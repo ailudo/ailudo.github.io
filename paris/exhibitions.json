@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-19T23:50:00+01:00",
+ "updated": "2026-10-20T08:00:00+01:00",
  "venues": [
   {
    "id": "louvre",
@@ -340,11 +340,10 @@
    "title": "Zurbarán",
    "artists": "Francisco de Zurbarán",
    "start": "2026-10-07",
-   "end": null,
+   "end": "2027-01-25",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.louvre.fr/en-ce-moment/expositions",
-   "note": "Closing date not confirmed on the venue page."
+   "url": "https://www.louvre.fr/en-ce-moment/expositions"
   },
   {
    "id": "l-sculpt",
@@ -461,11 +460,10 @@
    "title": "Éternel Tintoret",
    "artists": "Tintoretto",
    "start": "2026-09-11",
-   "end": null,
+   "end": "2027-01-24",
    "admission": "check",
    "discipline": "Painting & works on paper",
-   "url": "https://www.musee-jacquemart-andre.com/",
-   "note": "Closing date not confirmed on the venue page."
+   "url": "https://www.musee-jacquemart-andre.com/"
   },
   {
    "id": "pp-gonzales",
@@ -564,16 +562,17 @@
    "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
   },
   {
-   "id": "o-peduzzi",
+   "id": "o-monet",
    "venue": "orsay",
-   "short": "Richard Peduzzi",
-   "title": "Vertigo",
-   "artists": "Richard Peduzzi",
+   "short": "Claude Monet",
+   "title": "Je passe ma vie à peindre",
+   "artists": "Claude Monet",
    "start": null,
    "end": "2027-01-17",
    "admission": "paid",
-   "discipline": "Sculpture & installation",
-   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
+   "discipline": "Painting & works on paper",
+   "url": "https://www.musee-orsay.fr/fr/programme/agenda/expositions/je-passe-ma-vie-peindre",
+   "note": "A display within the museum."
   },
   {
    "id": "o-brac",
@@ -582,7 +581,7 @@
    "title": "Decorative arts drawings",
    "artists": "Marie Bracquemond, Félix Bracquemond",
    "start": null,
-   "end": "2026-12-06",
+   "end": "2027-01-10",
    "admission": "paid",
    "discipline": "Design & architecture",
    "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions",
@@ -594,8 +593,8 @@
    "short": "Maurice Denis",
    "title": "Illustrating Christian mysticism",
    "artists": "Maurice Denis",
-   "start": "2026-11-10",
-   "end": "2027-02-07",
+   "start": null,
+   "end": "2027-01-24",
    "admission": "paid",
    "discipline": "Painting & works on paper",
    "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions",
@@ -648,18 +647,6 @@
    "end": "2027-01-24",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.mam.paris.fr/"
-  },
-  {
-   "id": "mam-miller",
-   "venue": "mam",
-   "short": "Lee Miller",
-   "title": "Lee Miller",
-   "artists": "Lee Miller",
-   "start": "2026-06-19",
-   "end": "2027-01-04",
-   "admission": "paid",
-   "discipline": "Photography & moving image",
    "url": "https://www.mam.paris.fr/"
   },
   {
@@ -904,11 +891,10 @@
    "title": "Un vestiaire à soi",
    "artists": "",
    "start": "2026-09-26",
-   "end": null,
+   "end": "2027-02-14",
    "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://www.palaisgalliera.paris.fr/",
-   "note": "Closing date not confirmed on the venue page."
+   "url": "https://www.palaisgalliera.paris.fr/"
   },
   {
    "id": "ad-pav",
@@ -917,7 +903,7 @@
    "title": "Rafael Pavarotti, photographe",
    "artists": "Rafael Pavarotti",
    "start": "2026-10-02",
-   "end": "2027-02-07",
+   "end": "2027-05-02",
    "admission": "paid",
    "discipline": "Photography & moving image",
    "url": "https://madparis.fr/"
@@ -1004,6 +990,228 @@
    "end": "2026-11-08",
    "admission": "paid",
    "discipline": "History & collections",
+   "url": "https://www.quaibranly.fr/"
+  },
+  {
+   "id": "l-affin",
+   "venue": "louvre",
+   "short": "Islamic arts among the decorative arts",
+   "title": "Affinités: Les merveilles des arts de l’Islam aux Objets d’art",
+   "artists": "",
+   "start": "2026-06-24",
+   "end": "2026-12-06",
+   "admission": "paid",
+   "discipline": "History & collections",
+   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/affinites-0",
+   "note": "Richelieu wing, Objets d’art rooms."
+  },
+  {
+   "id": "l-lacoste",
+   "venue": "louvre",
+   "short": "The Michel Lacoste donation",
+   "title": "La donation Michel Lacoste au musée du Louvre: Orfèvrerie française de Mangot à Puiforcat",
+   "artists": "",
+   "start": "2026-06-26",
+   "end": "2027-01-11",
+   "admission": "paid",
+   "discipline": "Design & architecture",
+   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/la-donation-michel-lacoste-au-musee-du-louvre"
+  },
+  {
+   "id": "o-echos",
+   "venue": "orsay",
+   "short": "Teenagers look at Orsay",
+   "title": "Échos de l’Invisible: Regards d’adolescents sur les collections du musée d’Orsay",
+   "artists": "Jad Bestautte",
+   "start": "2026-10-13",
+   "end": "2027-01-03",
+   "admission": "paid",
+   "discipline": "Group shows",
+   "url": "https://www.musee-orsay.fr/fr/programme/agenda/expositions/echos-de-linvisible",
+   "note": "Room 8c, level 0."
+  },
+  {
+   "id": "pdt-celeste",
+   "venue": "pdt",
+   "short": "Céleste Richard-Zimmermann",
+   "title": "Toutes les colonnes n’ont pas un cœur de pierre",
+   "artists": "Céleste Richard-Zimmermann",
+   "start": "2026-10-21",
+   "end": "2027-01-10",
+   "admission": "paid",
+   "discipline": "Sculpture & installation",
+   "url": "https://palaisdetokyo.com/"
+  },
+  {
+   "id": "mam-fattal",
+   "venue": "mam",
+   "short": "Simone Fattal",
+   "title": "Des villes au fond d’un lac",
+   "artists": "Simone Fattal",
+   "start": "2026-09-18",
+   "end": "2027-01-24",
+   "admission": "paid",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.mam.paris.fr/"
+  },
+  {
+   "id": "mam-krewer",
+   "venue": "mam",
+   "short": "Florian Krewer",
+   "title": "woven thin*",
+   "artists": "Florian Krewer",
+   "start": "2026-06-19",
+   "end": "2027-01-04",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.mam.paris.fr/"
+  },
+  {
+   "id": "mam-duchamp",
+   "venue": "mam",
+   "short": "Prix Marcel Duchamp 2026",
+   "title": "Prix Marcel Duchamp 2026",
+   "artists": "Joël Andrianomearisoa, Brognon Rollin, Laura Henno, Josèfa Ntjam",
+   "start": "2026-10-02",
+   "end": "2027-02-07",
+   "admission": "free",
+   "discipline": "Group shows",
+   "url": "https://www.mam.paris.fr/"
+  },
+  {
+   "id": "pi-cahiers",
+   "venue": "picasso",
+   "short": "Picasso and Cahiers d’art",
+   "title": "Pablo Picasso au prisme de « Cahiers d’art »",
+   "artists": "Pablo Picasso",
+   "start": null,
+   "end": "2027-01-03",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.museepicassoparis.fr/fr/agenda/salle-dossier-pablo-picasso-au-prisme-de-cahiers-dart/",
+   "note": "A display within the museum."
+  },
+  {
+   "id": "pi-kuitca",
+   "venue": "picasso",
+   "short": "Guillermo Kuitca",
+   "title": "Guillermo Kuitca, Chapelle",
+   "artists": "Guillermo Kuitca",
+   "start": null,
+   "end": "2027-12-31",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.museepicassoparis.fr/fr/agenda/guillermo-kuitca-chapelle/"
+  },
+  {
+   "id": "pp-visionnaires",
+   "venue": "petitpalais",
+   "short": "Prune Nourry: Visionaries",
+   "title": "Visionnaires: carte blanche à Prune Nourry",
+   "artists": "Prune Nourry",
+   "start": "2026-10-20",
+   "end": "2027-01-24",
+   "admission": "check",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.petitpalais.paris.fr/en/node/3994",
+   "note": "Portraits of eighteen overlooked women sculptors."
+  },
+  {
+   "id": "ad-look",
+   "venue": "artsdeco",
+   "short": "Forty years of fashion at the museum",
+   "title": "Look ! 40 ans de mode au musée",
+   "artists": "",
+   "start": "2026-09-30",
+   "end": "2027-04-04",
+   "admission": "paid",
+   "discipline": "Design & architecture",
+   "url": "https://madparis.fr/"
+  },
+  {
+   "id": "gp-girls",
+   "venue": "grandpalais",
+   "short": "Girls: adolescence, fashion and rebellion",
+   "title": "Girls: Adolescence, mode et rébellion",
+   "artists": "",
+   "start": "2026-12-09",
+   "end": "2027-03-21",
+   "admission": "check",
+   "discipline": "Design & architecture",
+   "url": "https://www.grandpalais.fr/"
+  },
+  {
+   "id": "gp-ninagawa",
+   "venue": "grandpalais",
+   "short": "Mika Ninagawa",
+   "title": "Alive with Shadows",
+   "artists": "Mika Ninagawa, EiM",
+   "start": "2026-12-16",
+   "end": "2027-03-21",
+   "admission": "check",
+   "discipline": "Photography & moving image",
+   "url": "https://www.grandpalais.fr/"
+  },
+  {
+   "id": "ca-harvest",
+   "venue": "cartier",
+   "short": "Ibrahim Mahama",
+   "title": "The Harvest Season",
+   "artists": "Ibrahim Mahama, Dorothy Akpene Amenuke, Gideon Appah, James Barnor, CATPC, Courage Dzidula Kpodo, Zohra Opoku, Tjaša Rener, Feda Wardak",
+   "start": "2026-10-22",
+   "end": "2027-02-28",
+   "admission": "paid",
+   "discipline": "Group shows",
+   "url": "https://www.fondationcartier.com/en/programme/exhibition/the-harvest-season",
+   "price": "€15 / €10"
+  },
+  {
+   "id": "cj-tabouret",
+   "venue": "cognacq",
+   "short": "Claire Tabouret",
+   "title": "Carte blanche à Claire Tabouret",
+   "artists": "Claire Tabouret",
+   "start": "2026-09-15",
+   "end": "2027-03-12",
+   "admission": "check",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.museecognacqjay.paris.fr/",
+   "note": "Her work shown with 18th-century pieces from the collection."
+  },
+  {
+   "id": "qb-premieres",
+   "venue": "branly",
+   "short": "First Nations",
+   "title": "Premières Nations",
+   "artists": "",
+   "start": "2026-09-29",
+   "end": "2027-01-10",
+   "admission": "paid",
+   "discipline": "History & collections",
+   "url": "https://www.quaibranly.fr/"
+  },
+  {
+   "id": "qb-tahiti",
+   "venue": "branly",
+   "short": "Early photographs of Tahiti",
+   "title": "Voir Tahiti: Premières photographies 1859–1870",
+   "artists": "",
+   "start": "2026-09-29",
+   "end": "2027-01-31",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://www.quaibranly.fr/"
+  },
+  {
+   "id": "qb-mivekannin",
+   "venue": "branly",
+   "short": "Roméo Mivekannin",
+   "title": "Violence silencieuse: Sous le regard de Roméo Mivekannin",
+   "artists": "Roméo Mivekannin",
+   "start": "2026-11-10",
+   "end": "2027-04-04",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
    "url": "https://www.quaibranly.fr/"
   }
  ]
