@@ -6,7 +6,7 @@
 <title>Studio AI Ludo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Bodoni+Moda:ital,opsz,wght@1,6..96,500&display=swap">
 <style>
   html, body {
     margin: 0;
@@ -82,6 +82,26 @@
     60%  { opacity: 1; transform: scale(1.12); }
     100% { opacity: 1; transform: scale(1); }
   }
+  /* Paris label: same drift, different phase, Bodoni italic on white */
+  .drift.paris {
+    animation:
+      drift-x 61s ease-in-out -9s infinite alternate,
+      drift-y 43s ease-in-out -35s infinite alternate;
+  }
+  .drift.paris:hover { animation-play-state: paused; }
+  .logo-link.paris {
+    background: #fff;
+    color: #111;
+    font-family: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-stretch: 100%;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    font-size: clamp(15px, 2vw, 26px);
+    animation-delay: 3.4s;
+    box-shadow: inset 0 0 0 1.5px #111;
+  }
   .logo-link:focus-visible {
     outline: 2px solid #0030c8;
     outline-offset: 4px;
@@ -90,6 +110,7 @@
   @media (prefers-reduced-motion: reduce) {
     .hero { animation: none; filter: blur(6px); }
     .drift { animation: none; left: auto; top: auto; right: 24px; bottom: 24px; transform: none; }
+    .drift.paris { right: auto; left: 24px; }
     .logo-link { animation: none; opacity: 1; transform: none; }
   }
 </style>
@@ -99,6 +120,10 @@
 
   <div class="drift">
     <a class="logo-link" href="london/" aria-label="Exhibitions in London: On View London" title="On View London">Exhibitions<br>in London</a>
+  </div>
+
+  <div class="drift paris">
+    <a class="logo-link paris" href="paris/" lang="fr" aria-label="Expositions à Paris : On View Paris" title="On View Paris">Expositions<br>à Paris</a>
   </div>
 </body>
 </html>
