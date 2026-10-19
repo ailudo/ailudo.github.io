@@ -1,1067 +1,957 @@
 {
- "updated": "2026-10-19T16:30:00+01:00",
- "checked": "2026-10-19",
+ "updated": "2026-10-19T22:30:29+01:00",
  "venues": [
   {
    "id": "louvre",
    "name": "Musée du Louvre",
-   "area": "Louvre",
+   "area": "Centre",
+   "kind": "National museum",
    "lat": 48.8606,
    "lng": 2.3376,
-   "cats": [
-    "old"
-   ],
-   "source": "https://www.louvre.fr/en-ce-moment/expositions"
+   "label": "right",
+   "source": "https://www.louvre.fr/en-ce-moment/expositions",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+du+Louvre+Paris"
   },
   {
    "id": "cluny",
    "name": "Musée de Cluny",
-   "area": "Latin Quarter",
+   "area": "Left Bank",
+   "kind": "National museum",
    "lat": 48.8505,
    "lng": 2.344,
-   "cats": [
-    "old"
-   ],
-   "source": "https://www.musee-moyenage.fr/"
+   "label": "right",
+   "source": "https://www.musee-moyenage.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+de+Cluny+Paris"
   },
   {
    "id": "jacquemart",
    "name": "Musée Jacquemart-André",
-   "area": "8th",
+   "area": "Champs-Élysées",
+   "kind": "Independent",
    "lat": 48.8755,
    "lng": 2.3115,
-   "cats": [
-    "old"
-   ],
-   "source": "https://www.musee-jacquemart-andre.com/"
+   "label": "left",
+   "source": "https://www.musee-jacquemart-andre.com/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+Jacquemart-Andr%C3%A9+Paris"
   },
   {
    "id": "petitpalais",
    "name": "Petit Palais",
-   "area": "8th",
+   "area": "Champs-Élysées",
+   "kind": "Public & non-profit",
    "lat": 48.866,
    "lng": 2.314,
-   "cats": [
-    "old",
-    "c19"
-   ],
-   "source": "https://www.petitpalais.paris.fr/"
+   "label": "right-down",
+   "source": "https://www.petitpalais.paris.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Petit+Palais+Paris"
   },
   {
    "id": "custodia",
    "name": "Fondation Custodia",
-   "area": "7th",
+   "area": "Left Bank",
+   "kind": "Independent",
    "lat": 48.8562,
    "lng": 2.3198,
-   "cats": [
-    "old"
-   ],
-   "source": "https://www.fondationcustodia.fr/Exhibitions"
+   "label": "left",
+   "source": "https://www.fondationcustodia.fr/Exhibitions",
+   "map": "https://www.google.com/maps/search/?api=1&query=Fondation+Custodia+Paris"
   },
   {
    "id": "luxembourg",
    "name": "Musée du Luxembourg",
-   "area": "6th",
+   "area": "Left Bank",
+   "kind": "National museum",
    "lat": 48.849,
    "lng": 2.333,
-   "cats": [
-    "old"
-   ],
-   "source": "https://museeduluxembourg.fr/"
+   "label": "left",
+   "source": "https://museeduluxembourg.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+du+Luxembourg+Paris"
   },
   {
    "id": "cognacq",
    "name": "Musée Cognacq-Jay",
-   "area": "Marais",
+   "area": "Marais & East",
+   "kind": "Public & non-profit",
    "lat": 48.8574,
    "lng": 2.3622,
-   "cats": [
-    "old"
-   ],
-   "source": "https://museecognacqjay.paris.fr/"
+   "label": "right-down",
+   "source": "https://museecognacqjay.paris.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+Cognacq-Jay+Paris"
   },
   {
    "id": "camondo",
    "name": "Musée Nissim de Camondo",
-   "area": "17th",
+   "area": "Champs-Élysées",
+   "kind": "Independent",
    "lat": 48.8791,
    "lng": 2.3098,
-   "cats": [
-    "old"
-   ],
-   "source": "https://madparis.fr/"
+   "label": "left-down",
+   "source": "https://madparis.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+Nissim+de+Camondo+Paris"
   },
   {
    "id": "carnavalet",
    "name": "Musée Carnavalet",
-   "area": "Marais",
+   "area": "Marais & East",
+   "kind": "Public & non-profit",
    "lat": 48.8574,
    "lng": 2.3626,
-   "cats": [
-    "old"
-   ],
-   "source": "https://www.carnavalet.paris.fr/"
+   "label": "right-down",
+   "source": "https://www.carnavalet.paris.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+Carnavalet+Paris"
   },
   {
    "id": "orsay",
    "name": "Musée d’Orsay",
-   "area": "7th",
+   "area": "Left Bank",
+   "kind": "National museum",
    "lat": 48.86,
    "lng": 2.3266,
-   "cats": [
-    "c19"
-   ],
-   "source": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
+   "label": "left-down",
+   "source": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+d%27Orsay+Paris"
   },
   {
    "id": "orangerie",
    "name": "Musée de l’Orangerie",
-   "area": "Tuileries",
+   "area": "Centre",
+   "kind": "National museum",
    "lat": 48.8638,
    "lng": 2.3226,
-   "cats": [
-    "c19"
-   ],
-   "source": "https://www.musee-orangerie.fr/"
+   "label": "left-down",
+   "source": "https://www.musee-orangerie.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+de+l%27Orangerie+Paris"
   },
   {
    "id": "marmottan",
    "name": "Musée Marmottan Monet",
-   "area": "16th",
+   "area": "West",
+   "kind": "Independent",
    "lat": 48.859,
    "lng": 2.267,
-   "cats": [
-    "c19"
-   ],
-   "source": "https://www.marmottan.fr/"
+   "label": "left",
+   "source": "https://www.marmottan.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+Marmottan+Monet+Paris"
   },
   {
    "id": "mam",
    "name": "Musée d’Art Moderne de Paris",
-   "area": "16th",
+   "area": "West",
+   "kind": "Public & non-profit",
    "lat": 48.8644,
    "lng": 2.297,
-   "cats": [
-    "mod"
-   ],
-   "source": "https://www.mam.paris.fr/"
+   "label": "right",
+   "source": "https://www.mam.paris.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+d%27Art+Moderne+de+Paris"
   },
   {
    "id": "pdt",
    "name": "Palais de Tokyo",
-   "area": "16th",
+   "area": "West",
+   "kind": "Public & non-profit",
    "lat": 48.8643,
    "lng": 2.2967,
-   "cats": [
-    "mod"
-   ],
-   "source": "https://palaisdetokyo.com/"
+   "label": "right-down",
+   "source": "https://palaisdetokyo.com/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Palais+de+Tokyo+Paris"
   },
   {
    "id": "flv",
    "name": "Fondation Louis Vuitton",
-   "area": "Bois de Boulogne",
+   "area": "West",
+   "kind": "Independent",
    "lat": 48.8767,
    "lng": 2.2635,
-   "cats": [
-    "mod"
-   ],
-   "source": "https://www.fondationlouisvuitton.fr/"
+   "label": "left",
+   "source": "https://www.fondationlouisvuitton.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Fondation+Louis+Vuitton+Paris"
   },
   {
    "id": "bourse",
    "name": "Bourse de Commerce",
-   "area": "Les Halles",
+   "area": "Centre",
+   "kind": "Independent",
    "lat": 48.8627,
    "lng": 2.3427,
-   "cats": [
-    "mod"
-   ],
-   "source": "https://www.pinaultcollection.com/boursedecommerce/"
+   "label": "right",
+   "source": "https://www.pinaultcollection.com/boursedecommerce/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Bourse+de+Commerce+Pinault+Collection+Paris"
   },
   {
    "id": "cartier",
    "name": "Fondation Cartier",
-   "area": "Palais-Royal",
+   "area": "Centre",
+   "kind": "Independent",
    "lat": 48.864,
    "lng": 2.3366,
-   "cats": [
-    "mod"
-   ],
-   "source": "https://www.fondationcartier.com/"
+   "label": "right-up",
+   "source": "https://www.fondationcartier.com/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Fondation+Cartier+Paris"
   },
   {
    "id": "lafayette",
    "name": "Lafayette Anticipations",
-   "area": "Marais",
+   "area": "Marais & East",
+   "kind": "Independent",
    "lat": 48.859,
    "lng": 2.355,
-   "cats": [
-    "mod"
-   ],
-   "source": "https://www.lafayetteanticipations.com/"
+   "label": "left-up",
+   "source": "https://www.lafayetteanticipations.com/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Lafayette+Anticipations+Paris"
   },
   {
    "id": "picasso",
    "name": "Musée Picasso",
-   "area": "Marais",
+   "area": "Marais & East",
+   "kind": "National museum",
    "lat": 48.8598,
    "lng": 2.3626,
-   "cats": [
-    "mod"
-   ],
-   "source": "https://www.museepicassoparis.fr/fr/agenda/types/exposition/"
+   "label": "right-up",
+   "source": "https://www.museepicassoparis.fr/fr/agenda/types/exposition/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+Picasso+Paris"
   },
   {
    "id": "grandpalais",
    "name": "Grand Palais",
-   "area": "8th",
+   "area": "Champs-Élysées",
+   "kind": "National museum",
    "lat": 48.8661,
    "lng": 2.3125,
-   "cats": [
-    "mod"
-   ],
-   "source": "https://www.grandpalais.fr/"
+   "label": "left",
+   "source": "https://www.grandpalais.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Grand+Palais+Paris"
   },
   {
    "id": "jeudepaume",
    "name": "Jeu de Paume",
-   "area": "Tuileries",
+   "area": "Centre",
+   "kind": "Public & non-profit",
    "lat": 48.8654,
    "lng": 2.3224,
-   "cats": [
-    "photo"
-   ],
-   "source": "https://jeudepaume.org/"
+   "label": "left-up",
+   "source": "https://jeudepaume.org/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Jeu+de+Paume+Paris"
   },
   {
    "id": "mep",
    "name": "Maison Européenne de la Photographie",
-   "area": "Marais",
+   "area": "Marais & East",
+   "kind": "Independent",
    "lat": 48.8553,
    "lng": 2.356,
-   "cats": [
-    "photo"
-   ],
-   "source": "https://www.mep-fr.org/"
+   "label": "left-down",
+   "source": "https://www.mep-fr.org/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Maison+Europ%C3%A9enne+de+la+Photographie+Paris"
   },
   {
    "id": "bal",
    "name": "Le Bal",
-   "area": "18th",
+   "area": "North",
+   "kind": "Independent",
    "lat": 48.8838,
    "lng": 2.33,
-   "cats": [
-    "photo"
-   ],
-   "source": "https://le-bal.fr/"
+   "label": "right",
+   "source": "https://le-bal.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Le+Bal+Paris"
   },
   {
    "id": "galliera",
    "name": "Palais Galliera",
-   "area": "16th",
+   "area": "West",
+   "kind": "Public & non-profit",
    "lat": 48.8656,
    "lng": 2.2966,
-   "cats": [
-    "fashion"
-   ],
-   "source": "https://www.palaisgalliera.paris.fr/"
+   "label": "right-up",
+   "source": "https://www.palaisgalliera.paris.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Palais+Galliera+Paris"
   },
   {
    "id": "artsdeco",
    "name": "Les Arts Décoratifs",
-   "area": "Louvre",
+   "area": "Centre",
+   "kind": "Independent",
    "lat": 48.863,
    "lng": 2.3326,
-   "cats": [
-    "fashion"
-   ],
-   "source": "https://madparis.fr/"
+   "label": "right-down",
+   "source": "https://madparis.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Les+Arts+D%C3%A9coratifs+Paris"
   },
   {
    "id": "ysl",
    "name": "Musée Yves Saint Laurent",
-   "area": "16th",
+   "area": "West",
+   "kind": "Independent",
    "lat": 48.8668,
    "lng": 2.2931,
-   "cats": [
-    "fashion"
-   ],
-   "source": "https://museeyslparis.com/"
+   "label": "left",
+   "source": "https://museeyslparis.com/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+Yves+Saint+Laurent+Paris"
   },
   {
    "id": "ima",
    "name": "Institut du Monde Arabe",
-   "area": "5th",
+   "area": "Left Bank",
+   "kind": "Public & non-profit",
    "lat": 48.8485,
    "lng": 2.3563,
-   "cats": [
-    "world"
-   ],
-   "source": "https://www.imarabe.org/"
+   "label": "right",
+   "source": "https://www.imarabe.org/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Institut+du+Monde+Arabe+Paris"
   },
   {
    "id": "guimet",
    "name": "Musée Guimet",
-   "area": "16th",
+   "area": "West",
+   "kind": "National museum",
    "lat": 48.8651,
    "lng": 2.2933,
-   "cats": [
-    "world"
-   ],
-   "source": "https://www.guimet.fr/"
+   "label": "left-up",
+   "source": "https://www.guimet.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+Guimet+Paris"
   },
   {
    "id": "cernuschi",
    "name": "Musée Cernuschi",
-   "area": "8th",
+   "area": "Champs-Élysées",
+   "kind": "Public & non-profit",
    "lat": 48.8791,
    "lng": 2.3095,
-   "cats": [
-    "world"
-   ],
-   "source": "https://www.cernuschi.paris.fr/"
+   "label": "left-up",
+   "source": "https://www.cernuschi.paris.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+Cernuschi+Paris"
   },
   {
    "id": "branly",
    "name": "Musée du quai Branly",
-   "area": "7th",
+   "area": "Left Bank",
+   "kind": "National museum",
    "lat": 48.8611,
    "lng": 2.2978,
-   "cats": [
-    "world"
-   ],
-   "source": "https://www.quaibranly.fr/"
+   "label": "left-down",
+   "source": "https://www.quaibranly.fr/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+du+quai+Branly+Paris"
   }
  ],
  "exhibitions": [
   {
    "id": "l-zurb",
    "venue": "louvre",
-   "head": "Francisco de Zurbarán",
+   "short": "Francisco de Zurbarán",
    "title": "Zurbarán",
+   "artists": "Francisco de Zurbarán",
    "start": "2026-10-07",
    "end": null,
-   "adm": "paid",
-   "cats": [
-    "old"
-   ],
-   "note": "Closing date not confirmed on the venue page.",
-   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.louvre.fr/en-ce-moment/expositions",
+   "note": "Closing date not confirmed on the venue page."
   },
   {
    "id": "l-sculpt",
    "venue": "louvre",
-   "head": "Sculpture from the Museo Nacional de Escultura, Valladolid",
+   "short": "Sculpture from the Museo Nacional de Escultura, Valladolid",
    "title": "Sculpter la couleur: Chefs-d’œuvre du Musée national de sculpture, Valladolid",
+   "artists": "",
    "start": "2026-10-07",
    "end": "2027-01-25",
-   "adm": "paid",
-   "cats": [
-    "old"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Sculpture & installation",
    "url": "https://www.louvre.fr/en-ce-moment/expositions"
   },
   {
    "id": "l-photo",
    "venue": "louvre",
-   "head": "The Louvre seen by photographers",
+   "short": "The Louvre seen by photographers",
    "title": "Louvre Photo",
+   "artists": "",
    "start": "2026-11-04",
    "end": "2027-05-03",
-   "adm": "paid",
-   "cats": [
-    "photo"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
    "url": "https://www.louvre.fr/en-ce-moment/expositions"
   },
   {
    "id": "l-hotes",
    "venue": "louvre",
-   "head": "Kader Attia and Elizabeth Peyton",
+   "short": "Kader Attia and Elizabeth Peyton",
    "title": "Les Hôtes du Louvre",
+   "artists": "Kader Attia, Elizabeth Peyton",
    "start": "2026-09-24",
    "end": "2026-12-14",
-   "adm": "paid",
-   "cats": [
-    "old",
-    "mod"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Group shows",
    "url": "https://www.louvre.fr/en-ce-moment/expositions"
   },
   {
    "id": "l-ingres",
    "venue": "louvre",
-   "head": "Ingres and fashion",
+   "short": "Ingres and fashion",
    "title": "Ingres et la mode",
+   "artists": "Jean-Auguste-Dominique Ingres",
    "start": "2026-07-03",
    "end": "2026-11-08",
-   "adm": "paid",
-   "cats": [
-    "old",
-    "fashion"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
    "url": "https://www.louvre.fr/en-ce-moment/expositions"
   },
   {
    "id": "l-myth",
    "venue": "louvre",
-   "head": "Mythologies",
+   "short": "Mythologies",
    "title": "Mythologies",
+   "artists": "",
    "start": "2026-07-08",
    "end": "2026-11-09",
-   "adm": "paid",
-   "cats": [
-    "old"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "History & collections",
    "url": "https://www.louvre.fr/en-ce-moment/expositions"
   },
   {
    "id": "l-cross",
    "venue": "louvre",
-   "head": "Mughal, Safavid and Ottoman masterworks",
+   "short": "Mughal, Safavid and Ottoman masterworks",
    "title": "Crosscurrents: Chefs-d’œuvre de l’art moghol, safavide et ottoman du musée du Louvre",
+   "artists": "",
    "start": "2026-06-19",
    "end": "2027-01-24",
-   "adm": "paid",
-   "cats": [
-    "old",
-    "world"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "History & collections",
    "url": "https://www.louvre.fr/en-ce-moment/expositions"
   },
   {
    "id": "l-eau",
    "venue": "louvre",
-   "head": "Mesopotamia",
+   "short": "Mesopotamia",
    "title": "L’Eau primordiale: Leçons de Mésopotamie",
+   "artists": "",
    "start": "2026-05-20",
    "end": "2027-03-15",
-   "adm": "paid",
-   "cats": [
-    "world"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "History & collections",
    "url": "https://www.louvre.fr/en-ce-moment/expositions"
   },
   {
    "id": "l-romain",
    "venue": "louvre",
-   "head": "Roman art",
+   "short": "Roman art",
    "title": "L’art romain du Louvre: Un monde d’images",
+   "artists": "",
    "start": "2026-06-11",
    "end": "2027-01-10",
-   "adm": "paid",
-   "cats": [
-    "old"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "History & collections",
    "url": "https://www.louvre.fr/en-ce-moment/expositions"
   },
   {
    "id": "c-flamel",
    "venue": "cluny",
-   "head": "Nicolas Flamel",
+   "short": "Nicolas Flamel",
    "title": "Nicolas Flamel, alchimiste de papier",
+   "artists": "",
    "start": "2026-10-13",
    "end": "2027-01-24",
-   "adm": "paid",
-   "cats": [
-    "old"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "History & collections",
    "url": "https://www.musee-moyenage.fr/"
   },
   {
    "id": "ja-tintoret",
    "venue": "jacquemart",
-   "head": "Tintoretto",
+   "short": "Tintoretto",
    "title": "Éternel Tintoret",
+   "artists": "Tintoretto",
    "start": "2026-09-11",
    "end": null,
-   "adm": "check",
-   "cats": [
-    "old"
-   ],
-   "note": "Closing date not confirmed on the venue page.",
-   "url": "https://www.musee-jacquemart-andre.com/"
+   "admission": "check",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.musee-jacquemart-andre.com/",
+   "note": "Closing date not confirmed on the venue page."
   },
   {
    "id": "pp-gonzales",
    "venue": "petitpalais",
-   "head": "Eva Gonzalès",
+   "short": "Eva Gonzalès",
    "title": "Eva Gonzalès",
+   "artists": "Eva Gonzalès",
    "start": "2026-09-15",
    "end": "2027-01-24",
-   "adm": "paid",
-   "cats": [
-    "c19"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
    "url": "https://www.petitpalais.paris.fr/"
   },
   {
    "id": "pp-bruxelles",
    "venue": "petitpalais",
-   "head": "Brussels around 1900",
+   "short": "Brussels around 1900",
    "title": "Bruxelles 1900",
+   "artists": "",
    "start": "2026-11-10",
    "end": "2027-04-25",
-   "adm": "paid",
-   "cats": [
-    "c19"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Design & architecture",
    "url": "https://www.petitpalais.paris.fr/"
   },
   {
    "id": "cu-amis",
    "venue": "custodia",
-   "head": "Drawings in the collections of 19th-century French artists",
+   "short": "Drawings in the collections of 19th-century French artists",
    "title": "Mes Chers Amis",
+   "artists": "",
    "start": "2026-10-17",
    "end": "2027-01-17",
-   "adm": "check",
-   "cats": [
-    "old",
-    "c19"
-   ],
-   "note": "",
+   "admission": "check",
+   "discipline": "Painting & works on paper",
    "url": "https://www.fondationcustodia.fr/Exhibitions"
   },
   {
    "id": "lux-warhol",
    "venue": "luxembourg",
-   "head": "Andy Warhol",
+   "short": "Andy Warhol",
    "title": "La Ligne et l’image",
+   "artists": "Andy Warhol",
    "start": "2026-09-16",
    "end": "2027-01-10",
-   "adm": "check",
-   "cats": [
-    "mod"
-   ],
-   "note": "",
+   "admission": "check",
+   "discipline": "Painting & works on paper",
    "url": "https://museeduluxembourg.fr/"
   },
   {
    "id": "ca-villegle",
    "venue": "carnavalet",
-   "head": "Jacques Villeglé",
+   "short": "Jacques Villeglé",
    "title": "Paris à l’arraché: Jacques Villeglé et l’art urbain",
+   "artists": "Jacques Villeglé",
    "start": "2026-10-14",
    "end": "2027-02-14",
-   "adm": "paid",
-   "cats": [
-    "mod"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
    "url": "https://www.carnavalet.paris.fr/"
   },
   {
    "id": "o-cassatt",
    "venue": "orsay",
-   "head": "Mary Cassatt",
+   "short": "Mary Cassatt",
    "title": "Mary Cassatt, l’indépendante",
+   "artists": "Mary Cassatt",
    "start": "2026-10-06",
    "end": "2027-01-31",
-   "adm": "paid",
-   "cats": [
-    "c19"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
    "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
   },
   {
    "id": "o-holzer",
    "venue": "orsay",
-   "head": "Jenny Holzer",
+   "short": "Jenny Holzer",
    "title": "Jenny Holzer: J’ai vu",
+   "artists": "Jenny Holzer",
    "start": "2026-10-20",
    "end": "2027-02-21",
-   "adm": "paid",
-   "cats": [
-    "mod",
-    "c19"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Sculpture & installation",
    "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
   },
   {
    "id": "o-bartholdi",
    "venue": "orsay",
-   "head": "Auguste Bartholdi",
+   "short": "Auguste Bartholdi",
    "title": "Liberty Enlightening the World",
+   "artists": "Auguste Bartholdi",
    "start": null,
    "end": "2027-01-31",
-   "adm": "paid",
-   "cats": [
-    "c19"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Sculpture & installation",
    "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
   },
   {
    "id": "o-peduzzi",
    "venue": "orsay",
-   "head": "Richard Peduzzi",
+   "short": "Richard Peduzzi",
    "title": "Vertigo",
+   "artists": "Richard Peduzzi",
    "start": null,
    "end": "2027-01-17",
-   "adm": "paid",
-   "cats": [
-    "c19",
-    "mod"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Sculpture & installation",
    "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
   },
   {
    "id": "o-brac",
    "venue": "orsay",
-   "head": "Marie and Félix Bracquemond",
+   "short": "Marie and Félix Bracquemond",
    "title": "Decorative arts drawings",
+   "artists": "Marie Bracquemond, Félix Bracquemond",
    "start": null,
    "end": "2026-12-06",
-   "adm": "paid",
-   "cats": [
-    "c19",
-    "fashion"
-   ],
-   "note": "A display within the museum.",
-   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
+   "admission": "paid",
+   "discipline": "Design & architecture",
+   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions",
+   "note": "A display within the museum."
   },
   {
    "id": "o-denis",
    "venue": "orsay",
-   "head": "Maurice Denis",
+   "short": "Maurice Denis",
    "title": "Illustrating Christian mysticism",
+   "artists": "Maurice Denis",
    "start": "2026-11-10",
    "end": "2027-02-07",
-   "adm": "paid",
-   "cats": [
-    "c19"
-   ],
-   "note": "A display within the museum.",
-   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions",
+   "note": "A display within the museum."
   },
   {
    "id": "o-legray",
    "venue": "orsay",
-   "head": "Gustave Le Gray",
+   "short": "Gustave Le Gray",
    "title": "Painter and Photographer",
+   "artists": "Gustave Le Gray",
    "start": "2026-11-10",
    "end": "2027-02-07",
-   "adm": "paid",
-   "cats": [
-    "c19",
-    "photo"
-   ],
-   "note": "A display within the museum.",
-   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions",
+   "note": "A display within the museum."
   },
   {
    "id": "or-monet",
    "venue": "orangerie",
-   "head": "Claude Monet",
+   "short": "Claude Monet",
    "title": "Monet, peindre le temps",
+   "artists": "Claude Monet",
    "start": "2026-09-30",
    "end": "2027-01-25",
-   "adm": "paid",
-   "cats": [
-    "c19"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
    "url": "https://www.musee-orangerie.fr/"
   },
   {
    "id": "ma-paysages",
    "venue": "marmottan",
-   "head": "Landscape from Monet to Hockney",
+   "short": "Landscape from Monet to Hockney",
    "title": "Histoires de paysages. De Monet à Hockney (1890–2026)",
+   "artists": "Claude Monet, Nicolas de Staël, Edvard Munch, Piet Mondrian, David Hockney and others",
    "start": "2026-09-24",
    "end": "2027-01-31",
-   "adm": "paid",
-   "cats": [
-    "c19",
-    "mod"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
    "url": "https://www.marmottan.fr/"
   },
   {
    "id": "mam-hist",
    "venue": "mam",
-   "head": "The Histories*",
+   "short": "Kerry James Marshall",
    "title": "The Histories*",
+   "artists": "Kerry James Marshall",
    "start": "2026-09-18",
    "end": "2027-01-24",
-   "adm": "paid",
-   "cats": [
-    "mod"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
    "url": "https://www.mam.paris.fr/"
   },
   {
    "id": "mam-miller",
    "venue": "mam",
-   "head": "Lee Miller",
+   "short": "Lee Miller",
    "title": "Lee Miller",
+   "artists": "Lee Miller",
    "start": "2026-06-19",
    "end": "2027-01-04",
-   "adm": "paid",
-   "cats": [
-    "mod",
-    "photo"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
    "url": "https://www.mam.paris.fr/"
   },
   {
    "id": "pdt-cherri",
    "venue": "pdt",
-   "head": "Ali Cherri",
+   "short": "Ali Cherri",
    "title": "Today Is OK",
+   "artists": "Ali Cherri",
    "start": "2026-10-21",
    "end": "2027-02-14",
-   "adm": "paid",
-   "cats": [
-    "mod"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Sculpture & installation",
    "url": "https://palaisdetokyo.com/"
   },
   {
    "id": "pdt-gomes",
    "venue": "pdt",
-   "head": "Sonia Gomes",
+   "short": "Sonia Gomes",
    "title": "Wild Heart",
+   "artists": "Sonia Gomes",
    "start": "2026-10-21",
    "end": "2027-02-14",
-   "adm": "paid",
-   "cats": [
-    "mod"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Sculpture & installation",
    "url": "https://palaisdetokyo.com/"
   },
   {
    "id": "pdt-gang",
    "venue": "pdt",
-   "head": "Artists outside the cities of France",
+   "short": "Artists outside the cities of France",
    "title": "Toi et ta bande",
+   "artists": "Gina Proenza, Marine Peixoto, Pacôme Ricciardi, Lisa Di Giovanni, Léa Tissot-Laura and others",
    "start": "2026-10-21",
    "end": "2027-02-14",
-   "adm": "paid",
-   "cats": [
-    "mod"
-   ],
-   "note": "Free entry on 21 and 22 October.",
-   "url": "https://palaisdetokyo.com/"
+   "admission": "paid",
+   "discipline": "Group shows",
+   "url": "https://palaisdetokyo.com/",
+   "note": "Free entry on 21 and 22 October."
   },
   {
    "id": "pdt-john",
    "venue": "pdt",
-   "head": "Valérie John",
+   "short": "Valérie John",
    "title": "I telman nwè ki i blé (So Black It Turns Blue)",
+   "artists": "Valérie John",
    "start": "2026-10-21",
    "end": "2027-02-14",
-   "adm": "paid",
-   "cats": [
-    "mod"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Sculpture & installation",
    "url": "https://palaisdetokyo.com/"
   },
   {
    "id": "flv-fayet",
    "venue": "flv",
-   "head": "Gustave Fayet",
+   "short": "Gustave Fayet",
    "title": "Gustave Fayet, Collectionneur – Créateur. Icônes de l’art moderne",
+   "artists": "Gustave Fayet",
    "start": "2026-10-09",
    "end": "2027-03-08",
-   "adm": "paid",
-   "cats": [
-    "mod"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
    "url": "https://www.fondationlouisvuitton.fr/"
   },
   {
    "id": "bc-remember",
    "venue": "bourse",
-   "head": "Photographs from the Pinault Collection",
+   "short": "Photographs from the Pinault Collection",
    "title": "Remember Me. De la Collection Pinault",
+   "artists": "Barbara Kruger, Cindy Sherman, Man Ray, Dorothea Lange, Wolfgang Tillmans and others",
    "start": "2026-10-07",
    "end": "2027-01-18",
-   "adm": "paid",
-   "cats": [
-    "mod",
-    "photo"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
    "url": "https://www.pinaultcollection.com/boursedecommerce/"
   },
   {
    "id": "la-nishimura",
    "venue": "lafayette",
-   "head": "Yu Nishimura",
+   "short": "Yu Nishimura",
    "title": "Towards a Sea",
+   "artists": "Yu Nishimura",
    "start": "2026-10-21",
    "end": "2027-01-03",
-   "adm": "free",
-   "cats": [
-    "mod"
-   ],
-   "note": "",
+   "admission": "free",
+   "discipline": "Painting & works on paper",
    "url": "https://www.lafayetteanticipations.com/"
   },
   {
    "id": "la-fauquet",
    "venue": "lafayette",
-   "head": "Hélène Fauquet",
+   "short": "Hélène Fauquet",
    "title": "Vivresse",
+   "artists": "Hélène Fauquet",
    "start": "2026-10-21",
    "end": "2027-01-03",
-   "adm": "free",
-   "cats": [
-    "mod"
-   ],
-   "note": "",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
    "url": "https://www.lafayetteanticipations.com/"
   },
   {
    "id": "la-thomson",
    "venue": "lafayette",
-   "head": "Mungo Thomson",
+   "short": "Mungo Thomson",
    "title": "Monument",
+   "artists": "Mungo Thomson",
    "start": "2026-10-21",
    "end": "2026-11-29",
-   "adm": "free",
-   "cats": [
-    "mod"
-   ],
-   "note": "",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
    "url": "https://www.lafayetteanticipations.com/"
   },
   {
    "id": "pi-schwitters",
    "venue": "picasso",
-   "head": "Kurt Schwitters",
+   "short": "Kurt Schwitters",
    "title": "Le chaos-monde 1918–1948",
+   "artists": "Kurt Schwitters",
    "start": "2026-10-06",
    "end": "2027-02-07",
-   "adm": "paid",
-   "cats": [
-    "mod"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
    "url": "https://www.museepicassoparis.fr/fr/agenda/types/exposition/"
   },
   {
    "id": "pi-malraux",
    "venue": "picasso",
-   "head": "André Malraux and Pablo Picasso",
+   "short": "André Malraux and Pablo Picasso",
    "title": "Le musée imaginaire",
+   "artists": "André Malraux, Pablo Picasso",
    "start": null,
    "end": "2027-02-07",
-   "adm": "paid",
-   "cats": [
-    "mod"
-   ],
-   "note": "A display within the museum.",
-   "url": "https://www.museepicassoparis.fr/fr/agenda/types/exposition/"
+   "admission": "paid",
+   "discipline": "History & collections",
+   "url": "https://www.museepicassoparis.fr/fr/agenda/types/exposition/",
+   "note": "A display within the museum."
   },
   {
    "id": "gp-cezanne",
    "venue": "grandpalais",
-   "head": "Cézanne and the artists after him",
+   "short": "Cézanne and the artists after him",
    "title": "Cézanne et nous",
+   "artists": "Paul Cézanne and others",
    "start": "2026-09-23",
    "end": "2027-01-17",
-   "adm": "check",
-   "cats": [
-    "c19",
-    "mod"
-   ],
-   "note": "Presented with the Musée d’Orsay.",
-   "url": "https://www.grandpalais.fr/"
+   "admission": "check",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.grandpalais.fr/",
+   "note": "Presented with the Musée d’Orsay."
   },
   {
    "id": "jp-douglas",
    "venue": "jeudepaume",
-   "head": "Stan Douglas",
+   "short": "Stan Douglas",
    "title": "Parallax",
+   "artists": "Stan Douglas",
    "start": "2026-10-20",
    "end": "2027-01-10",
-   "adm": "check",
-   "cats": [
-    "photo"
-   ],
-   "note": "",
+   "admission": "check",
+   "discipline": "Photography & moving image",
    "url": "https://jeudepaume.org/"
   },
   {
    "id": "mep-penn",
    "venue": "mep",
-   "head": "Irving Penn",
+   "short": "Irving Penn",
    "title": "Penn & Fashion",
+   "artists": "Irving Penn",
    "start": "2026-09-30",
    "end": "2027-01-17",
-   "adm": "paid",
-   "cats": [
-    "photo",
-    "fashion"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
    "url": "https://www.mep-fr.org/"
   },
   {
    "id": "bal-wilson",
    "venue": "bal",
-   "head": "The Wilson Centre for Photography collection",
+   "short": "The Wilson Centre for Photography collection",
    "title": "L’Espace entre nous",
+   "artists": "",
    "start": "2026-06-19",
    "end": "2027-01-03",
-   "adm": "paid",
-   "cats": [
-    "photo"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
    "url": "https://le-bal.fr/"
   },
   {
    "id": "gal-vest",
    "venue": "galliera",
-   "head": "A wardrobe of one’s own",
+   "short": "A wardrobe of one’s own",
    "title": "Un vestiaire à soi",
+   "artists": "",
    "start": "2026-09-26",
    "end": null,
-   "adm": "paid",
-   "cats": [
-    "fashion"
-   ],
-   "note": "Closing date not confirmed on the venue page.",
-   "url": "https://www.palaisgalliera.paris.fr/"
+   "admission": "paid",
+   "discipline": "Design & architecture",
+   "url": "https://www.palaisgalliera.paris.fr/",
+   "note": "Closing date not confirmed on the venue page."
   },
   {
    "id": "ad-pav",
    "venue": "artsdeco",
-   "head": "Rafael Pavarotti",
+   "short": "Rafael Pavarotti",
    "title": "Rafael Pavarotti, photographe",
+   "artists": "Rafael Pavarotti",
    "start": "2026-10-02",
    "end": "2027-02-07",
-   "adm": "paid",
-   "cats": [
-    "fashion",
-    "photo"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
    "url": "https://madparis.fr/"
   },
   {
    "id": "ad-maj",
    "venue": "artsdeco",
-   "head": "Haute couture at the Thai court",
+   "short": "Haute couture at the Thai court",
    "title": "Majestic Fashion: Haute Couture and Tradition at the Thai Court",
+   "artists": "",
    "start": "2026-05-13",
    "end": "2026-11-01",
-   "adm": "paid",
-   "cats": [
-    "fashion"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Design & architecture",
    "url": "https://madparis.fr/"
   },
   {
    "id": "ima-mariee",
    "venue": "ima",
-   "head": "Weddings in Algeria, Morocco and Tunisia",
+   "short": "Weddings in Algeria, Morocco and Tunisia",
    "title": "Vive la mariée !",
+   "artists": "",
    "start": "2026-09-29",
    "end": "2027-02-28",
-   "adm": "paid",
-   "cats": [
-    "world",
-    "fashion"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "History & collections",
    "url": "https://www.imarabe.org/"
   },
   {
    "id": "ima-alhambra",
    "venue": "ima",
-   "head": "The Nasrid Alhambra",
+   "short": "The Nasrid Alhambra",
    "title": "Les Trésors cachés de l’Alhambra nasride",
+   "artists": "",
    "start": "2026-11-24",
    "end": "2027-05-16",
-   "adm": "paid",
-   "cats": [
-    "world"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "History & collections",
    "url": "https://www.imarabe.org/"
   },
   {
    "id": "gu-dal",
    "venue": "guimet",
-   "head": "Seulgi Lee",
+   "short": "Seulgi Lee",
    "title": "DAL DARI. The Moon and its Legs",
+   "artists": "Seulgi Lee",
    "start": "2026-06-06",
    "end": "2027-02-08",
-   "adm": "paid",
-   "cats": [
-    "world"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Sculpture & installation",
    "url": "https://www.guimet.fr/"
   },
   {
    "id": "gu-trompe",
    "venue": "guimet",
-   "head": "Korean trompe-l’œil",
+   "short": "Korean trompe-l’œil",
    "title": "Le savoir en trompe-l’œil: Corée, XVIIIe–XXe siècle",
+   "artists": "",
    "start": "2026-09-16",
    "end": "2027-01-04",
-   "adm": "paid",
-   "cats": [
-    "world"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
    "url": "https://www.guimet.fr/"
   },
   {
    "id": "ce-coree",
    "venue": "cernuschi",
-   "head": "Korea and the scholar class",
+   "short": "Korea and the scholar class",
    "title": "Corée, le royaume des lettrés",
+   "artists": "",
    "start": "2026-11-20",
    "end": "2027-04-04",
-   "adm": "check",
-   "cats": [
-    "world"
-   ],
-   "note": "",
+   "admission": "check",
+   "discipline": "History & collections",
    "url": "https://www.cernuschi.paris.fr/"
   },
   {
    "id": "qb-plumes",
    "venue": "branly",
-   "head": "Birds of paradise",
+   "short": "Birds of paradise",
    "title": "Plumes du Paradis",
+   "artists": "",
    "start": "2026-05-12",
    "end": "2026-11-08",
-   "adm": "paid",
-   "cats": [
-    "world"
-   ],
-   "note": "",
+   "admission": "paid",
+   "discipline": "History & collections",
    "url": "https://www.quaibranly.fr/"
   }
  ]

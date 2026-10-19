@@ -1,384 +1,1733 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="What is on, closing and opening at Paris museums and non-profit spaces. An AI project by Studio AI Ludo.">
-<title>On View Paris</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><title>On View Paris</title><meta name="description" content="What's on, what's closing and what's opening at Paris's public museums, non-profit spaces and foundations."><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,800;1,6..96,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&text=%E5%8D%8E%E8%AF%AD&display=swap">
 <style>
-/* Layout: a printed programme. Masthead, one ruled filter strip, then a two-column list of entries or a dated bar chart. Bodoni for headlines, Instrument Sans for everything that is read at size. */
+/* On View Paris. Layout: wall-label masthead, departure-board "last chance" strip,
+   then a filter bar over cards, a season timeline or a map. Everything is scoped to #onview. */
 :root{
-  --paper:#f2eee6; --paper2:#e9e4d8; --ink:#16171c; --muted:#5d5f68; --rule:#cfc8b8;
-  --blue:#1f2b8a; --blue-ink:#ffffff; --red:#a8281f; --green:#1d6a4c;
-  --c-old:#7a4b2a; --c-c19:#2d6a6a; --c-mod:#1f2b8a; --c-photo:#5b3a86; --c-fashion:#a8281f; --c-world:#8a6a14;
-  --display:'Bodoni Moda','Didot','Bodoni 72',Georgia,serif;
-  --sans:'Instrument Sans','Helvetica Neue',Arial,sans-serif;
+  --wall:#EFEDE6; --panel:#FFFFFF; --ink:#0B0B0C; --ink-2:#4B4B50; --line:#CFCBBE; --line-2:#8C887C;
+  --accent:#0030C8; --accent-soft:#DCE3FA; --on-accent:#FFFFFF; --bar:#B8B4A6; --map-bg:#E4E1D8; --tiles:light;
+  --warn:#B93A00; --warn-soft:#FFE4D2; --hot:#FF6A2B; --bad:#C8102E; --bad-soft:#FFDDE2;
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --f-cjk:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --r:0;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#14151a; --paper2:#1d1f26; --ink:#efebe2; --muted:#a3a5ae; --rule:#34363f;
-  --blue:#9ea8ff; --blue-ink:#10113a; --red:#ff8c80; --green:#7fd1ab;
-  --c-old:#d9a276; --c-c19:#7ccaca; --c-mod:#9ea8ff; --c-photo:#c4a2f2; --c-fashion:#ff8c80; --c-world:#e3c25d; color-scheme:dark}}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --wall:#0C0C0D; --panel:#151517; --ink:#F2F0EA; --ink-2:#A3A19A; --line:#2B2B2E; --line-2:#6A6A6F;
+  --accent:#8FA5FF; --accent-soft:#1C2250; --on-accent:#0C0C0D; --bar:#3B3B40; --map-bg:#1A1B1E; --tiles:dark; --tile-bright:.62;
+  --warn:#FFA05C; --warn-soft:#33200F; --hot:#C2410C; --bad:#FF8C80; --bad-soft:#3B1714; color-scheme:dark;
+}}
 :root[data-theme="dark"]{
-  --paper:#14151a; --paper2:#1d1f26; --ink:#efebe2; --muted:#a3a5ae; --rule:#34363f;
-  --blue:#9ea8ff; --blue-ink:#10113a; --red:#ff8c80; --green:#7fd1ab;
-  --c-old:#d9a276; --c-c19:#7ccaca; --c-mod:#9ea8ff; --c-photo:#c4a2f2; --c-fashion:#ff8c80; --c-world:#e3c25d; color-scheme:dark}
-*{box-sizing:border-box}
-body{margin:0}
-body{background:var(--paper);color:var(--ink);font:400 16px/1.5 var(--sans);padding-block:0 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.wrap{max-width:1120px;margin:0 auto}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.mast{padding-block:36px 20px;border-bottom:3px double var(--ink);display:grid;gap:10px}
-.mast .kicker{font:500 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.mast h1{font:800 clamp(44px,9vw,92px)/.95 var(--display);letter-spacing:-.01em;margin:0;text-wrap:balance}
-.mast h1 em{font-style:italic;font-weight:400}
-.mast .dek{max-width:60ch;margin:0;color:var(--muted);font-size:17px}
-.checked{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;color:var(--muted);align-items:center}
-.checked b{color:var(--ink);font-weight:600}
-.theme{margin-left:auto;font:500 12px var(--sans);background:none;border:1px solid var(--rule);color:var(--ink);padding:6px 10px;border-radius:2px;cursor:pointer}
-.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--ink);padding-block:12px;display:grid;gap:10px}
-@media(max-width:760px),(max-height:600px){.bar{position:static}body::before{display:none}}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
-.row{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
-.lbl{font:600 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);min-width:5.5em}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{font:500 14px/1 var(--sans);padding:9px 12px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;border-radius:2px;display:inline-flex;align-items:center;gap:7px;min-height:38px}
-.chip .dot{width:9px;height:9px;border-radius:50%;background:var(--dot,var(--ink));flex:none}
-.chip[aria-pressed="false"]{border-color:var(--rule);color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
-.chip[aria-pressed="false"] .dot{background:transparent;box-shadow:inset 0 0 0 1.5px var(--dot,var(--ink))}
-.chip.seg[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-.chip.seg[aria-pressed="false"]{text-decoration:none}
-.chip .n{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px}
-select{font:500 14px var(--sans);padding:9px 10px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:2px;min-height:38px;max-width:100%}
-.count{font-size:14px;color:var(--muted);padding-block:14px 4px}
-.count b{color:var(--ink)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:0 28px}
-.card{border-top:1px solid var(--ink);padding-block:16px 22px;display:grid;gap:7px;align-content:start;min-width:0}
-.card .top{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:12px}
-.badge{font:600 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:5px 7px;border:1px solid currentColor;border-radius:2px}
-.b-now{color:var(--ink)} .b-close{color:var(--red)} .b-soon{color:var(--green)}
-.b-free{background:var(--blue);color:var(--blue-ink);border-color:var(--blue)}
-.venue{font:600 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.card h3{font:600 clamp(24px,3.2vw,30px)/1.08 var(--display);margin:2px 0 0;text-wrap:balance}
-.card .title{font-style:italic;color:var(--muted);font-family:var(--display);font-size:15px;line-height:1.35;margin:0}
-.card .dates{font-variant-numeric:tabular-nums;font-weight:500;margin:4px 0 0}
-.card .note{font-size:13px;color:var(--muted);margin:0}
-.tags{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted);align-items:center}
-.tag{display:inline-flex;gap:6px;align-items:center}
-.tag i{width:8px;height:8px;border-radius:50%;background:var(--dot)}
-.src{font-size:13px;color:var(--blue);text-underline-offset:3px}
-.empty{padding:48px 0;text-align:center;font-family:var(--display);font-size:22px;border-top:1px solid var(--ink)}
-.tl{overflow-x:auto;border-top:1px solid var(--ink);margin-top:10px;-webkit-overflow-scrolling:touch}
-.tl-in{--nw:200px;min-width:760px;position:relative;padding-bottom:10px}
-.tl-head{display:grid;grid-template-columns:200px 1fr;border-bottom:1px solid var(--rule);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);position:sticky;left:0}
-.tl-months{position:relative;height:28px}
-.tl-months span{position:absolute;top:8px;border-left:1px solid var(--rule);padding-left:5px;height:20px}
-.tl-row{display:grid;grid-template-columns:200px 1fr;align-items:center;border-bottom:1px solid var(--rule);min-height:34px}
-.tl-name{font-size:13px;line-height:1.25;padding:6px 10px 6px 0;min-width:0}
-.tl-name small{display:block;color:var(--muted);font-size:11px}
-.tl-track{position:relative;height:34px}
-.tl-bar{position:absolute;top:10px;height:14px;background:var(--dot,var(--ink));border-radius:1px;opacity:.9}
-.tl-bar.open{background:linear-gradient(90deg,var(--dot),transparent)}
-.tl-today{position:absolute;top:0;bottom:0;width:0;border-left:2px solid var(--red);z-index:2;pointer-events:none}
-.tl-today::after{content:"Today";position:absolute;top:-1px;left:4px;font-size:10px;color:var(--red);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
-.map{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;margin-top:14px;border-top:1px solid var(--ink);padding-top:14px}
-@media(max-width:760px){.map{grid-template-columns:1fr}.tl-head,.tl-row{grid-template-columns:150px 1fr}.tl-in{--nw:150px}}
-.pmap{height:clamp(380px,62vh,640px);border:1.5px solid var(--ink);background:var(--paper2);min-width:0}
-.pmap .leaflet-tile-pane{filter:grayscale(1) contrast(.92) brightness(1.04)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pmap .leaflet-tile-pane{filter:grayscale(1) contrast(.92) brightness(.62)}}
-:root[data-theme="dark"] .pmap .leaflet-tile-pane{filter:grayscale(1) contrast(.92) brightness(.62)}
-.pmap .leaflet-container{font-family:var(--sans)}
-.pmap .leaflet-popup-content-wrapper,.pmap .leaflet-popup-tip{background:var(--paper);color:var(--ink);border-radius:0}
-.pmap .leaflet-popup-content{margin:12px 14px;font-size:13.5px;line-height:1.4;min-width:200px}
-.pmap .leaflet-popup-content a{color:var(--ink)}
-.pp-v{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-.pp-i{padding:6px 0;border-top:1px solid var(--rule);display:grid;gap:2px}
-.pp-i a{font:600 16px/1.2 var(--display);text-decoration:none}
-.pp-i a:hover{text-decoration:underline}
-.pp-i span{font-size:12px;color:var(--muted)}
-.pin2{position:relative;width:0;height:0}
-.pin2 .d{position:absolute;left:-11px;top:-11px;width:22px;height:22px;border-radius:50%;background:var(--dot);color:#fff;border:2px solid var(--paper);display:grid;place-items:center;font:600 11px/1 var(--sans);box-shadow:0 1px 3px rgba(0,0,0,.3)}
-.pin2.sel .d{border-color:var(--ink);border-width:3px}
-.pin2 .l{position:absolute;left:15px;top:-9px;white-space:nowrap;background:var(--paper);border:1px solid var(--rule);padding:1px 6px;font:600 12px/1.3 var(--sans);color:var(--ink)}
-.pmap.zo .pin2 .l{display:none}
-.ov-me{position:relative;width:0;height:0}
-.ov-me .core{position:absolute;left:-8px;top:-8px;width:16px;height:16px;border-radius:50%;background:#E5141F;border:2.5px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
-.ov-me .halo{position:absolute;left:-18px;top:-18px;width:36px;height:36px;border-radius:50%;background:rgba(229,20,31,.28)}
-.pmap .locctl a{display:grid;place-items:center;cursor:pointer}
-.pmap .locctl.on a{color:#E5141F}
-@media (prefers-reduced-motion:no-preference){.ov-me .core{animation:blink 1.1s ease-in-out infinite}.ov-me .halo{animation:halo 1.1s ease-out infinite}@keyframes blink{50%{opacity:.25}}@keyframes halo{from{transform:scale(.4);opacity:.9}to{transform:scale(1.2);opacity:0}}}
-.vlist{list-style:none;margin:0;padding:0;display:grid;gap:0}
-.vlist li{border-top:1px solid var(--rule)}
-.vlist button{all:unset;cursor:pointer;display:flex;justify-content:space-between;gap:12px;padding:9px 2px;width:100%;box-sizing:border-box;font-size:14px}
-.vlist button:focus-visible{outline:2px solid var(--blue)}
-.vlist .c{font-variant-numeric:tabular-nums;color:var(--muted)}
-.vlist .z{color:var(--muted)}
-section.about{margin-top:56px;border-top:3px double var(--ink);padding-top:22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:20px 40px}
-@media(max-width:760px){section.about{grid-template-columns:1fr}}
-section.about h2{font:600 28px/1.1 var(--display);margin:0}
-section.about p{margin:0 0 12px;max-width:62ch}
-.vens{columns:2 220px;column-gap:28px;font-size:14px;margin:0;padding:0;list-style:none}
-.vens li{break-inside:avoid;padding-block:3px}
-.vens small{color:var(--muted)}
-footer{margin-top:36px;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:space-between;border-top:1px solid var(--rule);padding-top:14px}
-@media (prefers-reduced-motion:no-preference){.card{animation:rise .35s ease both}@keyframes rise{from{opacity:.001;transform:translateY(6px)}to{opacity:1;transform:none}}}
+  --wall:#0C0C0D; --panel:#151517; --ink:#F2F0EA; --ink-2:#A3A19A; --line:#2B2B2E; --line-2:#6A6A6F;
+  --accent:#8FA5FF; --accent-soft:#1C2250; --on-accent:#0C0C0D; --bar:#3B3B40; --map-bg:#1A1B1E; --tiles:dark; --tile-bright:.62;
+  --warn:#FFA05C; --warn-soft:#33200F; --hot:#C2410C; --bad:#FF8C80; --bad-soft:#3B1714; color-scheme:dark;
+}
+ .leaflet-pane, .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-tile-container, .leaflet-pane > svg, .leaflet-pane > canvas, .leaflet-zoom-box, .leaflet-image-layer, .leaflet-layer { position: absolute; left: 0; top: 0; } .leaflet-container { overflow: hidden; } .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow { -webkit-user-select: none; -moz-user-select: none; user-select: none; -webkit-user-drag: none; } .leaflet-tile::selection { background: transparent; } .leaflet-safari .leaflet-tile { image-rendering: -webkit-optimize-contrast; } .leaflet-safari .leaflet-tile-container { width: 1600px; height: 1600px; -webkit-transform-origin: 0 0; } .leaflet-marker-icon, .leaflet-marker-shadow { display: block; } .leaflet-container .leaflet-overlay-pane svg { max-width: none !important; max-height: none !important; } .leaflet-container .leaflet-marker-pane img, .leaflet-container .leaflet-shadow-pane img, .leaflet-container .leaflet-tile-pane img, .leaflet-container img.leaflet-image-layer, .leaflet-container .leaflet-tile { max-width: none !important; max-height: none !important; width: auto; padding: 0; } .leaflet-container img.leaflet-tile { mix-blend-mode: plus-lighter; } .leaflet-container.leaflet-touch-zoom { -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; } .leaflet-container.leaflet-touch-drag { -ms-touch-action: pinch-zoom; touch-action: none; touch-action: pinch-zoom; } .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom { -ms-touch-action: none; touch-action: none; } .leaflet-container { -webkit-tap-highlight-color: transparent; } .leaflet-container a { -webkit-tap-highlight-color: rgba(51, 181, 229, 0.4); } .leaflet-tile { filter: inherit; visibility: hidden; } .leaflet-tile-loaded { visibility: inherit; } .leaflet-zoom-box { width: 0; height: 0; -moz-box-sizing: border-box; box-sizing: border-box; z-index: 800; } .leaflet-overlay-pane svg { -moz-user-select: none; } .leaflet-pane { z-index: 400; } .leaflet-tile-pane { z-index: 200; } .leaflet-overlay-pane { z-index: 400; } .leaflet-shadow-pane { z-index: 500; } .leaflet-marker-pane { z-index: 600; } .leaflet-tooltip-pane { z-index: 650; } .leaflet-popup-pane { z-index: 700; } .leaflet-map-pane canvas { z-index: 100; } .leaflet-map-pane svg { z-index: 200; } .leaflet-vml-shape { width: 1px; height: 1px; } .lvml { display: inline-block; position: absolute; } .leaflet-control { position: relative; z-index: 800; pointer-events: visiblePainted; pointer-events: auto; } .leaflet-top, .leaflet-bottom { position: absolute; z-index: 1000; pointer-events: none; } .leaflet-top { top: 0; } .leaflet-right { right: 0; } .leaflet-bottom { bottom: 0; } .leaflet-left { left: 0; } .leaflet-control { float: left; clear: both; } .leaflet-right .leaflet-control { float: right; } .leaflet-top .leaflet-control { margin-top: 10px; } .leaflet-bottom .leaflet-control { margin-bottom: 10px; } .leaflet-left .leaflet-control { margin-left: 10px; } .leaflet-right .leaflet-control { margin-right: 10px; } .leaflet-fade-anim .leaflet-popup { opacity: 0; -webkit-transition: opacity 0.2s linear; -moz-transition: opacity 0.2s linear; transition: opacity 0.2s linear; } .leaflet-fade-anim .leaflet-map-pane .leaflet-popup { opacity: 1; } .leaflet-zoom-animated { -webkit-transform-origin: 0 0; -ms-transform-origin: 0 0; transform-origin: 0 0; } svg.leaflet-zoom-animated { will-change: transform; } .leaflet-zoom-anim .leaflet-zoom-animated { -webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1); -moz-transition: -moz-transform 0.25s cubic-bezier(0,0,0.25,1); transition: transform 0.25s cubic-bezier(0,0,0.25,1); } .leaflet-zoom-anim .leaflet-tile, .leaflet-pan-anim .leaflet-tile { -webkit-transition: none; -moz-transition: none; transition: none; } .leaflet-zoom-anim .leaflet-zoom-hide { visibility: hidden; } .leaflet-interactive { cursor: pointer; } .leaflet-grab { cursor: -webkit-grab; cursor: -moz-grab; cursor: grab; } .leaflet-crosshair, .leaflet-crosshair .leaflet-interactive { cursor: crosshair; } .leaflet-popup-pane, .leaflet-control { cursor: auto; } .leaflet-dragging .leaflet-grab, .leaflet-dragging .leaflet-grab .leaflet-interactive, .leaflet-dragging .leaflet-marker-draggable { cursor: move; cursor: -webkit-grabbing; cursor: -moz-grabbing; cursor: grabbing; } .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-image-layer, .leaflet-pane > svg path, .leaflet-tile-container { pointer-events: none; } .leaflet-marker-icon.leaflet-interactive, .leaflet-image-layer.leaflet-interactive, .leaflet-pane > svg path.leaflet-interactive, svg.leaflet-image-layer.leaflet-interactive path { pointer-events: visiblePainted; pointer-events: auto; } .leaflet-container { background: #ddd; outline-offset: 1px; } .leaflet-container a { color: #0078A8; } .leaflet-zoom-box { border: 2px dotted #38f; background: rgba(255,255,255,0.5); } .leaflet-container { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-size: 12px; font-size: 0.75rem; line-height: 1.5; } .leaflet-bar { box-shadow: 0 1px 5px rgba(0,0,0,0.65); border-radius: 4px; } .leaflet-bar a { background-color: #fff; border-bottom: 1px solid #ccc; width: 26px; height: 26px; line-height: 26px; display: block; text-align: center; text-decoration: none; color: black; } .leaflet-bar a, .leaflet-control-layers-toggle { background-position: 50% 50%; background-repeat: no-repeat; display: block; } .leaflet-bar a:hover, .leaflet-bar a:focus { background-color: #f4f4f4; } .leaflet-bar a:first-child { border-top-left-radius: 4px; border-top-right-radius: 4px; } .leaflet-bar a:last-child { border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom: none; } .leaflet-bar a.leaflet-disabled { cursor: default; background-color: #f4f4f4; color: #bbb; } .leaflet-touch .leaflet-bar a { width: 30px; height: 30px; line-height: 30px; } .leaflet-touch .leaflet-bar a:first-child { border-top-left-radius: 2px; border-top-right-radius: 2px; } .leaflet-touch .leaflet-bar a:last-child { border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; } .leaflet-control-zoom-in, .leaflet-control-zoom-out { font: bold 18px 'Lucida Console', Monaco, monospace; text-indent: 1px; } .leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out { font-size: 22px; } .leaflet-control-layers { box-shadow: 0 1px 5px rgba(0,0,0,0.4); background: #fff; border-radius: 5px; } .leaflet-control-layers-toggle { width: 36px; height: 36px; } .leaflet-retina .leaflet-control-layers-toggle { background-size: 26px 26px; } .leaflet-touch .leaflet-control-layers-toggle { width: 44px; height: 44px; } .leaflet-control-layers .leaflet-control-layers-list, .leaflet-control-layers-expanded .leaflet-control-layers-toggle { display: none; } .leaflet-control-layers-expanded .leaflet-control-layers-list { display: block; position: relative; } .leaflet-control-layers-expanded { padding: 6px 10px 6px 6px; color: #333; background: #fff; } .leaflet-control-layers-scrollbar { overflow-y: scroll; overflow-x: hidden; padding-right: 5px; } .leaflet-control-layers-selector { margin-top: 2px; position: relative; top: 1px; } .leaflet-control-layers label { display: block; font-size: 13px; font-size: 1.08333em; } .leaflet-control-layers-separator { height: 0; border-top: 1px solid #ddd; margin: 5px -10px 5px -6px; } .leaflet-default-icon-path { } .leaflet-container .leaflet-control-attribution { background: #fff; background: rgba(255, 255, 255, 0.8); margin: 0; } .leaflet-control-attribution, .leaflet-control-scale-line { padding: 0 5px; color: #333; line-height: 1.4; } .leaflet-control-attribution a { text-decoration: none; } .leaflet-control-attribution a:hover, .leaflet-control-attribution a:focus { text-decoration: underline; } .leaflet-attribution-flag { display: inline !important; vertical-align: baseline !important; width: 1em; height: 0.6669em; } .leaflet-left .leaflet-control-scale { margin-left: 5px; } .leaflet-bottom .leaflet-control-scale { margin-bottom: 5px; } .leaflet-control-scale-line { border: 2px solid #777; border-top: none; line-height: 1.1; padding: 2px 5px 1px; white-space: nowrap; -moz-box-sizing: border-box; box-sizing: border-box; background: rgba(255, 255, 255, 0.8); text-shadow: 1px 1px #fff; } .leaflet-control-scale-line:not(:first-child) { border-top: 2px solid #777; border-bottom: none; margin-top: -2px; } .leaflet-control-scale-line:not(:first-child):not(:last-child) { border-bottom: 2px solid #777; } .leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar { box-shadow: none; } .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar { border: 2px solid rgba(0,0,0,0.2); background-clip: padding-box; } .leaflet-popup { position: absolute; text-align: center; margin-bottom: 20px; } .leaflet-popup-content-wrapper { padding: 1px; text-align: left; border-radius: 12px; } .leaflet-popup-content { margin: 13px 24px 13px 20px; line-height: 1.3; font-size: 13px; font-size: 1.08333em; min-height: 1px; } .leaflet-popup-content p { margin: 17px 0; margin: 1.3em 0; } .leaflet-popup-tip-container { width: 40px; height: 20px; position: absolute; left: 50%; margin-top: -1px; margin-left: -20px; overflow: hidden; pointer-events: none; } .leaflet-popup-tip { width: 17px; height: 17px; padding: 1px; margin: -10px auto 0; pointer-events: auto; -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); } .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: white; color: #333; box-shadow: 0 3px 14px rgba(0,0,0,0.4); } .leaflet-container a.leaflet-popup-close-button { position: absolute; top: 0; right: 0; border: none; text-align: center; width: 24px; height: 24px; font: 16px/24px Tahoma, Verdana, sans-serif; color: #757575; text-decoration: none; background: transparent; } .leaflet-container a.leaflet-popup-close-button:hover, .leaflet-container a.leaflet-popup-close-button:focus { color: #585858; } .leaflet-popup-scrolled { overflow: auto; } .leaflet-oldie .leaflet-popup-content-wrapper { -ms-zoom: 1; } .leaflet-oldie .leaflet-popup-tip { width: 24px; margin: 0 auto; -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)"; filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678); } .leaflet-oldie .leaflet-control-zoom, .leaflet-oldie .leaflet-control-layers, .leaflet-oldie .leaflet-popup-content-wrapper, .leaflet-oldie .leaflet-popup-tip { border: 1px solid #999; } .leaflet-div-icon { background: #fff; border: 1px solid #666; } .leaflet-tooltip { position: absolute; padding: 6px; background-color: #fff; border: 1px solid #fff; border-radius: 3px; color: #222; white-space: nowrap; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; pointer-events: none; box-shadow: 0 1px 3px rgba(0,0,0,0.4); } .leaflet-tooltip.leaflet-interactive { cursor: pointer; pointer-events: auto; } .leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before, .leaflet-tooltip-left:before, .leaflet-tooltip-right:before { position: absolute; pointer-events: none; border: 6px solid transparent; background: transparent; content: ""; } .leaflet-tooltip-bottom { margin-top: 6px; } .leaflet-tooltip-top { margin-top: -6px; } .leaflet-tooltip-bottom:before, .leaflet-tooltip-top:before { left: 50%; margin-left: -6px; } .leaflet-tooltip-top:before { bottom: 0; margin-bottom: -12px; border-top-color: #fff; } .leaflet-tooltip-bottom:before { top: 0; margin-top: -12px; margin-left: -6px; border-bottom-color: #fff; } .leaflet-tooltip-left { margin-left: -6px; } .leaflet-tooltip-right { margin-left: 6px; } .leaflet-tooltip-left:before, .leaflet-tooltip-right:before { top: 50%; margin-top: -6px; } .leaflet-tooltip-left:before { right: 0; margin-right: -12px; border-left-color: #fff; } .leaflet-tooltip-right:before { left: 0; margin-left: -12px; border-right-color: #fff; } @media print { .leaflet-control { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+body{background:var(--wall);color:var(--ink)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:1000;background:var(--wall)}
+#onview .ov-wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+#onview,#onview *{box-sizing:border-box}
+#onview{background:var(--wall);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;container-type:inline-size;-webkit-text-size-adjust:100%;text-align:left}
+#onview h1,#onview h2,#onview h3,#onview p,#onview ol,#onview ul,#onview li,#onview fieldset,#onview legend{margin:0;padding:0;border:0;letter-spacing:normal;text-transform:none;font-family:inherit;color:inherit;line-height:inherit}
+#onview ol,#onview ul{list-style:none}
+#onview article,#onview section,#onview header,#onview footer,#onview nav,#onview main,#onview figure{margin:0;padding:0;border:0;box-shadow:none;background:none;float:none;width:auto;max-width:none}
+#onview button,#onview select,#onview input,#onview textarea{font:inherit;color:inherit;letter-spacing:normal;text-transform:none;box-shadow:none;margin:0;line-height:1.3;min-height:0;height:auto;width:auto;border-radius:var(--r)}
+#onview a{color:inherit;box-shadow:none;border:0}
+#onview :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#onview .ov-wrap{max-width:1240px;margin:0 auto;padding:0 16px}
+#onview .mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+#onview .cjk{font-family:var(--f-cjk);font-weight:500}
+
+/* Masthead */
+#onview .ov-mast{padding:18px 0 26px;display:grid;gap:16px;border-top:12px solid var(--ink)}
+#onview a.ov-home{justify-self:start;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--ink);padding-bottom:1px}
+#onview a.ov-home:hover{background:var(--ink);color:var(--wall)}
+#onview .ov-links{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:space-between}
+#onview .ov-eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+#onview h1.ov-title{font-family:var(--f-display);font-weight:800;font-stretch:125%;text-transform:uppercase;font-size:clamp(44px,23cqi,300px);line-height:.84;letter-spacing:-.04em;overflow-wrap:anywhere}
+#onview h1.ov-title span{display:block;font-weight:800;color:transparent;-webkit-text-stroke:clamp(1.5px,.3cqi,4px) var(--ink)}
+#onview .ov-intro{max-width:56ch;font-size:17px;line-height:1.45;color:var(--ink);border-left:8px solid var(--accent);padding-left:14px}
+#onview .ov-verified{display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--f-mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+#onview .ov-stale{border:2px solid var(--warn);background:var(--warn-soft);padding:10px 12px;font-size:14px}
+
+/* Owner tools (preview only) */
+#onview .ov-owner{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:10px 12px;border:2px dashed var(--line-2);font-size:13.5px}
+#onview .ov-owner strong{font-weight:600}
+#onview .ov-owner .ov-msg{flex:1 1 260px;color:var(--ink-2);min-width:0}
+#onview .ov-btn{border:2px solid var(--ink);background:var(--ink);color:var(--wall);padding:7px 12px;cursor:pointer;font-weight:600}
+#onview .ov-btn.ghost{background:transparent;color:var(--ink)}
+#onview .ov-btn[disabled]{opacity:.5;cursor:default}
+#onview .ov-copybox{width:100%;height:120px;font-family:var(--f-mono);font-size:12px;background:var(--panel);border:1px solid var(--line);padding:8px}
+
+/* Summary */
+#onview .ov-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:2px solid var(--ink);background:var(--panel)}
+#onview .ov-summary button{all:unset;cursor:pointer;padding:14px 16px 12px;display:grid;gap:4px;border-right:2px solid var(--ink);box-sizing:border-box}
+#onview .ov-summary button:last-child{border-right:0}
+#onview .ov-summary button:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+#onview .ov-summary .n{font-family:var(--f-display);font-weight:800;font-stretch:125%;font-size:clamp(40px,8cqi,88px);line-height:.9;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+#onview .ov-summary .l{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+#onview .ov-summary button:hover{background:var(--accent-soft)}
+#onview .ov-summary button[aria-pressed="true"]{background:var(--ink);color:var(--wall)}
+#onview .ov-summary button[aria-pressed="true"] .l{color:var(--wall)}
+@container (max-width:640px){
+  #onview .ov-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #onview .ov-summary button{border-right:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+  #onview .ov-summary button:nth-child(2n){border-right:0}
+  #onview .ov-summary button:nth-last-child(-n+2){border-bottom:0}
+}
+
+/* Last chance board */
+#onview .ov-board{margin-top:20px;background:var(--ink);color:var(--wall);padding:16px 18px 6px}
+#onview .ov-h{margin:0 0 8px;font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--wall)}
+#onview .ov-board ol{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:0 28px}
+#onview .ov-board li{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--ink-2)}
+#onview .ov-board .d{font-family:var(--f-display);font-weight:800;font-stretch:125%;font-size:32px;line-height:1;font-variant-numeric:tabular-nums;color:var(--hot);white-space:nowrap}
+#onview .ov-board .d small{display:block;font-family:var(--f-mono);font-weight:400;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--wall);opacity:.75;margin-top:4px}
+#onview .ov-board .d.today{font-size:20px}
+#onview .ov-board a{text-decoration:none;font-family:var(--f-display);font-weight:800;font-stretch:112%;font-size:18px;color:var(--wall)}
+#onview .ov-board a:hover{text-decoration:underline}
+#onview .ov-board .v{display:block;font-size:13px;color:var(--wall);opacity:.75}
+
+/* Toolbar */
+#onview .ov-toolbar{margin-top:20px;padding:14px 0;border-bottom:2px solid var(--ink);display:grid;gap:10px}
+#onview .ov-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+#onview .ov-search{flex:1 1 220px;min-width:0;display:flex;align-items:center;gap:8px;background:var(--panel);border:2px solid var(--ink);padding:0 10px}
+#onview .ov-search input{border:0;background:transparent;padding:9px 0;flex:1;min-width:0;outline:none}
+#onview .ov-search:focus-within{outline:3px solid var(--accent);outline-offset:1px}
+#onview .ov-search svg{flex:none;color:var(--ink)}
+#onview select{background-color:var(--panel);border:2px solid var(--ink);padding:8px 28px 8px 10px;appearance:none;-webkit-appearance:none;font-family:var(--f-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;
+  background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);
+  background-position:calc(100% - 15px) 52%,calc(100% - 10px) 52%;background-size:5px 5px;background-repeat:no-repeat;max-width:100%}
+#onview .ov-seg{display:inline-flex;border:2px solid var(--ink);overflow:hidden;background:var(--panel)}
+#onview .ov-seg button{border:0;border-radius:0;background:transparent;padding:8px 12px;cursor:pointer;border-right:2px solid var(--ink);font-family:var(--f-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+#onview .ov-seg button:last-child{border-right:0}
+#onview .ov-seg button[aria-pressed="true"]{background:var(--ink);color:var(--wall)}
+#onview .ov-toggle{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--ink);background:var(--panel);padding:7px 12px;cursor:pointer;font-family:var(--f-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+#onview .ov-toggle[aria-pressed="true"],#onview .ov-toggle[aria-expanded="true"]{border-color:var(--accent);background:var(--accent);color:var(--on-accent);font-weight:600}
+#onview .ov-toggle .cjk{font-size:14px}
+#onview .ov-toggle .caret{font-size:10px}
+#onview .ov-spacer{flex:1}
+#onview .ov-meta{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-family:var(--f-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-2)}
+#onview .ov-link{background:none;border:0;padding:0;text-decoration:underline;cursor:pointer;color:var(--ink);font:inherit}
+@container (max-width:560px){#onview .ov-row select{flex:1 1 45%}}
+
+/* Venue checklist */
+#onview .ov-venues{border:2px solid var(--ink);background:var(--panel);padding:12px 14px}
+#onview .ov-venues-head{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-bottom:10px;font-size:13px;color:var(--ink-2)}
+#onview .ov-vlist{display:grid;max-width:620px;max-height:460px;overflow:auto;border-top:2px solid var(--ink)}
+#onview .ov-vrow{display:grid;grid-template-columns:26px minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:5px 2px 5px 0;border-bottom:1px solid var(--line)}
+#onview .ov-vrow .num{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);text-align:right;font-variant-numeric:tabular-nums}
+#onview .ov-vrow.off .ov-check{color:var(--ink-2)}
+#onview .ov-check{display:flex;flex-wrap:wrap;gap:2px 8px;align-items:baseline;cursor:pointer;font-size:14px;min-width:0}
+#onview .ov-check input{accent-color:var(--accent);width:15px;height:15px;flex:none;transform:translateY(2px)}
+#onview .ov-check .a{font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2)}
+#onview .ov-vrow .c{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);min-width:2ch;text-align:right}
+#onview .ov-move{display:inline-flex;gap:4px}
+#onview .ov-move button{width:30px;height:28px;padding:0;display:grid;place-items:center;border:2px solid var(--ink);border-radius:0;background:var(--panel);cursor:pointer;font-size:13px;line-height:1}
+#onview .ov-move button:hover{background:var(--ink);color:var(--wall)}
+#onview .ov-move button[disabled]{opacity:.3;cursor:default;background:var(--panel);color:var(--ink)}
+
+/* Cards */
+#onview .ov-results{padding:20px 0 8px}
+#onview .ov-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px}
+#onview article.ov-card{margin:0;background:var(--panel);border:2px solid var(--ink);border-radius:0;padding:0;display:grid;grid-template-rows:auto 1fr auto;min-width:0;transition:transform .12s,box-shadow .12s}
+#onview article.ov-card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ink)}
+#onview article.ov-card.sino{border-left:10px solid var(--accent)}
+#onview .ov-card .top{display:flex;gap:8px;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--ink);color:var(--wall)}
+#onview .ov-card .venue{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;min-width:0;display:flex;align-items:center;gap:8px}
+#onview .ov-card .venue .vname{min-width:0;overflow-wrap:anywhere}
+#onview .vbadge{flex:none;display:inline-grid;place-items:center;min-width:30px;height:22px;padding:0 5px;background:var(--wall);color:var(--ink);font-family:var(--f-display);font-weight:800;font-stretch:112%;font-size:11px;letter-spacing:.02em;line-height:1;border-radius:2px;box-shadow:inset 0 0 0 1.5px var(--ink)}
+#onview .ov-card .body{padding:14px 14px 12px;display:grid;gap:6px;align-content:start}
+#onview .ov-card h3{font-family:var(--f-display);font-weight:800;font-stretch:112%;font-size:28px;line-height:1;letter-spacing:-.02em;overflow-wrap:anywhere}
+#onview .ov-card h3 a{text-decoration:none}
+#onview .ov-card h3.mid{font-size:23px;line-height:1.05}
+#onview .ov-card h3.grp{font-size:19px;font-stretch:100%;line-height:1.15;font-weight:700;letter-spacing:-.01em}
+#onview .tl-label a.grp,#onview .ov-board a.grp{font-size:14px;font-stretch:100%}
+#onview .pp-item a.grp{font-size:14.5px;font-stretch:100%}
+#onview .ov-card h3 a:hover{text-decoration:underline}
+#onview .ov-card .full{font-weight:600;font-size:14.5px;line-height:1.35}
+#onview .ov-card .artists{color:var(--ink-2);font-size:13.5px}
+#onview .ov-card .dates{font-family:var(--f-mono);font-size:12.5px;font-variant-numeric:tabular-nums;margin-top:4px}
+#onview .ov-card .foot{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)}
+#onview .ov-card .foot .grow{flex:1}
+#onview a.maplink{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:2px solid var(--ink);white-space:nowrap}
+#onview a.maplink:hover{background:var(--ink);color:var(--wall)}
+#onview .chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;line-height:1;padding:5px 7px;border:1px solid var(--line-2);white-space:nowrap}
+#onview .chip.status{border:0;font-family:var(--f-mono);font-weight:500;font-size:11px;letter-spacing:.05em;text-transform:uppercase;background:var(--wall);color:var(--ink)}
+#onview .chip.soon{background:var(--hot);color:#000}
+#onview .chip.today{background:var(--bad);color:#fff}
+#onview .chip.upcoming{background:transparent;color:var(--wall);border:1px solid var(--wall)}
+#onview .chip.sino{background:var(--accent);color:var(--on-accent);border-color:transparent}
+#onview .chip.commercial{border-style:dashed;color:var(--ink-2)}
+#onview .chip.free{font-weight:600}
+#onview .ov-empty{padding:40px 0;text-align:center;color:var(--ink-2);display:grid;gap:8px;justify-items:center}
+
+/* Timeline */
+#onview .tl{border-top:3px solid var(--ink);overflow:hidden}
+#onview .tl-head,#onview .tl-row{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:16px;align-items:center}
+#onview .tl-head{padding:8px 0;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2)}
+#onview .tl-track{position:relative;height:18px}
+#onview .tl-head .tl-track{height:16px}
+#onview .tl-month{position:absolute;top:0;padding-left:5px;border-left:1px solid var(--line);height:100%;white-space:nowrap}
+#onview .tl-row{padding:7px 0;border-bottom:1px solid var(--line)}
+#onview .tl-label{min-width:0;font-size:13px;line-height:1.3}
+#onview .tl-label a{font-family:var(--f-display);font-weight:700;font-stretch:112%;font-size:16px;text-decoration:none}
+#onview .tl-label a:hover{text-decoration:underline}
+#onview .tl-label .v{display:block;color:var(--ink-2);font-size:12px}
+#onview .tl-grid{position:absolute;top:-8px;bottom:-8px;width:1px;background:var(--line)}
+#onview .tl-today{position:absolute;top:-8px;bottom:-8px;width:2px;background:var(--bad);opacity:.7}
+#onview .tl-head .tl-today{top:0;bottom:0}
+#onview .bar{position:absolute;top:3px;height:12px;border-radius:2px;background:var(--bar)}
+#onview .bar.sino{background:var(--accent)}
+#onview .bar.soon{background:var(--warn)}
+#onview .bar.upcoming{background:transparent;border:1.5px solid var(--ink-2)}
+#onview .bar.upcoming.sino{border-color:var(--accent)}
+#onview .bar.nostart{-webkit-mask-image:linear-gradient(90deg,transparent,#000 28px);mask-image:linear-gradient(90deg,transparent,#000 28px)}
+#onview .bar.noend{-webkit-mask-image:linear-gradient(270deg,transparent,#000 28px);mask-image:linear-gradient(270deg,transparent,#000 28px)}
+#onview .ov-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 10px;font-size:12px;color:var(--ink-2)}
+#onview .ov-legend span{display:inline-flex;align-items:center;gap:6px}
+#onview .ov-legend i{display:inline-block;width:18px;height:9px;border-radius:2px;background:var(--bar)}
+#onview .ov-legend i.sino{background:var(--accent)}
+#onview .ov-legend i.soon{background:var(--warn)}
+#onview .ov-legend i.upcoming{background:transparent;border:1.5px solid var(--ink-2)}
+#onview .ov-legend i.me{width:10px;height:10px;border-radius:50%;background:#E5202E}
+#onview .ov-legend i.dot{width:10px;height:10px;border-radius:50%;background:var(--ink)}
+@container (max-width:700px){#onview .tl-head,#onview .tl-row{grid-template-columns:1fr;gap:6px}#onview .tl-head .tl-label{display:none}}
+
+/* Map */
+#onview .ov-map{height:clamp(380px,62vh,660px);border:2px solid var(--ink);border-radius:0;background:var(--map-bg);overflow:hidden}
+#onview .ov-map-note{margin-top:8px;font-size:12.5px;color:var(--ink-2)}
+#onview .ov-locate{display:block;border:2px solid var(--ink);background:var(--panel);color:var(--ink);font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;padding:7px 10px;cursor:pointer;box-shadow:none}
+#onview .ov-locate:hover{background:var(--ink);color:var(--wall)}
+#onview .ov-locate[aria-pressed="true"]{background:#E5202E;border-color:#E5202E;color:#fff}
+#onview .ov-me{width:16px;height:16px;border-radius:50%;background:#E5202E;border:3px solid #fff;box-shadow:0 0 0 2px #E5202E,0 1px 6px rgba(0,0,0,.45)}
+#onview .leaflet-container{font-family:var(--f-body);background:var(--map-bg)}
+#onview .leaflet-tile-pane{filter:grayscale(1) contrast(.92) brightness(var(--tile-bright,1.04))}
+#onview .ov-pin{position:relative;width:0;height:0}
+#onview .ov-pin .dot{position:absolute;left:-10px;top:-10px;width:20px;height:20px;border-radius:50%;background:var(--ink);color:var(--wall);border:2px solid var(--wall);display:grid;place-items:center;font-family:var(--f-mono);font-size:10.5px;font-weight:500;line-height:1;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+#onview .ov-pin.sino .dot{background:var(--accent)}
+#onview .ov-pin .lbl{position:absolute;top:-10px;left:14px;white-space:nowrap;background:var(--panel);border:1px solid var(--line);border-radius:2px;padding:2px 6px;font-family:var(--f-display);font-stretch:108%;font-weight:700;font-size:12.5px;line-height:1.25;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+#onview .ov-pin .lbl .w-sino{color:var(--accent)}
+#onview .ov-pin .lbl .w-soon{color:var(--warn)}
+#onview .ov-pin .lbl .more,#onview .ov-pin .lbl .sep{font-family:var(--f-mono);font-weight:400;font-size:11px;color:var(--ink-2)}
+#onview .ov-pin.left .lbl{left:auto;right:14px}
+#onview .ov-pin.up .lbl{top:-24px}
+#onview .ov-pin.down .lbl{top:4px}
+#onview .ov-map.zoomed-out .ov-pin .lbl{display:none}
+#onview .leaflet-popup-content-wrapper{background:var(--panel);color:var(--ink);border-radius:var(--r);box-shadow:0 4px 16px rgba(0,0,0,.18)}
+#onview .leaflet-popup-tip{background:var(--panel)}
+#onview .leaflet-popup-content{margin:12px 14px;min-width:220px;max-width:300px;font-size:13.5px;line-height:1.4}
+#onview .leaflet-container a.leaflet-popup-close-button{color:var(--ink-2)}
+#onview .pp-venue{font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px;padding-right:14px}
+#onview .pp-item{padding:7px 0;border-top:1px solid var(--line);display:grid;gap:2px}
+#onview .pp-item a{font-family:var(--f-display);font-weight:700;font-stretch:112%;font-size:17px;text-decoration:none;color:var(--ink)}
+#onview .pp-item a:hover{text-decoration:underline}
+#onview .pp-item .t{font-size:12.5px}
+#onview .pp-item .m{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2)}
+#onview .leaflet-control-attribution{background:var(--panel);color:var(--ink-2);font-size:10.5px}
+#onview .leaflet-control-attribution a{color:var(--ink-2)}
+#onview .leaflet-bar a{background:var(--panel);color:var(--ink);border-bottom-color:var(--line)}
+
+/* Footer */
+#onview .ov-foot{margin-top:36px;padding:24px 0 48px;border-top:12px solid var(--ink);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px;font-size:14px;color:var(--ink-2)}
+#onview .ov-foot h2{margin-bottom:6px;font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+#onview .ov-foot p{max-width:62ch;margin-bottom:8px}
+#onview .ov-foot-venues{grid-column:1/-1}
+#onview .ov-vnames{list-style:none;margin:0;padding:0;columns:220px;column-gap:24px}
+#onview .ov-vnames li{break-inside:avoid;padding:2px 0}
+@media (prefers-reduced-motion:no-preference){#onview .ov-card,#onview .tl-row{animation:ovIn .25s ease-out both}@keyframes ovIn{from{opacity:.4}to{opacity:1}}}
 </style>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" crossorigin="anonymous">
-</head>
-<body>
-<div class="wrap">
-<header class="mast">
-  <a class="back" href="../">← Studio AI Ludo</a>
-  <div class="kicker">An AI project by Studio AI Ludo</div>
-  <h1>On View <em>Paris</em></h1>
-  <p class="dek">What is on, closing and opening at the public museums and non-profit spaces of Paris. Gathered from each venue's own pages and written up with AI.</p>
-  <div class="checked"><span>Listings checked <b id="checkedDate">19 October 2026</b></span><span id="venueCount"></span>
-    <button class="theme" id="themeBtn" type="button">Light / dark</button></div>
-</header>
+<div id="onview" data-src="exhibitions.json">
+<div class="ov-wrap">
+  <header class="ov-mast">
+    <nav class="ov-links" aria-label="Studio AI Ludo"><a class="ov-home" href="../">← Studio AI Ludo</a><a class="ov-home ov-sib" href="../london/">On View London →</a></nav>
+    <div class="ov-eyebrow">Exhibitions across Paris · An AI project by Studio AI Ludo</div>
+    <h1 class="ov-title" aria-label="On View Paris">On View <span aria-hidden="true">Par</span><span aria-hidden="true">is</span></h1>
+    <p class="ov-intro">What's on, what's closing and what's opening at Paris's public museums and non-profit spaces, with several private foundations.</p>
+    <div class="ov-verified"><span id="ov-verified">Listings checked —</span><span id="ov-venueCount"></span></div>
+    <div class="ov-stale" id="ov-stale" hidden></div>
+  </header>
 
-<div class="bar" role="group" aria-label="Filters">
-  <div class="row"><span class="lbl">Categories</span><div class="chips" id="cats"></div></div>
-  <div class="row">
-    <span class="lbl">Show</span>
-    <div class="chips" id="status"></div>
-    <div class="chips" id="adm"></div>
+  <nav class="ov-summary" aria-label="Show">
+    <button type="button" data-status="all"><span class="n" id="ov-n-all">—</span><span class="l">Listed</span></button>
+    <button type="button" data-status="on"><span class="n" id="ov-n-on">—</span><span class="l">On now</span></button>
+    <button type="button" data-status="closing"><span class="n" id="ov-n-closing">—</span><span class="l">Closing within 14 days</span></button>
+    <button type="button" data-status="upcoming"><span class="n" id="ov-n-upcoming">—</span><span class="l">Opening soon</span></button>
+  </nav>
+
+  <section class="ov-board" id="ov-board" hidden aria-labelledby="ov-board-h">
+    <h2 class="ov-h" id="ov-board-h">Last chance</h2>
+    <ol id="ov-boardList"></ol>
+  </section>
+
+  <div class="ov-toolbar" role="search">
+    <div class="ov-row">
+      <label class="ov-search" for="ov-q">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        <input id="ov-q" type="search" placeholder="Search artist, title or venue" autocomplete="off">
+      </label>
+      <button type="button" class="ov-toggle" id="ov-sino" aria-pressed="false"><span class="cjk" lang="zh">华语</span> Sinophone <span class="mono" id="ov-n-sino"></span></button>
+    </div>
+    <div class="ov-row">
+      <div class="ov-seg" role="group" aria-label="Admission">
+        <button type="button" data-adm="all">Any</button>
+        <button type="button" data-adm="free">Free</button>
+        <button type="button" data-adm="paid">Ticketed</button>
+      </div>
+      <button type="button" class="ov-toggle" id="ov-venueToggle" aria-expanded="false" aria-controls="ov-venues">Venues <span class="mono" id="ov-venueSel"></span> <span class="caret" aria-hidden="true">▾</span></button>
+      <select id="ov-area" aria-label="Area"></select>
+      <select id="ov-discipline" aria-label="Discipline"></select>
+      <span class="ov-spacer"></span>
+      <select id="ov-sort" aria-label="Sort">
+        <option value="venue">Venue order</option>
+        <option value="closing">Closing soonest</option>
+        <option value="opening">Opening soonest</option>
+      </select>
+      <div class="ov-seg" role="group" aria-label="View">
+        <button type="button" data-view="cards">Cards</button>
+        <button type="button" data-view="timeline">Timeline</button>
+        <button type="button" data-view="map">Map</button>
+      </div>
+    </div>
+    <div class="ov-venues" id="ov-venues" hidden>
+      <div class="ov-venues-head">
+        <span>Tick the venues to show. Use the arrows to change their order.</span>
+        <button type="button" class="ov-link" id="ov-vAll">Select all</button>
+        <button type="button" class="ov-link" id="ov-vNone">Clear all</button>
+        <button type="button" class="ov-link" id="ov-vReset">Reset order</button>
+      </div>
+      <ol class="ov-vlist" id="ov-venuesGrid" aria-label="Venues in display order"></ol>
+    </div>
+    <div class="ov-meta"><span id="ov-count" aria-live="polite"></span><button type="button" class="ov-link" id="ov-clear" hidden>Clear filters</button></div>
   </div>
-  <div class="row">
-    <span class="lbl">Venue</span><select id="venue" aria-label="Venue"></select>
-    <span class="lbl" style="min-width:0">Order</span><select id="sort" aria-label="Order">
-      <option value="close">Closing soonest</option><option value="open">Opening soonest</option><option value="venue">By venue</option></select>
-    <span class="lbl" style="min-width:0">View</span><div class="chips" id="view"></div>
-  </div>
+
+  <main class="ov-results" id="ov-results"></main>
+
+  <footer class="ov-foot">
+    <div>
+      <h2>About these listings</h2>
+      <p>This is an AI project by Studio AI Ludo. Each listing is gathered from the venue's own website and written up with AI, then checked on the date shown at the top. Where a venue publishes only a closing date, the listing reads "Until". Ongoing collection displays, talks and events are left out. Commercial galleries are left out. Headlines are our own, in English: the artist for a solo show, the subject for a thematic show, with the official title (usually French) beneath and the leading artists listed after it. Free means the exhibition itself is free.</p>
+      <p>Closed for works at the time of checking: Centre Pompidou, Musée Nissim de Camondo (reopens early 2027) and Musée Yves Saint Laurent Paris (reopens autumn 2027). Musée Cognacq-Jay and Fondation Cartier have no confirmed show running or announced.</p>
+      <p>The same guide for another city: <a href="../london/">On View London</a>.</p>
+      <p>Opening hours, prices and booking change. Each card links to the venue on Google Maps, where its current opening hours are shown. Check before you travel.</p>
+    </div>
+    <div>
+      <h2><span class="cjk" lang="zh">华语</span> Sinophone</h2>
+      <p>Marks a solo show by an artist from the Chinese-speaking world (mainland China, Hong Kong, Taiwan, Macau and the diaspora), or a group show built around such artists. "Includes" marks a group show with at least one such artist. Tags are editorial.</p>
+    </div>
+    <div class="ov-foot-venues">
+      <h2>Venues</h2>
+      <ul class="ov-vnames" id="ov-venueNames"></ul>
+    </div>
+  </footer>
 </div>
-
-<div class="count" id="count" aria-live="polite"></div>
-<main id="out"></main>
-
-<section class="about" id="about">
-  <div><h2>About this guide</h2></div>
-  <div>
-    <p>On View Paris lists temporary exhibitions at public museums, national and city institutions, and non-profit foundations. It leaves out commercial galleries, permanent collection displays, talks and events.</p>
-    <p>Each headline names the artist for a solo show, or the subject for a themed one, with the official title beneath it. Free means the exhibition itself is free. Where a date could not be confirmed on a venue's own page, the card says so. Dates change, so check the venue before you travel.</p>
-    <p>Closed for works at the time of checking: Centre Pompidou, Musée Nissim de Camondo (reopens early 2027) and Musée Yves Saint Laurent Paris (reopens autumn 2027). Musée Cognacq-Jay and Fondation Cartier have no confirmed show running or announced at the time of checking.</p>
-    <p>Part of a pair with <a href="https://ailudo.github.io/london/">On View London</a>.</p>
-    <h2 style="font-size:20px;margin:22px 0 8px">Venues</h2>
-    <ul class="vens" id="vens"></ul>
-  </div>
-</section>
-<footer><span>Studio AI Ludo · Paris · 2026</span><span>Dates as published by each venue on the day of checking.</span></footer>
 </div>
-
+<script type="application/json" id="exhibitions-data">
+{
+ "updated": "2026-10-19T22:30:29+01:00",
+ "venues": [
+  {
+   "id": "louvre",
+   "name": "Musée du Louvre",
+   "area": "Centre",
+   "kind": "National museum",
+   "lat": 48.8606,
+   "lng": 2.3376,
+   "label": "right",
+   "source": "https://www.louvre.fr/en-ce-moment/expositions",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+du+Louvre+Paris"
+  },
+  {
+   "id": "cluny",
+   "name": "Musée de Cluny",
+   "area": "Left Bank",
+   "kind": "National museum",
+   "lat": 48.8505,
+   "lng": 2.344,
+   "label": "right",
+   "source": "https://www.musee-moyenage.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+de+Cluny+Paris"
+  },
+  {
+   "id": "jacquemart",
+   "name": "Musée Jacquemart-André",
+   "area": "Champs-Élysées",
+   "kind": "Independent",
+   "lat": 48.8755,
+   "lng": 2.3115,
+   "label": "left",
+   "source": "https://www.musee-jacquemart-andre.com/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+Jacquemart-Andr%C3%A9+Paris"
+  },
+  {
+   "id": "petitpalais",
+   "name": "Petit Palais",
+   "area": "Champs-Élysées",
+   "kind": "Public \u0026 non-profit",
+   "lat": 48.866,
+   "lng": 2.314,
+   "label": "right-down",
+   "source": "https://www.petitpalais.paris.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Petit+Palais+Paris"
+  },
+  {
+   "id": "custodia",
+   "name": "Fondation Custodia",
+   "area": "Left Bank",
+   "kind": "Independent",
+   "lat": 48.8562,
+   "lng": 2.3198,
+   "label": "left",
+   "source": "https://www.fondationcustodia.fr/Exhibitions",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Fondation+Custodia+Paris"
+  },
+  {
+   "id": "luxembourg",
+   "name": "Musée du Luxembourg",
+   "area": "Left Bank",
+   "kind": "National museum",
+   "lat": 48.849,
+   "lng": 2.333,
+   "label": "left",
+   "source": "https://museeduluxembourg.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+du+Luxembourg+Paris"
+  },
+  {
+   "id": "cognacq",
+   "name": "Musée Cognacq-Jay",
+   "area": "Marais \u0026 East",
+   "kind": "Public \u0026 non-profit",
+   "lat": 48.8574,
+   "lng": 2.3622,
+   "label": "right-down",
+   "source": "https://museecognacqjay.paris.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+Cognacq-Jay+Paris"
+  },
+  {
+   "id": "camondo",
+   "name": "Musée Nissim de Camondo",
+   "area": "Champs-Élysées",
+   "kind": "Independent",
+   "lat": 48.8791,
+   "lng": 2.3098,
+   "label": "left-down",
+   "source": "https://madparis.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+Nissim+de+Camondo+Paris"
+  },
+  {
+   "id": "carnavalet",
+   "name": "Musée Carnavalet",
+   "area": "Marais \u0026 East",
+   "kind": "Public \u0026 non-profit",
+   "lat": 48.8574,
+   "lng": 2.3626,
+   "label": "right-down",
+   "source": "https://www.carnavalet.paris.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+Carnavalet+Paris"
+  },
+  {
+   "id": "orsay",
+   "name": "Musée d’Orsay",
+   "area": "Left Bank",
+   "kind": "National museum",
+   "lat": 48.86,
+   "lng": 2.3266,
+   "label": "left-down",
+   "source": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+d%27Orsay+Paris"
+  },
+  {
+   "id": "orangerie",
+   "name": "Musée de l’Orangerie",
+   "area": "Centre",
+   "kind": "National museum",
+   "lat": 48.8638,
+   "lng": 2.3226,
+   "label": "left-down",
+   "source": "https://www.musee-orangerie.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+de+l%27Orangerie+Paris"
+  },
+  {
+   "id": "marmottan",
+   "name": "Musée Marmottan Monet",
+   "area": "West",
+   "kind": "Independent",
+   "lat": 48.859,
+   "lng": 2.267,
+   "label": "left",
+   "source": "https://www.marmottan.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+Marmottan+Monet+Paris"
+  },
+  {
+   "id": "mam",
+   "name": "Musée d’Art Moderne de Paris",
+   "area": "West",
+   "kind": "Public \u0026 non-profit",
+   "lat": 48.8644,
+   "lng": 2.297,
+   "label": "right",
+   "source": "https://www.mam.paris.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+d%27Art+Moderne+de+Paris"
+  },
+  {
+   "id": "pdt",
+   "name": "Palais de Tokyo",
+   "area": "West",
+   "kind": "Public \u0026 non-profit",
+   "lat": 48.8643,
+   "lng": 2.2967,
+   "label": "right-down",
+   "source": "https://palaisdetokyo.com/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Palais+de+Tokyo+Paris"
+  },
+  {
+   "id": "flv",
+   "name": "Fondation Louis Vuitton",
+   "area": "West",
+   "kind": "Independent",
+   "lat": 48.8767,
+   "lng": 2.2635,
+   "label": "left",
+   "source": "https://www.fondationlouisvuitton.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Fondation+Louis+Vuitton+Paris"
+  },
+  {
+   "id": "bourse",
+   "name": "Bourse de Commerce",
+   "area": "Centre",
+   "kind": "Independent",
+   "lat": 48.8627,
+   "lng": 2.3427,
+   "label": "right",
+   "source": "https://www.pinaultcollection.com/boursedecommerce/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Bourse+de+Commerce+Pinault+Collection+Paris"
+  },
+  {
+   "id": "cartier",
+   "name": "Fondation Cartier",
+   "area": "Centre",
+   "kind": "Independent",
+   "lat": 48.864,
+   "lng": 2.3366,
+   "label": "right-up",
+   "source": "https://www.fondationcartier.com/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Fondation+Cartier+Paris"
+  },
+  {
+   "id": "lafayette",
+   "name": "Lafayette Anticipations",
+   "area": "Marais \u0026 East",
+   "kind": "Independent",
+   "lat": 48.859,
+   "lng": 2.355,
+   "label": "left-up",
+   "source": "https://www.lafayetteanticipations.com/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Lafayette+Anticipations+Paris"
+  },
+  {
+   "id": "picasso",
+   "name": "Musée Picasso",
+   "area": "Marais \u0026 East",
+   "kind": "National museum",
+   "lat": 48.8598,
+   "lng": 2.3626,
+   "label": "right-up",
+   "source": "https://www.museepicassoparis.fr/fr/agenda/types/exposition/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+Picasso+Paris"
+  },
+  {
+   "id": "grandpalais",
+   "name": "Grand Palais",
+   "area": "Champs-Élysées",
+   "kind": "National museum",
+   "lat": 48.8661,
+   "lng": 2.3125,
+   "label": "left",
+   "source": "https://www.grandpalais.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Grand+Palais+Paris"
+  },
+  {
+   "id": "jeudepaume",
+   "name": "Jeu de Paume",
+   "area": "Centre",
+   "kind": "Public \u0026 non-profit",
+   "lat": 48.8654,
+   "lng": 2.3224,
+   "label": "left-up",
+   "source": "https://jeudepaume.org/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Jeu+de+Paume+Paris"
+  },
+  {
+   "id": "mep",
+   "name": "Maison Européenne de la Photographie",
+   "area": "Marais \u0026 East",
+   "kind": "Independent",
+   "lat": 48.8553,
+   "lng": 2.356,
+   "label": "left-down",
+   "source": "https://www.mep-fr.org/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Maison+Europ%C3%A9enne+de+la+Photographie+Paris"
+  },
+  {
+   "id": "bal",
+   "name": "Le Bal",
+   "area": "North",
+   "kind": "Independent",
+   "lat": 48.8838,
+   "lng": 2.33,
+   "label": "right",
+   "source": "https://le-bal.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Le+Bal+Paris"
+  },
+  {
+   "id": "galliera",
+   "name": "Palais Galliera",
+   "area": "West",
+   "kind": "Public \u0026 non-profit",
+   "lat": 48.8656,
+   "lng": 2.2966,
+   "label": "right-up",
+   "source": "https://www.palaisgalliera.paris.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Palais+Galliera+Paris"
+  },
+  {
+   "id": "artsdeco",
+   "name": "Les Arts Décoratifs",
+   "area": "Centre",
+   "kind": "Independent",
+   "lat": 48.863,
+   "lng": 2.3326,
+   "label": "right-down",
+   "source": "https://madparis.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Les+Arts+D%C3%A9coratifs+Paris"
+  },
+  {
+   "id": "ysl",
+   "name": "Musée Yves Saint Laurent",
+   "area": "West",
+   "kind": "Independent",
+   "lat": 48.8668,
+   "lng": 2.2931,
+   "label": "left",
+   "source": "https://museeyslparis.com/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+Yves+Saint+Laurent+Paris"
+  },
+  {
+   "id": "ima",
+   "name": "Institut du Monde Arabe",
+   "area": "Left Bank",
+   "kind": "Public \u0026 non-profit",
+   "lat": 48.8485,
+   "lng": 2.3563,
+   "label": "right",
+   "source": "https://www.imarabe.org/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Institut+du+Monde+Arabe+Paris"
+  },
+  {
+   "id": "guimet",
+   "name": "Musée Guimet",
+   "area": "West",
+   "kind": "National museum",
+   "lat": 48.8651,
+   "lng": 2.2933,
+   "label": "left-up",
+   "source": "https://www.guimet.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+Guimet+Paris"
+  },
+  {
+   "id": "cernuschi",
+   "name": "Musée Cernuschi",
+   "area": "Champs-Élysées",
+   "kind": "Public \u0026 non-profit",
+   "lat": 48.8791,
+   "lng": 2.3095,
+   "label": "left-up",
+   "source": "https://www.cernuschi.paris.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+Cernuschi+Paris"
+  },
+  {
+   "id": "branly",
+   "name": "Musée du quai Branly",
+   "area": "Left Bank",
+   "kind": "National museum",
+   "lat": 48.8611,
+   "lng": 2.2978,
+   "label": "left-down",
+   "source": "https://www.quaibranly.fr/",
+   "map": "https://www.google.com/maps/search/?api=1\u0026query=Mus%C3%A9e+du+quai+Branly+Paris"
+  }
+ ],
+ "exhibitions": [
+  {
+   "id": "l-zurb",
+   "venue": "louvre",
+   "short": "Francisco de Zurbarán",
+   "title": "Zurbarán",
+   "artists": "Francisco de Zurbarán",
+   "start": "2026-10-07",
+   "end": null,
+   "admission": "paid",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.louvre.fr/en-ce-moment/expositions",
+   "note": "Closing date not confirmed on the venue page."
+  },
+  {
+   "id": "l-sculpt",
+   "venue": "louvre",
+   "short": "Sculpture from the Museo Nacional de Escultura, Valladolid",
+   "title": "Sculpter la couleur: Chefs-d’œuvre du Musée national de sculpture, Valladolid",
+   "artists": "",
+   "start": "2026-10-07",
+   "end": "2027-01-25",
+   "admission": "paid",
+   "discipline": "Sculpture \u0026 installation",
+   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+  },
+  {
+   "id": "l-photo",
+   "venue": "louvre",
+   "short": "The Louvre seen by photographers",
+   "title": "Louvre Photo",
+   "artists": "",
+   "start": "2026-11-04",
+   "end": "2027-05-03",
+   "admission": "paid",
+   "discipline": "Photography \u0026 moving image",
+   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+  },
+  {
+   "id": "l-hotes",
+   "venue": "louvre",
+   "short": "Kader Attia and Elizabeth Peyton",
+   "title": "Les Hôtes du Louvre",
+   "artists": "Kader Attia, Elizabeth Peyton",
+   "start": "2026-09-24",
+   "end": "2026-12-14",
+   "admission": "paid",
+   "discipline": "Group shows",
+   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+  },
+  {
+   "id": "l-ingres",
+   "venue": "louvre",
+   "short": "Ingres and fashion",
+   "title": "Ingres et la mode",
+   "artists": "Jean-Auguste-Dominique Ingres",
+   "start": "2026-07-03",
+   "end": "2026-11-08",
+   "admission": "paid",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+  },
+  {
+   "id": "l-myth",
+   "venue": "louvre",
+   "short": "Mythologies",
+   "title": "Mythologies",
+   "artists": "",
+   "start": "2026-07-08",
+   "end": "2026-11-09",
+   "admission": "paid",
+   "discipline": "History \u0026 collections",
+   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+  },
+  {
+   "id": "l-cross",
+   "venue": "louvre",
+   "short": "Mughal, Safavid and Ottoman masterworks",
+   "title": "Crosscurrents: Chefs-d’œuvre de l’art moghol, safavide et ottoman du musée du Louvre",
+   "artists": "",
+   "start": "2026-06-19",
+   "end": "2027-01-24",
+   "admission": "paid",
+   "discipline": "History \u0026 collections",
+   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+  },
+  {
+   "id": "l-eau",
+   "venue": "louvre",
+   "short": "Mesopotamia",
+   "title": "L’Eau primordiale: Leçons de Mésopotamie",
+   "artists": "",
+   "start": "2026-05-20",
+   "end": "2027-03-15",
+   "admission": "paid",
+   "discipline": "History \u0026 collections",
+   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+  },
+  {
+   "id": "l-romain",
+   "venue": "louvre",
+   "short": "Roman art",
+   "title": "L’art romain du Louvre: Un monde d’images",
+   "artists": "",
+   "start": "2026-06-11",
+   "end": "2027-01-10",
+   "admission": "paid",
+   "discipline": "History \u0026 collections",
+   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+  },
+  {
+   "id": "c-flamel",
+   "venue": "cluny",
+   "short": "Nicolas Flamel",
+   "title": "Nicolas Flamel, alchimiste de papier",
+   "artists": "",
+   "start": "2026-10-13",
+   "end": "2027-01-24",
+   "admission": "paid",
+   "discipline": "History \u0026 collections",
+   "url": "https://www.musee-moyenage.fr/"
+  },
+  {
+   "id": "ja-tintoret",
+   "venue": "jacquemart",
+   "short": "Tintoretto",
+   "title": "Éternel Tintoret",
+   "artists": "Tintoretto",
+   "start": "2026-09-11",
+   "end": null,
+   "admission": "check",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.musee-jacquemart-andre.com/",
+   "note": "Closing date not confirmed on the venue page."
+  },
+  {
+   "id": "pp-gonzales",
+   "venue": "petitpalais",
+   "short": "Eva Gonzalès",
+   "title": "Eva Gonzalès",
+   "artists": "Eva Gonzalès",
+   "start": "2026-09-15",
+   "end": "2027-01-24",
+   "admission": "paid",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.petitpalais.paris.fr/"
+  },
+  {
+   "id": "pp-bruxelles",
+   "venue": "petitpalais",
+   "short": "Brussels around 1900",
+   "title": "Bruxelles 1900",
+   "artists": "",
+   "start": "2026-11-10",
+   "end": "2027-04-25",
+   "admission": "paid",
+   "discipline": "Design \u0026 architecture",
+   "url": "https://www.petitpalais.paris.fr/"
+  },
+  {
+   "id": "cu-amis",
+   "venue": "custodia",
+   "short": "Drawings in the collections of 19th-century French artists",
+   "title": "Mes Chers Amis",
+   "artists": "",
+   "start": "2026-10-17",
+   "end": "2027-01-17",
+   "admission": "check",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.fondationcustodia.fr/Exhibitions"
+  },
+  {
+   "id": "lux-warhol",
+   "venue": "luxembourg",
+   "short": "Andy Warhol",
+   "title": "La Ligne et l’image",
+   "artists": "Andy Warhol",
+   "start": "2026-09-16",
+   "end": "2027-01-10",
+   "admission": "check",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://museeduluxembourg.fr/"
+  },
+  {
+   "id": "ca-villegle",
+   "venue": "carnavalet",
+   "short": "Jacques Villeglé",
+   "title": "Paris à l’arraché: Jacques Villeglé et l’art urbain",
+   "artists": "Jacques Villeglé",
+   "start": "2026-10-14",
+   "end": "2027-02-14",
+   "admission": "paid",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.carnavalet.paris.fr/"
+  },
+  {
+   "id": "o-cassatt",
+   "venue": "orsay",
+   "short": "Mary Cassatt",
+   "title": "Mary Cassatt, l’indépendante",
+   "artists": "Mary Cassatt",
+   "start": "2026-10-06",
+   "end": "2027-01-31",
+   "admission": "paid",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
+  },
+  {
+   "id": "o-holzer",
+   "venue": "orsay",
+   "short": "Jenny Holzer",
+   "title": "Jenny Holzer: J’ai vu",
+   "artists": "Jenny Holzer",
+   "start": "2026-10-20",
+   "end": "2027-02-21",
+   "admission": "paid",
+   "discipline": "Sculpture \u0026 installation",
+   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
+  },
+  {
+   "id": "o-bartholdi",
+   "venue": "orsay",
+   "short": "Auguste Bartholdi",
+   "title": "Liberty Enlightening the World",
+   "artists": "Auguste Bartholdi",
+   "start": null,
+   "end": "2027-01-31",
+   "admission": "paid",
+   "discipline": "Sculpture \u0026 installation",
+   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
+  },
+  {
+   "id": "o-peduzzi",
+   "venue": "orsay",
+   "short": "Richard Peduzzi",
+   "title": "Vertigo",
+   "artists": "Richard Peduzzi",
+   "start": null,
+   "end": "2027-01-17",
+   "admission": "paid",
+   "discipline": "Sculpture \u0026 installation",
+   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
+  },
+  {
+   "id": "o-brac",
+   "venue": "orsay",
+   "short": "Marie and Félix Bracquemond",
+   "title": "Decorative arts drawings",
+   "artists": "Marie Bracquemond, Félix Bracquemond",
+   "start": null,
+   "end": "2026-12-06",
+   "admission": "paid",
+   "discipline": "Design \u0026 architecture",
+   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions",
+   "note": "A display within the museum."
+  },
+  {
+   "id": "o-denis",
+   "venue": "orsay",
+   "short": "Maurice Denis",
+   "title": "Illustrating Christian mysticism",
+   "artists": "Maurice Denis",
+   "start": "2026-11-10",
+   "end": "2027-02-07",
+   "admission": "paid",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions",
+   "note": "A display within the museum."
+  },
+  {
+   "id": "o-legray",
+   "venue": "orsay",
+   "short": "Gustave Le Gray",
+   "title": "Painter and Photographer",
+   "artists": "Gustave Le Gray",
+   "start": "2026-11-10",
+   "end": "2027-02-07",
+   "admission": "paid",
+   "discipline": "Photography \u0026 moving image",
+   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions",
+   "note": "A display within the museum."
+  },
+  {
+   "id": "or-monet",
+   "venue": "orangerie",
+   "short": "Claude Monet",
+   "title": "Monet, peindre le temps",
+   "artists": "Claude Monet",
+   "start": "2026-09-30",
+   "end": "2027-01-25",
+   "admission": "paid",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.musee-orangerie.fr/"
+  },
+  {
+   "id": "ma-paysages",
+   "venue": "marmottan",
+   "short": "Landscape from Monet to Hockney",
+   "title": "Histoires de paysages. De Monet à Hockney (1890–2026)",
+   "artists": "Claude Monet, Nicolas de Staël, Edvard Munch, Piet Mondrian, David Hockney and others",
+   "start": "2026-09-24",
+   "end": "2027-01-31",
+   "admission": "paid",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.marmottan.fr/"
+  },
+  {
+   "id": "mam-hist",
+   "venue": "mam",
+   "short": "Kerry James Marshall",
+   "title": "The Histories*",
+   "artists": "Kerry James Marshall",
+   "start": "2026-09-18",
+   "end": "2027-01-24",
+   "admission": "paid",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.mam.paris.fr/"
+  },
+  {
+   "id": "mam-miller",
+   "venue": "mam",
+   "short": "Lee Miller",
+   "title": "Lee Miller",
+   "artists": "Lee Miller",
+   "start": "2026-06-19",
+   "end": "2027-01-04",
+   "admission": "paid",
+   "discipline": "Photography \u0026 moving image",
+   "url": "https://www.mam.paris.fr/"
+  },
+  {
+   "id": "pdt-cherri",
+   "venue": "pdt",
+   "short": "Ali Cherri",
+   "title": "Today Is OK",
+   "artists": "Ali Cherri",
+   "start": "2026-10-21",
+   "end": "2027-02-14",
+   "admission": "paid",
+   "discipline": "Sculpture \u0026 installation",
+   "url": "https://palaisdetokyo.com/"
+  },
+  {
+   "id": "pdt-gomes",
+   "venue": "pdt",
+   "short": "Sonia Gomes",
+   "title": "Wild Heart",
+   "artists": "Sonia Gomes",
+   "start": "2026-10-21",
+   "end": "2027-02-14",
+   "admission": "paid",
+   "discipline": "Sculpture \u0026 installation",
+   "url": "https://palaisdetokyo.com/"
+  },
+  {
+   "id": "pdt-gang",
+   "venue": "pdt",
+   "short": "Artists outside the cities of France",
+   "title": "Toi et ta bande",
+   "artists": "Gina Proenza, Marine Peixoto, Pacôme Ricciardi, Lisa Di Giovanni, Léa Tissot-Laura and others",
+   "start": "2026-10-21",
+   "end": "2027-02-14",
+   "admission": "paid",
+   "discipline": "Group shows",
+   "url": "https://palaisdetokyo.com/",
+   "note": "Free entry on 21 and 22 October."
+  },
+  {
+   "id": "pdt-john",
+   "venue": "pdt",
+   "short": "Valérie John",
+   "title": "I telman nwè ki i blé (So Black It Turns Blue)",
+   "artists": "Valérie John",
+   "start": "2026-10-21",
+   "end": "2027-02-14",
+   "admission": "paid",
+   "discipline": "Sculpture \u0026 installation",
+   "url": "https://palaisdetokyo.com/"
+  },
+  {
+   "id": "flv-fayet",
+   "venue": "flv",
+   "short": "Gustave Fayet",
+   "title": "Gustave Fayet, Collectionneur – Créateur. Icônes de l’art moderne",
+   "artists": "Gustave Fayet",
+   "start": "2026-10-09",
+   "end": "2027-03-08",
+   "admission": "paid",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.fondationlouisvuitton.fr/"
+  },
+  {
+   "id": "bc-remember",
+   "venue": "bourse",
+   "short": "Photographs from the Pinault Collection",
+   "title": "Remember Me. De la Collection Pinault",
+   "artists": "Barbara Kruger, Cindy Sherman, Man Ray, Dorothea Lange, Wolfgang Tillmans and others",
+   "start": "2026-10-07",
+   "end": "2027-01-18",
+   "admission": "paid",
+   "discipline": "Photography \u0026 moving image",
+   "url": "https://www.pinaultcollection.com/boursedecommerce/"
+  },
+  {
+   "id": "la-nishimura",
+   "venue": "lafayette",
+   "short": "Yu Nishimura",
+   "title": "Towards a Sea",
+   "artists": "Yu Nishimura",
+   "start": "2026-10-21",
+   "end": "2027-01-03",
+   "admission": "free",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.lafayetteanticipations.com/"
+  },
+  {
+   "id": "la-fauquet",
+   "venue": "lafayette",
+   "short": "Hélène Fauquet",
+   "title": "Vivresse",
+   "artists": "Hélène Fauquet",
+   "start": "2026-10-21",
+   "end": "2027-01-03",
+   "admission": "free",
+   "discipline": "Sculpture \u0026 installation",
+   "url": "https://www.lafayetteanticipations.com/"
+  },
+  {
+   "id": "la-thomson",
+   "venue": "lafayette",
+   "short": "Mungo Thomson",
+   "title": "Monument",
+   "artists": "Mungo Thomson",
+   "start": "2026-10-21",
+   "end": "2026-11-29",
+   "admission": "free",
+   "discipline": "Sculpture \u0026 installation",
+   "url": "https://www.lafayetteanticipations.com/"
+  },
+  {
+   "id": "pi-schwitters",
+   "venue": "picasso",
+   "short": "Kurt Schwitters",
+   "title": "Le chaos-monde 1918–1948",
+   "artists": "Kurt Schwitters",
+   "start": "2026-10-06",
+   "end": "2027-02-07",
+   "admission": "paid",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.museepicassoparis.fr/fr/agenda/types/exposition/"
+  },
+  {
+   "id": "pi-malraux",
+   "venue": "picasso",
+   "short": "André Malraux and Pablo Picasso",
+   "title": "Le musée imaginaire",
+   "artists": "André Malraux, Pablo Picasso",
+   "start": null,
+   "end": "2027-02-07",
+   "admission": "paid",
+   "discipline": "History \u0026 collections",
+   "url": "https://www.museepicassoparis.fr/fr/agenda/types/exposition/",
+   "note": "A display within the museum."
+  },
+  {
+   "id": "gp-cezanne",
+   "venue": "grandpalais",
+   "short": "Cézanne and the artists after him",
+   "title": "Cézanne et nous",
+   "artists": "Paul Cézanne and others",
+   "start": "2026-09-23",
+   "end": "2027-01-17",
+   "admission": "check",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.grandpalais.fr/",
+   "note": "Presented with the Musée d’Orsay."
+  },
+  {
+   "id": "jp-douglas",
+   "venue": "jeudepaume",
+   "short": "Stan Douglas",
+   "title": "Parallax",
+   "artists": "Stan Douglas",
+   "start": "2026-10-20",
+   "end": "2027-01-10",
+   "admission": "check",
+   "discipline": "Photography \u0026 moving image",
+   "url": "https://jeudepaume.org/"
+  },
+  {
+   "id": "mep-penn",
+   "venue": "mep",
+   "short": "Irving Penn",
+   "title": "Penn \u0026 Fashion",
+   "artists": "Irving Penn",
+   "start": "2026-09-30",
+   "end": "2027-01-17",
+   "admission": "paid",
+   "discipline": "Photography \u0026 moving image",
+   "url": "https://www.mep-fr.org/"
+  },
+  {
+   "id": "bal-wilson",
+   "venue": "bal",
+   "short": "The Wilson Centre for Photography collection",
+   "title": "L’Espace entre nous",
+   "artists": "",
+   "start": "2026-06-19",
+   "end": "2027-01-03",
+   "admission": "paid",
+   "discipline": "Photography \u0026 moving image",
+   "url": "https://le-bal.fr/"
+  },
+  {
+   "id": "gal-vest",
+   "venue": "galliera",
+   "short": "A wardrobe of one’s own",
+   "title": "Un vestiaire à soi",
+   "artists": "",
+   "start": "2026-09-26",
+   "end": null,
+   "admission": "paid",
+   "discipline": "Design \u0026 architecture",
+   "url": "https://www.palaisgalliera.paris.fr/",
+   "note": "Closing date not confirmed on the venue page."
+  },
+  {
+   "id": "ad-pav",
+   "venue": "artsdeco",
+   "short": "Rafael Pavarotti",
+   "title": "Rafael Pavarotti, photographe",
+   "artists": "Rafael Pavarotti",
+   "start": "2026-10-02",
+   "end": "2027-02-07",
+   "admission": "paid",
+   "discipline": "Photography \u0026 moving image",
+   "url": "https://madparis.fr/"
+  },
+  {
+   "id": "ad-maj",
+   "venue": "artsdeco",
+   "short": "Haute couture at the Thai court",
+   "title": "Majestic Fashion: Haute Couture and Tradition at the Thai Court",
+   "artists": "",
+   "start": "2026-05-13",
+   "end": "2026-11-01",
+   "admission": "paid",
+   "discipline": "Design \u0026 architecture",
+   "url": "https://madparis.fr/"
+  },
+  {
+   "id": "ima-mariee",
+   "venue": "ima",
+   "short": "Weddings in Algeria, Morocco and Tunisia",
+   "title": "Vive la mariée !",
+   "artists": "",
+   "start": "2026-09-29",
+   "end": "2027-02-28",
+   "admission": "paid",
+   "discipline": "History \u0026 collections",
+   "url": "https://www.imarabe.org/"
+  },
+  {
+   "id": "ima-alhambra",
+   "venue": "ima",
+   "short": "The Nasrid Alhambra",
+   "title": "Les Trésors cachés de l’Alhambra nasride",
+   "artists": "",
+   "start": "2026-11-24",
+   "end": "2027-05-16",
+   "admission": "paid",
+   "discipline": "History \u0026 collections",
+   "url": "https://www.imarabe.org/"
+  },
+  {
+   "id": "gu-dal",
+   "venue": "guimet",
+   "short": "Seulgi Lee",
+   "title": "DAL DARI. The Moon and its Legs",
+   "artists": "Seulgi Lee",
+   "start": "2026-06-06",
+   "end": "2027-02-08",
+   "admission": "paid",
+   "discipline": "Sculpture \u0026 installation",
+   "url": "https://www.guimet.fr/"
+  },
+  {
+   "id": "gu-trompe",
+   "venue": "guimet",
+   "short": "Korean trompe-l’œil",
+   "title": "Le savoir en trompe-l’œil: Corée, XVIIIe–XXe siècle",
+   "artists": "",
+   "start": "2026-09-16",
+   "end": "2027-01-04",
+   "admission": "paid",
+   "discipline": "Painting \u0026 works on paper",
+   "url": "https://www.guimet.fr/"
+  },
+  {
+   "id": "ce-coree",
+   "venue": "cernuschi",
+   "short": "Korea and the scholar class",
+   "title": "Corée, le royaume des lettrés",
+   "artists": "",
+   "start": "2026-11-20",
+   "end": "2027-04-04",
+   "admission": "check",
+   "discipline": "History \u0026 collections",
+   "url": "https://www.cernuschi.paris.fr/"
+  },
+  {
+   "id": "qb-plumes",
+   "venue": "branly",
+   "short": "Birds of paradise",
+   "title": "Plumes du Paradis",
+   "artists": "",
+   "start": "2026-05-12",
+   "end": "2026-11-08",
+   "admission": "paid",
+   "discipline": "History \u0026 collections",
+   "url": "https://www.quaibranly.fr/"
+  }
+ ]
+}
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" crossorigin="anonymous"></script>
-<script type="application/json" id="exhibitions-data">{"updated":"2026-10-19T16:30:00+01:00","checked":"2026-10-19","venues":[{"id":"louvre","name":"Musée du Louvre","area":"Louvre","lat":48.8606,"lng":2.3376,"cats":["old"],"source":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"cluny","name":"Musée de Cluny","area":"Latin Quarter","lat":48.8505,"lng":2.344,"cats":["old"],"source":"https://www.musee-moyenage.fr/"},{"id":"jacquemart","name":"Musée Jacquemart-André","area":"8th","lat":48.8755,"lng":2.3115,"cats":["old"],"source":"https://www.musee-jacquemart-andre.com/"},{"id":"petitpalais","name":"Petit Palais","area":"8th","lat":48.866,"lng":2.314,"cats":["old","c19"],"source":"https://www.petitpalais.paris.fr/"},{"id":"custodia","name":"Fondation Custodia","area":"7th","lat":48.8562,"lng":2.3198,"cats":["old"],"source":"https://www.fondationcustodia.fr/Exhibitions"},{"id":"luxembourg","name":"Musée du Luxembourg","area":"6th","lat":48.849,"lng":2.333,"cats":["old"],"source":"https://museeduluxembourg.fr/"},{"id":"cognacq","name":"Musée Cognacq-Jay","area":"Marais","lat":48.8574,"lng":2.3622,"cats":["old"],"source":"https://museecognacqjay.paris.fr/"},{"id":"camondo","name":"Musée Nissim de Camondo","area":"17th","lat":48.8791,"lng":2.3098,"cats":["old"],"source":"https://madparis.fr/"},{"id":"carnavalet","name":"Musée Carnavalet","area":"Marais","lat":48.8574,"lng":2.3626,"cats":["old"],"source":"https://www.carnavalet.paris.fr/"},{"id":"orsay","name":"Musée d’Orsay","area":"7th","lat":48.86,"lng":2.3266,"cats":["c19"],"source":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"orangerie","name":"Musée de l’Orangerie","area":"Tuileries","lat":48.8638,"lng":2.3226,"cats":["c19"],"source":"https://www.musee-orangerie.fr/"},{"id":"marmottan","name":"Musée Marmottan Monet","area":"16th","lat":48.859,"lng":2.267,"cats":["c19"],"source":"https://www.marmottan.fr/"},{"id":"mam","name":"Musée d’Art Moderne de Paris","area":"16th","lat":48.8644,"lng":2.297,"cats":["mod"],"source":"https://www.mam.paris.fr/"},{"id":"pdt","name":"Palais de Tokyo","area":"16th","lat":48.8643,"lng":2.2967,"cats":["mod"],"source":"https://palaisdetokyo.com/"},{"id":"flv","name":"Fondation Louis Vuitton","area":"Bois de Boulogne","lat":48.8767,"lng":2.2635,"cats":["mod"],"source":"https://www.fondationlouisvuitton.fr/"},{"id":"bourse","name":"Bourse de Commerce","area":"Les Halles","lat":48.8627,"lng":2.3427,"cats":["mod"],"source":"https://www.pinaultcollection.com/boursedecommerce/"},{"id":"cartier","name":"Fondation Cartier","area":"Palais-Royal","lat":48.864,"lng":2.3366,"cats":["mod"],"source":"https://www.fondationcartier.com/"},{"id":"lafayette","name":"Lafayette Anticipations","area":"Marais","lat":48.859,"lng":2.355,"cats":["mod"],"source":"https://www.lafayetteanticipations.com/"},{"id":"picasso","name":"Musée Picasso","area":"Marais","lat":48.8598,"lng":2.3626,"cats":["mod"],"source":"https://www.museepicassoparis.fr/fr/agenda/types/exposition/"},{"id":"grandpalais","name":"Grand Palais","area":"8th","lat":48.8661,"lng":2.3125,"cats":["mod"],"source":"https://www.grandpalais.fr/"},{"id":"jeudepaume","name":"Jeu de Paume","area":"Tuileries","lat":48.8654,"lng":2.3224,"cats":["photo"],"source":"https://jeudepaume.org/"},{"id":"mep","name":"Maison Européenne de la Photographie","area":"Marais","lat":48.8553,"lng":2.356,"cats":["photo"],"source":"https://www.mep-fr.org/"},{"id":"bal","name":"Le Bal","area":"18th","lat":48.8838,"lng":2.33,"cats":["photo"],"source":"https://le-bal.fr/"},{"id":"galliera","name":"Palais Galliera","area":"16th","lat":48.8656,"lng":2.2966,"cats":["fashion"],"source":"https://www.palaisgalliera.paris.fr/"},{"id":"artsdeco","name":"Les Arts Décoratifs","area":"Louvre","lat":48.863,"lng":2.3326,"cats":["fashion"],"source":"https://madparis.fr/"},{"id":"ysl","name":"Musée Yves Saint Laurent","area":"16th","lat":48.8668,"lng":2.2931,"cats":["fashion"],"source":"https://museeyslparis.com/"},{"id":"ima","name":"Institut du Monde Arabe","area":"5th","lat":48.8485,"lng":2.3563,"cats":["world"],"source":"https://www.imarabe.org/"},{"id":"guimet","name":"Musée Guimet","area":"16th","lat":48.8651,"lng":2.2933,"cats":["world"],"source":"https://www.guimet.fr/"},{"id":"cernuschi","name":"Musée Cernuschi","area":"8th","lat":48.8791,"lng":2.3095,"cats":["world"],"source":"https://www.cernuschi.paris.fr/"},{"id":"branly","name":"Musée du quai Branly","area":"7th","lat":48.8611,"lng":2.2978,"cats":["world"],"source":"https://www.quaibranly.fr/"}],"exhibitions":[{"id":"l-zurb","venue":"louvre","head":"Francisco de Zurbarán","title":"Zurbarán","start":"2026-10-07","end":null,"adm":"paid","cats":["old"],"note":"Closing date not confirmed on the venue page.","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-sculpt","venue":"louvre","head":"Sculpture from the Museo Nacional de Escultura, Valladolid","title":"Sculpter la couleur: Chefs-d’œuvre du Musée national de sculpture, Valladolid","start":"2026-10-07","end":"2027-01-25","adm":"paid","cats":["old"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-photo","venue":"louvre","head":"The Louvre seen by photographers","title":"Louvre Photo","start":"2026-11-04","end":"2027-05-03","adm":"paid","cats":["photo"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-hotes","venue":"louvre","head":"Kader Attia and Elizabeth Peyton","title":"Les Hôtes du Louvre","start":"2026-09-24","end":"2026-12-14","adm":"paid","cats":["old","mod"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-ingres","venue":"louvre","head":"Ingres and fashion","title":"Ingres et la mode","start":"2026-07-03","end":"2026-11-08","adm":"paid","cats":["old","fashion"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-myth","venue":"louvre","head":"Mythologies","title":"Mythologies","start":"2026-07-08","end":"2026-11-09","adm":"paid","cats":["old"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-cross","venue":"louvre","head":"Mughal, Safavid and Ottoman masterworks","title":"Crosscurrents: Chefs-d’œuvre de l’art moghol, safavide et ottoman du musée du Louvre","start":"2026-06-19","end":"2027-01-24","adm":"paid","cats":["old","world"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-eau","venue":"louvre","head":"Mesopotamia","title":"L’Eau primordiale: Leçons de Mésopotamie","start":"2026-05-20","end":"2027-03-15","adm":"paid","cats":["world"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-romain","venue":"louvre","head":"Roman art","title":"L’art romain du Louvre: Un monde d’images","start":"2026-06-11","end":"2027-01-10","adm":"paid","cats":["old"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"c-flamel","venue":"cluny","head":"Nicolas Flamel","title":"Nicolas Flamel, alchimiste de papier","start":"2026-10-13","end":"2027-01-24","adm":"paid","cats":["old"],"note":"","url":"https://www.musee-moyenage.fr/"},{"id":"ja-tintoret","venue":"jacquemart","head":"Tintoretto","title":"Éternel Tintoret","start":"2026-09-11","end":null,"adm":"check","cats":["old"],"note":"Closing date not confirmed on the venue page.","url":"https://www.musee-jacquemart-andre.com/"},{"id":"pp-gonzales","venue":"petitpalais","head":"Eva Gonzalès","title":"Eva Gonzalès","start":"2026-09-15","end":"2027-01-24","adm":"paid","cats":["c19"],"note":"","url":"https://www.petitpalais.paris.fr/"},{"id":"pp-bruxelles","venue":"petitpalais","head":"Brussels around 1900","title":"Bruxelles 1900","start":"2026-11-10","end":"2027-04-25","adm":"paid","cats":["c19"],"note":"","url":"https://www.petitpalais.paris.fr/"},{"id":"cu-amis","venue":"custodia","head":"Drawings in the collections of 19th-century French artists","title":"Mes Chers Amis","start":"2026-10-17","end":"2027-01-17","adm":"check","cats":["old","c19"],"note":"","url":"https://www.fondationcustodia.fr/Exhibitions"},{"id":"lux-warhol","venue":"luxembourg","head":"Andy Warhol","title":"La Ligne et l’image","start":"2026-09-16","end":"2027-01-10","adm":"check","cats":["mod"],"note":"","url":"https://museeduluxembourg.fr/"},{"id":"ca-villegle","venue":"carnavalet","head":"Jacques Villeglé","title":"Paris à l’arraché: Jacques Villeglé et l’art urbain","start":"2026-10-14","end":"2027-02-14","adm":"paid","cats":["mod"],"note":"","url":"https://www.carnavalet.paris.fr/"},{"id":"o-cassatt","venue":"orsay","head":"Mary Cassatt","title":"Mary Cassatt, l’indépendante","start":"2026-10-06","end":"2027-01-31","adm":"paid","cats":["c19"],"note":"","url":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"o-holzer","venue":"orsay","head":"Jenny Holzer","title":"Jenny Holzer: J’ai vu","start":"2026-10-20","end":"2027-02-21","adm":"paid","cats":["mod","c19"],"note":"","url":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"o-bartholdi","venue":"orsay","head":"Auguste Bartholdi","title":"Liberty Enlightening the World","start":null,"end":"2027-01-31","adm":"paid","cats":["c19"],"note":"","url":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"o-peduzzi","venue":"orsay","head":"Richard Peduzzi","title":"Vertigo","start":null,"end":"2027-01-17","adm":"paid","cats":["c19","mod"],"note":"","url":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"o-brac","venue":"orsay","head":"Marie and Félix Bracquemond","title":"Decorative arts drawings","start":null,"end":"2026-12-06","adm":"paid","cats":["c19","fashion"],"note":"A display within the museum.","url":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"o-denis","venue":"orsay","head":"Maurice Denis","title":"Illustrating Christian mysticism","start":"2026-11-10","end":"2027-02-07","adm":"paid","cats":["c19"],"note":"A display within the museum.","url":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"o-legray","venue":"orsay","head":"Gustave Le Gray","title":"Painter and Photographer","start":"2026-11-10","end":"2027-02-07","adm":"paid","cats":["c19","photo"],"note":"A display within the museum.","url":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"or-monet","venue":"orangerie","head":"Claude Monet","title":"Monet, peindre le temps","start":"2026-09-30","end":"2027-01-25","adm":"paid","cats":["c19"],"note":"","url":"https://www.musee-orangerie.fr/"},{"id":"ma-paysages","venue":"marmottan","head":"Landscape from Monet to Hockney","title":"Histoires de paysages. De Monet à Hockney (1890–2026)","start":"2026-09-24","end":"2027-01-31","adm":"paid","cats":["c19","mod"],"note":"","url":"https://www.marmottan.fr/"},{"id":"mam-hist","venue":"mam","head":"The Histories*","title":"The Histories*","start":"2026-09-18","end":"2027-01-24","adm":"paid","cats":["mod"],"note":"","url":"https://www.mam.paris.fr/"},{"id":"mam-miller","venue":"mam","head":"Lee Miller","title":"Lee Miller","start":"2026-06-19","end":"2027-01-04","adm":"paid","cats":["mod","photo"],"note":"","url":"https://www.mam.paris.fr/"},{"id":"pdt-cherri","venue":"pdt","head":"Ali Cherri","title":"Today Is OK","start":"2026-10-21","end":"2027-02-14","adm":"paid","cats":["mod"],"note":"","url":"https://palaisdetokyo.com/"},{"id":"pdt-gomes","venue":"pdt","head":"Sonia Gomes","title":"Wild Heart","start":"2026-10-21","end":"2027-02-14","adm":"paid","cats":["mod"],"note":"","url":"https://palaisdetokyo.com/"},{"id":"pdt-gang","venue":"pdt","head":"Artists outside the cities of France","title":"Toi et ta bande","start":"2026-10-21","end":"2027-02-14","adm":"paid","cats":["mod"],"note":"Free entry on 21 and 22 October.","url":"https://palaisdetokyo.com/"},{"id":"pdt-john","venue":"pdt","head":"Valérie John","title":"I telman nwè ki i blé (So Black It Turns Blue)","start":"2026-10-21","end":"2027-02-14","adm":"paid","cats":["mod"],"note":"","url":"https://palaisdetokyo.com/"},{"id":"flv-fayet","venue":"flv","head":"Gustave Fayet","title":"Gustave Fayet, Collectionneur – Créateur. Icônes de l’art moderne","start":"2026-10-09","end":"2027-03-08","adm":"paid","cats":["mod"],"note":"","url":"https://www.fondationlouisvuitton.fr/"},{"id":"bc-remember","venue":"bourse","head":"Photographs from the Pinault Collection","title":"Remember Me. De la Collection Pinault","start":"2026-10-07","end":"2027-01-18","adm":"paid","cats":["mod","photo"],"note":"","url":"https://www.pinaultcollection.com/boursedecommerce/"},{"id":"la-nishimura","venue":"lafayette","head":"Yu Nishimura","title":"Towards a Sea","start":"2026-10-21","end":"2027-01-03","adm":"free","cats":["mod"],"note":"","url":"https://www.lafayetteanticipations.com/"},{"id":"la-fauquet","venue":"lafayette","head":"Hélène Fauquet","title":"Vivresse","start":"2026-10-21","end":"2027-01-03","adm":"free","cats":["mod"],"note":"","url":"https://www.lafayetteanticipations.com/"},{"id":"la-thomson","venue":"lafayette","head":"Mungo Thomson","title":"Monument","start":"2026-10-21","end":"2026-11-29","adm":"free","cats":["mod"],"note":"","url":"https://www.lafayetteanticipations.com/"},{"id":"pi-schwitters","venue":"picasso","head":"Kurt Schwitters","title":"Le chaos-monde 1918–1948","start":"2026-10-06","end":"2027-02-07","adm":"paid","cats":["mod"],"note":"","url":"https://www.museepicassoparis.fr/fr/agenda/types/exposition/"},{"id":"pi-malraux","venue":"picasso","head":"André Malraux and Pablo Picasso","title":"Le musée imaginaire","start":null,"end":"2027-02-07","adm":"paid","cats":["mod"],"note":"A display within the museum.","url":"https://www.museepicassoparis.fr/fr/agenda/types/exposition/"},{"id":"gp-cezanne","venue":"grandpalais","head":"Cézanne and the artists after him","title":"Cézanne et nous","start":"2026-09-23","end":"2027-01-17","adm":"check","cats":["c19","mod"],"note":"Presented with the Musée d’Orsay.","url":"https://www.grandpalais.fr/"},{"id":"jp-douglas","venue":"jeudepaume","head":"Stan Douglas","title":"Parallax","start":"2026-10-20","end":"2027-01-10","adm":"check","cats":["photo"],"note":"","url":"https://jeudepaume.org/"},{"id":"mep-penn","venue":"mep","head":"Irving Penn","title":"Penn & Fashion","start":"2026-09-30","end":"2027-01-17","adm":"paid","cats":["photo","fashion"],"note":"","url":"https://www.mep-fr.org/"},{"id":"bal-wilson","venue":"bal","head":"The Wilson Centre for Photography collection","title":"L’Espace entre nous","start":"2026-06-19","end":"2027-01-03","adm":"paid","cats":["photo"],"note":"","url":"https://le-bal.fr/"},{"id":"gal-vest","venue":"galliera","head":"A wardrobe of one’s own","title":"Un vestiaire à soi","start":"2026-09-26","end":null,"adm":"paid","cats":["fashion"],"note":"Closing date not confirmed on the venue page.","url":"https://www.palaisgalliera.paris.fr/"},{"id":"ad-pav","venue":"artsdeco","head":"Rafael Pavarotti","title":"Rafael Pavarotti, photographe","start":"2026-10-02","end":"2027-02-07","adm":"paid","cats":["fashion","photo"],"note":"","url":"https://madparis.fr/"},{"id":"ad-maj","venue":"artsdeco","head":"Haute couture at the Thai court","title":"Majestic Fashion: Haute Couture and Tradition at the Thai Court","start":"2026-05-13","end":"2026-11-01","adm":"paid","cats":["fashion"],"note":"","url":"https://madparis.fr/"},{"id":"ima-mariee","venue":"ima","head":"Weddings in Algeria, Morocco and Tunisia","title":"Vive la mariée !","start":"2026-09-29","end":"2027-02-28","adm":"paid","cats":["world","fashion"],"note":"","url":"https://www.imarabe.org/"},{"id":"ima-alhambra","venue":"ima","head":"The Nasrid Alhambra","title":"Les Trésors cachés de l’Alhambra nasride","start":"2026-11-24","end":"2027-05-16","adm":"paid","cats":["world"],"note":"","url":"https://www.imarabe.org/"},{"id":"gu-dal","venue":"guimet","head":"Seulgi Lee","title":"DAL DARI. The Moon and its Legs","start":"2026-06-06","end":"2027-02-08","adm":"paid","cats":["world"],"note":"","url":"https://www.guimet.fr/"},{"id":"gu-trompe","venue":"guimet","head":"Korean trompe-l’œil","title":"Le savoir en trompe-l’œil: Corée, XVIIIe–XXe siècle","start":"2026-09-16","end":"2027-01-04","adm":"paid","cats":["world"],"note":"","url":"https://www.guimet.fr/"},{"id":"ce-coree","venue":"cernuschi","head":"Korea and the scholar class","title":"Corée, le royaume des lettrés","start":"2026-11-20","end":"2027-04-04","adm":"check","cats":["world"],"note":"","url":"https://www.cernuschi.paris.fr/"},{"id":"qb-plumes","venue":"branly","head":"Birds of paradise","title":"Plumes du Paradis","start":"2026-05-12","end":"2026-11-08","adm":"paid","cats":["world"],"note":"","url":"https://www.quaibranly.fr/"}]}</script>
 <script>
-let CHECKED, VEN, V, EX, TODAY;
-function load(d){
-  CHECKED=d.checked;
-  VEN=d.venues.map(v=>({id:v.id,name:v.name,area:v.area,lat:v.lat,lng:v.lng,cats:v.cats,src:v.source}));
-  V=Object.fromEntries(VEN.map(v=>[v.id,v]));
-  EX=d.exhibitions.map(e=>({id:e.id,venue:e.venue,head:e.head,title:e.title,start:e.start||null,end:e.end||null,adm:e.adm,cats:(e.cats&&e.cats.length)?e.cats:V[e.venue].cats,note:e.note||'',url:e.url||V[e.venue].src}));
-  TODAY=todayISO();
-}
-const CATS=[
- {id:'old',name:'Old Masters & early modern',c:'--c-old'},
- {id:'c19',name:'19th century & Impressionism',c:'--c-c19'},
- {id:'mod',name:'Modern & contemporary',c:'--c-mod'},
- {id:'photo',name:'Photography',c:'--c-photo'},
- {id:'fashion',name:'Fashion & design',c:'--c-fashion'},
- {id:'world',name:'World art',c:'--c-world'}];
-// [id, venue, headline, official title, start, end, admission, categories override, note, url]
-
-const $=s=>document.querySelector(s);
-const state={cats:new Set(CATS.map(c=>c.id)),status:'all',adm:'all',venue:'all',sort:'close',view:'cards'};
-const todayISO=()=>{const d=new Date();const t=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');return t<CHECKED?CHECKED:t};
-const dayN=s=>Math.round(Date.parse(s+'T00:00:00Z')/864e5);
-const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const fd=s=>{const [y,m,d]=s.split('-').map(Number);return d+' '+MON[m-1]+(y!==2026?' '+y:'')};
-const fdy=s=>{const [y,m,d]=s.split('-').map(Number);return d+' '+MON[m-1]+' '+y};
-function statusOf(e){
-  if(e.end&&e.end<TODAY)return null;
-  if(e.start&&e.start>TODAY)return 'soon';
-  if(e.end&&dayN(e.end)-dayN(TODAY)<=14)return 'close';
-  return 'now';
-}
-function datesText(e){
-  const st=statusOf(e);
-  if(e.start&&e.end&&e.start>TODAY)return fdy(e.start)+' to '+fdy(e.end);
-  if(e.start&&e.start>TODAY)return 'Opens '+fdy(e.start);
-  if(e.end)return 'Until '+fdy(e.end);
-  if(e.start)return 'Opened '+fdy(e.start);
-  return '';
-}
-const STAT={now:['On now','b-now'],close:['Closing within 14 days','b-close'],soon:['Opening soon','b-soon']};
-function visible(ignoreVenue){
-  return EX.filter(e=>{
-    const st=statusOf(e);if(!st)return false;
-    if(!e.cats.some(c=>state.cats.has(c)))return false;
-    if(state.status!=='all'&&state.status!==st)return false;
-    if(state.adm==='free'&&e.adm!=='free')return false;
-    if(state.adm==='paid'&&e.adm==='free')return false;
-    if(!ignoreVenue&&state.venue!=='all'&&e.venue!==state.venue)return false;
-    return true;
-  });
-}
-function sorted(list){
-  const far='9999-12-31',L=list.slice();
-  const key={
-    close:e=>(e.end||far)+e.id,
-    open:e=>{const s=statusOf(e);return (s==='soon'?'0':'1')+(s==='soon'?e.start:(e.start||'0000'))+e.id},
-    venue:e=>V[e.venue].name+(e.end||far)
-  }[state.sort];
-  return L.sort((a,b)=>key(a)<key(b)?-1:1);
-}
-const catColor=id=>`var(${CATS.find(c=>c.id===id).c})`;
-function esc(s){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
-
-function renderBar(){
-  const counts=Object.fromEntries(CATS.map(c=>[c.id,0]));
-  EX.forEach(e=>{if(statusOf(e))e.cats.forEach(c=>counts[c]++)});
-  $('#cats').innerHTML=CATS.map(c=>`<button class="chip" type="button" data-cat="${c.id}" aria-pressed="${state.cats.has(c.id)}" style="--dot:var(${c.c})"><span class="dot"></span>${esc(c.name)} <span class="n">${counts[c.id]}</span></button>`).join('');
-  const segs=(id,items,key)=>{$(id).innerHTML=items.map(([v,t])=>`<button class="chip seg" type="button" data-${key}="${v}" aria-pressed="${state[key]===v}">${t}</button>`).join('')};
-  segs('#status',[['all','All'],['now','On now'],['close','Closing soon'],['soon','Opening soon']],'status');
-  segs('#adm',[['all','Free and ticketed'],['free','Free'],['paid','Ticketed']],'adm');
-  segs('#view',[['cards','Cards'],['timeline','Timeline'],['map','Map']],'view');
-}
-function renderVenueSelect(){
-  const base=visible(true),n={};base.forEach(e=>n[e.venue]=(n[e.venue]||0)+1);
-  const opts=VEN.filter(v=>n[v.id]).sort((a,b)=>a.name.localeCompare(b.name,'fr'));
-  if(state.venue!=='all'&&!n[state.venue])state.venue='all';
-  $('#venue').innerHTML='<option value="all">All venues</option>'+opts.map(v=>`<option value="${v.id}"${state.venue===v.id?' selected':''}>${esc(v.name)} (${n[v.id]})</option>`).join('');
-}
-function catTags(e){return e.cats.map(c=>`<span class="tag" style="--dot:${catColor(c)}"><i></i>${esc(CATS.find(x=>x.id===c).name)}</span>`).join('')}
-function cards(list){
-  if(!list.length)return '<div class="empty">Nothing matches these filters.</div>';
-  return '<div class="grid">'+list.map(e=>{
-    const st=statusOf(e),[sl,sc]=STAT[st],v=V[e.venue];
-    return `<article class="card"><div class="top"><span class="badge ${sc}">${sl}</span>${e.adm==='free'?'<span class="badge b-free">Free</span>':e.adm==='paid'?'<span class="badge">Ticketed</span>':'<span class="badge" style="color:var(--muted)">Check price</span>'}</div>
-    <div class="venue">${esc(v.name)} · ${esc(v.area)}</div>
-    <h3>${esc(e.head)}</h3><p class="title">${esc(e.title)}</p>
-    <p class="dates">${datesText(e)}</p>${e.note?`<p class="note">${esc(e.note)}</p>`:''}
-    <div class="tags">${catTags(e)}</div>
-    <a class="src" href="${esc(e.url)}" target="_blank" rel="noopener">Venue page ↗</a></article>`}).join('')+'</div>';
-}
-function timeline(list){
-  if(!list.length)return '<div class="empty">Nothing matches these filters.</div>';
-  const A=dayN('2026-09-01'),B=dayN('2027-05-31'),W=B-A;
-  const pct=s=>Math.max(0,Math.min(100,(dayN(s)-A)/W*100));
-  const months=[];for(let i=0;i<9;i++){const y=2026+Math.floor((8+i)/12),m=(8+i)%12;months.push([`${y}-${String(m+1).padStart(2,'0')}-01`,MON[m]+(m===0?' '+y:'')])}
-  const rows=list.map(e=>{
-    const s=e.start&&e.start>'2026-09-01'?e.start:'2026-09-01',en=e.end||'2027-05-31';
-    const l=pct(s),w=Math.max(pct(en)-l,1);
-    return `<div class="tl-row"><div class="tl-name"><b>${esc(e.head)}</b><small>${esc(V[e.venue].name)} · ${datesText(e)}</small></div><div class="tl-track"><div class="tl-bar${e.end?'':' open'}" style="left:${l}%;width:${w}%;--dot:${catColor(e.cats[0])}" title="${esc(e.title)}"></div></div></div>`}).join('');
-  const t=pct(TODAY);
-  return `<div class="tl"><div class="tl-in"><div class="tl-head"><div></div><div class="tl-months">${months.map(m=>`<span style="left:${pct(m[0])}%">${m[1]}</span>`).join('')}</div></div>
-  <div style="position:relative">${rows}<div style="position:absolute;left:var(--nw);right:0;top:0;bottom:0;pointer-events:none"><div class="tl-today" style="left:${t}%"></div></div></div></div></div>`;
-}
-const loc={on:false,msg:'',id:null};
-let pm=null,pmEl=null,pmLayer=null,meMk=null,meCi=null,locNote=null,locCtl=null,fitKey='',firstFix=true;
-function say(t){loc.msg=t||'';if(locNote){locNote.textContent=loc.msg;locNote.hidden=!loc.msg}}
-function locStop(msg){if(loc.id!=null&&navigator.geolocation)navigator.geolocation.clearWatch(loc.id);loc.id=null;loc.on=false;
-  if(pm){if(meMk){pm.removeLayer(meMk);meMk=null}if(meCi){pm.removeLayer(meCi);meCi=null}}
-  if(locCtl){locCtl.classList.remove('on');locCtl.firstChild.setAttribute('aria-pressed','false');locCtl.firstChild.title='Show my location'}say(msg)}
-function onFix(p){
-  const ll=[p.coords.latitude,p.coords.longitude],acc=p.coords.accuracy||0;
-  if(!meMk){meMk=L.marker(ll,{icon:L.divIcon({className:'',html:'<div class="ov-me" role="img" aria-label="Your location"><span class="halo"></span><span class="core"></span></div>',iconSize:[0,0]}),interactive:false,keyboard:false,zIndexOffset:2000}).addTo(pm)}else meMk.setLatLng(ll);
-  if(acc>0&&acc<1500){if(!meCi)meCi=L.circle(ll,{radius:acc,color:'#E5141F',weight:1,fillColor:'#E5141F',fillOpacity:.08,interactive:false}).addTo(pm);else{meCi.setLatLng(ll);meCi.setRadius(acc)}}else if(meCi){pm.removeLayer(meCi);meCi=null}
-  if(firstFix){firstFix=false;
-    if(pm.distance(ll,[48.8566,2.3522])<45000){if(!pm.getBounds().contains(ll))pm.panTo(ll);say('Red dot: your current location'+(acc>=1?' (accurate to about '+Math.round(acc)+' m)':'')+'. It stays on this device.')}
-    else say('Your location is outside Paris, so the red dot is off the map. Zoom out to find it.')}
-}
-function locStart(){
-  if(!navigator.geolocation){say('Your browser can’t share its location.');return}
-  firstFix=true;say('Waiting for location permission…');loc.on=true;
-  locCtl.classList.add('on');locCtl.firstChild.setAttribute('aria-pressed','true');locCtl.firstChild.title='Hide my location';
-  loc.id=navigator.geolocation.watchPosition(onFix,err=>locStop(err&&err.code===1?'Location permission was declined. Allow location for this site in your browser settings, then try again.':err&&err.code===3?'Finding your location took too long. Try again.':'Your location could not be found just now.'),{enableHighAccuracy:false,maximumAge:15000,timeout:20000});
-}
-function ensureMap(){
-  if(pm)return true;if(!window.L)return false;
-  pmEl=document.createElement('div');pmEl.className='pmap';
-  pm=L.map(pmEl,{scrollWheelZoom:false,zoomSnap:.5});
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(pm);
-  pmLayer=L.layerGroup().addTo(pm);
-  const LC=L.Control.extend({options:{position:'topleft'},onAdd(){
-    const d=L.DomUtil.create('div','leaflet-bar locctl'),a=L.DomUtil.create('a','',d);
-    a.href='#';a.setAttribute('role','button');a.setAttribute('aria-pressed','false');a.setAttribute('aria-label','Show my location');a.title='Show my location';
-    a.innerHTML='<svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="9" r="1.6" fill="currentColor"/><path d="M9 1v3M9 14v3M1 9h3M14 9h3" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>';
-    L.DomEvent.disableClickPropagation(d);
-    L.DomEvent.on(a,'click',e=>{L.DomEvent.preventDefault(e);loc.on?locStop(''):locStart()});
-    locCtl=d;return d}});
-  new LC().addTo(pm);
-  pm.on('zoomend',()=>pmEl.classList.toggle('zo',pm.getZoom()<13));
-  pm.setView([48.8566,2.3322],13);
-  try{if(navigator.permissions&&navigator.permissions.query)navigator.permissions.query({name:'geolocation'}).then(p=>{if(p.state==='granted'&&!loc.on)locStart()}).catch(()=>{})}catch(_){}
-  return true;
-}
-function mapView(list){
-  return `<div class="map"><div id="pmapHost" style="min-width:0"><p class="locnote" id="locNote" hidden style="margin:8px 0 0;font-size:13px;color:var(--muted)" aria-live="polite"></p></div><ul class="vlist" id="vlistHost"></ul></div>`;
-}
-function mapAfter(list){
-  const host=$('#pmapHost');if(!host)return;
-  if(!ensureMap()){host.insertAdjacentHTML('afterbegin','<div class="empty">The map could not load. Check your connection and reload the page.</div>');return}
-  host.insertBefore(pmEl,host.firstChild);locNote=$('#locNote');say(loc.msg);
-  const n={};list.forEach(e=>n[e.venue]=(n[e.venue]||0)+1);
-  $('#vlistHost').innerHTML=VEN.slice().sort((a,b)=>a.name.localeCompare(b.name,'fr')).map(v=>`<li><button type="button" data-v="${v.id}"><span>${esc(v.name)}</span><span class="${n[v.id]?'c':'z'}">${n[v.id]||'none'}</span></button></li>`).join('');
-  pmLayer.clearLayers();const pts=[];
-  VEN.filter(v=>n[v.id]).forEach(v=>{
-    const nm=v.name.replace('Musée d’','').replace('Musée du ','').replace('Musée ','').replace('Maison Européenne de la Photographie','MEP').replace('Fondation ','Fond. ');
-    const el=document.createElement('div');el.className='pin2'+(state.venue===v.id?' sel':'');el.style.setProperty('--dot',catColor(v.cats[0]));
-    el.innerHTML=`<span class="d">${n[v.id]}</span><span class="l">${esc(nm)}</span>`;
-    const mk=L.marker([v.lat,v.lng],{icon:L.divIcon({className:'',html:el,iconSize:[0,0]}),title:v.name,riseOnHover:true});
-    const pop=document.createElement('div');pop.innerHTML=`<div class="pp-v">${esc(v.name)}</div>`+list.filter(e=>e.venue===v.id).map(e=>`<div class="pp-i"><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.head)}</a><span>${datesText(e)}</span></div>`).join('');
-    mk.bindPopup(pop,{maxWidth:320});mk.addTo(pmLayer);pts.push([v.lat,v.lng]);
-  });
-  setTimeout(()=>{pm.invalidateSize();pmEl.classList.toggle('zo',pm.getZoom()<13);
-    const k=pts.map(p=>p.join(',')).sort().join(';');
-    if(pts.length&&pts.length<=8&&k!==fitKey&&fitKey)pm.fitBounds(pts,{padding:[40,40],maxZoom:15});
-    fitKey=k||'none'},0);
-}
-function render(){
-  renderBar();renderVenueSelect();
-  const list=sorted(visible(false));
-  $('#count').innerHTML=`<b>${list.length}</b> exhibition${list.length===1?'':'s'} at <b>${new Set(list.map(e=>e.venue)).size}</b> venues`+(state.venue!=='all'?` · <a href="#" id="clearV">Show all venues</a>`:'');
-  $('#out').innerHTML=state.view==='cards'?cards(list):state.view==='timeline'?timeline(list):mapView(sorted(visible(true)));
-  if(state.view==='map')mapAfter(sorted(visible(true)));
-  const c=$('#clearV');if(c)c.onclick=ev=>{ev.preventDefault();state.venue='all';render()};
-}
-document.addEventListener('click',ev=>{
-  const b=ev.target.closest('button,[data-v]');if(!b)return;
-  if(b.dataset.cat){const id=b.dataset.cat;state.cats.has(id)?state.cats.delete(id):state.cats.add(id);render();return}
-  for(const k of ['status','adm','view'])if(b.dataset[k]){state[k]=b.dataset[k];render();return}
-  if(b.dataset.v){state.venue=state.venue===b.dataset.v?'all':b.dataset.v;render()}
-});
-document.addEventListener('keydown',ev=>{const g=ev.target.closest&&ev.target.closest('.pin');if(g&&(ev.key==='Enter'||ev.key===' ')){ev.preventDefault();state.venue=state.venue===g.dataset.v?'all':g.dataset.v;render()}});
-$('#venue').onchange=e=>{state.venue=e.target.value;render()};
-$('#sort').onchange=e=>{state.sort=e.target.value;render()};
-$('#themeBtn').onclick=()=>{const r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dark?'light':'dark'};
-function boot(){
-// venues footer
-const nBy={};EX.forEach(e=>{if(statusOf(e))nBy[e.venue]=(nBy[e.venue]||0)+1});
-$('#vens').innerHTML=VEN.slice().sort((a,b)=>a.name.localeCompare(b.name,'fr')).map(v=>`<li><a href="${esc(v.src)}" target="_blank" rel="noopener">${esc(v.name)}</a> <small>${nBy[v.id]?nBy[v.id]+' listed':'none listed'}</small></li>`).join('');
-$('#venueCount').textContent=VEN.length+' venues in six categories';
-$('#checkedDate').textContent=new Date(CHECKED+'T12:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
-render();
-}
 (function(){
-  var dataEl=document.getElementById('exhibitions-data'), embedded=JSON.parse(dataEl.textContent), done=false;
-  function go(d){ if(done)return; done=true; load(d); boot(); }
-  if(!window.fetch){ go(embedded); return; }
-  // Prefer exhibitions.json (refreshed nightly) when it is newer than the copy embedded in the page.
-  var timer=setTimeout(function(){ go(embedded); },3500);
-  fetch('exhibitions.json?t='+Math.floor(Date.now()/300000),{cache:'no-cache'})
-    .then(function(r){ return r.ok?r.json():null; })
-    .then(function(j){ if(j&&j.exhibitions&&j.venues&&new Date(j.updated)>=new Date(embedded.updated)){ clearTimeout(timer); go(j); } })
+function boot(){
+  var root = document.getElementById('onview');
+  var dataEl = document.getElementById('exhibitions-data');
+  if (!root || !dataEl || root.dataset.booted) return;
+  root.dataset.booted = '1';
+  var DATA;
+  try { DATA = JSON.parse(dataEl.textContent); } catch (err) { document.getElementById('ov-results').textContent = 'The listings data could not be read. Paste the data block again.'; return; }
+
+  var DAY = 864e5;
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var AREAS = ['Centre','Marais & East','Left Bank','Champs-Élysées','West','North'];
+  var DISCIPLINES = ['Painting & works on paper','Sculpture & installation','Photography & moving image','Design & architecture','History & collections','Group shows'];
+
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  function parse(s){ if (!s) return null; var p = s.split('-').map(Number); return new Date(p[0], p[1]-1, p[2]); }
+  function fmt(d){ return d.getDate() + ' ' + MONTHS[d.getMonth()] + (d.getFullYear() !== today.getFullYear() ? ' ' + d.getFullYear() : ''); }
+  function fmtFull(d){ return d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear(); }
+  var venues = {}; DATA.venues.forEach(function(v){ venues[v.id] = v; });
+
+  var items = DATA.exhibitions.map(function(e){
+    var v = venues[e.venue] || {name:e.venue, area:'Centre', kind:'', lat:48.8566, lng:2.3522};
+    var s = parse(e.start), en = parse(e.end);
+    var status = 'on';
+    if (s && s > today) status = 'upcoming';
+    else if (en && en < today) status = 'closed';
+    var daysLeft = en ? Math.round((en - today)/DAY) : null;
+    var daysToOpen = s ? Math.round((s - today)/DAY) : null;
+    var siteLL = v.sites && e.site && v.sites[e.site];
+    return Object.assign({}, e, {
+      v: v, s: s, en: en, status: status, daysLeft: daysLeft, daysToOpen: daysToOpen,
+      closing: status === 'on' && daysLeft !== null && daysLeft <= 14,
+      area: e.area || v.area, venueName: v.name, short: e.short || e.title,
+      lat: siteLL ? siteLL[0] : v.lat, lng: siteLL ? siteLL[1] : v.lng,
+      locKey: e.venue + (siteLL ? '|' + e.site : ''),
+      hay: [e.short, e.title, e.artists, v.name, e.site].filter(Boolean).join(' ').toLowerCase()
+    });
+  }).filter(function(e){ return e.status !== 'closed'; });
+
+  var KEY = 'onview-paris-filters-v3';
+  var defaults = {status:'all', q:'', adm:'all', area:'all', off:[], order:[], discipline:'all', sino:false, view:'cards', sort:'venue', venuesOpen:false};
+  var state = Object.assign({}, defaults);
+  try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved) state = Object.assign(state, saved); } catch (_) {}
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (_) {} }
+
+  function $(id){ return document.getElementById(id); }
+  function el(tag, cls, text){ var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function link(text, href, cls){ var a = el('a', cls || null, text); a.href = href; a.target = '_blank'; a.rel = 'noopener'; return a; }
+
+  var updated = new Date(DATA.updated);
+  var updDay = new Date(updated.getFullYear(), updated.getMonth(), updated.getDate());
+  $('ov-verified').textContent = 'Listings checked ' + fmtFull(updDay);
+  $('ov-venueCount').textContent = DATA.venues.length + ' venues';
+  (function(){ var ul = $('ov-venueNames'); if (!ul) return; DATA.venues.map(function(v){ return v.name; }).sort(function(x, y){ return x.localeCompare(y, 'en', {sensitivity:'base'}); }).forEach(function(n){ var li = document.createElement('li'); li.textContent = n; ul.appendChild(li); }); })();
+  var age = Math.floor((today - updDay)/DAY);
+  if (age > 14) { $('ov-stale').hidden = false; $('ov-stale').textContent = 'These listings were last checked ' + age + ' days ago. Some dates may have changed, so check with the venue before you go.'; }
+
+  function fillSelect(sel, label, values){
+    sel.textContent = '';
+    var o = el('option', null, label); o.value = 'all'; sel.appendChild(o);
+    values.forEach(function(v){ var op = el('option', null, v); op.value = v; sel.appendChild(op); });
+  }
+  fillSelect($('ov-area'), 'All areas', AREAS.filter(function(a){ return items.some(function(i){ return i.area === a; }); }));
+  fillSelect($('ov-discipline'), 'All disciplines', DISCIPLINES);
+
+  // Venue checklist in display order, with move up / down.
+  // The data's venues array sets the default order; a viewer's own changes are kept in their browser.
+  var venueList = DATA.venues.slice();
+  var grid = $('ov-venuesGrid');
+  var RANK = {};
+  function orderedIds(){
+    var ids = state.order.filter(function(id){ return venues[id]; });
+    DATA.venues.forEach(function(v){ if (ids.indexOf(v.id) < 0) ids.push(v.id); });
+    return ids;
+  }
+  function move(id, dir){
+    var ids = orderedIds(), i = ids.indexOf(id), j = i + dir;
+    if (i < 0 || j < 0 || j >= ids.length) return;
+    ids[i] = ids[j]; ids[j] = id;
+    set({order: ids});
+    var b = $('ov-mv-' + (dir < 0 ? 'up-' : 'down-') + id);
+    if (!b || b.disabled) b = $('ov-mv-' + (dir < 0 ? 'down-' : 'up-') + id);
+    if (b) b.focus();
+  }
+  function renderVenuePanel(forCounts){
+    var keep = grid.scrollTop;
+    while (grid.firstChild) grid.removeChild(grid.firstChild);
+    var ids = orderedIds();
+    ids.forEach(function(id, i){
+      var v = venues[id], on = state.off.indexOf(id) < 0;
+      var li = el('li','ov-vrow' + (on ? '' : ' off'));
+      li.appendChild(el('span','num', String(i + 1)));
+      var lb = el('label','ov-check'); var cb = el('input'); cb.type = 'checkbox'; cb.id = 'ov-v-' + id; cb.checked = on;
+      lb.appendChild(cb); lb.appendChild(document.createTextNode(v.name + (v.kind === 'Commercial gallery' ? ' (commercial)' : '')));
+      lb.appendChild(el('span','a', v.area));
+      cb.addEventListener('change', function(){
+        var off = state.off.filter(function(x){ return x !== id; });
+        if (!cb.checked) off.push(id);
+        set({off: off});
+        var n = $('ov-v-' + id); if (n) n.focus();
+      });
+      li.appendChild(lb);
+      li.appendChild(el('span','c', String(forCounts.filter(function(e){ return e.venue === id; }).length)));
+      var mv = el('span','ov-move');
+      [['up', -1, '↑', 'Move ' + v.name + ' up'], ['down', 1, '↓', 'Move ' + v.name + ' down']].forEach(function(m){
+        var b = el('button', null, m[2]); b.type = 'button'; b.id = 'ov-mv-' + m[0] + '-' + id; b.setAttribute('aria-label', m[3]);
+        b.disabled = (m[1] < 0 && i === 0) || (m[1] > 0 && i === ids.length - 1);
+        b.addEventListener('click', function(){ move(id, m[1]); });
+        mv.appendChild(b);
+      });
+      li.appendChild(mv);
+      grid.appendChild(li);
+    });
+    grid.scrollTop = keep;
+  }
+
+  function matchesBase(e, ignoreVenue){
+    if (state.q && e.hay.indexOf(state.q.toLowerCase()) < 0) return false;
+    if (state.adm === 'free' && e.admission !== 'free') return false;
+    if (state.adm === 'paid' && e.admission !== 'paid') return false;
+    if (state.area !== 'all' && e.area !== state.area) return false;
+    if (!ignoreVenue && state.off.indexOf(e.venue) >= 0) return false;
+    if (state.discipline !== 'all' && e.discipline !== state.discipline) return false;
+    return true;
+  }
+  function matchesStatus(e){
+    if (state.status === 'on') return e.status === 'on';
+    if (state.status === 'closing') return e.closing;
+    if (state.status === 'upcoming') return e.status === 'upcoming';
+    return true;
+  }
+  var BIG = 1e15;
+  function endKey(e){ return e.status === 'upcoming' ? BIG/2 + e.s.getTime() : (e.en ? e.en.getTime() : BIG); }
+  function sorter(a, b){
+    if (state.sort === 'opening') {
+      var ka = a.status === 'upcoming' ? a.s.getTime() : -BIG + (a.en ? a.en.getTime() : BIG);
+      var kb = b.status === 'upcoming' ? b.s.getTime() : -BIG + (b.en ? b.en.getTime() : BIG);
+      return ka - kb || a.short.localeCompare(b.short);
+    }
+    if (state.sort === 'venue') return (RANK[a.venue] - RANK[b.venue]) || endKey(a) - endKey(b) || a.short.localeCompare(b.short);
+    return endKey(a) - endKey(b) || a.short.localeCompare(b.short);
+  }
+
+  function statusChip(e){
+    if (e.status === 'upcoming') return el('span','chip status upcoming', e.daysToOpen === 0 ? 'Opens today' : e.daysToOpen === 1 ? 'Opens tomorrow' : 'Opens ' + fmt(e.s));
+    if (e.closing) return el('span','chip status ' + (e.daysLeft <= 1 ? 'today' : 'soon'), e.daysLeft === 0 ? 'Closes today' : e.daysLeft === 1 ? 'Closes tomorrow' : 'Closes in ' + e.daysLeft + ' days');
+    return el('span','chip status on','On now');
+  }
+  function dateText(e){
+    var endT = e.endText || (e.en ? fmt(e.en) : null);
+    if (e.s && endT) return fmt(e.s) + ' – ' + endT;
+    if (endT) return 'Until ' + endT;
+    if (e.s) return 'From ' + fmt(e.s);
+    return 'Dates to be confirmed';
+  }
+  function admissionText(e){ return e.admission === 'free' ? 'Free' : e.admission === 'paid' ? (e.price || 'Ticketed') : 'Check venue'; }
+  function sinoChip(e){
+    if (!e.sinophone) return null;
+    var c = el('span','chip sino'); var z = el('span','cjk','华语'); z.lang = 'zh'; c.appendChild(z);
+    c.appendChild(document.createTextNode(e.sinophone === 'includes' ? 'Includes sinophone artists' : 'Sinophone'));
+    return c;
+  }
+  function venueLine(e){ return e.venueName + (e.site ? ' · ' + e.site : ''); }
+  var MONO = {'tate-modern':'TM','tate-britain':'TB','national-gallery':'NG','npg':'NPG','courtauld':'CG','british-museum':'BM','british-library':'BL','va':'V+A','wallace':'WC','serpentine':'SP','hayward':'HG','barbican':'BB','whitechapel':'WG','ica':'ICA','camden-art-centre':'CAC','gasworks':'GW','camden-arts-projects':'CAP','ibraaz':'IBZ','slg':'SLG','chisenhale':'CH','raven-row':'RR','ydp':'YDP','warburg':'WI','ra':'RA','saatchi':'SG','dulwich':'DPG','trg':'TR'};
+  var LOGO = {'tate-modern':['l-tate','wide'],'tate-britain':['l-tate','wide'],'national-gallery':['l-ng','sq'],'ra':['l-ra','sq']};
+  function monogram(v){ if (MONO[v.id]) return MONO[v.id]; return String(v.name || '').split(/\s+/).map(function(w){ return w.charAt(0); }).join('').slice(0, 3).toUpperCase(); }
+  function isGroup(e){ return /^Group show/i.test(e.short); }
+  function headCls(e){ return (isGroup(e) || e.short.length > 26) ? 'grp' : (e.short.length > 14 ? 'mid' : null); }
+  function mapShort(e){
+    if (isGroup(e)) { var rest = (e.short.split(':')[1] || '').split(',')[0].replace(/\s*etc\.?$/, '').trim(); return 'Group: ' + (rest || 'various'); }
+    if (e.short.length <= 26) return e.short;
+    var cut = e.short.slice(0, 25); var sp = cut.lastIndexOf(' '); return (sp > 8 ? cut.slice(0, sp) : cut) + '\u2026';
+  }
+
+  function renderCards(list, host){
+    var g = el('div','ov-cards');
+    list.forEach(function(e){
+      var c = el('article','ov-card' + (e.sinophone ? ' sino' : ''));
+      var top = el('div','top'); var vn = el('span','venue'); var LG = null; var vb = el('span','vbadge' + (LG ? ' logo ' + LG[1] + ' ' + LG[0] : ''), LG ? '' : monogram(e.v)); vb.setAttribute('aria-hidden','true'); vn.appendChild(vb); vn.appendChild(el('span','vname', venueLine(e))); top.appendChild(vn); top.appendChild(statusChip(e)); c.appendChild(top);
+      var body = el('div','body');
+      var h = el('h3', headCls(e)); h.appendChild(link(e.short, e.url)); body.appendChild(h);
+      if (e.short !== e.title) body.appendChild(el('p','full', e.title));
+      if (e.artists && e.artists !== e.title && e.artists !== e.short) body.appendChild(el('p','artists', e.artists));
+      body.appendChild(el('div','dates', dateText(e)));
+      c.appendChild(body);
+      var foot = el('div','foot');
+      foot.appendChild(el('span','chip' + (e.admission === 'free' ? ' free' : ''), admissionText(e)));
+      var sc = sinoChip(e); if (sc) foot.appendChild(sc);
+      if (e.v.kind === 'Commercial gallery') foot.appendChild(el('span','chip commercial','Commercial gallery'));
+      if (e.note) foot.appendChild(el('span','chip', e.note));
+      if (e.v.map) { foot.appendChild(el('span','grow')); var ml = link('Hours & map \u2197', e.v.map, 'maplink'); ml.title = 'Opening hours and directions for ' + e.venueName + ' on Google Maps'; ml.setAttribute('aria-label', 'Opening hours and directions for ' + e.venueName + ' on Google Maps'); foot.appendChild(ml); }
+      c.appendChild(foot);
+      g.appendChild(c);
+    });
+    host.appendChild(g);
+  }
+
+  function legend(host, kinds){
+    var lg = el('div','ov-legend');
+    kinds.forEach(function(k){ var s = el('span'); s.appendChild(el('i', k[0])); s.appendChild(document.createTextNode(k[1])); lg.appendChild(s); });
+    host.appendChild(lg);
+  }
+
+  function renderTimeline(list, host){
+    var ws = new Date(today.getFullYear(), today.getMonth(), 1);
+    var we = new Date(today.getFullYear(), today.getMonth() + 9, 1);
+    var span = we - ws;
+    function pct(d){ return Math.max(0, Math.min(1, (d - ws)/span)) * 100; }
+    var months = []; for (var i = 0; i < 9; i++) months.push(new Date(ws.getFullYear(), ws.getMonth() + i, 1));
+    legend(host, [['','On now'],['soon','Closing within 14 days'],['upcoming','Opening soon'],['sino','Sinophone']]);
+    var wrap = el('div','tl');
+    var head = el('div','tl-head'); head.appendChild(el('div','tl-label','Exhibition'));
+    var ht = el('div','tl-track');
+    months.forEach(function(m, i){ var mm = el('span','tl-month', MONTHS[m.getMonth()] + (i === 0 || m.getMonth() === 0 ? ' ' + String(m.getFullYear()).slice(2) : '')); mm.style.left = pct(m) + '%'; ht.appendChild(mm); });
+    var tdy = el('span','tl-today'); tdy.style.left = pct(today) + '%'; ht.appendChild(tdy);
+    head.appendChild(ht); wrap.appendChild(head);
+    list.forEach(function(e){
+      var row = el('div','tl-row');
+      var lab = el('div','tl-label'); var a = link(e.short, e.url, isGroup(e) ? 'grp' : null); a.title = e.title; lab.appendChild(a);
+      lab.appendChild(el('span','v', venueLine(e) + ' · ' + dateText(e)));
+      row.appendChild(lab);
+      var tr = el('div','tl-track');
+      months.slice(1).forEach(function(m){ var gl = el('span','tl-grid'); gl.style.left = pct(m) + '%'; tr.appendChild(gl); });
+      var left = e.s ? pct(e.s) : 0, right = e.en ? pct(new Date(e.en.getTime() + DAY)) : 100;
+      var bar = el('span','bar');
+      if (e.status === 'upcoming') bar.classList.add('upcoming'); else if (e.closing) bar.classList.add('soon');
+      if (e.sinophone) bar.classList.add('sino');
+      if (!e.s || e.s < ws) bar.classList.add('nostart');
+      if (!e.en || e.en >= we) bar.classList.add('noend');
+      bar.style.left = left + '%'; bar.style.width = Math.max(0.8, right - left) + '%';
+      bar.setAttribute('role','img'); bar.setAttribute('aria-label', e.title + ', ' + dateText(e));
+      tr.appendChild(bar);
+      var t = el('span','tl-today'); t.style.left = pct(today) + '%'; tr.appendChild(t);
+      row.appendChild(tr); wrap.appendChild(row);
+    });
+    host.appendChild(wrap);
+  }
+
+  // Map (Leaflet), created once and reused
+  var mapEl = null, map = null, layer = null, tileFailed = 0, mapNote = null, lastBoundsKey = '';
+  function ensureMap(){
+    if (map || !window.L) return !!map;
+    mapEl = el('div','ov-map'); mapEl.id = 'ov-map';
+    mapNote = el('p','ov-map-note','Labels show each venue’s exhibitions by short title. Zoom out for the venues furthest from the centre; tap a venue for details.');
+    map = L.map(mapEl, {scrollWheelZoom: false, zoomSnap: 0.5, attributionControl: true});
+    var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '\u00a9 <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    tiles.on('tileerror', function(){ tileFailed++; if (tileFailed === 4) mapNote.textContent = 'The base map could not load here, so venues are shown on a blank ground. It loads normally on your website.'; });
+    layer = L.layerGroup().addTo(map);
+    function zoomCls(){ mapEl.classList.toggle('zoomed-out', map.getZoom() < 12); }
+    map.on('zoomend', zoomCls);
+    // Reader location: a red dot, only after the reader taps the button. Never stored or sent anywhere.
+    var meMarker = null, meAcc = null, watchId = null, locBtn = null, firstFix = true;
+    function stopLocate(){
+      if (watchId !== null && navigator.geolocation) navigator.geolocation.clearWatch(watchId);
+      watchId = null; firstFix = true;
+      if (meMarker) { map.removeLayer(meMarker); meMarker = null; }
+      if (meAcc) { map.removeLayer(meAcc); meAcc = null; }
+      locBtn.setAttribute('aria-pressed','false'); locBtn.textContent = 'Show my location';
+    }
+    var LocCtl = L.Control.extend({
+      options: {position: 'topright'},
+      onAdd: function(){
+        locBtn = L.DomUtil.create('button','ov-locate'); locBtn.type = 'button';
+        locBtn.textContent = 'Show my location'; locBtn.setAttribute('aria-pressed','false');
+        L.DomEvent.disableClickPropagation(locBtn);
+        L.DomEvent.on(locBtn, 'click', function(){
+          if (watchId !== null) { stopLocate(); return; }
+          if (!navigator.geolocation) { mapNote.textContent = 'Your browser can\u2019t share a location.'; return; }
+          locBtn.textContent = 'Locating\u2026';
+          watchId = navigator.geolocation.watchPosition(function(pos){
+            var ll = [pos.coords.latitude, pos.coords.longitude];
+            if (!meMarker) {
+              meAcc = L.circle(ll, {radius: pos.coords.accuracy, color: '#E5202E', weight: 1, fillColor: '#E5202E', fillOpacity: .12, interactive: false}).addTo(map);
+              meMarker = L.marker(ll, {icon: L.divIcon({className: '', html: '<div class="ov-me"></div>', iconSize: [16,16], iconAnchor: [8,8]}), title: 'You are here', keyboard: false, zIndexOffset: 1000}).addTo(map);
+              meMarker.bindTooltip('You are here');
+            } else { meMarker.setLatLng(ll); meAcc.setLatLng(ll); meAcc.setRadius(pos.coords.accuracy); }
+            locBtn.setAttribute('aria-pressed','true'); locBtn.textContent = 'Hide my location';
+            if (firstFix) { firstFix = false; if (map.getBounds().pad(0.5).contains(ll) === false) map.setView(ll, Math.max(map.getZoom(), 13)); }
+          }, function(err){
+            stopLocate();
+            mapNote.textContent = err && err.code === 1 ? 'Location is blocked for this page. Allow it in your browser settings to see the red dot.' : 'Couldn\u2019t work out your location just now.';
+          }, {enableHighAccuracy: true, maximumAge: 15000, timeout: 20000});
+        });
+        return locBtn;
+      }
+    });
+    new LocCtl().addTo(map);
+    map.setView([48.8566, 2.3322], mapEl.clientWidth > 700 ? 13 : 12); zoomCls();
+    return true;
+  }
+  function renderMap(list, host){
+    if (!ensureMap()) {
+      var m = el('div','ov-empty'); m.appendChild(el('p', null, 'The map could not load. Check your connection and reload the page.')); host.appendChild(m); return;
+    }
+    legend(host, [['dot','Venue (number of exhibitions)'],['sino','Venue with a sinophone show'],['soon','Short title in amber: closing within 14 days'],['me','Your location (tap Show my location)']]);
+    host.appendChild(mapEl); host.appendChild(mapNote);
+    layer.clearLayers();
+    var groups = {};
+    list.forEach(function(e){ (groups[e.locKey] = groups[e.locKey] || []).push(e); });
+    var pts = [];
+    Object.keys(groups).forEach(function(k){
+      var g = groups[k].slice().sort(sorter), e0 = g[0];
+      var dir = (e0.site && e0.v.sites && e0.v.sites[e0.site]) ? 'right' : (e0.v.label || 'right');
+      var pin = el('div','ov-pin ' + dir.split('-').join(' ') + (g.some(function(x){ return x.sinophone; }) ? ' sino' : ''));
+      pin.appendChild(el('span','dot', String(g.length)));
+      var lbl = el('span','lbl');
+      g.slice(0, 3).forEach(function(x, i){
+        if (i) lbl.appendChild(el('span','sep',' · '));
+        lbl.appendChild(el('span', x.closing ? 'w-soon' : x.sinophone ? 'w-sino' : '', mapShort(x)));
+      });
+      if (g.length > 3) lbl.appendChild(el('span','more',' +' + (g.length - 3)));
+      pin.appendChild(lbl);
+      var icon = L.divIcon({className: '', html: pin, iconSize: [0, 0]});
+      var mk = L.marker([e0.lat, e0.lng], {icon: icon, title: venueLine(e0), keyboard: true, riseOnHover: true});
+      var pop = el('div');
+      pop.appendChild(el('div','pp-venue', e0.venueName + (e0.v.sites && e0.site && e0.v.sites[e0.site] ? ' · ' + e0.site : '')));
+      g.forEach(function(x){
+        var it = el('div','pp-item');
+        it.appendChild(link(x.short, x.url, isGroup(x) ? 'grp' : null));
+        if (x.short !== x.title) it.appendChild(el('span','t', x.title));
+        it.appendChild(el('span','m', dateText(x) + ' · ' + admissionText(x) + (x.closing ? ' · ' + (x.daysLeft === 0 ? 'closes today' : 'closes in ' + x.daysLeft + (x.daysLeft === 1 ? ' day' : ' days')) : x.status === 'upcoming' ? ' · opens ' + fmt(x.s) : '')));
+        pop.appendChild(it);
+      });
+      mk.bindPopup(pop, {maxWidth: 320, autoPanPadding: [24, 24]});
+      mk.addTo(layer); pts.push([e0.lat, e0.lng]);
+    });
+    setTimeout(function(){
+      map.invalidateSize();
+      var bk = pts.map(function(p){ return p.join(','); }).sort().join(';');
+      if (!lastBoundsKey) { map.setView([48.8566, 2.3322], mapEl.clientWidth > 700 ? 13 : 12); }
+      else if (pts.length && pts.length <= 8 && bk !== lastBoundsKey) { map.fitBounds(pts, {padding: [40, 40], maxZoom: 14}); }
+      lastBoundsKey = bk || 'none';
+    }, 0);
+  }
+
+  function renderBoard(base){
+    var board = $('ov-board'), ol = $('ov-boardList');
+    ol.textContent = '';
+    var soon = base.filter(function(e){ return e.closing && (!state.sino || e.sinophone); }).sort(function(a,b){ return a.daysLeft - b.daysLeft || a.short.localeCompare(b.short); }).slice(0, 8);
+    board.hidden = !(state.status === 'all' && soon.length);
+    soon.forEach(function(e){
+      var li = el('li');
+      var d = el('div','d' + (e.daysLeft <= 1 ? ' today' : ''), e.daysLeft === 0 ? 'Today' : String(e.daysLeft));
+      if (e.daysLeft > 0) d.appendChild(el('small', null, e.daysLeft === 1 ? 'day' : 'days'));
+      li.appendChild(d);
+      var t = el('div'); var a = link(e.short, e.url, isGroup(e) ? 'grp' : null); a.title = e.title; t.appendChild(a);
+      t.appendChild(el('span','v', venueLine(e) + ' · ' + admissionText(e)));
+      li.appendChild(t); ol.appendChild(li);
+    });
+  }
+
+  function render(){
+    $('ov-q').value = state.q;
+    $('ov-area').value = state.area; $('ov-discipline').value = state.discipline; $('ov-sort').value = state.sort;
+    root.querySelectorAll('[data-adm]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.adm === state.adm)); });
+    root.querySelectorAll('[data-view]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.view === state.view)); });
+    root.querySelectorAll('[data-status]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.status === state.status)); });
+    $('ov-sino').setAttribute('aria-pressed', String(state.sino));
+    $('ov-venues').hidden = !state.venuesOpen;
+    $('ov-venueToggle').setAttribute('aria-expanded', String(state.venuesOpen));
+    var onCount = venueList.filter(function(v){ return state.off.indexOf(v.id) < 0; }).length;
+    $('ov-venueSel').textContent = onCount === venueList.length ? 'All' : onCount + '/' + venueList.length;
+    RANK = {}; orderedIds().forEach(function(id, i){ RANK[id] = i; });
+    var forCounts = items.filter(function(e){ return matchesBase(e, true) && (!state.sino || e.sinophone) && matchesStatus(e); });
+    if (state.venuesOpen) renderVenuePanel(forCounts);
+
+    var base = items.filter(function(e){ return matchesBase(e); });
+    var scoped = base.filter(function(e){ return !state.sino || e.sinophone; });
+    $('ov-n-all').textContent = scoped.length;
+    $('ov-n-on').textContent = scoped.filter(function(e){ return e.status === 'on'; }).length;
+    $('ov-n-closing').textContent = scoped.filter(function(e){ return e.closing; }).length;
+    $('ov-n-upcoming').textContent = scoped.filter(function(e){ return e.status === 'upcoming'; }).length;
+    $('ov-n-sino').textContent = base.filter(function(e){ return e.sinophone && matchesStatus(e); }).length;
+    renderBoard(base);
+
+    var list = scoped.filter(matchesStatus).sort(sorter);
+    var host = $('ov-results');
+    while (host.firstChild) host.removeChild(host.firstChild);
+    var filtered = state.status !== 'all' || state.q || state.adm !== 'all' || state.area !== 'all' || state.off.length || state.discipline !== 'all' || state.sino;
+    $('ov-clear').hidden = !filtered;
+    $('ov-count').textContent = list.length === 1 ? '1 exhibition' : list.length + ' exhibitions';
+    if (!list.length) {
+      var em = el('div','ov-empty'); em.appendChild(el('p', null, 'No exhibitions match these filters.'));
+      var b = el('button','ov-link','Clear filters'); b.type = 'button'; b.addEventListener('click', clear); em.appendChild(b);
+      host.appendChild(em); return;
+    }
+    if (state.view === 'timeline') renderTimeline(list, host);
+    else if (state.view === 'map') renderMap(list, host);
+    else renderCards(list, host);
+  }
+
+  function set(patch){ Object.assign(state, patch); save(); render(); }
+  function clear(){ set({status:'all', q:'', adm:'all', area:'all', off:[], discipline:'all', sino:false}); }
+
+  root.querySelectorAll('[data-status]').forEach(function(b){ b.addEventListener('click', function(){ set({status: b.dataset.status === state.status ? 'all' : b.dataset.status}); }); });
+  root.querySelectorAll('[data-adm]').forEach(function(b){ b.addEventListener('click', function(){ set({adm: b.dataset.adm}); }); });
+  root.querySelectorAll('[data-view]').forEach(function(b){ b.addEventListener('click', function(){ set({view: b.dataset.view}); }); });
+  $('ov-sino').addEventListener('click', function(){ set({sino: !state.sino}); });
+  $('ov-venueToggle').addEventListener('click', function(){ set({venuesOpen: !state.venuesOpen}); });
+  $('ov-vAll').addEventListener('click', function(){ set({off: []}); });
+  $('ov-vNone').addEventListener('click', function(){ set({off: venueList.map(function(v){ return v.id; })}); });
+  $('ov-vReset').addEventListener('click', function(){ set({order: []}); });
+  $('ov-area').addEventListener('change', function(e){ set({area: e.target.value}); });
+  $('ov-discipline').addEventListener('change', function(e){ set({discipline: e.target.value}); });
+  $('ov-sort').addEventListener('change', function(e){ set({sort: e.target.value}); });
+  var qt; $('ov-q').addEventListener('input', function(e){ clearTimeout(qt); var v = e.target.value; qt = setTimeout(function(){ set({q: v}); }, 120); });
+  $('ov-clear').addEventListener('click', clear);
+
+  render();
+  
+
+}
+// Load the latest listings from the published data file when the page names one (data-src),
+// falling back to the copy embedded in the page if it is slow, unreachable or older.
+function start(){
+  var root = document.getElementById('onview'), dataEl = document.getElementById('exhibitions-data');
+  var src = root && root.getAttribute('data-src');
+  if (!src || !window.fetch) { boot(); return; }
+  var done = false;
+  function go(){ if (!done) { done = true; boot(); } }
+  var timer = setTimeout(go, 3500);
+  fetch(src + (src.indexOf('?') < 0 ? '?' : '\u0026') + 't=' + Math.floor(Date.now() / 300000), {cache: 'no-cache'})
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(j){
+      if (done || !j || !j.exhibitions || !j.venues) return;
+      var cur = null; try { cur = dataEl ? JSON.parse(dataEl.textContent) : null; } catch (_) {}
+      if (!dataEl) { dataEl = document.createElement('script'); dataEl.type = 'application/json'; dataEl.id = 'exhibitions-data'; root.parentNode.insertBefore(dataEl, root); }
+      if (!cur || new Date(j.updated) >= new Date(cur.updated)) dataEl.textContent = JSON.stringify(j);
+    })
     .catch(function(){})
-    .then(function(){ clearTimeout(timer); go(embedded); });
+    .then(function(){ clearTimeout(timer); go(); });
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
 </script>
 
-</body>
-</html>
+</body></html>
