@@ -1,0 +1,1986 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><title>On View London</title><meta name="description" content="What's on, what's closing and what's opening at London's public museums and non-profit galleries."><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&text=%E5%8D%8E%E8%AF%AD&display=swap">
+<style>
+/* On View London. Layout: wall-label masthead, departure-board "last chance" strip,
+   then a filter bar over cards, a season timeline or a map. Everything is scoped to #onview. */
+:root{
+  --wall:#EFEDE6; --panel:#FFFFFF; --ink:#0B0B0C; --ink-2:#4B4B50; --line:#CFCBBE; --line-2:#8C887C;
+  --accent:#0030C8; --accent-soft:#DCE3FA; --on-accent:#FFFFFF; --bar:#B8B4A6; --map-bg:#E4E1D8; --tiles:light;
+  --warn:#B93A00; --warn-soft:#FFE4D2; --hot:#FF6A2B; --bad:#C8102E; --bad-soft:#FFDDE2;
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --f-cjk:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --r:0;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --wall:#0C0C0D; --panel:#151517; --ink:#F2F0EA; --ink-2:#A3A19A; --line:#2B2B2E; --line-2:#6A6A6F;
+  --accent:#8FA5FF; --accent-soft:#1C2250; --on-accent:#0C0C0D; --bar:#3B3B40; --map-bg:#1A1B1E; --tiles:dark; --tile-bright:.62;
+  --warn:#FFA05C; --warn-soft:#33200F; --hot:#C2410C; --bad:#FF8C80; --bad-soft:#3B1714; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --wall:#0C0C0D; --panel:#151517; --ink:#F2F0EA; --ink-2:#A3A19A; --line:#2B2B2E; --line-2:#6A6A6F;
+  --accent:#8FA5FF; --accent-soft:#1C2250; --on-accent:#0C0C0D; --bar:#3B3B40; --map-bg:#1A1B1E; --tiles:dark; --tile-bright:.62;
+  --warn:#FFA05C; --warn-soft:#33200F; --hot:#C2410C; --bad:#FF8C80; --bad-soft:#3B1714; color-scheme:dark;
+}
+ .leaflet-pane, .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-tile-container, .leaflet-pane > svg, .leaflet-pane > canvas, .leaflet-zoom-box, .leaflet-image-layer, .leaflet-layer { position: absolute; left: 0; top: 0; } .leaflet-container { overflow: hidden; } .leaflet-tile, .leaflet-marker-icon, .leaflet-marker-shadow { -webkit-user-select: none; -moz-user-select: none; user-select: none; -webkit-user-drag: none; } .leaflet-tile::selection { background: transparent; } .leaflet-safari .leaflet-tile { image-rendering: -webkit-optimize-contrast; } .leaflet-safari .leaflet-tile-container { width: 1600px; height: 1600px; -webkit-transform-origin: 0 0; } .leaflet-marker-icon, .leaflet-marker-shadow { display: block; } .leaflet-container .leaflet-overlay-pane svg { max-width: none !important; max-height: none !important; } .leaflet-container .leaflet-marker-pane img, .leaflet-container .leaflet-shadow-pane img, .leaflet-container .leaflet-tile-pane img, .leaflet-container img.leaflet-image-layer, .leaflet-container .leaflet-tile { max-width: none !important; max-height: none !important; width: auto; padding: 0; } .leaflet-container img.leaflet-tile { mix-blend-mode: plus-lighter; } .leaflet-container.leaflet-touch-zoom { -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; } .leaflet-container.leaflet-touch-drag { -ms-touch-action: pinch-zoom; touch-action: none; touch-action: pinch-zoom; } .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom { -ms-touch-action: none; touch-action: none; } .leaflet-container { -webkit-tap-highlight-color: transparent; } .leaflet-container a { -webkit-tap-highlight-color: rgba(51, 181, 229, 0.4); } .leaflet-tile { filter: inherit; visibility: hidden; } .leaflet-tile-loaded { visibility: inherit; } .leaflet-zoom-box { width: 0; height: 0; -moz-box-sizing: border-box; box-sizing: border-box; z-index: 800; } .leaflet-overlay-pane svg { -moz-user-select: none; } .leaflet-pane { z-index: 400; } .leaflet-tile-pane { z-index: 200; } .leaflet-overlay-pane { z-index: 400; } .leaflet-shadow-pane { z-index: 500; } .leaflet-marker-pane { z-index: 600; } .leaflet-tooltip-pane { z-index: 650; } .leaflet-popup-pane { z-index: 700; } .leaflet-map-pane canvas { z-index: 100; } .leaflet-map-pane svg { z-index: 200; } .leaflet-vml-shape { width: 1px; height: 1px; } .lvml { display: inline-block; position: absolute; } .leaflet-control { position: relative; z-index: 800; pointer-events: visiblePainted; pointer-events: auto; } .leaflet-top, .leaflet-bottom { position: absolute; z-index: 1000; pointer-events: none; } .leaflet-top { top: 0; } .leaflet-right { right: 0; } .leaflet-bottom { bottom: 0; } .leaflet-left { left: 0; } .leaflet-control { float: left; clear: both; } .leaflet-right .leaflet-control { float: right; } .leaflet-top .leaflet-control { margin-top: 10px; } .leaflet-bottom .leaflet-control { margin-bottom: 10px; } .leaflet-left .leaflet-control { margin-left: 10px; } .leaflet-right .leaflet-control { margin-right: 10px; } .leaflet-fade-anim .leaflet-popup { opacity: 0; -webkit-transition: opacity 0.2s linear; -moz-transition: opacity 0.2s linear; transition: opacity 0.2s linear; } .leaflet-fade-anim .leaflet-map-pane .leaflet-popup { opacity: 1; } .leaflet-zoom-animated { -webkit-transform-origin: 0 0; -ms-transform-origin: 0 0; transform-origin: 0 0; } svg.leaflet-zoom-animated { will-change: transform; } .leaflet-zoom-anim .leaflet-zoom-animated { -webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1); -moz-transition: -moz-transform 0.25s cubic-bezier(0,0,0.25,1); transition: transform 0.25s cubic-bezier(0,0,0.25,1); } .leaflet-zoom-anim .leaflet-tile, .leaflet-pan-anim .leaflet-tile { -webkit-transition: none; -moz-transition: none; transition: none; } .leaflet-zoom-anim .leaflet-zoom-hide { visibility: hidden; } .leaflet-interactive { cursor: pointer; } .leaflet-grab { cursor: -webkit-grab; cursor: -moz-grab; cursor: grab; } .leaflet-crosshair, .leaflet-crosshair .leaflet-interactive { cursor: crosshair; } .leaflet-popup-pane, .leaflet-control { cursor: auto; } .leaflet-dragging .leaflet-grab, .leaflet-dragging .leaflet-grab .leaflet-interactive, .leaflet-dragging .leaflet-marker-draggable { cursor: move; cursor: -webkit-grabbing; cursor: -moz-grabbing; cursor: grabbing; } .leaflet-marker-icon, .leaflet-marker-shadow, .leaflet-image-layer, .leaflet-pane > svg path, .leaflet-tile-container { pointer-events: none; } .leaflet-marker-icon.leaflet-interactive, .leaflet-image-layer.leaflet-interactive, .leaflet-pane > svg path.leaflet-interactive, svg.leaflet-image-layer.leaflet-interactive path { pointer-events: visiblePainted; pointer-events: auto; } .leaflet-container { background: #ddd; outline-offset: 1px; } .leaflet-container a { color: #0078A8; } .leaflet-zoom-box { border: 2px dotted #38f; background: rgba(255,255,255,0.5); } .leaflet-container { font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; font-size: 12px; font-size: 0.75rem; line-height: 1.5; } .leaflet-bar { box-shadow: 0 1px 5px rgba(0,0,0,0.65); border-radius: 4px; } .leaflet-bar a { background-color: #fff; border-bottom: 1px solid #ccc; width: 26px; height: 26px; line-height: 26px; display: block; text-align: center; text-decoration: none; color: black; } .leaflet-bar a, .leaflet-control-layers-toggle { background-position: 50% 50%; background-repeat: no-repeat; display: block; } .leaflet-bar a:hover, .leaflet-bar a:focus { background-color: #f4f4f4; } .leaflet-bar a:first-child { border-top-left-radius: 4px; border-top-right-radius: 4px; } .leaflet-bar a:last-child { border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom: none; } .leaflet-bar a.leaflet-disabled { cursor: default; background-color: #f4f4f4; color: #bbb; } .leaflet-touch .leaflet-bar a { width: 30px; height: 30px; line-height: 30px; } .leaflet-touch .leaflet-bar a:first-child { border-top-left-radius: 2px; border-top-right-radius: 2px; } .leaflet-touch .leaflet-bar a:last-child { border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; } .leaflet-control-zoom-in, .leaflet-control-zoom-out { font: bold 18px 'Lucida Console', Monaco, monospace; text-indent: 1px; } .leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out { font-size: 22px; } .leaflet-control-layers { box-shadow: 0 1px 5px rgba(0,0,0,0.4); background: #fff; border-radius: 5px; } .leaflet-control-layers-toggle { width: 36px; height: 36px; } .leaflet-retina .leaflet-control-layers-toggle { background-size: 26px 26px; } .leaflet-touch .leaflet-control-layers-toggle { width: 44px; height: 44px; } .leaflet-control-layers .leaflet-control-layers-list, .leaflet-control-layers-expanded .leaflet-control-layers-toggle { display: none; } .leaflet-control-layers-expanded .leaflet-control-layers-list { display: block; position: relative; } .leaflet-control-layers-expanded { padding: 6px 10px 6px 6px; color: #333; background: #fff; } .leaflet-control-layers-scrollbar { overflow-y: scroll; overflow-x: hidden; padding-right: 5px; } .leaflet-control-layers-selector { margin-top: 2px; position: relative; top: 1px; } .leaflet-control-layers label { display: block; font-size: 13px; font-size: 1.08333em; } .leaflet-control-layers-separator { height: 0; border-top: 1px solid #ddd; margin: 5px -10px 5px -6px; } .leaflet-default-icon-path { } .leaflet-container .leaflet-control-attribution { background: #fff; background: rgba(255, 255, 255, 0.8); margin: 0; } .leaflet-control-attribution, .leaflet-control-scale-line { padding: 0 5px; color: #333; line-height: 1.4; } .leaflet-control-attribution a { text-decoration: none; } .leaflet-control-attribution a:hover, .leaflet-control-attribution a:focus { text-decoration: underline; } .leaflet-attribution-flag { display: inline !important; vertical-align: baseline !important; width: 1em; height: 0.6669em; } .leaflet-left .leaflet-control-scale { margin-left: 5px; } .leaflet-bottom .leaflet-control-scale { margin-bottom: 5px; } .leaflet-control-scale-line { border: 2px solid #777; border-top: none; line-height: 1.1; padding: 2px 5px 1px; white-space: nowrap; -moz-box-sizing: border-box; box-sizing: border-box; background: rgba(255, 255, 255, 0.8); text-shadow: 1px 1px #fff; } .leaflet-control-scale-line:not(:first-child) { border-top: 2px solid #777; border-bottom: none; margin-top: -2px; } .leaflet-control-scale-line:not(:first-child):not(:last-child) { border-bottom: 2px solid #777; } .leaflet-touch .leaflet-control-attribution, .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar { box-shadow: none; } .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar { border: 2px solid rgba(0,0,0,0.2); background-clip: padding-box; } .leaflet-popup { position: absolute; text-align: center; margin-bottom: 20px; } .leaflet-popup-content-wrapper { padding: 1px; text-align: left; border-radius: 12px; } .leaflet-popup-content { margin: 13px 24px 13px 20px; line-height: 1.3; font-size: 13px; font-size: 1.08333em; min-height: 1px; } .leaflet-popup-content p { margin: 17px 0; margin: 1.3em 0; } .leaflet-popup-tip-container { width: 40px; height: 20px; position: absolute; left: 50%; margin-top: -1px; margin-left: -20px; overflow: hidden; pointer-events: none; } .leaflet-popup-tip { width: 17px; height: 17px; padding: 1px; margin: -10px auto 0; pointer-events: auto; -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); } .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: white; color: #333; box-shadow: 0 3px 14px rgba(0,0,0,0.4); } .leaflet-container a.leaflet-popup-close-button { position: absolute; top: 0; right: 0; border: none; text-align: center; width: 24px; height: 24px; font: 16px/24px Tahoma, Verdana, sans-serif; color: #757575; text-decoration: none; background: transparent; } .leaflet-container a.leaflet-popup-close-button:hover, .leaflet-container a.leaflet-popup-close-button:focus { color: #585858; } .leaflet-popup-scrolled { overflow: auto; } .leaflet-oldie .leaflet-popup-content-wrapper { -ms-zoom: 1; } .leaflet-oldie .leaflet-popup-tip { width: 24px; margin: 0 auto; -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)"; filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678); } .leaflet-oldie .leaflet-control-zoom, .leaflet-oldie .leaflet-control-layers, .leaflet-oldie .leaflet-popup-content-wrapper, .leaflet-oldie .leaflet-popup-tip { border: 1px solid #999; } .leaflet-div-icon { background: #fff; border: 1px solid #666; } .leaflet-tooltip { position: absolute; padding: 6px; background-color: #fff; border: 1px solid #fff; border-radius: 3px; color: #222; white-space: nowrap; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; pointer-events: none; box-shadow: 0 1px 3px rgba(0,0,0,0.4); } .leaflet-tooltip.leaflet-interactive { cursor: pointer; pointer-events: auto; } .leaflet-tooltip-top:before, .leaflet-tooltip-bottom:before, .leaflet-tooltip-left:before, .leaflet-tooltip-right:before { position: absolute; pointer-events: none; border: 6px solid transparent; background: transparent; content: ""; } .leaflet-tooltip-bottom { margin-top: 6px; } .leaflet-tooltip-top { margin-top: -6px; } .leaflet-tooltip-bottom:before, .leaflet-tooltip-top:before { left: 50%; margin-left: -6px; } .leaflet-tooltip-top:before { bottom: 0; margin-bottom: -12px; border-top-color: #fff; } .leaflet-tooltip-bottom:before { top: 0; margin-top: -12px; margin-left: -6px; border-bottom-color: #fff; } .leaflet-tooltip-left { margin-left: -6px; } .leaflet-tooltip-right { margin-left: 6px; } .leaflet-tooltip-left:before, .leaflet-tooltip-right:before { top: 50%; margin-top: -6px; } .leaflet-tooltip-left:before { right: 0; margin-right: -12px; border-left-color: #fff; } .leaflet-tooltip-right:before { left: 0; margin-left: -12px; border-right-color: #fff; } @media print { .leaflet-control { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+body{background:var(--wall);color:var(--ink)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:1000;background:var(--wall)}
+#onview .ov-wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+#onview,#onview *{box-sizing:border-box}
+#onview{background:var(--wall);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;container-type:inline-size;-webkit-text-size-adjust:100%;text-align:left}
+#onview h1,#onview h2,#onview h3,#onview p,#onview ol,#onview ul,#onview li,#onview fieldset,#onview legend{margin:0;padding:0;border:0;letter-spacing:normal;text-transform:none;font-family:inherit;color:inherit;line-height:inherit}
+#onview ol,#onview ul{list-style:none}
+#onview article,#onview section,#onview header,#onview footer,#onview nav,#onview main,#onview figure{margin:0;padding:0;border:0;box-shadow:none;background:none;float:none;width:auto;max-width:none}
+#onview button,#onview select,#onview input,#onview textarea{font:inherit;color:inherit;letter-spacing:normal;text-transform:none;box-shadow:none;margin:0;line-height:1.3;min-height:0;height:auto;width:auto;border-radius:var(--r)}
+#onview a{color:inherit;box-shadow:none;border:0}
+#onview :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#onview .ov-wrap{max-width:1240px;margin:0 auto;padding:0 16px}
+#onview .mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+#onview .cjk{font-family:var(--f-cjk);font-weight:500}
+
+/* Masthead */
+#onview .ov-mast{padding:18px 0 26px;display:grid;gap:16px;border-top:12px solid var(--ink)}
+#onview a.ov-home{justify-self:start;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--ink);padding-bottom:1px}
+#onview a.ov-home:hover{background:var(--ink);color:var(--wall)}
+#onview .ov-eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+#onview h1.ov-title{font-family:var(--f-display);font-weight:800;font-stretch:125%;text-transform:uppercase;font-size:clamp(44px,23cqi,300px);line-height:.84;letter-spacing:-.04em;overflow-wrap:anywhere}
+#onview h1.ov-title span{display:block;font-weight:800;color:transparent;-webkit-text-stroke:clamp(1.5px,.3cqi,4px) var(--ink)}
+#onview .ov-intro{max-width:56ch;font-size:17px;line-height:1.45;color:var(--ink);border-left:8px solid var(--accent);padding-left:14px}
+#onview .ov-verified{display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--f-mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+#onview .ov-stale{border:2px solid var(--warn);background:var(--warn-soft);padding:10px 12px;font-size:14px}
+
+/* Owner tools (preview only) */
+#onview .ov-owner{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:10px 12px;border:2px dashed var(--line-2);font-size:13.5px}
+#onview .ov-owner strong{font-weight:600}
+#onview .ov-owner .ov-msg{flex:1 1 260px;color:var(--ink-2);min-width:0}
+#onview .ov-btn{border:2px solid var(--ink);background:var(--ink);color:var(--wall);padding:7px 12px;cursor:pointer;font-weight:600}
+#onview .ov-btn.ghost{background:transparent;color:var(--ink)}
+#onview .ov-btn[disabled]{opacity:.5;cursor:default}
+#onview .ov-copybox{width:100%;height:120px;font-family:var(--f-mono);font-size:12px;background:var(--panel);border:1px solid var(--line);padding:8px}
+
+/* Summary */
+#onview .ov-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:2px solid var(--ink);background:var(--panel)}
+#onview .ov-summary button{all:unset;cursor:pointer;padding:14px 16px 12px;display:grid;gap:4px;border-right:2px solid var(--ink);box-sizing:border-box}
+#onview .ov-summary button:last-child{border-right:0}
+#onview .ov-summary button:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+#onview .ov-summary .n{font-family:var(--f-display);font-weight:800;font-stretch:125%;font-size:clamp(40px,8cqi,88px);line-height:.9;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+#onview .ov-summary .l{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+#onview .ov-summary button:hover{background:var(--accent-soft)}
+#onview .ov-summary button[aria-pressed="true"]{background:var(--ink);color:var(--wall)}
+#onview .ov-summary button[aria-pressed="true"] .l{color:var(--wall)}
+@container (max-width:640px){
+  #onview .ov-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #onview .ov-summary button{border-right:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+  #onview .ov-summary button:nth-child(2n){border-right:0}
+  #onview .ov-summary button:nth-last-child(-n+2){border-bottom:0}
+}
+
+/* Last chance board */
+#onview .ov-board{margin-top:20px;background:var(--ink);color:var(--wall);padding:16px 18px 6px}
+#onview .ov-h{margin:0 0 8px;font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--wall)}
+#onview .ov-board ol{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:0 28px}
+#onview .ov-board li{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--ink-2)}
+#onview .ov-board .d{font-family:var(--f-display);font-weight:800;font-stretch:125%;font-size:32px;line-height:1;font-variant-numeric:tabular-nums;color:var(--hot);white-space:nowrap}
+#onview .ov-board .d small{display:block;font-family:var(--f-mono);font-weight:400;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--wall);opacity:.75;margin-top:4px}
+#onview .ov-board .d.today{font-size:20px}
+#onview .ov-board a{text-decoration:none;font-family:var(--f-display);font-weight:800;font-stretch:112%;font-size:18px;color:var(--wall)}
+#onview .ov-board a:hover{text-decoration:underline}
+#onview .ov-board .v{display:block;font-size:13px;color:var(--wall);opacity:.75}
+
+/* Toolbar */
+#onview .ov-toolbar{margin-top:20px;padding:14px 0;border-bottom:2px solid var(--ink);display:grid;gap:10px}
+#onview .ov-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+#onview .ov-search{flex:1 1 220px;min-width:0;display:flex;align-items:center;gap:8px;background:var(--panel);border:2px solid var(--ink);padding:0 10px}
+#onview .ov-search input{border:0;background:transparent;padding:9px 0;flex:1;min-width:0;outline:none}
+#onview .ov-search:focus-within{outline:3px solid var(--accent);outline-offset:1px}
+#onview .ov-search svg{flex:none;color:var(--ink)}
+#onview select{background-color:var(--panel);border:2px solid var(--ink);padding:8px 28px 8px 10px;appearance:none;-webkit-appearance:none;font-family:var(--f-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;
+  background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);
+  background-position:calc(100% - 15px) 52%,calc(100% - 10px) 52%;background-size:5px 5px;background-repeat:no-repeat;max-width:100%}
+#onview .ov-seg{display:inline-flex;border:2px solid var(--ink);overflow:hidden;background:var(--panel)}
+#onview .ov-seg button{border:0;border-radius:0;background:transparent;padding:8px 12px;cursor:pointer;border-right:2px solid var(--ink);font-family:var(--f-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+#onview .ov-seg button:last-child{border-right:0}
+#onview .ov-seg button[aria-pressed="true"]{background:var(--ink);color:var(--wall)}
+#onview .ov-toggle{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--ink);background:var(--panel);padding:7px 12px;cursor:pointer;font-family:var(--f-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+#onview .ov-toggle[aria-pressed="true"],#onview .ov-toggle[aria-expanded="true"]{border-color:var(--accent);background:var(--accent);color:var(--on-accent);font-weight:600}
+#onview .ov-toggle .cjk{font-size:14px}
+#onview .ov-toggle .caret{font-size:10px}
+#onview .ov-spacer{flex:1}
+#onview .ov-meta{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-family:var(--f-mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-2)}
+#onview .ov-link{background:none;border:0;padding:0;text-decoration:underline;cursor:pointer;color:var(--ink);font:inherit}
+@container (max-width:560px){#onview .ov-row select{flex:1 1 45%}}
+
+/* Venue checklist */
+#onview .ov-venues{border:2px solid var(--ink);background:var(--panel);padding:12px 14px}
+#onview .ov-venues-head{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-bottom:10px;font-size:13px;color:var(--ink-2)}
+#onview .ov-vlist{display:grid;max-width:620px;max-height:460px;overflow:auto;border-top:2px solid var(--ink)}
+#onview .ov-vrow{display:grid;grid-template-columns:26px minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:5px 2px 5px 0;border-bottom:1px solid var(--line)}
+#onview .ov-vrow .num{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);text-align:right;font-variant-numeric:tabular-nums}
+#onview .ov-vrow.off .ov-check{color:var(--ink-2)}
+#onview .ov-check{display:flex;flex-wrap:wrap;gap:2px 8px;align-items:baseline;cursor:pointer;font-size:14px;min-width:0}
+#onview .ov-check input{accent-color:var(--accent);width:15px;height:15px;flex:none;transform:translateY(2px)}
+#onview .ov-check .a{font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2)}
+#onview .ov-vrow .c{font-family:var(--f-mono);font-size:12px;color:var(--ink-2);min-width:2ch;text-align:right}
+#onview .ov-move{display:inline-flex;gap:4px}
+#onview .ov-move button{width:30px;height:28px;padding:0;display:grid;place-items:center;border:2px solid var(--ink);border-radius:0;background:var(--panel);cursor:pointer;font-size:13px;line-height:1}
+#onview .ov-move button:hover{background:var(--ink);color:var(--wall)}
+#onview .ov-move button[disabled]{opacity:.3;cursor:default;background:var(--panel);color:var(--ink)}
+
+/* Cards */
+#onview .ov-results{padding:20px 0 8px}
+#onview .ov-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px}
+#onview article.ov-card{margin:0;background:var(--panel);border:2px solid var(--ink);border-radius:0;padding:0;display:grid;grid-template-rows:auto 1fr auto;min-width:0;transition:transform .12s,box-shadow .12s}
+#onview article.ov-card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ink)}
+#onview article.ov-card.sino{border-left:10px solid var(--accent)}
+#onview .ov-card .top{display:flex;gap:8px;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--ink);color:var(--wall)}
+#onview .ov-card .venue{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;min-width:0;display:flex;align-items:center;gap:8px}
+#onview .ov-card .venue .vname{min-width:0;overflow-wrap:anywhere}
+#onview .vbadge{flex:none;display:inline-grid;place-items:center;min-width:30px;height:22px;padding:0 5px;background:var(--wall);color:var(--ink);font-family:var(--f-display);font-weight:800;font-stretch:112%;font-size:11px;letter-spacing:.02em;line-height:1;border-radius:2px;box-shadow:inset 0 0 0 1.5px var(--ink)}
+#onview .ov-card .body{padding:14px 14px 12px;display:grid;gap:6px;align-content:start}
+#onview .ov-card h3{font-family:var(--f-display);font-weight:800;font-stretch:112%;font-size:28px;line-height:1;letter-spacing:-.02em;overflow-wrap:anywhere}
+#onview .ov-card h3 a{text-decoration:none}
+#onview .ov-card h3.mid{font-size:23px;line-height:1.05}
+#onview .ov-card h3.grp{font-size:19px;font-stretch:100%;line-height:1.15;font-weight:700;letter-spacing:-.01em}
+#onview .tl-label a.grp,#onview .ov-board a.grp{font-size:14px;font-stretch:100%}
+#onview .pp-item a.grp{font-size:14.5px;font-stretch:100%}
+#onview .ov-card h3 a:hover{text-decoration:underline}
+#onview .ov-card .full{font-weight:600;font-size:14.5px;line-height:1.35}
+#onview .ov-card .artists{color:var(--ink-2);font-size:13.5px}
+#onview .ov-card .dates{font-family:var(--f-mono);font-size:12.5px;font-variant-numeric:tabular-nums;margin-top:4px}
+#onview .ov-card .foot{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)}
+#onview .ov-card .foot .grow{flex:1}
+#onview a.maplink{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:2px solid var(--ink);white-space:nowrap}
+#onview a.maplink:hover{background:var(--ink);color:var(--wall)}
+#onview .chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;line-height:1;padding:5px 7px;border:1px solid var(--line-2);white-space:nowrap}
+#onview .chip.status{border:0;font-family:var(--f-mono);font-weight:500;font-size:11px;letter-spacing:.05em;text-transform:uppercase;background:var(--wall);color:var(--ink)}
+#onview .chip.soon{background:var(--hot);color:#000}
+#onview .chip.today{background:var(--bad);color:#fff}
+#onview .chip.upcoming{background:transparent;color:var(--wall);border:1px solid var(--wall)}
+#onview .chip.sino{background:var(--accent);color:var(--on-accent);border-color:transparent}
+#onview .chip.commercial{border-style:dashed;color:var(--ink-2)}
+#onview .chip.free{font-weight:600}
+#onview .ov-empty{padding:40px 0;text-align:center;color:var(--ink-2);display:grid;gap:8px;justify-items:center}
+
+/* Timeline */
+#onview .tl{border-top:3px solid var(--ink);overflow:hidden}
+#onview .tl-head,#onview .tl-row{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:16px;align-items:center}
+#onview .tl-head{padding:8px 0;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2)}
+#onview .tl-track{position:relative;height:18px}
+#onview .tl-head .tl-track{height:16px}
+#onview .tl-month{position:absolute;top:0;padding-left:5px;border-left:1px solid var(--line);height:100%;white-space:nowrap}
+#onview .tl-row{padding:7px 0;border-bottom:1px solid var(--line)}
+#onview .tl-label{min-width:0;font-size:13px;line-height:1.3}
+#onview .tl-label a{font-family:var(--f-display);font-weight:700;font-stretch:112%;font-size:16px;text-decoration:none}
+#onview .tl-label a:hover{text-decoration:underline}
+#onview .tl-label .v{display:block;color:var(--ink-2);font-size:12px}
+#onview .tl-grid{position:absolute;top:-8px;bottom:-8px;width:1px;background:var(--line)}
+#onview .tl-today{position:absolute;top:-8px;bottom:-8px;width:2px;background:var(--bad);opacity:.7}
+#onview .tl-head .tl-today{top:0;bottom:0}
+#onview .bar{position:absolute;top:3px;height:12px;border-radius:2px;background:var(--bar)}
+#onview .bar.sino{background:var(--accent)}
+#onview .bar.soon{background:var(--warn)}
+#onview .bar.upcoming{background:transparent;border:1.5px solid var(--ink-2)}
+#onview .bar.upcoming.sino{border-color:var(--accent)}
+#onview .bar.nostart{-webkit-mask-image:linear-gradient(90deg,transparent,#000 28px);mask-image:linear-gradient(90deg,transparent,#000 28px)}
+#onview .bar.noend{-webkit-mask-image:linear-gradient(270deg,transparent,#000 28px);mask-image:linear-gradient(270deg,transparent,#000 28px)}
+#onview .ov-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 10px;font-size:12px;color:var(--ink-2)}
+#onview .ov-legend span{display:inline-flex;align-items:center;gap:6px}
+#onview .ov-legend i{display:inline-block;width:18px;height:9px;border-radius:2px;background:var(--bar)}
+#onview .ov-legend i.sino{background:var(--accent)}
+#onview .ov-legend i.soon{background:var(--warn)}
+#onview .ov-legend i.upcoming{background:transparent;border:1.5px solid var(--ink-2)}
+#onview .ov-legend i.dot{width:10px;height:10px;border-radius:50%;background:var(--ink)}
+@container (max-width:700px){#onview .tl-head,#onview .tl-row{grid-template-columns:1fr;gap:6px}#onview .tl-head .tl-label{display:none}}
+
+/* Map */
+#onview .ov-map{height:clamp(380px,62vh,660px);border:2px solid var(--ink);border-radius:0;background:var(--map-bg);overflow:hidden}
+#onview .ov-map-note{margin-top:8px;font-size:12.5px;color:var(--ink-2)}
+#onview .leaflet-container{font-family:var(--f-body);background:var(--map-bg)}
+#onview .leaflet-tile-pane{filter:grayscale(1) contrast(.92) brightness(var(--tile-bright,1.04))}
+#onview .ov-pin{position:relative;width:0;height:0}
+#onview .ov-pin .dot{position:absolute;left:-10px;top:-10px;width:20px;height:20px;border-radius:50%;background:var(--ink);color:var(--wall);border:2px solid var(--wall);display:grid;place-items:center;font-family:var(--f-mono);font-size:10.5px;font-weight:500;line-height:1;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+#onview .ov-pin.sino .dot{background:var(--accent)}
+#onview .ov-pin .lbl{position:absolute;top:-10px;left:14px;white-space:nowrap;background:var(--panel);border:1px solid var(--line);border-radius:2px;padding:2px 6px;font-family:var(--f-display);font-stretch:108%;font-weight:700;font-size:12.5px;line-height:1.25;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+#onview .ov-pin .lbl .w-sino{color:var(--accent)}
+#onview .ov-pin .lbl .w-soon{color:var(--warn)}
+#onview .ov-pin .lbl .more,#onview .ov-pin .lbl .sep{font-family:var(--f-mono);font-weight:400;font-size:11px;color:var(--ink-2)}
+#onview .ov-pin.left .lbl{left:auto;right:14px}
+#onview .ov-pin.up .lbl{top:-24px}
+#onview .ov-pin.down .lbl{top:4px}
+#onview .ov-map.zoomed-out .ov-pin .lbl{display:none}
+#onview .leaflet-popup-content-wrapper{background:var(--panel);color:var(--ink);border-radius:var(--r);box-shadow:0 4px 16px rgba(0,0,0,.18)}
+#onview .leaflet-popup-tip{background:var(--panel)}
+#onview .leaflet-popup-content{margin:12px 14px;min-width:220px;max-width:300px;font-size:13.5px;line-height:1.4}
+#onview .leaflet-container a.leaflet-popup-close-button{color:var(--ink-2)}
+#onview .pp-venue{font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px;padding-right:14px}
+#onview .pp-item{padding:7px 0;border-top:1px solid var(--line);display:grid;gap:2px}
+#onview .pp-item a{font-family:var(--f-display);font-weight:700;font-stretch:112%;font-size:17px;text-decoration:none;color:var(--ink)}
+#onview .pp-item a:hover{text-decoration:underline}
+#onview .pp-item .t{font-size:12.5px}
+#onview .pp-item .m{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2)}
+#onview .leaflet-control-attribution{background:var(--panel);color:var(--ink-2);font-size:10.5px}
+#onview .leaflet-control-attribution a{color:var(--ink-2)}
+#onview .leaflet-bar a{background:var(--panel);color:var(--ink);border-bottom-color:var(--line)}
+
+/* Footer */
+#onview .ov-foot{margin-top:36px;padding:24px 0 48px;border-top:12px solid var(--ink);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px;font-size:14px;color:var(--ink-2)}
+#onview .ov-foot h2{margin-bottom:6px;font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+#onview .ov-foot p{max-width:62ch;margin-bottom:8px}
+#onview .ov-foot-venues{grid-column:1/-1}
+#onview .ov-vnames{list-style:none;margin:0;padding:0;columns:220px;column-gap:24px}
+#onview .ov-vnames li{break-inside:avoid;padding:2px 0}
+@media (prefers-reduced-motion:no-preference){#onview .ov-card,#onview .tl-row{animation:ovIn .25s ease-out both}@keyframes ovIn{from{opacity:.4}to{opacity:1}}}
+</style>
+
+<div id="onview" data-src="exhibitions.json">
+<div class="ov-wrap">
+  <header class="ov-mast">
+    <a class="ov-home" href="../">← Studio AI Ludo</a>
+    <div class="ov-eyebrow">Exhibitions across London · An AI project by Studio AI Ludo</div>
+    <h1 class="ov-title" aria-label="On View London">On View <span aria-hidden="true">Lond</span><span aria-hidden="true">on</span></h1>
+    <p class="ov-intro">What's on, what's closing and what's opening at London's public museums and non-profit galleries, with a few independent spaces.</p>
+    <div class="ov-verified"><span id="ov-verified">Listings checked —</span><span id="ov-venueCount"></span></div>
+    <div class="ov-stale" id="ov-stale" hidden></div>
+  </header>
+
+  <nav class="ov-summary" aria-label="Show">
+    <button type="button" data-status="all"><span class="n" id="ov-n-all">—</span><span class="l">Listed</span></button>
+    <button type="button" data-status="on"><span class="n" id="ov-n-on">—</span><span class="l">On now</span></button>
+    <button type="button" data-status="closing"><span class="n" id="ov-n-closing">—</span><span class="l">Closing within 14 days</span></button>
+    <button type="button" data-status="upcoming"><span class="n" id="ov-n-upcoming">—</span><span class="l">Opening soon</span></button>
+  </nav>
+
+  <section class="ov-board" id="ov-board" hidden aria-labelledby="ov-board-h">
+    <h2 class="ov-h" id="ov-board-h">Last chance</h2>
+    <ol id="ov-boardList"></ol>
+  </section>
+
+  <div class="ov-toolbar" role="search">
+    <div class="ov-row">
+      <label class="ov-search" for="ov-q">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        <input id="ov-q" type="search" placeholder="Search artist, title or venue" autocomplete="off">
+      </label>
+      <button type="button" class="ov-toggle" id="ov-sino" aria-pressed="false"><span class="cjk" lang="zh">华语</span> Sinophone <span class="mono" id="ov-n-sino"></span></button>
+    </div>
+    <div class="ov-row">
+      <div class="ov-seg" role="group" aria-label="Admission">
+        <button type="button" data-adm="all">Any</button>
+        <button type="button" data-adm="free">Free</button>
+        <button type="button" data-adm="paid">Ticketed</button>
+      </div>
+      <button type="button" class="ov-toggle" id="ov-venueToggle" aria-expanded="false" aria-controls="ov-venues">Venues <span class="mono" id="ov-venueSel"></span> <span class="caret" aria-hidden="true">▾</span></button>
+      <select id="ov-area" aria-label="Area"></select>
+      <select id="ov-discipline" aria-label="Discipline"></select>
+      <span class="ov-spacer"></span>
+      <select id="ov-sort" aria-label="Sort">
+        <option value="venue">Venue order</option>
+        <option value="closing">Closing soonest</option>
+        <option value="opening">Opening soonest</option>
+      </select>
+      <div class="ov-seg" role="group" aria-label="View">
+        <button type="button" data-view="cards">Cards</button>
+        <button type="button" data-view="timeline">Timeline</button>
+        <button type="button" data-view="map">Map</button>
+      </div>
+    </div>
+    <div class="ov-venues" id="ov-venues" hidden>
+      <div class="ov-venues-head">
+        <span>Tick the venues to show. Use the arrows to change their order.</span>
+        <button type="button" class="ov-link" id="ov-vAll">Select all</button>
+        <button type="button" class="ov-link" id="ov-vNone">Clear all</button>
+        <button type="button" class="ov-link" id="ov-vReset">Reset order</button>
+      </div>
+      <ol class="ov-vlist" id="ov-venuesGrid" aria-label="Venues in display order"></ol>
+    </div>
+    <div class="ov-meta"><span id="ov-count" aria-live="polite"></span><button type="button" class="ov-link" id="ov-clear" hidden>Clear filters</button></div>
+  </div>
+
+  <main class="ov-results" id="ov-results"></main>
+
+  <footer class="ov-foot">
+    <div>
+      <h2>About these listings</h2>
+      <p>This is an AI project by Studio AI Ludo. Each listing is gathered from the venue's own website and written up with AI, then checked on the date shown at the top. Where a venue publishes only a closing date, the listing reads "Until". Ongoing collection displays, talks and events are left out. Headlines are our own: the artist for a solo show, the subject for a thematic show, with the official title beneath and the leading artists listed after it.</p>
+      <p>Opening hours, prices and booking change. Each card links to the venue on Google Maps, where its current opening hours are shown. Check before you travel.</p>
+    </div>
+    <div>
+      <h2><span class="cjk" lang="zh">华语</span> Sinophone</h2>
+      <p>Marks a solo show by an artist from the Chinese-speaking world (mainland China, Hong Kong, Taiwan, Macau and the diaspora), or a group show built around such artists. "Includes" marks a group show with at least one such artist. Tags are editorial.</p>
+    </div>
+    <div class="ov-foot-venues">
+      <h2>Venues</h2>
+      <ul class="ov-vnames" id="ov-venueNames"></ul>
+    </div>
+  </footer>
+</div>
+</div>
+<script type="application/json" id="exhibitions-data">
+{
+ "updated": "2026-10-19T02:13:58+01:00",
+ "venues": [
+  {
+   "id": "tate-modern",
+   "name": "Tate Modern",
+   "area": "South Bank",
+   "kind": "National museum",
+   "lat": 51.5076,
+   "lng": -0.0994,
+   "label": "right",
+   "source": "https://www.tate.org.uk/whats-on/tate-modern",
+   "map": "https://www.google.com/maps/search/?api=1&query=Tate+Modern+London"
+  },
+  {
+   "id": "tate-britain",
+   "name": "Tate Britain",
+   "area": "Central",
+   "kind": "National museum",
+   "lat": 51.491,
+   "lng": -0.1278,
+   "label": "right",
+   "source": "https://www.tate.org.uk/whats-on/tate-britain",
+   "map": "https://www.google.com/maps/search/?api=1&query=Tate+Britain+London"
+  },
+  {
+   "id": "national-gallery",
+   "name": "National Gallery",
+   "area": "Central",
+   "kind": "National museum",
+   "lat": 51.5089,
+   "lng": -0.1283,
+   "label": "left-down",
+   "source": "https://www.nationalgallery.org.uk/exhibitions",
+   "map": "https://www.google.com/maps/search/?api=1&query=National+Gallery+London"
+  },
+  {
+   "id": "npg",
+   "name": "National Portrait Gallery",
+   "area": "Central",
+   "kind": "National museum",
+   "lat": 51.5094,
+   "lng": -0.1281,
+   "label": "right-up",
+   "source": "https://www.npg.org.uk/whatson/exhibitions",
+   "map": "https://www.google.com/maps/search/?api=1&query=National+Portrait+Gallery+London"
+  },
+  {
+   "id": "courtauld",
+   "name": "Courtauld Gallery",
+   "area": "Central",
+   "kind": "Public & non-profit",
+   "lat": 51.511,
+   "lng": -0.1171,
+   "label": "right",
+   "source": "https://courtauld.ac.uk/gallery",
+   "map": "https://www.google.com/maps/search/?api=1&query=Courtauld+Gallery+London"
+  },
+  {
+   "id": "british-museum",
+   "name": "British Museum",
+   "area": "Central",
+   "kind": "National museum",
+   "lat": 51.5194,
+   "lng": -0.127,
+   "label": "right",
+   "source": "https://www.britishmuseum.org/exhibitions-events",
+   "map": "https://www.google.com/maps/search/?api=1&query=British+Museum+London"
+  },
+  {
+   "id": "british-library",
+   "name": "British Library",
+   "area": "Central",
+   "kind": "National library",
+   "lat": 51.5299,
+   "lng": -0.1277,
+   "label": "right",
+   "source": "https://www.bl.uk/about/press/releases/british-library-announces-2026-exhibitions",
+   "map": "https://www.google.com/maps/search/?api=1&query=British+Library+London"
+  },
+  {
+   "id": "va",
+   "name": "V&A",
+   "area": "West",
+   "kind": "National museum",
+   "lat": 51.4966,
+   "lng": -0.1722,
+   "label": "right",
+   "sites": {
+    "V&A East Museum": [
+     51.5418,
+     -0.0118
+    ],
+    "Young V&A": [
+     51.529,
+     -0.0553
+    ]
+   },
+   "source": "https://www.vam.ac.uk/exhibitions",
+   "map": "https://www.google.com/maps/search/?api=1&query=V%26A+South+Kensington+London"
+  },
+  {
+   "id": "wallace",
+   "name": "Wallace Collection",
+   "area": "Central",
+   "kind": "National museum",
+   "lat": 51.5175,
+   "lng": -0.1527,
+   "label": "left",
+   "source": "https://www.wallacecollection.org/explore/exhibitions/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Wallace+Collection+London"
+  },
+  {
+   "id": "serpentine",
+   "name": "Serpentine",
+   "area": "West",
+   "kind": "Public & non-profit",
+   "lat": 51.5048,
+   "lng": -0.1749,
+   "label": "left",
+   "sites": {
+    "Serpentine North": [
+     51.5056,
+     -0.1709
+    ]
+   },
+   "source": "https://www.serpentinegalleries.org/whats-on/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Serpentine+Gallery+London"
+  },
+  {
+   "id": "hayward",
+   "name": "Hayward Gallery",
+   "area": "South Bank",
+   "kind": "Public & non-profit",
+   "lat": 51.5063,
+   "lng": -0.1156,
+   "label": "left",
+   "source": "https://www.southbankcentre.co.uk/whats-on/art-exhibitions",
+   "map": "https://www.google.com/maps/search/?api=1&query=Hayward+Gallery+London"
+  },
+  {
+   "id": "barbican",
+   "name": "Barbican",
+   "area": "City & East",
+   "kind": "Public & non-profit",
+   "lat": 51.5202,
+   "lng": -0.0938,
+   "label": "right",
+   "source": "https://www.barbican.org.uk/whats-on/art-design",
+   "map": "https://www.google.com/maps/search/?api=1&query=Barbican+Art+Gallery+London"
+  },
+  {
+   "id": "whitechapel",
+   "name": "Whitechapel Gallery",
+   "area": "City & East",
+   "kind": "Public & non-profit",
+   "lat": 51.516,
+   "lng": -0.0703,
+   "label": "right",
+   "source": "https://www.whitechapelgallery.org/exhibitions/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Whitechapel+Gallery+London"
+  },
+  {
+   "id": "ica",
+   "name": "ICA",
+   "area": "Central",
+   "kind": "Public & non-profit",
+   "lat": 51.5063,
+   "lng": -0.131,
+   "label": "left",
+   "source": "https://www.ica.art/exhibitions",
+   "map": "https://www.google.com/maps/search/?api=1&query=Institute+of+Contemporary+Arts+London"
+  },
+  {
+   "id": "camden-art-centre",
+   "name": "Camden Art Centre",
+   "area": "North",
+   "kind": "Public & non-profit",
+   "lat": 51.5513,
+   "lng": -0.181,
+   "label": "right",
+   "source": "https://camdenartcentre.org/whats-on",
+   "map": "https://www.google.com/maps/search/?api=1&query=Camden+Art+Centre+London"
+  },
+  {
+   "id": "slg",
+   "name": "South London Gallery",
+   "area": "South",
+   "kind": "Public & non-profit",
+   "lat": 51.4741,
+   "lng": -0.0753,
+   "label": "right",
+   "source": "https://www.southlondongallery.org/exhibitions/",
+   "map": "https://www.google.com/maps/search/?api=1&query=South+London+Gallery"
+  },
+  {
+   "id": "chisenhale",
+   "name": "Chisenhale Gallery",
+   "area": "City & East",
+   "kind": "Public & non-profit",
+   "lat": 51.534,
+   "lng": -0.0367,
+   "label": "right",
+   "source": "https://chisenhale.org.uk/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Chisenhale+Gallery+London"
+  },
+  {
+   "id": "raven-row",
+   "name": "Raven Row",
+   "area": "City & East",
+   "kind": "Public & non-profit",
+   "lat": 51.5178,
+   "lng": -0.0779,
+   "label": "left",
+   "source": "https://www.ravenrow.org/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Raven+Row+London"
+  },
+  {
+   "id": "ydp",
+   "name": "YDP",
+   "area": "Central",
+   "kind": "Public & non-profit",
+   "lat": 51.5191,
+   "lng": -0.131,
+   "label": "left",
+   "source": "https://www.ydp.co",
+   "map": "https://www.google.com/maps/search/?api=1&query=YDP+19+Bedford+Square+London"
+  },
+  {
+   "id": "warburg",
+   "name": "Warburg Institute",
+   "area": "Central",
+   "kind": "Public & non-profit",
+   "lat": 51.5232,
+   "lng": -0.1305,
+   "label": "left-up",
+   "source": "https://warburg.sas.ac.uk/news-events/exhibitions-seasons",
+   "map": "https://www.google.com/maps/search/?api=1&query=Warburg+Institute+London"
+  },
+  {
+   "id": "ra",
+   "name": "Royal Academy",
+   "area": "Central",
+   "kind": "Independent",
+   "lat": 51.5094,
+   "lng": -0.1395,
+   "label": "left",
+   "source": "https://www.royalacademy.org.uk/exhibitions-and-events",
+   "map": "https://www.google.com/maps/search/?api=1&query=Royal+Academy+of+Arts+London"
+  },
+  {
+   "id": "saatchi",
+   "name": "Saatchi Gallery",
+   "area": "West",
+   "kind": "Independent",
+   "lat": 51.4904,
+   "lng": -0.1585,
+   "label": "left",
+   "source": "https://www.saatchigallery.com/whats-on",
+   "map": "https://www.google.com/maps/search/?api=1&query=Saatchi+Gallery+London"
+  },
+  {
+   "id": "dulwich",
+   "name": "Dulwich Picture Gallery",
+   "area": "South",
+   "kind": "Independent",
+   "lat": 51.4459,
+   "lng": -0.0865,
+   "label": "right",
+   "source": "https://www.dulwichpicturegallery.org.uk/whats-on/exhibitions/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Dulwich+Picture+Gallery+London"
+  },
+  {
+   "id": "trg",
+   "name": "Tabula Rasa Gallery",
+   "area": "City & East",
+   "kind": "Commercial gallery",
+   "lat": 51.5285,
+   "lng": -0.0868,
+   "label": "left",
+   "source": "https://gallerytabularasa.co.uk/Upcoming-Present",
+   "note": "London space only (99 East Road, Hoxton). Exclude Tabula Rasa Beijing shows.",
+   "map": "https://www.google.com/maps/search/?api=1&query=Tabula+Rasa+Gallery+99+East+Road+London"
+  },
+  {
+   "id": "gasworks",
+   "name": "Gasworks",
+   "area": "South",
+   "kind": "Public & non-profit",
+   "lat": 51.4849,
+   "lng": -0.1226,
+   "label": "right",
+   "source": "https://gasworks.org.uk/exhibitions/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Gasworks+155+Vauxhall+Street+London"
+  },
+  {
+   "id": "camden-arts-projects",
+   "name": "Camden Arts Projects",
+   "area": "North",
+   "kind": "Independent",
+   "lat": 51.5446,
+   "lng": -0.1487,
+   "label": "left",
+   "source": "https://camdenartsprojects.com/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Camden+Arts+Projects+176+Prince+of+Wales+Road+London"
+  },
+  {
+   "id": "ibraaz",
+   "name": "Ibraaz",
+   "area": "Central",
+   "kind": "Independent",
+   "lat": 51.5192,
+   "lng": -0.1403,
+   "label": "left-up",
+   "source": "https://ibraaz.org/whats-on",
+   "map": "https://www.google.com/maps/search/?api=1&query=Ibraaz+93+Mortimer+Street+London"
+  }
+ ],
+ "exhibitions": [
+  {
+   "id": "tm-le-parc",
+   "venue": "tate-modern",
+   "short": "Julio Le Parc",
+   "title": "Julio Le Parc: Light. Colour. Action.",
+   "artists": "Julio Le Parc",
+   "start": null,
+   "end": "2027-05-03",
+   "admission": "paid",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.tate.org.uk/whats-on/tate-modern/julio-le-parc"
+  },
+  {
+   "id": "tm-frida",
+   "venue": "tate-modern",
+   "short": "Frida Kahlo",
+   "title": "Frida: The Making of an Icon",
+   "artists": "Frida Kahlo",
+   "start": null,
+   "end": "2027-01-03",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.tate.org.uk/whats-on/tate-modern/frida-kahlo-the-making-of-an-icon"
+  },
+  {
+   "id": "tm-mendieta",
+   "venue": "tate-modern",
+   "short": "Ana Mendieta",
+   "title": "Ana Mendieta",
+   "artists": "Ana Mendieta",
+   "start": null,
+   "end": "2027-01-17",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://www.tate.org.uk/whats-on/tate-modern/ana-mendieta"
+  },
+  {
+   "id": "tm-light-magic",
+   "venue": "tate-modern",
+   "short": "Birth of Art Photography",
+   "title": "Light and Magic: The Birth of Art Photography",
+   "artists": "Alfred Stieglitz, Edward Steichen, Paul Strand, Edward Weston, Gertrude Käsebier and others",
+   "start": "2026-10-14",
+   "end": "2027-02-21",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://www.tate.org.uk/whats-on/tate-modern/light-and-magic",
+   "sinophone": "includes",
+   "price": "£20 (£19 concessions)"
+  },
+  {
+   "id": "tm-gathering-ground",
+   "venue": "tate-modern",
+   "short": "Environmental and Social Justice",
+   "title": "Gathering Ground",
+   "artists": "Bruce Conner, Zheng Bo, Carolina Caycedo, Abbas Akhavan, Minerva Cuevas and others",
+   "start": "2025-01-29",
+   "end": "2027-03-07",
+   "admission": "free",
+   "discipline": "Group shows",
+   "url": "https://www.tate.org.uk/whats-on/tate-modern/gathering-ground",
+   "sinophone": "includes",
+   "note": "Collection display"
+  },
+  {
+   "id": "tm-atoui",
+   "venue": "tate-modern",
+   "short": "Tarek Atoui",
+   "title": "Hyundai Commission: Tarek Atoui",
+   "artists": "Tarek Atoui",
+   "start": null,
+   "end": "2027-04-11",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.tate.org.uk/whats-on/tate-modern/tarek-atoui"
+  },
+  {
+   "id": "tb-90s",
+   "venue": "tate-britain",
+   "short": "The 90s: Art and Fashion",
+   "title": "The 90s: Art and Fashion",
+   "artists": "Alexander McQueen, Vivienne Westwood, Damien Hirst, Sarah Lucas, Juergen Teller, Corinne Day and others",
+   "start": null,
+   "end": "2027-02-14",
+   "admission": "paid",
+   "discipline": "Design & architecture",
+   "url": "https://www.tate.org.uk/whats-on/tate-britain/the-90s"
+  },
+  {
+   "id": "tb-bloomsbury",
+   "venue": "tate-britain",
+   "short": "Vanessa Bell and Duncan Grant",
+   "title": "Vanessa Bell & Duncan Grant: Inside Bloomsbury",
+   "artists": "Vanessa Bell, Duncan Grant",
+   "start": "2026-11-12",
+   "end": "2027-04-11",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.tate.org.uk/whats-on/tate-britain/vanessa-bell-and-duncan-grant"
+  },
+  {
+   "id": "tb-sedira",
+   "venue": "tate-britain",
+   "short": "Zineb Sedira",
+   "title": "Tate Britain Commission 2026: Zineb Sedira",
+   "artists": "Zineb Sedira",
+   "start": null,
+   "end": "2027-01-17",
+   "admission": "free",
+   "discipline": "Photography & moving image",
+   "url": "https://www.tate.org.uk/whats-on/tate-britain/zineb-sedira"
+  },
+  {
+   "id": "tb-rahman",
+   "venue": "tate-britain",
+   "short": "Mohammed Z Rahman",
+   "title": "Art Now: Mohammed Z Rahman",
+   "artists": "Mohammed Z Rahman",
+   "start": null,
+   "end": "2026-11-08",
+   "admission": "free",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.tate.org.uk/whats-on/tate-britain/art-now-mohammed-z-rahman"
+  },
+  {
+   "id": "ng-renoir",
+   "venue": "national-gallery",
+   "short": "Renoir and Love",
+   "title": "Renoir and Love",
+   "artists": "Pierre-Auguste Renoir",
+   "start": null,
+   "end": "2027-01-31",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.nationalgallery.org.uk/exhibitions/renoir-and-love"
+  },
+  {
+   "id": "ng-shonibare",
+   "venue": "national-gallery",
+   "short": "Yinka Shonibare and Thomas Gainsborough",
+   "title": "Yinka Shonibare and Thomas Gainsborough: A Conversation",
+   "artists": "Yinka Shonibare, Thomas Gainsborough",
+   "start": null,
+   "end": "2027-02-07",
+   "admission": "free",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.nationalgallery.org.uk/exhibitions/yinka-shonibare-and-thomas-gainsborough-a-conversation"
+  },
+  {
+   "id": "ng-van-eyck",
+   "venue": "national-gallery",
+   "short": "Van Eyck: The Portraits",
+   "title": "Van Eyck: The Portraits",
+   "artists": "Jan van Eyck",
+   "start": "2026-11-21",
+   "end": "2027-04-11",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.nationalgallery.org.uk/exhibitions/van-eyck-the-portraits"
+  },
+  {
+   "id": "npg-walker",
+   "venue": "npg",
+   "short": "Tim Walker",
+   "title": "Tim Walker's Fairyland: Love and Legends",
+   "artists": "Tim Walker",
+   "start": "2026-10-08",
+   "end": "2027-02-07",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://www.npg.org.uk/whatson/exhibitions"
+  },
+  {
+   "id": "npg-taylor-wessing",
+   "venue": "npg",
+   "short": "Taylor Wessing Photo Portrait Prize",
+   "title": "Taylor Wessing Photo Portrait Prize 2026",
+   "artists": "",
+   "start": "2026-11-05",
+   "end": "2027-01-17",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://www.npg.org.uk/whatson/exhibitions"
+  },
+  {
+   "id": "bm-bayeux",
+   "venue": "british-museum",
+   "short": "The Bayeux Tapestry",
+   "title": "The Bayeux Tapestry",
+   "artists": "",
+   "start": "2026-09-10",
+   "end": "2027-07-11",
+   "admission": "paid",
+   "discipline": "History & collections",
+   "url": "https://www.britishmuseum.org/exhibitions/bayeux-tapestry",
+   "price": "£25–£33"
+  },
+  {
+   "id": "bm-korea",
+   "venue": "british-museum",
+   "short": "Korea",
+   "title": "Korea",
+   "artists": "",
+   "start": "2026-10-01",
+   "end": "2027-01-31",
+   "admission": "paid",
+   "discipline": "History & collections",
+   "url": "https://www.britishmuseum.org/exhibitions/korea",
+   "price": "£18–£20"
+  },
+  {
+   "id": "bm-usa250",
+   "venue": "british-museum",
+   "short": "USA 250: Declaring Independence",
+   "title": "Declaring independence: USA 250",
+   "artists": "",
+   "start": "2026-06-30",
+   "end": "2026-11-29",
+   "admission": "free",
+   "discipline": "History & collections",
+   "url": "https://www.britishmuseum.org/exhibitions/declaring-independence-usa-250"
+  },
+  {
+   "id": "bm-woodcuts",
+   "venue": "british-museum",
+   "short": "Italian Renaissance Woodcuts",
+   "title": "Multiplied wonders: Italian Renaissance woodcuts",
+   "artists": "",
+   "start": "2026-10-08",
+   "end": "2027-03-21",
+   "admission": "free",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.britishmuseum.org/exhibitions/multiplied-wonders-italian-renaissance-woodcuts"
+  },
+  {
+   "id": "va-schiaparelli",
+   "venue": "va",
+   "site": "South Kensington",
+   "short": "Elsa Schiaparelli",
+   "title": "Schiaparelli: Fashion Becomes Art",
+   "artists": "Elsa Schiaparelli",
+   "start": null,
+   "end": "2026-11-15",
+   "admission": "paid",
+   "note": "Sold out online",
+   "discipline": "Design & architecture",
+   "url": "https://www.vam.ac.uk/exhibitions/schiaparelli"
+  },
+  {
+   "id": "va-rising-voices",
+   "venue": "va",
+   "site": "South Kensington",
+   "short": "Contemporary Art from Asia, Australia and the Pacific",
+   "title": "Rising Voices: Contemporary Art from Asia, Australia and the Pacific",
+   "artists": "Michael Parekōwhai, Montien Boonma, Ah Xian, Khadim Ali, Takahiro Iwasaki and others",
+   "start": null,
+   "end": "2027-01-10",
+   "admission": "paid",
+   "price": "£17",
+   "discipline": "Group shows",
+   "url": "https://www.vam.ac.uk/exhibitions/rising-voices-contemporary-art-from-asia-australia-and-the-pacific",
+   "sinophone": "includes"
+  },
+  {
+   "id": "va-constantinople",
+   "venue": "va",
+   "site": "South Kensington",
+   "short": "Constantinople to Istanbul",
+   "title": "Constantinople to Istanbul: One City, Two Empires",
+   "artists": "",
+   "start": "2026-11-07",
+   "end": null,
+   "admission": "paid",
+   "price": "From £25",
+   "discipline": "History & collections",
+   "url": "https://www.vam.ac.uk/exhibitions/constantinople-to-istanbul-one-city-two-empires"
+  },
+  {
+   "id": "va-music-is-black",
+   "venue": "va",
+   "site": "V&A East Museum",
+   "area": "City & East",
+   "short": "The Music is Black",
+   "title": "The Music is Black: A British Story",
+   "artists": "",
+   "start": null,
+   "end": "2027-01-10",
+   "admission": "paid",
+   "price": "£22.50–£24.50",
+   "discipline": "History & collections",
+   "url": "https://www.vam.ac.uk/exhibitions/the-music-is-black-a-british-story"
+  },
+  {
+   "id": "va-aardman",
+   "venue": "va",
+   "site": "Young V&A",
+   "area": "City & East",
+   "short": "Inside Aardman",
+   "title": "Inside Aardman: Wallace & Gromit and Friends",
+   "artists": "Aardman",
+   "start": null,
+   "end": "2026-11-15",
+   "admission": "paid",
+   "price": "£12.50",
+   "discipline": "Photography & moving image",
+   "url": "https://www.vam.ac.uk/exhibitions/inside-aardman-wallace-gromit-and-friends"
+  },
+  {
+   "id": "wc-churchill",
+   "venue": "wallace",
+   "short": "Winston Churchill: The Painter",
+   "title": "Winston Churchill: The Painter",
+   "artists": "Winston Churchill",
+   "start": null,
+   "end": "2026-11-29",
+   "admission": "paid",
+   "price": "£18",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.wallacecollection.org/explore/exhibitions/"
+  },
+  {
+   "id": "wc-at-war",
+   "venue": "wallace",
+   "short": "The Wallace Collection at War",
+   "title": "The Wallace Collection at War",
+   "artists": "",
+   "start": null,
+   "end": "2026-10-25",
+   "admission": "free",
+   "discipline": "History & collections",
+   "url": "https://www.wallacecollection.org/explore/exhibitions/"
+  },
+  {
+   "id": "wc-kneebone",
+   "venue": "wallace",
+   "short": "Rachel Kneebone",
+   "title": "Metamorphoses: Porcelain Sculpture by Rachel Kneebone",
+   "artists": "Rachel Kneebone",
+   "start": null,
+   "end": "2027-04-25",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.wallacecollection.org/explore/exhibitions/"
+  },
+  {
+   "id": "wc-cosimo",
+   "venue": "wallace",
+   "short": "Cosimo I de' Medici: Art and Dynasty",
+   "title": "Cosimo I de' Medici: Art and Dynasty",
+   "artists": "",
+   "start": "2026-11-18",
+   "end": "2027-03-21",
+   "admission": "free",
+   "discipline": "History & collections",
+   "url": "https://www.wallacecollection.org/whats-on/events/cosimo-i-de-medici-art-and-dynasty/"
+  },
+  {
+   "id": "sp-caguiat",
+   "venue": "serpentine",
+   "site": "Serpentine South",
+   "short": "Justin Caguiat",
+   "title": "Justin Caguiat: Change Ringing",
+   "artists": "Justin Caguiat",
+   "start": "2026-10-08",
+   "end": "2027-01-10",
+   "admission": "free",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.serpentinegalleries.org/whats-on/justin-caguiat-change-ringing/"
+  },
+  {
+   "id": "sp-kanwar",
+   "venue": "serpentine",
+   "site": "Serpentine North",
+   "short": "Amar Kanwar",
+   "title": "Amar Kanwar",
+   "artists": "Amar Kanwar",
+   "start": "2026-09-23",
+   "end": "2027-01-31",
+   "admission": "free",
+   "discipline": "Photography & moving image",
+   "url": "https://www.serpentinegalleries.org/whats-on/amar-kanwar-exhibition/"
+  },
+  {
+   "id": "sp-pavilion",
+   "venue": "serpentine",
+   "site": "Serpentine South",
+   "short": "Serpentine Pavilion 2026",
+   "title": "Serpentine Pavilion 2026 by LANZA atelier",
+   "artists": "LANZA atelier (Isabel Abascal, Alessandro Arienzo)",
+   "start": "2026-06-06",
+   "end": "2026-10-25",
+   "admission": "free",
+   "discipline": "Design & architecture",
+   "url": "https://www.serpentinegalleries.org/whats-on/serpentine-pavilion-2026-by-isabel-abascal-and-alessandro-arienzo-lanza-atelier/"
+  },
+  {
+   "id": "sp-soto",
+   "venue": "serpentine",
+   "site": "Serpentine South",
+   "short": "Jesús Rafael Soto",
+   "title": "Jesús Rafael Soto: Pénétrable BBL Jaune",
+   "artists": "Jesús Rafael Soto",
+   "start": "2026-06-16",
+   "end": "2026-10-25",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.serpentinegalleries.org/whats-on/jesus-rafael-soto-penetrable-bbl-jaune/"
+  },
+  {
+   "id": "hw-goldin",
+   "venue": "hayward",
+   "short": "Nan Goldin",
+   "title": "Nan Goldin: You Never Did Anything Wrong",
+   "artists": "Nan Goldin",
+   "start": "2026-11-24",
+   "end": "2027-03-14",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://www.southbankcentre.co.uk/whats-on/nan-goldin-you-never-did-anything-wrong/"
+  },
+  {
+   "id": "hw-arutiunian",
+   "venue": "hayward",
+   "site": "HENI Project Space",
+   "short": "Andrius Arutiunian",
+   "title": "Andrius Arutiunian: They Tried to Count Us",
+   "artists": "Andrius Arutiunian",
+   "start": "2026-11-24",
+   "end": "2027-03-07",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.southbankcentre.co.uk/whats-on/andrius-arutiunian-they-tried-to-count-us/"
+  },
+  {
+   "id": "bb-ryman",
+   "venue": "barbican",
+   "site": "Art Gallery",
+   "short": "Robert Ryman",
+   "title": "Robert Ryman: The Real Thing",
+   "artists": "Robert Ryman",
+   "start": "2026-10-09",
+   "end": "2027-02-28",
+   "admission": "check",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.barbican.org.uk/whats-on/2026/event/robert-ryman-the-real-thing"
+  },
+  {
+   "id": "bb-mohri",
+   "venue": "barbican",
+   "site": "The Curve",
+   "short": "Yuko Mohri",
+   "title": "Yuko Mohri: In Concert",
+   "artists": "Yuko Mohri",
+   "start": "2026-10-01",
+   "end": "2027-01-24",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.barbican.org.uk/whats-on/2026/event/yuko-mohri-in-concert"
+  },
+  {
+   "id": "bb-concrete-clay",
+   "venue": "barbican",
+   "site": "Foyers",
+   "short": "Archiving the Barbican",
+   "title": "Concrete and Clay: Archiving the Barbican",
+   "artists": "",
+   "start": "2025-02-10",
+   "end": "2027-01-01",
+   "admission": "free",
+   "discipline": "Design & architecture",
+   "url": "https://www.barbican.org.uk/whats-on/2025/event/concrete-and-clay-archiving-the-barbican"
+  },
+  {
+   "id": "wg-vicuna-threads",
+   "venue": "whitechapel",
+   "short": "Cecilia Vicuña",
+   "title": "Cecilia Vicuña: Living Threads",
+   "artists": "Cecilia Vicuña",
+   "start": "2026-10-07",
+   "end": "2027-02-14",
+   "admission": "check",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.whitechapelgallery.org/exhibitions/cecilia-vicuna/",
+   "note": "With Foraging Quipu"
+  },
+  {
+   "id": "wg-this-must-be",
+   "venue": "whitechapel",
+   "short": "Artists for Whitechapel Gallery",
+   "title": "This Must Be the Place: Artists for Whitechapel Gallery",
+   "artists": "Andrew Cranston, Lenz Geerk, Gareth Cadwallader, Sky Glabush and others",
+   "start": "2026-10-08",
+   "end": "2026-11-08",
+   "admission": "check",
+   "discipline": "Group shows",
+   "url": "https://www.whitechapelgallery.org/exhibitions/this-must-be-the-place-artists-for-whitechapel-gallery/",
+   "note": "Exhibition and sale"
+  },
+  {
+   "id": "wg-screen-portraits",
+   "venue": "whitechapel",
+   "short": "Screen Portraits",
+   "title": "Screen Portraits: Whitechapel Gallery Artists – Part 2",
+   "artists": "Ayo Akingbade, Holly Graham, Maz Murray, Gaby Sahhar and others",
+   "start": "2026-10-07",
+   "end": "2027-01-17",
+   "admission": "check",
+   "discipline": "Photography & moving image",
+   "url": "https://www.whitechapelgallery.org/exhibitions/screen-portraits-whitechapel-gallery-artists-part-2/"
+  },
+  {
+   "id": "wg-jarman",
+   "venue": "whitechapel",
+   "short": "Film London Jarman Award 2026",
+   "title": "The Film London Jarman Award 2026",
+   "artists": "Sadia Pineda Hameed, Ilona Sagar, Rhea Storr, Alia Syed",
+   "start": "2026-11-17",
+   "end": "2026-12-13",
+   "admission": "check",
+   "discipline": "Photography & moving image",
+   "url": "https://www.whitechapelgallery.org/exhibitions/the-film-london-jarman-award-2026/"
+  },
+  {
+   "id": "ica-knight",
+   "venue": "ica",
+   "short": "Autumn Knight",
+   "title": "Autumn Knight: I Can't Complain",
+   "artists": "Autumn Knight",
+   "start": "2026-09-29",
+   "end": "2026-11-29",
+   "admission": "check",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.ica.art/exhibitions/autumn-knight"
+  },
+  {
+   "id": "cac-hard-line",
+   "venue": "camden-art-centre",
+   "short": "Liz Larner",
+   "title": "A hard line to bend",
+   "artists": "Liz Larner",
+   "start": "2026-09-11",
+   "end": "2027-01-17",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://camdenartcentre.org/whats-on/a-hard-line-to-bend"
+  },
+  {
+   "id": "slg-sosnowska",
+   "venue": "slg",
+   "short": "Monika Sosnowska",
+   "title": "Monika Sosnowska: Weight of Matter",
+   "artists": "Monika Sosnowska",
+   "start": "2026-09-10",
+   "end": "2026-11-22",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.southlondongallery.org/exhibitions/monika-sosnowska-weight-of-matter/",
+   "price": "Suggested £5 donation"
+  },
+  {
+   "id": "ch-wakaliga",
+   "venue": "chisenhale",
+   "short": "Wakaliga Uganda",
+   "title": "Wakaliga Uganda",
+   "artists": "Wakaliga Uganda",
+   "start": "2026-10-02",
+   "end": "2026-12-06",
+   "admission": "free",
+   "discipline": "Photography & moving image",
+   "url": "https://chisenhale.org.uk/"
+  },
+  {
+   "id": "rr-sturtevant",
+   "venue": "raven-row",
+   "short": "Sturtevant",
+   "title": "Sturtevant: Eat the Outside to Light Up the Inside",
+   "artists": "Sturtevant",
+   "start": "2026-10-15",
+   "end": "2026-12-20",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.ravenrow.org/"
+  },
+  {
+   "id": "ydp-true-names",
+   "venue": "ydp",
+   "short": "Group show: Georgia O'Keeffe, Dorothea Lange, Pacita Abad etc.",
+   "title": "true names",
+   "artists": "Georgia O'Keeffe, Dorothea Lange, Pacita Abad, Gauri Gill, Bernice Bing, Chen Zhe, Shao Fan, Zeng Xiaolian and others",
+   "start": "2026-10-02",
+   "end": "2026-12-19",
+   "admission": "free",
+   "sinophone": "includes",
+   "discipline": "Group shows",
+   "url": "https://www.ydp.co/exhibitions/true-names"
+  },
+  {
+   "id": "ra-dadd",
+   "venue": "ra",
+   "short": "Richard Dadd",
+   "title": "Richard Dadd",
+   "artists": "Richard Dadd",
+   "start": "2026-07-25",
+   "end": "2026-10-25",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.royalacademy.org.uk/exhibition/richard-dadd",
+   "price": "£15"
+  },
+  {
+   "id": "ra-riviera",
+   "venue": "ra",
+   "short": "Painting the French Riviera",
+   "title": "Painting the French Riviera",
+   "artists": "Henri Matisse, Claude Monet, Georges Braque, André Derain, Raoul Dufy and others",
+   "start": "2026-10-02",
+   "end": "2027-01-31",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.royalacademy.org.uk/exhibition/painting-the-french-riviera",
+   "price": "£24–£26"
+  },
+  {
+   "id": "ra-guggenheim",
+   "venue": "ra",
+   "short": "Peggy Guggenheim in London",
+   "title": "Peggy Guggenheim in London",
+   "artists": "Vasily Kandinsky, Salvador Dalí, Henry Moore, Rita Kernn-Larsen and others",
+   "start": "2026-11-21",
+   "end": "2027-03-14",
+   "admission": "paid",
+   "discipline": "Group shows",
+   "url": "https://www.royalacademy.org.uk/exhibition/peggy-guggenheim-in-london",
+   "price": "£17"
+  },
+  {
+   "id": "ra-day",
+   "venue": "ra",
+   "short": "RA Schools 2026",
+   "title": "Day: RA Schools 2026",
+   "artists": "Anna Metzger, Sam Tromp, Joel Wycherley",
+   "start": "2026-09-18",
+   "end": "2026-11-08",
+   "admission": "free",
+   "discipline": "Group shows",
+   "url": "https://www.royalacademy.org.uk/exhibition/raschools-day-2026"
+  },
+  {
+   "id": "ra-eisenman",
+   "venue": "ra",
+   "site": "Annenberg Courtyard",
+   "short": "Nicole Eisenman",
+   "title": "Nicole Eisenman",
+   "artists": "Nicole Eisenman",
+   "start": "2026-09-22",
+   "end": "2027-02-05",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.royalacademy.org.uk/exhibition/nicole-eisenman-courtyard-sculpture"
+  },
+  {
+   "id": "dpg-hokusai",
+   "venue": "dulwich",
+   "short": "Hokusai's Thirty-six Views of Mount Fuji",
+   "title": "Hokusai: Thirty-six Views of Mount Fuji from the Iuchi Collection",
+   "artists": "Katsushika Hokusai",
+   "start": "2026-10-20",
+   "end": "2027-01-17",
+   "admission": "paid",
+   "price": "From £21.50",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.dulwichpicturegallery.org.uk/whats-on/hokusai-thirty-six-views-of-mt-fuji-from-the-iuchi-collection/"
+  },
+  {
+   "id": "dpg-mackesy",
+   "venue": "dulwich",
+   "short": "Charlie Mackesy",
+   "title": "Charlie Mackesy: The Boy, the Mole, the Fox, the Horse… and You",
+   "artists": "Charlie Mackesy",
+   "start": "2026-11-03",
+   "end": "2027-02-07",
+   "admission": "paid",
+   "note": "With gallery admission",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.dulwichpicturegallery.org.uk/whats-on/charlie-mackesy-the-boy-the-fox-the-mole-the-horse-and-you/"
+  },
+  {
+   "id": "trg-sky",
+   "venue": "trg",
+   "short": "Emily Avery Yoshiko Crow",
+   "title": "The Sky Takes Root",
+   "artists": "Emily Avery Yoshiko Crow",
+   "start": "2026-09-12",
+   "end": "2026-11-13",
+   "admission": "check",
+   "discipline": null,
+   "url": "https://gallerytabularasa.co.uk/2026-09-Emily-Avery-Yoshiko-Crow"
+  },
+  {
+   "id": "bl-christie",
+   "venue": "british-library",
+   "short": "Agatha Christie",
+   "title": "Agatha Christie: A World of Mystery",
+   "artists": "Agatha Christie",
+   "start": "2026-10-30",
+   "end": "2027-06-20",
+   "admission": "paid",
+   "price": "£20–£25",
+   "discipline": "History & collections",
+   "url": "https://www.ianvisits.co.uk/calendar/agatha-christie-a-world-of-mystery-british-library-431007/"
+  },
+  {
+   "id": "ct-toor",
+   "venue": "courtauld",
+   "short": "Salman Toor",
+   "title": "Salman Toor: Someone Like You",
+   "artists": "Salman Toor",
+   "start": "2026-10-02",
+   "end": "2027-01-10",
+   "admission": "check",
+   "discipline": "Painting & works on paper",
+   "url": "https://courtauld.ac.uk/whats-on/exh-salman-toor-someone-like-you/",
+   "note": "With a drawings display"
+  },
+  {
+   "id": "ct-gill",
+   "venue": "courtauld",
+   "short": "Winifred Gill",
+   "title": "Winifred Gill: A Bloomsbury Pioneer",
+   "artists": "Winifred Gill",
+   "start": "2026-10-14",
+   "end": "2027-01-20",
+   "admission": "check",
+   "discipline": "Painting & works on paper",
+   "url": "https://courtauld.ac.uk/whats-on/exh-winifred-gill/"
+  },
+  {
+   "id": "ct-walker",
+   "venue": "courtauld",
+   "short": "Ella Walker",
+   "title": "Courtauld Commission 2026: Ella Walker",
+   "artists": "Ella Walker",
+   "start": "2026-09-03",
+   "end": null,
+   "admission": "free",
+   "discipline": "Painting & works on paper",
+   "url": "https://courtauld.ac.uk/whats-on/courtauld-commission-2026-ella-walker/"
+  },
+  {
+   "id": "wb-night-maps",
+   "venue": "warburg",
+   "short": "Maps from the Sunderland Collection",
+   "title": "Night Maps",
+   "artists": "",
+   "start": "2026-10-21",
+   "end": "2027-04-17",
+   "admission": "free",
+   "discipline": "History & collections",
+   "url": "https://warburg.sas.ac.uk/news-events/events/night-maps"
+  },
+  {
+   "id": "hw-blake",
+   "venue": "hayward",
+   "short": "Quentin Blake",
+   "title": "Quentin Blake: The Southbank Parade",
+   "artists": "Quentin Blake",
+   "start": "2026-10-18",
+   "end": "2026-11-08",
+   "admission": "free",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.southbankcentre.co.uk/whats-on/quentin-blake-the-southbank-parade/",
+   "note": "Site-wide across Southbank Centre"
+  },
+  {
+   "id": "hw-koestler",
+   "venue": "hayward",
+   "short": "Koestler Arts: Rock, Paper, Scissors",
+   "title": "Koestler Arts: Rock, Paper, Scissors",
+   "artists": "",
+   "start": "2026-10-18",
+   "end": "2026-11-29",
+   "admission": "free",
+   "discipline": "Group shows",
+   "url": "https://www.southbankcentre.co.uk/whats-on/koestler-arts-rock-paper-scissors/",
+   "note": "In The Undercroft"
+  },
+  {
+   "id": "ra-rae",
+   "venue": "ra",
+   "short": "Barbara Rae",
+   "title": "In Provence and Southern France",
+   "artists": "Barbara Rae",
+   "start": "2026-09-29",
+   "end": "2027-02-28",
+   "admission": "free",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.royalacademy.org.uk/exhibition/selling-display-barbara-rae-ra",
+   "note": "Selling display"
+  },
+  {
+   "id": "ra-awuni",
+   "venue": "ra",
+   "short": "Emmanuel Awuni",
+   "title": "Emmanuel Awuni",
+   "artists": "Emmanuel Awuni",
+   "start": "2026-09-29",
+   "end": "2027-02-28",
+   "admission": "free",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.royalacademy.org.uk/exhibition/selling-display-emmanuel-awuni",
+   "note": "Selling display"
+  },
+  {
+   "id": "ra-white-cube",
+   "venue": "ra",
+   "short": "Group show: Tracey Emin, Antony Gormley, Michael Armitage etc.",
+   "title": "White Cube x RA",
+   "artists": "Tracey Emin, Antony Gormley, Michael Armitage",
+   "start": "2026-10-06",
+   "end": "2027-03-07",
+   "admission": "free",
+   "discipline": "Group shows",
+   "url": "https://www.royalacademy.org.uk/exhibition/selling-display-white-cube",
+   "note": "Selling display"
+  },
+  {
+   "id": "gw-contreras-lomas",
+   "venue": "gasworks",
+   "short": "Paloma Contreras Lomas",
+   "title": "Paloma Contreras Lomas: Disco Inferno",
+   "artists": "Paloma Contreras Lomas",
+   "start": "2026-10-01",
+   "end": "2026-12-13",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://gasworks.org.uk/exhibitions/paloma-contreras-lomas-exhibition/"
+  },
+  {
+   "id": "ib-taring-padi",
+   "venue": "ibraaz",
+   "site": "Majlis",
+   "short": "Taring Padi",
+   "title": "Rakyat Pasti Menang",
+   "artists": "Taring Padi",
+   "start": "2026-07-08",
+   "end": "2026-11-22",
+   "admission": "check",
+   "discipline": "Painting & works on paper",
+   "url": "https://ibraaz.org/whats-on/taring-padi"
+  },
+  {
+   "id": "ib-elegy",
+   "venue": "ibraaz",
+   "site": "Minassa",
+   "short": "Gabrielle Goliath",
+   "title": "Elegy",
+   "artists": "Gabrielle Goliath",
+   "start": "2026-10-08",
+   "end": "2027-01-17",
+   "admission": "check",
+   "discipline": "Sculpture & installation",
+   "url": "https://ibraaz.org/whats-on/elegy-gabrielle-goliath"
+  },
+  {
+   "id": "ib-cosmic-breath",
+   "venue": "ibraaz",
+   "site": "Musalla",
+   "short": "Joe Namy",
+   "title": "Cosmic Breath",
+   "artists": "Joe Namy",
+   "start": null,
+   "end": "2027-03-07",
+   "admission": "check",
+   "discipline": "Sculpture & installation",
+   "url": "https://ibraaz.org/whats-on/cosmic-breath-joe-namy"
+  }
+ ]
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" crossorigin="anonymous"></script>
+<script>
+(function(){
+function boot(){
+  var root = document.getElementById('onview');
+  var dataEl = document.getElementById('exhibitions-data');
+  if (!root || !dataEl || root.dataset.booted) return;
+  root.dataset.booted = '1';
+  var DATA;
+  try { DATA = JSON.parse(dataEl.textContent); } catch (err) { document.getElementById('ov-results').textContent = 'The listings data could not be read. Paste the data block again.'; return; }
+
+  var DAY = 864e5;
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var AREAS = ['Central','South Bank','West','City & East','North','South'];
+  var DISCIPLINES = ['Painting & works on paper','Sculpture & installation','Photography & moving image','Design & architecture','History & collections','Group shows'];
+
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  function parse(s){ if (!s) return null; var p = s.split('-').map(Number); return new Date(p[0], p[1]-1, p[2]); }
+  function fmt(d){ return d.getDate() + ' ' + MONTHS[d.getMonth()] + (d.getFullYear() !== today.getFullYear() ? ' ' + d.getFullYear() : ''); }
+  function fmtFull(d){ return d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear(); }
+  var venues = {}; DATA.venues.forEach(function(v){ venues[v.id] = v; });
+
+  var items = DATA.exhibitions.map(function(e){
+    var v = venues[e.venue] || {name:e.venue, area:'Central', kind:'', lat:51.5074, lng:-0.1278};
+    var s = parse(e.start), en = parse(e.end);
+    var status = 'on';
+    if (s && s > today) status = 'upcoming';
+    else if (en && en < today) status = 'closed';
+    var daysLeft = en ? Math.round((en - today)/DAY) : null;
+    var daysToOpen = s ? Math.round((s - today)/DAY) : null;
+    var siteLL = v.sites && e.site && v.sites[e.site];
+    return Object.assign({}, e, {
+      v: v, s: s, en: en, status: status, daysLeft: daysLeft, daysToOpen: daysToOpen,
+      closing: status === 'on' && daysLeft !== null && daysLeft <= 14,
+      area: e.area || v.area, venueName: v.name, short: e.short || e.title,
+      lat: siteLL ? siteLL[0] : v.lat, lng: siteLL ? siteLL[1] : v.lng,
+      locKey: e.venue + (siteLL ? '|' + e.site : ''),
+      hay: [e.short, e.title, e.artists, v.name, e.site].filter(Boolean).join(' ').toLowerCase()
+    });
+  }).filter(function(e){ return e.status !== 'closed'; });
+
+  var KEY = 'onview-filters-v3';
+  var defaults = {status:'all', q:'', adm:'all', area:'all', off:[], order:[], discipline:'all', sino:false, view:'cards', sort:'venue', venuesOpen:false};
+  var state = Object.assign({}, defaults);
+  try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved) state = Object.assign(state, saved); } catch (_) {}
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (_) {} }
+
+  function $(id){ return document.getElementById(id); }
+  function el(tag, cls, text){ var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+  function link(text, href, cls){ var a = el('a', cls || null, text); a.href = href; a.target = '_blank'; a.rel = 'noopener'; return a; }
+
+  var updated = new Date(DATA.updated);
+  var updDay = new Date(updated.getFullYear(), updated.getMonth(), updated.getDate());
+  $('ov-verified').textContent = 'Listings checked ' + fmtFull(updDay);
+  $('ov-venueCount').textContent = DATA.venues.length + ' venues';
+  (function(){ var ul = $('ov-venueNames'); if (!ul) return; DATA.venues.map(function(v){ return v.name; }).sort(function(x, y){ return x.localeCompare(y, 'en', {sensitivity:'base'}); }).forEach(function(n){ var li = document.createElement('li'); li.textContent = n; ul.appendChild(li); }); })();
+  var age = Math.floor((today - updDay)/DAY);
+  if (age > 14) { $('ov-stale').hidden = false; $('ov-stale').textContent = 'These listings were last checked ' + age + ' days ago. Some dates may have changed, so check with the venue before you go.'; }
+
+  function fillSelect(sel, label, values){
+    sel.textContent = '';
+    var o = el('option', null, label); o.value = 'all'; sel.appendChild(o);
+    values.forEach(function(v){ var op = el('option', null, v); op.value = v; sel.appendChild(op); });
+  }
+  fillSelect($('ov-area'), 'All areas', AREAS.filter(function(a){ return items.some(function(i){ return i.area === a; }); }));
+  fillSelect($('ov-discipline'), 'All disciplines', DISCIPLINES);
+
+  // Venue checklist in display order, with move up / down.
+  // The data's venues array sets the default order; a viewer's own changes are kept in their browser.
+  var venueList = DATA.venues.slice();
+  var grid = $('ov-venuesGrid');
+  var RANK = {};
+  function orderedIds(){
+    var ids = state.order.filter(function(id){ return venues[id]; });
+    DATA.venues.forEach(function(v){ if (ids.indexOf(v.id) < 0) ids.push(v.id); });
+    return ids;
+  }
+  function move(id, dir){
+    var ids = orderedIds(), i = ids.indexOf(id), j = i + dir;
+    if (i < 0 || j < 0 || j >= ids.length) return;
+    ids[i] = ids[j]; ids[j] = id;
+    set({order: ids});
+    var b = $('ov-mv-' + (dir < 0 ? 'up-' : 'down-') + id);
+    if (!b || b.disabled) b = $('ov-mv-' + (dir < 0 ? 'down-' : 'up-') + id);
+    if (b) b.focus();
+  }
+  function renderVenuePanel(forCounts){
+    var keep = grid.scrollTop;
+    while (grid.firstChild) grid.removeChild(grid.firstChild);
+    var ids = orderedIds();
+    ids.forEach(function(id, i){
+      var v = venues[id], on = state.off.indexOf(id) < 0;
+      var li = el('li','ov-vrow' + (on ? '' : ' off'));
+      li.appendChild(el('span','num', String(i + 1)));
+      var lb = el('label','ov-check'); var cb = el('input'); cb.type = 'checkbox'; cb.id = 'ov-v-' + id; cb.checked = on;
+      lb.appendChild(cb); lb.appendChild(document.createTextNode(v.name + (v.kind === 'Commercial gallery' ? ' (commercial)' : '')));
+      lb.appendChild(el('span','a', v.area));
+      cb.addEventListener('change', function(){
+        var off = state.off.filter(function(x){ return x !== id; });
+        if (!cb.checked) off.push(id);
+        set({off: off});
+        var n = $('ov-v-' + id); if (n) n.focus();
+      });
+      li.appendChild(lb);
+      li.appendChild(el('span','c', String(forCounts.filter(function(e){ return e.venue === id; }).length)));
+      var mv = el('span','ov-move');
+      [['up', -1, '↑', 'Move ' + v.name + ' up'], ['down', 1, '↓', 'Move ' + v.name + ' down']].forEach(function(m){
+        var b = el('button', null, m[2]); b.type = 'button'; b.id = 'ov-mv-' + m[0] + '-' + id; b.setAttribute('aria-label', m[3]);
+        b.disabled = (m[1] < 0 && i === 0) || (m[1] > 0 && i === ids.length - 1);
+        b.addEventListener('click', function(){ move(id, m[1]); });
+        mv.appendChild(b);
+      });
+      li.appendChild(mv);
+      grid.appendChild(li);
+    });
+    grid.scrollTop = keep;
+  }
+
+  function matchesBase(e, ignoreVenue){
+    if (state.q && e.hay.indexOf(state.q.toLowerCase()) < 0) return false;
+    if (state.adm === 'free' && e.admission !== 'free') return false;
+    if (state.adm === 'paid' && e.admission !== 'paid') return false;
+    if (state.area !== 'all' && e.area !== state.area) return false;
+    if (!ignoreVenue && state.off.indexOf(e.venue) >= 0) return false;
+    if (state.discipline !== 'all' && e.discipline !== state.discipline) return false;
+    return true;
+  }
+  function matchesStatus(e){
+    if (state.status === 'on') return e.status === 'on';
+    if (state.status === 'closing') return e.closing;
+    if (state.status === 'upcoming') return e.status === 'upcoming';
+    return true;
+  }
+  var BIG = 1e15;
+  function endKey(e){ return e.status === 'upcoming' ? BIG/2 + e.s.getTime() : (e.en ? e.en.getTime() : BIG); }
+  function sorter(a, b){
+    if (state.sort === 'opening') {
+      var ka = a.status === 'upcoming' ? a.s.getTime() : -BIG + (a.en ? a.en.getTime() : BIG);
+      var kb = b.status === 'upcoming' ? b.s.getTime() : -BIG + (b.en ? b.en.getTime() : BIG);
+      return ka - kb || a.short.localeCompare(b.short);
+    }
+    if (state.sort === 'venue') return (RANK[a.venue] - RANK[b.venue]) || endKey(a) - endKey(b) || a.short.localeCompare(b.short);
+    return endKey(a) - endKey(b) || a.short.localeCompare(b.short);
+  }
+
+  function statusChip(e){
+    if (e.status === 'upcoming') return el('span','chip status upcoming', e.daysToOpen === 0 ? 'Opens today' : e.daysToOpen === 1 ? 'Opens tomorrow' : 'Opens ' + fmt(e.s));
+    if (e.closing) return el('span','chip status ' + (e.daysLeft <= 1 ? 'today' : 'soon'), e.daysLeft === 0 ? 'Closes today' : e.daysLeft === 1 ? 'Closes tomorrow' : 'Closes in ' + e.daysLeft + ' days');
+    return el('span','chip status on','On now');
+  }
+  function dateText(e){
+    var endT = e.endText || (e.en ? fmt(e.en) : null);
+    if (e.s && endT) return fmt(e.s) + ' – ' + endT;
+    if (endT) return 'Until ' + endT;
+    if (e.s) return 'From ' + fmt(e.s);
+    return 'Dates to be confirmed';
+  }
+  function admissionText(e){ return e.admission === 'free' ? 'Free' : e.admission === 'paid' ? (e.price || 'Ticketed') : 'Check venue'; }
+  function sinoChip(e){
+    if (!e.sinophone) return null;
+    var c = el('span','chip sino'); var z = el('span','cjk','华语'); z.lang = 'zh'; c.appendChild(z);
+    c.appendChild(document.createTextNode(e.sinophone === 'includes' ? 'Includes sinophone artists' : 'Sinophone'));
+    return c;
+  }
+  function venueLine(e){ return e.venueName + (e.site ? ' · ' + e.site : ''); }
+  var MONO = {'tate-modern':'TM','tate-britain':'TB','national-gallery':'NG','npg':'NPG','courtauld':'CG','british-museum':'BM','british-library':'BL','va':'V+A','wallace':'WC','serpentine':'SP','hayward':'HG','barbican':'BB','whitechapel':'WG','ica':'ICA','camden-art-centre':'CAC','gasworks':'GW','camden-arts-projects':'CAP','ibraaz':'IBZ','slg':'SLG','chisenhale':'CH','raven-row':'RR','ydp':'YDP','warburg':'WI','ra':'RA','saatchi':'SG','dulwich':'DPG','trg':'TR'};
+  var LOGO = {'tate-modern':['l-tate','wide'],'tate-britain':['l-tate','wide'],'national-gallery':['l-ng','sq'],'ra':['l-ra','sq']};
+  function monogram(v){ if (MONO[v.id]) return MONO[v.id]; return String(v.name || '').split(/\s+/).map(function(w){ return w.charAt(0); }).join('').slice(0, 3).toUpperCase(); }
+  function isGroup(e){ return /^Group show/i.test(e.short); }
+  function headCls(e){ return (isGroup(e) || e.short.length > 26) ? 'grp' : (e.short.length > 14 ? 'mid' : null); }
+  function mapShort(e){
+    if (isGroup(e)) { var rest = (e.short.split(':')[1] || '').split(',')[0].replace(/\s*etc\.?$/, '').trim(); return 'Group: ' + (rest || 'various'); }
+    if (e.short.length <= 26) return e.short;
+    var cut = e.short.slice(0, 25); var sp = cut.lastIndexOf(' '); return (sp > 8 ? cut.slice(0, sp) : cut) + '\u2026';
+  }
+
+  function renderCards(list, host){
+    var g = el('div','ov-cards');
+    list.forEach(function(e){
+      var c = el('article','ov-card' + (e.sinophone ? ' sino' : ''));
+      var top = el('div','top'); var vn = el('span','venue'); var LG = null; var vb = el('span','vbadge' + (LG ? ' logo ' + LG[1] + ' ' + LG[0] : ''), LG ? '' : monogram(e.v)); vb.setAttribute('aria-hidden','true'); vn.appendChild(vb); vn.appendChild(el('span','vname', venueLine(e))); top.appendChild(vn); top.appendChild(statusChip(e)); c.appendChild(top);
+      var body = el('div','body');
+      var h = el('h3', headCls(e)); h.appendChild(link(e.short, e.url)); body.appendChild(h);
+      if (e.short !== e.title) body.appendChild(el('p','full', e.title));
+      if (e.artists && e.artists !== e.title && e.artists !== e.short) body.appendChild(el('p','artists', e.artists));
+      body.appendChild(el('div','dates', dateText(e)));
+      c.appendChild(body);
+      var foot = el('div','foot');
+      foot.appendChild(el('span','chip' + (e.admission === 'free' ? ' free' : ''), admissionText(e)));
+      var sc = sinoChip(e); if (sc) foot.appendChild(sc);
+      if (e.v.kind === 'Commercial gallery') foot.appendChild(el('span','chip commercial','Commercial gallery'));
+      if (e.note) foot.appendChild(el('span','chip', e.note));
+      if (e.v.map) { foot.appendChild(el('span','grow')); var ml = link('Hours & map \u2197', e.v.map, 'maplink'); ml.title = 'Opening hours and directions for ' + e.venueName + ' on Google Maps'; ml.setAttribute('aria-label', 'Opening hours and directions for ' + e.venueName + ' on Google Maps'); foot.appendChild(ml); }
+      c.appendChild(foot);
+      g.appendChild(c);
+    });
+    host.appendChild(g);
+  }
+
+  function legend(host, kinds){
+    var lg = el('div','ov-legend');
+    kinds.forEach(function(k){ var s = el('span'); s.appendChild(el('i', k[0])); s.appendChild(document.createTextNode(k[1])); lg.appendChild(s); });
+    host.appendChild(lg);
+  }
+
+  function renderTimeline(list, host){
+    var ws = new Date(today.getFullYear(), today.getMonth(), 1);
+    var we = new Date(today.getFullYear(), today.getMonth() + 9, 1);
+    var span = we - ws;
+    function pct(d){ return Math.max(0, Math.min(1, (d - ws)/span)) * 100; }
+    var months = []; for (var i = 0; i < 9; i++) months.push(new Date(ws.getFullYear(), ws.getMonth() + i, 1));
+    legend(host, [['','On now'],['soon','Closing within 14 days'],['upcoming','Opening soon'],['sino','Sinophone']]);
+    var wrap = el('div','tl');
+    var head = el('div','tl-head'); head.appendChild(el('div','tl-label','Exhibition'));
+    var ht = el('div','tl-track');
+    months.forEach(function(m, i){ var mm = el('span','tl-month', MONTHS[m.getMonth()] + (i === 0 || m.getMonth() === 0 ? ' ' + String(m.getFullYear()).slice(2) : '')); mm.style.left = pct(m) + '%'; ht.appendChild(mm); });
+    var tdy = el('span','tl-today'); tdy.style.left = pct(today) + '%'; ht.appendChild(tdy);
+    head.appendChild(ht); wrap.appendChild(head);
+    list.forEach(function(e){
+      var row = el('div','tl-row');
+      var lab = el('div','tl-label'); var a = link(e.short, e.url, isGroup(e) ? 'grp' : null); a.title = e.title; lab.appendChild(a);
+      lab.appendChild(el('span','v', venueLine(e) + ' · ' + dateText(e)));
+      row.appendChild(lab);
+      var tr = el('div','tl-track');
+      months.slice(1).forEach(function(m){ var gl = el('span','tl-grid'); gl.style.left = pct(m) + '%'; tr.appendChild(gl); });
+      var left = e.s ? pct(e.s) : 0, right = e.en ? pct(new Date(e.en.getTime() + DAY)) : 100;
+      var bar = el('span','bar');
+      if (e.status === 'upcoming') bar.classList.add('upcoming'); else if (e.closing) bar.classList.add('soon');
+      if (e.sinophone) bar.classList.add('sino');
+      if (!e.s || e.s < ws) bar.classList.add('nostart');
+      if (!e.en || e.en >= we) bar.classList.add('noend');
+      bar.style.left = left + '%'; bar.style.width = Math.max(0.8, right - left) + '%';
+      bar.setAttribute('role','img'); bar.setAttribute('aria-label', e.title + ', ' + dateText(e));
+      tr.appendChild(bar);
+      var t = el('span','tl-today'); t.style.left = pct(today) + '%'; tr.appendChild(t);
+      row.appendChild(tr); wrap.appendChild(row);
+    });
+    host.appendChild(wrap);
+  }
+
+  // Map (Leaflet), created once and reused
+  var mapEl = null, map = null, layer = null, tileFailed = 0, mapNote = null, lastBoundsKey = '';
+  function ensureMap(){
+    if (map || !window.L) return !!map;
+    mapEl = el('div','ov-map'); mapEl.id = 'ov-map';
+    mapNote = el('p','ov-map-note','Labels show each venue’s exhibitions by short title. Zoom out for outer London venues; tap a venue for details.');
+    map = L.map(mapEl, {scrollWheelZoom: false, zoomSnap: 0.5, attributionControl: true});
+    var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '\u00a9 <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    tiles.on('tileerror', function(){ tileFailed++; if (tileFailed === 4) mapNote.textContent = 'The base map could not load here, so venues are shown on a blank ground. It loads normally on your website.'; });
+    layer = L.layerGroup().addTo(map);
+    function zoomCls(){ mapEl.classList.toggle('zoomed-out', map.getZoom() < 12); }
+    map.on('zoomend', zoomCls);
+    map.setView([51.512, -0.118], mapEl.clientWidth > 700 ? 13 : 12.5); zoomCls();
+    return true;
+  }
+  function renderMap(list, host){
+    if (!ensureMap()) {
+      var m = el('div','ov-empty'); m.appendChild(el('p', null, 'The map could not load. Check your connection and reload the page.')); host.appendChild(m); return;
+    }
+    legend(host, [['dot','Venue (number of exhibitions)'],['sino','Venue with a sinophone show'],['soon','Short title in amber: closing within 14 days']]);
+    host.appendChild(mapEl); host.appendChild(mapNote);
+    layer.clearLayers();
+    var groups = {};
+    list.forEach(function(e){ (groups[e.locKey] = groups[e.locKey] || []).push(e); });
+    var pts = [];
+    Object.keys(groups).forEach(function(k){
+      var g = groups[k].slice().sort(sorter), e0 = g[0];
+      var dir = (e0.site && e0.v.sites && e0.v.sites[e0.site]) ? 'right' : (e0.v.label || 'right');
+      var pin = el('div','ov-pin ' + dir.split('-').join(' ') + (g.some(function(x){ return x.sinophone; }) ? ' sino' : ''));
+      pin.appendChild(el('span','dot', String(g.length)));
+      var lbl = el('span','lbl');
+      g.slice(0, 3).forEach(function(x, i){
+        if (i) lbl.appendChild(el('span','sep',' · '));
+        lbl.appendChild(el('span', x.closing ? 'w-soon' : x.sinophone ? 'w-sino' : '', mapShort(x)));
+      });
+      if (g.length > 3) lbl.appendChild(el('span','more',' +' + (g.length - 3)));
+      pin.appendChild(lbl);
+      var icon = L.divIcon({className: '', html: pin, iconSize: [0, 0]});
+      var mk = L.marker([e0.lat, e0.lng], {icon: icon, title: venueLine(e0), keyboard: true, riseOnHover: true});
+      var pop = el('div');
+      pop.appendChild(el('div','pp-venue', e0.venueName + (e0.v.sites && e0.site && e0.v.sites[e0.site] ? ' · ' + e0.site : '')));
+      g.forEach(function(x){
+        var it = el('div','pp-item');
+        it.appendChild(link(x.short, x.url, isGroup(x) ? 'grp' : null));
+        if (x.short !== x.title) it.appendChild(el('span','t', x.title));
+        it.appendChild(el('span','m', dateText(x) + ' · ' + admissionText(x) + (x.closing ? ' · ' + (x.daysLeft === 0 ? 'closes today' : 'closes in ' + x.daysLeft + (x.daysLeft === 1 ? ' day' : ' days')) : x.status === 'upcoming' ? ' · opens ' + fmt(x.s) : '')));
+        pop.appendChild(it);
+      });
+      mk.bindPopup(pop, {maxWidth: 320, autoPanPadding: [24, 24]});
+      mk.addTo(layer); pts.push([e0.lat, e0.lng]);
+    });
+    setTimeout(function(){
+      map.invalidateSize();
+      var bk = pts.map(function(p){ return p.join(','); }).sort().join(';');
+      if (!lastBoundsKey) { map.setView([51.512, -0.118], mapEl.clientWidth > 700 ? 13 : 12.5); }
+      else if (pts.length && pts.length <= 8 && bk !== lastBoundsKey) { map.fitBounds(pts, {padding: [40, 40], maxZoom: 14}); }
+      lastBoundsKey = bk || 'none';
+    }, 0);
+  }
+
+  function renderBoard(base){
+    var board = $('ov-board'), ol = $('ov-boardList');
+    ol.textContent = '';
+    var soon = base.filter(function(e){ return e.closing && (!state.sino || e.sinophone); }).sort(function(a,b){ return a.daysLeft - b.daysLeft || a.short.localeCompare(b.short); }).slice(0, 8);
+    board.hidden = !(state.status === 'all' && soon.length);
+    soon.forEach(function(e){
+      var li = el('li');
+      var d = el('div','d' + (e.daysLeft <= 1 ? ' today' : ''), e.daysLeft === 0 ? 'Today' : String(e.daysLeft));
+      if (e.daysLeft > 0) d.appendChild(el('small', null, e.daysLeft === 1 ? 'day' : 'days'));
+      li.appendChild(d);
+      var t = el('div'); var a = link(e.short, e.url, isGroup(e) ? 'grp' : null); a.title = e.title; t.appendChild(a);
+      t.appendChild(el('span','v', venueLine(e) + ' · ' + admissionText(e)));
+      li.appendChild(t); ol.appendChild(li);
+    });
+  }
+
+  function render(){
+    $('ov-q').value = state.q;
+    $('ov-area').value = state.area; $('ov-discipline').value = state.discipline; $('ov-sort').value = state.sort;
+    root.querySelectorAll('[data-adm]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.adm === state.adm)); });
+    root.querySelectorAll('[data-view]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.view === state.view)); });
+    root.querySelectorAll('[data-status]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.status === state.status)); });
+    $('ov-sino').setAttribute('aria-pressed', String(state.sino));
+    $('ov-venues').hidden = !state.venuesOpen;
+    $('ov-venueToggle').setAttribute('aria-expanded', String(state.venuesOpen));
+    var onCount = venueList.filter(function(v){ return state.off.indexOf(v.id) < 0; }).length;
+    $('ov-venueSel').textContent = onCount === venueList.length ? 'All' : onCount + '/' + venueList.length;
+    RANK = {}; orderedIds().forEach(function(id, i){ RANK[id] = i; });
+    var forCounts = items.filter(function(e){ return matchesBase(e, true) && (!state.sino || e.sinophone) && matchesStatus(e); });
+    if (state.venuesOpen) renderVenuePanel(forCounts);
+
+    var base = items.filter(function(e){ return matchesBase(e); });
+    var scoped = base.filter(function(e){ return !state.sino || e.sinophone; });
+    $('ov-n-all').textContent = scoped.length;
+    $('ov-n-on').textContent = scoped.filter(function(e){ return e.status === 'on'; }).length;
+    $('ov-n-closing').textContent = scoped.filter(function(e){ return e.closing; }).length;
+    $('ov-n-upcoming').textContent = scoped.filter(function(e){ return e.status === 'upcoming'; }).length;
+    $('ov-n-sino').textContent = base.filter(function(e){ return e.sinophone && matchesStatus(e); }).length;
+    renderBoard(base);
+
+    var list = scoped.filter(matchesStatus).sort(sorter);
+    var host = $('ov-results');
+    while (host.firstChild) host.removeChild(host.firstChild);
+    var filtered = state.status !== 'all' || state.q || state.adm !== 'all' || state.area !== 'all' || state.off.length || state.discipline !== 'all' || state.sino;
+    $('ov-clear').hidden = !filtered;
+    $('ov-count').textContent = list.length === 1 ? '1 exhibition' : list.length + ' exhibitions';
+    if (!list.length) {
+      var em = el('div','ov-empty'); em.appendChild(el('p', null, 'No exhibitions match these filters.'));
+      var b = el('button','ov-link','Clear filters'); b.type = 'button'; b.addEventListener('click', clear); em.appendChild(b);
+      host.appendChild(em); return;
+    }
+    if (state.view === 'timeline') renderTimeline(list, host);
+    else if (state.view === 'map') renderMap(list, host);
+    else renderCards(list, host);
+  }
+
+  function set(patch){ Object.assign(state, patch); save(); render(); }
+  function clear(){ set({status:'all', q:'', adm:'all', area:'all', off:[], discipline:'all', sino:false}); }
+
+  root.querySelectorAll('[data-status]').forEach(function(b){ b.addEventListener('click', function(){ set({status: b.dataset.status === state.status ? 'all' : b.dataset.status}); }); });
+  root.querySelectorAll('[data-adm]').forEach(function(b){ b.addEventListener('click', function(){ set({adm: b.dataset.adm}); }); });
+  root.querySelectorAll('[data-view]').forEach(function(b){ b.addEventListener('click', function(){ set({view: b.dataset.view}); }); });
+  $('ov-sino').addEventListener('click', function(){ set({sino: !state.sino}); });
+  $('ov-venueToggle').addEventListener('click', function(){ set({venuesOpen: !state.venuesOpen}); });
+  $('ov-vAll').addEventListener('click', function(){ set({off: []}); });
+  $('ov-vNone').addEventListener('click', function(){ set({off: venueList.map(function(v){ return v.id; })}); });
+  $('ov-vReset').addEventListener('click', function(){ set({order: []}); });
+  $('ov-area').addEventListener('change', function(e){ set({area: e.target.value}); });
+  $('ov-discipline').addEventListener('change', function(e){ set({discipline: e.target.value}); });
+  $('ov-sort').addEventListener('change', function(e){ set({sort: e.target.value}); });
+  var qt; $('ov-q').addEventListener('input', function(e){ clearTimeout(qt); var v = e.target.value; qt = setTimeout(function(){ set({q: v}); }, 120); });
+  $('ov-clear').addEventListener('click', clear);
+
+  render();
+  
+  (function(){
+    var TRIGGER = 'trig_01VAonCqpB7hkzsep3XPwrLt', SERVER = 'Claude Code Remote';
+    var owner = $('ov-owner'); if (!owner) return; owner.hidden = false;
+    var msg = $('ov-ownerMsg'), rbtn = $('ov-refresh'), cbtn = $('ov-copy'), box = $('ov-copybox');
+    function makeBlock(){
+      var d = JSON.parse(dataEl.textContent), ids = orderedIds();
+      d.venues.sort(function(a, b){ return ids.indexOf(a.id) - ids.indexOf(b.id); });
+      return '<script type="application/json" id="exhibitions-data">\n' + JSON.stringify(d, null, 1).replace(/<\//g, '<\\/').replace(/&/g, '\\u0026') + '\n<\/script>';
+    }
+    cbtn.addEventListener('click', function(){
+      var block = makeBlock();
+      function fallback(){ box.hidden = false; box.value = block; box.focus(); box.select(); msg.textContent = 'Copy everything in the box below, then paste it over the data block on your WordPress page.'; }
+      try { navigator.clipboard.writeText(block).then(function(){ msg.textContent = 'Copied, with your venue order. In WordPress, open the page, replace the contents of the data block with it, then click Update.'; }, fallback); } catch (_) { fallback(); }
+    });
+    function when(iso){ var d = new Date(iso); if (isNaN(d)) return ''; return d.getDate() + ' ' + MONTHS[d.getMonth()] + ', ' + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0'); }
+    function describe(t){
+      if (!t) return 'The refresh task could not be found. Ask Claude to set it up again.';
+      var r = t.last_run; if (!r) return 'No refresh has run yet. Listings were checked ' + fmtFull(updDay) + '.';
+      var s = String(r.status || '');
+      if (/SUCCEEDED/.test(s)) return 'Last refresh finished ' + when(r.finished_at || r.fired_at) + '.';
+      if (/FAIL|CANCEL|ERROR/.test(s)) return 'The last refresh, started ' + when(r.fired_at) + ', did not finish. Try again.';
+      return 'A refresh is running (started ' + when(r.fired_at) + '). This page reloads with the new listings when it finishes.';
+    }
+    function errText(e, write){
+      var c = e && e.code;
+      if (c === 'not_in_manifest' || c === 'approval_required' || c === 'consent_required') return 'Refreshing needs your permission for Claude Code Remote on this page. Allow it when asked, then try again.';
+      if (c === 'server_not_connected' || c === 'needs_reauth' || c === 'selection_required') return 'Claude Code Remote isn’t available to this page. Reconnect it in claude.ai Settings, Connectors, then try again.';
+      if (c === 'tool_error') return 'The refresh task reported a problem: ' + (e.message || 'no details') + '.';
+      if (write && (c === 'server_unavailable' || c === 'upstream_error' || c === 'cancelled')) return 'The refresh may have started. Check back in a few minutes before trying again.';
+      if (c === 'server_unavailable' || c === 'upstream_error') return 'Couldn’t reach the refresh task just now. Try again in a minute.';
+      return 'Refresh isn’t available in this view.';
+    }
+    var mcp = null;
+    function loadStatus(){
+      return mcp.callTool(SERVER, 'list_triggers', {limit: 100}, {cache: false}).then(function(r){
+        var p = r.payload || {}; var list = (p && p.data) || [];
+        msg.textContent = describe(list.filter(function(t){ return t.id === TRIGGER; })[0]);
+      }).catch(function(e){ msg.textContent = errText(e, false); });
+    }
+    rbtn.addEventListener('click', function(){
+      if (!mcp) return;
+      rbtn.disabled = true; msg.textContent = 'Starting the refresh…';
+      mcp.callTool(SERVER, 'fire_trigger', {trigger_id: TRIGGER}, {cache: false}).then(function(){
+        msg.textContent = 'Refresh started. Reading every venue’s website takes about 10 to 15 minutes. This page reloads with the new listings when it’s done, and ailudo.github.io/london picks them up within a few minutes.';
+        setTimeout(function(){ rbtn.disabled = false; }, 60000);
+      }).catch(function(e){
+        msg.textContent = errText(e, true);
+        var ambiguous = e && (e.code === 'server_unavailable' || e.code === 'upstream_error' || e.code === 'cancelled');
+        setTimeout(function(){ rbtn.disabled = false; }, ambiguous ? 60000 : 0);
+      });
+    });
+    if (window.claude && window.claude.use) {
+      window.claude.use('mcp').then(function(m){
+        if (!m) return;
+        mcp = m; rbtn.hidden = false;
+        return window.claude.use('permissions').then(function(p){ return p ? p.state('mcp:' + SERVER) : 'unavailable'; }).catch(function(){ return 'unavailable'; }).then(function(st){ if (st === 'granted') loadStatus(); });
+      }).catch(function(){});
+    }
+  })();
+
+}
+// Load the latest listings from the published data file when the page names one (data-src),
+// falling back to the copy embedded in the page if it is slow, unreachable or older.
+function start(){
+  var root = document.getElementById('onview'), dataEl = document.getElementById('exhibitions-data');
+  var src = root && root.getAttribute('data-src');
+  if (!src || !window.fetch) { boot(); return; }
+  var done = false;
+  function go(){ if (!done) { done = true; boot(); } }
+  var timer = setTimeout(go, 3500);
+  fetch(src + (src.indexOf('?') < 0 ? '?' : '\u0026') + 't=' + Math.floor(Date.now() / 300000), {cache: 'no-cache'})
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(j){
+      if (done || !j || !j.exhibitions || !j.venues) return;
+      var cur = null; try { cur = dataEl ? JSON.parse(dataEl.textContent) : null; } catch (_) {}
+      if (!dataEl) { dataEl = document.createElement('script'); dataEl.type = 'application/json'; dataEl.id = 'exhibitions-data'; root.parentNode.insertBefore(dataEl, root); }
+      if (!cur || new Date(j.updated) >= new Date(cur.updated)) dataEl.textContent = JSON.stringify(j);
+    })
+    .catch(function(){})
+    .then(function(){ clearTimeout(timer); go(); });
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+</script>
+
+</body></html>
