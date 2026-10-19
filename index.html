@@ -36,7 +36,7 @@
         then drifts slowly around the page. It links to On View London. */
   :root {
     --s: clamp(110px, 16vw, 200px);   /* logo width  */
-    --h: calc(var(--s) * 1.133);      /* logo height (image is 760 x 861) */
+    --h: calc(var(--s) * 1.133);      /* logo height (image is 560 x 634) */
   }
   .drift-x, .drift-y {
     position: fixed;
@@ -85,7 +85,6 @@
     display: block;
     width: 100%;
     height: 100%;
-    mix-blend-mode: multiply;   /* lets the white of the jpg disappear */
   }
   @keyframes pop {
     0%   { opacity: 0; transform: scale(0); }
@@ -106,12 +105,12 @@
 </style>
 </head>
 <body>
-  <img class="hero" src="picture.jpg" alt="Studio AI Ludo">
+  <img class="hero" src="images/studio-ai-ludo.png" alt="Studio AI Ludo">
 
   <div class="drift-x">
     <div class="drift-y">
       <a class="logo-link" href="london/" aria-label="On View London" title="On View London">
-        <img src="logo.jpg" alt="art london">
+        <img src="images/art-london.png" alt="art london">
       </a>
     </div>
   </div>
