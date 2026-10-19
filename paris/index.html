@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="What is on, closing and opening at Paris museums and non-profit spaces. An AI project by Studio AI Ludo.">
+<title>On View Paris</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,800;1,6..96,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: a printed programme. Masthead, one ruled filter strip, then a two-column list of entries or a dated bar chart. Bodoni for headlines, Instrument Sans for everything that is read at size. */
+:root{
+  --paper:#f2eee6; --paper2:#e9e4d8; --ink:#16171c; --muted:#5d5f68; --rule:#cfc8b8;
+  --blue:#1f2b8a; --blue-ink:#ffffff; --red:#a8281f; --green:#1d6a4c;
+  --c-old:#7a4b2a; --c-c19:#2d6a6a; --c-mod:#1f2b8a; --c-photo:#5b3a86; --c-fashion:#a8281f; --c-world:#8a6a14;
+  --display:'Bodoni Moda','Didot','Bodoni 72',Georgia,serif;
+  --sans:'Instrument Sans','Helvetica Neue',Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#14151a; --paper2:#1d1f26; --ink:#efebe2; --muted:#a3a5ae; --rule:#34363f;
+  --blue:#9ea8ff; --blue-ink:#10113a; --red:#ff8c80; --green:#7fd1ab;
+  --c-old:#d9a276; --c-c19:#7ccaca; --c-mod:#9ea8ff; --c-photo:#c4a2f2; --c-fashion:#ff8c80; --c-world:#e3c25d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#14151a; --paper2:#1d1f26; --ink:#efebe2; --muted:#a3a5ae; --rule:#34363f;
+  --blue:#9ea8ff; --blue-ink:#10113a; --red:#ff8c80; --green:#7fd1ab;
+  --c-old:#d9a276; --c-c19:#7ccaca; --c-mod:#9ea8ff; --c-photo:#c4a2f2; --c-fashion:#ff8c80; --c-world:#e3c25d; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.5 var(--sans);padding-block:0 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1120px;margin:0 auto}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.mast{padding-block:36px 20px;border-bottom:3px double var(--ink);display:grid;gap:10px}
+.mast .kicker{font:500 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.mast h1{font:800 clamp(44px,9vw,92px)/.95 var(--display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.mast h1 em{font-style:italic;font-weight:400}
+.mast .dek{max-width:60ch;margin:0;color:var(--muted);font-size:17px}
+.checked{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;color:var(--muted);align-items:center}
+.checked b{color:var(--ink);font-weight:600}
+.theme{margin-left:auto;font:500 12px var(--sans);background:none;border:1px solid var(--rule);color:var(--ink);padding:6px 10px;border-radius:2px;cursor:pointer}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--ink);padding-block:12px;display:grid;gap:10px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.row{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.lbl{font:600 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);min-width:5.5em}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 14px/1 var(--sans);padding:9px 12px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;border-radius:2px;display:inline-flex;align-items:center;gap:7px;min-height:38px}
+.chip .dot{width:9px;height:9px;border-radius:50%;background:var(--dot,var(--ink));flex:none}
+.chip[aria-pressed="false"]{border-color:var(--rule);color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
+.chip[aria-pressed="false"] .dot{background:transparent;box-shadow:inset 0 0 0 1.5px var(--dot,var(--ink))}
+.chip.seg[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.chip.seg[aria-pressed="false"]{text-decoration:none}
+.chip .n{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px}
+select{font:500 14px var(--sans);padding:9px 10px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:2px;min-height:38px;max-width:100%}
+.count{font-size:14px;color:var(--muted);padding-block:14px 4px}
+.count b{color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:0 28px}
+.card{border-top:1px solid var(--ink);padding-block:16px 22px;display:grid;gap:7px;align-content:start;min-width:0}
+.card .top{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:12px}
+.badge{font:600 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:5px 7px;border:1px solid currentColor;border-radius:2px}
+.b-now{color:var(--ink)} .b-close{color:var(--red)} .b-soon{color:var(--green)}
+.b-free{background:var(--blue);color:var(--blue-ink);border-color:var(--blue)}
+.venue{font:600 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.card h3{font:600 clamp(24px,3.2vw,30px)/1.08 var(--display);margin:2px 0 0;text-wrap:balance}
+.card .title{font-style:italic;color:var(--muted);font-family:var(--display);font-size:15px;line-height:1.35;margin:0}
+.card .dates{font-variant-numeric:tabular-nums;font-weight:500;margin:4px 0 0}
+.card .note{font-size:13px;color:var(--muted);margin:0}
+.tags{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted);align-items:center}
+.tag{display:inline-flex;gap:6px;align-items:center}
+.tag i{width:8px;height:8px;border-radius:50%;background:var(--dot)}
+.src{font-size:13px;color:var(--blue);text-underline-offset:3px}
+.empty{padding:48px 0;text-align:center;font-family:var(--display);font-size:22px;border-top:1px solid var(--ink)}
+.tl{overflow-x:auto;border-top:1px solid var(--ink);margin-top:10px;-webkit-overflow-scrolling:touch}
+.tl-in{--nw:200px;min-width:760px;position:relative;padding-bottom:10px}
+.tl-head{display:grid;grid-template-columns:200px 1fr;border-bottom:1px solid var(--rule);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);position:sticky;left:0}
+.tl-months{position:relative;height:28px}
+.tl-months span{position:absolute;top:8px;border-left:1px solid var(--rule);padding-left:5px;height:20px}
+.tl-row{display:grid;grid-template-columns:200px 1fr;align-items:center;border-bottom:1px solid var(--rule);min-height:34px}
+.tl-name{font-size:13px;line-height:1.25;padding:6px 10px 6px 0;min-width:0}
+.tl-name small{display:block;color:var(--muted);font-size:11px}
+.tl-track{position:relative;height:34px}
+.tl-bar{position:absolute;top:10px;height:14px;background:var(--dot,var(--ink));border-radius:1px;opacity:.9}
+.tl-bar.open{background:linear-gradient(90deg,var(--dot),transparent)}
+.tl-today{position:absolute;top:0;bottom:0;width:0;border-left:2px solid var(--red);z-index:2;pointer-events:none}
+.tl-today::after{content:"Today";position:absolute;top:-1px;left:4px;font-size:10px;color:var(--red);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.map{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;margin-top:14px;border-top:1px solid var(--ink);padding-top:14px}
+@media(max-width:760px){.map{grid-template-columns:1fr}.tl-head,.tl-row{grid-template-columns:150px 1fr}.tl-in{--nw:150px}}
+.map svg{width:100%;height:auto;background:var(--paper2);display:block}
+.map .seine{fill:none;stroke:var(--blue);stroke-width:10;stroke-linecap:round;stroke-linejoin:round;opacity:.28}
+.map .pin{cursor:pointer}
+.map .pin circle{fill:var(--dot);stroke:var(--paper);stroke-width:2}
+.map .pin text{font:600 11px var(--sans);fill:var(--ink);paint-order:stroke;stroke:var(--paper2);stroke-width:3px}
+.map .pin.sel circle{stroke:var(--ink);stroke-width:3}
+.vlist{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.vlist li{border-top:1px solid var(--rule)}
+.vlist button{all:unset;cursor:pointer;display:flex;justify-content:space-between;gap:12px;padding:9px 2px;width:100%;box-sizing:border-box;font-size:14px}
+.vlist button:focus-visible{outline:2px solid var(--blue)}
+.vlist .c{font-variant-numeric:tabular-nums;color:var(--muted)}
+.vlist .z{color:var(--muted)}
+section.about{margin-top:56px;border-top:3px double var(--ink);padding-top:22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:20px 40px}
+@media(max-width:760px){section.about{grid-template-columns:1fr}}
+section.about h2{font:600 28px/1.1 var(--display);margin:0}
+section.about p{margin:0 0 12px;max-width:62ch}
+.vens{columns:2 220px;column-gap:28px;font-size:14px;margin:0;padding:0;list-style:none}
+.vens li{break-inside:avoid;padding-block:3px}
+.vens small{color:var(--muted)}
+footer{margin-top:36px;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:space-between;border-top:1px solid var(--rule);padding-top:14px}
+@media (prefers-reduced-motion:no-preference){.card{animation:rise .35s ease both}@keyframes rise{from{opacity:.001;transform:translateY(6px)}to{opacity:1;transform:none}}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+<header class="mast">
+  <div class="kicker">An AI project by Studio AI Ludo</div>
+  <h1>On View <em>Paris</em></h1>
+  <p class="dek">What is on, closing and opening at the public museums and non-profit spaces of Paris. Gathered from each venue's own pages and written up with AI.</p>
+  <div class="checked"><span>Listings checked <b>19 October 2026</b></span><span id="venueCount"></span>
+    <button class="theme" id="themeBtn" type="button">Light / dark</button></div>
+</header>
+
+<div class="bar" role="group" aria-label="Filters">
+  <div class="row"><span class="lbl">Categories</span><div class="chips" id="cats"></div></div>
+  <div class="row">
+    <span class="lbl">Show</span>
+    <div class="chips" id="status"></div>
+    <div class="chips" id="adm"></div>
+  </div>
+  <div class="row">
+    <span class="lbl">Venue</span><select id="venue" aria-label="Venue"></select>
+    <span class="lbl" style="min-width:0">Order</span><select id="sort" aria-label="Order">
+      <option value="close">Closing soonest</option><option value="open">Opening soonest</option><option value="venue">By venue</option></select>
+    <span class="lbl" style="min-width:0">View</span><div class="chips" id="view"></div>
+  </div>
+</div>
+
+<div class="count" id="count" aria-live="polite"></div>
+<main id="out"></main>
+
+<section class="about" id="about">
+  <div><h2>About this guide</h2></div>
+  <div>
+    <p>On View Paris lists temporary exhibitions at public museums, national and city institutions, and non-profit foundations. It leaves out commercial galleries, permanent collection displays, talks and events.</p>
+    <p>Each headline names the artist for a solo show, or the subject for a themed one, with the official title beneath it. Free means the exhibition itself is free. Where a date could not be confirmed on a venue's own page, the card says so. Dates change, so check the venue before you travel.</p>
+    <p>Closed for works at the time of checking: Centre Pompidou, Musée Nissim de Camondo (reopens early 2027) and Musée Yves Saint Laurent Paris (reopens autumn 2027). Musée Cognacq-Jay and Fondation Cartier have no confirmed show running or announced at the time of checking.</p>
+    <p>Part of a pair with <a href="https://ailudo.github.io/london/">On View London</a>.</p>
+    <h2 style="font-size:20px;margin:22px 0 8px">Venues</h2>
+    <ul class="vens" id="vens"></ul>
+  </div>
+</section>
+<footer><span>Studio AI Ludo · Paris · 2026</span><span>Dates as published by each venue on the day of checking.</span></footer>
+</div>
+
+<script>
+const CHECKED='2026-10-19';
+const CATS=[
+ {id:'old',name:'Old Masters & early modern',c:'--c-old'},
+ {id:'c19',name:'19th century & Impressionism',c:'--c-c19'},
+ {id:'mod',name:'Modern & contemporary',c:'--c-mod'},
+ {id:'photo',name:'Photography',c:'--c-photo'},
+ {id:'fashion',name:'Fashion & design',c:'--c-fashion'},
+ {id:'world',name:'World art',c:'--c-world'}];
+const VEN=[
+ ['louvre','Musée du Louvre','Louvre',48.8606,2.3376,['old'],'https://www.louvre.fr/en-ce-moment/expositions'],
+ ['cluny','Musée de Cluny','Latin Quarter',48.8505,2.3440,['old'],'https://www.musee-moyenage.fr/'],
+ ['jacquemart','Musée Jacquemart-André','8th',48.8755,2.3115,['old'],'https://www.musee-jacquemart-andre.com/'],
+ ['petitpalais','Petit Palais','8th',48.8660,2.3140,['old','c19'],'https://www.petitpalais.paris.fr/'],
+ ['custodia','Fondation Custodia','7th',48.8562,2.3198,['old'],'https://www.fondationcustodia.fr/Exhibitions'],
+ ['luxembourg','Musée du Luxembourg','6th',48.8490,2.3330,['old'],'https://museeduluxembourg.fr/'],
+ ['cognacq','Musée Cognacq-Jay','Marais',48.8574,2.3622,['old'],'https://museecognacqjay.paris.fr/'],
+ ['camondo','Musée Nissim de Camondo','17th',48.8791,2.3098,['old'],'https://madparis.fr/'],
+ ['carnavalet','Musée Carnavalet','Marais',48.8574,2.3626,['old'],'https://www.carnavalet.paris.fr/'],
+ ['orsay','Musée d’Orsay','7th',48.8600,2.3266,['c19'],'https://www.musee-orsay.fr/en/program/whats-on/exhibitions'],
+ ['orangerie','Musée de l’Orangerie','Tuileries',48.8638,2.3226,['c19'],'https://www.musee-orangerie.fr/'],
+ ['marmottan','Musée Marmottan Monet','16th',48.8590,2.2670,['c19'],'https://www.marmottan.fr/'],
+ ['mam','Musée d’Art Moderne de Paris','16th',48.8644,2.2970,['mod'],'https://www.mam.paris.fr/'],
+ ['pdt','Palais de Tokyo','16th',48.8643,2.2967,['mod'],'https://palaisdetokyo.com/'],
+ ['flv','Fondation Louis Vuitton','Bois de Boulogne',48.8767,2.2635,['mod'],'https://www.fondationlouisvuitton.fr/'],
+ ['bourse','Bourse de Commerce','Les Halles',48.8627,2.3427,['mod'],'https://www.pinaultcollection.com/boursedecommerce/'],
+ ['cartier','Fondation Cartier','Palais-Royal',48.8640,2.3366,['mod'],'https://www.fondationcartier.com/'],
+ ['lafayette','Lafayette Anticipations','Marais',48.8590,2.3550,['mod'],'https://www.lafayetteanticipations.com/'],
+ ['picasso','Musée Picasso','Marais',48.8598,2.3626,['mod'],'https://www.museepicassoparis.fr/fr/agenda/types/exposition/'],
+ ['grandpalais','Grand Palais','8th',48.8661,2.3125,['mod'],'https://www.grandpalais.fr/'],
+ ['jeudepaume','Jeu de Paume','Tuileries',48.8654,2.3224,['photo'],'https://jeudepaume.org/'],
+ ['mep','Maison Européenne de la Photographie','Marais',48.8553,2.3560,['photo'],'https://www.mep-fr.org/'],
+ ['bal','Le Bal','18th',48.8838,2.3300,['photo'],'https://le-bal.fr/'],
+ ['galliera','Palais Galliera','16th',48.8656,2.2966,['fashion'],'https://www.palaisgalliera.paris.fr/'],
+ ['artsdeco','Les Arts Décoratifs','Louvre',48.8630,2.3326,['fashion'],'https://madparis.fr/'],
+ ['ysl','Musée Yves Saint Laurent','16th',48.8668,2.2931,['fashion'],'https://museeyslparis.com/'],
+ ['ima','Institut du Monde Arabe','5th',48.8485,2.3563,['world'],'https://www.imarabe.org/'],
+ ['guimet','Musée Guimet','16th',48.8651,2.2933,['world'],'https://www.guimet.fr/'],
+ ['cernuschi','Musée Cernuschi','8th',48.8791,2.3095,['world'],'https://www.cernuschi.paris.fr/'],
+ ['branly','Musée du quai Branly','7th',48.8611,2.2978,['world'],'https://www.quaibranly.fr/']
+].map(a=>({id:a[0],name:a[1],area:a[2],lat:a[3],lng:a[4],cats:a[5],src:a[6]}));
+const V=Object.fromEntries(VEN.map(v=>[v.id,v]));
+// [id, venue, headline, official title, start, end, admission, categories override, note, url]
+const RAW=[
+['l-zurb','louvre','Francisco de Zurbarán','Zurbarán','2026-10-07',null,'paid',0,'Closing date not confirmed on the venue page.'],
+['l-sculpt','louvre','Sculpture from the Museo Nacional de Escultura, Valladolid','Sculpter la couleur: Chefs-d’œuvre du Musée national de sculpture, Valladolid','2026-10-07','2027-01-25','paid'],
+['l-photo','louvre','The Louvre seen by photographers','Louvre Photo','2026-11-04','2027-05-03','paid',['photo']],
+['l-hotes','louvre','Kader Attia and Elizabeth Peyton','Les Hôtes du Louvre','2026-09-24','2026-12-14','paid',['old','mod']],
+['l-ingres','louvre','Ingres and fashion','Ingres et la mode','2026-07-03','2026-11-08','paid',['old','fashion']],
+['l-myth','louvre','Mythologies','Mythologies','2026-07-08','2026-11-09','paid'],
+['l-cross','louvre','Mughal, Safavid and Ottoman masterworks','Crosscurrents: Chefs-d’œuvre de l’art moghol, safavide et ottoman du musée du Louvre','2026-06-19','2027-01-24','paid',['old','world']],
+['l-eau','louvre','Mesopotamia','L’Eau primordiale: Leçons de Mésopotamie','2026-05-20','2027-03-15','paid',['world']],
+['l-romain','louvre','Roman art','L’art romain du Louvre: Un monde d’images','2026-06-11','2027-01-10','paid'],
+['c-flamel','cluny','Nicolas Flamel','Nicolas Flamel, alchimiste de papier','2026-10-13','2027-01-24','paid'],
+['ja-tintoret','jacquemart','Tintoretto','Éternel Tintoret','2026-09-11',null,'check',0,'Closing date not confirmed on the venue page.'],
+['pp-gonzales','petitpalais','Eva Gonzalès','Eva Gonzalès','2026-09-15','2027-01-24','paid',['c19']],
+['pp-bruxelles','petitpalais','Brussels around 1900','Bruxelles 1900','2026-11-10','2027-04-25','paid',['c19']],
+['cu-amis','custodia','Drawings in the collections of 19th-century French artists','Mes Chers Amis','2026-10-17','2027-01-17','check',['old','c19']],
+['lux-warhol','luxembourg','Andy Warhol','La Ligne et l’image','2026-09-16','2027-01-10','check',['mod']],
+['ca-villegle','carnavalet','Jacques Villeglé','Paris à l’arraché: Jacques Villeglé et l’art urbain','2026-10-14','2027-02-14','paid',['mod']],
+['o-cassatt','orsay','Mary Cassatt','Mary Cassatt, l’indépendante','2026-10-06','2027-01-31','paid'],
+['o-holzer','orsay','Jenny Holzer','Jenny Holzer: J’ai vu','2026-10-20','2027-02-21','paid',['mod','c19']],
+['o-bartholdi','orsay','Auguste Bartholdi','Liberty Enlightening the World',null,'2027-01-31','paid'],
+['o-peduzzi','orsay','Richard Peduzzi','Vertigo',null,'2027-01-17','paid',['c19','mod']],
+['o-brac','orsay','Marie and Félix Bracquemond','Decorative arts drawings',null,'2026-12-06','paid',['c19','fashion'],'A display within the museum.'],
+['o-denis','orsay','Maurice Denis','Illustrating Christian mysticism','2026-11-10','2027-02-07','paid',0,'A display within the museum.'],
+['o-legray','orsay','Gustave Le Gray','Painter and Photographer','2026-11-10','2027-02-07','paid',['c19','photo'],'A display within the museum.'],
+['or-monet','orangerie','Claude Monet','Monet, peindre le temps','2026-09-30','2027-01-25','paid'],
+['ma-paysages','marmottan','Landscape from Monet to Hockney','Histoires de paysages. De Monet à Hockney (1890–2026)','2026-09-24','2027-01-31','paid',['c19','mod']],
+['mam-hist','mam','The Histories*','The Histories*','2026-09-18','2027-01-24','paid'],
+['mam-miller','mam','Lee Miller','Lee Miller','2026-06-19','2027-01-04','paid',['mod','photo']],
+['pdt-cherri','pdt','Ali Cherri','Today Is OK','2026-10-21','2027-02-14','paid'],
+['pdt-gomes','pdt','Sonia Gomes','Wild Heart','2026-10-21','2027-02-14','paid'],
+['pdt-gang','pdt','Artists outside the cities of France','Toi et ta bande','2026-10-21','2027-02-14','paid',0,'Free entry on 21 and 22 October.'],
+['pdt-john','pdt','Valérie John','I telman nwè ki i blé (So Black It Turns Blue)','2026-10-21','2027-02-14','paid'],
+['flv-fayet','flv','Gustave Fayet','Gustave Fayet, Collectionneur – Créateur. Icônes de l’art moderne','2026-10-09','2027-03-08','paid'],
+['bc-remember','bourse','Photographs from the Pinault Collection','Remember Me. De la Collection Pinault','2026-10-07','2027-01-18','paid',['mod','photo']],
+['la-nishimura','lafayette','Yu Nishimura','Towards a Sea','2026-10-21','2027-01-03','free'],
+['la-fauquet','lafayette','Hélène Fauquet','Vivresse','2026-10-21','2027-01-03','free'],
+['la-thomson','lafayette','Mungo Thomson','Monument','2026-10-21','2026-11-29','free'],
+['pi-schwitters','picasso','Kurt Schwitters','Le chaos-monde 1918–1948','2026-10-06','2027-02-07','paid'],
+['pi-malraux','picasso','André Malraux and Pablo Picasso','Le musée imaginaire',null,'2027-02-07','paid',0,'A display within the museum.'],
+['gp-cezanne','grandpalais','Cézanne and the artists after him','Cézanne et nous','2026-09-23','2027-01-17','check',['c19','mod'],'Presented with the Musée d’Orsay.'],
+['jp-douglas','jeudepaume','Stan Douglas','Parallax','2026-10-20','2027-01-10','check'],
+['mep-penn','mep','Irving Penn','Penn & Fashion','2026-09-30','2027-01-17','paid',['photo','fashion']],
+['bal-wilson','bal','The Wilson Centre for Photography collection','L’Espace entre nous','2026-06-19','2027-01-03','paid'],
+['gal-vest','galliera','A wardrobe of one’s own','Un vestiaire à soi','2026-09-26',null,'paid',0,'Closing date not confirmed on the venue page.'],
+['ad-pav','artsdeco','Rafael Pavarotti','Rafael Pavarotti, photographe','2026-10-02','2027-02-07','paid',['fashion','photo']],
+['ad-maj','artsdeco','Haute couture at the Thai court','Majestic Fashion: Haute Couture and Tradition at the Thai Court','2026-05-13','2026-11-01','paid'],
+['ima-mariee','ima','Weddings in Algeria, Morocco and Tunisia','Vive la mariée !','2026-09-29','2027-02-28','paid',['world','fashion']],
+['ima-alhambra','ima','The Nasrid Alhambra','Les Trésors cachés de l’Alhambra nasride','2026-11-24','2027-05-16','paid'],
+['gu-dal','guimet','Seulgi Lee','DAL DARI. The Moon and its Legs','2026-06-06','2027-02-08','paid'],
+['gu-trompe','guimet','Korean trompe-l’œil','Le savoir en trompe-l’œil: Corée, XVIIIe–XXe siècle','2026-09-16','2027-01-04','paid'],
+['ce-coree','cernuschi','Korea and the scholar class','Corée, le royaume des lettrés','2026-11-20','2027-04-04','check'],
+['qb-plumes','branly','Birds of paradise','Plumes du Paradis','2026-05-12','2026-11-08','paid']
+];
+const EX=RAW.map(r=>({id:r[0],venue:r[1],head:r[2],title:r[3],start:r[4],end:r[5],adm:r[6],cats:r[7]||V[r[1]].cats,note:r[8]||'',url:V[r[1]].src}));
+
+const $=s=>document.querySelector(s);
+const state={cats:new Set(CATS.map(c=>c.id)),status:'all',adm:'all',venue:'all',sort:'close',view:'cards'};
+const todayISO=()=>{const d=new Date();const t=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');return t<CHECKED?CHECKED:t};
+const TODAY=todayISO();
+const dayN=s=>Math.round(Date.parse(s+'T00:00:00Z')/864e5);
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const fd=s=>{const [y,m,d]=s.split('-').map(Number);return d+' '+MON[m-1]+(y!==2026?' '+y:'')};
+const fdy=s=>{const [y,m,d]=s.split('-').map(Number);return d+' '+MON[m-1]+' '+y};
+function statusOf(e){
+  if(e.end&&e.end<TODAY)return null;
+  if(e.start&&e.start>TODAY)return 'soon';
+  if(e.end&&dayN(e.end)-dayN(TODAY)<=14)return 'close';
+  return 'now';
+}
+function datesText(e){
+  const st=statusOf(e);
+  if(e.start&&e.end&&e.start>TODAY)return fdy(e.start)+' to '+fdy(e.end);
+  if(e.start&&e.start>TODAY)return 'Opens '+fdy(e.start);
+  if(e.end)return 'Until '+fdy(e.end);
+  if(e.start)return 'Opened '+fdy(e.start);
+  return '';
+}
+const STAT={now:['On now','b-now'],close:['Closing within 14 days','b-close'],soon:['Opening soon','b-soon']};
+function visible(ignoreVenue){
+  return EX.filter(e=>{
+    const st=statusOf(e);if(!st)return false;
+    if(!e.cats.some(c=>state.cats.has(c)))return false;
+    if(state.status!=='all'&&state.status!==st)return false;
+    if(state.adm==='free'&&e.adm!=='free')return false;
+    if(state.adm==='paid'&&e.adm==='free')return false;
+    if(!ignoreVenue&&state.venue!=='all'&&e.venue!==state.venue)return false;
+    return true;
+  });
+}
+function sorted(list){
+  const far='9999-12-31',L=list.slice();
+  const key={
+    close:e=>(e.end||far)+e.id,
+    open:e=>{const s=statusOf(e);return (s==='soon'?'0':'1')+(s==='soon'?e.start:(e.start||'0000'))+e.id},
+    venue:e=>V[e.venue].name+(e.end||far)
+  }[state.sort];
+  return L.sort((a,b)=>key(a)<key(b)?-1:1);
+}
+const catColor=id=>`var(${CATS.find(c=>c.id===id).c})`;
+function esc(s){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))}
+
+function renderBar(){
+  const counts=Object.fromEntries(CATS.map(c=>[c.id,0]));
+  EX.forEach(e=>{if(statusOf(e))e.cats.forEach(c=>counts[c]++)});
+  $('#cats').innerHTML=CATS.map(c=>`<button class="chip" type="button" data-cat="${c.id}" aria-pressed="${state.cats.has(c.id)}" style="--dot:var(${c.c})"><span class="dot"></span>${esc(c.name)} <span class="n">${counts[c.id]}</span></button>`).join('');
+  const segs=(id,items,key)=>{$(id).innerHTML=items.map(([v,t])=>`<button class="chip seg" type="button" data-${key}="${v}" aria-pressed="${state[key]===v}">${t}</button>`).join('')};
+  segs('#status',[['all','All'],['now','On now'],['close','Closing soon'],['soon','Opening soon']],'status');
+  segs('#adm',[['all','Free and ticketed'],['free','Free'],['paid','Ticketed']],'adm');
+  segs('#view',[['cards','Cards'],['timeline','Timeline'],['map','Map']],'view');
+}
+function renderVenueSelect(){
+  const base=visible(true),n={};base.forEach(e=>n[e.venue]=(n[e.venue]||0)+1);
+  const opts=VEN.filter(v=>n[v.id]).sort((a,b)=>a.name.localeCompare(b.name,'fr'));
+  if(state.venue!=='all'&&!n[state.venue])state.venue='all';
+  $('#venue').innerHTML='<option value="all">All venues</option>'+opts.map(v=>`<option value="${v.id}"${state.venue===v.id?' selected':''}>${esc(v.name)} (${n[v.id]})</option>`).join('');
+}
+function catTags(e){return e.cats.map(c=>`<span class="tag" style="--dot:${catColor(c)}"><i></i>${esc(CATS.find(x=>x.id===c).name)}</span>`).join('')}
+function cards(list){
+  if(!list.length)return '<div class="empty">Nothing matches these filters.</div>';
+  return '<div class="grid">'+list.map(e=>{
+    const st=statusOf(e),[sl,sc]=STAT[st],v=V[e.venue];
+    return `<article class="card"><div class="top"><span class="badge ${sc}">${sl}</span>${e.adm==='free'?'<span class="badge b-free">Free</span>':e.adm==='paid'?'<span class="badge">Ticketed</span>':'<span class="badge" style="color:var(--muted)">Check price</span>'}</div>
+    <div class="venue">${esc(v.name)} · ${esc(v.area)}</div>
+    <h3>${esc(e.head)}</h3><p class="title">${esc(e.title)}</p>
+    <p class="dates">${datesText(e)}</p>${e.note?`<p class="note">${esc(e.note)}</p>`:''}
+    <div class="tags">${catTags(e)}</div>
+    <a class="src" href="${esc(e.url)}" target="_blank" rel="noopener">Venue page ↗</a></article>`}).join('')+'</div>';
+}
+function timeline(list){
+  if(!list.length)return '<div class="empty">Nothing matches these filters.</div>';
+  const A=dayN('2026-09-01'),B=dayN('2027-05-31'),W=B-A;
+  const pct=s=>Math.max(0,Math.min(100,(dayN(s)-A)/W*100));
+  const months=[];for(let i=0;i<9;i++){const y=2026+Math.floor((8+i)/12),m=(8+i)%12;months.push([`${y}-${String(m+1).padStart(2,'0')}-01`,MON[m]+(m===0?' '+y:'')])}
+  const rows=list.map(e=>{
+    const s=e.start&&e.start>'2026-09-01'?e.start:'2026-09-01',en=e.end||'2027-05-31';
+    const l=pct(s),w=Math.max(pct(en)-l,1);
+    return `<div class="tl-row"><div class="tl-name"><b>${esc(e.head)}</b><small>${esc(V[e.venue].name)} · ${datesText(e)}</small></div><div class="tl-track"><div class="tl-bar${e.end?'':' open'}" style="left:${l}%;width:${w}%;--dot:${catColor(e.cats[0])}" title="${esc(e.title)}"></div></div></div>`}).join('');
+  const t=pct(TODAY);
+  return `<div class="tl"><div class="tl-in"><div class="tl-head"><div></div><div class="tl-months">${months.map(m=>`<span style="left:${pct(m[0])}%">${m[1]}</span>`).join('')}</div></div>
+  <div style="position:relative">${rows}<div style="position:absolute;left:var(--nw);right:0;top:0;bottom:0;pointer-events:none"><div class="tl-today" style="left:${t}%"></div></div></div></div></div>`;
+}
+function mapView(list){
+  const n={};list.forEach(e=>n[e.venue]=(n[e.venue]||0)+1);
+  const lat0=48.8330,lat1=48.8860,lng0=2.2500,lng1=2.3900,W=700,H=Math.round(W*(lat1-lat0)*1.0/((lng1-lng0)*Math.cos(48.86*Math.PI/180)));
+  const X=g=>(g-lng0)/(lng1-lng0)*W,Y=a=>(lat1-a)/(lat1-lat0)*H;
+  const seine=[[2.2520,48.8470],[2.2700,48.8420],[2.2850,48.8490],[2.2960,48.8590],[2.3070,48.8645],[2.3210,48.8645],[2.3380,48.8590],[2.3500,48.8530],[2.3640,48.8430],[2.3800,48.8350],[2.3900,48.8330]].map(p=>X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join(' ');
+  const pins=VEN.filter(v=>n[v.id]).map(v=>{
+    const x=X(v.lng),y=Y(v.lat),r=7+Math.min(n[v.id],6)*1.6,left=x>W*0.72;
+    return `<g class="pin${state.venue===v.id?' sel':''}" data-v="${v.id}" tabindex="0" role="button" aria-label="${esc(v.name)}, ${n[v.id]} exhibitions" style="--dot:${catColor(v.cats[0])}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}"/><text x="${(left?x-r-4:x+r+4).toFixed(1)}" y="${(y+4).toFixed(1)}" text-anchor="${left?'end':'start'}">${esc(v.name.replace('Musée d’','').replace('Musée du ','').replace('Musée ','').replace('Maison Européenne de la Photographie','MEP').replace('Fondation ','Fond. '))}</text></g>`}).join('');
+  const lis=VEN.slice().sort((a,b)=>a.name.localeCompare(b.name,'fr')).map(v=>`<li><button type="button" data-v="${v.id}"><span>${esc(v.name)}</span><span class="${n[v.id]?'c':'z'}">${n[v.id]||'none'}</span></button></li>`).join('');
+  return `<div class="map"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Map of venues, sized by number of exhibitions"><polyline class="seine" points="${seine}"/>${pins}</svg><ul class="vlist">${lis}</ul></div>`;
+}
+function render(){
+  renderBar();renderVenueSelect();
+  const list=sorted(visible(false));
+  $('#count').innerHTML=`<b>${list.length}</b> exhibition${list.length===1?'':'s'} at <b>${new Set(list.map(e=>e.venue)).size}</b> venues`+(state.venue!=='all'?` · <a href="#" id="clearV">Show all venues</a>`:'');
+  $('#out').innerHTML=state.view==='cards'?cards(list):state.view==='timeline'?timeline(list):mapView(sorted(visible(true)));
+  const c=$('#clearV');if(c)c.onclick=ev=>{ev.preventDefault();state.venue='all';render()};
+}
+document.addEventListener('click',ev=>{
+  const b=ev.target.closest('button,[data-v]');if(!b)return;
+  if(b.dataset.cat){const id=b.dataset.cat;state.cats.has(id)?state.cats.delete(id):state.cats.add(id);render();return}
+  for(const k of ['status','adm','view'])if(b.dataset[k]){state[k]=b.dataset[k];render();return}
+  if(b.dataset.v){state.venue=state.venue===b.dataset.v?'all':b.dataset.v;render()}
+});
+document.addEventListener('keydown',ev=>{const g=ev.target.closest&&ev.target.closest('.pin');if(g&&(ev.key==='Enter'||ev.key===' ')){ev.preventDefault();state.venue=state.venue===g.dataset.v?'all':g.dataset.v;render()}});
+$('#venue').onchange=e=>{state.venue=e.target.value;render()};
+$('#sort').onchange=e=>{state.sort=e.target.value;render()};
+$('#themeBtn').onclick=()=>{const r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dark?'light':'dark'};
+// venues footer
+const nBy={};EX.forEach(e=>{if(statusOf(e))nBy[e.venue]=(nBy[e.venue]||0)+1});
+$('#vens').innerHTML=VEN.slice().sort((a,b)=>a.name.localeCompare(b.name,'fr')).map(v=>`<li><a href="${esc(v.src)}" target="_blank" rel="noopener">${esc(v.name)}</a> <small>${nBy[v.id]?nBy[v.id]+' listed':'none listed'}</small></li>`).join('');
+$('#venueCount').textContent=VEN.length+' venues in six categories';
+render();
+</script>
+
+</body>
+</html>
