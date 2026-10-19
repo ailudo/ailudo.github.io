@@ -107,13 +107,14 @@
     outline-offset: 4px;
   }
 
+  /* Reduced motion: keep the one-off blur and pop-up, but do not let the labels wander.
+     Add ?motion=on to the address to see the drifting anyway. */
   @media (prefers-reduced-motion: reduce) {
-    .hero { animation: none; filter: blur(6px); }
-    .drift { animation: none; left: auto; top: auto; right: 24px; bottom: 24px; transform: none; }
-    .drift.paris { right: auto; left: 24px; }
-    .logo-link { animation: none; opacity: 1; transform: none; }
+    html:not(.motion-on) .drift { animation: none; left: auto; top: auto; right: 24px; bottom: 24px; transform: none; }
+    html:not(.motion-on) .drift.paris { right: auto; left: 24px; }
   }
 </style>
+<script>if(/[?&]motion=on\b/.test(location.search))document.documentElement.classList.add("motion-on");</script>
 </head>
 <body>
   <img class="hero" src="images/studio-ai-ludo.png" alt="Studio AI Ludo">
