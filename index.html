@@ -35,8 +35,8 @@
   /* 2. The logo: pops up once the picture has gone soft (about 2.6s),
         then drifts slowly around the page. It links to On View London. */
   :root {
-    --s: clamp(110px, 16vw, 200px);   /* logo width  */
-    --h: calc(var(--s) * 1.133);      /* logo height (image is 560 x 634) */
+    --s: clamp(70px, 10.2vw, 128px);  /* logo box width: lettering is about half its previous size */
+    --h: var(--s);                    /* logo box height (image is square, 2100 x 2100) */
   }
   .drift-x, .drift-y {
     position: fixed;
