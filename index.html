@@ -9,32 +9,111 @@
     margin: 0;
     height: 100%;
     background: #ffffff;
+    overflow: hidden;
   }
   body {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  img {
+
+  /* 1. The picture: sharp on load, then softly out of focus after 1 second */
+  .hero {
     max-width: 90vw;
     max-height: 90vh;
     width: auto;
     height: auto;
     display: block;
     filter: blur(0);
-    /* sharp on load, then drifts slightly out of focus after 1 second */
     animation: defocus 1.6s ease-in-out 1s forwards;
   }
   @keyframes defocus {
     from { filter: blur(0); }
     to   { filter: blur(6px); }
   }
+
+  /* 2. The logo: pops up once the picture has gone soft (about 2.6s),
+        then drifts slowly around the page. It links to On View London. */
+  :root {
+    --s: clamp(110px, 16vw, 200px);   /* logo width  */
+    --h: calc(var(--s) * 1.133);      /* logo height (image is 760 x 861) */
+  }
+  .drift-x, .drift-y {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: var(--s);
+    height: var(--h);
+  }
+  /* two different periods so the path wanders instead of bouncing diagonally;
+     negative delays start it near the middle of the page */
+  .drift-x {
+    animation: drift-x 53s ease-in-out -26s infinite alternate;
+  }
+  .drift-y {
+    position: static;
+    animation: drift-y 37s ease-in-out -18s infinite alternate;
+  }
+  @keyframes drift-x {
+    from { transform: translateX(0); }
+    to   { transform: translateX(calc(100vw - var(--s))); }
+  }
+  @keyframes drift-y {
+    from { transform: translateY(0); }
+    to   { transform: translateY(calc(100vh - var(--h))); }
+  }
+  @supports (height: 100dvh) {
+    @keyframes drift-y {
+      from { transform: translateY(0); }
+      to   { transform: translateY(calc(100dvh - var(--h))); }
+    }
+  }
+  /* hold still under the pointer so it is easy to click */
+  .drift-x:hover, .drift-x:hover .drift-y {
+    animation-play-state: paused;
+  }
+
+  .logo-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(0);
+    animation: pop 0.8s cubic-bezier(.2, .9, .3, 1.25) 2.8s forwards;
+  }
+  .logo-link img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: multiply;   /* lets the white of the jpg disappear */
+  }
+  @keyframes pop {
+    0%   { opacity: 0; transform: scale(0); }
+    60%  { opacity: 1; transform: scale(1.12); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  .logo-link:focus-visible {
+    outline: 2px solid #0030c8;
+    outline-offset: 4px;
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    img { animation: none; }
+    .hero { animation: none; filter: blur(6px); }
+    .drift-x, .drift-y { animation: none; }
+    .drift-x { left: auto; top: auto; right: 24px; bottom: 24px; }
+    .logo-link { animation: none; opacity: 1; transform: none; }
   }
 </style>
 </head>
 <body>
-  <img src="picture.jpg" alt="Studio AI Ludo">
+  <img class="hero" src="picture.jpg" alt="Studio AI Ludo">
+
+  <div class="drift-x">
+    <div class="drift-y">
+      <a class="logo-link" href="london/" aria-label="On View London" title="On View London">
+        <img src="logo.jpg" alt="art london">
+      </a>
+    </div>
+  </div>
 </body>
 </html>
