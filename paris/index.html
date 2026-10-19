@@ -136,7 +136,7 @@ footer{margin-top:36px;font-size:13px;color:var(--muted);display:flex;flex-wrap:
   <div class="kicker">An AI project by Studio AI Ludo</div>
   <h1>On View <em>Paris</em></h1>
   <p class="dek">What is on, closing and opening at the public museums and non-profit spaces of Paris. Gathered from each venue's own pages and written up with AI.</p>
-  <div class="checked"><span>Listings checked <b>19 October 2026</b></span><span id="venueCount"></span>
+  <div class="checked"><span>Listings checked <b id="checkedDate">19 October 2026</b></span><span id="venueCount"></span>
     <button class="theme" id="themeBtn" type="button">Light / dark</button></div>
 </header>
 
@@ -173,8 +173,16 @@ footer{margin-top:36px;font-size:13px;color:var(--muted);display:flex;flex-wrap:
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" crossorigin="anonymous"></script>
+<script type="application/json" id="exhibitions-data">{"updated":"2026-10-19T16:30:00+01:00","checked":"2026-10-19","venues":[{"id":"louvre","name":"Musée du Louvre","area":"Louvre","lat":48.8606,"lng":2.3376,"cats":["old"],"source":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"cluny","name":"Musée de Cluny","area":"Latin Quarter","lat":48.8505,"lng":2.344,"cats":["old"],"source":"https://www.musee-moyenage.fr/"},{"id":"jacquemart","name":"Musée Jacquemart-André","area":"8th","lat":48.8755,"lng":2.3115,"cats":["old"],"source":"https://www.musee-jacquemart-andre.com/"},{"id":"petitpalais","name":"Petit Palais","area":"8th","lat":48.866,"lng":2.314,"cats":["old","c19"],"source":"https://www.petitpalais.paris.fr/"},{"id":"custodia","name":"Fondation Custodia","area":"7th","lat":48.8562,"lng":2.3198,"cats":["old"],"source":"https://www.fondationcustodia.fr/Exhibitions"},{"id":"luxembourg","name":"Musée du Luxembourg","area":"6th","lat":48.849,"lng":2.333,"cats":["old"],"source":"https://museeduluxembourg.fr/"},{"id":"cognacq","name":"Musée Cognacq-Jay","area":"Marais","lat":48.8574,"lng":2.3622,"cats":["old"],"source":"https://museecognacqjay.paris.fr/"},{"id":"camondo","name":"Musée Nissim de Camondo","area":"17th","lat":48.8791,"lng":2.3098,"cats":["old"],"source":"https://madparis.fr/"},{"id":"carnavalet","name":"Musée Carnavalet","area":"Marais","lat":48.8574,"lng":2.3626,"cats":["old"],"source":"https://www.carnavalet.paris.fr/"},{"id":"orsay","name":"Musée d’Orsay","area":"7th","lat":48.86,"lng":2.3266,"cats":["c19"],"source":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"orangerie","name":"Musée de l’Orangerie","area":"Tuileries","lat":48.8638,"lng":2.3226,"cats":["c19"],"source":"https://www.musee-orangerie.fr/"},{"id":"marmottan","name":"Musée Marmottan Monet","area":"16th","lat":48.859,"lng":2.267,"cats":["c19"],"source":"https://www.marmottan.fr/"},{"id":"mam","name":"Musée d’Art Moderne de Paris","area":"16th","lat":48.8644,"lng":2.297,"cats":["mod"],"source":"https://www.mam.paris.fr/"},{"id":"pdt","name":"Palais de Tokyo","area":"16th","lat":48.8643,"lng":2.2967,"cats":["mod"],"source":"https://palaisdetokyo.com/"},{"id":"flv","name":"Fondation Louis Vuitton","area":"Bois de Boulogne","lat":48.8767,"lng":2.2635,"cats":["mod"],"source":"https://www.fondationlouisvuitton.fr/"},{"id":"bourse","name":"Bourse de Commerce","area":"Les Halles","lat":48.8627,"lng":2.3427,"cats":["mod"],"source":"https://www.pinaultcollection.com/boursedecommerce/"},{"id":"cartier","name":"Fondation Cartier","area":"Palais-Royal","lat":48.864,"lng":2.3366,"cats":["mod"],"source":"https://www.fondationcartier.com/"},{"id":"lafayette","name":"Lafayette Anticipations","area":"Marais","lat":48.859,"lng":2.355,"cats":["mod"],"source":"https://www.lafayetteanticipations.com/"},{"id":"picasso","name":"Musée Picasso","area":"Marais","lat":48.8598,"lng":2.3626,"cats":["mod"],"source":"https://www.museepicassoparis.fr/fr/agenda/types/exposition/"},{"id":"grandpalais","name":"Grand Palais","area":"8th","lat":48.8661,"lng":2.3125,"cats":["mod"],"source":"https://www.grandpalais.fr/"},{"id":"jeudepaume","name":"Jeu de Paume","area":"Tuileries","lat":48.8654,"lng":2.3224,"cats":["photo"],"source":"https://jeudepaume.org/"},{"id":"mep","name":"Maison Européenne de la Photographie","area":"Marais","lat":48.8553,"lng":2.356,"cats":["photo"],"source":"https://www.mep-fr.org/"},{"id":"bal","name":"Le Bal","area":"18th","lat":48.8838,"lng":2.33,"cats":["photo"],"source":"https://le-bal.fr/"},{"id":"galliera","name":"Palais Galliera","area":"16th","lat":48.8656,"lng":2.2966,"cats":["fashion"],"source":"https://www.palaisgalliera.paris.fr/"},{"id":"artsdeco","name":"Les Arts Décoratifs","area":"Louvre","lat":48.863,"lng":2.3326,"cats":["fashion"],"source":"https://madparis.fr/"},{"id":"ysl","name":"Musée Yves Saint Laurent","area":"16th","lat":48.8668,"lng":2.2931,"cats":["fashion"],"source":"https://museeyslparis.com/"},{"id":"ima","name":"Institut du Monde Arabe","area":"5th","lat":48.8485,"lng":2.3563,"cats":["world"],"source":"https://www.imarabe.org/"},{"id":"guimet","name":"Musée Guimet","area":"16th","lat":48.8651,"lng":2.2933,"cats":["world"],"source":"https://www.guimet.fr/"},{"id":"cernuschi","name":"Musée Cernuschi","area":"8th","lat":48.8791,"lng":2.3095,"cats":["world"],"source":"https://www.cernuschi.paris.fr/"},{"id":"branly","name":"Musée du quai Branly","area":"7th","lat":48.8611,"lng":2.2978,"cats":["world"],"source":"https://www.quaibranly.fr/"}],"exhibitions":[{"id":"l-zurb","venue":"louvre","head":"Francisco de Zurbarán","title":"Zurbarán","start":"2026-10-07","end":null,"adm":"paid","cats":["old"],"note":"Closing date not confirmed on the venue page.","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-sculpt","venue":"louvre","head":"Sculpture from the Museo Nacional de Escultura, Valladolid","title":"Sculpter la couleur: Chefs-d’œuvre du Musée national de sculpture, Valladolid","start":"2026-10-07","end":"2027-01-25","adm":"paid","cats":["old"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-photo","venue":"louvre","head":"The Louvre seen by photographers","title":"Louvre Photo","start":"2026-11-04","end":"2027-05-03","adm":"paid","cats":["photo"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-hotes","venue":"louvre","head":"Kader Attia and Elizabeth Peyton","title":"Les Hôtes du Louvre","start":"2026-09-24","end":"2026-12-14","adm":"paid","cats":["old","mod"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-ingres","venue":"louvre","head":"Ingres and fashion","title":"Ingres et la mode","start":"2026-07-03","end":"2026-11-08","adm":"paid","cats":["old","fashion"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-myth","venue":"louvre","head":"Mythologies","title":"Mythologies","start":"2026-07-08","end":"2026-11-09","adm":"paid","cats":["old"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-cross","venue":"louvre","head":"Mughal, Safavid and Ottoman masterworks","title":"Crosscurrents: Chefs-d’œuvre de l’art moghol, safavide et ottoman du musée du Louvre","start":"2026-06-19","end":"2027-01-24","adm":"paid","cats":["old","world"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-eau","venue":"louvre","head":"Mesopotamia","title":"L’Eau primordiale: Leçons de Mésopotamie","start":"2026-05-20","end":"2027-03-15","adm":"paid","cats":["world"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"l-romain","venue":"louvre","head":"Roman art","title":"L’art romain du Louvre: Un monde d’images","start":"2026-06-11","end":"2027-01-10","adm":"paid","cats":["old"],"note":"","url":"https://www.louvre.fr/en-ce-moment/expositions"},{"id":"c-flamel","venue":"cluny","head":"Nicolas Flamel","title":"Nicolas Flamel, alchimiste de papier","start":"2026-10-13","end":"2027-01-24","adm":"paid","cats":["old"],"note":"","url":"https://www.musee-moyenage.fr/"},{"id":"ja-tintoret","venue":"jacquemart","head":"Tintoretto","title":"Éternel Tintoret","start":"2026-09-11","end":null,"adm":"check","cats":["old"],"note":"Closing date not confirmed on the venue page.","url":"https://www.musee-jacquemart-andre.com/"},{"id":"pp-gonzales","venue":"petitpalais","head":"Eva Gonzalès","title":"Eva Gonzalès","start":"2026-09-15","end":"2027-01-24","adm":"paid","cats":["c19"],"note":"","url":"https://www.petitpalais.paris.fr/"},{"id":"pp-bruxelles","venue":"petitpalais","head":"Brussels around 1900","title":"Bruxelles 1900","start":"2026-11-10","end":"2027-04-25","adm":"paid","cats":["c19"],"note":"","url":"https://www.petitpalais.paris.fr/"},{"id":"cu-amis","venue":"custodia","head":"Drawings in the collections of 19th-century French artists","title":"Mes Chers Amis","start":"2026-10-17","end":"2027-01-17","adm":"check","cats":["old","c19"],"note":"","url":"https://www.fondationcustodia.fr/Exhibitions"},{"id":"lux-warhol","venue":"luxembourg","head":"Andy Warhol","title":"La Ligne et l’image","start":"2026-09-16","end":"2027-01-10","adm":"check","cats":["mod"],"note":"","url":"https://museeduluxembourg.fr/"},{"id":"ca-villegle","venue":"carnavalet","head":"Jacques Villeglé","title":"Paris à l’arraché: Jacques Villeglé et l’art urbain","start":"2026-10-14","end":"2027-02-14","adm":"paid","cats":["mod"],"note":"","url":"https://www.carnavalet.paris.fr/"},{"id":"o-cassatt","venue":"orsay","head":"Mary Cassatt","title":"Mary Cassatt, l’indépendante","start":"2026-10-06","end":"2027-01-31","adm":"paid","cats":["c19"],"note":"","url":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"o-holzer","venue":"orsay","head":"Jenny Holzer","title":"Jenny Holzer: J’ai vu","start":"2026-10-20","end":"2027-02-21","adm":"paid","cats":["mod","c19"],"note":"","url":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"o-bartholdi","venue":"orsay","head":"Auguste Bartholdi","title":"Liberty Enlightening the World","start":null,"end":"2027-01-31","adm":"paid","cats":["c19"],"note":"","url":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"o-peduzzi","venue":"orsay","head":"Richard Peduzzi","title":"Vertigo","start":null,"end":"2027-01-17","adm":"paid","cats":["c19","mod"],"note":"","url":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"o-brac","venue":"orsay","head":"Marie and Félix Bracquemond","title":"Decorative arts drawings","start":null,"end":"2026-12-06","adm":"paid","cats":["c19","fashion"],"note":"A display within the museum.","url":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"o-denis","venue":"orsay","head":"Maurice Denis","title":"Illustrating Christian mysticism","start":"2026-11-10","end":"2027-02-07","adm":"paid","cats":["c19"],"note":"A display within the museum.","url":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"o-legray","venue":"orsay","head":"Gustave Le Gray","title":"Painter and Photographer","start":"2026-11-10","end":"2027-02-07","adm":"paid","cats":["c19","photo"],"note":"A display within the museum.","url":"https://www.musee-orsay.fr/en/program/whats-on/exhibitions"},{"id":"or-monet","venue":"orangerie","head":"Claude Monet","title":"Monet, peindre le temps","start":"2026-09-30","end":"2027-01-25","adm":"paid","cats":["c19"],"note":"","url":"https://www.musee-orangerie.fr/"},{"id":"ma-paysages","venue":"marmottan","head":"Landscape from Monet to Hockney","title":"Histoires de paysages. De Monet à Hockney (1890–2026)","start":"2026-09-24","end":"2027-01-31","adm":"paid","cats":["c19","mod"],"note":"","url":"https://www.marmottan.fr/"},{"id":"mam-hist","venue":"mam","head":"The Histories*","title":"The Histories*","start":"2026-09-18","end":"2027-01-24","adm":"paid","cats":["mod"],"note":"","url":"https://www.mam.paris.fr/"},{"id":"mam-miller","venue":"mam","head":"Lee Miller","title":"Lee Miller","start":"2026-06-19","end":"2027-01-04","adm":"paid","cats":["mod","photo"],"note":"","url":"https://www.mam.paris.fr/"},{"id":"pdt-cherri","venue":"pdt","head":"Ali Cherri","title":"Today Is OK","start":"2026-10-21","end":"2027-02-14","adm":"paid","cats":["mod"],"note":"","url":"https://palaisdetokyo.com/"},{"id":"pdt-gomes","venue":"pdt","head":"Sonia Gomes","title":"Wild Heart","start":"2026-10-21","end":"2027-02-14","adm":"paid","cats":["mod"],"note":"","url":"https://palaisdetokyo.com/"},{"id":"pdt-gang","venue":"pdt","head":"Artists outside the cities of France","title":"Toi et ta bande","start":"2026-10-21","end":"2027-02-14","adm":"paid","cats":["mod"],"note":"Free entry on 21 and 22 October.","url":"https://palaisdetokyo.com/"},{"id":"pdt-john","venue":"pdt","head":"Valérie John","title":"I telman nwè ki i blé (So Black It Turns Blue)","start":"2026-10-21","end":"2027-02-14","adm":"paid","cats":["mod"],"note":"","url":"https://palaisdetokyo.com/"},{"id":"flv-fayet","venue":"flv","head":"Gustave Fayet","title":"Gustave Fayet, Collectionneur – Créateur. Icônes de l’art moderne","start":"2026-10-09","end":"2027-03-08","adm":"paid","cats":["mod"],"note":"","url":"https://www.fondationlouisvuitton.fr/"},{"id":"bc-remember","venue":"bourse","head":"Photographs from the Pinault Collection","title":"Remember Me. De la Collection Pinault","start":"2026-10-07","end":"2027-01-18","adm":"paid","cats":["mod","photo"],"note":"","url":"https://www.pinaultcollection.com/boursedecommerce/"},{"id":"la-nishimura","venue":"lafayette","head":"Yu Nishimura","title":"Towards a Sea","start":"2026-10-21","end":"2027-01-03","adm":"free","cats":["mod"],"note":"","url":"https://www.lafayetteanticipations.com/"},{"id":"la-fauquet","venue":"lafayette","head":"Hélène Fauquet","title":"Vivresse","start":"2026-10-21","end":"2027-01-03","adm":"free","cats":["mod"],"note":"","url":"https://www.lafayetteanticipations.com/"},{"id":"la-thomson","venue":"lafayette","head":"Mungo Thomson","title":"Monument","start":"2026-10-21","end":"2026-11-29","adm":"free","cats":["mod"],"note":"","url":"https://www.lafayetteanticipations.com/"},{"id":"pi-schwitters","venue":"picasso","head":"Kurt Schwitters","title":"Le chaos-monde 1918–1948","start":"2026-10-06","end":"2027-02-07","adm":"paid","cats":["mod"],"note":"","url":"https://www.museepicassoparis.fr/fr/agenda/types/exposition/"},{"id":"pi-malraux","venue":"picasso","head":"André Malraux and Pablo Picasso","title":"Le musée imaginaire","start":null,"end":"2027-02-07","adm":"paid","cats":["mod"],"note":"A display within the museum.","url":"https://www.museepicassoparis.fr/fr/agenda/types/exposition/"},{"id":"gp-cezanne","venue":"grandpalais","head":"Cézanne and the artists after him","title":"Cézanne et nous","start":"2026-09-23","end":"2027-01-17","adm":"check","cats":["c19","mod"],"note":"Presented with the Musée d’Orsay.","url":"https://www.grandpalais.fr/"},{"id":"jp-douglas","venue":"jeudepaume","head":"Stan Douglas","title":"Parallax","start":"2026-10-20","end":"2027-01-10","adm":"check","cats":["photo"],"note":"","url":"https://jeudepaume.org/"},{"id":"mep-penn","venue":"mep","head":"Irving Penn","title":"Penn & Fashion","start":"2026-09-30","end":"2027-01-17","adm":"paid","cats":["photo","fashion"],"note":"","url":"https://www.mep-fr.org/"},{"id":"bal-wilson","venue":"bal","head":"The Wilson Centre for Photography collection","title":"L’Espace entre nous","start":"2026-06-19","end":"2027-01-03","adm":"paid","cats":["photo"],"note":"","url":"https://le-bal.fr/"},{"id":"gal-vest","venue":"galliera","head":"A wardrobe of one’s own","title":"Un vestiaire à soi","start":"2026-09-26","end":null,"adm":"paid","cats":["fashion"],"note":"Closing date not confirmed on the venue page.","url":"https://www.palaisgalliera.paris.fr/"},{"id":"ad-pav","venue":"artsdeco","head":"Rafael Pavarotti","title":"Rafael Pavarotti, photographe","start":"2026-10-02","end":"2027-02-07","adm":"paid","cats":["fashion","photo"],"note":"","url":"https://madparis.fr/"},{"id":"ad-maj","venue":"artsdeco","head":"Haute couture at the Thai court","title":"Majestic Fashion: Haute Couture and Tradition at the Thai Court","start":"2026-05-13","end":"2026-11-01","adm":"paid","cats":["fashion"],"note":"","url":"https://madparis.fr/"},{"id":"ima-mariee","venue":"ima","head":"Weddings in Algeria, Morocco and Tunisia","title":"Vive la mariée !","start":"2026-09-29","end":"2027-02-28","adm":"paid","cats":["world","fashion"],"note":"","url":"https://www.imarabe.org/"},{"id":"ima-alhambra","venue":"ima","head":"The Nasrid Alhambra","title":"Les Trésors cachés de l’Alhambra nasride","start":"2026-11-24","end":"2027-05-16","adm":"paid","cats":["world"],"note":"","url":"https://www.imarabe.org/"},{"id":"gu-dal","venue":"guimet","head":"Seulgi Lee","title":"DAL DARI. The Moon and its Legs","start":"2026-06-06","end":"2027-02-08","adm":"paid","cats":["world"],"note":"","url":"https://www.guimet.fr/"},{"id":"gu-trompe","venue":"guimet","head":"Korean trompe-l’œil","title":"Le savoir en trompe-l’œil: Corée, XVIIIe–XXe siècle","start":"2026-09-16","end":"2027-01-04","adm":"paid","cats":["world"],"note":"","url":"https://www.guimet.fr/"},{"id":"ce-coree","venue":"cernuschi","head":"Korea and the scholar class","title":"Corée, le royaume des lettrés","start":"2026-11-20","end":"2027-04-04","adm":"check","cats":["world"],"note":"","url":"https://www.cernuschi.paris.fr/"},{"id":"qb-plumes","venue":"branly","head":"Birds of paradise","title":"Plumes du Paradis","start":"2026-05-12","end":"2026-11-08","adm":"paid","cats":["world"],"note":"","url":"https://www.quaibranly.fr/"}]}</script>
 <script>
-const CHECKED='2026-10-19';
+let CHECKED, VEN, V, EX, TODAY;
+function load(d){
+  CHECKED=d.checked;
+  VEN=d.venues.map(v=>({id:v.id,name:v.name,area:v.area,lat:v.lat,lng:v.lng,cats:v.cats,src:v.source}));
+  V=Object.fromEntries(VEN.map(v=>[v.id,v]));
+  EX=d.exhibitions.map(e=>({id:e.id,venue:e.venue,head:e.head,title:e.title,start:e.start||null,end:e.end||null,adm:e.adm,cats:(e.cats&&e.cats.length)?e.cats:V[e.venue].cats,note:e.note||'',url:e.url||V[e.venue].src}));
+  TODAY=todayISO();
+}
 const CATS=[
  {id:'old',name:'Old Masters & early modern',c:'--c-old'},
  {id:'c19',name:'19th century & Impressionism',c:'--c-c19'},
@@ -182,99 +190,11 @@ const CATS=[
  {id:'photo',name:'Photography',c:'--c-photo'},
  {id:'fashion',name:'Fashion & design',c:'--c-fashion'},
  {id:'world',name:'World art',c:'--c-world'}];
-const VEN=[
- ['louvre','Musée du Louvre','Louvre',48.8606,2.3376,['old'],'https://www.louvre.fr/en-ce-moment/expositions'],
- ['cluny','Musée de Cluny','Latin Quarter',48.8505,2.3440,['old'],'https://www.musee-moyenage.fr/'],
- ['jacquemart','Musée Jacquemart-André','8th',48.8755,2.3115,['old'],'https://www.musee-jacquemart-andre.com/'],
- ['petitpalais','Petit Palais','8th',48.8660,2.3140,['old','c19'],'https://www.petitpalais.paris.fr/'],
- ['custodia','Fondation Custodia','7th',48.8562,2.3198,['old'],'https://www.fondationcustodia.fr/Exhibitions'],
- ['luxembourg','Musée du Luxembourg','6th',48.8490,2.3330,['old'],'https://museeduluxembourg.fr/'],
- ['cognacq','Musée Cognacq-Jay','Marais',48.8574,2.3622,['old'],'https://museecognacqjay.paris.fr/'],
- ['camondo','Musée Nissim de Camondo','17th',48.8791,2.3098,['old'],'https://madparis.fr/'],
- ['carnavalet','Musée Carnavalet','Marais',48.8574,2.3626,['old'],'https://www.carnavalet.paris.fr/'],
- ['orsay','Musée d’Orsay','7th',48.8600,2.3266,['c19'],'https://www.musee-orsay.fr/en/program/whats-on/exhibitions'],
- ['orangerie','Musée de l’Orangerie','Tuileries',48.8638,2.3226,['c19'],'https://www.musee-orangerie.fr/'],
- ['marmottan','Musée Marmottan Monet','16th',48.8590,2.2670,['c19'],'https://www.marmottan.fr/'],
- ['mam','Musée d’Art Moderne de Paris','16th',48.8644,2.2970,['mod'],'https://www.mam.paris.fr/'],
- ['pdt','Palais de Tokyo','16th',48.8643,2.2967,['mod'],'https://palaisdetokyo.com/'],
- ['flv','Fondation Louis Vuitton','Bois de Boulogne',48.8767,2.2635,['mod'],'https://www.fondationlouisvuitton.fr/'],
- ['bourse','Bourse de Commerce','Les Halles',48.8627,2.3427,['mod'],'https://www.pinaultcollection.com/boursedecommerce/'],
- ['cartier','Fondation Cartier','Palais-Royal',48.8640,2.3366,['mod'],'https://www.fondationcartier.com/'],
- ['lafayette','Lafayette Anticipations','Marais',48.8590,2.3550,['mod'],'https://www.lafayetteanticipations.com/'],
- ['picasso','Musée Picasso','Marais',48.8598,2.3626,['mod'],'https://www.museepicassoparis.fr/fr/agenda/types/exposition/'],
- ['grandpalais','Grand Palais','8th',48.8661,2.3125,['mod'],'https://www.grandpalais.fr/'],
- ['jeudepaume','Jeu de Paume','Tuileries',48.8654,2.3224,['photo'],'https://jeudepaume.org/'],
- ['mep','Maison Européenne de la Photographie','Marais',48.8553,2.3560,['photo'],'https://www.mep-fr.org/'],
- ['bal','Le Bal','18th',48.8838,2.3300,['photo'],'https://le-bal.fr/'],
- ['galliera','Palais Galliera','16th',48.8656,2.2966,['fashion'],'https://www.palaisgalliera.paris.fr/'],
- ['artsdeco','Les Arts Décoratifs','Louvre',48.8630,2.3326,['fashion'],'https://madparis.fr/'],
- ['ysl','Musée Yves Saint Laurent','16th',48.8668,2.2931,['fashion'],'https://museeyslparis.com/'],
- ['ima','Institut du Monde Arabe','5th',48.8485,2.3563,['world'],'https://www.imarabe.org/'],
- ['guimet','Musée Guimet','16th',48.8651,2.2933,['world'],'https://www.guimet.fr/'],
- ['cernuschi','Musée Cernuschi','8th',48.8791,2.3095,['world'],'https://www.cernuschi.paris.fr/'],
- ['branly','Musée du quai Branly','7th',48.8611,2.2978,['world'],'https://www.quaibranly.fr/']
-].map(a=>({id:a[0],name:a[1],area:a[2],lat:a[3],lng:a[4],cats:a[5],src:a[6]}));
-const V=Object.fromEntries(VEN.map(v=>[v.id,v]));
 // [id, venue, headline, official title, start, end, admission, categories override, note, url]
-const RAW=[
-['l-zurb','louvre','Francisco de Zurbarán','Zurbarán','2026-10-07',null,'paid',0,'Closing date not confirmed on the venue page.'],
-['l-sculpt','louvre','Sculpture from the Museo Nacional de Escultura, Valladolid','Sculpter la couleur: Chefs-d’œuvre du Musée national de sculpture, Valladolid','2026-10-07','2027-01-25','paid'],
-['l-photo','louvre','The Louvre seen by photographers','Louvre Photo','2026-11-04','2027-05-03','paid',['photo']],
-['l-hotes','louvre','Kader Attia and Elizabeth Peyton','Les Hôtes du Louvre','2026-09-24','2026-12-14','paid',['old','mod']],
-['l-ingres','louvre','Ingres and fashion','Ingres et la mode','2026-07-03','2026-11-08','paid',['old','fashion']],
-['l-myth','louvre','Mythologies','Mythologies','2026-07-08','2026-11-09','paid'],
-['l-cross','louvre','Mughal, Safavid and Ottoman masterworks','Crosscurrents: Chefs-d’œuvre de l’art moghol, safavide et ottoman du musée du Louvre','2026-06-19','2027-01-24','paid',['old','world']],
-['l-eau','louvre','Mesopotamia','L’Eau primordiale: Leçons de Mésopotamie','2026-05-20','2027-03-15','paid',['world']],
-['l-romain','louvre','Roman art','L’art romain du Louvre: Un monde d’images','2026-06-11','2027-01-10','paid'],
-['c-flamel','cluny','Nicolas Flamel','Nicolas Flamel, alchimiste de papier','2026-10-13','2027-01-24','paid'],
-['ja-tintoret','jacquemart','Tintoretto','Éternel Tintoret','2026-09-11',null,'check',0,'Closing date not confirmed on the venue page.'],
-['pp-gonzales','petitpalais','Eva Gonzalès','Eva Gonzalès','2026-09-15','2027-01-24','paid',['c19']],
-['pp-bruxelles','petitpalais','Brussels around 1900','Bruxelles 1900','2026-11-10','2027-04-25','paid',['c19']],
-['cu-amis','custodia','Drawings in the collections of 19th-century French artists','Mes Chers Amis','2026-10-17','2027-01-17','check',['old','c19']],
-['lux-warhol','luxembourg','Andy Warhol','La Ligne et l’image','2026-09-16','2027-01-10','check',['mod']],
-['ca-villegle','carnavalet','Jacques Villeglé','Paris à l’arraché: Jacques Villeglé et l’art urbain','2026-10-14','2027-02-14','paid',['mod']],
-['o-cassatt','orsay','Mary Cassatt','Mary Cassatt, l’indépendante','2026-10-06','2027-01-31','paid'],
-['o-holzer','orsay','Jenny Holzer','Jenny Holzer: J’ai vu','2026-10-20','2027-02-21','paid',['mod','c19']],
-['o-bartholdi','orsay','Auguste Bartholdi','Liberty Enlightening the World',null,'2027-01-31','paid'],
-['o-peduzzi','orsay','Richard Peduzzi','Vertigo',null,'2027-01-17','paid',['c19','mod']],
-['o-brac','orsay','Marie and Félix Bracquemond','Decorative arts drawings',null,'2026-12-06','paid',['c19','fashion'],'A display within the museum.'],
-['o-denis','orsay','Maurice Denis','Illustrating Christian mysticism','2026-11-10','2027-02-07','paid',0,'A display within the museum.'],
-['o-legray','orsay','Gustave Le Gray','Painter and Photographer','2026-11-10','2027-02-07','paid',['c19','photo'],'A display within the museum.'],
-['or-monet','orangerie','Claude Monet','Monet, peindre le temps','2026-09-30','2027-01-25','paid'],
-['ma-paysages','marmottan','Landscape from Monet to Hockney','Histoires de paysages. De Monet à Hockney (1890–2026)','2026-09-24','2027-01-31','paid',['c19','mod']],
-['mam-hist','mam','The Histories*','The Histories*','2026-09-18','2027-01-24','paid'],
-['mam-miller','mam','Lee Miller','Lee Miller','2026-06-19','2027-01-04','paid',['mod','photo']],
-['pdt-cherri','pdt','Ali Cherri','Today Is OK','2026-10-21','2027-02-14','paid'],
-['pdt-gomes','pdt','Sonia Gomes','Wild Heart','2026-10-21','2027-02-14','paid'],
-['pdt-gang','pdt','Artists outside the cities of France','Toi et ta bande','2026-10-21','2027-02-14','paid',0,'Free entry on 21 and 22 October.'],
-['pdt-john','pdt','Valérie John','I telman nwè ki i blé (So Black It Turns Blue)','2026-10-21','2027-02-14','paid'],
-['flv-fayet','flv','Gustave Fayet','Gustave Fayet, Collectionneur – Créateur. Icônes de l’art moderne','2026-10-09','2027-03-08','paid'],
-['bc-remember','bourse','Photographs from the Pinault Collection','Remember Me. De la Collection Pinault','2026-10-07','2027-01-18','paid',['mod','photo']],
-['la-nishimura','lafayette','Yu Nishimura','Towards a Sea','2026-10-21','2027-01-03','free'],
-['la-fauquet','lafayette','Hélène Fauquet','Vivresse','2026-10-21','2027-01-03','free'],
-['la-thomson','lafayette','Mungo Thomson','Monument','2026-10-21','2026-11-29','free'],
-['pi-schwitters','picasso','Kurt Schwitters','Le chaos-monde 1918–1948','2026-10-06','2027-02-07','paid'],
-['pi-malraux','picasso','André Malraux and Pablo Picasso','Le musée imaginaire',null,'2027-02-07','paid',0,'A display within the museum.'],
-['gp-cezanne','grandpalais','Cézanne and the artists after him','Cézanne et nous','2026-09-23','2027-01-17','check',['c19','mod'],'Presented with the Musée d’Orsay.'],
-['jp-douglas','jeudepaume','Stan Douglas','Parallax','2026-10-20','2027-01-10','check'],
-['mep-penn','mep','Irving Penn','Penn & Fashion','2026-09-30','2027-01-17','paid',['photo','fashion']],
-['bal-wilson','bal','The Wilson Centre for Photography collection','L’Espace entre nous','2026-06-19','2027-01-03','paid'],
-['gal-vest','galliera','A wardrobe of one’s own','Un vestiaire à soi','2026-09-26',null,'paid',0,'Closing date not confirmed on the venue page.'],
-['ad-pav','artsdeco','Rafael Pavarotti','Rafael Pavarotti, photographe','2026-10-02','2027-02-07','paid',['fashion','photo']],
-['ad-maj','artsdeco','Haute couture at the Thai court','Majestic Fashion: Haute Couture and Tradition at the Thai Court','2026-05-13','2026-11-01','paid'],
-['ima-mariee','ima','Weddings in Algeria, Morocco and Tunisia','Vive la mariée !','2026-09-29','2027-02-28','paid',['world','fashion']],
-['ima-alhambra','ima','The Nasrid Alhambra','Les Trésors cachés de l’Alhambra nasride','2026-11-24','2027-05-16','paid'],
-['gu-dal','guimet','Seulgi Lee','DAL DARI. The Moon and its Legs','2026-06-06','2027-02-08','paid'],
-['gu-trompe','guimet','Korean trompe-l’œil','Le savoir en trompe-l’œil: Corée, XVIIIe–XXe siècle','2026-09-16','2027-01-04','paid'],
-['ce-coree','cernuschi','Korea and the scholar class','Corée, le royaume des lettrés','2026-11-20','2027-04-04','check'],
-['qb-plumes','branly','Birds of paradise','Plumes du Paradis','2026-05-12','2026-11-08','paid']
-];
-const EX=RAW.map(r=>({id:r[0],venue:r[1],head:r[2],title:r[3],start:r[4],end:r[5],adm:r[6],cats:r[7]||V[r[1]].cats,note:r[8]||'',url:V[r[1]].src}));
 
 const $=s=>document.querySelector(s);
 const state={cats:new Set(CATS.map(c=>c.id)),status:'all',adm:'all',venue:'all',sort:'close',view:'cards'};
 const todayISO=()=>{const d=new Date();const t=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');return t<CHECKED?CHECKED:t};
-const TODAY=todayISO();
 const dayN=s=>Math.round(Date.parse(s+'T00:00:00Z')/864e5);
 const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const fd=s=>{const [y,m,d]=s.split('-').map(Number);return d+' '+MON[m-1]+(y!==2026?' '+y:'')};
@@ -437,11 +357,26 @@ document.addEventListener('keydown',ev=>{const g=ev.target.closest&&ev.target.cl
 $('#venue').onchange=e=>{state.venue=e.target.value;render()};
 $('#sort').onchange=e=>{state.sort=e.target.value;render()};
 $('#themeBtn').onclick=()=>{const r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dark?'light':'dark'};
+function boot(){
 // venues footer
 const nBy={};EX.forEach(e=>{if(statusOf(e))nBy[e.venue]=(nBy[e.venue]||0)+1});
 $('#vens').innerHTML=VEN.slice().sort((a,b)=>a.name.localeCompare(b.name,'fr')).map(v=>`<li><a href="${esc(v.src)}" target="_blank" rel="noopener">${esc(v.name)}</a> <small>${nBy[v.id]?nBy[v.id]+' listed':'none listed'}</small></li>`).join('');
 $('#venueCount').textContent=VEN.length+' venues in six categories';
+$('#checkedDate').textContent=new Date(CHECKED+'T12:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
 render();
+}
+(function(){
+  var dataEl=document.getElementById('exhibitions-data'), embedded=JSON.parse(dataEl.textContent), done=false;
+  function go(d){ if(done)return; done=true; load(d); boot(); }
+  if(!window.fetch){ go(embedded); return; }
+  // Prefer exhibitions.json (refreshed nightly) when it is newer than the copy embedded in the page.
+  var timer=setTimeout(function(){ go(embedded); },3500);
+  fetch('exhibitions.json?t='+Math.floor(Date.now()/300000),{cache:'no-cache'})
+    .then(function(r){ return r.ok?r.json():null; })
+    .then(function(j){ if(j&&j.exhibitions&&j.venues&&new Date(j.updated)>=new Date(embedded.updated)){ clearTimeout(timer); go(j); } })
+    .catch(function(){})
+    .then(function(){ clearTimeout(timer); go(embedded); });
+})();
 </script>
 
 </body>
