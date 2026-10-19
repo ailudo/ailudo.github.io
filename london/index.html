@@ -48,7 +48,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 #onview a.ov-home{justify-self:start;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--ink);padding-bottom:1px}
 #onview a.ov-home:hover{background:var(--ink);color:var(--wall)}
 #onview .ov-eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
-#onview h1.ov-title{font-family:var(--f-display);font-weight:800;font-stretch:125%;text-transform:uppercase;font-size:clamp(44px,19cqi,280px);line-height:.84;letter-spacing:-.04em;overflow-wrap:anywhere}
+#onview h1.ov-title{font-family:var(--f-display);font-weight:800;font-stretch:125%;text-transform:uppercase;font-size:clamp(44px,23cqi,300px);line-height:.84;letter-spacing:-.04em;overflow-wrap:anywhere}
 #onview h1.ov-title span{display:block;font-weight:800;color:transparent;-webkit-text-stroke:clamp(1.5px,.3cqi,4px) var(--ink)}
 #onview .ov-intro{max-width:56ch;font-size:17px;line-height:1.45;color:var(--ink);border-left:8px solid var(--accent);padding-left:14px}
 #onview .ov-verified{display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--f-mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
@@ -239,7 +239,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   <header class="ov-mast">
     
     <div class="ov-eyebrow">Exhibitions across London · An AI project by Studio AI Ludo</div>
-    <h1 class="ov-title">On View <span>London</span></h1>
+    <h1 class="ov-title" aria-label="On View London">On View <span aria-hidden="true">Lond</span><span aria-hidden="true">on</span></h1>
     <p class="ov-intro">What's on, what's closing and what's opening at London's public museums and non-profit galleries, with a few independent spaces.</p>
     <div class="ov-verified"><span id="ov-verified">Listings checked —</span><span id="ov-venueCount"></span></div>
     <div class="ov-stale" id="ov-stale" hidden></div>
