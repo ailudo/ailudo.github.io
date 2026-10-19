@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-19T22:30:29+01:00",
+ "updated": "2026-10-19T23:50:00+01:00",
  "venues": [
   {
    "id": "louvre",
@@ -733,7 +733,59 @@
    "end": "2027-01-18",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.pinaultcollection.com/boursedecommerce/"
+   "url": "https://www.pinaultcollection.com/en/boursedecommerce/remember-me"
+  },
+  {
+   "id": "bc-kruger",
+   "venue": "bourse",
+   "short": "Barbara Kruger",
+   "title": "The History of Tears",
+   "artists": "Barbara Kruger",
+   "start": null,
+   "end": "2027-01-25",
+   "admission": "paid",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.pinaultcollection.com/en/boursedecommerce/history-tears",
+   "note": "In the Rotunda, with Remember Me on the same ticket."
+  },
+  {
+   "id": "bc-penn",
+   "venue": "bourse",
+   "short": "Irving Penn",
+   "title": "The World According to Penn",
+   "artists": "Irving Penn",
+   "start": null,
+   "end": "2027-01-10",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://www.pinaultcollection.com/en/boursedecommerce/world-according-penn",
+   "note": "Gallery 2, shown with Remember Me."
+  },
+  {
+   "id": "bc-depardon",
+   "venue": "bourse",
+   "short": "Raymond Depardon",
+   "title": "Raymond Depardon",
+   "artists": "Raymond Depardon",
+   "start": null,
+   "end": "2027-01-25",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://www.pinaultcollection.com/en/boursedecommerce/raymond-depardon",
+   "note": "Gallery 3, shown with Remember Me."
+  },
+  {
+   "id": "bc-goldin",
+   "venue": "bourse",
+   "short": "Nan Goldin",
+   "title": "Stendhal Syndrome",
+   "artists": "Nan Goldin",
+   "start": null,
+   "end": "2027-01-25",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://www.pinaultcollection.com/en/boursedecommerce/nan-goldin-stendhal-syndrome",
+   "note": "Slideshow in the auditorium, shown with Remember Me."
   },
   {
    "id": "la-nishimura",
