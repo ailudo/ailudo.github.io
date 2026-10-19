@@ -281,6 +281,39 @@
    "source": "https://gallerytabularasa.co.uk/Upcoming-Present",
    "note": "London space only (99 East Road, Hoxton). Exclude Tabula Rasa Beijing shows.",
    "map": "https://www.google.com/maps/search/?api=1&query=Tabula+Rasa+Gallery+99+East+Road+London"
+  },
+  {
+   "id": "gasworks",
+   "name": "Gasworks",
+   "area": "South",
+   "kind": "Public & non-profit",
+   "lat": 51.4849,
+   "lng": -0.1226,
+   "label": "right",
+   "source": "https://gasworks.org.uk/exhibitions/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Gasworks+155+Vauxhall+Street+London"
+  },
+  {
+   "id": "camden-arts-projects",
+   "name": "Camden Arts Projects",
+   "area": "North",
+   "kind": "Independent",
+   "lat": 51.5446,
+   "lng": -0.1487,
+   "label": "left",
+   "source": "https://camdenartsprojects.com/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Camden+Arts+Projects+176+Prince+of+Wales+Road+London"
+  },
+  {
+   "id": "ibraaz",
+   "name": "Ibraaz",
+   "area": "Central",
+   "kind": "Independent",
+   "lat": 51.5192,
+   "lng": -0.1403,
+   "label": "left-up",
+   "source": "https://ibraaz.org/whats-on",
+   "map": "https://www.google.com/maps/search/?api=1&query=Ibraaz+93+Mortimer+Street+London"
   }
  ],
  "exhibitions": [
@@ -1108,6 +1141,57 @@
    "discipline": "Group shows",
    "url": "https://www.royalacademy.org.uk/exhibition/selling-display-white-cube",
    "note": "Selling display"
+  },
+  {
+   "id": "gw-contreras-lomas",
+   "venue": "gasworks",
+   "short": "Paloma Contreras Lomas",
+   "title": "Paloma Contreras Lomas: Disco Inferno",
+   "artists": "Paloma Contreras Lomas",
+   "start": "2026-10-01",
+   "end": "2026-12-13",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://gasworks.org.uk/exhibitions/paloma-contreras-lomas-exhibition/"
+  },
+  {
+   "id": "ib-taring-padi",
+   "venue": "ibraaz",
+   "site": "Majlis",
+   "short": "Taring Padi",
+   "title": "Rakyat Pasti Menang",
+   "artists": "Taring Padi",
+   "start": "2026-07-08",
+   "end": "2026-11-22",
+   "admission": "check",
+   "discipline": "Painting & works on paper",
+   "url": "https://ibraaz.org/whats-on/taring-padi"
+  },
+  {
+   "id": "ib-elegy",
+   "venue": "ibraaz",
+   "site": "Minassa",
+   "short": "Gabrielle Goliath",
+   "title": "Elegy",
+   "artists": "Gabrielle Goliath",
+   "start": "2026-10-08",
+   "end": "2027-01-17",
+   "admission": "check",
+   "discipline": "Sculpture & installation",
+   "url": "https://ibraaz.org/whats-on/elegy-gabrielle-goliath"
+  },
+  {
+   "id": "ib-cosmic-breath",
+   "venue": "ibraaz",
+   "site": "Musalla",
+   "short": "Joe Namy",
+   "title": "Cosmic Breath",
+   "artists": "Joe Namy",
+   "start": null,
+   "end": "2027-03-07",
+   "admission": "check",
+   "discipline": "Sculpture & installation",
+   "url": "https://ibraaz.org/whats-on/cosmic-breath-joe-namy"
   }
  ]
 }

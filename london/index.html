@@ -231,6 +231,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 #onview .ov-foot{margin-top:36px;padding:24px 0 48px;border-top:12px solid var(--ink);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px;font-size:14px;color:var(--ink-2)}
 #onview .ov-foot h2{margin-bottom:6px;font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
 #onview .ov-foot p{max-width:62ch;margin-bottom:8px}
+#onview .ov-foot-venues{grid-column:1/-1}
+#onview .ov-vnames{list-style:none;margin:0;padding:0;columns:220px;column-gap:24px}
+#onview .ov-vnames li{break-inside:avoid;padding:2px 0}
 @media (prefers-reduced-motion:no-preference){#onview .ov-card,#onview .tl-row{animation:ovIn .25s ease-out both}@keyframes ovIn{from{opacity:.4}to{opacity:1}}}
 </style>
 
@@ -310,10 +313,15 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
       <h2><span class="cjk" lang="zh">华语</span> Sinophone</h2>
       <p>Marks a solo show by an artist from the Chinese-speaking world (mainland China, Hong Kong, Taiwan, Macau and the diaspora), or a group show built around such artists. "Includes" marks a group show with at least one such artist. Tags are editorial.</p>
     </div>
+    <div class="ov-foot-venues">
+      <h2>Venues</h2>
+      <ul class="ov-vnames" id="ov-venueNames"></ul>
+    </div>
   </footer>
 </div>
 </div>
-<script type="application/json" id="exhibitions-data">{
+<script type="application/json" id="exhibitions-data">
+{
  "updated": "2026-10-19T02:13:58+01:00",
  "venues": [
   {
@@ -325,7 +333,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "lng": -0.0994,
    "label": "right",
    "source": "https://www.tate.org.uk/whats-on/tate-modern",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Tate+Modern+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Tate+Modern+London"
   },
   {
    "id": "tate-britain",
@@ -336,7 +344,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "lng": -0.1278,
    "label": "right",
    "source": "https://www.tate.org.uk/whats-on/tate-britain",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Tate+Britain+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Tate+Britain+London"
   },
   {
    "id": "national-gallery",
@@ -347,7 +355,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "lng": -0.1283,
    "label": "left-down",
    "source": "https://www.nationalgallery.org.uk/exhibitions",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=National+Gallery+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=National+Gallery+London"
   },
   {
    "id": "npg",
@@ -358,18 +366,18 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "lng": -0.1281,
    "label": "right-up",
    "source": "https://www.npg.org.uk/whatson/exhibitions",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=National+Portrait+Gallery+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=National+Portrait+Gallery+London"
   },
   {
    "id": "courtauld",
    "name": "Courtauld Gallery",
    "area": "Central",
-   "kind": "Public \u0026 non-profit",
+   "kind": "Public & non-profit",
    "lat": 51.511,
    "lng": -0.1171,
    "label": "right",
    "source": "https://courtauld.ac.uk/gallery",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Courtauld+Gallery+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Courtauld+Gallery+London"
   },
   {
    "id": "british-museum",
@@ -380,7 +388,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "lng": -0.127,
    "label": "right",
    "source": "https://www.britishmuseum.org/exhibitions-events",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=British+Museum+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=British+Museum+London"
   },
   {
    "id": "british-library",
@@ -391,28 +399,28 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "lng": -0.1277,
    "label": "right",
    "source": "https://www.bl.uk/about/press/releases/british-library-announces-2026-exhibitions",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=British+Library+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=British+Library+London"
   },
   {
    "id": "va",
-   "name": "V\u0026A",
+   "name": "V&A",
    "area": "West",
    "kind": "National museum",
    "lat": 51.4966,
    "lng": -0.1722,
    "label": "right",
    "sites": {
-    "V\u0026A East Museum": [
+    "V&A East Museum": [
      51.5418,
      -0.0118
     ],
-    "Young V\u0026A": [
+    "Young V&A": [
      51.529,
      -0.0553
     ]
    },
    "source": "https://www.vam.ac.uk/exhibitions",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=V%26A+South+Kensington+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=V%26A+South+Kensington+London"
   },
   {
    "id": "wallace",
@@ -423,13 +431,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "lng": -0.1527,
    "label": "left",
    "source": "https://www.wallacecollection.org/explore/exhibitions/",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Wallace+Collection+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Wallace+Collection+London"
   },
   {
    "id": "serpentine",
    "name": "Serpentine",
    "area": "West",
-   "kind": "Public \u0026 non-profit",
+   "kind": "Public & non-profit",
    "lat": 51.5048,
    "lng": -0.1749,
    "label": "left",
@@ -440,117 +448,117 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     ]
    },
    "source": "https://www.serpentinegalleries.org/whats-on/",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Serpentine+Gallery+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Serpentine+Gallery+London"
   },
   {
    "id": "hayward",
    "name": "Hayward Gallery",
    "area": "South Bank",
-   "kind": "Public \u0026 non-profit",
+   "kind": "Public & non-profit",
    "lat": 51.5063,
    "lng": -0.1156,
    "label": "left",
    "source": "https://www.southbankcentre.co.uk/whats-on/art-exhibitions",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Hayward+Gallery+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Hayward+Gallery+London"
   },
   {
    "id": "barbican",
    "name": "Barbican",
-   "area": "City \u0026 East",
-   "kind": "Public \u0026 non-profit",
+   "area": "City & East",
+   "kind": "Public & non-profit",
    "lat": 51.5202,
    "lng": -0.0938,
    "label": "right",
    "source": "https://www.barbican.org.uk/whats-on/art-design",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Barbican+Art+Gallery+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Barbican+Art+Gallery+London"
   },
   {
    "id": "whitechapel",
    "name": "Whitechapel Gallery",
-   "area": "City \u0026 East",
-   "kind": "Public \u0026 non-profit",
+   "area": "City & East",
+   "kind": "Public & non-profit",
    "lat": 51.516,
    "lng": -0.0703,
    "label": "right",
    "source": "https://www.whitechapelgallery.org/exhibitions/",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Whitechapel+Gallery+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Whitechapel+Gallery+London"
   },
   {
    "id": "ica",
    "name": "ICA",
    "area": "Central",
-   "kind": "Public \u0026 non-profit",
+   "kind": "Public & non-profit",
    "lat": 51.5063,
    "lng": -0.131,
    "label": "left",
    "source": "https://www.ica.art/exhibitions",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Institute+of+Contemporary+Arts+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Institute+of+Contemporary+Arts+London"
   },
   {
    "id": "camden-art-centre",
    "name": "Camden Art Centre",
    "area": "North",
-   "kind": "Public \u0026 non-profit",
+   "kind": "Public & non-profit",
    "lat": 51.5513,
    "lng": -0.181,
    "label": "right",
    "source": "https://camdenartcentre.org/whats-on",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Camden+Art+Centre+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Camden+Art+Centre+London"
   },
   {
    "id": "slg",
    "name": "South London Gallery",
    "area": "South",
-   "kind": "Public \u0026 non-profit",
+   "kind": "Public & non-profit",
    "lat": 51.4741,
    "lng": -0.0753,
    "label": "right",
    "source": "https://www.southlondongallery.org/exhibitions/",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=South+London+Gallery"
+   "map": "https://www.google.com/maps/search/?api=1&query=South+London+Gallery"
   },
   {
    "id": "chisenhale",
    "name": "Chisenhale Gallery",
-   "area": "City \u0026 East",
-   "kind": "Public \u0026 non-profit",
+   "area": "City & East",
+   "kind": "Public & non-profit",
    "lat": 51.534,
    "lng": -0.0367,
    "label": "right",
    "source": "https://chisenhale.org.uk/",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Chisenhale+Gallery+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Chisenhale+Gallery+London"
   },
   {
    "id": "raven-row",
    "name": "Raven Row",
-   "area": "City \u0026 East",
-   "kind": "Public \u0026 non-profit",
+   "area": "City & East",
+   "kind": "Public & non-profit",
    "lat": 51.5178,
    "lng": -0.0779,
    "label": "left",
    "source": "https://www.ravenrow.org/",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Raven+Row+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Raven+Row+London"
   },
   {
    "id": "ydp",
    "name": "YDP",
    "area": "Central",
-   "kind": "Public \u0026 non-profit",
+   "kind": "Public & non-profit",
    "lat": 51.5191,
    "lng": -0.131,
    "label": "left",
    "source": "https://www.ydp.co",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=YDP+19+Bedford+Square+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=YDP+19+Bedford+Square+London"
   },
   {
    "id": "warburg",
    "name": "Warburg Institute",
    "area": "Central",
-   "kind": "Public \u0026 non-profit",
+   "kind": "Public & non-profit",
    "lat": 51.5232,
    "lng": -0.1305,
    "label": "left-up",
    "source": "https://warburg.sas.ac.uk/news-events/exhibitions-seasons",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Warburg+Institute+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Warburg+Institute+London"
   },
   {
    "id": "ra",
@@ -561,7 +569,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "lng": -0.1395,
    "label": "left",
    "source": "https://www.royalacademy.org.uk/exhibitions-and-events",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Royal+Academy+of+Arts+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Royal+Academy+of+Arts+London"
   },
   {
    "id": "saatchi",
@@ -572,7 +580,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "lng": -0.1585,
    "label": "left",
    "source": "https://www.saatchigallery.com/whats-on",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Saatchi+Gallery+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Saatchi+Gallery+London"
   },
   {
    "id": "dulwich",
@@ -583,19 +591,52 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "lng": -0.0865,
    "label": "right",
    "source": "https://www.dulwichpicturegallery.org.uk/whats-on/exhibitions/",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Dulwich+Picture+Gallery+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Dulwich+Picture+Gallery+London"
   },
   {
    "id": "trg",
    "name": "Tabula Rasa Gallery",
-   "area": "City \u0026 East",
+   "area": "City & East",
    "kind": "Commercial gallery",
    "lat": 51.5285,
    "lng": -0.0868,
    "label": "left",
    "source": "https://gallerytabularasa.co.uk/Upcoming-Present",
    "note": "London space only (99 East Road, Hoxton). Exclude Tabula Rasa Beijing shows.",
-   "map": "https://www.google.com/maps/search/?api=1\u0026query=Tabula+Rasa+Gallery+99+East+Road+London"
+   "map": "https://www.google.com/maps/search/?api=1&query=Tabula+Rasa+Gallery+99+East+Road+London"
+  },
+  {
+   "id": "gasworks",
+   "name": "Gasworks",
+   "area": "South",
+   "kind": "Public & non-profit",
+   "lat": 51.4849,
+   "lng": -0.1226,
+   "label": "right",
+   "source": "https://gasworks.org.uk/exhibitions/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Gasworks+155+Vauxhall+Street+London"
+  },
+  {
+   "id": "camden-arts-projects",
+   "name": "Camden Arts Projects",
+   "area": "North",
+   "kind": "Independent",
+   "lat": 51.5446,
+   "lng": -0.1487,
+   "label": "left",
+   "source": "https://camdenartsprojects.com/",
+   "map": "https://www.google.com/maps/search/?api=1&query=Camden+Arts+Projects+176+Prince+of+Wales+Road+London"
+  },
+  {
+   "id": "ibraaz",
+   "name": "Ibraaz",
+   "area": "Central",
+   "kind": "Independent",
+   "lat": 51.5192,
+   "lng": -0.1403,
+   "label": "left-up",
+   "source": "https://ibraaz.org/whats-on",
+   "map": "https://www.google.com/maps/search/?api=1&query=Ibraaz+93+Mortimer+Street+London"
   }
  ],
  "exhibitions": [
@@ -608,7 +649,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": null,
    "end": "2027-05-03",
    "admission": "paid",
-   "discipline": "Sculpture \u0026 installation",
+   "discipline": "Sculpture & installation",
    "url": "https://www.tate.org.uk/whats-on/tate-modern/julio-le-parc"
   },
   {
@@ -620,7 +661,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": null,
    "end": "2027-01-03",
    "admission": "paid",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.tate.org.uk/whats-on/tate-modern/frida-kahlo-the-making-of-an-icon"
   },
   {
@@ -632,7 +673,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": null,
    "end": "2027-01-17",
    "admission": "paid",
-   "discipline": "Photography \u0026 moving image",
+   "discipline": "Photography & moving image",
    "url": "https://www.tate.org.uk/whats-on/tate-modern/ana-mendieta"
   },
   {
@@ -644,7 +685,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-14",
    "end": "2027-02-21",
    "admission": "paid",
-   "discipline": "Photography \u0026 moving image",
+   "discipline": "Photography & moving image",
    "url": "https://www.tate.org.uk/whats-on/tate-modern/light-and-magic",
    "sinophone": "includes",
    "price": "£20 (£19 concessions)"
@@ -672,7 +713,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": null,
    "end": "2027-04-11",
    "admission": "free",
-   "discipline": "Sculpture \u0026 installation",
+   "discipline": "Sculpture & installation",
    "url": "https://www.tate.org.uk/whats-on/tate-modern/tarek-atoui"
   },
   {
@@ -684,19 +725,19 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": null,
    "end": "2027-02-14",
    "admission": "paid",
-   "discipline": "Design \u0026 architecture",
+   "discipline": "Design & architecture",
    "url": "https://www.tate.org.uk/whats-on/tate-britain/the-90s"
   },
   {
    "id": "tb-bloomsbury",
    "venue": "tate-britain",
    "short": "Vanessa Bell and Duncan Grant",
-   "title": "Vanessa Bell \u0026 Duncan Grant: Inside Bloomsbury",
+   "title": "Vanessa Bell & Duncan Grant: Inside Bloomsbury",
    "artists": "Vanessa Bell, Duncan Grant",
    "start": "2026-11-12",
    "end": "2027-04-11",
    "admission": "paid",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.tate.org.uk/whats-on/tate-britain/vanessa-bell-and-duncan-grant"
   },
   {
@@ -708,7 +749,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": null,
    "end": "2027-01-17",
    "admission": "free",
-   "discipline": "Photography \u0026 moving image",
+   "discipline": "Photography & moving image",
    "url": "https://www.tate.org.uk/whats-on/tate-britain/zineb-sedira"
   },
   {
@@ -720,7 +761,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": null,
    "end": "2026-11-08",
    "admission": "free",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.tate.org.uk/whats-on/tate-britain/art-now-mohammed-z-rahman"
   },
   {
@@ -732,7 +773,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": null,
    "end": "2027-01-31",
    "admission": "paid",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.nationalgallery.org.uk/exhibitions/renoir-and-love"
   },
   {
@@ -744,7 +785,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": null,
    "end": "2027-02-07",
    "admission": "free",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.nationalgallery.org.uk/exhibitions/yinka-shonibare-and-thomas-gainsborough-a-conversation"
   },
   {
@@ -756,7 +797,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-11-21",
    "end": "2027-04-11",
    "admission": "paid",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.nationalgallery.org.uk/exhibitions/van-eyck-the-portraits"
   },
   {
@@ -768,7 +809,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-08",
    "end": "2027-02-07",
    "admission": "paid",
-   "discipline": "Photography \u0026 moving image",
+   "discipline": "Photography & moving image",
    "url": "https://www.npg.org.uk/whatson/exhibitions"
   },
   {
@@ -780,7 +821,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-11-05",
    "end": "2027-01-17",
    "admission": "paid",
-   "discipline": "Photography \u0026 moving image",
+   "discipline": "Photography & moving image",
    "url": "https://www.npg.org.uk/whatson/exhibitions"
   },
   {
@@ -792,7 +833,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-09-10",
    "end": "2027-07-11",
    "admission": "paid",
-   "discipline": "History \u0026 collections",
+   "discipline": "History & collections",
    "url": "https://www.britishmuseum.org/exhibitions/bayeux-tapestry",
    "price": "£25–£33"
   },
@@ -805,7 +846,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-01",
    "end": "2027-01-31",
    "admission": "paid",
-   "discipline": "History \u0026 collections",
+   "discipline": "History & collections",
    "url": "https://www.britishmuseum.org/exhibitions/korea",
    "price": "£18–£20"
   },
@@ -818,7 +859,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-06-30",
    "end": "2026-11-29",
    "admission": "free",
-   "discipline": "History \u0026 collections",
+   "discipline": "History & collections",
    "url": "https://www.britishmuseum.org/exhibitions/declaring-independence-usa-250"
   },
   {
@@ -830,7 +871,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-08",
    "end": "2027-03-21",
    "admission": "free",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.britishmuseum.org/exhibitions/multiplied-wonders-italian-renaissance-woodcuts"
   },
   {
@@ -844,7 +885,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "end": "2026-11-15",
    "admission": "paid",
    "note": "Sold out online",
-   "discipline": "Design \u0026 architecture",
+   "discipline": "Design & architecture",
    "url": "https://www.vam.ac.uk/exhibitions/schiaparelli"
   },
   {
@@ -873,14 +914,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "end": null,
    "admission": "paid",
    "price": "From £25",
-   "discipline": "History \u0026 collections",
+   "discipline": "History & collections",
    "url": "https://www.vam.ac.uk/exhibitions/constantinople-to-istanbul-one-city-two-empires"
   },
   {
    "id": "va-music-is-black",
    "venue": "va",
-   "site": "V\u0026A East Museum",
-   "area": "City \u0026 East",
+   "site": "V&A East Museum",
+   "area": "City & East",
    "short": "The Music is Black",
    "title": "The Music is Black: A British Story",
    "artists": "",
@@ -888,22 +929,22 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "end": "2027-01-10",
    "admission": "paid",
    "price": "£22.50–£24.50",
-   "discipline": "History \u0026 collections",
+   "discipline": "History & collections",
    "url": "https://www.vam.ac.uk/exhibitions/the-music-is-black-a-british-story"
   },
   {
    "id": "va-aardman",
    "venue": "va",
-   "site": "Young V\u0026A",
-   "area": "City \u0026 East",
+   "site": "Young V&A",
+   "area": "City & East",
    "short": "Inside Aardman",
-   "title": "Inside Aardman: Wallace \u0026 Gromit and Friends",
+   "title": "Inside Aardman: Wallace & Gromit and Friends",
    "artists": "Aardman",
    "start": null,
    "end": "2026-11-15",
    "admission": "paid",
    "price": "£12.50",
-   "discipline": "Photography \u0026 moving image",
+   "discipline": "Photography & moving image",
    "url": "https://www.vam.ac.uk/exhibitions/inside-aardman-wallace-gromit-and-friends"
   },
   {
@@ -916,7 +957,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "end": "2026-11-29",
    "admission": "paid",
    "price": "£18",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.wallacecollection.org/explore/exhibitions/"
   },
   {
@@ -928,7 +969,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": null,
    "end": "2026-10-25",
    "admission": "free",
-   "discipline": "History \u0026 collections",
+   "discipline": "History & collections",
    "url": "https://www.wallacecollection.org/explore/exhibitions/"
   },
   {
@@ -940,7 +981,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": null,
    "end": "2027-04-25",
    "admission": "free",
-   "discipline": "Sculpture \u0026 installation",
+   "discipline": "Sculpture & installation",
    "url": "https://www.wallacecollection.org/explore/exhibitions/"
   },
   {
@@ -952,7 +993,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-11-18",
    "end": "2027-03-21",
    "admission": "free",
-   "discipline": "History \u0026 collections",
+   "discipline": "History & collections",
    "url": "https://www.wallacecollection.org/whats-on/events/cosimo-i-de-medici-art-and-dynasty/"
   },
   {
@@ -965,7 +1006,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-08",
    "end": "2027-01-10",
    "admission": "free",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.serpentinegalleries.org/whats-on/justin-caguiat-change-ringing/"
   },
   {
@@ -978,7 +1019,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-09-23",
    "end": "2027-01-31",
    "admission": "free",
-   "discipline": "Photography \u0026 moving image",
+   "discipline": "Photography & moving image",
    "url": "https://www.serpentinegalleries.org/whats-on/amar-kanwar-exhibition/"
   },
   {
@@ -991,7 +1032,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-06-06",
    "end": "2026-10-25",
    "admission": "free",
-   "discipline": "Design \u0026 architecture",
+   "discipline": "Design & architecture",
    "url": "https://www.serpentinegalleries.org/whats-on/serpentine-pavilion-2026-by-isabel-abascal-and-alessandro-arienzo-lanza-atelier/"
   },
   {
@@ -1004,7 +1045,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-06-16",
    "end": "2026-10-25",
    "admission": "free",
-   "discipline": "Sculpture \u0026 installation",
+   "discipline": "Sculpture & installation",
    "url": "https://www.serpentinegalleries.org/whats-on/jesus-rafael-soto-penetrable-bbl-jaune/"
   },
   {
@@ -1016,7 +1057,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-11-24",
    "end": "2027-03-14",
    "admission": "paid",
-   "discipline": "Photography \u0026 moving image",
+   "discipline": "Photography & moving image",
    "url": "https://www.southbankcentre.co.uk/whats-on/nan-goldin-you-never-did-anything-wrong/"
   },
   {
@@ -1029,7 +1070,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-11-24",
    "end": "2027-03-07",
    "admission": "free",
-   "discipline": "Sculpture \u0026 installation",
+   "discipline": "Sculpture & installation",
    "url": "https://www.southbankcentre.co.uk/whats-on/andrius-arutiunian-they-tried-to-count-us/"
   },
   {
@@ -1042,7 +1083,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-09",
    "end": "2027-02-28",
    "admission": "check",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.barbican.org.uk/whats-on/2026/event/robert-ryman-the-real-thing"
   },
   {
@@ -1055,7 +1096,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-01",
    "end": "2027-01-24",
    "admission": "free",
-   "discipline": "Sculpture \u0026 installation",
+   "discipline": "Sculpture & installation",
    "url": "https://www.barbican.org.uk/whats-on/2026/event/yuko-mohri-in-concert"
   },
   {
@@ -1068,7 +1109,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2025-02-10",
    "end": "2027-01-01",
    "admission": "free",
-   "discipline": "Design \u0026 architecture",
+   "discipline": "Design & architecture",
    "url": "https://www.barbican.org.uk/whats-on/2025/event/concrete-and-clay-archiving-the-barbican"
   },
   {
@@ -1080,7 +1121,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-07",
    "end": "2027-02-14",
    "admission": "check",
-   "discipline": "Sculpture \u0026 installation",
+   "discipline": "Sculpture & installation",
    "url": "https://www.whitechapelgallery.org/exhibitions/cecilia-vicuna/",
    "note": "With Foraging Quipu"
   },
@@ -1106,7 +1147,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-07",
    "end": "2027-01-17",
    "admission": "check",
-   "discipline": "Photography \u0026 moving image",
+   "discipline": "Photography & moving image",
    "url": "https://www.whitechapelgallery.org/exhibitions/screen-portraits-whitechapel-gallery-artists-part-2/"
   },
   {
@@ -1118,7 +1159,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-11-17",
    "end": "2026-12-13",
    "admission": "check",
-   "discipline": "Photography \u0026 moving image",
+   "discipline": "Photography & moving image",
    "url": "https://www.whitechapelgallery.org/exhibitions/the-film-london-jarman-award-2026/"
   },
   {
@@ -1130,7 +1171,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-09-29",
    "end": "2026-11-29",
    "admission": "check",
-   "discipline": "Sculpture \u0026 installation",
+   "discipline": "Sculpture & installation",
    "url": "https://www.ica.art/exhibitions/autumn-knight"
   },
   {
@@ -1142,7 +1183,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-09-11",
    "end": "2027-01-17",
    "admission": "free",
-   "discipline": "Sculpture \u0026 installation",
+   "discipline": "Sculpture & installation",
    "url": "https://camdenartcentre.org/whats-on/a-hard-line-to-bend"
   },
   {
@@ -1154,7 +1195,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-09-10",
    "end": "2026-11-22",
    "admission": "free",
-   "discipline": "Sculpture \u0026 installation",
+   "discipline": "Sculpture & installation",
    "url": "https://www.southlondongallery.org/exhibitions/monika-sosnowska-weight-of-matter/",
    "price": "Suggested £5 donation"
   },
@@ -1167,7 +1208,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-02",
    "end": "2026-12-06",
    "admission": "free",
-   "discipline": "Photography \u0026 moving image",
+   "discipline": "Photography & moving image",
    "url": "https://chisenhale.org.uk/"
   },
   {
@@ -1179,7 +1220,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-15",
    "end": "2026-12-20",
    "admission": "free",
-   "discipline": "Sculpture \u0026 installation",
+   "discipline": "Sculpture & installation",
    "url": "https://www.ravenrow.org/"
   },
   {
@@ -1204,7 +1245,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-07-25",
    "end": "2026-10-25",
    "admission": "paid",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.royalacademy.org.uk/exhibition/richard-dadd",
    "price": "£15"
   },
@@ -1217,7 +1258,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-02",
    "end": "2027-01-31",
    "admission": "paid",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.royalacademy.org.uk/exhibition/painting-the-french-riviera",
    "price": "£24–£26"
   },
@@ -1256,7 +1297,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-09-22",
    "end": "2027-02-05",
    "admission": "free",
-   "discipline": "Sculpture \u0026 installation",
+   "discipline": "Sculpture & installation",
    "url": "https://www.royalacademy.org.uk/exhibition/nicole-eisenman-courtyard-sculpture"
   },
   {
@@ -1269,7 +1310,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "end": "2027-01-17",
    "admission": "paid",
    "price": "From £21.50",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.dulwichpicturegallery.org.uk/whats-on/hokusai-thirty-six-views-of-mt-fuji-from-the-iuchi-collection/"
   },
   {
@@ -1282,7 +1323,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "end": "2027-02-07",
    "admission": "paid",
    "note": "With gallery admission",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.dulwichpicturegallery.org.uk/whats-on/charlie-mackesy-the-boy-the-fox-the-mole-the-horse-and-you/"
   },
   {
@@ -1307,7 +1348,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "end": "2027-06-20",
    "admission": "paid",
    "price": "£20–£25",
-   "discipline": "History \u0026 collections",
+   "discipline": "History & collections",
    "url": "https://www.ianvisits.co.uk/calendar/agatha-christie-a-world-of-mystery-british-library-431007/"
   },
   {
@@ -1319,7 +1360,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-02",
    "end": "2027-01-10",
    "admission": "check",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://courtauld.ac.uk/whats-on/exh-salman-toor-someone-like-you/",
    "note": "With a drawings display"
   },
@@ -1332,7 +1373,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-14",
    "end": "2027-01-20",
    "admission": "check",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://courtauld.ac.uk/whats-on/exh-winifred-gill/"
   },
   {
@@ -1344,7 +1385,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-09-03",
    "end": null,
    "admission": "free",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://courtauld.ac.uk/whats-on/courtauld-commission-2026-ella-walker/"
   },
   {
@@ -1356,7 +1397,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-21",
    "end": "2027-04-17",
    "admission": "free",
-   "discipline": "History \u0026 collections",
+   "discipline": "History & collections",
    "url": "https://warburg.sas.ac.uk/news-events/events/night-maps"
   },
   {
@@ -1368,7 +1409,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-10-18",
    "end": "2026-11-08",
    "admission": "free",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.southbankcentre.co.uk/whats-on/quentin-blake-the-southbank-parade/",
    "note": "Site-wide across Southbank Centre"
   },
@@ -1394,7 +1435,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-09-29",
    "end": "2027-02-28",
    "admission": "free",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.royalacademy.org.uk/exhibition/selling-display-barbara-rae-ra",
    "note": "Selling display"
   },
@@ -1407,7 +1448,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "start": "2026-09-29",
    "end": "2027-02-28",
    "admission": "free",
-   "discipline": "Painting \u0026 works on paper",
+   "discipline": "Painting & works on paper",
    "url": "https://www.royalacademy.org.uk/exhibition/selling-display-emmanuel-awuni",
    "note": "Selling display"
   },
@@ -1423,9 +1464,61 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
    "discipline": "Group shows",
    "url": "https://www.royalacademy.org.uk/exhibition/selling-display-white-cube",
    "note": "Selling display"
+  },
+  {
+   "id": "gw-contreras-lomas",
+   "venue": "gasworks",
+   "short": "Paloma Contreras Lomas",
+   "title": "Paloma Contreras Lomas: Disco Inferno",
+   "artists": "Paloma Contreras Lomas",
+   "start": "2026-10-01",
+   "end": "2026-12-13",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://gasworks.org.uk/exhibitions/paloma-contreras-lomas-exhibition/"
+  },
+  {
+   "id": "ib-taring-padi",
+   "venue": "ibraaz",
+   "site": "Majlis",
+   "short": "Taring Padi",
+   "title": "Rakyat Pasti Menang",
+   "artists": "Taring Padi",
+   "start": "2026-07-08",
+   "end": "2026-11-22",
+   "admission": "check",
+   "discipline": "Painting & works on paper",
+   "url": "https://ibraaz.org/whats-on/taring-padi"
+  },
+  {
+   "id": "ib-elegy",
+   "venue": "ibraaz",
+   "site": "Minassa",
+   "short": "Gabrielle Goliath",
+   "title": "Elegy",
+   "artists": "Gabrielle Goliath",
+   "start": "2026-10-08",
+   "end": "2027-01-17",
+   "admission": "check",
+   "discipline": "Sculpture & installation",
+   "url": "https://ibraaz.org/whats-on/elegy-gabrielle-goliath"
+  },
+  {
+   "id": "ib-cosmic-breath",
+   "venue": "ibraaz",
+   "site": "Musalla",
+   "short": "Joe Namy",
+   "title": "Cosmic Breath",
+   "artists": "Joe Namy",
+   "start": null,
+   "end": "2027-03-07",
+   "admission": "check",
+   "discipline": "Sculpture & installation",
+   "url": "https://ibraaz.org/whats-on/cosmic-breath-joe-namy"
   }
  ]
-}</script>
+}
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" crossorigin="anonymous"></script>
 <script>
 (function(){
@@ -1482,6 +1575,7 @@ function boot(){
   var updDay = new Date(updated.getFullYear(), updated.getMonth(), updated.getDate());
   $('ov-verified').textContent = 'Listings checked ' + fmtFull(updDay);
   $('ov-venueCount').textContent = DATA.venues.length + ' venues';
+  (function(){ var ul = $('ov-venueNames'); if (!ul) return; DATA.venues.map(function(v){ return v.name; }).sort(function(x, y){ return x.localeCompare(y, 'en', {sensitivity:'base'}); }).forEach(function(n){ var li = document.createElement('li'); li.textContent = n; ul.appendChild(li); }); })();
   var age = Math.floor((today - updDay)/DAY);
   if (age > 14) { $('ov-stale').hidden = false; $('ov-stale').textContent = 'These listings were last checked ' + age + ' days ago. Some dates may have changed, so check with the venue before you go.'; }
 
@@ -1591,7 +1685,7 @@ function boot(){
     return c;
   }
   function venueLine(e){ return e.venueName + (e.site ? ' · ' + e.site : ''); }
-  var MONO = {'tate-modern':'TM','tate-britain':'TB','national-gallery':'NG','npg':'NPG','courtauld':'CG','british-museum':'BM','british-library':'BL','va':'V+A','wallace':'WC','serpentine':'SP','hayward':'HG','barbican':'BB','whitechapel':'WG','ica':'ICA','camden-art-centre':'CAC','slg':'SLG','chisenhale':'CH','raven-row':'RR','ydp':'YDP','warburg':'WI','ra':'RA','saatchi':'SG','dulwich':'DPG','trg':'TR'};
+  var MONO = {'tate-modern':'TM','tate-britain':'TB','national-gallery':'NG','npg':'NPG','courtauld':'CG','british-museum':'BM','british-library':'BL','va':'V+A','wallace':'WC','serpentine':'SP','hayward':'HG','barbican':'BB','whitechapel':'WG','ica':'ICA','camden-art-centre':'CAC','gasworks':'GW','camden-arts-projects':'CAP','ibraaz':'IBZ','slg':'SLG','chisenhale':'CH','raven-row':'RR','ydp':'YDP','warburg':'WI','ra':'RA','saatchi':'SG','dulwich':'DPG','trg':'TR'};
   var LOGO = {'tate-modern':['l-tate','wide'],'tate-britain':['l-tate','wide'],'national-gallery':['l-ng','sq'],'ra':['l-ra','sq']};
   function monogram(v){ if (MONO[v.id]) return MONO[v.id]; return String(v.name || '').split(/\s+/).map(function(w){ return w.charAt(0); }).join('').slice(0, 3).toUpperCase(); }
   function isGroup(e){ return /^Group show/i.test(e.short); }
