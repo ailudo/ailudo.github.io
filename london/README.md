@@ -1,6 +1,6 @@
 # On View London
 
-**On View London** — an AI project by 文化土豆 Culture Potato, live at [ailudo.github.io/london](https://ailudo.github.io/london/).
+**On View London** — an AI project by Studio AI Ludo, live at [ailudo.github.io/london](https://ailudo.github.io/london/).
 
 `exhibitions.json` holds the current exhibitions at 24 London museums and galleries: venues (with map coordinates) and exhibitions (headline, official title, leading artists, dates, admission, links, and a sinophone tag).
 

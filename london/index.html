@@ -244,7 +244,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 <div class="ov-wrap">
   <header class="ov-mast">
     
-    <div class="ov-eyebrow">Exhibitions across London · An AI project by <span class="cjk" lang="zh">文化土豆</span> Culture Potato</div>
+    <div class="ov-eyebrow">Exhibitions across London · An AI project by Studio AI Ludo</div>
     <h1 class="ov-title">On View <span>London</span></h1>
     <p class="ov-intro">What's on, what's closing and what's opening at London's public museums and non-profit galleries, with a few independent spaces.</p>
     <div class="ov-verified"><span id="ov-verified">Listings checked —</span><span id="ov-venueCount"></span></div>
@@ -309,7 +309,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   <footer class="ov-foot">
     <div>
       <h2>About these listings</h2>
-      <p>This is an AI project by Culture Potato. Each listing is gathered from the venue's own website and written up with AI, then checked on the date shown at the top. Where a venue publishes only a closing date, the listing reads "Until". Ongoing collection displays, talks and events are left out. Headlines are our own: the artist for a solo show, the subject for a thematic show, with the official title beneath and the leading artists listed after it.</p>
+      <p>This is an AI project by Studio AI Ludo. Each listing is gathered from the venue's own website and written up with AI, then checked on the date shown at the top. Where a venue publishes only a closing date, the listing reads "Until". Ongoing collection displays, talks and events are left out. Headlines are our own: the artist for a solo show, the subject for a thematic show, with the official title beneath and the leading artists listed after it.</p>
       <p>Opening hours, prices and booking change. Each card links to the venue on Google Maps, where its current opening hours are shown. Check before you travel.</p>
     </div>
     <div>
@@ -1857,7 +1857,7 @@ function boot(){
       if (!mcp) return;
       rbtn.disabled = true; msg.textContent = 'Starting the refresh…';
       mcp.callTool(SERVER, 'fire_trigger', {trigger_id: TRIGGER}, {cache: false}).then(function(){
-        msg.textContent = 'Refresh started. Reading every venue’s website takes about 10 to 15 minutes. This page reloads with the new listings when it’s done, and culturepotato.com/london picks them up within a few minutes.';
+        msg.textContent = 'Refresh started. Reading every venue’s website takes about 10 to 15 minutes. This page reloads with the new listings when it’s done, and ailudo.github.io/london picks them up within a few minutes.';
         setTimeout(function(){ rbtn.disabled = false; }, 60000);
       }).catch(function(e){
         msg.textContent = errText(e, true);
