@@ -88,6 +88,14 @@ select{font:500 14px var(--sans);padding:9px 10px;border:1px solid var(--ink);ba
 @media(max-width:760px){.map{grid-template-columns:1fr}.tl-head,.tl-row{grid-template-columns:150px 1fr}.tl-in{--nw:150px}}
 .map svg{width:100%;height:auto;background:var(--paper2);display:block}
 .map .seine{fill:none;stroke:var(--blue);stroke-width:10;stroke-linecap:round;stroke-linejoin:round;opacity:.28}
+a.back{display:inline-block;margin-bottom:14px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--ink);padding-bottom:1px}
+a.back:hover{background:var(--ink);color:var(--paper)}
+.locbar{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:13px;color:var(--muted)}
+.locbtn{font:600 12px var(--sans);letter-spacing:.06em;text-transform:uppercase;border:1.5px solid var(--ink);background:transparent;color:var(--ink);padding:6px 10px;cursor:pointer}
+.locbtn[aria-pressed="true"]{background:#E5141F;border-color:#E5141F;color:#fff}
+.map .me .halo{fill:#E5141F;opacity:.28}
+.map .me .core{fill:#E5141F;stroke:#fff;stroke-width:2.5}
+@media (prefers-reduced-motion:no-preference){.map .me .core{animation:blink 1.1s ease-in-out infinite}.map .me .halo{transform-box:fill-box;transform-origin:center;animation:halo 1.1s ease-out infinite}@keyframes blink{50%{opacity:.25}}@keyframes halo{from{transform:scale(.4);opacity:.9}to{transform:scale(1.2);opacity:0}}}
 .map .pin{cursor:pointer}
 .map .pin circle{fill:var(--dot);stroke:var(--paper);stroke-width:2}
 .map .pin text{font:600 11px var(--sans);fill:var(--ink);paint-order:stroke;stroke:var(--paper2);stroke-width:3px}
@@ -113,6 +121,7 @@ footer{margin-top:36px;font-size:13px;color:var(--muted);display:flex;flex-wrap:
 <body>
 <div class="wrap">
 <header class="mast">
+  <a class="back" href="../">← Studio AI Ludo</a>
   <div class="kicker">An AI project by Studio AI Ludo</div>
   <h1>On View <em>Paris</em></h1>
   <p class="dek">What is on, closing and opening at the public museums and non-profit spaces of Paris. Gathered from each venue's own pages and written up with AI.</p>
@@ -336,6 +345,16 @@ function timeline(list){
   return `<div class="tl"><div class="tl-in"><div class="tl-head"><div></div><div class="tl-months">${months.map(m=>`<span style="left:${pct(m[0])}%">${m[1]}</span>`).join('')}</div></div>
   <div style="position:relative">${rows}<div style="position:absolute;left:var(--nw);right:0;top:0;bottom:0;pointer-events:none"><div class="tl-today" style="left:${t}%"></div></div></div></div></div>`;
 }
+const loc={on:false,ll:null,acc:0,msg:'',id:null};
+function locStop(msg){if(loc.id!=null&&navigator.geolocation)navigator.geolocation.clearWatch(loc.id);loc.id=null;loc.on=false;loc.ll=null;loc.msg=msg||'';if(state.view==='map')render()}
+function locStart(){
+  if(!navigator.geolocation){loc.msg='Your browser can’t share its location.';render();return}
+  loc.on=true;loc.msg='Waiting for location permission…';render();
+  loc.id=navigator.geolocation.watchPosition(p=>{const first=!loc.ll;loc.ll=[p.coords.latitude,p.coords.longitude];loc.acc=p.coords.accuracy||0;if(first||true)loc.msg='';if(state.view==='map')render()},
+    err=>locStop(err&&err.code===1?'Location permission was declined. Allow location for this site in your browser settings, then try again.':err&&err.code===3?'Finding your location took too long. Try again.':'Your location could not be found just now.'),
+    {enableHighAccuracy:false,maximumAge:15000,timeout:20000});
+}
+document.addEventListener('click',ev=>{if(ev.target.closest('#locBtn')){loc.on?locStop(''):locStart()}});
 function mapView(list){
   const n={};list.forEach(e=>n[e.venue]=(n[e.venue]||0)+1);
   const lat0=48.8330,lat1=48.8860,lng0=2.2500,lng1=2.3900,W=700,H=Math.round(W*(lat1-lat0)*1.0/((lng1-lng0)*Math.cos(48.86*Math.PI/180)));
@@ -345,7 +364,12 @@ function mapView(list){
     const x=X(v.lng),y=Y(v.lat),r=7+Math.min(n[v.id],6)*1.6,left=x>W*0.72;
     return `<g class="pin${state.venue===v.id?' sel':''}" data-v="${v.id}" tabindex="0" role="button" aria-label="${esc(v.name)}, ${n[v.id]} exhibitions" style="--dot:${catColor(v.cats[0])}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}"/><text x="${(left?x-r-4:x+r+4).toFixed(1)}" y="${(y+4).toFixed(1)}" text-anchor="${left?'end':'start'}">${esc(v.name.replace('Musée d’','').replace('Musée du ','').replace('Musée ','').replace('Maison Européenne de la Photographie','MEP').replace('Fondation ','Fond. '))}</text></g>`}).join('');
   const lis=VEN.slice().sort((a,b)=>a.name.localeCompare(b.name,'fr')).map(v=>`<li><button type="button" data-v="${v.id}"><span>${esc(v.name)}</span><span class="${n[v.id]?'c':'z'}">${n[v.id]||'none'}</span></button></li>`).join('');
-  return `<div class="map"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Map of venues, sized by number of exhibitions"><polyline class="seine" points="${seine}"/>${pins}</svg><ul class="vlist">${lis}</ul></div>`;
+  let me='',note=loc.msg;
+  if(loc.on&&loc.ll){const[la,ln]=loc.ll;
+    if(la>=lat0&&la<=lat1&&ln>=lng0&&ln<=lng1){const x=X(ln).toFixed(1),y=Y(la).toFixed(1);me=`<g class="me" role="img" aria-label="Your location"><circle class="halo" cx="${x}" cy="${y}" r="22"/><circle class="core" cx="${x}" cy="${y}" r="8"/></g>`;note=`Red dot: your current location${loc.acc>=1?' (accurate to about '+Math.round(loc.acc)+' m)':''}. It stays on this device.`}
+    else note='Your location is outside the area of this map, so the red dot is not shown.'}
+  const bar=`<div class="locbar"><button type="button" class="locbtn" id="locBtn" aria-pressed="${loc.on}">${loc.on?'Hide my location':'Show my location'}</button><span aria-live="polite">${esc(note)}</span></div>`;
+  return `<div class="map">${bar}<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Map of venues, sized by number of exhibitions"><polyline class="seine" points="${seine}"/>${pins}${me}</svg><ul class="vlist">${lis}</ul></div>`;
 }
 function render(){
   renderBar();renderVenueSelect();
