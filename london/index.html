@@ -194,12 +194,17 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 #onview .ov-legend i.sino{background:var(--accent)}
 #onview .ov-legend i.soon{background:var(--warn)}
 #onview .ov-legend i.upcoming{background:transparent;border:1.5px solid var(--ink-2)}
+#onview .ov-legend i.me{width:10px;height:10px;border-radius:50%;background:#E5202E}
 #onview .ov-legend i.dot{width:10px;height:10px;border-radius:50%;background:var(--ink)}
 @container (max-width:700px){#onview .tl-head,#onview .tl-row{grid-template-columns:1fr;gap:6px}#onview .tl-head .tl-label{display:none}}
 
 /* Map */
 #onview .ov-map{height:clamp(380px,62vh,660px);border:2px solid var(--ink);border-radius:0;background:var(--map-bg);overflow:hidden}
 #onview .ov-map-note{margin-top:8px;font-size:12.5px;color:var(--ink-2)}
+#onview .ov-locate{display:block;border:2px solid var(--ink);background:var(--panel);color:var(--ink);font-family:var(--f-mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;padding:7px 10px;cursor:pointer;box-shadow:none}
+#onview .ov-locate:hover{background:var(--ink);color:var(--wall)}
+#onview .ov-locate[aria-pressed="true"]{background:#E5202E;border-color:#E5202E;color:#fff}
+#onview .ov-me{width:16px;height:16px;border-radius:50%;background:#E5202E;border:3px solid #fff;box-shadow:0 0 0 2px #E5202E,0 1px 6px rgba(0,0,0,.45)}
 #onview .leaflet-container{font-family:var(--f-body);background:var(--map-bg)}
 #onview .leaflet-tile-pane{filter:grayscale(1) contrast(.92) brightness(var(--tile-bright,1.04))}
 #onview .ov-pin{position:relative;width:0;height:0}
@@ -1775,6 +1780,43 @@ function boot(){
     layer = L.layerGroup().addTo(map);
     function zoomCls(){ mapEl.classList.toggle('zoomed-out', map.getZoom() < 12); }
     map.on('zoomend', zoomCls);
+    // Reader location: a red dot, only after the reader taps the button. Never stored or sent anywhere.
+    var meMarker = null, meAcc = null, watchId = null, locBtn = null, firstFix = true;
+    function stopLocate(){
+      if (watchId !== null && navigator.geolocation) navigator.geolocation.clearWatch(watchId);
+      watchId = null; firstFix = true;
+      if (meMarker) { map.removeLayer(meMarker); meMarker = null; }
+      if (meAcc) { map.removeLayer(meAcc); meAcc = null; }
+      locBtn.setAttribute('aria-pressed','false'); locBtn.textContent = 'Show my location';
+    }
+    var LocCtl = L.Control.extend({
+      options: {position: 'topright'},
+      onAdd: function(){
+        locBtn = L.DomUtil.create('button','ov-locate'); locBtn.type = 'button';
+        locBtn.textContent = 'Show my location'; locBtn.setAttribute('aria-pressed','false');
+        L.DomEvent.disableClickPropagation(locBtn);
+        L.DomEvent.on(locBtn, 'click', function(){
+          if (watchId !== null) { stopLocate(); return; }
+          if (!navigator.geolocation) { mapNote.textContent = 'Your browser can\u2019t share a location.'; return; }
+          locBtn.textContent = 'Locating\u2026';
+          watchId = navigator.geolocation.watchPosition(function(pos){
+            var ll = [pos.coords.latitude, pos.coords.longitude];
+            if (!meMarker) {
+              meAcc = L.circle(ll, {radius: pos.coords.accuracy, color: '#E5202E', weight: 1, fillColor: '#E5202E', fillOpacity: .12, interactive: false}).addTo(map);
+              meMarker = L.marker(ll, {icon: L.divIcon({className: '', html: '<div class="ov-me"></div>', iconSize: [16,16], iconAnchor: [8,8]}), title: 'You are here', keyboard: false, zIndexOffset: 1000}).addTo(map);
+              meMarker.bindTooltip('You are here');
+            } else { meMarker.setLatLng(ll); meAcc.setLatLng(ll); meAcc.setRadius(pos.coords.accuracy); }
+            locBtn.setAttribute('aria-pressed','true'); locBtn.textContent = 'Hide my location';
+            if (firstFix) { firstFix = false; if (map.getBounds().pad(0.5).contains(ll) === false) map.setView(ll, Math.max(map.getZoom(), 13)); }
+          }, function(err){
+            stopLocate();
+            mapNote.textContent = err && err.code === 1 ? 'Location is blocked for this page. Allow it in your browser settings to see the red dot.' : 'Couldn\u2019t work out your location just now.';
+          }, {enableHighAccuracy: true, maximumAge: 15000, timeout: 20000});
+        });
+        return locBtn;
+      }
+    });
+    new LocCtl().addTo(map);
     map.setView([51.512, -0.118], mapEl.clientWidth > 700 ? 13 : 12.5); zoomCls();
     return true;
   }
@@ -1782,7 +1824,7 @@ function boot(){
     if (!ensureMap()) {
       var m = el('div','ov-empty'); m.appendChild(el('p', null, 'The map could not load. Check your connection and reload the page.')); host.appendChild(m); return;
     }
-    legend(host, [['dot','Venue (number of exhibitions)'],['sino','Venue with a sinophone show'],['soon','Short title in amber: closing within 14 days']]);
+    legend(host, [['dot','Venue (number of exhibitions)'],['sino','Venue with a sinophone show'],['soon','Short title in amber: closing within 14 days'],['me','Your location (tap Show my location)']]);
     host.appendChild(mapEl); host.appendChild(mapNote);
     layer.clearLayers();
     var groups = {};
