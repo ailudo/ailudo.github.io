@@ -6,7 +6,7 @@
 <title>Studio AI Ludo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Inter:wght@700&family=Bodoni+Moda:ital,opsz,wght@1,6..96,500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Inter:wght@700&family=VT323&family=Bodoni+Moda:ital,opsz,wght@1,6..96,500&display=swap">
 <style>
   html, body {
     margin: 0;
@@ -115,14 +115,26 @@
   }
   .drift.gym:hover { animation-play-state: paused; }
   .gym-link {
-    display: block;
-    font-size: clamp(28px, 4vw, 44px);
-    text-decoration: none;
+    /* a classic Mac bevel button, as on the gym page */
+    display: flex;
+    align-items: center;
+    gap: 0.35em;
+    font-family: "VT323", "Monaco", monospace;
+    font-size: clamp(22px, 2.6vw, 32px);
     line-height: 1;
+    color: #000;
+    text-decoration: none;
+    padding: 0.18em 0.45em 0.12em;
+    background: #DDDDDD;
+    border: 2px solid;
+    border-color: #FFFFFF #555555 #555555 #FFFFFF;
+    outline: 2px solid #000;
     opacity: 0;
     transform: scale(0);
     animation: pop 0.55s cubic-bezier(.2, .9, .3, 1.25) 0.5s forwards;
   }
+  .gym-link:active { border-color: #555555 #FFFFFF #FFFFFF #555555; background: #AAAAAA; }
+  .gym-link svg { width: 1.3em; height: auto; display: block; }
   .gym-link:focus-visible {
     outline: 2px solid #0030c8;
     outline-offset: 4px;
@@ -179,7 +191,7 @@
   </div>
 
   <div class="drift gym">
-    <a class="gym-link" href="gym/" aria-label="Gym training tracker" title="Gym training tracker">💪</a>
+    <a class="gym-link" href="gym/" aria-label="Gym training tracker" title="Gym training tracker"><svg viewBox="0 0 16 9" shape-rendering="crispEdges" aria-hidden="true"><g fill="#000"><rect x="1" y="2" width="2" height="5"/><rect x="3" y="0" width="2" height="9"/><rect x="5" y="3" width="6" height="3"/><rect x="11" y="0" width="2" height="9"/><rect x="13" y="2" width="2" height="5"/></g><rect x="6" y="4" width="4" height="1" fill="#DDDDDD"/></svg>GYM</a>
   </div>
 
   <div class="drift zug">
