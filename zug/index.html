@@ -410,7 +410,9 @@ async function openFromLink(p){
       const g = local ? { ...local } : { id, sent: sg.moves.length, me: null, moves: [] };
       const fresh = adopt(g, sg);
       if (!local) g.sent = g.moves.length;
-      if (side && !spectate){ g.key = key; g.me = side; }
+      const mine = local && local.key && (local.me==='w' || local.me==='b');
+      if (side && !spectate && !(mine && local.key !== key)){ g.key = key; g.me = side; }
+      else if (mine && local.key !== key && side) toast(`That's the link you sent ${(local.me==='w'?sg.b:sg.w) || 'your friend'} — opened as you`);
       history.replaceState(null, '', '#g/'+id);
       if (g.me === 'w' || g.me === 'b'){
         if (!g[g.me]){ return viewJoin(g, g.me); }
@@ -584,6 +586,7 @@ function viewGame(g, opts = {}){
         <button class="textbtn" id="resign" style="align-self:flex-start">Resign</button></div>`;
     }
 
+    if (!spec && g.key && mode !== 'log') panel = panel.replace(/<\/div>$/, `<button class="textbtn" id="mylink" style="align-self:flex-start">Open this game on another device</button></div>`);
     const head = (mode==='log' || !live) ? `
       <div class="banner"><span><strong>${view ? esc(moveLabel(full.hist, view-1)) : 'Start position'}</strong> · ${view} of ${full.hist.length}</span>
       <button id="tolive">${mode==='log' ? 'Close log' : 'Back to live'}${I.arrow}</button></div>` : `
@@ -713,6 +716,7 @@ function viewGame(g, opts = {}){
     on('fx', ()=>{ prefs.fx = !prefs.fx; savePrefs(); if (prefs.fx){ audio(); feedback('move'); } render(); });
     const specLink = () => { const msg = `Watch ${g.w||'?'} vs ${g.b||'?'} — ${g.name} on Zug: ${gameLink(g, { v:'1' })}`; shareOther(msg); };
     on('spec', specLink); on('spectop', specLink);
+    on('mylink', ()=>{ const msg = `${g.name} — my own Zug link, playing ${colourName(g.me)}. Keep it private: whoever has it can move for me. ${gameLink(g, { k:g.key })}`; shareOther(msg); });
     on('send', ()=>{ const m = sendMessage(); markSent(); location.href = smsHref(m, g.phone||''); setTimeout(render, 400); });
     on('sendother', async ()=>{ const m = sendMessage(); await shareOther(m); markSent(); render(); });
     on('undo', ()=>{ const expect = g.moves.length; g.moves = g.moves.slice(0,-1); if (g.sent > g.moves.length) g.sent = g.moves.length; saveGame(g); view=g.moves.length; feedback('tap'); render(); if (g.online && g.key) online('undo', { expect }); });
