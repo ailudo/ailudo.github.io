@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<title>Zug — chess by text message</title>
+<meta name="description" content="Chess with friends, one text message at a time. A Studio AI Ludo project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#111111; --paper:#FFFFFF; --blue:#A8D8F0; --red:#E2231A; --grey:#595959; --rule:#111111;
+  --pad:24px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body{min-height:100svh;display:flex;justify-content:center}
+#app{width:100%;max-width:520px;min-height:100svh;display:flex;flex-direction:column}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+a{color:var(--ink)}
+.hidden{display:none!important}
+.label{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.muted{color:var(--grey)}
+.primary{display:flex;align-items:center;justify-content:space-between;width:100%;height:60px;padding:0 20px;border:0;background:var(--ink);color:#fff;font-size:18px;font-weight:500;text-decoration:none}
+.primary.red{background:var(--red)}
+.primary:disabled{opacity:.35;cursor:default}
+.secondary{height:48px;padding:0 14px;border:1.5px solid var(--ink);background:var(--paper);font-size:15px}
+.textbtn{height:44px;padding:0;border:0;background:none;font-size:15px;text-decoration:underline;text-underline-offset:3px}
+.iconbtn{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:0;background:none;padding:0}
+.field{display:flex;flex-direction:column;gap:8px}
+.field input{height:52px;padding:0 14px;border:2px solid var(--ink);border-radius:0;font-size:18px;background:var(--paper);outline:none;-webkit-appearance:none}
+.field input:focus{box-shadow:0 0 0 3px var(--blue)}
+.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:2px solid var(--ink)}
+.seg button{height:48px;border:0;background:var(--paper);font-size:16px}
+.seg button+button{border-left:2px solid var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff;font-weight:500}
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:square}
+
+/* home */
+.home-head{padding:28px var(--pad) 20px}
+.wordmark{margin:0;font-size:112px;line-height:.9;font-weight:700;letter-spacing:-.05em}
+.strip{display:grid;grid-template-columns:repeat(8,1fr);height:48px}
+.strip span:nth-child(odd){background:var(--blue)}.strip span:nth-child(even){background:var(--ink)}
+.list-head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:10px;border-bottom:2px solid var(--rule)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:var(--ink)}
+.row b{display:block;font-size:20px}
+.row small{display:block;font-size:14px;color:var(--grey);margin-top:3px}
+.status{font-size:14px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--red)}
+.empty{padding:20px 0;color:var(--grey);font-size:15px;line-height:1.45}
+
+/* game */
+.bar{height:56px;padding:0 12px 0 4px;display:flex;align-items:center;gap:8px}
+.who{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+.who b{font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip{width:14px;height:14px;flex-shrink:0}
+.chip.w{background:#fff;border:2px solid var(--ink)} .chip.b{background:var(--ink)}
+.boardwrap{width:100%;display:flex;justify-content:center}
+.board{position:relative;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));width:min(100%, calc(100svh - 300px));min-width:280px;aspect-ratio:1/1;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.sq{position:relative;border:0;padding:0;margin:0;display:block;aspect-ratio:1/1;cursor:default}
+.sq.l{background:var(--blue)} .sq.d{background:var(--ink)}
+.sq.can{cursor:pointer}
+.sq svg.pc{position:absolute;inset:4%;width:92%;height:92%;pointer-events:none}
+.sq .co{position:absolute;font-size:clamp(8px,2.4vw,11px);font-weight:500;line-height:1;pointer-events:none}
+.sq.l .co{color:var(--ink)} .sq.d .co{color:var(--blue)}
+.sq .rk{top:3px;left:4px} .sq .fl{bottom:3px;right:4px}
+.sq.last::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 3px var(--red);pointer-events:none}
+.sq.sel::before{content:"";position:absolute;inset:0;background:rgba(226,35,26,.35);pointer-events:none}
+.sq.chk::before{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(226,35,26,.85) 0,rgba(226,35,26,.25) 70%);pointer-events:none}
+.sq.tgt::after{content:"";position:absolute;left:37%;top:37%;width:26%;height:26%;border-radius:50%;background:var(--red);opacity:.85;pointer-events:none}
+.sq.tgt.cap::after{left:6%;top:6%;width:88%;height:88%;background:none;border:3px solid var(--red);box-sizing:border-box;opacity:1}
+.moves{display:flex;align-items:center;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.moves .iconbtn{width:48px;height:48px}
+.moves .iconbtn:disabled{color:#BDBDBD;cursor:default}
+.ticker{flex:1;min-width:0;display:flex;gap:10px;justify-content:flex-end;overflow:hidden;white-space:nowrap;font-size:14px;font-variant-numeric:tabular-nums;border:0;background:none;padding:0 4px;height:48px;align-items:center;mask-image:linear-gradient(90deg,transparent,#000 24px)}
+.ticker span{color:var(--grey)} .ticker span.cur{color:var(--ink);font-weight:700;border-bottom:2px solid var(--red)}
+.panel{padding:16px 16px calc(20px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:12px}
+.panel p{margin:0;font-size:16px;line-height:1.4}
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.banner{height:56px;padding:0 6px 0 16px;display:flex;align-items:center;justify-content:space-between;background:var(--ink);color:#fff;font-size:15px}
+.banner button{color:#fff;background:none;border:0;height:44px;padding:0 10px;font-size:15px;font-weight:500;display:flex;gap:6px;align-items:center}
+.sheet{display:grid;grid-template-columns:40px minmax(0,1fr) minmax(0,1fr);font-size:17px;font-variant-numeric:tabular-nums}
+.sheet .n{color:var(--grey);padding:6px 0}
+.sheet button{text-align:left;border:0;background:none;padding:6px 8px;font-size:17px;height:36px}
+.sheet button.cur{background:var(--ink);color:#fff;font-weight:700}
+.sheethead{display:grid;grid-template-columns:40px minmax(0,1fr) minmax(0,1fr);padding-bottom:6px;border-bottom:2px solid var(--rule)}
+.promo{position:absolute;inset:0;background:rgba(17,17,17,.6);display:flex;align-items:center;justify-content:center;z-index:5}
+.promo div{display:grid;grid-template-columns:repeat(4,1fr);background:var(--paper);border:2px solid var(--ink)}
+.promo button{width:72px;height:72px;border:0;background:var(--blue);padding:6px}
+.promo button+button{border-left:2px solid var(--ink)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 16px;font-size:15px;max-width:90vw;z-index:20;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+.page{padding:20px var(--pad) 24px;display:flex;flex-direction:column;gap:22px;flex:1}
+.bubble{align-self:flex-end;max-width:300px;padding:12px 16px;border-radius:20px;background:var(--blue);font-size:15px;line-height:1.4;word-break:break-word}
+.hero{display:grid;grid-template-columns:1fr 1fr;height:195px}
+.hero div{display:flex;align-items:center;justify-content:center}
+.hero svg{width:150px;height:150px}
+#hap{position:fixed;left:-100px;top:0;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<label id="hap" aria-hidden="true"><input type="checkbox" switch tabindex="-1"></label>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module">
+import { Chess } from 'https://cdn.jsdelivr.net/npm/chess.js@1.4.0/+esm';
+
+/* ---------- constants ---------- */
+const PLACES = ['Lugano','Eiger','Brienz','Zermatt','Bern','Basel','Lucerne','Thun','Davos','Locarno','Montreux','Sion','Chur','Aarau','Gstaad','Wengen','Mürren','Grindelwald','Engadin','Rigi','Pilatus','Säntis','Jungfrau','Matterhorn','Ticino','Vevey','Neuchâtel','Fribourg','Schwyz','Uri','Glarus','Arosa','Andermatt','Interlaken','Lauterbrunnen','Saas-Fee','Verbier','Morges','Biel','Zug'];
+const LINES = ['Gambit','Defence','Variation','Attack','Opening','System','Counter-gambit','Indian','Exchange','Line'];
+const ALPH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+const PFX = ['', '~', '.', '*'];
+const BASE = location.origin + location.pathname;
+const $app = document.getElementById('app');
+
+const I = {
+  back:'<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>',
+  arrow:'<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  first:'<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M18 6l-7 6 7 6"/></svg>',
+  prev:'<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>',
+  next:'<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',
+  last:'<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M6 6l7 6-7 6"/></svg>',
+  eye:'<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+  soundOn:'<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>',
+  soundOff:'<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 9l5 6M22 9l-5 6"/></svg>',
+  reroll:'<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>',
+};
+
+/* ---------- pieces: flat geometric SVG ---------- */
+const SHAPES = {
+  p:'<circle cx="50" cy="35" r="12"/><path d="M39 78 L44 50 H56 L61 78 Z"/>',
+  r:'<path d="M31 78 L34 42 H66 L69 78 Z"/><path d="M28 42 V22 H37 V30 H45.5 V22 H54.5 V30 H63 V22 H72 V42 Z"/>',
+  n:'<path d="M33 78 L37 60 C28 56 24 47 29 40 L45 26 L45 13 L54 22 C68 26 74 43 71 60 L69 78 Z"/><circle class="eye" cx="44" cy="36" r="3.5"/>',
+  b:'<circle cx="50" cy="13" r="5"/><path d="M50 19 C64 31 67 47 59 61 L61 78 H39 L41 61 C33 47 36 31 50 19 Z"/><path class="slit" d="M55 32 L46 46"/>',
+  q:'<path d="M29 78 L32 57 L20 28 L38 45 L41 20 L50 42 L59 20 L62 45 L80 28 L68 57 L71 78 Z"/>',
+  k:'<path d="M46.5 8 H53.5 V15 H60 V22 H53.5 V30 H46.5 V22 H40 V15 H46.5 Z"/><path d="M36 50 C29 37 39 29 50 35 C61 29 71 37 64 50 Z"/><path d="M33 78 L36 50 H64 L67 78 Z"/>',
+};
+function pieceSVG(type, color){
+  const fill = color==='w' ? '#FFFFFF' : '#111111';
+  const line = color==='w' ? '#111111' : '#FFFFFF';
+  return `<svg class="pc" viewBox="0 0 100 100" aria-hidden="true"><g fill="${fill}" stroke="${line}" stroke-width="3.5" stroke-linejoin="round">${SHAPES[type]}<rect x="22" y="78" width="56" height="9"/></g><style>.eye{fill:${line};stroke:none}.slit{fill:none;stroke:${line};stroke-width:4}</style></svg>`;
+}
+const PIECE_NAME = {p:'pawn',n:'knight',b:'bishop',r:'rook',q:'queen',k:'king'};
+
+/* ---------- storage ---------- */
+const store = {
+  get(k, d){ try { const v = localStorage.getItem(k); return v==null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+const games = () => store.get('zug.games', {});
+const saveGame = g => { const all = games(); g.updated = Date.now(); all[g.id] = g; store.set('zug.games', all); };
+const prefs = Object.assign({ fx:true, name:'' }, store.get('zug.prefs', {}));
+const savePrefs = () => store.set('zug.prefs', prefs);
+
+/* ---------- move codec: index into sorted legal moves ---------- */
+const lan = m => m.from + m.to + (m.promotion || '');
+function sortedMoves(chess){ return chess.moves({verbose:true}).map(lan).sort(); }
+function encodeMoves(list){
+  const c = new Chess(); let out = '';
+  for (const u of list){
+    const idx = sortedMoves(c).indexOf(u);
+    if (idx < 0) break;
+    out += PFX[Math.floor(idx/64)] + ALPH[idx%64];
+    c.move({from:u.slice(0,2), to:u.slice(2,4), promotion:u[4]});
+  }
+  return out;
+}
+function decodeMoves(str){
+  const c = new Chess(); const out = [];
+  for (let i=0; i<(str||'').length; i++){
+    let page = PFX.indexOf(str[i]);
+    if (page > 0) i++; else page = 0;
+    const idx = page*64 + ALPH.indexOf(str[i]);
+    const u = sortedMoves(c)[idx];
+    if (!u) break;
+    out.push(u); c.move({from:u.slice(0,2), to:u.slice(2,4), promotion:u[4]});
+  }
+  return out;
+}
+function replay(list, upto = list.length){
+  const c = new Chess(); const hist = [];
+  for (let i=0; i<upto; i++){ const u = list[i]; hist.push(c.move({from:u.slice(0,2), to:u.slice(2,4), promotion:u[4]})); }
+  return { chess:c, hist };
+}
+
+/* ---------- links ---------- */
+function gameLink(g, extra = {}){
+  const p = new URLSearchParams();
+  p.set('id', g.id); p.set('n', g.name);
+  p.set('w', g.w || ''); p.set('b', g.b || '');
+  if (g.moves.length) p.set('m', encodeMoves(g.moves));
+  if (g.resign) p.set('r', g.resign);
+  for (const [k,v] of Object.entries(extra)) p.set(k, v);
+  return BASE + '#' + p.toString();
+}
+function smsHref(body, phone=''){
+  const ios = /iP(hone|ad|od)/.test(navigator.userAgent);
+  return `sms:${phone}${ios ? '&' : '?'}body=${encodeURIComponent(body)}`;
+}
+
+/* ---------- feedback: sound + haptics ---------- */
+let ac;
+function audio(){ if (!ac){ try { ac = new (window.AudioContext||window.webkitAudioContext)(); } catch {} } if (ac && ac.state==='suspended') ac.resume(); return ac; }
+function tock(t0, freq=190, gain=0.55){
+  const a = audio(); if (!a) return;
+  const len = 0.06, buf = a.createBuffer(1, a.sampleRate*len, a.sampleRate), d = buf.getChannelData(0);
+  for (let i=0;i<d.length;i++) d[i] = (Math.random()*2-1) * Math.pow(1-i/d.length, 4);
+  const n = a.createBufferSource(); n.buffer = buf;
+  const bp = a.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value = freq*5; bp.Q.value = 2.5;
+  const g1 = a.createGain(); g1.gain.value = gain;
+  n.connect(bp).connect(g1).connect(a.destination); n.start(t0);
+  const o = a.createOscillator(); o.type='sine'; o.frequency.setValueAtTime(freq*1.4, t0); o.frequency.exponentialRampToValueAtTime(freq, t0+0.08);
+  const g2 = a.createGain(); g2.gain.setValueAtTime(gain*0.9, t0); g2.gain.exponentialRampToValueAtTime(0.001, t0+0.12);
+  o.connect(g2).connect(a.destination); o.start(t0); o.stop(t0+0.13);
+}
+function tone(t0, f, dur, gain=0.18){
+  const a = audio(); if (!a) return;
+  const o = a.createOscillator(); o.type='triangle'; o.frequency.value = f;
+  const g = a.createGain(); g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(gain, t0+0.015); g.gain.exponentialRampToValueAtTime(0.0001, t0+dur);
+  o.connect(g).connect(a.destination); o.start(t0); o.stop(t0+dur+0.02);
+}
+const hapEl = document.getElementById('hap');
+function buzz(pattern){
+  if (navigator.vibrate) { navigator.vibrate(pattern); return; }
+  // iOS 18+: toggling a native switch gives a light haptic tick (unofficial).
+  const pulses = Array.isArray(pattern) ? Math.ceil(pattern.length/2) : 1;
+  for (let i=0;i<pulses;i++) setTimeout(()=>{ try { hapEl.click(); } catch {} }, i*110);
+}
+function feedback(kind){
+  if (!prefs.fx) return;
+  const a = audio(); const t = a ? a.currentTime + 0.01 : 0;
+  if (kind==='move'){ tock(t); buzz(12); }
+  else if (kind==='capture'){ tock(t,160,0.6); tock(t+0.075,140,0.5); buzz([14,60,22]); }
+  else if (kind==='check'){ tock(t); tone(t+0.05,660,0.16); tone(t+0.17,880,0.22); buzz([40]); }
+  else if (kind==='end'){ tock(t,150,0.6); [262,330,392,523].forEach((f,i)=>tone(t+0.08+i*0.02,f,1.2,0.12)); buzz([60,80,60,80,120]); }
+  else if (kind==='tap'){ buzz(6); }
+}
+function feedbackFor(mv, chess){
+  if (chess.isGameOver()) return feedback('end');
+  if (chess.inCheck()) return feedback('check');
+  if (mv.captured) return feedback('capture');
+  feedback('move');
+}
+
+/* ---------- helpers ---------- */
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rnd = a => a[Math.floor(Math.random()*a.length)];
+const randomName = () => `${rnd(PLACES)} ${rnd(LINES)}`;
+const newId = () => Array.from(crypto.getRandomValues(new Uint8Array(5)), b => ALPH[b%62]).join('');
+let toastT;
+function toast(msg){ const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove('on'), 2600); }
+async function copy(text, msg='Link copied'){ try { await navigator.clipboard.writeText(text); toast(msg); } catch { prompt('Copy this:', text); } }
+async function shareOther(text){ if (navigator.share){ try { await navigator.share({ text }); } catch {} } else copy(text, 'Message copied'); }
+const colourName = c => c==='w' ? 'White' : 'Black';
+const other = c => c==='w' ? 'b' : 'w';
+function moveLabel(hist, i){ const m = hist[i]; const no = Math.floor(i/2)+1; return i%2===0 ? `${no}. ${m.san}` : `${no}… ${m.san}`; }
+
+function resultOf(g, chess){
+  if (g.resign) return { text: `${colourName(g.resign)} resigned`, score: g.resign==='w' ? '0–1' : '1–0' };
+  if (chess.isCheckmate()) return { text:'Checkmate', score: chess.turn()==='w' ? '0–1' : '1–0' };
+  if (chess.isStalemate()) return { text:'Stalemate', score:'½–½' };
+  if (chess.isThreefoldRepetition()) return { text:'Draw by repetition', score:'½–½' };
+  if (chess.isInsufficientMaterial()) return { text:'Draw — insufficient material', score:'½–½' };
+  if (chess.isDraw()) return { text:'Draw — fifty-move rule', score:'½–½' };
+  return null;
+}
+
+/* ---------- routing ---------- */
+window.addEventListener('hashchange', route);
+function route(){
+  const h = location.hash.slice(1);
+  if (h === 'new') return viewNew();
+  if (h.includes('id=')) return openFromLink(new URLSearchParams(h));
+  if (h.startsWith('g/')) { const g = games()[h.slice(2)]; if (g) return viewGame(g); }
+  viewHome();
+}
+function go(h){ if (location.hash === '#'+h) route(); else location.hash = h; }
+
+/* ---------- home ---------- */
+function viewHome(){
+  const list = Object.values(games()).sort((a,b)=>b.updated-a.updated);
+  const rows = list.map(g => {
+    const { chess } = replay(g.moves);
+    const res = resultOf(g, chess);
+    const opp = g.me==='spec' ? `${g.w||'?'} vs ${g.b||'?'}` : `vs ${(g.me==='w'?g.b:g.w) || 'friend'}`;
+    const n = Math.floor(g.moves.length/2) + 1;
+    let status, sub;
+    if (g.me==='spec'){ status = res ? res.score : 'Watching'; sub = `${opp} · move ${n}`; }
+    else if (res){ status = res.score; sub = `${opp} · ${n} moves · ${res.text.toLowerCase()}`; }
+    else if (!g.w || !g.b){ status = chess.turn()===g.me ? '<span class="dot"></span>Your move' : 'Waiting'; sub = `${opp} · invite sent`; }
+    else if (g.moves.length > (g.sent||0) && chess.turn()!==g.me){ status = '<span class="dot"></span>Send your move'; sub = `${opp} · move ${n}`; }
+    else if (chess.turn()===g.me){ status = '<span class="dot"></span>Your move'; sub = `${opp} · move ${n}`; }
+    else { status = 'Their move'; sub = `${opp} · move ${n}`; }
+    sub += g.me!=='spec' ? ` · you are ${colourName(g.me)}` : '';
+    return `<a class="row" href="#g/${esc(g.id)}"><div><b>${esc(g.name)}</b><small>${esc(sub)}</small></div><span class="status">${status}</span></a>`;
+  }).join('');
+  $app.innerHTML = `
+  <header class="home-head">
+    <div class="label" style="font-weight:500;letter-spacing:.08em"><a href="../" style="text-decoration:none">Studio AI Ludo</a></div>
+    <h1 class="wordmark">Zug</h1>
+    <p style="margin:12px 0 0;font-size:17px;line-height:1.35;max-width:300px">Chess with friends, one text message at a time.</p>
+  </header>
+  <div class="strip" aria-hidden="true">${'<span></span>'.repeat(8)}</div>
+  <main class="page" style="gap:28px">
+    <a class="primary" href="#new"><span>New game</span>${I.arrow}</a>
+    <section>
+      <div class="list-head"><h2 class="label" style="margin:0">Games</h2><span class="muted" style="font-size:13px">${list.length ? `${list.length} saved on this phone` : ''}</span></div>
+      ${rows || `<p class="empty">No games yet. Start one, and it will be kept here — every move your friend texts you updates it.</p>`}
+    </section>
+  </main>
+  <footer style="padding:0 var(--pad) 24px;font-size:12px" class="muted">ailudo.github.io/zug · games are stored only on this phone and in your texts</footer>`;
+}
+
+/* ---------- new game ---------- */
+function viewNew(){
+  let name = randomName(), side = 'w';
+  $app.innerHTML = `
+  <main class="page">
+    <a href="#" style="display:flex;align-items:center;gap:6px;height:44px;font-size:15px;text-decoration:none">${I.back}Games</a>
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <span class="label">New game</span>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <h1 id="gname" style="margin:0;font-size:40px;line-height:1.05;letter-spacing:-.03em"></h1>
+        <button class="iconbtn" id="reroll" aria-label="Pick another name" style="border:1.5px solid var(--ink);flex-shrink:0">${I.reroll}</button>
+      </div>
+    </div>
+    <div class="field"><label class="label" for="me">01 — Your name</label><input id="me" autocomplete="given-name" maxlength="24" value="${esc(prefs.name)}" placeholder="Your name"></div>
+    <div class="field"><span class="label" id="sidel">02 — Play as</span>
+      <div class="seg" role="group" aria-labelledby="sidel"><button data-s="w" aria-pressed="true">White</button><button data-s="b" aria-pressed="false">Black</button><button data-s="r" aria-pressed="false">Random</button></div></div>
+    <div class="field"><label class="label" for="ph">03 — Friend's phone <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:400">optional</span></label><input id="ph" type="tel" inputmode="tel" autocomplete="off" placeholder="Leave blank to pick in Messages"></div>
+    <button class="primary" id="go"><span>Invite by SMS</span>${I.arrow}</button>
+    <button class="textbtn" id="other" style="align-self:flex-start">Invite another way (WhatsApp, copy link…)</button>
+  </main>`;
+  const $n = document.getElementById('gname'); $n.textContent = name;
+  document.getElementById('reroll').onclick = () => { name = randomName(); $n.textContent = name; feedback('tap'); };
+  $app.querySelectorAll('.seg button').forEach(b => b.onclick = () => { side = b.dataset.s; $app.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x===b)); });
+  const create = () => {
+    const me = document.getElementById('me').value.trim();
+    if (!me){ document.getElementById('me').focus(); toast('Add your name first'); return null; }
+    prefs.name = me; savePrefs();
+    const colour = side==='r' ? (Math.random()<.5?'w':'b') : side;
+    const g = { id:newId(), name, w: colour==='w'?me:'', b: colour==='b'?me:'', me: colour, moves:[], sent:0, phone: document.getElementById('ph').value.replace(/[^\d+]/g,''), created:Date.now() };
+    saveGame(g);
+    const msg = `${name} — ${me} has challenged you to chess on Zug. You play ${colourName(other(colour))}. Join here: ${gameLink(g)}`;
+    return { g, msg };
+  };
+  document.getElementById('go').onclick = () => { const r = create(); if (!r) return; location.href = smsHref(r.msg, r.g.phone); setTimeout(()=>go('g/'+r.g.id), 400); };
+  document.getElementById('other').onclick = async () => { const r = create(); if (!r) return; await shareOther(r.msg); go('g/'+r.g.id); };
+}
+
+/* ---------- opening a link ---------- */
+function openFromLink(p){
+  const id = p.get('id'); if (!id) return viewHome();
+  const linkMoves = decodeMoves(p.get('m') || '');
+  const local = games()[id];
+  const spectate = p.get('v') === '1';
+  const incoming = { id, name: p.get('n') || 'Untitled game', w: p.get('w') || '', b: p.get('b') || '', moves: linkMoves, resign: p.get('r') || '' };
+
+  if (local){
+    const g = { ...local };
+    g.w = g.w || incoming.w; g.b = g.b || incoming.b; g.name = local.name || incoming.name;
+    const isPrefix = (a,b) => a.length <= b.length && a.every((x,i)=>x===b[i]);
+    let fresh = 0;
+    if (isPrefix(local.moves, linkMoves) && linkMoves.length > local.moves.length){ fresh = linkMoves.length - local.moves.length; g.moves = linkMoves; g.sent = linkMoves.length; }
+    else if (!isPrefix(linkMoves, local.moves)){ g.moves = linkMoves; g.sent = linkMoves.length; toast('This link replaced your copy of the game'); }
+    if (incoming.resign && !g.resign) g.resign = incoming.resign;
+    saveGame(g);
+    history.replaceState(null, '', '#g/'+id);
+    return viewGame(g, { arrived: fresh });
+  }
+  const g = { ...incoming, sent: linkMoves.length, me: null };
+  if (spectate){ g.me = 'spec'; saveGame(g); history.replaceState(null,'','#g/'+id); return viewGame(g, { arrived: linkMoves.length ? 1 : 0 }); }
+  if (!g.w || !g.b) return viewJoin(g, !g.w ? 'w' : 'b');
+  return viewWho(g);
+}
+
+function viewJoin(g, colour){
+  const host = colour==='w' ? g.b : g.w;
+  const k = colour==='w' ? 'k' : 'k';
+  $app.innerHTML = `
+  <div style="padding:24px;display:flex;justify-content:space-between;align-items:baseline">
+    <a href="#" style="font-size:28px;font-weight:700;letter-spacing:-.04em;text-decoration:none">Zug</a>
+    <span class="label" style="font-size:12px;font-weight:500;letter-spacing:.08em">${esc(g.name)}</span>
+  </div>
+  <div class="hero" aria-hidden="true"><div style="background:var(--blue)">${pieceSVG(k,'w').replace('class="pc"','')}</div><div style="background:var(--ink)">${pieceSVG(k,'b').replace('class="pc"','')}</div></div>
+  <main class="page" style="padding-top:28px">
+    <h1 style="margin:0;font-size:40px;line-height:1.05;letter-spacing:-.03em">${esc(host || 'A friend')} has challenged you.</h1>
+    <p style="margin:0;font-size:17px;line-height:1.4">You play <strong>${colourName(colour)}</strong>. ${colour==='w' ? 'You move first.' : `${esc(host||'They')} moves first — you'll get a text when it's your turn.`}</p>
+    <div class="field"><label class="label" for="nm">Your name</label><input id="nm" maxlength="24" autocomplete="given-name" value="${esc(prefs.name)}" placeholder="Your name"></div>
+    <button class="primary" id="join"><span>Join and start</span>${I.arrow}</button>
+    <button class="textbtn" id="watch" style="align-self:flex-start">Just watch instead</button>
+    <p class="muted" style="margin:auto 0 0;font-size:13px;line-height:1.45">No app, no account. The game lives in the link — keep this text thread and you keep the game.</p>
+  </main>`;
+  document.getElementById('join').onclick = () => {
+    const nm = document.getElementById('nm').value.trim();
+    if (!nm){ document.getElementById('nm').focus(); toast('Add your name first'); return; }
+    prefs.name = nm; savePrefs(); audio(); feedback('tap');
+    g[colour] = nm; g.me = colour; saveGame(g);
+    history.replaceState(null,'','#g/'+g.id); viewGame(g, { arrived: g.moves.length ? 1 : 0 });
+  };
+  document.getElementById('watch').onclick = () => { g.me = 'spec'; saveGame(g); history.replaceState(null,'','#g/'+g.id); viewGame(g); };
+}
+
+function viewWho(g){
+  $app.innerHTML = `
+  <main class="page">
+    <a href="#" style="font-size:28px;font-weight:700;letter-spacing:-.04em;text-decoration:none">Zug</a>
+    <span class="label">${esc(g.name)}</span>
+    <h1 style="margin:0;font-size:36px;line-height:1.05;letter-spacing:-.03em">Which one are you?</h1>
+    <p class="muted" style="margin:0;font-size:15px;line-height:1.4">This game isn't saved on this phone yet.</p>
+    <button class="primary" data-c="w"><span>${esc(g.w)} — White</span>${I.arrow}</button>
+    <button class="primary" data-c="b"><span>${esc(g.b)} — Black</span>${I.arrow}</button>
+    <button class="secondary" data-c="spec">Just watching</button>
+  </main>`;
+  $app.querySelectorAll('[data-c]').forEach(b => b.onclick = () => { g.me = b.dataset.c; saveGame(g); history.replaceState(null,'','#g/'+g.id); viewGame(g, { arrived: g.moves.length ? 1 : 0 }); });
+}
+
+/* ---------- game ---------- */
+function viewGame(g, opts = {}){
+  let view = g.moves.length;           // ply being shown
+  let sel = null, targets = [], promo = null;
+  const spec = g.me === 'spec';
+  const flip = g.me === 'b';
+  let mode = 'live';                    // 'live' | 'log'
+
+  const opp = spec ? null : other(g.me);
+  const nameOf = c => (c==='w' ? g.w : g.b) || (c===g.me ? 'You' : 'Waiting for friend');
+
+  function state(){ return replay(g.moves, view); }
+
+  function render(){
+    const { chess, hist } = state();
+    const full = replay(g.moves);
+    const res = resultOf(g, full.chess);
+    const live = view === g.moves.length;
+    const myTurn = !spec && live && !res && full.chess.turn() === g.me;
+    const unsent = !spec && g.moves.length > (g.sent||0);
+    const last = hist[view-1];
+    const board = chess.board();
+    const kingInCheck = chess.inCheck() ? findKing(board, chess.turn()) : null;
+
+    let sqs = '';
+    for (let rr=0; rr<8; rr++) for (let cc=0; cc<8; cc++){
+      const r = flip ? 7-rr : rr, c = flip ? 7-cc : cc;
+      const name = 'abcdefgh'[c] + (8-r);
+      const p = board[r][c];
+      const light = (r+c)%2===0;
+      const cls = ['sq', light?'l':'d'];
+      if (last && (last.from===name || last.to===name)) cls.push('last');
+      if (sel===name) cls.push('sel');
+      const t = targets.find(x=>x.to===name);
+      if (t) cls.push('tgt', t.captured ? 'cap' : '');
+      if (kingInCheck===name) cls.push('chk');
+      const canTap = myTurn && !opts.lock && ((p && p.color===g.me) || t);
+      if (canTap) cls.push('can');
+      const label = name + (p ? ` ${p.color==='w'?'white':'black'} ${PIECE_NAME[p.type]}` : '');
+      sqs += `<button class="${cls.join(' ')}" data-sq="${name}" aria-label="${label}" ${canTap?'':'tabindex="-1"'}>`+
+        (p ? pieceSVG(p.type, p.color) : '') +
+        (cc===0 ? `<span class="co rk">${8-r}</span>` : '') + (rr===7 ? `<span class="co fl">${'abcdefgh'[c]}</span>` : '') + `</button>`;
+    }
+
+    const top = flip ? 'w' : 'b', bottom = flip ? 'b' : 'w';
+    const turnCol = full.chess.turn();
+    const tag = c => {
+      if (res) return '';
+      if (!live) return '';
+      return turnCol===c ? ' · to move' : '';
+    };
+
+    const ticker = full.hist.map((m,i)=> `<span class="${i===view-1?'cur':''}">${i%2===0?`${Math.floor(i/2)+1}. `:''}${esc(m.san)}</span>`).join('');
+
+    // bottom panel
+    let panel = '';
+    const oppName = spec ? '' : ((opp==='w'?g.w:g.b) || 'your friend');
+    if (mode === 'log'){
+      let rows = '';
+      for (let i=0;i<full.hist.length;i+=2){
+        const a = full.hist[i], b = full.hist[i+1];
+        rows += `<span class="n">${i/2+1}</span><button data-ply="${i+1}" class="${view===i+1?'cur':''}">${esc(a.san)}</button>${b?`<button data-ply="${i+2}" class="${view===i+2?'cur':''}">${esc(b.san)}</button>`:'<span></span>'}`;
+      }
+      panel = `<div class="panel">
+        <div class="sheethead label"><span></span><span>${esc(g.w||'White')}</span><span>${esc(g.b||'Black')}</span></div>
+        <div class="sheet">${rows || '<span></span><span class="muted" style="padding:6px 8px">No moves yet</span><span></span>'}</div>
+        ${res ? `<p style="margin-top:6px"><strong>${res.score}</strong> · ${esc(res.text)}</p>` : ''}
+        <p class="muted" style="font-size:13px">Tap a move to jump there. Swipe the board left or right to step.</p></div>`;
+    } else if (spec){
+      panel = `<div class="panel"><p>${res ? `<strong>${res.score}</strong> · ${esc(res.text)}.` : `You're watching. This is the position when the link was sent — ask for a new link to see more.`}</p>
+        <button class="secondary" id="log">Move log</button></div>`;
+    } else if (res){
+      panel = `<div class="panel"><p><strong>${res.score} · ${esc(res.text)}.</strong> ${unsent ? `Send the final position to ${esc(oppName)}.` : ''}</p>
+        ${unsent ? `<button class="primary red" id="send"><span>Send to ${esc(oppName)} by SMS</span>${I.arrow}</button>` : ''}
+        <div class="row2"><button class="secondary" id="log">Move log</button><button class="secondary" id="spec">Invite spectators</button></div>
+        ${unsent ? `<button class="textbtn" id="sendother" style="align-self:flex-start">Send another way</button>` : ''}</div>`;
+    } else if (unsent){
+      const lm = full.hist[full.hist.length-1];
+      panel = `<div class="panel"><p><strong>You played ${esc(moveLabel(full.hist, full.hist.length-1))}.</strong> ${esc(oppName.charAt(0).toUpperCase()+oppName.slice(1))} won't see it until you send it.</p>
+        <button class="primary red" id="send"><span>Send move to ${esc(oppName)} by SMS</span>${I.arrow}</button>
+        <div class="row2"><button class="secondary" id="undo">Take back</button><button class="secondary" id="sendother">Send another way</button></div></div>`;
+    } else if (myTurn){
+      const lm = full.hist[full.hist.length-1];
+      panel = `<div class="panel"><p>${lm ? `${esc(oppName.charAt(0).toUpperCase()+oppName.slice(1))} played <strong>${esc(moveLabel(full.hist, full.hist.length-1))}</strong>. ` : ''}<strong>Your move.</strong>${full.chess.inCheck()?' You are in check.':''}</p>
+        <div class="row2"><button class="secondary" id="log">Move log</button><button class="secondary" id="spec">Invite spectators</button></div>
+        <button class="textbtn" id="resign" style="align-self:flex-start">Resign</button></div>`;
+    } else {
+      const invited = !g.w || !g.b;
+      panel = `<div class="panel"><p>${invited ? `<strong>Waiting for ${esc(oppName)} to join.</strong> Their first move will arrive as a text — just tap the link.` : `<strong>Waiting for ${esc(oppName)}.</strong> When their text arrives, tap the link to see their move.`}</p>
+        ${invited ? `<button class="secondary" id="reinvite">Send the invite again</button>` : ''}
+        <div class="row2"><button class="secondary" id="log">Move log</button><button class="secondary" id="spec">Invite spectators</button></div>
+        <button class="textbtn" id="resign" style="align-self:flex-start">Resign</button></div>`;
+    }
+
+    const head = (mode==='log' || !live) ? `
+      <div class="banner"><span><strong>${view ? esc(moveLabel(full.hist, view-1)) : 'Start position'}</strong> · ${view} of ${full.hist.length}</span>
+      <button id="tolive">${mode==='log' ? 'Close log' : 'Back to live'}${I.arrow}</button></div>` : `
+      <div class="bar">
+        <a class="iconbtn" href="#" aria-label="Back to games">${I.back}</a>
+        <div class="who"><span class="chip ${top}"></span><b>${esc(nameOf(top))}</b><span class="muted" style="font-size:14px;white-space:nowrap">${colourName(top)}${tag(top)}</span></div>
+        <button class="iconbtn" id="fx" aria-label="Sound and vibration" aria-pressed="${prefs.fx}">${prefs.fx?I.soundOn:I.soundOff}</button>
+        ${spec ? '' : `<button class="iconbtn" id="spectop" aria-label="Invite spectators">${I.eye}</button>`}
+      </div>`;
+
+    $app.innerHTML = `${head}
+      <div class="boardwrap"><div class="board" id="board" role="grid" aria-label="Chess board">${sqs}${promo ? promoHTML(promo) : ''}</div></div>
+      <div class="bar" style="padding:0 16px">
+        <div class="who"><span class="chip ${bottom}"></span><b>${esc(nameOf(bottom))}</b><span class="muted" style="font-size:14px;white-space:nowrap">${colourName(bottom)}${g.me===bottom?' · you':''}${tag(bottom)}</span></div>
+        <span class="muted" style="font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:45%">${esc(g.name)}</span>
+      </div>
+      <div class="moves">
+        <button class="iconbtn" id="first" aria-label="First move" ${view===0?'disabled':''}>${I.first}</button>
+        <button class="iconbtn" id="prev" aria-label="Previous move" ${view===0?'disabled':''}>${I.prev}</button>
+        <button class="ticker" id="ticker" aria-label="Open move log">${ticker || '<span>No moves yet</span>'}</button>
+        <button class="iconbtn" id="next" aria-label="Next move" ${live?'disabled':''}>${I.next}</button>
+        <button class="iconbtn" id="last" aria-label="Latest move" ${live?'disabled':''}>${I.last}</button>
+      </div>
+      ${panel}`;
+
+    wire(chess, full, res, oppName);
+  }
+
+  function promoHTML(p){
+    return `<div class="promo" role="dialog" aria-label="Promote pawn to"><div>${['q','r','b','n'].map(t=>`<button data-promo="${t}" aria-label="${PIECE_NAME[t]}">${pieceSVG(t, g.me).replace('class="pc"','width="60" height="60"')}</button>`).join('')}</div></div>`;
+  }
+
+  function findKing(board, color){
+    for (let r=0;r<8;r++) for (let c=0;c<8;c++){ const p = board[r][c]; if (p && p.type==='k' && p.color===color) return 'abcdefgh'[c]+(8-r); }
+  }
+
+  function step(to){ view = Math.max(0, Math.min(g.moves.length, to)); sel=null; targets=[]; const { chess, hist } = state(); if (hist[view-1]) feedbackFor(hist[view-1], chess); render(); }
+
+  function play(from, to, promotion){
+    const { chess } = replay(g.moves);
+    let mv;
+    try { mv = chess.move({ from, to, promotion }); } catch { return; }
+    g.moves = [...g.moves, lan(mv)]; saveGame(g);
+    view = g.moves.length; sel=null; targets=[]; promo=null;
+    feedbackFor(mv, chess);
+    render();
+  }
+
+  function sendMessage(){
+    const full = replay(g.moves);
+    const res = resultOf(g, full.chess);
+    const me = g.me==='w' ? g.w : g.b;
+    const lm = full.hist.length ? moveLabel(full.hist, full.hist.length-1) : '';
+    let msg;
+    if (g.resign === g.me) msg = `${g.name} — ${me} resigned. Good game! ${gameLink(g)}`;
+    else if (res) msg = `${g.name} — ${me} played ${lm}. ${res.text}! ${res.score}. ${gameLink(g)}`;
+    else msg = `${g.name} — ${me} played ${lm}. Your move: ${gameLink(g)}`;
+    return msg;
+  }
+  function markSent(){ g.sent = g.moves.length; saveGame(g); }
+
+  function wire(chess, full, res, oppName){
+    const $b = document.getElementById('board');
+    const on = (id, fn) => { const el = document.getElementById(id); if (el) el.onclick = fn; };
+    $b.onclick = e => {
+      const pb = e.target.closest('[data-promo]');
+      if (pb){ play(promo.from, promo.to, pb.dataset.promo); return; }
+      const sq = e.target.closest('.sq'); if (!sq || !sq.classList.contains('can')) { if (sel){ sel=null; targets=[]; render(); } return; }
+      audio();
+      const name = sq.dataset.sq;
+      const t = targets.find(x=>x.to===name);
+      if (sel && t){
+        if (t.promotion){ promo = { from:sel, to:name }; render(); return; }
+        play(sel, name); return;
+      }
+      const p = chess.get(name);
+      if (p && p.color===g.me){
+        if (sel===name){ sel=null; targets=[]; }
+        else { sel=name; targets = chess.moves({ square:name, verbose:true }); feedback('tap'); }
+        render();
+      }
+    };
+    // swipe to step
+    let sx=null, sy=null;
+    $b.ontouchstart = e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; };
+    $b.ontouchend = e => {
+      if (sx==null) return; const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; sx=null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)*1.5) step(view + (dx<0 ? 1 : -1));
+    };
+    on('first', ()=>step(0)); on('prev', ()=>step(view-1)); on('next', ()=>step(view+1)); on('last', ()=>step(g.moves.length));
+    on('ticker', ()=>{ mode='log'; render(); });
+    on('log', ()=>{ mode='log'; render(); });
+    on('tolive', ()=>{ mode='live'; view=g.moves.length; render(); });
+    $app.querySelectorAll('[data-ply]').forEach(b => b.onclick = () => step(+b.dataset.ply));
+    on('fx', ()=>{ prefs.fx = !prefs.fx; savePrefs(); if (prefs.fx){ audio(); feedback('move'); } render(); });
+    const specLink = () => { const msg = `Watch ${g.w||'?'} vs ${g.b||'?'} — ${g.name} on Zug: ${gameLink(g, { v:'1' })}`; shareOther(msg); };
+    on('spec', specLink); on('spectop', specLink);
+    on('send', ()=>{ const m = sendMessage(); markSent(); location.href = smsHref(m, g.phone||''); setTimeout(render, 400); });
+    on('sendother', async ()=>{ const m = sendMessage(); await shareOther(m); markSent(); render(); });
+    on('undo', ()=>{ g.moves = g.moves.slice(0,-1); if (g.resign===g.me) g.resign=''; saveGame(g); view=g.moves.length; feedback('tap'); render(); });
+    on('reinvite', ()=>{ const me = g.me==='w'?g.w:g.b; const msg = `${g.name} — ${me} has challenged you to chess on Zug. You play ${colourName(opp)}. Join here: ${gameLink(g)}`; location.href = smsHref(msg, g.phone||''); });
+    on('resign', ()=>{ if (!confirm('Resign this game?')) return; g.resign = g.me; saveGame(g); feedback('end');
+      const m = sendMessage(); g.sent = g.moves.length; saveGame(g);
+      if (confirm(`Tell ${oppName} by SMS?`)) location.href = smsHref(m, g.phone||''); render(); });
+  }
+
+  // keyboard arrows
+  document.onkeydown = e => {
+    if (!location.hash.startsWith('#g/')) return;
+    if (e.key==='ArrowLeft') step(view-1);
+    if (e.key==='ArrowRight') step(view+1);
+    if (e.key==='Escape' && (sel||promo)){ sel=null; targets=[]; promo=null; render(); }
+  };
+
+  render();
+  // replay the move that just arrived by text
+  if (opts.arrived && g.moves.length){
+    const once = () => { const { chess, hist } = replay(g.moves); feedbackFor(hist[hist.length-1], chess); };
+    // audio needs a gesture on most phones: play on first tap if blocked
+    const a = audio();
+    if (a && a.state === 'running') once(); else document.addEventListener('pointerdown', once, { once:true });
+  }
+}
+
+route();
+</script>
+</body>
+</html>
