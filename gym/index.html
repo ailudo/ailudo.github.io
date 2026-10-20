@@ -1612,6 +1612,36 @@ function resetAll() {
 }
 
 // ─────────────────────────────────────────────────────
+// BROWSER IDENTITY — stable per-browser client ID
+// ─────────────────────────────────────────────────────
+function getClientId() {
+  try {
+    let id = localStorage.getItem('ddd_client_id');
+    if (!id) {
+      // Generate a compact random ID: 8 hex chars from crypto.getRandomValues
+      const buf = new Uint32Array(2);
+      (window.crypto || window.msCrypto).getRandomValues(buf);
+      id = buf[0].toString(16).padStart(8,'0') + buf[1].toString(16).padStart(8,'0');
+      localStorage.setItem('ddd_client_id', id);
+    }
+    return id;
+  } catch(e) {
+    return 'default';
+  }
+}
+
+const CLIENT_ID = getClientId();
+
+function allHistory() {
+  try { return JSON.parse(localStorage.getItem('ddd_gym_history') || '[]'); } catch(e) { return []; }
+}
+
+function myHistory() {
+  // Own sessions: clientId matches, OR legacy entries with no clientId (migrated in gracefully)
+  return allHistory().filter(e => !e.clientId || e.clientId === CLIENT_ID);
+}
+
+// ─────────────────────────────────────────────────────
 // SAVE / HISTORY
 // ─────────────────────────────────────────────────────
 function showSaveModal() { document.getElementById('saveOverlay').classList.add('show'); }
@@ -1621,7 +1651,7 @@ function confirmSave() {
   const now = new Date();
   const dateStr = now.toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
   const timeStr = now.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
-  const entry = { date: dateStr, time: timeStr, timestamp: now.getTime(), exercises: {} };
+  const entry = { clientId: CLIENT_ID, date: dateStr, time: timeStr, timestamp: now.getTime(), exercises: {} };
   EXERCISES.forEach(ex => {
     entry.exercises[ex.name] = setData[ex.id].map(s => ({
       reps: ex.isTimed ? null : s.reps,
@@ -1630,10 +1660,10 @@ function confirmSave() {
       done: s.done
     }));
   });
-  let history = [];
-  try { history = JSON.parse(localStorage.getItem('ddd_gym_history') || '[]'); } catch(e) {}
+  // Append to full shared array (preserves other browsers' entries)
+  let history = allHistory();
   history.unshift(entry);
-  if (history.length > 30) history = history.slice(0, 30);
+  if (history.length > 120) history = history.slice(0, 120); // higher cap now it's shared
   localStorage.setItem('ddd_gym_history', JSON.stringify(history));
   closeSaveModal();
   renderHistory();
@@ -1642,8 +1672,7 @@ function confirmSave() {
 
 function renderHistory() {
   const list = document.getElementById('historyList');
-  let history = [];
-  try { history = JSON.parse(localStorage.getItem('ddd_gym_history') || '[]'); } catch(e) {}
+  const history = myHistory();
   if (history.length === 0) {
     list.innerHTML = '<div class="no-history">No sessions saved yet — complete a session and tap Save.</div>';
     return;
@@ -1679,8 +1708,16 @@ function renderHistory() {
 }
 
 function clearHistory() {
-  if (!confirm('Clear all session history? This cannot be undone.')) return;
-  localStorage.removeItem('ddd_gym_history');
+  if (!confirm('Clear your history on this browser? Other devices are unaffected.')) return;
+  // Remove only this browser's entries; keep other browsers' entries intact
+  const remaining = allHistory().filter(e => e.clientId && e.clientId !== CLIENT_ID);
+  try {
+    if (remaining.length === 0) {
+      localStorage.removeItem('ddd_gym_history');
+    } else {
+      localStorage.setItem('ddd_gym_history', JSON.stringify(remaining));
+    }
+  } catch(e) {}
   renderHistory();
 }
 
