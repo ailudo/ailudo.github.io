@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-20T08:00:00+01:00",
+ "updated": "2026-10-20T02:39:23+01:00",
  "venues": [
   {
    "id": "louvre",
@@ -343,7 +343,7 @@
    "end": "2027-01-25",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/zurbaran"
   },
   {
    "id": "l-sculpt",
@@ -355,7 +355,7 @@
    "end": "2027-01-25",
    "admission": "paid",
    "discipline": "Sculpture & installation",
-   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/sculpter-la-couleur"
   },
   {
    "id": "l-photo",
@@ -367,7 +367,7 @@
    "end": "2027-05-03",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/louvre-photo"
   },
   {
    "id": "l-hotes",
@@ -379,7 +379,7 @@
    "end": "2026-12-14",
    "admission": "paid",
    "discipline": "Group shows",
-   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/les-hotes-du-louvre"
   },
   {
    "id": "l-ingres",
@@ -391,7 +391,7 @@
    "end": "2026-11-08",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/ingres-et-la-mode"
   },
   {
    "id": "l-myth",
@@ -403,7 +403,7 @@
    "end": "2026-11-09",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/mythologies"
   },
   {
    "id": "l-cross",
@@ -415,7 +415,7 @@
    "end": "2027-01-24",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/crosscurrents"
   },
   {
    "id": "l-eau",
@@ -427,7 +427,7 @@
    "end": "2027-03-15",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/l-eau-primordiale-0"
   },
   {
    "id": "l-romain",
@@ -439,7 +439,7 @@
    "end": "2027-01-10",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.louvre.fr/en-ce-moment/expositions"
+   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/l-art-romain-du-louvre"
   },
   {
    "id": "c-flamel",
@@ -906,19 +906,19 @@
    "end": "2027-05-02",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://madparis.fr/"
+   "url": "https://madparis.fr/rafael-pavarotti-photographe-10279"
   },
   {
    "id": "ad-maj",
    "venue": "artsdeco",
    "short": "Haute couture at the Thai court",
-   "title": "Majestic Fashion: Haute Couture and Tradition at the Thai Court",
+   "title": "La Mode en majesté. Haute couture et tradition à la cour de Thaïlande",
    "artists": "",
    "start": "2026-05-13",
    "end": "2026-11-01",
    "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://madparis.fr/"
+   "url": "https://madparis.fr/La-Mode-en-majeste-Haute-couture-et-tradition-a-la-cour-de-Thailande-10206"
   },
   {
    "id": "ima-mariee",
@@ -1126,7 +1126,7 @@
    "end": "2027-04-04",
    "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://madparis.fr/"
+   "url": "https://madparis.fr/Look-40-ans-de-mode-au-musee-10263"
   },
   {
    "id": "gp-girls",
@@ -1213,6 +1213,19 @@
    "admission": "paid",
    "discipline": "Painting & works on paper",
    "url": "https://www.quaibranly.fr/"
+  },
+  {
+   "id": "ad-kyoto",
+   "venue": "artsdeco",
+   "short": "Paris > Kyoto > Paris: four designers return from Japan",
+   "title": "Paris > Kyoto > Paris. Quatre designers de retour du Japon",
+   "artists": "",
+   "start": null,
+   "end": null,
+   "admission": "check",
+   "discipline": "Design & architecture",
+   "note": "Dates not confirmed on the venue page.",
+   "url": "https://madparis.fr/Paris-Kyoto-Paris-Quatre-designers-de-retour-du-Japon"
   }
  ]
 }
