@@ -22,15 +22,10 @@
 
   /* 1. The picture: sharp on load, then softly out of focus after 1 second */
   .hero {
-    margin: 0;
-    font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    font-size: min(24vmin, 22vw);
-    line-height: 0.9;
-    letter-spacing: -0.05em;
-    color: #111111;
-    -webkit-font-smoothing: antialiased;
-    user-select: none;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
     display: block;
     filter: blur(0);
     animation: defocus 1.6s ease-in-out 1s forwards;
@@ -142,13 +137,18 @@
   .drift.zug:hover { animation-play-state: paused; }
   .zug-link {
     display: block;
-    width: clamp(56px, 7vw, 96px);
-    line-height: 0;
+    font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(30px, 4.2vw, 56px);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    color: #111111;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
     opacity: 0;
     transform: scale(0);
     animation: pop 0.55s cubic-bezier(.2, .9, .3, 1.25) 0.7s forwards;
   }
-  .zug-link svg { width: 100%; height: auto; display: block; }
   .zug-link:focus-visible {
     outline: 2px solid #0030c8;
     outline-offset: 4px;
@@ -166,7 +166,7 @@
 <script>if(/[?&]motion=on\b/.test(location.search))document.documentElement.classList.add("motion-on");</script>
 </head>
 <body>
-  <h1 class="hero">Studio<br>AI<br>Ludo</h1>
+  <img class="hero" src="images/studio-ai-ludo.png" alt="Studio AI Ludo">
 
   <div class="drift">
     <a class="logo-link" href="london/" aria-label="Exhibitions in London: On View London" title="On View London">Exhibitions<br>in London</a>
@@ -181,12 +181,7 @@
   </div>
 
   <div class="drift zug">
-    <a class="zug-link" href="zug/" aria-label="Zug: chess with friends by text message" title="Zug — chess by text message">
-      <svg viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true">
-        <defs><pattern id="sq" width="2" height="2" patternUnits="userSpaceOnUse"><rect width="2" height="2" fill="#111111"/><rect width="1" height="1" fill="#A8D8F0"/><rect x="1" y="1" width="1" height="1" fill="#A8D8F0"/></pattern></defs>
-        <rect width="8" height="8" fill="url(#sq)"/>
-      </svg>
-    </a>
+    <a class="zug-link" href="zug/" aria-label="Zug: chess with friends by text message" title="Zug — chess by text message">Zug</a>
   </div>
   <label id="hap" aria-hidden="true" style="position:fixed;left:-100px;top:0;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden"><input type="checkbox" switch tabindex="-1"></label>
   <script>
