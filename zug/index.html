@@ -120,7 +120,7 @@ const $app = document.getElementById('app');
 /* ---------- online saving (Cloudflare Worker) ----------
    Leave API empty to run link-only: the whole game travels in each text message.
    Set it to the Worker's address to save games online as well. */
-const API = '';
+const API = 'https://zug.muddypuppy.workers.dev';
 async function api(path, body){
   if (!API) return null;
   const ctl = new AbortController(); const t = setTimeout(()=>ctl.abort(), 8000);
