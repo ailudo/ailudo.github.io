@@ -6,7 +6,7 @@
 <title>Studio AI Ludo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Bodoni+Moda:ital,opsz,wght@1,6..96,500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Inter:wght@700&family=Bodoni+Moda:ital,opsz,wght@1,6..96,500&display=swap">
 <style>
   html, body {
     margin: 0;
@@ -22,10 +22,15 @@
 
   /* 1. The picture: sharp on load, then softly out of focus after 1 second */
   .hero {
-    max-width: 90vw;
-    max-height: 90vh;
-    width: auto;
-    height: auto;
+    margin: 0;
+    font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: min(24vmin, 22vw);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    color: #111111;
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
     display: block;
     filter: blur(0);
     animation: defocus 1.6s ease-in-out 1s forwards;
@@ -75,7 +80,7 @@
     white-space: nowrap;
     opacity: 0;
     transform: scale(0);
-    animation: pop 0.8s cubic-bezier(.2, .9, .3, 1.25) 2.8s forwards;
+    animation: pop 0.55s cubic-bezier(.2, .9, .3, 1.25) 0.2s forwards;
   }
   @keyframes pop {
     0%   { opacity: 0; transform: scale(0); }
@@ -99,7 +104,7 @@
     letter-spacing: 0.01em;
     text-transform: none;
     font-size: clamp(15px, 2vw, 26px);
-    animation-delay: 3.4s;
+    animation-delay: 0.4s;
     box-shadow: inset 0 0 0 1.5px #111;
   }
   .logo-link:focus-visible {
@@ -121,7 +126,7 @@
     line-height: 1;
     opacity: 0;
     transform: scale(0);
-    animation: pop 0.8s cubic-bezier(.2, .9, .3, 1.25) 3.9s forwards;
+    animation: pop 0.55s cubic-bezier(.2, .9, .3, 1.25) 0.5s forwards;
   }
   .gym-link:focus-visible {
     outline: 2px solid #0030c8;
@@ -141,7 +146,7 @@
     line-height: 0;
     opacity: 0;
     transform: scale(0);
-    animation: pop 0.8s cubic-bezier(.2, .9, .3, 1.25) 4.4s forwards;
+    animation: pop 0.55s cubic-bezier(.2, .9, .3, 1.25) 0.7s forwards;
   }
   .zug-link svg { width: 100%; height: auto; display: block; }
   .zug-link:focus-visible {
@@ -161,7 +166,7 @@
 <script>if(/[?&]motion=on\b/.test(location.search))document.documentElement.classList.add("motion-on");</script>
 </head>
 <body>
-  <img class="hero" src="images/studio-ai-ludo.png" alt="Studio AI Ludo">
+  <h1 class="hero">Studio<br>AI<br>Ludo</h1>
 
   <div class="drift">
     <a class="logo-link" href="london/" aria-label="Exhibitions in London: On View London" title="On View London">Exhibitions<br>in London</a>
@@ -183,5 +188,54 @@
       </svg>
     </a>
   </div>
+  <label id="hap" aria-hidden="true" style="position:fixed;left:-100px;top:0;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden"><input type="checkbox" switch tabindex="-1"></label>
+  <script>
+  (function () {
+    // A light haptic tick: the vibrate API on Android; on iPhone (iOS 18+) toggling a
+    // native switch gives a tick. Browsers only allow these after the visitor has touched the page.
+    var hap = document.getElementById('hap');
+    function tick() {
+      try { if (navigator.vibrate) { navigator.vibrate(12); return; } hap.click(); } catch (e) {}
+    }
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches && !document.documentElement.classList.contains('motion-on');
+    var items = Array.prototype.slice.call(document.querySelectorAll('.drift'));
+
+    // Each label drifts on two periods (seconds). A random point in each cycle gives a
+    // random starting position; retry a few times so the labels do not start stacked.
+    var periods = { london: [53, 37], paris: [61, 43], gym: [47, 59], zug: [67, 41] };
+    function kind(el) { return el.classList.contains('paris') ? 'paris' : el.classList.contains('gym') ? 'gym' : el.classList.contains('zug') ? 'zug' : 'london'; }
+    function where(offset, period) { // position 0..1 for an alternating ease-in-out cycle
+      var t = offset % (2 * period), u = t < period ? t / period : 2 - t / period;
+      return u * u * (3 - 2 * u);
+    }
+    if (!reduce) {
+      var placed = [];
+      items.forEach(function (el) {
+        var per = periods[kind(el)], best = null, bestGap = -1;
+        for (var i = 0; i < 25; i++) {
+          var ox = Math.random() * 2 * per[0], oy = Math.random() * 2 * per[1];
+          var x = where(ox, per[0]), y = where(oy, per[1]);
+          var gap = placed.reduce(function (m, q) { return Math.min(m, Math.hypot(q[0] - x, q[1] - y)); }, 9);
+          if (gap > bestGap) { bestGap = gap; best = [ox, oy, x, y]; }
+          if (gap > 0.35) break;
+        }
+        placed.push([best[2], best[3]]);
+        // longhands only, so the stylesheet's pause-on-hover still applies
+        el.style.animationDuration = per[0] + 's, ' + per[1] + 's';
+        el.style.animationDelay = (-best[0]).toFixed(2) + 's, ' + (-best[1]).toFixed(2) + 's';
+      });
+    }
+
+    // Pop up in a random order, all within the first second, each with a tick.
+    items.forEach(function (el) {
+      var link = el.querySelector('a');
+      var at = Math.random() * 0.85;
+      link.style.animationDelay = at.toFixed(2) + 's';
+      setTimeout(tick, at * 1000 + 120);
+      link.addEventListener('pointerdown', tick);
+    });
+  })();
+  </script>
 </body>
 </html>
