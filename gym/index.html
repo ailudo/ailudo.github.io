@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gym Session — DDD Programme</title>
+<title>Gym Session — Spine-Safe Programme</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=DM+Mono:wght@400;500&display=swap');
 
@@ -652,12 +652,12 @@ header{
 
 <!-- ── HEADER ── -->
 <header>
-  <div class="header-titlebar">GYM SESSION — DDD PROGRAMME</div>
+  <div class="header-titlebar">GYM SESSION — SPINE-SAFE PROGRAMME</div>
   <div class="header-body">
     <div class="header-top">
       <div class="title-block">
         <h1>GYM SESSION</h1>
-        <p>DDD-safe · strength + rehab · 45 min</p>
+        <p>Spine-safe · strength + rehab · 45 min</p>
         <div class="date-chip" id="todayDate"></div>
       </div>
       <div class="timer-wrap">
@@ -1748,7 +1748,7 @@ function exportImage() {
   ctx.strokeStyle = '#000000'; ctx.lineWidth = 2; ctx.strokeRect(10,10,W-20,H-20);
   ctx.fillStyle = '#000000'; ctx.fillRect(10,10,W-20,40);
   ctx.fillStyle = '#FFFFFF'; ctx.font = 'bold 16px monospace';
-  ctx.fillText('GYM SESSION — DDD PROGRAMME', 24, 36);
+  ctx.fillText('GYM SESSION — SPINE-SAFE PROGRAMME', 24, 36);
   ctx.fillStyle = '#000000'; ctx.font = '14px monospace';
   ctx.fillText(dateStr + '  ·  ' + timeStr, PADDING, 82);
   const doneSets = EXERCISES.reduce((n,ex) => n + setData[ex.id].filter(s=>s.done).length, 0);
@@ -1769,7 +1769,7 @@ function exportImage() {
     y += ROW_H;
   });
   ctx.fillStyle = '#555555'; ctx.font = '11px monospace';
-  ctx.fillText('DDD Training Programme · Neutral spine always · Progress is earned one set at a time.', PADDING, y+28);
+  ctx.fillText('Spine-Safe Training · Neutral spine always · Progress is earned one set at a time.', PADDING, y+28);
   const fname = `gym-${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}.png`;
   try {
     const link = document.createElement('a');
