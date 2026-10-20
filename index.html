@@ -128,12 +128,34 @@
     outline-offset: 4px;
   }
 
+  /* Zug link: a small black and light-blue chessboard, drifting at its own period */
+  .drift.zug {
+    animation:
+      drift-x 67s ease-in-out -40s infinite alternate,
+      drift-y 41s ease-in-out -7s infinite alternate;
+  }
+  .drift.zug:hover { animation-play-state: paused; }
+  .zug-link {
+    display: block;
+    width: clamp(56px, 7vw, 96px);
+    line-height: 0;
+    opacity: 0;
+    transform: scale(0);
+    animation: pop 0.8s cubic-bezier(.2, .9, .3, 1.25) 4.4s forwards;
+  }
+  .zug-link svg { width: 100%; height: auto; display: block; }
+  .zug-link:focus-visible {
+    outline: 2px solid #0030c8;
+    outline-offset: 4px;
+  }
+
   /* Reduced motion: keep the one-off blur and pop-up, but do not let the labels wander.
      Add ?motion=on to the address to see the drifting anyway. */
   @media (prefers-reduced-motion: reduce) {
     html:not(.motion-on) .drift { animation: none; left: auto; top: auto; right: 24px; bottom: 24px; transform: none; }
     html:not(.motion-on) .drift.paris { right: auto; left: 24px; }
     html:not(.motion-on) .drift.gym { right: 24px; top: 24px; bottom: auto; left: auto; }
+    html:not(.motion-on) .drift.zug { left: 24px; top: 24px; right: auto; bottom: auto; }
   }
 </style>
 <script>if(/[?&]motion=on\b/.test(location.search))document.documentElement.classList.add("motion-on");</script>
@@ -151,6 +173,15 @@
 
   <div class="drift gym">
     <a class="gym-link" href="gym/" aria-label="Gym training tracker" title="Gym training tracker">💪</a>
+  </div>
+
+  <div class="drift zug">
+    <a class="zug-link" href="zug/" aria-label="Zug: chess with friends by text message" title="Zug — chess by text message">
+      <svg viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true">
+        <defs><pattern id="sq" width="2" height="2" patternUnits="userSpaceOnUse"><rect width="2" height="2" fill="#111111"/><rect width="1" height="1" fill="#A8D8F0"/><rect x="1" y="1" width="1" height="1" fill="#A8D8F0"/></pattern></defs>
+        <rect width="8" height="8" fill="url(#sq)"/>
+      </svg>
+    </a>
   </div>
 </body>
 </html>
