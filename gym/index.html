@@ -35,7 +35,7 @@ body{
   background:var(--bg);
   color:var(--text);
   min-height:100vh;
-  padding:16px 12px 60px;
+  padding:10px 8px 48px;
   font-size:18px;
   line-height:1.3;
 }
@@ -43,7 +43,7 @@ body{
 /* ── MAC BEVEL BUTTON ── */
 .mac-btn{
   font-family:'VT323',monospace;
-  font-size:18px;
+  font-size:17px;
   background:var(--surface2);
   color:var(--text);
   border:2px solid var(--border);
@@ -52,12 +52,13 @@ body{
   border-left-color:var(--bevel-light);
   border-top-color:var(--bevel-light);
   cursor:pointer;
-  padding:4px 10px;
+  padding:3px 9px;
   line-height:1.2;
   white-space:nowrap;
   user-select:none;
   border-radius:0;
   outline:none;
+  min-height:36px;
 }
 .mac-btn:active{
   border-right-color:var(--bevel-light);
@@ -75,16 +76,16 @@ body{
 /* ── HEADER ── */
 header{
   max-width:720px;
-  margin:0 auto 20px;
+  margin:0 auto 12px;
   border:2px solid var(--border);
   padding:0;
 }
 .header-titlebar{
   background:var(--text);
   color:var(--bg);
-  padding:6px 12px;
+  padding:4px 10px;
   font-family:'Press Start 2P',monospace;
-  font-size:9px;
+  font-size:7px;
   letter-spacing:0.05em;
   display:flex;
   align-items:center;
@@ -93,80 +94,81 @@ header{
 .header-titlebar::before{
   content:'';
   display:inline-block;
-  width:10px; height:10px;
+  width:8px; height:8px;
   border:2px solid var(--bg);
   border-radius:50%;
   flex-shrink:0;
 }
 .header-body{
-  padding:12px 14px;
+  padding:8px 10px 8px;
 }
+/* Single compact row: title+date on left, timer inline on right */
 .header-top{
   display:flex;
   justify-content:space-between;
-  align-items:flex-start;
-  gap:12px;
+  align-items:center;
+  gap:10px;
 }
 .title-block h1{
   font-family:'Press Start 2P',monospace;
-  font-size:10px;
+  font-size:7px;
   letter-spacing:0.04em;
-  line-height:1.6;
+  line-height:1.5;
   font-weight:400;
 }
 .title-block p{
-  font-size:16px;
+  font-size:14px;
   color:var(--text-muted);
-  margin-top:4px;
+  margin-top:2px;
+  line-height:1.2;
 }
 .date-chip{
   font-family:'DM Mono',monospace;
-  font-size:13px;
+  font-size:11px;
   color:var(--text-muted);
   border:1px solid var(--border);
-  padding:2px 8px;
+  padding:1px 6px;
   display:inline-block;
-  margin-top:6px;
+  margin-top:4px;
   background:var(--surface2);
 }
 
+/* Timer compact — inline with title */
 .timer-wrap{
   display:flex;
-  flex-direction:column;
+  flex-direction:row;
   align-items:center;
-  gap:4px;
+  gap:6px;
   flex-shrink:0;
   border:2px solid var(--border);
-  padding:8px 12px;
+  border-right-color:var(--bevel-shadow);
+  border-bottom-color:var(--bevel-shadow);
+  padding:4px 8px;
   background:var(--surface);
 }
 .timer-display{
   font-family:'VT323',monospace;
-  font-size:36px;
+  font-size:28px;
   font-weight:400;
   color:var(--text);
   letter-spacing:0.05em;
   line-height:1;
 }
 .timer-display.warn{ color:var(--strength); }
-.timer-label{
-  font-size:14px;
-  color:var(--text-muted);
-  text-transform:uppercase;
-  letter-spacing:0.08em;
-}
-.timer-btns{display:flex;gap:4px;margin-top:4px;}
+.timer-label{ display:none; }/* hidden in compact mode */
+.timer-btns{display:flex;gap:3px;}
 .tbtn{ }/* reuse mac-btn */
 
+/* Progress bar row, tighter */
 .progress-wrap{
-  margin-top:12px;
+  margin-top:7px;
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:8px;
 }
 .prog-track{
   flex:1;
-  height:12px;
+  height:10px;
   background:var(--surface2);
   border:2px solid var(--border);
   border-right-color:var(--bevel-shadow);
@@ -187,27 +189,28 @@ header{
 }
 .prog-count{
   font-family:'DM Mono',monospace;
-  font-size:13px;
+  font-size:11px;
   color:var(--text-muted);
   white-space:nowrap;
 }
 
-.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;}
-.legend-item{display:flex;align-items:center;gap:6px;font-size:16px;color:var(--text-muted);}
-.ldot{width:12px;height:12px;border:1px solid var(--border);}
+/* Legend — inline after progress, not a separate row */
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+.legend-item{display:flex;align-items:center;gap:4px;font-size:14px;color:var(--text-muted);}
+.ldot{width:10px;height:10px;border:1px solid var(--border);}
 
 /* ── SECTION LABEL ── */
 .section-label{
   max-width:720px;
-  margin:20px auto 8px;
+  margin:12px auto 6px;
   font-family:'Press Start 2P',monospace;
-  font-size:8px;
+  font-size:7px;
   letter-spacing:0.1em;
   text-transform:uppercase;
   color:var(--text);
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:8px;
   padding:0 2px;
 }
 .section-label::after{
@@ -232,7 +235,7 @@ header{
 .card{
   background:var(--surface);
   border-top:1px solid #AAAAAA;
-  padding:12px 14px 12px 18px;
+  padding:8px 10px 8px 14px;
   position:relative;
   overflow:hidden;
   transition:background 0.2s;
@@ -252,34 +255,36 @@ header{
 .type-strength .type-bar{background:var(--strength);}
 .type-rehab .type-bar{background:var(--rehab);}
 
-.card-top{display:flex;gap:12px;align-items:flex-start;}
-.card-icon{flex-shrink:0;width:60px;height:60px;}
-.card-icon svg{width:60px;height:60px;}
+.card-top{display:flex;gap:8px;align-items:center;}
+.card-icon{flex-shrink:0;width:44px;height:44px;}
+.card-icon svg{width:44px;height:44px;}
 .card-body{flex:1;min-width:0;}
 .ex-name{
   font-family:'Press Start 2P',monospace;
-  font-size:8px;
+  font-size:7px;
   font-weight:400;
   letter-spacing:0.03em;
-  line-height:1.6;
-  margin-bottom:4px;
+  line-height:1.5;
+  margin-bottom:2px;
 }
+/* Pills inline after ex-name to save vertical space */
+.card-name-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;}
 .ddd-flag{
   display:inline-block;
-  font-size:14px;
+  font-size:13px;
   font-family:'VT323',monospace;
-  padding:1px 8px;
+  padding:0px 6px;
   border:1px solid var(--border);
   background:var(--surface2);
-  margin-bottom:4px;
   letter-spacing:0.04em;
+  flex-shrink:0;
 }
-.ex-note{font-size:16px;color:var(--text-muted);line-height:1.3;margin-bottom:6px;}
-.target-pills{display:flex;gap:4px;flex-wrap:wrap;}
+.ex-note{font-size:14px;color:var(--text-muted);line-height:1.2;margin-bottom:4px;}
+.target-pills{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:2px;}
 .tpill{
   font-family:'DM Mono',monospace;
-  font-size:12px;
-  padding:2px 8px;
+  font-size:11px;
+  padding:1px 6px;
   border:1px solid var(--border);
   color:var(--text-muted);
   background:var(--surface2);
@@ -287,35 +292,36 @@ header{
 
 /* ── SET TRACKER ── */
 .sets-tracker{
-  margin-top:10px;
+  margin-top:6px;
   border-top:1px solid #AAAAAA;
-  padding-top:10px;
+  padding-top:6px;
   display:flex;
   flex-direction:column;
-  gap:7px;
+  gap:4px;
 }
-.set-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.set-row{display:flex;align-items:center;gap:6px;}
 .set-label{
   font-family:'DM Mono',monospace;
-  font-size:13px;
+  font-size:12px;
   color:var(--text-muted);
-  width:40px;
+  width:34px;
   flex-shrink:0;
 }
-.set-fields{display:flex;gap:6px;align-items:center;flex:1;flex-wrap:wrap;}
+.set-fields{display:flex;gap:5px;align-items:center;flex:1;}
 
-/* Spinners — Mac stepper style */
-.spinner-wrap{display:flex;flex-direction:column;align-items:center;gap:2px;}
+/* Spinners — Mac stepper style, larger touch targets */
+.spinner-wrap{display:flex;flex-direction:column;align-items:center;gap:1px;}
 .spinner-label{
-  font-size:13px;
+  font-size:11px;
   font-family:'VT323',monospace;
   color:var(--text-muted);
   letter-spacing:0.05em;
   text-transform:uppercase;
+  line-height:1;
 }
 .spinner{display:flex;align-items:center;gap:0;}
 .spin-btn{
-  width:26px;height:26px;
+  width:36px;height:36px;
   border:2px solid var(--border);
   border-right-color:var(--bevel-shadow);
   border-bottom-color:var(--bevel-shadow);
@@ -323,7 +329,7 @@ header{
   border-top-color:var(--bevel-light);
   background:var(--surface2);
   cursor:pointer;
-  font-size:16px;
+  font-size:20px;
   font-family:'VT323',monospace;
   line-height:1;
   display:flex;align-items:center;justify-content:center;
@@ -342,21 +348,21 @@ header{
   font-family:'DM Mono',monospace;
   font-size:14px;
   font-weight:500;
-  min-width:38px;
-  height:26px;
+  min-width:40px;
+  height:36px;
   border-top:2px solid var(--bevel-shadow);
   border-bottom:2px solid var(--bevel-light);
   border-left:none;
   border-right:none;
   background:var(--bg);
   text-align:center;
-  line-height:22px;
+  line-height:32px;
   color:var(--text);
 }
 
-/* Set check — Mac checkbox style */
+/* Set check — Mac checkbox style, larger touch target */
 .set-check{
-  width:22px;height:22px;
+  width:36px;height:36px;
   border:2px solid var(--border);
   border-right-color:var(--bevel-light);
   border-bottom-color:var(--bevel-light);
@@ -376,7 +382,7 @@ header{
     transparent 2px, transparent 5px
   );
 }
-.set-check svg{width:12px;height:12px;}
+.set-check svg{width:16px;height:16px;}
 
 /* ── REST TIMER ── */
 .rest-timer{
@@ -633,11 +639,12 @@ header{
 }
 
 @media(max-width:480px){
-  .title-block h1{font-size:8px;}
-  .timer-display{font-size:30px;}
-  .card-icon{width:48px;height:48px;}
-  .card-icon svg{width:48px;height:48px;}
-  .ex-name{font-size:7px;}
+  .title-block h1{font-size:6px;}
+  .timer-display{font-size:24px;}
+  .card-icon{width:38px;height:38px;}
+  .card-icon svg{width:38px;height:38px;}
+  .ex-name{font-size:6px;}
+  body{padding:8px 6px 40px;}
 }
 </style>
 </head>
@@ -657,8 +664,8 @@ header{
         <div class="timer-display" id="timerDisplay">45:00</div>
         <div class="timer-label">SESSION TIMER</div>
         <div class="timer-btns">
-          <button class="mac-btn" id="timerStartBtn" onclick="timerToggle()">Start</button>
-          <button class="mac-btn" onclick="timerReset()">Reset</button>
+          <button class="mac-btn" id="timerStartBtn" onclick="beep('click');haptic('light');timerToggle()">Start</button>
+          <button class="mac-btn" onclick="beep('click');haptic('light');timerReset()">Reset</button>
         </div>
       </div>
     </div>
@@ -1095,16 +1102,16 @@ header{
 
 <!-- ── ACTIONS ── -->
 <div class="actions-wrap">
-  <button class="action-btn primary" onclick="showSaveModal()">[ Save Session ]</button>
-  <button class="action-btn" onclick="exportImage()">[ Save as Image ]</button>
-  <button class="action-btn danger" onclick="resetAll()">[ Reset ]</button>
+  <button class="action-btn primary" onclick="beep('click');haptic('medium');showSaveModal()">[ Save Session ]</button>
+  <button class="action-btn" onclick="beep('click');haptic('light');exportImage()">[ Save as Image ]</button>
+  <button class="action-btn danger" onclick="beep('click');haptic('light');resetAll()">[ Reset ]</button>
 </div>
 
 <!-- ── HISTORY ── -->
 <div class="history-section">
   <div class="history-header">
     <div class="history-title">Session History</div>
-    <button class="mac-btn" onclick="clearHistory()" style="font-size:14px">Clear all</button>
+    <button class="mac-btn" onclick="beep('click');haptic('light');clearHistory()" style="font-size:14px">Clear all</button>
   </div>
   <div id="historyList"></div>
 </div>
@@ -1116,8 +1123,8 @@ header{
     <div class="save-modal-body">
       <p>This will record today's weights and reps to your history log so you can track progress over time.</p>
       <div class="save-modal-btns">
-        <button onclick="closeSaveModal()">Cancel</button>
-        <button class="primary" onclick="confirmSave()">Save</button>
+        <button onclick="beep('click');haptic('light');closeSaveModal()">Cancel</button>
+        <button class="primary" onclick="beep('click');haptic('heavy');confirmSave()">Save</button>
       </div>
     </div>
   </div>
@@ -1219,7 +1226,7 @@ function buildTrackers() {
       chk.className = 'set-check';
       chk.id = `chk-${ex.id}-${s}`;
       chk.innerHTML = `<svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="white" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/></svg>`;
-      chk.onclick = () => toggleSet(ex.id, s);
+      chk.onclick = () => { beep('click'); haptic('medium'); toggleSet(ex.id, s); };
       row.appendChild(chk);
 
       container.appendChild(row);
@@ -1274,7 +1281,7 @@ function makeHoldTimer(ex, setIdx) {
       ${sideLabel}
       <div class="hold-status" id="hold-status-${ex.id}-${setIdx}">Ready</div>
       <button class="hold-btn" id="hold-btn-${ex.id}-${setIdx}"
-        onclick="holdToggle(${ex.id},${setIdx})">[ Start ]</button>
+        onclick="beep('click');haptic('light');holdToggle(${ex.id},${setIdx})">[ Start ]</button>
     </div>`;
   return wrap;
 }
@@ -1510,7 +1517,7 @@ function makeSpinner(field, exId, setIdx, defaultVal, step, min, max) {
   const minus = document.createElement('button');
   minus.className = 'spin-btn';
   minus.textContent = '−';
-  minus.onclick = () => adjustVal(exId, setIdx, field, -step, min, max);
+  minus.onclick = () => { beep('click'); haptic('light'); adjustVal(exId, setIdx, field, -step, min, max); };
   const valEl = document.createElement('div');
   valEl.className = 'spin-val';
   valEl.id = `${field}-${exId}-${setIdx}`;
@@ -1518,7 +1525,7 @@ function makeSpinner(field, exId, setIdx, defaultVal, step, min, max) {
   const plus = document.createElement('button');
   plus.className = 'spin-btn';
   plus.textContent = '+';
-  plus.onclick = () => adjustVal(exId, setIdx, field, step, min, max);
+  plus.onclick = () => { beep('click'); haptic('light'); adjustVal(exId, setIdx, field, step, min, max); };
   row.appendChild(minus); row.appendChild(valEl); row.appendChild(plus);
   wrap.appendChild(row);
   return wrap;
@@ -1751,9 +1758,10 @@ function beep(type) {
     const ctx = getAudioCtx();
     if (ctx.state === 'suspended') ctx.resume();
     const configs = {
-      rest: [{ freq:520, dur:0.12, t:0 }, { freq:520, dur:0.12, t:0.2 }],
-      side: [{ freq:660, dur:0.12, t:0 }, { freq:880, dur:0.12, t:0.2 }],
-      done: [{ freq:880, dur:0.15, t:0 }, { freq:880, dur:0.25, t:0.22 }],
+      click: [{ freq:1400, dur:0.018, t:0 }],
+      rest:  [{ freq:520, dur:0.12, t:0 }, { freq:520, dur:0.12, t:0.2 }],
+      side:  [{ freq:660, dur:0.12, t:0 }, { freq:880, dur:0.12, t:0.2 }],
+      done:  [{ freq:880, dur:0.15, t:0 }, { freq:880, dur:0.25, t:0.22 }],
     };
     const tones = configs[type] || configs.done;
     const now = ctx.currentTime;
@@ -1762,14 +1770,24 @@ function beep(type) {
       const gain = ctx.createGain();
       osc.connect(gain);
       gain.connect(ctx.destination);
-      osc.type = 'sine';
+      osc.type = type === 'click' ? 'square' : 'sine';
       osc.frequency.setValueAtTime(freq, now + t);
       gain.gain.setValueAtTime(0, now + t);
-      gain.gain.linearRampToValueAtTime(0.35, now + t + 0.01);
+      gain.gain.linearRampToValueAtTime(type === 'click' ? 0.18 : 0.35, now + t + 0.005);
       gain.gain.exponentialRampToValueAtTime(0.001, now + t + dur);
       osc.start(now + t);
-      osc.stop(now + t + dur + 0.05);
+      osc.stop(now + t + dur + 0.02);
     });
+  } catch(e) {}
+}
+
+/* Haptic feedback — vibrate API; iOS Safari ignores silently */
+function haptic(type) {
+  try {
+    if (!navigator.vibrate) return;
+    if (type === 'heavy')  navigator.vibrate([60]);
+    else if (type === 'medium') navigator.vibrate([25]);
+    else navigator.vibrate([8]);
   } catch(e) {}
 }
 
