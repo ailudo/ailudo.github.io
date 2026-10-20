@@ -134,7 +134,7 @@ function adopt(g, sg){
   // take the server's copy as the truth; returns how many new moves arrived
   const before = g.moves.length;
   const extends_ = sg.moves.length > before && g.moves.every((m,i)=>m===sg.moves[i]);
-  g.name = sg.name || g.name; g.w = sg.w; g.b = sg.b; g.resign = sg.resign || ''; g.moves = sg.moves.slice(); g.online = true;
+  g.name = sg.name || g.name; g.w = sg.w; g.b = sg.b; g.resign = sg.resign || ''; g.moves = sg.moves.slice(); g.online = true; g.pending = false;
   if (extends_) g.sent = g.moves.length;
   if (g.sent > g.moves.length) g.sent = g.moves.length;
   return extends_ ? sg.moves.length - before : 0;
@@ -324,7 +324,8 @@ function viewHome(refresh = true){
     if (g.me==='spec'){ status = res ? res.score : 'Watching'; sub = `${opp} · move ${n}`; }
     else if (res){ status = res.score; sub = `${opp} · ${n} moves · ${res.text.toLowerCase()}`; }
     else if (!g.w || !g.b){ status = chess.turn()===g.me ? '<span class="dot"></span>Your move' : 'Waiting'; sub = `${opp} · invite sent`; }
-    else if (g.moves.length > (g.sent||0) && chess.turn()!==g.me){ status = '<span class="dot"></span>Send your move'; sub = `${opp} · move ${n}`; }
+    else if (g.pending){ status = '<span class="dot"></span>Tap Done'; sub = `${opp} · move ${n}`; }
+    else if (g.moves.length > (g.sent||0) && chess.turn()!==g.me && !g.online){ status = '<span class="dot"></span>Send your move'; sub = `${opp} · move ${n}`; }
     else if (chess.turn()===g.me){ status = '<span class="dot"></span>Your move'; sub = `${opp} · move ${n}`; }
     else { status = 'Their move'; sub = `${opp} · move ${n}`; }
     sub += g.me!=='spec' ? ` · you are ${colourName(g.me)}` : '';
@@ -568,10 +569,18 @@ function viewGame(g, opts = {}){
         ${unsent ? `<button class="primary red" id="send"><span>Send to ${esc(oppName)} by SMS</span>${I.arrow}</button>` : ''}
         <div class="row2"><button class="secondary" id="log">Move log</button><button class="secondary" id="spec">Invite spectators</button></div>
         ${unsent ? `<button class="textbtn" id="sendother" style="align-self:flex-start">Send another way</button>` : ''}</div>`;
+    } else if (g.pending && live){
+      panel = `<div class="panel"><p><strong>You played ${esc(moveLabel(full.hist, full.hist.length-1))}.</strong> Tap Done to put it on ${esc(oppName)}'s board — until then you can take it back.</p>
+        <button class="primary" id="done"><span>Done</span>${I.arrow}</button>
+        <button class="secondary" id="undo">Take back</button></div>`;
+    } else if (unsent && g.online && !g.offline){
+      panel = `<div class="panel"><p><strong>Done — ${esc(moveLabel(full.hist, full.hist.length-1))} is on ${esc(oppName)}'s board.</strong> Want to give them a nudge?</p>
+        <button class="primary red" id="send"><span>Text ${esc(oppName)}</span>${I.arrow}</button>
+        <div class="row2"><button class="secondary" id="nonudge">No need</button><button class="secondary" id="sendother">Another app</button></div>
+        <button class="textbtn" id="undo" style="align-self:flex-start">Take back (until they reply)</button></div>`;
     } else if (unsent){
-      const lm = full.hist[full.hist.length-1];
-      panel = `<div class="panel"><p><strong>You played ${esc(moveLabel(full.hist, full.hist.length-1))}.</strong> ${g.online && !g.offline ? `Saved — send ${esc(oppName)} a text so they know it's their turn.` : `${esc(oppName.charAt(0).toUpperCase()+oppName.slice(1))} won't see it until you send it.`}</p>
-        <button class="primary red" id="send"><span>${g.online && !g.offline ? `Text ${esc(oppName)}` : `Send move to ${esc(oppName)} by SMS`}</span>${I.arrow}</button>
+      panel = `<div class="panel"><p><strong>You played ${esc(moveLabel(full.hist, full.hist.length-1))}.</strong> ${esc(oppName.charAt(0).toUpperCase()+oppName.slice(1))} won't see it until you send it.</p>
+        <button class="primary red" id="send"><span>Send move to ${esc(oppName)} by SMS</span>${I.arrow}</button>
         <div class="row2"><button class="secondary" id="undo">Take back</button><button class="secondary" id="sendother">Send another way</button></div></div>`;
     } else if (myTurn){
       const lm = full.hist[full.hist.length-1];
@@ -633,8 +642,8 @@ function viewGame(g, opts = {}){
     g.moves = [...g.moves, lan(mv)]; saveGame(g);
     view = g.moves.length; sel=null; targets=[]; promo=null;
     feedbackFor(mv, chess);
+    if (g.online && g.key && !g.offline){ g.pending = true; saveGame(g); }
     render();
-    if (g.online && g.key) online('move', { move: lan(mv), expect });
   }
 
   async function online(action, body){
@@ -651,7 +660,7 @@ function viewGame(g, opts = {}){
   function startPolling(){
     if (!g.online || poll) return;
     poll = setInterval(async () => {
-      if (document.visibilityState !== 'visible' || g.saving || promo) return;
+      if (document.visibilityState !== 'visible' || g.saving || promo || g.pending) return;
       const r = await api(`/games/${g.id}`);
       if (!r || !r.ok) return;
       const sg = r.data.game;
@@ -719,7 +728,10 @@ function viewGame(g, opts = {}){
     on('mylink', ()=>{ const msg = `${g.name} — my own Zug link, playing ${colourName(g.me)}. Keep it private: whoever has it can move for me. ${gameLink(g, { k:g.key })}`; shareOther(msg); });
     on('send', ()=>{ const m = sendMessage(); markSent(); location.href = smsHref(m, g.phone||''); setTimeout(render, 400); });
     on('sendother', async ()=>{ const m = sendMessage(); await shareOther(m); markSent(); render(); });
-    on('undo', ()=>{ const expect = g.moves.length; g.moves = g.moves.slice(0,-1); if (g.sent > g.moves.length) g.sent = g.moves.length; saveGame(g); view=g.moves.length; feedback('tap'); render(); if (g.online && g.key) online('undo', { expect }); });
+    on('done', ()=>{ g.pending = false; feedback('tap'); online('move', { move: g.moves[g.moves.length-1], expect: g.moves.length-1 }); });
+    on('nonudge', ()=>{ markSent(); render(); });
+    on('undo', ()=>{ if (g.pending){ g.moves = g.moves.slice(0,-1); g.pending = false; saveGame(g); view = g.moves.length; feedback('tap'); render(); return; }
+      const expect = g.moves.length; g.moves = g.moves.slice(0,-1); if (g.sent > g.moves.length) g.sent = g.moves.length; saveGame(g); view=g.moves.length; feedback('tap'); render(); if (g.online && g.key) online('undo', { expect }); });
     on('reinvite', ()=>{ location.href = smsHref(inviteText(g), g.phone||''); });
     on('resign', ()=>{ if (!confirm('Resign this game?')) return; g.resign = g.me; saveGame(g); feedback('end'); if (g.online && g.key) online('resign', {});
       const m = sendMessage(); g.sent = g.moves.length; saveGame(g);
