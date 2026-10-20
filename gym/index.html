@@ -5,180 +5,639 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gym Session — DDD Programme</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=DM+Mono:wght@400;500&display=swap');
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
 :root{
-  --bg:#F0F0EB;--surface:#FFFFFF;--surface2:#F7F7F3;--border:#E0DFD8;
-  --text:#1A1A1A;--text-muted:#7A7A72;
-  --accent:#2D6A4F;--accent-light:#D8EDDF;
-  --done-bg:#EAF4EE;--done-border:#A8D5B5;
-  --warmup:#8B5CF6;--warmup-light:#EDE9FE;
-  --strength:#C93A4A;--strength-light:#F7DDE0;
-  --rehab:#3A6AC9;--rehab-light:#DDE8F7;
-  --timer-warn:#C97B3A;
+  --bg:#FFFFFF;
+  --surface:#FFFFFF;
+  --surface2:#DDDDDD;
+  --border:#000000;
+  --text:#000000;
+  --text-muted:#555555;
+  --bevel-light:#FFFFFF;
+  --bevel-shadow:#555555;
+
+  /* Type bar colours — only colour in the whole UI */
+  --warmup:#7B3F9E;
+  --strength:#B22222;
+  --rehab:#1A5FA8;
+
+  /* Lighter tints for subtle fills */
+  --warmup-tint:#EDE4F5;
+  --strength-tint:#F5E4E4;
+  --rehab-tint:#E4EDF5;
 }
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px 14px 60px}
+
+body{
+  font-family:'VT323',monospace;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  padding:16px 12px 60px;
+  font-size:18px;
+  line-height:1.3;
+}
+
+/* ── MAC BEVEL BUTTON ── */
+.mac-btn{
+  font-family:'VT323',monospace;
+  font-size:18px;
+  background:var(--surface2);
+  color:var(--text);
+  border:2px solid var(--border);
+  border-right-color:var(--bevel-shadow);
+  border-bottom-color:var(--bevel-shadow);
+  border-left-color:var(--bevel-light);
+  border-top-color:var(--bevel-light);
+  cursor:pointer;
+  padding:4px 10px;
+  line-height:1.2;
+  white-space:nowrap;
+  user-select:none;
+  border-radius:0;
+  outline:none;
+}
+.mac-btn:active{
+  border-right-color:var(--bevel-light);
+  border-bottom-color:var(--bevel-light);
+  border-left-color:var(--bevel-shadow);
+  border-top-color:var(--bevel-shadow);
+  background:#AAAAAA;
+}
+.mac-btn.active,.mac-btn.checked-style{
+  background:var(--text);
+  color:var(--bg);
+  border-color:var(--text);
+}
 
 /* ── HEADER ── */
-header{max-width:720px;margin:0 auto 24px}
-.header-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
-.title-block h1{font-size:1.5rem;font-weight:600;letter-spacing:-0.03em;line-height:1.2}
-.title-block p{color:var(--text-muted);font-size:0.82rem;margin-top:3px}
-.date-chip{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--text-muted);background:var(--surface);border:1.5px solid var(--border);padding:3px 10px;border-radius:20px;margin-top:6px;display:inline-block}
+header{
+  max-width:720px;
+  margin:0 auto 20px;
+  border:2px solid var(--border);
+  padding:0;
+}
+.header-titlebar{
+  background:var(--text);
+  color:var(--bg);
+  padding:6px 12px;
+  font-family:'Press Start 2P',monospace;
+  font-size:9px;
+  letter-spacing:0.05em;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.header-titlebar::before{
+  content:'';
+  display:inline-block;
+  width:10px; height:10px;
+  border:2px solid var(--bg);
+  border-radius:50%;
+  flex-shrink:0;
+}
+.header-body{
+  padding:12px 14px;
+}
+.header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+}
+.title-block h1{
+  font-family:'Press Start 2P',monospace;
+  font-size:10px;
+  letter-spacing:0.04em;
+  line-height:1.6;
+  font-weight:400;
+}
+.title-block p{
+  font-size:16px;
+  color:var(--text-muted);
+  margin-top:4px;
+}
+.date-chip{
+  font-family:'DM Mono',monospace;
+  font-size:13px;
+  color:var(--text-muted);
+  border:1px solid var(--border);
+  padding:2px 8px;
+  display:inline-block;
+  margin-top:6px;
+  background:var(--surface2);
+}
 
-.timer-wrap{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0}
-.timer-display{font-family:'DM Mono',monospace;font-size:1.45rem;font-weight:500;color:var(--accent);letter-spacing:0.04em;line-height:1}
-.timer-display.warn{color:var(--timer-warn)}
-.timer-label{font-size:0.65rem;font-family:'DM Mono',monospace;letter-spacing:0.08em;color:var(--text-muted);text-transform:uppercase}
-.timer-btns{display:flex;gap:5px}
-.tbtn{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;padding:4px 9px;border-radius:6px;border:1.5px solid var(--border);background:var(--surface);cursor:pointer;color:var(--text-muted);transition:all 0.15s}
-.tbtn:hover{border-color:var(--accent);color:var(--accent)}
-.tbtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.timer-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  flex-shrink:0;
+  border:2px solid var(--border);
+  padding:8px 12px;
+  background:var(--surface);
+}
+.timer-display{
+  font-family:'VT323',monospace;
+  font-size:36px;
+  font-weight:400;
+  color:var(--text);
+  letter-spacing:0.05em;
+  line-height:1;
+}
+.timer-display.warn{ color:var(--strength); }
+.timer-label{
+  font-size:14px;
+  color:var(--text-muted);
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+}
+.timer-btns{display:flex;gap:4px;margin-top:4px;}
+.tbtn{ }/* reuse mac-btn */
 
-.progress-wrap{margin-top:16px;display:flex;align-items:center;gap:10px}
-.prog-track{flex:1;height:6px;background:var(--border);border-radius:10px;overflow:hidden}
-.prog-fill{height:100%;background:var(--accent);border-radius:10px;transition:width 0.4s ease;width:0%}
-.prog-count{font-family:'DM Mono',monospace;font-size:0.73rem;color:var(--text-muted);white-space:nowrap}
+.progress-wrap{
+  margin-top:12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.prog-track{
+  flex:1;
+  height:12px;
+  background:var(--surface2);
+  border:2px solid var(--border);
+  border-right-color:var(--bevel-shadow);
+  border-bottom-color:var(--bevel-shadow);
+  border-left-color:var(--bevel-light);
+  border-top-color:var(--bevel-light);
+  overflow:hidden;
+}
+.prog-fill{
+  height:100%;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--text) 0px, var(--text) 2px,
+    transparent 2px, transparent 6px
+  );
+  transition:width 0.4s ease;
+  width:0%;
+}
+.prog-count{
+  font-family:'DM Mono',monospace;
+  font-size:13px;
+  color:var(--text-muted);
+  white-space:nowrap;
+}
 
-.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
-.legend-item{display:flex;align-items:center;gap:5px;font-size:0.73rem;color:var(--text-muted)}
-.ldot{width:9px;height:9px;border-radius:50%}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:16px;color:var(--text-muted);}
+.ldot{width:12px;height:12px;border:1px solid var(--border);}
 
 /* ── SECTION LABEL ── */
-.section-label{max-width:720px;margin:26px auto 10px;font-size:0.68rem;font-family:'DM Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);display:flex;align-items:center;gap:10px}
-.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
-.section-time{font-size:0.66rem;font-family:'DM Mono',monospace;color:var(--text-muted);background:var(--surface2);border:1px solid var(--border);padding:2px 8px;border-radius:10px;white-space:nowrap}
+.section-label{
+  max-width:720px;
+  margin:20px auto 8px;
+  font-family:'Press Start 2P',monospace;
+  font-size:8px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:0 2px;
+}
+.section-label::after{
+  content:'';
+  flex:1;
+  height:2px;
+  background:var(--border);
+}
+.section-time{
+  font-size:14px;
+  font-family:'DM Mono',monospace;
+  color:var(--text-muted);
+  border:1px solid var(--border);
+  padding:1px 7px;
+  background:var(--surface2);
+  white-space:nowrap;
+  font-family:'VT323',monospace;
+}
 
 /* ── CARD ── */
-.cards{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
-.card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:14px 16px 14px 20px;position:relative;overflow:hidden;transition:border-color 0.2s}
-.card:hover{border-color:#C0BFB8}
-.card.all-done{background:var(--done-bg);border-color:var(--done-border)}
-.card.all-done .ex-name{text-decoration:line-through;color:var(--text-muted)}
+.cards{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:0;border:2px solid var(--border);}
+.card{
+  background:var(--surface);
+  border-top:1px solid #AAAAAA;
+  padding:12px 14px 12px 18px;
+  position:relative;
+  overflow:hidden;
+  transition:background 0.2s;
+}
+.card:first-child{border-top:none;}
+.card.all-done{
+  background: repeating-linear-gradient(
+    -45deg,
+    #F8F8F8 0px, #F8F8F8 4px,
+    #EEEEEE 4px, #EEEEEE 8px
+  );
+}
+.card.all-done .ex-name{text-decoration:line-through;color:var(--text-muted);}
 
-.type-bar{position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:14px 0 0 14px}
-.type-warmup .type-bar{background:var(--warmup)}
-.type-strength .type-bar{background:var(--strength)}
-.type-rehab .type-bar{background:var(--rehab)}
+.type-bar{position:absolute;left:0;top:0;bottom:0;width:5px;}
+.type-warmup .type-bar{background:var(--warmup);}
+.type-strength .type-bar{background:var(--strength);}
+.type-rehab .type-bar{background:var(--rehab);}
 
-.card-top{display:flex;gap:14px;align-items:flex-start}
-.card-icon{flex-shrink:0;width:64px;height:64px}
-.card-icon svg{width:64px;height:64px}
-.card-body{flex:1;min-width:0}
-.ex-name{font-size:0.97rem;font-weight:600;letter-spacing:-0.01em;margin-bottom:2px}
-.ddd-flag{display:inline-block;font-size:0.62rem;font-family:'DM Mono',monospace;letter-spacing:0.04em;padding:2px 7px;border-radius:10px;background:var(--accent-light);color:var(--accent);margin-bottom:6px;font-weight:500}
-.ex-note{font-size:0.75rem;color:var(--text-muted);line-height:1.4;margin-bottom:8px}
-.target-pills{display:flex;gap:5px;flex-wrap:wrap}
-.tpill{font-family:'DM Mono',monospace;font-size:0.7rem;padding:3px 9px;border-radius:20px;border:1.5px solid var(--border);color:var(--text-muted);background:var(--surface2)}
+.card-top{display:flex;gap:12px;align-items:flex-start;}
+.card-icon{flex-shrink:0;width:60px;height:60px;}
+.card-icon svg{width:60px;height:60px;}
+.card-body{flex:1;min-width:0;}
+.ex-name{
+  font-family:'Press Start 2P',monospace;
+  font-size:8px;
+  font-weight:400;
+  letter-spacing:0.03em;
+  line-height:1.6;
+  margin-bottom:4px;
+}
+.ddd-flag{
+  display:inline-block;
+  font-size:14px;
+  font-family:'VT323',monospace;
+  padding:1px 8px;
+  border:1px solid var(--border);
+  background:var(--surface2);
+  margin-bottom:4px;
+  letter-spacing:0.04em;
+}
+.ex-note{font-size:16px;color:var(--text-muted);line-height:1.3;margin-bottom:6px;}
+.target-pills{display:flex;gap:4px;flex-wrap:wrap;}
+.tpill{
+  font-family:'DM Mono',monospace;
+  font-size:12px;
+  padding:2px 8px;
+  border:1px solid var(--border);
+  color:var(--text-muted);
+  background:var(--surface2);
+}
 
 /* ── SET TRACKER ── */
-.sets-tracker{margin-top:12px;border-top:1px solid var(--border);padding-top:12px;display:flex;flex-direction:column;gap:8px}
-.set-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.set-label{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--text-muted);width:38px;flex-shrink:0}
-.set-fields{display:flex;gap:8px;align-items:center;flex:1;flex-wrap:wrap}
+.sets-tracker{
+  margin-top:10px;
+  border-top:1px solid #AAAAAA;
+  padding-top:10px;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+.set-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.set-label{
+  font-family:'DM Mono',monospace;
+  font-size:13px;
+  color:var(--text-muted);
+  width:40px;
+  flex-shrink:0;
+}
+.set-fields{display:flex;gap:6px;align-items:center;flex:1;flex-wrap:wrap;}
 
-/* Spinners */
-.spinner-wrap{display:flex;flex-direction:column;align-items:center;gap:2px}
-.spinner-label{font-size:0.6rem;font-family:'DM Mono',monospace;color:var(--text-muted);letter-spacing:0.05em;text-transform:uppercase}
-.spinner{display:flex;align-items:center;gap:0}
-.spin-btn{width:28px;height:28px;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer;font-size:0.9rem;line-height:1;display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:all 0.1s;flex-shrink:0}
-.spin-btn:first-child{border-radius:6px 0 0 6px}
-.spin-btn:last-child{border-radius:0 6px 6px 0}
-.spin-btn:hover{background:var(--accent-light);color:var(--accent);border-color:var(--accent)}
-.spin-val{font-family:'DM Mono',monospace;font-size:0.82rem;font-weight:500;min-width:36px;height:28px;border-top:1.5px solid var(--border);border-bottom:1.5px solid var(--border);border-left:none;border-right:none;background:var(--surface);text-align:center;line-height:28px;color:var(--text)}
+/* Spinners — Mac stepper style */
+.spinner-wrap{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.spinner-label{
+  font-size:13px;
+  font-family:'VT323',monospace;
+  color:var(--text-muted);
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+}
+.spinner{display:flex;align-items:center;gap:0;}
+.spin-btn{
+  width:26px;height:26px;
+  border:2px solid var(--border);
+  border-right-color:var(--bevel-shadow);
+  border-bottom-color:var(--bevel-shadow);
+  border-left-color:var(--bevel-light);
+  border-top-color:var(--bevel-light);
+  background:var(--surface2);
+  cursor:pointer;
+  font-size:16px;
+  font-family:'VT323',monospace;
+  line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text);
+  flex-shrink:0;
+  border-radius:0;
+}
+.spin-btn:active{
+  border-right-color:var(--bevel-light);
+  border-bottom-color:var(--bevel-light);
+  border-left-color:var(--bevel-shadow);
+  border-top-color:var(--bevel-shadow);
+  background:#AAAAAA;
+}
+.spin-val{
+  font-family:'DM Mono',monospace;
+  font-size:14px;
+  font-weight:500;
+  min-width:38px;
+  height:26px;
+  border-top:2px solid var(--bevel-shadow);
+  border-bottom:2px solid var(--bevel-light);
+  border-left:none;
+  border-right:none;
+  background:var(--bg);
+  text-align:center;
+  line-height:22px;
+  color:var(--text);
+}
 
-/* Set check */
-.set-check{width:26px;height:26px;border-radius:50%;border:2px solid var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;margin-left:auto}
-.set-check:hover{border-color:var(--accent);background:var(--accent-light)}
-.set-check.checked{background:var(--accent);border-color:var(--accent)}
-.set-check svg{width:13px;height:13px}
+/* Set check — Mac checkbox style */
+.set-check{
+  width:22px;height:22px;
+  border:2px solid var(--border);
+  border-right-color:var(--bevel-light);
+  border-bottom-color:var(--bevel-light);
+  border-left-color:var(--bevel-shadow);
+  border-top-color:var(--bevel-shadow);
+  background:var(--bg);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  margin-left:auto;
+  border-radius:0;
+}
+.set-check.checked{
+  background: repeating-linear-gradient(
+    45deg,
+    var(--text) 0px, var(--text) 2px,
+    transparent 2px, transparent 5px
+  );
+}
+.set-check svg{width:12px;height:12px;}
 
 /* ── REST TIMER ── */
-.rest-timer{display:none;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface2);margin-top:2px;transition:background 0.3s,border-color 0.3s}
-.rest-timer.active{display:flex;border-color:#F5C0C6;background:#FEF2F3}
-.rest-timer.done{display:flex;border-color:#A8D5B5;background:var(--done-bg)}
-.rest-arc-wrap{flex-shrink:0;width:36px;height:36px}
-.rest-arc-wrap svg{width:36px;height:36px;transform:rotate(-90deg)}
-.arc-bg{fill:none;stroke:var(--border);stroke-width:4}
-.arc-fill{fill:none;stroke-width:4;stroke-linecap:round;transition:stroke-dashoffset 0.9s linear,stroke 0.4s}
-.rest-timer.active .arc-fill{stroke:#C93A4A}
-.rest-timer.done .arc-fill{stroke:#2D6A4F}
-.rest-body{flex:1;min-width:0}
-.rest-label{font-size:0.62rem;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1px}
-.rest-timer.active .rest-label{color:#C93A4A}
-.rest-timer.done .rest-label{color:var(--accent)}
-.rest-count{font-family:'DM Mono',monospace;font-size:1.1rem;font-weight:500;line-height:1}
-.rest-timer.active .rest-count{color:#C93A4A}
-.rest-timer.done .rest-count{color:var(--accent)}
-.rest-msg{font-size:0.72rem;color:var(--text-muted);margin-top:2px}
-.rest-timer.done .rest-msg{color:var(--accent);font-weight:500}
+.rest-timer{
+  display:none;
+  align-items:center;
+  gap:10px;
+  padding:7px 10px;
+  border:2px solid var(--border);
+  border-right-color:var(--bevel-shadow);
+  border-bottom-color:var(--bevel-shadow);
+  background:var(--surface2);
+  margin-top:4px;
+}
+.rest-timer.active{display:flex;background:#F5E4E4;border-color:var(--strength);}
+.rest-timer.done{display:flex;background:#E4EDF5;border-color:var(--rehab);}
+.rest-arc-wrap{flex-shrink:0;width:34px;height:34px;}
+.rest-arc-wrap svg{width:34px;height:34px;transform:rotate(-90deg);}
+.arc-bg{fill:none;stroke:#AAAAAA;stroke-width:3;}
+.arc-fill{fill:none;stroke-width:3;stroke-linecap:square;transition:stroke-dashoffset 0.9s linear,stroke 0.3s;}
+.rest-timer.active .arc-fill{stroke:var(--strength);}
+.rest-timer.done .arc-fill{stroke:var(--rehab);}
+.rest-body{flex:1;min-width:0;}
+.rest-label{
+  font-size:14px;
+  font-family:'VT323',monospace;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  margin-bottom:1px;
+}
+.rest-timer.active .rest-label{color:var(--strength);}
+.rest-timer.done .rest-label{color:var(--rehab);}
+.rest-count{
+  font-family:'VT323',monospace;
+  font-size:24px;
+  font-weight:400;
+  line-height:1;
+}
+.rest-timer.active .rest-count{color:var(--strength);}
+.rest-timer.done .rest-count{color:var(--rehab);}
+.rest-msg{font-size:14px;color:var(--text-muted);margin-top:1px;}
+.rest-timer.done .rest-msg{color:var(--rehab);font-weight:500;}
 
-/* ── HOLD TIMER (timed exercises) ── */
-.hold-timer-wrap{display:flex;align-items:center;gap:10px;padding:6px 0}
-.hold-arc-wrap{flex-shrink:0;width:48px;height:48px}
-.hold-arc-wrap svg{width:48px;height:48px;transform:rotate(-90deg)}
-.hold-arc-bg{fill:none;stroke:var(--border);stroke-width:4}
-.hold-arc-fill{fill:none;stroke:#C93A4A;stroke-width:4;stroke-linecap:round;transition:stroke-dashoffset 0.9s linear,stroke 0.4s}
-/* Counter-rotate text so it reads normally */
-.hold-arc-wrap text{transform-origin:24px 24px;transform:rotate(90deg)}
-.hold-body{display:flex;flex-direction:column;gap:4px}
-.hold-side-label{font-size:0.62rem;font-family:'DM Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;color:var(--strength);font-weight:500}
-.hold-status{font-size:0.75rem;color:var(--text-muted);line-height:1.2}
-.hold-btn{font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:500;padding:5px 12px;border-radius:7px;border:1.5px solid var(--strength);color:var(--strength);background:var(--strength-light);cursor:pointer;transition:all 0.15s;white-space:nowrap}
-.hold-btn:hover:not(:disabled){background:var(--strength);color:#fff}
-.hold-done .hold-btn{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
+/* ── HOLD TIMER ── */
+.hold-timer-wrap{display:flex;align-items:center;gap:10px;padding:4px 0;}
+.hold-arc-wrap{flex-shrink:0;width:46px;height:46px;}
+.hold-arc-wrap svg{width:46px;height:46px;transform:rotate(-90deg);}
+.hold-arc-bg{fill:none;stroke:#AAAAAA;stroke-width:3;}
+.hold-arc-fill{
+  fill:none;
+  stroke:var(--strength);
+  stroke-width:3;
+  stroke-linecap:square;
+  transition:stroke-dashoffset 0.9s linear,stroke 0.4s;
+}
+.hold-arc-wrap text{transform-origin:23px 23px;transform:rotate(90deg);}
+.hold-body{display:flex;flex-direction:column;gap:3px;}
+.hold-side-label{
+  font-size:14px;
+  font-family:'VT323',monospace;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--strength);
+}
+.hold-status{font-size:16px;color:var(--text-muted);line-height:1.2;}
+.hold-btn{
+  font-family:'VT323',monospace;
+  font-size:17px;
+  padding:3px 10px;
+  border:2px solid var(--border);
+  border-right-color:var(--bevel-shadow);
+  border-bottom-color:var(--bevel-shadow);
+  border-left-color:var(--bevel-light);
+  border-top-color:var(--bevel-light);
+  background:var(--surface2);
+  cursor:pointer;
+  color:var(--text);
+  white-space:nowrap;
+  border-radius:0;
+}
+.hold-btn:active{background:#AAAAAA;}
+.hold-done .hold-btn{
+  background:var(--text);
+  color:var(--bg);
+  opacity:0.6;
+}
 
 /* ── HISTORY PANEL ── */
-.history-section{max-width:720px;margin:32px auto 0}
-.history-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.history-title{font-size:0.68rem;font-family:'DM Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)}
-.history-list{display:flex;flex-direction:column;gap:8px}
-.history-entry{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;cursor:pointer;transition:border-color 0.2s}
-.history-entry:hover{border-color:#C0BFB8}
-.h-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.h-date{font-family:'DM Mono',monospace;font-size:0.78rem;font-weight:500;color:var(--text)}
-.h-stats{font-size:0.72rem;color:var(--text-muted)}
-.h-exercises{display:flex;flex-direction:column;gap:4px;display:none}
-.history-entry.expanded .h-exercises{display:flex}
-.h-ex-row{display:flex;justify-content:space-between;font-size:0.75rem}
-.h-ex-name{color:var(--text-muted)}
-.h-ex-sets{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text)}
-.no-history{font-size:0.8rem;color:var(--text-muted);text-align:center;padding:20px;background:var(--surface);border:1.5px dashed var(--border);border-radius:12px}
+.history-section{max-width:720px;margin:24px auto 0;}
+.history-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+  border-bottom:2px solid var(--border);
+  padding-bottom:6px;
+}
+.history-title{
+  font-family:'Press Start 2P',monospace;
+  font-size:8px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--text);
+}
+.history-list{display:flex;flex-direction:column;gap:0;border:2px solid var(--border);}
+.history-entry{
+  background:var(--surface);
+  border-top:1px solid #AAAAAA;
+  padding:10px 12px;
+  cursor:pointer;
+}
+.history-entry:first-child{border-top:none;}
+.history-entry:hover{background:var(--surface2);}
+.h-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.h-date{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;}
+.h-stats{font-size:15px;color:var(--text-muted);}
+.h-exercises{display:flex;flex-direction:column;gap:3px;display:none;}
+.history-entry.expanded .h-exercises{display:flex;}
+.h-ex-row{display:flex;justify-content:space-between;font-size:15px;}
+.h-ex-name{color:var(--text-muted);}
+.h-ex-sets{font-family:'DM Mono',monospace;font-size:13px;color:var(--text);}
+.no-history{
+  font-size:16px;
+  color:var(--text-muted);
+  text-align:center;
+  padding:20px;
+  border:2px dashed var(--text-muted);
+}
 
 /* ── BOTTOM ACTIONS ── */
-.tip-box{max-width:720px;margin:24px auto 0;background:#FFF8F0;border:1.5px solid #F0DAC0;border-radius:12px;padding:14px 16px;font-size:0.78rem;color:#7A5A30;line-height:1.55}
-.tip-box strong{font-weight:600}
+.tip-box{
+  max-width:720px;
+  margin:20px auto 0;
+  border:2px solid var(--border);
+  padding:12px 14px;
+  font-size:16px;
+  color:var(--text);
+  line-height:1.5;
+  background:var(--surface2);
+}
+.tip-box strong{font-family:'VT323',monospace;letter-spacing:0.04em;font-size:18px;}
 
-.actions-wrap{max-width:720px;margin:20px auto 0;display:flex;gap:10px;flex-wrap:wrap}
-.action-btn{flex:1;min-width:140px;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:500;padding:11px 16px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface);cursor:pointer;color:var(--text-muted);transition:all 0.2s;text-align:center}
-.action-btn:hover{border-color:#AAA9A2;color:var(--text)}
-.action-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-.action-btn.primary:hover{background:#225438}
-.action-btn.danger{color:#C93A4A;border-color:#F0C0C5}
-.action-btn.danger:hover{background:#FDF0F1;border-color:#C93A4A}
+.actions-wrap{max-width:720px;margin:14px auto 0;display:flex;gap:6px;flex-wrap:wrap;}
+.action-btn{
+  flex:1;
+  min-width:130px;
+  font-family:'VT323',monospace;
+  font-size:18px;
+  padding:8px 14px;
+  border:2px solid var(--border);
+  border-right-color:var(--bevel-shadow);
+  border-bottom-color:var(--bevel-shadow);
+  border-left-color:var(--bevel-light);
+  border-top-color:var(--bevel-light);
+  background:var(--surface2);
+  cursor:pointer;
+  color:var(--text);
+  text-align:center;
+  border-radius:0;
+}
+.action-btn:active{
+  border-right-color:var(--bevel-light);
+  border-bottom-color:var(--bevel-light);
+  border-left-color:var(--bevel-shadow);
+  border-top-color:var(--bevel-shadow);
+  background:#AAAAAA;
+}
+.action-btn.primary{
+  background:var(--text);
+  color:var(--bg);
+  border-color:var(--text);
+}
+.action-btn.primary:active{background:#333333;}
+.action-btn.danger{color:var(--strength);}
 
 /* Complete banner */
-.complete-banner{max-width:720px;margin:16px auto 0;background:var(--accent);color:#fff;border-radius:12px;padding:16px 20px;text-align:center;font-weight:500;font-size:0.9rem;display:none}
-.complete-banner.show{display:block}
+.complete-banner{
+  max-width:720px;
+  margin:14px auto 0;
+  background:var(--text);
+  color:var(--bg);
+  padding:14px 18px;
+  text-align:center;
+  font-family:'Press Start 2P',monospace;
+  font-size:9px;
+  letter-spacing:0.05em;
+  line-height:1.8;
+  display:none;
+  border:2px solid var(--border);
+}
+.complete-banner.show{display:block;}
 
 /* Save overlay */
-.save-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
-.save-overlay.show{display:flex}
-.save-modal{background:var(--surface);border-radius:16px;padding:24px;max-width:360px;width:100%;text-align:center}
-.save-modal h3{font-size:1rem;font-weight:600;margin-bottom:8px}
-.save-modal p{font-size:0.8rem;color:var(--text-muted);margin-bottom:20px;line-height:1.5}
-.save-modal-btns{display:flex;gap:8px}
-.save-modal-btns button{flex:1;padding:10px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface2);font-family:'DM Sans',sans-serif;font-size:0.82rem;cursor:pointer;color:var(--text-muted);transition:all 0.15s}
-.save-modal-btns button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-.save-modal-btns button:hover:not(.primary){border-color:#AAA9A2;color:var(--text)}
-.spinner-anim{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:6px}
-@keyframes spin{to{transform:rotate(360deg)}}
+.save-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+  padding:20px;
+}
+.save-overlay.show{display:flex;}
+.save-modal{
+  background:var(--surface);
+  border:3px solid var(--border);
+  border-right-color:var(--bevel-shadow);
+  border-bottom-color:var(--bevel-shadow);
+  padding:0;
+  max-width:340px;
+  width:100%;
+}
+.save-modal-bar{
+  background:var(--text);
+  color:var(--bg);
+  padding:6px 12px;
+  font-family:'Press Start 2P',monospace;
+  font-size:8px;
+  letter-spacing:0.05em;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.save-modal-bar::before{
+  content:'';
+  display:inline-block;
+  width:10px;height:10px;
+  border:2px solid var(--bg);
+  border-radius:50%;
+  flex-shrink:0;
+}
+.save-modal-body{padding:20px;}
+.save-modal-body p{font-size:17px;color:var(--text-muted);margin-bottom:18px;line-height:1.5;}
+.save-modal-btns{display:flex;gap:6px;}
+.save-modal-btns button{
+  flex:1;
+  padding:8px;
+  border:2px solid var(--border);
+  border-right-color:var(--bevel-shadow);
+  border-bottom-color:var(--bevel-shadow);
+  border-left-color:var(--bevel-light);
+  border-top-color:var(--bevel-light);
+  background:var(--surface2);
+  font-family:'VT323',monospace;
+  font-size:18px;
+  cursor:pointer;
+  color:var(--text);
+  border-radius:0;
+}
+.save-modal-btns button.primary{
+  background:var(--text);
+  color:var(--bg);
+  border-color:var(--text);
+}
 
 @media(max-width:480px){
-  .title-block h1{font-size:1.25rem}
-  .timer-display{font-size:1.2rem}
-  .card-icon{width:52px;height:52px}
-  .card-icon svg{width:52px;height:52px}
+  .title-block h1{font-size:8px;}
+  .timer-display{font-size:30px;}
+  .card-icon{width:48px;height:48px;}
+  .card-icon svg{width:48px;height:48px;}
+  .ex-name{font-size:7px;}
 }
 </style>
 </head>
@@ -186,29 +645,32 @@ header{max-width:720px;margin:0 auto 24px}
 
 <!-- ── HEADER ── -->
 <header>
-  <div class="header-top">
-    <div class="title-block">
-      <h1>Gym Session</h1>
-      <p>DDD-safe · strength + rehab · 45 min</p>
-      <div class="date-chip" id="todayDate"></div>
-    </div>
-    <div class="timer-wrap">
-      <div class="timer-display" id="timerDisplay">45:00</div>
-      <div class="timer-label">session timer</div>
-      <div class="timer-btns">
-        <button class="tbtn" id="timerStartBtn" onclick="timerToggle()">Start</button>
-        <button class="tbtn" onclick="timerReset()">Reset</button>
+  <div class="header-titlebar">GYM SESSION — DDD PROGRAMME</div>
+  <div class="header-body">
+    <div class="header-top">
+      <div class="title-block">
+        <h1>GYM SESSION</h1>
+        <p>DDD-safe · strength + rehab · 45 min</p>
+        <div class="date-chip" id="todayDate"></div>
+      </div>
+      <div class="timer-wrap">
+        <div class="timer-display" id="timerDisplay">45:00</div>
+        <div class="timer-label">SESSION TIMER</div>
+        <div class="timer-btns">
+          <button class="mac-btn" id="timerStartBtn" onclick="timerToggle()">Start</button>
+          <button class="mac-btn" onclick="timerReset()">Reset</button>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="progress-wrap">
-    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
-    <div class="prog-count" id="progCount">0 / 11</div>
-  </div>
-  <div class="legend">
-    <div class="legend-item"><div class="ldot" style="background:var(--warmup)"></div>Warm-up</div>
-    <div class="legend-item"><div class="ldot" style="background:var(--strength)"></div>Strength</div>
-    <div class="legend-item"><div class="ldot" style="background:var(--rehab)"></div>Rehab</div>
+    <div class="progress-wrap">
+      <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+      <div class="prog-count" id="progCount">0 / 11</div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="ldot" style="background:var(--warmup)"></div>Warm-up</div>
+      <div class="legend-item"><div class="ldot" style="background:var(--strength)"></div>Strength</div>
+      <div class="legend-item"><div class="ldot" style="background:var(--rehab)"></div>Rehab</div>
+    </div>
   </div>
 </header>
 
@@ -216,21 +678,27 @@ header{max-width:720px;margin:0 auto 24px}
 <div class="section-label">Warm-up <span class="section-time">5 min</span></div>
 <div class="cards">
 
-  <!-- Cat-Cow -->
+  <!-- Cat-Cow — spinal flexion/extension wave -->
   <div class="card type-warmup" id="card-0">
     <div class="type-bar"></div>
     <div class="card-top">
       <div class="card-icon">
-        <svg viewBox="0 0 72 72" fill="none">
-          <ellipse cx="36" cy="40" rx="20" ry="9" stroke="#8B5CF6" stroke-width="2" fill="#EDE9FE"/>
-          <circle cx="16" cy="32" r="6" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="2"/>
-          <path d="M16 38 Q36 22 56 38" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round" fill="none" stroke-dasharray="4 2"/>
-          <path d="M16 42 Q36 52 56 42" stroke="#8B5CF6" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.35"/>
-          <line x1="22" y1="48" x2="18" y2="58" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round"/>
-          <line x1="28" y1="49" x2="26" y2="59" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round"/>
-          <line x1="46" y1="48" x2="44" y2="58" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round"/>
-          <line x1="52" y1="48" x2="52" y2="58" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round"/>
-          <path d="M36 27 L34 22 L38 22 Z" fill="#8B5CF6"/>
+        <!-- Swiss pictogram: figure on all-fours, spine arc -->
+        <svg viewBox="0 0 60 60" fill="none">
+          <!-- Head -->
+          <circle cx="10" cy="22" r="5" fill="#000"/>
+          <!-- Torso arched (cat) -->
+          <path d="M14 20 Q30 10 46 20" stroke="#000" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <!-- Ghost flat spine -->
+          <path d="M14 20 Q30 22 46 20" stroke="#000" stroke-width="1.5" stroke-linecap="round" fill="none" stroke-dasharray="3 3" opacity="0.35"/>
+          <!-- Front arms -->
+          <line x1="18" y1="20" x2="18" y2="38" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="14" y1="38" x2="22" y2="38" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Rear legs -->
+          <line x1="42" y1="20" x2="42" y2="38" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="38" y1="38" x2="46" y2="38" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Direction arrow -->
+          <path d="M30 8 L28 13 M30 8 L32 13" stroke="#7B3F9E" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </div>
       <div class="card-body">
@@ -249,13 +717,18 @@ header{max-width:720px;margin:0 auto 24px}
     <div class="type-bar"></div>
     <div class="card-top">
       <div class="card-icon">
-        <svg viewBox="0 0 72 72" fill="none">
-          <line x1="6" y1="58" x2="66" y2="58" stroke="#8B5CF6" stroke-width="1.5" opacity="0.2"/>
-          <path d="M12 54 Q22 34 40 28 Q48 28 52 38 L56 58" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-          <circle cx="12" cy="52" r="5" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="2"/>
-          <line x1="16" y1="52" x2="24" y2="48" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="54" y1="56" x2="62" y2="58" stroke="#8B5CF6" stroke-width="3" stroke-linecap="round"/>
-          <path d="M40 28 L38 22 L42 22 Z" fill="#8B5CF6"/>
+        <!-- Swiss pictogram: supine bridge -->
+        <svg viewBox="0 0 60 60" fill="none">
+          <!-- Floor line -->
+          <line x1="2" y1="52" x2="58" y2="52" stroke="#000" stroke-width="2" opacity="0.2"/>
+          <!-- Head -->
+          <circle cx="8" cy="44" r="5" fill="#000"/>
+          <!-- Torso bridge arc -->
+          <path d="M12 42 Q20 22 36 22 Q42 22 44 32 L46 52" stroke="#000" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <!-- Upper legs -->
+          <line x1="46" y1="52" x2="52" y2="52" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Arrow up -->
+          <path d="M28 18 L26 23 M28 18 L30 23" stroke="#7B3F9E" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </div>
       <div class="card-body">
@@ -274,13 +747,19 @@ header{max-width:720px;margin:0 auto 24px}
     <div class="type-bar"></div>
     <div class="card-top">
       <div class="card-icon">
-        <svg viewBox="0 0 72 72" fill="none">
-          <line x1="16" y1="38" x2="56" y2="38" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="12" cy="38" r="6" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="2"/>
-          <line x1="26" y1="38" x2="22" y2="22" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="46" y1="38" x2="56" y2="28" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="56" y1="28" x2="62" y2="32" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
-          <ellipse cx="36" cy="38" rx="9" ry="5" fill="#8B5CF6" opacity="0.08"/>
+        <!-- Swiss pictogram: supine, opposite arm/leg extended -->
+        <svg viewBox="0 0 60 60" fill="none">
+          <!-- Head -->
+          <circle cx="8" cy="30" r="5" fill="#000"/>
+          <!-- Torso horizontal -->
+          <line x1="12" y1="30" x2="44" y2="30" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Left arm up -->
+          <line x1="18" y1="30" x2="14" y2="14" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Right leg extended -->
+          <line x1="40" y1="30" x2="56" y2="22" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Bent knee (other leg, up) -->
+          <line x1="30" y1="30" x2="30" y2="16" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="30" y1="16" x2="38" y2="16" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 2" opacity="0.5"/>
         </svg>
       </div>
       <div class="card-body">
@@ -305,18 +784,20 @@ header{max-width:720px;margin:0 auto 24px}
     <div class="type-bar"></div>
     <div class="card-top">
       <div class="card-icon">
-        <svg viewBox="0 0 72 72" fill="none">
-          <line x1="8" y1="14" x2="64" y2="14" stroke="#C93A4A" stroke-width="3" stroke-linecap="round"/>
-          <rect x="22" y="14" width="7" height="5" rx="2" fill="#C93A4A" opacity="0.5"/>
-          <rect x="43" y="14" width="7" height="5" rx="2" fill="#C93A4A" opacity="0.5"/>
-          <line x1="25" y1="19" x2="28" y2="30" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="47" y1="19" x2="44" y2="30" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="28" y1="30" x2="36" y2="35" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="44" y1="30" x2="36" y2="35" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="36" y1="35" x2="36" y2="50" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="36" cy="27" r="6" fill="#F7DDE0" stroke="#C93A4A" stroke-width="2"/>
-          <line x1="36" y1="50" x2="32" y2="62" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="36" y1="50" x2="40" y2="62" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Swiss pictogram: hanging from bar, chin over -->
+        <svg viewBox="0 0 60 60" fill="none">
+          <!-- Bar -->
+          <line x1="4" y1="8" x2="56" y2="8" stroke="#000" stroke-width="4" stroke-linecap="square"/>
+          <!-- Arms up gripping -->
+          <line x1="22" y1="8" x2="26" y2="20" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="38" y1="8" x2="34" y2="20" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Head (chin at bar level) -->
+          <circle cx="30" cy="16" r="6" fill="#000"/>
+          <!-- Torso -->
+          <line x1="30" y1="22" x2="30" y2="40" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Legs hanging -->
+          <line x1="30" y1="40" x2="24" y2="54" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="30" y1="40" x2="36" y2="54" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
         </svg>
       </div>
       <div class="card-body">
@@ -336,16 +817,26 @@ header{max-width:720px;margin:0 auto 24px}
     <div class="type-bar"></div>
     <div class="card-top">
       <div class="card-icon">
-        <svg viewBox="0 0 72 72" fill="none">
-          <rect x="8" y="20" width="6" height="38" rx="2" fill="#C93A4A" opacity="0.15"/>
-          <line x1="14" y1="32" x2="30" y2="36" stroke="#C93A4A" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.6"/>
-          <circle cx="44" cy="22" r="6" fill="#F7DDE0" stroke="#C93A4A" stroke-width="2"/>
-          <line x1="44" y1="28" x2="44" y2="48" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="44" y1="34" x2="30" y2="36" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="44" y1="48" x2="40" y2="62" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="44" y1="48" x2="50" y2="62" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M30 36 L24 35 L26 31 Z" fill="#C93A4A" opacity="0.6"/>
-          <line x1="14" y1="63" x2="64" y2="63" stroke="#C93A4A" stroke-width="1.5" opacity="0.2"/>
+        <!-- Swiss pictogram: seated press forward -->
+        <svg viewBox="0 0 60 60" fill="none">
+          <!-- Seat back (machine) -->
+          <rect x="2" y="18" width="6" height="28" fill="#000" rx="1" opacity="0.3"/>
+          <line x1="8" y1="22" x2="8" y2="42" stroke="#000" stroke-width="2" stroke-linecap="square"/>
+          <!-- Head -->
+          <circle cx="20" cy="14" r="5" fill="#000"/>
+          <!-- Torso upright -->
+          <line x1="20" y1="19" x2="20" y2="36" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Arms pressing forward -->
+          <line x1="20" y1="26" x2="44" y2="26" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Ghost pulled-back position -->
+          <line x1="20" y1="28" x2="30" y2="28" stroke="#000" stroke-width="2" stroke-dasharray="3 3" stroke-linecap="round" opacity="0.35"/>
+          <!-- Arrow showing push direction -->
+          <path d="M44 24 L48 26 L44 28" stroke="#B22222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <!-- Legs -->
+          <line x1="20" y1="36" x2="14" y2="50" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="20" y1="36" x2="26" y2="50" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="10" y1="50" x2="18" y2="50" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="22" y1="50" x2="30" y2="50" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
         </svg>
       </div>
       <div class="card-body">
@@ -365,16 +856,26 @@ header{max-width:720px;margin:0 auto 24px}
     <div class="type-bar"></div>
     <div class="card-top">
       <div class="card-icon">
-        <svg viewBox="0 0 72 72" fill="none">
-          <rect x="58" y="20" width="6" height="40" rx="2" fill="#C93A4A" opacity="0.15"/>
-          <line x1="58" y1="36" x2="44" y2="38" stroke="#C93A4A" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.6"/>
-          <circle cx="28" cy="20" r="6" fill="#F7DDE0" stroke="#C93A4A" stroke-width="2"/>
-          <path d="M28 26 Q30 38 30 44" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-          <line x1="28" y1="34" x2="44" y2="38" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="30" y1="44" x2="24" y2="58" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="30" y1="44" x2="36" y2="58" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M44 38 L50 36 L48 42 Z" fill="#C93A4A" opacity="0.5"/>
-          <line x1="16" y1="46" x2="40" y2="46" stroke="#C93A4A" stroke-width="2" opacity="0.25" stroke-linecap="round"/>
+        <!-- Swiss pictogram: seated row, pulling handles toward torso -->
+        <svg viewBox="0 0 60 60" fill="none">
+          <!-- Machine column right -->
+          <rect x="52" y="14" width="6" height="32" fill="#000" rx="1" opacity="0.3"/>
+          <line x1="52" y1="18" x2="52" y2="42" stroke="#000" stroke-width="2" stroke-linecap="square"/>
+          <!-- Head -->
+          <circle cx="16" cy="14" r="5" fill="#000"/>
+          <!-- Torso upright -->
+          <line x1="16" y1="19" x2="16" y2="36" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Arms pulling back -->
+          <line x1="16" y1="26" x2="40" y2="26" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Ghost extended position -->
+          <line x1="40" y1="28" x2="52" y2="28" stroke="#000" stroke-width="2" stroke-dasharray="3 3" stroke-linecap="round" opacity="0.35"/>
+          <!-- Arrow showing pull direction -->
+          <path d="M40 24 L36 26 L40 28" stroke="#B22222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <!-- Legs -->
+          <line x1="16" y1="36" x2="10" y2="50" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="16" y1="36" x2="22" y2="50" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="6" y1="50" x2="14" y2="50" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="18" y1="50" x2="26" y2="50" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
         </svg>
       </div>
       <div class="card-body">
@@ -394,16 +895,26 @@ header{max-width:720px;margin:0 auto 24px}
     <div class="type-bar"></div>
     <div class="card-top">
       <div class="card-icon">
-        <svg viewBox="0 0 72 72" fill="none">
-          <rect x="10" y="28" width="52" height="28" rx="5" fill="#C93A4A" opacity="0.08" stroke="#C93A4A" stroke-width="1.5"/>
-          <circle cx="22" cy="22" r="6" fill="#F7DDE0" stroke="#C93A4A" stroke-width="2"/>
-          <line x1="22" y1="28" x2="22" y2="42" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="10" y1="28" x2="10" y2="56" stroke="#C93A4A" stroke-width="3" stroke-linecap="round" opacity="0.3"/>
-          <line x1="22" y1="42" x2="46" y2="42" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="46" y1="42" x2="56" y2="54" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="56" cy="56" r="5" fill="#C93A4A" opacity="0.25" stroke="#C93A4A" stroke-width="1.5"/>
-          <path d="M58 46 Q64 50 60 56" stroke="#C93A4A" stroke-width="1.5" stroke-dasharray="3 2" fill="none"/>
-          <path d="M60 56 L56 54 L62 52 Z" fill="#C93A4A" opacity="0.6"/>
+        <!-- Swiss pictogram: seated, lower leg curling under -->
+        <svg viewBox="0 0 60 60" fill="none">
+          <!-- Machine seat -->
+          <rect x="4" y="28" width="20" height="6" fill="#000" rx="1" opacity="0.25"/>
+          <rect x="4" y="20" width="6" height="14" fill="#000" rx="1" opacity="0.2"/>
+          <!-- Head -->
+          <circle cx="18" cy="14" r="5" fill="#000"/>
+          <!-- Torso -->
+          <line x1="18" y1="19" x2="18" y2="30" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Thigh horizontal on seat -->
+          <line x1="18" y1="30" x2="40" y2="30" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Lower leg curled under -->
+          <line x1="40" y1="30" x2="38" y2="46" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Ghost extended leg -->
+          <line x1="40" y1="32" x2="54" y2="32" stroke="#000" stroke-width="2" stroke-dasharray="3 3" stroke-linecap="round" opacity="0.35"/>
+          <!-- Roller pad on foot -->
+          <circle cx="37" cy="47" r="4" fill="#000" opacity="0.4"/>
+          <!-- Arrow showing curl direction -->
+          <path d="M46 38 Q50 36 50 40 Q50 44 46 44" stroke="#B22222" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M46 44 L44 46 L48 46" stroke="#B22222" stroke-width="2" stroke-linecap="round" fill="none"/>
         </svg>
       </div>
       <div class="card-body">
@@ -423,15 +934,24 @@ header{max-width:720px;margin:0 auto 24px}
     <div class="type-bar"></div>
     <div class="card-top">
       <div class="card-icon">
-        <svg viewBox="0 0 72 72" fill="none">
-          <rect x="6" y="30" width="18" height="30" rx="4" fill="#C93A4A" opacity="0.08" stroke="#C93A4A" stroke-width="1.5"/>
-          <circle cx="16" cy="28" r="6" fill="#F7DDE0" stroke="#C93A4A" stroke-width="2"/>
-          <line x1="14" y1="34" x2="14" y2="50" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="14" y1="44" x2="38" y2="28" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="14" y1="48" x2="40" y2="34" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="38" y1="22" x2="42" y2="38" stroke="#C93A4A" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
-          <path d="M44 20 L48 14 L52 20" stroke="#C93A4A" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
-          <line x1="48" y1="14" x2="48" y2="30" stroke="#C93A4A" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.5"/>
+        <!-- Swiss pictogram: reclined, legs pressing plate up-forward -->
+        <svg viewBox="0 0 60 60" fill="none">
+          <!-- Reclined seat / back -->
+          <line x1="2" y1="52" x2="28" y2="36" stroke="#000" stroke-width="4" stroke-linecap="round" opacity="0.25"/>
+          <!-- Head -->
+          <circle cx="6" cy="44" r="5" fill="#000"/>
+          <!-- Torso reclined -->
+          <line x1="10" y1="42" x2="26" y2="36" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Thigh -->
+          <line x1="26" y1="36" x2="40" y2="22" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Lower leg (extended) pressing plate -->
+          <line x1="40" y1="22" x2="50" y2="12" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Foot plate -->
+          <line x1="46" y1="8" x2="54" y2="16" stroke="#000" stroke-width="4" stroke-linecap="square"/>
+          <!-- Ghost bent-knee position -->
+          <line x1="40" y1="24" x2="40" y2="38" stroke="#000" stroke-width="2" stroke-dasharray="3 3" stroke-linecap="round" opacity="0.35"/>
+          <!-- Arrow -->
+          <path d="M44 10 L46 6 L48 10" stroke="#B22222" stroke-width="2" stroke-linecap="round" fill="none"/>
         </svg>
       </div>
       <div class="card-body">
@@ -457,15 +977,22 @@ header{max-width:720px;margin:0 auto 24px}
     <div class="type-bar"></div>
     <div class="card-top">
       <div class="card-icon">
-        <svg viewBox="0 0 72 72" fill="none">
-          <line x1="22" y1="36" x2="52" y2="36" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="16" cy="34" r="6" fill="#DDE8F7" stroke="#3A6AC9" stroke-width="2"/>
-          <line x1="22" y1="36" x2="8" y2="28" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="28" y1="36" x2="26" y2="50" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="50" y1="36" x2="64" y2="30" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="46" y1="36" x2="46" y2="50" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M8 28 L4 26 L7 23 Z" fill="#3A6AC9" opacity="0.7"/>
-          <path d="M64 30 L68 28 L67 33 Z" fill="#3A6AC9" opacity="0.7"/>
+        <!-- Swiss pictogram: on all-fours, opposite arm and leg extended -->
+        <svg viewBox="0 0 60 60" fill="none">
+          <!-- Head -->
+          <circle cx="10" cy="28" r="5" fill="#000"/>
+          <!-- Torso level -->
+          <line x1="14" y1="28" x2="44" y2="28" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Front arm extended forward -->
+          <line x1="16" y1="28" x2="4" y2="18" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Rear leg extended back -->
+          <line x1="42" y1="28" x2="56" y2="20" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Supporting front arm down -->
+          <line x1="24" y1="28" x2="24" y2="42" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="20" y1="42" x2="28" y2="42" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Supporting rear leg down -->
+          <line x1="38" y1="28" x2="38" y2="42" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="34" y1="42" x2="42" y2="42" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
         </svg>
       </div>
       <div class="card-body">
@@ -484,14 +1011,23 @@ header{max-width:720px;margin:0 auto 24px}
     <div class="type-bar"></div>
     <div class="card-top">
       <div class="card-icon">
-        <svg viewBox="0 0 72 72" fill="none">
-          <line x1="6" y1="58" x2="66" y2="58" stroke="#3A6AC9" stroke-width="1.5" opacity="0.2"/>
-          <path d="M12 54 L46 38" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="50" cy="36" r="7" fill="#DDE8F7" stroke="#3A6AC9" stroke-width="2"/>
-          <line x1="46" y1="40" x2="52" y2="28" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="12" cy="54" r="3" fill="#3A6AC9" opacity="0.4"/>
-          <line x1="12" y1="54" x2="20" y2="54" stroke="#3A6AC9" stroke-width="4" stroke-linecap="round"/>
-          <path d="M32 42 L30 36 L34 36 Z" fill="#3A6AC9" opacity="0.6"/>
+        <!-- Swiss pictogram: side plank, body rigid diagonal -->
+        <svg viewBox="0 0 60 60" fill="none">
+          <!-- Floor -->
+          <line x1="2" y1="56" x2="58" y2="56" stroke="#000" stroke-width="2" opacity="0.2"/>
+          <!-- Elbow on ground -->
+          <circle cx="10" cy="54" r="4" fill="#000" opacity="0.35"/>
+          <!-- Forearm -->
+          <line x1="10" y1="54" x2="14" y2="48" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+          <!-- Body rigid diagonal -->
+          <line x1="14" y1="48" x2="46" y2="32" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+          <!-- Feet stacked -->
+          <line x1="46" y1="32" x2="54" y2="54" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+          <line x1="48" y1="54" x2="58" y2="54" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+          <!-- Head -->
+          <circle cx="50" cy="28" r="6" fill="#000"/>
+          <!-- Free arm raised -->
+          <line x1="30" y1="40" x2="34" y2="26" stroke="#000" stroke-width="3" stroke-linecap="round"/>
         </svg>
       </div>
       <div class="card-body">
@@ -510,16 +1046,27 @@ header{max-width:720px;margin:0 auto 24px}
     <div class="type-bar"></div>
     <div class="card-top">
       <div class="card-icon">
-        <svg viewBox="0 0 72 72" fill="none">
-          <line x1="14" y1="13" x2="14" y2="48" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="14" cy="10" r="5" fill="#DDE8F7" stroke="#3A6AC9" stroke-width="2"/>
-          <line x1="14" y1="36" x2="6" y2="50" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="6" y1="50" x2="4" y2="62" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="14" y1="36" x2="26" y2="48" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="26" y1="48" x2="30" y2="62" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M20 42 Q24 38 22 34" stroke="#3A6AC9" stroke-width="1.5" stroke-dasharray="3 2" stroke-linecap="round" fill="none"/>
-          <path d="M22 34 L18 34 L21 30 Z" fill="#3A6AC9" opacity="0.7"/>
-          <line x1="14" y1="24" x2="8" y2="34" stroke="#3A6AC9" stroke-width="2" stroke-linecap="round"/>
+        <!-- Swiss pictogram: kneeling lunge, torso upright, hip open -->
+        <svg viewBox="0 0 60 60" fill="none">
+          <!-- Floor -->
+          <line x1="2" y1="56" x2="58" y2="56" stroke="#000" stroke-width="2" opacity="0.2"/>
+          <!-- Head -->
+          <circle cx="30" cy="8" r="5" fill="#000"/>
+          <!-- Torso upright -->
+          <line x1="30" y1="13" x2="30" y2="30" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Front leg (bent knee, foot forward) -->
+          <line x1="30" y1="30" x2="44" y2="38" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="44" y1="38" x2="52" y2="54" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="48" y1="54" x2="56" y2="54" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Rear leg (knee on ground) -->
+          <line x1="30" y1="30" x2="18" y2="38" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <line x1="18" y1="38" x2="10" y2="56" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- Arms relaxed by sides -->
+          <line x1="30" y1="18" x2="22" y2="28" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="30" y1="18" x2="38" y2="28" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Hip-open arc arrow -->
+          <path d="M24 34 Q26 26 30 24" stroke="#1A5FA8" stroke-width="2" stroke-linecap="round" fill="none" stroke-dasharray="3 2"/>
+          <path d="M24 34 L22 30 L27 31" stroke="#1A5FA8" stroke-width="1.5" stroke-linecap="round" fill="none"/>
         </svg>
       </div>
       <div class="card-body">
@@ -537,27 +1084,27 @@ header{max-width:720px;margin:0 auto 24px}
 
 <!-- ── COMPLETE ── -->
 <div class="complete-banner" id="completeBanner">
-  🏋️ All sets done — great session. Save your log below before you leave.
+  *** ALL SETS DONE — GREAT SESSION ***<br>Save your log below before you leave.
 </div>
 
 <!-- ── TIP ── -->
 <div class="tip-box">
-  <strong>Before every set:</strong> neutral spine · 20% core brace · exhale on effort. Never trade position for weight.<br>
-  <strong>⚠️ No leg extensions</strong> — leg press + curl = same result, zero shear at L4/L5.
+  <strong>BEFORE EVERY SET:</strong> neutral spine · 20% core brace · exhale on effort. Never trade position for weight.<br>
+  <strong>NO LEG EXTENSIONS</strong> — leg press + curl = same result, zero shear at L4/L5.
 </div>
 
 <!-- ── ACTIONS ── -->
 <div class="actions-wrap">
-  <button class="action-btn primary" onclick="showSaveModal()">💾 &nbsp;Save this session</button>
-  <button class="action-btn" onclick="exportImage()">📸 &nbsp;Save as image</button>
-  <button class="action-btn danger" onclick="resetAll()">↺ &nbsp;Reset</button>
+  <button class="action-btn primary" onclick="showSaveModal()">[ Save Session ]</button>
+  <button class="action-btn" onclick="exportImage()">[ Save as Image ]</button>
+  <button class="action-btn danger" onclick="resetAll()">[ Reset ]</button>
 </div>
 
 <!-- ── HISTORY ── -->
 <div class="history-section">
   <div class="history-header">
     <div class="history-title">Session History</div>
-    <button class="tbtn" onclick="clearHistory()" style="font-size:0.68rem">Clear all</button>
+    <button class="mac-btn" onclick="clearHistory()" style="font-size:14px">Clear all</button>
   </div>
   <div id="historyList"></div>
 </div>
@@ -565,11 +1112,13 @@ header{max-width:720px;margin:0 auto 24px}
 <!-- ── SAVE MODAL ── -->
 <div class="save-overlay" id="saveOverlay">
   <div class="save-modal">
-    <h3>Save session?</h3>
-    <p>This will record today's weights and reps to your history log so you can track progress over time.</p>
-    <div class="save-modal-btns">
-      <button onclick="closeSaveModal()">Cancel</button>
-      <button class="primary" onclick="confirmSave()">Save session</button>
+    <div class="save-modal-bar">SAVE SESSION</div>
+    <div class="save-modal-body">
+      <p>This will record today's weights and reps to your history log so you can track progress over time.</p>
+      <div class="save-modal-btns">
+        <button onclick="closeSaveModal()">Cancel</button>
+        <button class="primary" onclick="confirmSave()">Save</button>
+      </div>
     </div>
   </div>
 </div>
@@ -577,9 +1126,6 @@ header{max-width:720px;margin:0 auto 24px}
 <script>
 // ═══════════════════════════════════════════════════
 // EXERCISE CONFIG
-// isTimed: true  → dial shows seconds, set gets a hold timer
-// holdSecs: default seconds for the hold
-// holdPerSide: true → timer runs twice (left + right side)
 // ═══════════════════════════════════════════════════
 const EXERCISES = [
   { id:0,  name:'Cat-Cow',             sets:2, hasWeight:false, isTimed:false, targetReps:'10',     restTimer:false },
@@ -600,7 +1146,6 @@ const CIRC = 2 * Math.PI * 15;
 
 let setData = {};
 const restTimers = {};
-// holdTimers[exId][setIdx] = { interval, elapsed, total, side, state: 'idle'|'side1'|'side2'|'done' }
 const holdTimers = {};
 
 const STRENGTH_REPS = [12, 8, 5];
@@ -659,12 +1204,9 @@ function buildTrackers() {
       fields.className = 'set-fields';
 
       if (ex.isTimed) {
-        // Seconds spinner
         fields.appendChild(makeSpinner('secs', ex.id, s, setData[ex.id][s].secs, 5, 5, 300));
-        // Hold timer UI
         fields.appendChild(makeHoldTimer(ex, s));
       } else {
-        // Reps spinner
         fields.appendChild(makeSpinner('reps', ex.id, s, setData[ex.id][s].reps, 1, 1, 50));
         if (ex.hasWeight) {
           fields.appendChild(makeSpinner('weight', ex.id, s, setData[ex.id][s].weight, 5, 5, 200));
@@ -673,17 +1215,15 @@ function buildTrackers() {
 
       row.appendChild(fields);
 
-      // Check button (for timed: auto-checked when timer completes; also tappable)
       const chk = document.createElement('button');
       chk.className = 'set-check';
       chk.id = `chk-${ex.id}-${s}`;
-      chk.innerHTML = `<svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      chk.innerHTML = `<svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="white" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/></svg>`;
       chk.onclick = () => toggleSet(ex.id, s);
       row.appendChild(chk);
 
       container.appendChild(row);
 
-      // Rest timer between sets (strength only)
       if (ex.restTimer && s < ex.sets - 1) {
         const rt = document.createElement('div');
         rt.className = 'rest-timer';
@@ -697,7 +1237,7 @@ function buildTrackers() {
             </svg>
           </div>
           <div class="rest-body">
-            <div class="rest-label" id="rest-label-${ex.id}-${s}">Rest</div>
+            <div class="rest-label" id="rest-label-${ex.id}-${s}">REST</div>
             <div class="rest-count" id="rest-count-${ex.id}-${s}">0:00</div>
             <div class="rest-msg" id="rest-msg-${ex.id}-${s}">Complete set ${s+1} to start</div>
           </div>`;
@@ -707,7 +1247,6 @@ function buildTrackers() {
   });
 }
 
-// ── Hold timer widget ──
 function makeHoldTimer(ex, setIdx) {
   const wrap = document.createElement('div');
   wrap.className = 'hold-timer-wrap';
@@ -715,27 +1254,27 @@ function makeHoldTimer(ex, setIdx) {
 
   const perSide = ex.holdPerSide;
   const sideLabel = perSide
-    ? `<span class="hold-side-label" id="hold-side-${ex.id}-${setIdx}">Left side</span>`
+    ? `<span class="hold-side-label" id="hold-side-${ex.id}-${setIdx}">LEFT SIDE</span>`
     : '';
 
   wrap.innerHTML = `
     <div class="hold-arc-wrap">
-      <svg viewBox="0 0 48 48">
-        <circle class="hold-arc-bg" cx="24" cy="24" r="20"/>
+      <svg viewBox="0 0 46 46">
+        <circle class="hold-arc-bg" cx="23" cy="23" r="20"/>
         <circle class="hold-arc-fill" id="hold-arc-${ex.id}-${setIdx}"
-          cx="24" cy="24" r="20"
+          cx="23" cy="23" r="20"
           stroke-dasharray="${2*Math.PI*20}"
           stroke-dashoffset="${2*Math.PI*20}"/>
-        <text id="hold-arc-text-${ex.id}-${setIdx}" x="24" y="28"
-          text-anchor="middle" font-family="DM Mono,monospace"
-          font-size="10" fill="#1A1A1A" font-weight="500">0</text>
+        <text id="hold-arc-text-${ex.id}-${setIdx}" x="23" y="27"
+          text-anchor="middle" font-family="VT323,monospace"
+          font-size="12" fill="#000000" font-weight="400">0</text>
       </svg>
     </div>
     <div class="hold-body">
       ${sideLabel}
       <div class="hold-status" id="hold-status-${ex.id}-${setIdx}">Ready</div>
       <button class="hold-btn" id="hold-btn-${ex.id}-${setIdx}"
-        onclick="holdToggle(${ex.id},${setIdx})">▶ Start</button>
+        onclick="holdToggle(${ex.id},${setIdx})">[ Start ]</button>
     </div>`;
   return wrap;
 }
@@ -747,22 +1286,19 @@ function holdToggle(exId, setIdx) {
   const ht = holdTimers[exId][setIdx];
   const ex = EXERCISES.find(e => e.id === exId);
 
-  if (ht.state === 'done') return; // already complete
+  if (ht.state === 'done') return;
 
   if (ht.state === 'idle') {
-    // Start side 1
     ht.side = 1;
     ht.elapsed = 0;
     ht.state = 'side1';
     startHoldInterval(exId, setIdx);
   } else if (ht.state === 'side1' || ht.state === 'side2') {
-    // Pause
     clearInterval(ht.interval);
     ht.state = 'paused_' + ht.side;
     updateHoldDisplay(exId, setIdx);
-    document.getElementById(`hold-btn-${exId}-${setIdx}`).textContent = '▶ Resume';
+    document.getElementById(`hold-btn-${exId}-${setIdx}`).textContent = '[ Resume ]';
   } else if (ht.state.startsWith('paused_')) {
-    // Resume
     ht.state = ht.side === 1 ? 'side1' : 'side2';
     startHoldInterval(exId, setIdx);
   }
@@ -772,7 +1308,7 @@ function startHoldInterval(exId, setIdx) {
   const ht = holdTimers[exId][setIdx];
   const ex = EXERCISES.find(e => e.id === exId);
   const btn = document.getElementById(`hold-btn-${exId}-${setIdx}`);
-  if (btn) btn.textContent = '⏸ Pause';
+  if (btn) btn.textContent = '[ Pause ]';
 
   updateHoldDisplay(exId, setIdx);
 
@@ -785,31 +1321,25 @@ function startHoldInterval(exId, setIdx) {
       clearInterval(ht.interval);
 
       if (ex.holdPerSide && ht.side === 1) {
-        // Switch to side 2
         ht.side = 2;
         ht.elapsed = 0;
         ht.state = 'side2';
         beep('side');
-        // Brief pause so user can switch sides
-        if (btn) btn.textContent = '▶ Other side';
+        if (btn) btn.textContent = '[ Other side ]';
         clearInterval(ht.interval);
-        // Update display to show "switch sides"
         const statusEl = document.getElementById(`hold-status-${exId}-${setIdx}`);
         if (statusEl) statusEl.textContent = 'Switch sides!';
         const sideEl = document.getElementById(`hold-side-${exId}-${setIdx}`);
-        if (sideEl) sideEl.textContent = 'Right side';
-        // Reset arc for side 2
+        if (sideEl) sideEl.textContent = 'RIGHT SIDE';
         const arcEl = document.getElementById(`hold-arc-${exId}-${setIdx}`);
         const HOLD_CIRC = 2 * Math.PI * 20;
         if (arcEl) arcEl.style.strokeDashoffset = HOLD_CIRC;
         const textEl = document.getElementById(`hold-arc-text-${exId}-${setIdx}`);
         if (textEl) textEl.textContent = '0';
       } else {
-        // Both sides done (or single-side done)
         ht.state = 'done';
         beep('done');
         updateHoldDisplay(exId, setIdx);
-        // Auto-check the set
         if (!setData[exId][setIdx].done) {
           setData[exId][setIdx].done = true;
           renderChecks();
@@ -839,29 +1369,28 @@ function updateHoldDisplay(exId, setIdx) {
   const offset = HOLD_CIRC - (HOLD_CIRC * fraction);
 
   if (arcEl) arcEl.style.strokeDashoffset = offset;
-  if (textEl) textEl.textContent = remaining > 0 ? remaining : '✓';
+  if (textEl) textEl.textContent = remaining > 0 ? remaining : 'OK';
 
   if (ht.state === 'done') {
-    if (arcEl) { arcEl.style.stroke = '#2D6A4F'; arcEl.style.strokeDashoffset = 0; }
-    if (textEl) { textEl.textContent = '✓'; textEl.setAttribute('fill', '#2D6A4F'); }
-    if (statusEl) statusEl.textContent = 'Complete ✓';
-    if (btnEl) { btnEl.textContent = 'Done'; btnEl.disabled = true; btnEl.style.opacity = '0.5'; }
+    if (arcEl) { arcEl.style.stroke = '#1A5FA8'; arcEl.style.strokeDashoffset = 0; }
+    if (textEl) { textEl.textContent = 'OK'; textEl.setAttribute('fill', '#1A5FA8'); }
+    if (statusEl) statusEl.textContent = 'Complete';
+    if (btnEl) { btnEl.textContent = '[ Done ]'; btnEl.disabled = true; }
     if (wrapEl) wrapEl.classList.add('hold-done');
   } else if (ht.state === 'idle') {
-    if (arcEl) { arcEl.style.stroke = '#C93A4A'; arcEl.style.strokeDashoffset = HOLD_CIRC; }
+    if (arcEl) { arcEl.style.stroke = '#B22222'; arcEl.style.strokeDashoffset = HOLD_CIRC; }
     if (textEl) textEl.textContent = target;
     if (statusEl) statusEl.textContent = 'Ready';
   } else {
-    // active
-    if (arcEl) arcEl.style.stroke = '#C93A4A';
-    const sideStr = ex.holdPerSide ? (ht.side === 1 ? ' · Left' : ' · Right') : '';
+    if (arcEl) arcEl.style.stroke = '#B22222';
+    const sideStr = ex.holdPerSide ? (ht.side === 1 ? ' · L' : ' · R') : '';
     if (statusEl) statusEl.textContent = `${remaining}s remaining${sideStr}`;
-    if (sideEl) sideEl.textContent = ht.side === 1 ? 'Left side' : 'Right side';
+    if (sideEl) sideEl.textContent = ht.side === 1 ? 'LEFT SIDE' : 'RIGHT SIDE';
   }
 }
 
 // ─────────────────────────────────────────────────────
-// REST TIMER LOGIC (between strength sets)
+// REST TIMER LOGIC
 // ─────────────────────────────────────────────────────
 function startRestTimer(exId, setIdx) {
   const rt = restTimers[exId][setIdx];
@@ -882,7 +1411,7 @@ function startRestTimer(exId, setIdx) {
       const nextRow = document.getElementById(`row-${exId}-${setIdx+1}`);
       if (nextRow) {
         nextRow.style.transition = 'background 0.4s';
-        nextRow.style.background = '#D8EDDF';
+        nextRow.style.background = '#E4EDF5';
         setTimeout(() => { nextRow.style.background = ''; }, 1200);
       }
     }
@@ -910,11 +1439,11 @@ function updateRestDisplay(exId, setIdx) {
   const arcEl   = document.getElementById(`arc-${exId}-${setIdx}`);
   if (countEl) countEl.textContent = `${mins}:${String(secs).padStart(2,'0')}`;
   if (rt.state === 'active') {
-    if (labelEl) labelEl.textContent = 'Resting…';
+    if (labelEl) labelEl.textContent = 'RESTING...';
     if (msgEl) msgEl.textContent = `${remaining}s until next set`;
     if (arcEl) arcEl.style.strokeDashoffset = CIRC - (CIRC * elapsed / REST_DURATION);
   } else if (rt.state === 'done') {
-    if (labelEl) labelEl.textContent = '✓ Ready';
+    if (labelEl) labelEl.textContent = 'READY';
     if (msgEl) msgEl.textContent = 'Go — start next set';
     if (arcEl) arcEl.style.strokeDashoffset = 0;
   } else {
@@ -969,13 +1498,12 @@ function updateProgress() {
   document.getElementById('completeBanner').classList.toggle('show', countDoneSets() === totalSets());
 }
 
-// Seconds spinner — same as reps but field='secs', updates hold timer display
 function makeSpinner(field, exId, setIdx, defaultVal, step, min, max) {
   const wrap = document.createElement('div');
   wrap.className = 'spinner-wrap';
   const lbl = document.createElement('div');
   lbl.className = 'spinner-label';
-  lbl.textContent = field === 'reps' ? 'Reps' : field === 'secs' ? 'Seconds' : 'Weight';
+  lbl.textContent = field === 'reps' ? 'Reps' : field === 'secs' ? 'Secs' : 'KG';
   wrap.appendChild(lbl);
   const row = document.createElement('div');
   row.className = 'spinner';
@@ -997,10 +1525,9 @@ function makeSpinner(field, exId, setIdx, defaultVal, step, min, max) {
 }
 
 function adjustVal(exId, setIdx, field, delta, min, max) {
-  const key = field;
-  let current = setData[exId][setIdx][key];
+  let current = setData[exId][setIdx][field];
   current = Math.min(max, Math.max(min, current + delta));
-  setData[exId][setIdx][key] = current;
+  setData[exId][setIdx][field] = current;
   if (field === 'weight' && setIdx === 0) {
     const ex = EXERCISES.find(e => e.id === exId);
     if (ex) {
@@ -1014,7 +1541,6 @@ function adjustVal(exId, setIdx, field, delta, min, max) {
   }
   const el = document.getElementById(`${field}-${exId}-${setIdx}`);
   if (el) el.textContent = field === 'weight' ? current + 'kg' : field === 'secs' ? current + 's' : current;
-  // If secs changed, update the arc text
   if (field === 'secs') {
     const textEl = document.getElementById(`hold-arc-text-${exId}-${setIdx}`);
     const ht = holdTimers[exId] && holdTimers[exId][setIdx];
@@ -1104,7 +1630,7 @@ function confirmSave() {
   localStorage.setItem('ddd_gym_history', JSON.stringify(history));
   closeSaveModal();
   renderHistory();
-  alert('✅ Session saved!');
+  alert('Session saved!');
 }
 
 function renderHistory() {
@@ -1174,31 +1700,32 @@ function exportImage() {
   const canvas = document.createElement('canvas');
   canvas.width = W; canvas.height = H;
   const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#F0F0EB'; ctx.fillRect(0,0,W,H);
-  ctx.fillStyle = '#FFFFFF'; roundRect(ctx, PADDING-10, 20, W-(PADDING-10)*2, HEADER_H-10, 14); ctx.fill();
-  ctx.fillStyle = '#1A1A1A'; ctx.font = 'bold 26px -apple-system,sans-serif';
-  ctx.fillText('Gym Session — DDD Programme', PADDING, 58);
-  ctx.fillStyle = '#7A7A72'; ctx.font = '15px -apple-system,sans-serif';
+  ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle = '#000000'; ctx.lineWidth = 2; ctx.strokeRect(10,10,W-20,H-20);
+  ctx.fillStyle = '#000000'; ctx.fillRect(10,10,W-20,40);
+  ctx.fillStyle = '#FFFFFF'; ctx.font = 'bold 16px monospace';
+  ctx.fillText('GYM SESSION — DDD PROGRAMME', 24, 36);
+  ctx.fillStyle = '#000000'; ctx.font = '14px monospace';
   ctx.fillText(dateStr + '  ·  ' + timeStr, PADDING, 82);
   const doneSets = EXERCISES.reduce((n,ex) => n + setData[ex.id].filter(s=>s.done).length, 0);
   const totalSetCount = EXERCISES.reduce((n,ex) => n + ex.sets, 0);
-  ctx.fillStyle = '#2D6A4F'; ctx.font = 'bold 15px -apple-system,sans-serif';
-  ctx.fillText(`${doneSets} / ${totalSetCount} sets completed`, PADDING, 106);
+  ctx.fillStyle = '#000000'; ctx.font = 'bold 14px monospace';
+  ctx.fillText(`${doneSets} / ${totalSetCount} sets completed`, PADDING, 104);
   let y = HEADER_H + 14;
   rows.forEach((row, idx) => {
-    ctx.fillStyle = idx%2===0 ? '#FFFFFF' : '#F7F7F3';
-    roundRect(ctx, PADDING-10, y-22, W-(PADDING-10)*2, ROW_H, 8); ctx.fill();
-    ctx.fillStyle = row.done ? '#2D6A4F' : '#C0BFB8';
-    ctx.font = 'bold 15px -apple-system,sans-serif';
-    ctx.fillText(row.done ? '✓' : '–', PADDING, y);
-    if (row.exName) { ctx.fillStyle = '#1A1A1A'; ctx.font = 'bold 14px -apple-system,sans-serif'; ctx.fillText(row.exName, PADDING+22, y); }
-    ctx.fillStyle = '#7A7A72'; ctx.font = '13px monospace';
+    ctx.fillStyle = idx%2===0 ? '#FFFFFF' : '#EEEEEE';
+    ctx.fillRect(PADDING-10, y-22, W-(PADDING-10)*2, ROW_H);
+    ctx.fillStyle = row.done ? '#000000' : '#AAAAAA';
+    ctx.font = 'bold 15px monospace';
+    ctx.fillText(row.done ? '[x]' : '[ ]', PADDING, y);
+    if (row.exName) { ctx.fillStyle = '#000000'; ctx.font = 'bold 13px monospace'; ctx.fillText(row.exName, PADDING+36, y); }
+    ctx.fillStyle = '#555555'; ctx.font = '13px monospace';
     const sw = ctx.measureText(row.setLabel).width;
     ctx.fillText(row.setLabel, W-PADDING-sw-10, y);
     y += ROW_H;
   });
-  ctx.fillStyle = '#7A7A72'; ctx.font = '12px -apple-system,sans-serif';
-  ctx.fillText('DDD Training Programme · Neutral spine always · Progress is earned one set at a time.', PADDING, y+30);
+  ctx.fillStyle = '#555555'; ctx.font = '11px monospace';
+  ctx.fillText('DDD Training Programme · Neutral spine always · Progress is earned one set at a time.', PADDING, y+28);
   const fname = `gym-${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}.png`;
   try {
     const link = document.createElement('a');
@@ -1210,12 +1737,8 @@ function exportImage() {
   }
 }
 
-function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();}
-
 // ─────────────────────────────────────────────────────
-// AUDIO BEEP — works on iPhone PWA (vibrate API disabled on iOS)
-// double-beep: two short tones, 200ms apart
-// type: 'rest' (low tone) | 'side' (mid tone) | 'done' (high double)
+// AUDIO BEEP
 // ─────────────────────────────────────────────────────
 let _audioCtx = null;
 function getAudioCtx() {
@@ -1226,9 +1749,7 @@ function getAudioCtx() {
 function beep(type) {
   try {
     const ctx = getAudioCtx();
-    // Resume context if suspended (iOS requires user gesture first)
     if (ctx.state === 'suspended') ctx.resume();
-
     const configs = {
       rest: [{ freq:520, dur:0.12, t:0 }, { freq:520, dur:0.12, t:0.2 }],
       side: [{ freq:660, dur:0.12, t:0 }, { freq:880, dur:0.12, t:0.2 }],
@@ -1236,7 +1757,6 @@ function beep(type) {
     };
     const tones = configs[type] || configs.done;
     const now = ctx.currentTime;
-
     tones.forEach(({ freq, dur, t }) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -1250,12 +1770,9 @@ function beep(type) {
       osc.start(now + t);
       osc.stop(now + t + dur + 0.05);
     });
-  } catch(e) {
-    // Silent fallback — audio not available
-  }
+  } catch(e) {}
 }
 
-// Unlock AudioContext on first user touch (iOS requirement)
 document.addEventListener('touchstart', () => {
   try { getAudioCtx().resume(); } catch(e) {}
 }, { once: true });
