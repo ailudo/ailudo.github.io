@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-20T02:39:23+01:00",
+ "updated": "2026-10-20T12:06:09+01:00",
  "venues": [
   {
    "id": "louvre",
@@ -1226,6 +1226,147 @@
    "discipline": "Design & architecture",
    "note": "Dates not confirmed on the venue page.",
    "url": "https://madparis.fr/Paris-Kyoto-Paris-Quatre-designers-de-retour-du-Japon"
+  },
+  {
+   "id": "mam-himid",
+   "venue": "mam",
+   "short": "Lubaina Himid: A Fashionable Marriage",
+   "title": "A Fashionable Marriage (Mariage à la mode)",
+   "artists": "Lubaina Himid",
+   "start": "2026-10-23",
+   "end": "2027-01-10",
+   "admission": "check",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.mam.paris.fr/fr/expositions/exposition-lubaina-himid",
+   "note": "Free entry to the museum collections."
+  },
+  {
+   "id": "ca-hains",
+   "venue": "cartier",
+   "short": "Raymond Hains: Du Grand Louvre aux 3 Cartier",
+   "title": "Raymond Hains : l’œuvre en chantier. Du Grand Louvre aux 3 Cartier",
+   "artists": "Raymond Hains",
+   "start": "2026-06-09",
+   "end": "2026-10-26",
+   "admission": "check",
+   "discipline": "Photography & moving image",
+   "url": "https://www.fondationcartier.com/programme/exposition/raymond-hains-l-oeuvre-en-chantier-du-grand-louvre-aux-3-cartier-place-palais-royal",
+   "note": "Outdoor installation at Place du Palais-Royal; the Galerie Valois part ended 4 October."
+  },
+  {
+   "id": "ca-barnor",
+   "venue": "cartier",
+   "short": "James Barnor: Style in the viewfinder",
+   "title": "James Barnor, Le Style dans le viseur",
+   "artists": "James Barnor",
+   "start": "2026-10-19",
+   "end": "2027-03-31",
+   "admission": "check",
+   "discipline": "Photography & moving image",
+   "url": "https://www.fondationcartier.com/programme/exposition/james-barnor-le-style-dans-le-viseur",
+   "note": "Shown at Galerie Valois."
+  },
+  {
+   "id": "or-celmins",
+   "venue": "orangerie",
+   "short": "Vija Celmins",
+   "title": "Vija Celmins",
+   "artists": "Vija Celmins",
+   "start": "2026-09-30",
+   "end": "2027-02-15",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.musee-orangerie.fr/fr/agenda/expositions/vija-celmins",
+   "price": "€12.50"
+  },
+  {
+   "id": "ma-soriano",
+   "venue": "marmottan",
+   "short": "Peter Soriano: Mapping Mount Kolsås",
+   "title": "MONET / SORIANO : Cartographie du Mont Kolsås",
+   "artists": "Peter Soriano",
+   "start": "2026-09-24",
+   "end": "2027-01-31",
+   "admission": "check",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.marmottan.fr/expositions/monet-soriano/",
+   "note": "A display within the museum."
+  },
+  {
+   "id": "mep-traore",
+   "venue": "mep",
+   "short": "Nanténé Traoré: pays des merveilles",
+   "title": "Nanténé Traoré : pays des merveilles",
+   "artists": "Nanténé Traoré",
+   "start": "2026-09-30",
+   "end": "2026-11-29",
+   "admission": "check",
+   "discipline": "Photography & moving image",
+   "url": "https://www.mep-fr.org/event/nantene-traore-pays-des-merveilles/",
+   "note": "Shown in the Studio."
+  },
+  {
+   "id": "mep-vetement",
+   "venue": "mep",
+   "short": "Everyday clothing",
+   "title": "Vêtement du quotidien",
+   "artists": "",
+   "start": "2026-09-30",
+   "end": "2027-01-17",
+   "admission": "check",
+   "discipline": "Photography & moving image",
+   "url": "https://www.mep-fr.org/event/vetement-du-quotidien/",
+   "note": "Shown in the Petite Galerie."
+  },
+  {
+   "id": "ce-hashi",
+   "venue": "cernuschi",
+   "short": "Matsutani Takesada: Hashigakari",
+   "title": "Hashigakari",
+   "artists": "Matsutani Takesada",
+   "start": "2026-09-08",
+   "end": "2026-12-13",
+   "admission": "free",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.cernuschi.paris.fr/fr/expositions/hashigakari",
+   "note": "A display of three donated works in the painting room."
+  },
+  {
+   "id": "ce-shim",
+   "venue": "cernuschi",
+   "short": "Shim Moon Seup: Perspective d’argile",
+   "title": "Perspective d’argile",
+   "artists": "Shim Moon Seup",
+   "start": "2026-10-20",
+   "end": "2026-12-13",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.cernuschi.paris.fr/fr/expositions/perspective-dargile",
+   "note": "Clay works installed in the Buddha room among Han and Tang funerary terracottas."
+  },
+  {
+   "id": "ima-dray",
+   "venue": "ima",
+   "short": "Joss Dray: Palestine photographed",
+   "title": "La Palestine photographiée par Joss Dray",
+   "artists": "Joss Dray",
+   "start": "2026-09-19",
+   "end": "2026-11-01",
+   "admission": "check",
+   "discipline": "Photography & moving image",
+   "url": "https://www.imarabe.org/fr/agenda/expositions-musee/palestine-photographiee-par-joss-dray"
+  },
+  {
+   "id": "ima-blida",
+   "venue": "ima",
+   "short": "Art therapy at the Blida-Joinville psychiatric hospital, 1960s",
+   "title": "Tenter l’art pour soigner : À l’hôpital psychiatrique de Blida-Joinville dans les années 1960",
+   "artists": "",
+   "start": "2025-10-22",
+   "end": "2027-01-03",
+   "admission": "check",
+   "discipline": "History & collections",
+   "url": "https://www.imarabe.org/fr/agenda/expositions-musee/tenter-art-pour-soigner-hopital-psychiatrique-blida-joinville-dans-les"
   }
  ]
 }
