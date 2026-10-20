@@ -117,6 +117,30 @@ const PFX = ['', '~', '.', '*'];
 const BASE = location.origin + location.pathname;
 const $app = document.getElementById('app');
 
+/* ---------- online saving (Cloudflare Worker) ----------
+   Leave API empty to run link-only: the whole game travels in each text message.
+   Set it to the Worker's address to save games online as well. */
+const API = '';
+async function api(path, body){
+  if (!API) return null;
+  const ctl = new AbortController(); const t = setTimeout(()=>ctl.abort(), 8000);
+  try {
+    const r = await fetch(API.replace(/\/$/,'') + path, body ? { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body), signal:ctl.signal } : { signal:ctl.signal, cache:'no-store' });
+    const data = await r.json().catch(()=>({}));
+    return { ok:r.ok, status:r.status, data };
+  } catch { return null; } finally { clearTimeout(t); }
+}
+function adopt(g, sg){
+  // take the server's copy as the truth; returns how many new moves arrived
+  const before = g.moves.length;
+  const extends_ = sg.moves.length > before && g.moves.every((m,i)=>m===sg.moves[i]);
+  g.name = sg.name || g.name; g.w = sg.w; g.b = sg.b; g.resign = sg.resign || ''; g.moves = sg.moves.slice(); g.online = true;
+  if (extends_) g.sent = g.moves.length;
+  if (g.sent > g.moves.length) g.sent = g.moves.length;
+  return extends_ ? sg.moves.length - before : 0;
+}
+let poll = null;
+
 const I = {
   back:'<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>',
   arrow:'<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
@@ -272,6 +296,7 @@ function resultOf(g, chess){
 /* ---------- routing ---------- */
 window.addEventListener('hashchange', route);
 function route(){
+  if (poll){ clearInterval(poll); poll = null; }
   const h = location.hash.slice(1);
   if (h === 'new') return viewNew();
   if (h.includes('id=')) return openFromLink(new URLSearchParams(h));
@@ -281,8 +306,15 @@ function route(){
 function go(h){ if (location.hash === '#'+h) route(); else location.hash = h; }
 
 /* ---------- home ---------- */
-function viewHome(){
+function viewHome(refresh = true){
   const list = Object.values(games()).sort((a,b)=>b.updated-a.updated);
+  if (refresh && API){
+    const online = list.filter(g => g.online);
+    if (online.length) Promise.all(online.map(async g => {
+      const r = await api(`/games/${g.id}`);
+      if (r && r.ok){ const cur = games()[g.id]; if (cur){ adopt(cur, r.data.game); saveGame(cur); } }
+    })).then(() => { const h = location.hash.slice(1); if (!h) viewHome(false); });
+  }
   const rows = list.map(g => {
     const { chess } = replay(g.moves);
     const res = resultOf(g, chess);
@@ -338,26 +370,59 @@ function viewNew(){
   const $n = document.getElementById('gname'); $n.textContent = name;
   document.getElementById('reroll').onclick = () => { name = randomName(); $n.textContent = name; feedback('tap'); };
   $app.querySelectorAll('.seg button').forEach(b => b.onclick = () => { side = b.dataset.s; $app.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x===b)); });
-  const create = () => {
+  const create = async (btn) => {
     const me = document.getElementById('me').value.trim();
     if (!me){ document.getElementById('me').focus(); toast('Add your name first'); return null; }
     prefs.name = me; savePrefs();
     const colour = side==='r' ? (Math.random()<.5?'w':'b') : side;
     const g = { id:newId(), name, w: colour==='w'?me:'', b: colour==='b'?me:'', me: colour, moves:[], sent:0, phone: document.getElementById('ph').value.replace(/[^\d+]/g,''), created:Date.now() };
+    if (API){
+      btn.disabled = true;
+      const r = await api('/games', { name, side: colour, player: me });
+      btn.disabled = false;
+      if (r && r.ok){ adopt(g, r.data.game); g.id = r.data.game.id; g.key = r.data.key; g.inviteKey = r.data.inviteKey; }
+      else toast("Couldn't reach the server — this game will travel by text only");
+    }
     saveGame(g);
-    const msg = `${name} — ${me} has challenged you to chess on Zug. You play ${colourName(other(colour))}. Join here: ${gameLink(g)}`;
-    return { g, msg };
+    return { g, msg: inviteText(g) };
   };
-  document.getElementById('go').onclick = () => { const r = create(); if (!r) return; location.href = smsHref(r.msg, r.g.phone); setTimeout(()=>go('g/'+r.g.id), 400); };
-  document.getElementById('other').onclick = async () => { const r = create(); if (!r) return; await shareOther(r.msg); go('g/'+r.g.id); };
+  document.getElementById('go').onclick = async e => { const r = await create(e.currentTarget); if (!r) return; location.href = smsHref(r.msg, r.g.phone); setTimeout(()=>go('g/'+r.g.id), 400); };
+  document.getElementById('other').onclick = async e => { const r = await create(e.currentTarget); if (!r) return; await shareOther(r.msg); go('g/'+r.g.id); };
+}
+function inviteText(g){
+  const me = g.me==='w' ? g.w : g.b;
+  return `${g.name} — ${me} has challenged you to chess on Zug. You play ${colourName(other(g.me))}. Join here: ${gameLink(g, g.inviteKey ? { k:g.inviteKey } : {})}`;
 }
 
 /* ---------- opening a link ---------- */
-function openFromLink(p){
+async function openFromLink(p){
   const id = p.get('id'); if (!id) return viewHome();
+  const key = p.get('k') || '';
+  const spectate = p.get('v') === '1';
+
+  // Online first: the server's copy is the truth when it can be reached.
+  if (API){
+    $app.innerHTML = `<main class="page"><p class="muted">Opening game…</p></main>`;
+    const r = await api(`/games/${encodeURIComponent(id)}${key ? '?key='+encodeURIComponent(key) : ''}`);
+    if (r && r.ok){
+      const sg = r.data.game, side = r.data.side;
+      const local = games()[id];
+      const g = local ? { ...local } : { id, sent: sg.moves.length, me: null, moves: [] };
+      const fresh = adopt(g, sg);
+      if (!local) g.sent = g.moves.length;
+      if (side && !spectate){ g.key = key; g.me = side; }
+      history.replaceState(null, '', '#g/'+id);
+      if (g.me === 'w' || g.me === 'b'){
+        if (!g[g.me]){ return viewJoin(g, g.me); }
+        saveGame(g); return viewGame(g, { arrived: local ? fresh : (g.moves.length ? 1 : 0) });
+      }
+      if (spectate || (sg.w && sg.b)){ g.me = 'spec'; saveGame(g); return viewGame(g, { arrived: g.moves.length ? 1 : 0 }); }
+      // no key and someone missing: an old-style invite; fall through to the link copy
+    }
+  }
+
   const linkMoves = decodeMoves(p.get('m') || '');
   const local = games()[id];
-  const spectate = p.get('v') === '1';
   const incoming = { id, name: p.get('n') || 'Untitled game', w: p.get('w') || '', b: p.get('b') || '', moves: linkMoves, resign: p.get('r') || '' };
 
   if (local){
@@ -393,13 +458,19 @@ function viewJoin(g, colour){
     <div class="field"><label class="label" for="nm">Your name</label><input id="nm" maxlength="24" autocomplete="given-name" value="${esc(prefs.name)}" placeholder="Your name"></div>
     <button class="primary" id="join"><span>Join and start</span>${I.arrow}</button>
     <button class="textbtn" id="watch" style="align-self:flex-start">Just watch instead</button>
-    <p class="muted" style="margin:auto 0 0;font-size:13px;line-height:1.45">No app, no account. The game lives in the link — keep this text thread and you keep the game.</p>
+    <p class="muted" style="margin:auto 0 0;font-size:13px;line-height:1.45">No app, no account. ${g.online ? 'The game is saved online — this link is yours, so keep the text.' : 'The game lives in the link — keep this text thread and you keep the game.'}</p>
   </main>`;
-  document.getElementById('join').onclick = () => {
+  document.getElementById('join').onclick = async e => {
     const nm = document.getElementById('nm').value.trim();
     if (!nm){ document.getElementById('nm').focus(); toast('Add your name first'); return; }
     prefs.name = nm; savePrefs(); audio(); feedback('tap');
-    g[colour] = nm; g.me = colour; saveGame(g);
+    g[colour] = nm; g.me = colour;
+    if (g.online && g.key){
+      e.currentTarget.disabled = true;
+      const r = await api(`/games/${g.id}/join`, { key:g.key, player:nm });
+      if (r && r.ok) adopt(g, r.data.game); else toast("Couldn't reach the server — playing by text for now");
+    }
+    saveGame(g);
     history.replaceState(null,'','#g/'+g.id); viewGame(g, { arrived: g.moves.length ? 1 : 0 });
   };
   document.getElementById('watch').onclick = () => { g.me = 'spec'; saveGame(g); history.replaceState(null,'','#g/'+g.id); viewGame(g); };
@@ -438,7 +509,7 @@ function viewGame(g, opts = {}){
     const res = resultOf(g, full.chess);
     const live = view === g.moves.length;
     const myTurn = !spec && live && !res && full.chess.turn() === g.me;
-    const unsent = !spec && g.moves.length > (g.sent||0);
+    const unsent = !spec && g.moves.length > (g.sent||0) && (res || full.chess.turn() !== g.me);
     const last = hist[view-1];
     const board = chess.board();
     const kingInCheck = chess.inCheck() ? findKing(board, chess.turn()) : null;
@@ -488,7 +559,7 @@ function viewGame(g, opts = {}){
         ${res ? `<p style="margin-top:6px"><strong>${res.score}</strong> · ${esc(res.text)}</p>` : ''}
         <p class="muted" style="font-size:13px">Tap a move to jump there. Swipe the board left or right to step.</p></div>`;
     } else if (spec){
-      panel = `<div class="panel"><p>${res ? `<strong>${res.score}</strong> · ${esc(res.text)}.` : `You're watching. This is the position when the link was sent — ask for a new link to see more.`}</p>
+      panel = `<div class="panel"><p>${res ? `<strong>${res.score}</strong> · ${esc(res.text)}.` : `${g.online ? "You're watching live — new moves appear by themselves." : "You're watching. This is the position when the link was sent — ask for a new link to see more."}`}</p>
         <button class="secondary" id="log">Move log</button></div>`;
     } else if (res){
       panel = `<div class="panel"><p><strong>${res.score} · ${esc(res.text)}.</strong> ${unsent ? `Send the final position to ${esc(oppName)}.` : ''}</p>
@@ -497,8 +568,8 @@ function viewGame(g, opts = {}){
         ${unsent ? `<button class="textbtn" id="sendother" style="align-self:flex-start">Send another way</button>` : ''}</div>`;
     } else if (unsent){
       const lm = full.hist[full.hist.length-1];
-      panel = `<div class="panel"><p><strong>You played ${esc(moveLabel(full.hist, full.hist.length-1))}.</strong> ${esc(oppName.charAt(0).toUpperCase()+oppName.slice(1))} won't see it until you send it.</p>
-        <button class="primary red" id="send"><span>Send move to ${esc(oppName)} by SMS</span>${I.arrow}</button>
+      panel = `<div class="panel"><p><strong>You played ${esc(moveLabel(full.hist, full.hist.length-1))}.</strong> ${g.online && !g.offline ? `Saved — send ${esc(oppName)} a text so they know it's their turn.` : `${esc(oppName.charAt(0).toUpperCase()+oppName.slice(1))} won't see it until you send it.`}</p>
+        <button class="primary red" id="send"><span>${g.online && !g.offline ? `Text ${esc(oppName)}` : `Send move to ${esc(oppName)} by SMS`}</span>${I.arrow}</button>
         <div class="row2"><button class="secondary" id="undo">Take back</button><button class="secondary" id="sendother">Send another way</button></div></div>`;
     } else if (myTurn){
       const lm = full.hist[full.hist.length-1];
@@ -507,7 +578,7 @@ function viewGame(g, opts = {}){
         <button class="textbtn" id="resign" style="align-self:flex-start">Resign</button></div>`;
     } else {
       const invited = !g.w || !g.b;
-      panel = `<div class="panel"><p>${invited ? `<strong>Waiting for ${esc(oppName)} to join.</strong> Their first move will arrive as a text — just tap the link.` : `<strong>Waiting for ${esc(oppName)}.</strong> When their text arrives, tap the link to see their move.`}</p>
+      panel = `<div class="panel"><p>${invited ? `<strong>Waiting for ${esc(oppName)} to join.</strong> ${g.online ? 'You will see them join here.' : 'Their first move will arrive as a text — just tap the link.'}` : `<strong>Waiting for ${esc(oppName)}.</strong> ${g.online ? 'Their move will appear here by itself, and they can text you too.' : 'When their text arrives, tap the link to see their move.'}`}</p>
         ${invited ? `<button class="secondary" id="reinvite">Send the invite again</button>` : ''}
         <div class="row2"><button class="secondary" id="log">Move log</button><button class="secondary" id="spec">Invite spectators</button></div>
         <button class="textbtn" id="resign" style="align-self:flex-start">Resign</button></div>`;
@@ -555,10 +626,41 @@ function viewGame(g, opts = {}){
     const { chess } = replay(g.moves);
     let mv;
     try { mv = chess.move({ from, to, promotion }); } catch { return; }
+    const expect = g.moves.length;
     g.moves = [...g.moves, lan(mv)]; saveGame(g);
     view = g.moves.length; sel=null; targets=[]; promo=null;
     feedbackFor(mv, chess);
     render();
+    if (g.online && g.key) online('move', { move: lan(mv), expect });
+  }
+
+  async function online(action, body){
+    g.saving = true;
+    const r = await api(`/games/${g.id}/${action}`, { key: g.key, ...body });
+    g.saving = false;
+    if (r && r.ok){ adopt(g, r.data.game); g.offline = false; }
+    else if (r && r.status === 409 && r.data.game){ adopt(g, r.data.game); toast('The game had moved on — showing the latest position'); }
+    else if (r && r.status === 403){ g.key = ''; toast('This phone can only watch this game'); }
+    else { g.offline = true; toast("Couldn't save online — the text link still carries your move"); }
+    saveGame(g); view = Math.min(view, g.moves.length); if (mode==='live') view = g.moves.length; render();
+  }
+
+  function startPolling(){
+    if (!g.online || poll) return;
+    poll = setInterval(async () => {
+      if (document.visibilityState !== 'visible' || g.saving || promo) return;
+      const r = await api(`/games/${g.id}`);
+      if (!r || !r.ok) return;
+      const sg = r.data.game;
+      const changed = sg.moves.join() !== g.moves.join() || sg.resign !== (g.resign||'') || sg.w !== g.w || sg.b !== g.b;
+      if (!changed) return;
+      const wasLive = view === g.moves.length;
+      const fresh = adopt(g, sg);
+      saveGame(g);
+      if (wasLive){ view = g.moves.length; sel = null; targets = []; }
+      render();
+      if (fresh){ const { chess, hist } = replay(g.moves); feedbackFor(hist[hist.length-1], chess); }
+    }, 5000);
   }
 
   function sendMessage(){
@@ -566,10 +668,11 @@ function viewGame(g, opts = {}){
     const res = resultOf(g, full.chess);
     const me = g.me==='w' ? g.w : g.b;
     const lm = full.hist.length ? moveLabel(full.hist, full.hist.length-1) : '';
+    const link = gameLink(g, g.inviteKey ? { k:g.inviteKey } : {});
     let msg;
-    if (g.resign === g.me) msg = `${g.name} — ${me} resigned. Good game! ${gameLink(g)}`;
-    else if (res) msg = `${g.name} — ${me} played ${lm}. ${res.text}! ${res.score}. ${gameLink(g)}`;
-    else msg = `${g.name} — ${me} played ${lm}. Your move: ${gameLink(g)}`;
+    if (g.resign === g.me) msg = `${g.name} — ${me} resigned. Good game! ${link}`;
+    else if (res) msg = `${g.name} — ${me} played ${lm}. ${res.text}! ${res.score}. ${link}`;
+    else msg = `${g.name} — ${me} played ${lm}. Your move: ${link}`;
     return msg;
   }
   function markSent(){ g.sent = g.moves.length; saveGame(g); }
@@ -612,9 +715,9 @@ function viewGame(g, opts = {}){
     on('spec', specLink); on('spectop', specLink);
     on('send', ()=>{ const m = sendMessage(); markSent(); location.href = smsHref(m, g.phone||''); setTimeout(render, 400); });
     on('sendother', async ()=>{ const m = sendMessage(); await shareOther(m); markSent(); render(); });
-    on('undo', ()=>{ g.moves = g.moves.slice(0,-1); if (g.resign===g.me) g.resign=''; saveGame(g); view=g.moves.length; feedback('tap'); render(); });
-    on('reinvite', ()=>{ const me = g.me==='w'?g.w:g.b; const msg = `${g.name} — ${me} has challenged you to chess on Zug. You play ${colourName(opp)}. Join here: ${gameLink(g)}`; location.href = smsHref(msg, g.phone||''); });
-    on('resign', ()=>{ if (!confirm('Resign this game?')) return; g.resign = g.me; saveGame(g); feedback('end');
+    on('undo', ()=>{ const expect = g.moves.length; g.moves = g.moves.slice(0,-1); if (g.sent > g.moves.length) g.sent = g.moves.length; saveGame(g); view=g.moves.length; feedback('tap'); render(); if (g.online && g.key) online('undo', { expect }); });
+    on('reinvite', ()=>{ location.href = smsHref(inviteText(g), g.phone||''); });
+    on('resign', ()=>{ if (!confirm('Resign this game?')) return; g.resign = g.me; saveGame(g); feedback('end'); if (g.online && g.key) online('resign', {});
       const m = sendMessage(); g.sent = g.moves.length; saveGame(g);
       if (confirm(`Tell ${oppName} by SMS?`)) location.href = smsHref(m, g.phone||''); render(); });
   }
@@ -628,6 +731,7 @@ function viewGame(g, opts = {}){
   };
 
   render();
+  startPolling();
   // replay the move that just arrived by text
   if (opts.arrived && g.moves.length){
     const once = () => { const { chess, hist } = replay(g.moves); feedbackFor(hist[hist.length-1], chess); };
