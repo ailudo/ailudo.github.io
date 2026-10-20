@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gym Session — DDD Programme</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F0F0EB;--surface:#FFFFFF;--surface2:#F7F7F3;--border:#E0DFD8;
+  --text:#1A1A1A;--text-muted:#7A7A72;
+  --accent:#2D6A4F;--accent-light:#D8EDDF;
+  --done-bg:#EAF4EE;--done-border:#A8D5B5;
+  --warmup:#8B5CF6;--warmup-light:#EDE9FE;
+  --strength:#C93A4A;--strength-light:#F7DDE0;
+  --rehab:#3A6AC9;--rehab-light:#DDE8F7;
+  --timer-warn:#C97B3A;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px 14px 60px}
+
+/* ── HEADER ── */
+header{max-width:720px;margin:0 auto 24px}
+.header-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.title-block h1{font-size:1.5rem;font-weight:600;letter-spacing:-0.03em;line-height:1.2}
+.title-block p{color:var(--text-muted);font-size:0.82rem;margin-top:3px}
+.date-chip{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--text-muted);background:var(--surface);border:1.5px solid var(--border);padding:3px 10px;border-radius:20px;margin-top:6px;display:inline-block}
+
+.timer-wrap{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0}
+.timer-display{font-family:'DM Mono',monospace;font-size:1.45rem;font-weight:500;color:var(--accent);letter-spacing:0.04em;line-height:1}
+.timer-display.warn{color:var(--timer-warn)}
+.timer-label{font-size:0.65rem;font-family:'DM Mono',monospace;letter-spacing:0.08em;color:var(--text-muted);text-transform:uppercase}
+.timer-btns{display:flex;gap:5px}
+.tbtn{font-family:'DM Sans',sans-serif;font-size:0.7rem;font-weight:500;padding:4px 9px;border-radius:6px;border:1.5px solid var(--border);background:var(--surface);cursor:pointer;color:var(--text-muted);transition:all 0.15s}
+.tbtn:hover{border-color:var(--accent);color:var(--accent)}
+.tbtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.progress-wrap{margin-top:16px;display:flex;align-items:center;gap:10px}
+.prog-track{flex:1;height:6px;background:var(--border);border-radius:10px;overflow:hidden}
+.prog-fill{height:100%;background:var(--accent);border-radius:10px;transition:width 0.4s ease;width:0%}
+.prog-count{font-family:'DM Mono',monospace;font-size:0.73rem;color:var(--text-muted);white-space:nowrap}
+
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:0.73rem;color:var(--text-muted)}
+.ldot{width:9px;height:9px;border-radius:50%}
+
+/* ── SECTION LABEL ── */
+.section-label{max-width:720px;margin:26px auto 10px;font-size:0.68rem;font-family:'DM Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);display:flex;align-items:center;gap:10px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.section-time{font-size:0.66rem;font-family:'DM Mono',monospace;color:var(--text-muted);background:var(--surface2);border:1px solid var(--border);padding:2px 8px;border-radius:10px;white-space:nowrap}
+
+/* ── CARD ── */
+.cards{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:14px 16px 14px 20px;position:relative;overflow:hidden;transition:border-color 0.2s}
+.card:hover{border-color:#C0BFB8}
+.card.all-done{background:var(--done-bg);border-color:var(--done-border)}
+.card.all-done .ex-name{text-decoration:line-through;color:var(--text-muted)}
+
+.type-bar{position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:14px 0 0 14px}
+.type-warmup .type-bar{background:var(--warmup)}
+.type-strength .type-bar{background:var(--strength)}
+.type-rehab .type-bar{background:var(--rehab)}
+
+.card-top{display:flex;gap:14px;align-items:flex-start}
+.card-icon{flex-shrink:0;width:64px;height:64px}
+.card-icon svg{width:64px;height:64px}
+.card-body{flex:1;min-width:0}
+.ex-name{font-size:0.97rem;font-weight:600;letter-spacing:-0.01em;margin-bottom:2px}
+.ddd-flag{display:inline-block;font-size:0.62rem;font-family:'DM Mono',monospace;letter-spacing:0.04em;padding:2px 7px;border-radius:10px;background:var(--accent-light);color:var(--accent);margin-bottom:6px;font-weight:500}
+.ex-note{font-size:0.75rem;color:var(--text-muted);line-height:1.4;margin-bottom:8px}
+.target-pills{display:flex;gap:5px;flex-wrap:wrap}
+.tpill{font-family:'DM Mono',monospace;font-size:0.7rem;padding:3px 9px;border-radius:20px;border:1.5px solid var(--border);color:var(--text-muted);background:var(--surface2)}
+
+/* ── SET TRACKER ── */
+.sets-tracker{margin-top:12px;border-top:1px solid var(--border);padding-top:12px;display:flex;flex-direction:column;gap:8px}
+.set-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.set-label{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--text-muted);width:38px;flex-shrink:0}
+.set-fields{display:flex;gap:8px;align-items:center;flex:1;flex-wrap:wrap}
+
+/* Spinners */
+.spinner-wrap{display:flex;flex-direction:column;align-items:center;gap:2px}
+.spinner-label{font-size:0.6rem;font-family:'DM Mono',monospace;color:var(--text-muted);letter-spacing:0.05em;text-transform:uppercase}
+.spinner{display:flex;align-items:center;gap:0}
+.spin-btn{width:28px;height:28px;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer;font-size:0.9rem;line-height:1;display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:all 0.1s;flex-shrink:0}
+.spin-btn:first-child{border-radius:6px 0 0 6px}
+.spin-btn:last-child{border-radius:0 6px 6px 0}
+.spin-btn:hover{background:var(--accent-light);color:var(--accent);border-color:var(--accent)}
+.spin-val{font-family:'DM Mono',monospace;font-size:0.82rem;font-weight:500;min-width:36px;height:28px;border-top:1.5px solid var(--border);border-bottom:1.5px solid var(--border);border-left:none;border-right:none;background:var(--surface);text-align:center;line-height:28px;color:var(--text)}
+
+/* Set check */
+.set-check{width:26px;height:26px;border-radius:50%;border:2px solid var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;margin-left:auto}
+.set-check:hover{border-color:var(--accent);background:var(--accent-light)}
+.set-check.checked{background:var(--accent);border-color:var(--accent)}
+.set-check svg{width:13px;height:13px}
+
+/* ── REST TIMER ── */
+.rest-timer{display:none;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface2);margin-top:2px;transition:background 0.3s,border-color 0.3s}
+.rest-timer.active{display:flex;border-color:#F5C0C6;background:#FEF2F3}
+.rest-timer.done{display:flex;border-color:#A8D5B5;background:var(--done-bg)}
+.rest-arc-wrap{flex-shrink:0;width:36px;height:36px}
+.rest-arc-wrap svg{width:36px;height:36px;transform:rotate(-90deg)}
+.arc-bg{fill:none;stroke:var(--border);stroke-width:4}
+.arc-fill{fill:none;stroke-width:4;stroke-linecap:round;transition:stroke-dashoffset 0.9s linear,stroke 0.4s}
+.rest-timer.active .arc-fill{stroke:#C93A4A}
+.rest-timer.done .arc-fill{stroke:#2D6A4F}
+.rest-body{flex:1;min-width:0}
+.rest-label{font-size:0.62rem;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1px}
+.rest-timer.active .rest-label{color:#C93A4A}
+.rest-timer.done .rest-label{color:var(--accent)}
+.rest-count{font-family:'DM Mono',monospace;font-size:1.1rem;font-weight:500;line-height:1}
+.rest-timer.active .rest-count{color:#C93A4A}
+.rest-timer.done .rest-count{color:var(--accent)}
+.rest-msg{font-size:0.72rem;color:var(--text-muted);margin-top:2px}
+.rest-timer.done .rest-msg{color:var(--accent);font-weight:500}
+
+/* ── HOLD TIMER (timed exercises) ── */
+.hold-timer-wrap{display:flex;align-items:center;gap:10px;padding:6px 0}
+.hold-arc-wrap{flex-shrink:0;width:48px;height:48px}
+.hold-arc-wrap svg{width:48px;height:48px;transform:rotate(-90deg)}
+.hold-arc-bg{fill:none;stroke:var(--border);stroke-width:4}
+.hold-arc-fill{fill:none;stroke:#C93A4A;stroke-width:4;stroke-linecap:round;transition:stroke-dashoffset 0.9s linear,stroke 0.4s}
+/* Counter-rotate text so it reads normally */
+.hold-arc-wrap text{transform-origin:24px 24px;transform:rotate(90deg)}
+.hold-body{display:flex;flex-direction:column;gap:4px}
+.hold-side-label{font-size:0.62rem;font-family:'DM Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;color:var(--strength);font-weight:500}
+.hold-status{font-size:0.75rem;color:var(--text-muted);line-height:1.2}
+.hold-btn{font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:500;padding:5px 12px;border-radius:7px;border:1.5px solid var(--strength);color:var(--strength);background:var(--strength-light);cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.hold-btn:hover:not(:disabled){background:var(--strength);color:#fff}
+.hold-done .hold-btn{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
+
+/* ── HISTORY PANEL ── */
+.history-section{max-width:720px;margin:32px auto 0}
+.history-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.history-title{font-size:0.68rem;font-family:'DM Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)}
+.history-list{display:flex;flex-direction:column;gap:8px}
+.history-entry{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;cursor:pointer;transition:border-color 0.2s}
+.history-entry:hover{border-color:#C0BFB8}
+.h-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.h-date{font-family:'DM Mono',monospace;font-size:0.78rem;font-weight:500;color:var(--text)}
+.h-stats{font-size:0.72rem;color:var(--text-muted)}
+.h-exercises{display:flex;flex-direction:column;gap:4px;display:none}
+.history-entry.expanded .h-exercises{display:flex}
+.h-ex-row{display:flex;justify-content:space-between;font-size:0.75rem}
+.h-ex-name{color:var(--text-muted)}
+.h-ex-sets{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--text)}
+.no-history{font-size:0.8rem;color:var(--text-muted);text-align:center;padding:20px;background:var(--surface);border:1.5px dashed var(--border);border-radius:12px}
+
+/* ── BOTTOM ACTIONS ── */
+.tip-box{max-width:720px;margin:24px auto 0;background:#FFF8F0;border:1.5px solid #F0DAC0;border-radius:12px;padding:14px 16px;font-size:0.78rem;color:#7A5A30;line-height:1.55}
+.tip-box strong{font-weight:600}
+
+.actions-wrap{max-width:720px;margin:20px auto 0;display:flex;gap:10px;flex-wrap:wrap}
+.action-btn{flex:1;min-width:140px;font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:500;padding:11px 16px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface);cursor:pointer;color:var(--text-muted);transition:all 0.2s;text-align:center}
+.action-btn:hover{border-color:#AAA9A2;color:var(--text)}
+.action-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.action-btn.primary:hover{background:#225438}
+.action-btn.danger{color:#C93A4A;border-color:#F0C0C5}
+.action-btn.danger:hover{background:#FDF0F1;border-color:#C93A4A}
+
+/* Complete banner */
+.complete-banner{max-width:720px;margin:16px auto 0;background:var(--accent);color:#fff;border-radius:12px;padding:16px 20px;text-align:center;font-weight:500;font-size:0.9rem;display:none}
+.complete-banner.show{display:block}
+
+/* Save overlay */
+.save-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
+.save-overlay.show{display:flex}
+.save-modal{background:var(--surface);border-radius:16px;padding:24px;max-width:360px;width:100%;text-align:center}
+.save-modal h3{font-size:1rem;font-weight:600;margin-bottom:8px}
+.save-modal p{font-size:0.8rem;color:var(--text-muted);margin-bottom:20px;line-height:1.5}
+.save-modal-btns{display:flex;gap:8px}
+.save-modal-btns button{flex:1;padding:10px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface2);font-family:'DM Sans',sans-serif;font-size:0.82rem;cursor:pointer;color:var(--text-muted);transition:all 0.15s}
+.save-modal-btns button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.save-modal-btns button:hover:not(.primary){border-color:#AAA9A2;color:var(--text)}
+.spinner-anim{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:480px){
+  .title-block h1{font-size:1.25rem}
+  .timer-display{font-size:1.2rem}
+  .card-icon{width:52px;height:52px}
+  .card-icon svg{width:52px;height:52px}
+}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-top">
+    <div class="title-block">
+      <h1>Gym Session</h1>
+      <p>DDD-safe · strength + rehab · 45 min</p>
+      <div class="date-chip" id="todayDate"></div>
+    </div>
+    <div class="timer-wrap">
+      <div class="timer-display" id="timerDisplay">45:00</div>
+      <div class="timer-label">session timer</div>
+      <div class="timer-btns">
+        <button class="tbtn" id="timerStartBtn" onclick="timerToggle()">Start</button>
+        <button class="tbtn" onclick="timerReset()">Reset</button>
+      </div>
+    </div>
+  </div>
+  <div class="progress-wrap">
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="prog-count" id="progCount">0 / 11</div>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="ldot" style="background:var(--warmup)"></div>Warm-up</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--strength)"></div>Strength</div>
+    <div class="legend-item"><div class="ldot" style="background:var(--rehab)"></div>Rehab</div>
+  </div>
+</header>
+
+<!-- ════════════ WARM-UP ════════════ -->
+<div class="section-label">Warm-up <span class="section-time">5 min</span></div>
+<div class="cards">
+
+  <!-- Cat-Cow -->
+  <div class="card type-warmup" id="card-0">
+    <div class="type-bar"></div>
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 72 72" fill="none">
+          <ellipse cx="36" cy="40" rx="20" ry="9" stroke="#8B5CF6" stroke-width="2" fill="#EDE9FE"/>
+          <circle cx="16" cy="32" r="6" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="2"/>
+          <path d="M16 38 Q36 22 56 38" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round" fill="none" stroke-dasharray="4 2"/>
+          <path d="M16 42 Q36 52 56 42" stroke="#8B5CF6" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.35"/>
+          <line x1="22" y1="48" x2="18" y2="58" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round"/>
+          <line x1="28" y1="49" x2="26" y2="59" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round"/>
+          <line x1="46" y1="48" x2="44" y2="58" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round"/>
+          <line x1="52" y1="48" x2="52" y2="58" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round"/>
+          <path d="M36 27 L34 22 L38 22 Z" fill="#8B5CF6"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="ex-name">Cat-Cow</div>
+        <div class="ex-note">Lumbar mobility · Warms spine · Reduces stiffness</div>
+        <div class="target-pills">
+          <div class="tpill">2 sets</div><div class="tpill">10 reps</div><div class="tpill">Breathe with movement</div>
+        </div>
+      </div>
+    </div>
+    <div class="sets-tracker" id="sets-0"></div>
+  </div>
+
+  <!-- Glute Bridge -->
+  <div class="card type-warmup" id="card-1">
+    <div class="type-bar"></div>
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 72 72" fill="none">
+          <line x1="6" y1="58" x2="66" y2="58" stroke="#8B5CF6" stroke-width="1.5" opacity="0.2"/>
+          <path d="M12 54 Q22 34 40 28 Q48 28 52 38 L56 58" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <circle cx="12" cy="52" r="5" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="2"/>
+          <line x1="16" y1="52" x2="24" y2="48" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="54" y1="56" x2="62" y2="58" stroke="#8B5CF6" stroke-width="3" stroke-linecap="round"/>
+          <path d="M40 28 L38 22 L42 22 Z" fill="#8B5CF6"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="ex-name">Glute Bridge</div>
+        <div class="ex-note">Activates posterior chain · Fires glutes before loading</div>
+        <div class="target-pills">
+          <div class="tpill">2 sets</div><div class="tpill">12 reps</div><div class="tpill">2 sec squeeze at top</div>
+        </div>
+      </div>
+    </div>
+    <div class="sets-tracker" id="sets-1"></div>
+  </div>
+
+  <!-- Dead Bug -->
+  <div class="card type-warmup" id="card-2">
+    <div class="type-bar"></div>
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 72 72" fill="none">
+          <line x1="16" y1="38" x2="56" y2="38" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="12" cy="38" r="6" fill="#EDE9FE" stroke="#8B5CF6" stroke-width="2"/>
+          <line x1="26" y1="38" x2="22" y2="22" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="46" y1="38" x2="56" y2="28" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="56" y1="28" x2="62" y2="32" stroke="#8B5CF6" stroke-width="2.5" stroke-linecap="round"/>
+          <ellipse cx="36" cy="38" rx="9" ry="5" fill="#8B5CF6" opacity="0.08"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="ex-name">Dead Bug</div>
+        <div class="ex-note">Deep core activation before loading · Spine-neutral</div>
+        <div class="target-pills">
+          <div class="tpill">2 sets</div><div class="tpill">6 reps / side</div><div class="tpill">Back flat</div>
+        </div>
+      </div>
+    </div>
+    <div class="sets-tracker" id="sets-2"></div>
+  </div>
+
+</div>
+
+<!-- ════════════ STRENGTH ════════════ -->
+<div class="section-label">Strength <span class="section-time">30 min</span></div>
+<div class="cards">
+
+  <!-- Pull-Up -->
+  <div class="card type-strength" id="card-3">
+    <div class="type-bar"></div>
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 72 72" fill="none">
+          <line x1="8" y1="14" x2="64" y2="14" stroke="#C93A4A" stroke-width="3" stroke-linecap="round"/>
+          <rect x="22" y="14" width="7" height="5" rx="2" fill="#C93A4A" opacity="0.5"/>
+          <rect x="43" y="14" width="7" height="5" rx="2" fill="#C93A4A" opacity="0.5"/>
+          <line x1="25" y1="19" x2="28" y2="30" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="47" y1="19" x2="44" y2="30" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="28" y1="30" x2="36" y2="35" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="44" y1="30" x2="36" y2="35" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="36" y1="35" x2="36" y2="50" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="36" cy="27" r="6" fill="#F7DDE0" stroke="#C93A4A" stroke-width="2"/>
+          <line x1="36" y1="50" x2="32" y2="62" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="36" y1="50" x2="40" y2="62" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="ex-name">Pull-Up</div>
+        <div class="ddd-flag">✓ decompresses spine</div>
+        <div class="ex-note">Bodyweight unassisted · Full hang at bottom · 3 sec lower</div>
+        <div class="target-pills">
+          <div class="tpill">3 sets</div><div class="tpill">4 · 3 · 3 reps</div><div class="tpill">90 sec rest</div>
+        </div>
+      </div>
+    </div>
+    <div class="sets-tracker" id="sets-3"></div>
+  </div>
+
+  <!-- Machine Chest Press -->
+  <div class="card type-strength" id="card-4">
+    <div class="type-bar"></div>
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 72 72" fill="none">
+          <rect x="8" y="20" width="6" height="38" rx="2" fill="#C93A4A" opacity="0.15"/>
+          <line x1="14" y1="32" x2="30" y2="36" stroke="#C93A4A" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.6"/>
+          <circle cx="44" cy="22" r="6" fill="#F7DDE0" stroke="#C93A4A" stroke-width="2"/>
+          <line x1="44" y1="28" x2="44" y2="48" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="44" y1="34" x2="30" y2="36" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="44" y1="48" x2="40" y2="62" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="44" y1="48" x2="50" y2="62" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M30 36 L24 35 L26 31 Z" fill="#C93A4A" opacity="0.6"/>
+          <line x1="14" y1="63" x2="64" y2="63" stroke="#C93A4A" stroke-width="1.5" opacity="0.2"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="ex-name">Machine Chest Press</div>
+        <div class="ddd-flag">✓ fixed path — spine neutral</div>
+        <div class="ex-note">Technogym · Handles at mid-chest · Core braced</div>
+        <div class="target-pills">
+          <div class="tpill">3 sets</div><div class="tpill">12 · 8 · 5 reps</div><div class="tpill">Controlled tempo</div>
+        </div>
+      </div>
+    </div>
+    <div class="sets-tracker" id="sets-4"></div>
+  </div>
+
+  <!-- Machine Low Row -->
+  <div class="card type-strength" id="card-5">
+    <div class="type-bar"></div>
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 72 72" fill="none">
+          <rect x="58" y="20" width="6" height="40" rx="2" fill="#C93A4A" opacity="0.15"/>
+          <line x1="58" y1="36" x2="44" y2="38" stroke="#C93A4A" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.6"/>
+          <circle cx="28" cy="20" r="6" fill="#F7DDE0" stroke="#C93A4A" stroke-width="2"/>
+          <path d="M28 26 Q30 38 30 44" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <line x1="28" y1="34" x2="44" y2="38" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="30" y1="44" x2="24" y2="58" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="30" y1="44" x2="36" y2="58" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M44 38 L50 36 L48 42 Z" fill="#C93A4A" opacity="0.5"/>
+          <line x1="16" y1="46" x2="40" y2="46" stroke="#C93A4A" stroke-width="2" opacity="0.25" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="ex-name">Machine Low Row</div>
+        <div class="ddd-flag">✓ chest pad — no lumbar rocking</div>
+        <div class="ex-note">Technogym · Torso still · Squeeze shoulder blades</div>
+        <div class="target-pills">
+          <div class="tpill">3 sets</div><div class="tpill">12 · 8 · 5 reps</div><div class="tpill">Elbows close</div>
+        </div>
+      </div>
+    </div>
+    <div class="sets-tracker" id="sets-5"></div>
+  </div>
+
+  <!-- Machine Leg Curl -->
+  <div class="card type-strength" id="card-6">
+    <div class="type-bar"></div>
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 72 72" fill="none">
+          <rect x="10" y="28" width="52" height="28" rx="5" fill="#C93A4A" opacity="0.08" stroke="#C93A4A" stroke-width="1.5"/>
+          <circle cx="22" cy="22" r="6" fill="#F7DDE0" stroke="#C93A4A" stroke-width="2"/>
+          <line x1="22" y1="28" x2="22" y2="42" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="10" y1="28" x2="10" y2="56" stroke="#C93A4A" stroke-width="3" stroke-linecap="round" opacity="0.3"/>
+          <line x1="22" y1="42" x2="46" y2="42" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="46" y1="42" x2="56" y2="54" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="56" cy="56" r="5" fill="#C93A4A" opacity="0.25" stroke="#C93A4A" stroke-width="1.5"/>
+          <path d="M58 46 Q64 50 60 56" stroke="#C93A4A" stroke-width="1.5" stroke-dasharray="3 2" fill="none"/>
+          <path d="M60 56 L56 54 L62 52 Z" fill="#C93A4A" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="ex-name">Machine Leg Curl</div>
+        <div class="ddd-flag">✓ back fully supported</div>
+        <div class="ex-note">Technogym seated · Hamstrings protect lumbar · Full range</div>
+        <div class="target-pills">
+          <div class="tpill">3 sets</div><div class="tpill">12 · 8 · 5 reps</div><div class="tpill">Controlled lower</div>
+        </div>
+      </div>
+    </div>
+    <div class="sets-tracker" id="sets-6"></div>
+  </div>
+
+  <!-- Machine Leg Press -->
+  <div class="card type-strength" id="card-7">
+    <div class="type-bar"></div>
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 72 72" fill="none">
+          <rect x="6" y="30" width="18" height="30" rx="4" fill="#C93A4A" opacity="0.08" stroke="#C93A4A" stroke-width="1.5"/>
+          <circle cx="16" cy="28" r="6" fill="#F7DDE0" stroke="#C93A4A" stroke-width="2"/>
+          <line x1="14" y1="34" x2="14" y2="50" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="14" y1="44" x2="38" y2="28" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="14" y1="48" x2="40" y2="34" stroke="#C93A4A" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="38" y1="22" x2="42" y2="38" stroke="#C93A4A" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+          <path d="M44 20 L48 14 L52 20" stroke="#C93A4A" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+          <line x1="48" y1="14" x2="48" y2="30" stroke="#C93A4A" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="ex-name">Machine Leg Press</div>
+        <div class="ddd-flag">✓ spine fully supported</div>
+        <div class="ex-note">Reclined · Feet high on plate · Don't lock out at top</div>
+        <div class="target-pills">
+          <div class="tpill">3 sets</div><div class="tpill">12 · 8 · 5 reps</div><div class="tpill">High foot placement</div>
+        </div>
+      </div>
+    </div>
+    <div class="sets-tracker" id="sets-7"></div>
+  </div>
+
+</div>
+
+<!-- ════════════ REHAB ════════════ -->
+<div class="section-label">Rehab · Stabilisation <span class="section-time">10 min</span></div>
+<div class="cards">
+
+  <!-- Bird Dog -->
+  <div class="card type-rehab" id="card-8">
+    <div class="type-bar"></div>
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 72 72" fill="none">
+          <line x1="22" y1="36" x2="52" y2="36" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="16" cy="34" r="6" fill="#DDE8F7" stroke="#3A6AC9" stroke-width="2"/>
+          <line x1="22" y1="36" x2="8" y2="28" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="28" y1="36" x2="26" y2="50" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="50" y1="36" x2="64" y2="30" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="46" y1="36" x2="46" y2="50" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M8 28 L4 26 L7 23 Z" fill="#3A6AC9" opacity="0.7"/>
+          <path d="M64 30 L68 28 L67 33 Z" fill="#3A6AC9" opacity="0.7"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="ex-name">Bird Dog</div>
+        <div class="ex-note">Multifidus · Glutes · Lumbar stabilisers</div>
+        <div class="target-pills">
+          <div class="tpill">2 sets</div><div class="tpill">8 reps / side</div><div class="tpill">Hips level</div>
+        </div>
+      </div>
+    </div>
+    <div class="sets-tracker" id="sets-8"></div>
+  </div>
+
+  <!-- McGill Side Bridge -->
+  <div class="card type-rehab" id="card-9">
+    <div class="type-bar"></div>
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 72 72" fill="none">
+          <line x1="6" y1="58" x2="66" y2="58" stroke="#3A6AC9" stroke-width="1.5" opacity="0.2"/>
+          <path d="M12 54 L46 38" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="50" cy="36" r="7" fill="#DDE8F7" stroke="#3A6AC9" stroke-width="2"/>
+          <line x1="46" y1="40" x2="52" y2="28" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="12" cy="54" r="3" fill="#3A6AC9" opacity="0.4"/>
+          <line x1="12" y1="54" x2="20" y2="54" stroke="#3A6AC9" stroke-width="4" stroke-linecap="round"/>
+          <path d="M32 42 L30 36 L34 36 Z" fill="#3A6AC9" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="ex-name">McGill Side Bridge</div>
+        <div class="ex-note">Lateral core · Quadratus lumborum · Spinal stability</div>
+        <div class="target-pills">
+          <div class="tpill">2 sets</div><div class="tpill">20 sec / side</div><div class="tpill">Hips forward</div>
+        </div>
+      </div>
+    </div>
+    <div class="sets-tracker" id="sets-9"></div>
+  </div>
+
+  <!-- Hip Flexor Stretch -->
+  <div class="card type-rehab" id="card-10">
+    <div class="type-bar"></div>
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 72 72" fill="none">
+          <line x1="14" y1="13" x2="14" y2="48" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="14" cy="10" r="5" fill="#DDE8F7" stroke="#3A6AC9" stroke-width="2"/>
+          <line x1="14" y1="36" x2="6" y2="50" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="6" y1="50" x2="4" y2="62" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="14" y1="36" x2="26" y2="48" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="26" y1="48" x2="30" y2="62" stroke="#3A6AC9" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M20 42 Q24 38 22 34" stroke="#3A6AC9" stroke-width="1.5" stroke-dasharray="3 2" stroke-linecap="round" fill="none"/>
+          <path d="M22 34 L18 34 L21 30 Z" fill="#3A6AC9" opacity="0.7"/>
+          <line x1="14" y1="24" x2="8" y2="34" stroke="#3A6AC9" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <div class="ex-name">Hip Flexor Stretch</div>
+        <div class="ex-note">Cool-down · Psoas release · Reduces anterior tilt</div>
+        <div class="target-pills">
+          <div class="tpill">2 sets</div><div class="tpill">45 sec / side</div><div class="tpill">Tuck pelvis</div>
+        </div>
+      </div>
+    </div>
+    <div class="sets-tracker" id="sets-10"></div>
+  </div>
+
+</div>
+
+<!-- ── COMPLETE ── -->
+<div class="complete-banner" id="completeBanner">
+  🏋️ All sets done — great session. Save your log below before you leave.
+</div>
+
+<!-- ── TIP ── -->
+<div class="tip-box">
+  <strong>Before every set:</strong> neutral spine · 20% core brace · exhale on effort. Never trade position for weight.<br>
+  <strong>⚠️ No leg extensions</strong> — leg press + curl = same result, zero shear at L4/L5.
+</div>
+
+<!-- ── ACTIONS ── -->
+<div class="actions-wrap">
+  <button class="action-btn primary" onclick="showSaveModal()">💾 &nbsp;Save this session</button>
+  <button class="action-btn" onclick="exportImage()">📸 &nbsp;Save as image</button>
+  <button class="action-btn danger" onclick="resetAll()">↺ &nbsp;Reset</button>
+</div>
+
+<!-- ── HISTORY ── -->
+<div class="history-section">
+  <div class="history-header">
+    <div class="history-title">Session History</div>
+    <button class="tbtn" onclick="clearHistory()" style="font-size:0.68rem">Clear all</button>
+  </div>
+  <div id="historyList"></div>
+</div>
+
+<!-- ── SAVE MODAL ── -->
+<div class="save-overlay" id="saveOverlay">
+  <div class="save-modal">
+    <h3>Save session?</h3>
+    <p>This will record today's weights and reps to your history log so you can track progress over time.</p>
+    <div class="save-modal-btns">
+      <button onclick="closeSaveModal()">Cancel</button>
+      <button class="primary" onclick="confirmSave()">Save session</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+// EXERCISE CONFIG
+// isTimed: true  → dial shows seconds, set gets a hold timer
+// holdSecs: default seconds for the hold
+// holdPerSide: true → timer runs twice (left + right side)
+// ═══════════════════════════════════════════════════
+const EXERCISES = [
+  { id:0,  name:'Cat-Cow',             sets:2, hasWeight:false, isTimed:false, targetReps:'10',     restTimer:false },
+  { id:1,  name:'Glute Bridge',        sets:2, hasWeight:false, isTimed:false, targetReps:'12',     restTimer:false },
+  { id:2,  name:'Dead Bug',            sets:2, hasWeight:false, isTimed:false, targetReps:'6/side', restTimer:false },
+  { id:3,  name:'Pull-Up',             sets:3, hasWeight:false, isTimed:false, targetReps:'4·3·3',  restTimer:true  },
+  { id:4,  name:'Machine Chest Press', sets:3, hasWeight:true,  isTimed:false, targetReps:'10',     restTimer:true  },
+  { id:5,  name:'Machine Low Row',     sets:3, hasWeight:true,  isTimed:false, targetReps:'10',     restTimer:true  },
+  { id:6,  name:'Machine Leg Curl',    sets:3, hasWeight:true,  isTimed:false, targetReps:'10',     restTimer:true  },
+  { id:7,  name:'Machine Leg Press',   sets:3, hasWeight:true,  isTimed:false, targetReps:'10',     restTimer:true  },
+  { id:8,  name:'Bird Dog',            sets:2, hasWeight:false, isTimed:false, targetReps:'8/side', restTimer:false },
+  { id:9,  name:'McGill Side Bridge',  sets:2, hasWeight:false, isTimed:true,  holdSecs:20, holdPerSide:true,  targetReps:'20sec/side', restTimer:false },
+  { id:10, name:'Hip Flexor Stretch',  sets:2, hasWeight:false, isTimed:true,  holdSecs:45, holdPerSide:true,  targetReps:'45sec/side', restTimer:false },
+];
+
+const REST_DURATION = 90;
+const CIRC = 2 * Math.PI * 15;
+
+let setData = {};
+const restTimers = {};
+// holdTimers[exId][setIdx] = { interval, elapsed, total, side, state: 'idle'|'side1'|'side2'|'done' }
+const holdTimers = {};
+
+const STRENGTH_REPS = [12, 8, 5];
+const DEFAULT_START_WEIGHT = 20;
+const WEIGHT_INCREMENT = 5;
+
+function initSetData() {
+  EXERCISES.forEach(ex => {
+    setData[ex.id] = [];
+    for (let s = 0; s < ex.sets; s++) {
+      const reps = getDefaultReps(ex, s);
+      const weight = ex.hasWeight ? DEFAULT_START_WEIGHT + (s * WEIGHT_INCREMENT) : 0;
+      const secs = ex.isTimed ? (ex.holdSecs || 30) : 0;
+      setData[ex.id][s] = { reps, weight, secs, done: false };
+    }
+    if (ex.restTimer) {
+      restTimers[ex.id] = {};
+      for (let s = 0; s < ex.sets - 1; s++) {
+        restTimers[ex.id][s] = { interval: null, elapsed: 0, state: 'idle' };
+      }
+    }
+    if (ex.isTimed) {
+      holdTimers[ex.id] = {};
+      for (let s = 0; s < ex.sets; s++) {
+        holdTimers[ex.id][s] = { interval: null, elapsed: 0, side: 1, state: 'idle' };
+      }
+    }
+  });
+}
+
+function getDefaultReps(ex, setIdx) {
+  if (ex.id === 3) return [4, 3, 3][setIdx];
+  if (ex.hasWeight) return STRENGTH_REPS[setIdx] !== undefined ? STRENGTH_REPS[setIdx] : 10;
+  return parseInt(ex.targetReps) || 10;
+}
+
+// ═══════════════════════════════════════════════════
+// BUILD SET TRACKERS
+// ═══════════════════════════════════════════════════
+function buildTrackers() {
+  EXERCISES.forEach(ex => {
+    const container = document.getElementById('sets-' + ex.id);
+    container.innerHTML = '';
+
+    for (let s = 0; s < ex.sets; s++) {
+      const row = document.createElement('div');
+      row.className = 'set-row';
+      row.id = `row-${ex.id}-${s}`;
+
+      const lbl = document.createElement('div');
+      lbl.className = 'set-label';
+      lbl.textContent = `Set ${s+1}`;
+      row.appendChild(lbl);
+
+      const fields = document.createElement('div');
+      fields.className = 'set-fields';
+
+      if (ex.isTimed) {
+        // Seconds spinner
+        fields.appendChild(makeSpinner('secs', ex.id, s, setData[ex.id][s].secs, 5, 5, 300));
+        // Hold timer UI
+        fields.appendChild(makeHoldTimer(ex, s));
+      } else {
+        // Reps spinner
+        fields.appendChild(makeSpinner('reps', ex.id, s, setData[ex.id][s].reps, 1, 1, 50));
+        if (ex.hasWeight) {
+          fields.appendChild(makeSpinner('weight', ex.id, s, setData[ex.id][s].weight, 5, 5, 200));
+        }
+      }
+
+      row.appendChild(fields);
+
+      // Check button (for timed: auto-checked when timer completes; also tappable)
+      const chk = document.createElement('button');
+      chk.className = 'set-check';
+      chk.id = `chk-${ex.id}-${s}`;
+      chk.innerHTML = `<svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      chk.onclick = () => toggleSet(ex.id, s);
+      row.appendChild(chk);
+
+      container.appendChild(row);
+
+      // Rest timer between sets (strength only)
+      if (ex.restTimer && s < ex.sets - 1) {
+        const rt = document.createElement('div');
+        rt.className = 'rest-timer';
+        rt.id = `rest-${ex.id}-${s}`;
+        rt.innerHTML = `
+          <div class="rest-arc-wrap">
+            <svg viewBox="0 0 36 36">
+              <circle class="arc-bg" cx="18" cy="18" r="15"/>
+              <circle class="arc-fill" id="arc-${ex.id}-${s}" cx="18" cy="18" r="15"
+                stroke-dasharray="${CIRC}" stroke-dashoffset="${CIRC}"/>
+            </svg>
+          </div>
+          <div class="rest-body">
+            <div class="rest-label" id="rest-label-${ex.id}-${s}">Rest</div>
+            <div class="rest-count" id="rest-count-${ex.id}-${s}">0:00</div>
+            <div class="rest-msg" id="rest-msg-${ex.id}-${s}">Complete set ${s+1} to start</div>
+          </div>`;
+        container.appendChild(rt);
+      }
+    }
+  });
+}
+
+// ── Hold timer widget ──
+function makeHoldTimer(ex, setIdx) {
+  const wrap = document.createElement('div');
+  wrap.className = 'hold-timer-wrap';
+  wrap.id = `hold-wrap-${ex.id}-${setIdx}`;
+
+  const perSide = ex.holdPerSide;
+  const sideLabel = perSide
+    ? `<span class="hold-side-label" id="hold-side-${ex.id}-${setIdx}">Left side</span>`
+    : '';
+
+  wrap.innerHTML = `
+    <div class="hold-arc-wrap">
+      <svg viewBox="0 0 48 48">
+        <circle class="hold-arc-bg" cx="24" cy="24" r="20"/>
+        <circle class="hold-arc-fill" id="hold-arc-${ex.id}-${setIdx}"
+          cx="24" cy="24" r="20"
+          stroke-dasharray="${2*Math.PI*20}"
+          stroke-dashoffset="${2*Math.PI*20}"/>
+        <text id="hold-arc-text-${ex.id}-${setIdx}" x="24" y="28"
+          text-anchor="middle" font-family="DM Mono,monospace"
+          font-size="10" fill="#1A1A1A" font-weight="500">0</text>
+      </svg>
+    </div>
+    <div class="hold-body">
+      ${sideLabel}
+      <div class="hold-status" id="hold-status-${ex.id}-${setIdx}">Ready</div>
+      <button class="hold-btn" id="hold-btn-${ex.id}-${setIdx}"
+        onclick="holdToggle(${ex.id},${setIdx})">▶ Start</button>
+    </div>`;
+  return wrap;
+}
+
+// ─────────────────────────────────────────────────────
+// HOLD TIMER LOGIC
+// ─────────────────────────────────────────────────────
+function holdToggle(exId, setIdx) {
+  const ht = holdTimers[exId][setIdx];
+  const ex = EXERCISES.find(e => e.id === exId);
+
+  if (ht.state === 'done') return; // already complete
+
+  if (ht.state === 'idle') {
+    // Start side 1
+    ht.side = 1;
+    ht.elapsed = 0;
+    ht.state = 'side1';
+    startHoldInterval(exId, setIdx);
+  } else if (ht.state === 'side1' || ht.state === 'side2') {
+    // Pause
+    clearInterval(ht.interval);
+    ht.state = 'paused_' + ht.side;
+    updateHoldDisplay(exId, setIdx);
+    document.getElementById(`hold-btn-${exId}-${setIdx}`).textContent = '▶ Resume';
+  } else if (ht.state.startsWith('paused_')) {
+    // Resume
+    ht.state = ht.side === 1 ? 'side1' : 'side2';
+    startHoldInterval(exId, setIdx);
+  }
+}
+
+function startHoldInterval(exId, setIdx) {
+  const ht = holdTimers[exId][setIdx];
+  const ex = EXERCISES.find(e => e.id === exId);
+  const btn = document.getElementById(`hold-btn-${exId}-${setIdx}`);
+  if (btn) btn.textContent = '⏸ Pause';
+
+  updateHoldDisplay(exId, setIdx);
+
+  ht.interval = setInterval(() => {
+    ht.elapsed++;
+    const target = setData[exId][setIdx].secs;
+    updateHoldDisplay(exId, setIdx);
+
+    if (ht.elapsed >= target) {
+      clearInterval(ht.interval);
+
+      if (ex.holdPerSide && ht.side === 1) {
+        // Switch to side 2
+        ht.side = 2;
+        ht.elapsed = 0;
+        ht.state = 'side2';
+        beep('side');
+        // Brief pause so user can switch sides
+        if (btn) btn.textContent = '▶ Other side';
+        clearInterval(ht.interval);
+        // Update display to show "switch sides"
+        const statusEl = document.getElementById(`hold-status-${exId}-${setIdx}`);
+        if (statusEl) statusEl.textContent = 'Switch sides!';
+        const sideEl = document.getElementById(`hold-side-${exId}-${setIdx}`);
+        if (sideEl) sideEl.textContent = 'Right side';
+        // Reset arc for side 2
+        const arcEl = document.getElementById(`hold-arc-${exId}-${setIdx}`);
+        const HOLD_CIRC = 2 * Math.PI * 20;
+        if (arcEl) arcEl.style.strokeDashoffset = HOLD_CIRC;
+        const textEl = document.getElementById(`hold-arc-text-${exId}-${setIdx}`);
+        if (textEl) textEl.textContent = '0';
+      } else {
+        // Both sides done (or single-side done)
+        ht.state = 'done';
+        beep('done');
+        updateHoldDisplay(exId, setIdx);
+        // Auto-check the set
+        if (!setData[exId][setIdx].done) {
+          setData[exId][setIdx].done = true;
+          renderChecks();
+          updateProgress();
+        }
+      }
+    }
+  }, 1000);
+}
+
+function updateHoldDisplay(exId, setIdx) {
+  const ht = holdTimers[exId][setIdx];
+  const ex = EXERCISES.find(e => e.id === exId);
+  const target = setData[exId][setIdx].secs;
+  const HOLD_CIRC = 2 * Math.PI * 20;
+
+  const arcEl    = document.getElementById(`hold-arc-${exId}-${setIdx}`);
+  const textEl   = document.getElementById(`hold-arc-text-${exId}-${setIdx}`);
+  const statusEl = document.getElementById(`hold-status-${exId}-${setIdx}`);
+  const btnEl    = document.getElementById(`hold-btn-${exId}-${setIdx}`);
+  const sideEl   = document.getElementById(`hold-side-${exId}-${setIdx}`);
+  const wrapEl   = document.getElementById(`hold-wrap-${exId}-${setIdx}`);
+
+  const elapsed = ht.elapsed;
+  const remaining = Math.max(0, target - elapsed);
+  const fraction = Math.min(elapsed / target, 1);
+  const offset = HOLD_CIRC - (HOLD_CIRC * fraction);
+
+  if (arcEl) arcEl.style.strokeDashoffset = offset;
+  if (textEl) textEl.textContent = remaining > 0 ? remaining : '✓';
+
+  if (ht.state === 'done') {
+    if (arcEl) { arcEl.style.stroke = '#2D6A4F'; arcEl.style.strokeDashoffset = 0; }
+    if (textEl) { textEl.textContent = '✓'; textEl.setAttribute('fill', '#2D6A4F'); }
+    if (statusEl) statusEl.textContent = 'Complete ✓';
+    if (btnEl) { btnEl.textContent = 'Done'; btnEl.disabled = true; btnEl.style.opacity = '0.5'; }
+    if (wrapEl) wrapEl.classList.add('hold-done');
+  } else if (ht.state === 'idle') {
+    if (arcEl) { arcEl.style.stroke = '#C93A4A'; arcEl.style.strokeDashoffset = HOLD_CIRC; }
+    if (textEl) textEl.textContent = target;
+    if (statusEl) statusEl.textContent = 'Ready';
+  } else {
+    // active
+    if (arcEl) arcEl.style.stroke = '#C93A4A';
+    const sideStr = ex.holdPerSide ? (ht.side === 1 ? ' · Left' : ' · Right') : '';
+    if (statusEl) statusEl.textContent = `${remaining}s remaining${sideStr}`;
+    if (sideEl) sideEl.textContent = ht.side === 1 ? 'Left side' : 'Right side';
+  }
+}
+
+// ─────────────────────────────────────────────────────
+// REST TIMER LOGIC (between strength sets)
+// ─────────────────────────────────────────────────────
+function startRestTimer(exId, setIdx) {
+  const rt = restTimers[exId][setIdx];
+  if (!rt || rt.state === 'active' || rt.state === 'done') return;
+  rt.state = 'active'; rt.elapsed = 0;
+  const el = document.getElementById(`rest-${exId}-${setIdx}`);
+  if (!el) return;
+  el.classList.remove('done'); el.classList.add('active');
+  updateRestDisplay(exId, setIdx);
+  rt.interval = setInterval(() => {
+    rt.elapsed++;
+    updateRestDisplay(exId, setIdx);
+    if (rt.elapsed >= REST_DURATION) {
+      clearInterval(rt.interval);
+      rt.state = 'done';
+      el.classList.remove('active'); el.classList.add('done');
+      beep('rest');
+      const nextRow = document.getElementById(`row-${exId}-${setIdx+1}`);
+      if (nextRow) {
+        nextRow.style.transition = 'background 0.4s';
+        nextRow.style.background = '#D8EDDF';
+        setTimeout(() => { nextRow.style.background = ''; }, 1200);
+      }
+    }
+  }, 1000);
+}
+
+function stopRestTimer(exId, setIdx) {
+  const rt = restTimers[exId] && restTimers[exId][setIdx];
+  if (!rt) return;
+  clearInterval(rt.interval); rt.state = 'idle'; rt.elapsed = 0;
+  const el = document.getElementById(`rest-${exId}-${setIdx}`);
+  if (el) el.classList.remove('active','done');
+  updateRestDisplay(exId, setIdx);
+}
+
+function updateRestDisplay(exId, setIdx) {
+  const rt = restTimers[exId] && restTimers[exId][setIdx];
+  if (!rt) return;
+  const elapsed = rt.elapsed;
+  const remaining = REST_DURATION - elapsed;
+  const mins = Math.floor(elapsed/60), secs = elapsed%60;
+  const countEl = document.getElementById(`rest-count-${exId}-${setIdx}`);
+  const labelEl = document.getElementById(`rest-label-${exId}-${setIdx}`);
+  const msgEl   = document.getElementById(`rest-msg-${exId}-${setIdx}`);
+  const arcEl   = document.getElementById(`arc-${exId}-${setIdx}`);
+  if (countEl) countEl.textContent = `${mins}:${String(secs).padStart(2,'0')}`;
+  if (rt.state === 'active') {
+    if (labelEl) labelEl.textContent = 'Resting…';
+    if (msgEl) msgEl.textContent = `${remaining}s until next set`;
+    if (arcEl) arcEl.style.strokeDashoffset = CIRC - (CIRC * elapsed / REST_DURATION);
+  } else if (rt.state === 'done') {
+    if (labelEl) labelEl.textContent = '✓ Ready';
+    if (msgEl) msgEl.textContent = 'Go — start next set';
+    if (arcEl) arcEl.style.strokeDashoffset = 0;
+  } else {
+    if (arcEl) arcEl.style.strokeDashoffset = CIRC;
+  }
+}
+
+// ─────────────────────────────────────────────────────
+// TOGGLE SET DONE
+// ─────────────────────────────────────────────────────
+function toggleSet(exId, setIdx) {
+  const wasDone = setData[exId][setIdx].done;
+  setData[exId][setIdx].done = !wasDone;
+  const ex = EXERCISES.find(e => e.id === exId);
+  if (ex && ex.restTimer && setIdx < ex.sets - 1) {
+    if (!wasDone) startRestTimer(exId, setIdx);
+    else stopRestTimer(exId, setIdx);
+  }
+  renderChecks();
+  updateProgress();
+}
+
+function renderChecks() {
+  EXERCISES.forEach(ex => {
+    let allDone = true;
+    for (let s = 0; s < ex.sets; s++) {
+      const chk = document.getElementById(`chk-${ex.id}-${s}`);
+      const done = setData[ex.id][s].done;
+      if (chk) chk.classList.toggle('checked', done);
+      if (!done) allDone = false;
+    }
+    const card = document.getElementById(`card-${ex.id}`);
+    if (card) card.classList.toggle('all-done', allDone);
+  });
+}
+
+function countDoneExercises() {
+  return EXERCISES.filter(ex => ex.sets > 0 && setData[ex.id].every(s => s.done)).length;
+}
+function countDoneSets() {
+  let total = 0;
+  EXERCISES.forEach(ex => { total += setData[ex.id].filter(s => s.done).length; });
+  return total;
+}
+function totalSets() { return EXERCISES.reduce((sum, ex) => sum + ex.sets, 0); }
+
+function updateProgress() {
+  const done = countDoneExercises();
+  const total = EXERCISES.length;
+  document.getElementById('progFill').style.width = (done/total*100) + '%';
+  document.getElementById('progCount').textContent = `${done} / ${total} exercises`;
+  document.getElementById('completeBanner').classList.toggle('show', countDoneSets() === totalSets());
+}
+
+// Seconds spinner — same as reps but field='secs', updates hold timer display
+function makeSpinner(field, exId, setIdx, defaultVal, step, min, max) {
+  const wrap = document.createElement('div');
+  wrap.className = 'spinner-wrap';
+  const lbl = document.createElement('div');
+  lbl.className = 'spinner-label';
+  lbl.textContent = field === 'reps' ? 'Reps' : field === 'secs' ? 'Seconds' : 'Weight';
+  wrap.appendChild(lbl);
+  const row = document.createElement('div');
+  row.className = 'spinner';
+  const minus = document.createElement('button');
+  minus.className = 'spin-btn';
+  minus.textContent = '−';
+  minus.onclick = () => adjustVal(exId, setIdx, field, -step, min, max);
+  const valEl = document.createElement('div');
+  valEl.className = 'spin-val';
+  valEl.id = `${field}-${exId}-${setIdx}`;
+  valEl.textContent = defaultVal + (field === 'weight' ? 'kg' : field === 'secs' ? 's' : '');
+  const plus = document.createElement('button');
+  plus.className = 'spin-btn';
+  plus.textContent = '+';
+  plus.onclick = () => adjustVal(exId, setIdx, field, step, min, max);
+  row.appendChild(minus); row.appendChild(valEl); row.appendChild(plus);
+  wrap.appendChild(row);
+  return wrap;
+}
+
+function adjustVal(exId, setIdx, field, delta, min, max) {
+  const key = field;
+  let current = setData[exId][setIdx][key];
+  current = Math.min(max, Math.max(min, current + delta));
+  setData[exId][setIdx][key] = current;
+  if (field === 'weight' && setIdx === 0) {
+    const ex = EXERCISES.find(e => e.id === exId);
+    if (ex) {
+      for (let s = 1; s < ex.sets; s++) {
+        const cascaded = Math.min(max, Math.max(min, current + s * WEIGHT_INCREMENT));
+        setData[exId][s].weight = cascaded;
+        const el = document.getElementById(`weight-${exId}-${s}`);
+        if (el) el.textContent = cascaded + 'kg';
+      }
+    }
+  }
+  const el = document.getElementById(`${field}-${exId}-${setIdx}`);
+  if (el) el.textContent = field === 'weight' ? current + 'kg' : field === 'secs' ? current + 's' : current;
+  // If secs changed, update the arc text
+  if (field === 'secs') {
+    const textEl = document.getElementById(`hold-arc-text-${exId}-${setIdx}`);
+    const ht = holdTimers[exId] && holdTimers[exId][setIdx];
+    if (textEl && ht && ht.state === 'idle') textEl.textContent = current;
+  }
+}
+
+// ─────────────────────────────────────────────────────
+// SESSION TIMER
+// ─────────────────────────────────────────────────────
+let timerInterval = null, secondsLeft = 45*60, running = false;
+function timerToggle() {
+  if (running) {
+    clearInterval(timerInterval); running = false;
+    document.getElementById('timerStartBtn').textContent = 'Resume';
+    document.getElementById('timerStartBtn').classList.remove('active');
+  } else {
+    running = true;
+    document.getElementById('timerStartBtn').textContent = 'Pause';
+    document.getElementById('timerStartBtn').classList.add('active');
+    timerInterval = setInterval(() => {
+      if (secondsLeft <= 0) { clearInterval(timerInterval); running = false; document.getElementById('timerStartBtn').textContent = 'Done'; document.getElementById('timerStartBtn').classList.remove('active'); return; }
+      secondsLeft--; updateTimerDisplay();
+    }, 1000);
+  }
+}
+function timerReset() {
+  clearInterval(timerInterval); running = false; secondsLeft = 45*60;
+  updateTimerDisplay();
+  document.getElementById('timerStartBtn').textContent = 'Start';
+  document.getElementById('timerStartBtn').classList.remove('active');
+}
+function updateTimerDisplay() {
+  const m = Math.floor(secondsLeft/60), s = secondsLeft%60;
+  const el = document.getElementById('timerDisplay');
+  el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  el.classList.toggle('warn', secondsLeft <= 300 && secondsLeft > 0);
+}
+
+// ─────────────────────────────────────────────────────
+// RESET
+// ─────────────────────────────────────────────────────
+function resetAll() {
+  if (!confirm('Reset this session? Your history will be kept.')) return;
+  EXERCISES.forEach(ex => {
+    if (ex.restTimer) {
+      for (let s = 0; s < ex.sets - 1; s++) {
+        if (restTimers[ex.id] && restTimers[ex.id][s]) clearInterval(restTimers[ex.id][s].interval);
+      }
+    }
+    if (ex.isTimed) {
+      for (let s = 0; s < ex.sets; s++) {
+        if (holdTimers[ex.id] && holdTimers[ex.id][s]) clearInterval(holdTimers[ex.id][s].interval);
+      }
+    }
+  });
+  initSetData();
+  buildTrackers();
+  renderChecks();
+  updateProgress();
+  timerReset();
+}
+
+// ─────────────────────────────────────────────────────
+// SAVE / HISTORY
+// ─────────────────────────────────────────────────────
+function showSaveModal() { document.getElementById('saveOverlay').classList.add('show'); }
+function closeSaveModal() { document.getElementById('saveOverlay').classList.remove('show'); }
+
+function confirmSave() {
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
+  const timeStr = now.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+  const entry = { date: dateStr, time: timeStr, timestamp: now.getTime(), exercises: {} };
+  EXERCISES.forEach(ex => {
+    entry.exercises[ex.name] = setData[ex.id].map(s => ({
+      reps: ex.isTimed ? null : s.reps,
+      secs: ex.isTimed ? s.secs : null,
+      weight: ex.hasWeight ? s.weight : null,
+      done: s.done
+    }));
+  });
+  let history = [];
+  try { history = JSON.parse(localStorage.getItem('ddd_gym_history') || '[]'); } catch(e) {}
+  history.unshift(entry);
+  if (history.length > 30) history = history.slice(0, 30);
+  localStorage.setItem('ddd_gym_history', JSON.stringify(history));
+  closeSaveModal();
+  renderHistory();
+  alert('✅ Session saved!');
+}
+
+function renderHistory() {
+  const list = document.getElementById('historyList');
+  let history = [];
+  try { history = JSON.parse(localStorage.getItem('ddd_gym_history') || '[]'); } catch(e) {}
+  if (history.length === 0) {
+    list.innerHTML = '<div class="no-history">No sessions saved yet — complete a session and tap Save.</div>';
+    return;
+  }
+  list.innerHTML = '';
+  history.forEach(entry => {
+    const div = document.createElement('div');
+    div.className = 'history-entry';
+    div.onclick = () => div.classList.toggle('expanded');
+    const exRows = Object.entries(entry.exercises).map(([name, sets]) => {
+      const doneSets = sets.filter(s => s.done);
+      let summary = '';
+      if (sets[0].weight !== null) {
+        const weights = [...new Set(doneSets.map(s => s.weight + 'kg'))].join(' / ');
+        summary = `${doneSets.length}×${sets[0].reps || '?'} @ ${weights || '—'}`;
+      } else if (sets[0].secs !== null) {
+        summary = `${doneSets.length}/${sets.length} sets · ${sets[0].secs}s`;
+      } else {
+        summary = `${doneSets.length}/${sets.length} sets`;
+      }
+      return `<div class="h-ex-row"><span class="h-ex-name">${name}</span><span class="h-ex-sets">${summary}</span></div>`;
+    }).join('');
+    const totalDone = Object.values(entry.exercises).flat().filter(s => s.done).length;
+    const totalAll  = Object.values(entry.exercises).flat().length;
+    div.innerHTML = `
+      <div class="h-top">
+        <div class="h-date">${entry.date} · ${entry.time}</div>
+        <div class="h-stats">${totalDone}/${totalAll} sets</div>
+      </div>
+      <div class="h-exercises">${exRows}</div>`;
+    list.appendChild(div);
+  });
+}
+
+function clearHistory() {
+  if (!confirm('Clear all session history? This cannot be undone.')) return;
+  localStorage.removeItem('ddd_gym_history');
+  renderHistory();
+}
+
+// ─────────────────────────────────────────────────────
+// IMAGE EXPORT
+// ─────────────────────────────────────────────────────
+function exportImage() {
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  const timeStr = now.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+  const rows = [];
+  EXERCISES.forEach(ex => {
+    setData[ex.id].forEach((s, i) => {
+      let label = ex.isTimed
+        ? `Set ${i+1}: ${s.secs}s hold`
+        : ex.hasWeight
+          ? `Set ${i+1}: ${s.reps} reps @ ${s.weight}kg`
+          : `Set ${i+1}: ${s.reps} reps`;
+      rows.push({ exName: i === 0 ? ex.name : '', setLabel: label, done: s.done });
+    });
+  });
+  const W = 800, PADDING = 44, HEADER_H = 110, ROW_H = 36, FOOTER_H = 60;
+  const H = HEADER_H + rows.length * ROW_H + FOOTER_H + PADDING;
+  const canvas = document.createElement('canvas');
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#F0F0EB'; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = '#FFFFFF'; roundRect(ctx, PADDING-10, 20, W-(PADDING-10)*2, HEADER_H-10, 14); ctx.fill();
+  ctx.fillStyle = '#1A1A1A'; ctx.font = 'bold 26px -apple-system,sans-serif';
+  ctx.fillText('Gym Session — DDD Programme', PADDING, 58);
+  ctx.fillStyle = '#7A7A72'; ctx.font = '15px -apple-system,sans-serif';
+  ctx.fillText(dateStr + '  ·  ' + timeStr, PADDING, 82);
+  const doneSets = EXERCISES.reduce((n,ex) => n + setData[ex.id].filter(s=>s.done).length, 0);
+  const totalSetCount = EXERCISES.reduce((n,ex) => n + ex.sets, 0);
+  ctx.fillStyle = '#2D6A4F'; ctx.font = 'bold 15px -apple-system,sans-serif';
+  ctx.fillText(`${doneSets} / ${totalSetCount} sets completed`, PADDING, 106);
+  let y = HEADER_H + 14;
+  rows.forEach((row, idx) => {
+    ctx.fillStyle = idx%2===0 ? '#FFFFFF' : '#F7F7F3';
+    roundRect(ctx, PADDING-10, y-22, W-(PADDING-10)*2, ROW_H, 8); ctx.fill();
+    ctx.fillStyle = row.done ? '#2D6A4F' : '#C0BFB8';
+    ctx.font = 'bold 15px -apple-system,sans-serif';
+    ctx.fillText(row.done ? '✓' : '–', PADDING, y);
+    if (row.exName) { ctx.fillStyle = '#1A1A1A'; ctx.font = 'bold 14px -apple-system,sans-serif'; ctx.fillText(row.exName, PADDING+22, y); }
+    ctx.fillStyle = '#7A7A72'; ctx.font = '13px monospace';
+    const sw = ctx.measureText(row.setLabel).width;
+    ctx.fillText(row.setLabel, W-PADDING-sw-10, y);
+    y += ROW_H;
+  });
+  ctx.fillStyle = '#7A7A72'; ctx.font = '12px -apple-system,sans-serif';
+  ctx.fillText('DDD Training Programme · Neutral spine always · Progress is earned one set at a time.', PADDING, y+30);
+  const fname = `gym-${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}.png`;
+  try {
+    const link = document.createElement('a');
+    link.download = fname; link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link); link.click(); document.body.removeChild(link);
+  } catch(e) {
+    const win = window.open();
+    win.document.write(`<img src="${canvas.toDataURL('image/png')}" style="max-width:100%;display:block;margin:auto">`);
+  }
+}
+
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();}
+
+// ─────────────────────────────────────────────────────
+// AUDIO BEEP — works on iPhone PWA (vibrate API disabled on iOS)
+// double-beep: two short tones, 200ms apart
+// type: 'rest' (low tone) | 'side' (mid tone) | 'done' (high double)
+// ─────────────────────────────────────────────────────
+let _audioCtx = null;
+function getAudioCtx() {
+  if (!_audioCtx) _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return _audioCtx;
+}
+
+function beep(type) {
+  try {
+    const ctx = getAudioCtx();
+    // Resume context if suspended (iOS requires user gesture first)
+    if (ctx.state === 'suspended') ctx.resume();
+
+    const configs = {
+      rest: [{ freq:520, dur:0.12, t:0 }, { freq:520, dur:0.12, t:0.2 }],
+      side: [{ freq:660, dur:0.12, t:0 }, { freq:880, dur:0.12, t:0.2 }],
+      done: [{ freq:880, dur:0.15, t:0 }, { freq:880, dur:0.25, t:0.22 }],
+    };
+    const tones = configs[type] || configs.done;
+    const now = ctx.currentTime;
+
+    tones.forEach(({ freq, dur, t }) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now + t);
+      gain.gain.setValueAtTime(0, now + t);
+      gain.gain.linearRampToValueAtTime(0.35, now + t + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + t + dur);
+      osc.start(now + t);
+      osc.stop(now + t + dur + 0.05);
+    });
+  } catch(e) {
+    // Silent fallback — audio not available
+  }
+}
+
+// Unlock AudioContext on first user touch (iOS requirement)
+document.addEventListener('touchstart', () => {
+  try { getAudioCtx().resume(); } catch(e) {}
+}, { once: true });
+
+// ─────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────
+document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+initSetData();
+buildTrackers();
+renderChecks();
+updateProgress();
+renderHistory();
+</script>
+</body>
+</html>
