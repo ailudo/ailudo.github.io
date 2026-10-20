@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-19T02:13:58+01:00",
+ "updated": "2026-10-20T12:05:41+01:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -399,7 +399,7 @@
    "short": "The 90s: Art and Fashion",
    "title": "The 90s: Art and Fashion",
    "artists": "Alexander McQueen, Vivienne Westwood, Damien Hirst, Sarah Lucas, Juergen Teller, Corinne Day and others",
-   "start": null,
+   "start": "2026-10-08",
    "end": "2027-02-14",
    "admission": "paid",
    "discipline": "Design & architecture",
@@ -495,7 +495,7 @@
    "short": "Taylor Wessing Photo Portrait Prize",
    "title": "Taylor Wessing Photo Portrait Prize 2026",
    "artists": "",
-   "start": "2026-11-05",
+   "start": "2026-10-29",
    "end": "2027-01-17",
    "admission": "paid",
    "discipline": "Photography & moving image",
@@ -1192,6 +1192,18 @@
    "admission": "check",
    "discipline": "Sculpture & installation",
    "url": "https://ibraaz.org/whats-on/cosmic-breath-joe-namy"
+  },
+  {
+   "id": "ct-modern-painting",
+   "venue": "courtauld",
+   "short": "Modern Painting from the Courtauld and Reuben Collections",
+   "title": "Modern Painting from the Courtauld and Reuben Collections",
+   "artists": "Paul Cézanne, Amedeo Modigliani, Pablo Picasso, René Magritte and others",
+   "start": "2026-09-18",
+   "end": null,
+   "admission": "check",
+   "discipline": "History & collections",
+   "url": "https://courtauld.ac.uk/whats-on/exh-modern-painting-from-the-courtauld-and-reuben-collections/"
   }
  ]
 }
