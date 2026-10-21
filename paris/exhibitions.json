@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-20T12:06:09+01:00",
+ "updated": "2026-10-21T01:04:01+01:00",
  "venues": [
   {
    "id": "louvre",
@@ -463,7 +463,7 @@
    "end": "2027-01-24",
    "admission": "check",
    "discipline": "Painting & works on paper",
-   "url": "https://www.musee-jacquemart-andre.com/"
+   "url": "https://www.musee-jacquemart-andre.com/fr/eternel-tintoret"
   },
   {
    "id": "pp-gonzales",
@@ -475,7 +475,7 @@
    "end": "2027-01-24",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.petitpalais.paris.fr/"
+   "url": "https://www.petitpalais.paris.fr/decouvrir-la-programmation/expositions/eva-gonzales"
   },
   {
    "id": "pp-bruxelles",
@@ -487,7 +487,7 @@
    "end": "2027-04-25",
    "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://www.petitpalais.paris.fr/"
+   "url": "https://www.petitpalais.paris.fr/decouvrir-la-programmation/expositions/bruxelles-1900"
   },
   {
    "id": "cu-amis",
@@ -505,13 +505,13 @@
    "id": "lux-warhol",
    "venue": "luxembourg",
    "short": "Andy Warhol",
-   "title": "La Ligne et l’image",
+   "title": "Andy Warhol. La ligne et l’image",
    "artists": "Andy Warhol",
    "start": "2026-09-16",
    "end": "2027-01-10",
    "admission": "check",
    "discipline": "Painting & works on paper",
-   "url": "https://museeduluxembourg.fr/"
+   "url": "https://museeduluxembourg.fr/fr/agenda/evenement/andy-warhol"
   },
   {
    "id": "ca-villegle",
@@ -523,7 +523,7 @@
    "end": "2027-02-14",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.carnavalet.paris.fr/"
+   "url": "https://www.carnavalet.paris.fr/expositions/paris-larrache"
   },
   {
    "id": "o-cassatt",
@@ -555,7 +555,7 @@
    "short": "Auguste Bartholdi",
    "title": "Liberty Enlightening the World",
    "artists": "Auguste Bartholdi",
-   "start": null,
+   "start": "2026-09-15",
    "end": "2027-01-31",
    "admission": "paid",
    "discipline": "Sculpture & installation",
@@ -623,7 +623,7 @@
    "end": "2027-01-25",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.musee-orangerie.fr/"
+   "url": "https://www.musee-orangerie.fr/fr/programme/agenda/expositions/monet-peindre-le-temps"
   },
   {
    "id": "ma-paysages",
@@ -635,7 +635,7 @@
    "end": "2027-01-31",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.marmottan.fr/"
+   "url": "https://www.marmottan.fr/expositions/histoires-de-paysages/"
   },
   {
    "id": "mam-hist",
@@ -820,7 +820,7 @@
    "end": "2027-02-07",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.museepicassoparis.fr/fr/agenda/types/exposition/"
+   "url": "https://www.museepicassoparis.fr/fr/agenda/kurt-schwitters-le-chaos-monde-1918-1948/"
   },
   {
    "id": "pi-malraux",
@@ -832,7 +832,7 @@
    "end": "2027-02-07",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.museepicassoparis.fr/fr/agenda/types/exposition/",
+   "url": "https://www.museepicassoparis.fr/fr/agenda/salle-dossier-andre-malraux-et-pablo-picasso-le-musee-imaginaire/",
    "note": "A display within the museum."
   },
   {
@@ -845,7 +845,7 @@
    "end": "2027-01-17",
    "admission": "check",
    "discipline": "Painting & works on paper",
-   "url": "https://www.grandpalais.fr/",
+   "url": "https://www.grandpalais.fr/fr/programme/cezanne-et-nous",
    "note": "Presented with the Musée d’Orsay."
   },
   {
@@ -858,7 +858,7 @@
    "end": "2027-01-10",
    "admission": "check",
    "discipline": "Photography & moving image",
-   "url": "https://jeudepaume.org/"
+   "url": "https://jeudepaume.org/evenement/stan-douglas/"
   },
   {
    "id": "mep-penn",
@@ -870,31 +870,31 @@
    "end": "2027-01-17",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.mep-fr.org/"
+   "url": "https://www.mep-fr.org/event/penn-fashion/"
   },
   {
    "id": "bal-wilson",
    "venue": "bal",
    "short": "The Wilson Centre for Photography collection",
-   "title": "L’Espace entre nous",
+   "title": "L’Espace entre nous : dans la collection du Wilson Centre for Photography",
    "artists": "",
    "start": "2026-06-19",
    "end": "2027-01-03",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://le-bal.fr/"
+   "url": "https://www.le-bal.fr/2026/05/lespace-entre-nous"
   },
   {
    "id": "gal-vest",
    "venue": "galliera",
    "short": "A wardrobe of one’s own",
-   "title": "Un vestiaire à soi",
+   "title": "Un vestiaire à soi. Féminités dissidentes au 19e siècle",
    "artists": "",
    "start": "2026-09-26",
    "end": "2027-02-14",
    "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://www.palaisgalliera.paris.fr/"
+   "url": "https://www.palaisgalliera.paris.fr/expositions/un-vestiaire-soi-feminites-dissidentes-au-19e-siecle"
   },
   {
    "id": "ad-pav",
@@ -930,19 +930,21 @@
    "end": "2027-02-28",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.imarabe.org/"
+   "url": "https://www.imarabe.org/fr/agenda/expositions-musee/vive-mariee",
+   "price": "€10 museum ticket, free under 26 (IMA museum admission)"
   },
   {
    "id": "ima-alhambra",
    "venue": "ima",
-   "short": "The Nasrid Alhambra",
-   "title": "Les Trésors cachés de l’Alhambra nasride",
+   "short": "The secrets of the Alhambra",
+   "title": "Les secrets de l'Alhambra",
    "artists": "",
    "start": "2026-11-24",
    "end": "2027-05-16",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.imarabe.org/"
+   "url": "https://www.imarabe.org/fr/agenda/expositions-musee/les-secrets-alhambra",
+   "price": "€17 full, €15 reduced, €9 ages 12-26, free under 12"
   },
   {
    "id": "gu-dal",
@@ -954,7 +956,7 @@
    "end": "2027-02-08",
    "admission": "paid",
    "discipline": "Sculpture & installation",
-   "url": "https://www.guimet.fr/"
+   "url": "https://www.guimet.fr/fr/expositions/dal-dari-la-lune-et-les-jambes"
   },
   {
    "id": "gu-trompe",
@@ -966,19 +968,19 @@
    "end": "2027-01-04",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.guimet.fr/"
+   "url": "https://www.guimet.fr/fr/expositions/le-savoir-en-trompe-loeil-coree-18e-20e-s"
   },
   {
    "id": "ce-coree",
    "venue": "cernuschi",
    "short": "Korea and the scholar class",
-   "title": "Corée, le royaume des lettrés",
+   "title": "Corée. Le royaume des lettrés (1600-1900)",
    "artists": "",
    "start": "2026-11-20",
    "end": "2027-04-04",
    "admission": "check",
    "discipline": "History & collections",
-   "url": "https://www.cernuschi.paris.fr/"
+   "url": "https://parismusees.paris.fr/en/exposition/korea"
   },
   {
    "id": "qb-plumes",
@@ -990,7 +992,7 @@
    "end": "2026-11-08",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.quaibranly.fr/"
+   "url": "https://www.quaibranly.fr/fr/expositions-evenements/au-musee/expositions/details-de-levenement/e/plumes-du-paradis"
   },
   {
    "id": "l-affin",
@@ -1111,9 +1113,9 @@
    "artists": "Prune Nourry",
    "start": "2026-10-20",
    "end": "2027-01-24",
-   "admission": "check",
+   "admission": "free",
    "discipline": "Sculpture & installation",
-   "url": "https://www.petitpalais.paris.fr/en/node/3994",
+   "url": "https://www.petitpalais.paris.fr/decouvrir-la-programmation/expositions/visionnaires",
    "note": "Portraits of eighteen overlooked women sculptors."
   },
   {
@@ -1138,19 +1140,19 @@
    "end": "2027-03-21",
    "admission": "check",
    "discipline": "Design & architecture",
-   "url": "https://www.grandpalais.fr/"
+   "url": "https://www.grandpalais.fr/fr/programme/girls-adolescence-mode-rebellion"
   },
   {
    "id": "gp-ninagawa",
    "venue": "grandpalais",
    "short": "Mika Ninagawa",
-   "title": "Alive with Shadows",
+   "title": "Mika Ninagawa with EiM. Alive with Shadows",
    "artists": "Mika Ninagawa, EiM",
    "start": "2026-12-16",
    "end": "2027-03-21",
    "admission": "check",
    "discipline": "Photography & moving image",
-   "url": "https://www.grandpalais.fr/"
+   "url": "https://www.grandpalais.fr/fr/programme/mika-ninagawa-eim-alive-shadows"
   },
   {
    "id": "ca-harvest",
@@ -1185,10 +1187,11 @@
    "title": "Premières Nations",
    "artists": "",
    "start": "2026-09-29",
-   "end": "2027-01-10",
+   "end": "2027-01-17",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.quaibranly.fr/"
+   "url": "https://www.quaibranly.fr/fr/expositions-evenements/au-musee/expositions/details-de-levenement/e/premieres-nations",
+   "price": "€14 full, €11 reduced (museum ticket)"
   },
   {
    "id": "qb-tahiti",
@@ -1200,7 +1203,7 @@
    "end": "2027-01-31",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.quaibranly.fr/"
+   "url": "https://www.quaibranly.fr/fr/expositions-evenements/au-musee/expositions/details-de-levenement/e/voir-tahiti"
   },
   {
    "id": "qb-mivekannin",
@@ -1212,19 +1215,18 @@
    "end": "2027-04-04",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.quaibranly.fr/"
+   "url": "https://www.quaibranly.fr/fr/expositions-evenements/au-musee/expositions/details-de-levenement/e/violence-silencieuse"
   },
   {
    "id": "ad-kyoto",
    "venue": "artsdeco",
    "short": "Paris > Kyoto > Paris: four designers return from Japan",
    "title": "Paris > Kyoto > Paris. Quatre designers de retour du Japon",
-   "artists": "",
-   "start": null,
-   "end": null,
+   "artists": "Nina Fradet, Tony Jouanneau, Felipe Ribon, Marion Vidal",
+   "start": "2026-09-10",
+   "end": "2027-01-03",
    "admission": "check",
    "discipline": "Design & architecture",
-   "note": "Dates not confirmed on the venue page.",
    "url": "https://madparis.fr/Paris-Kyoto-Paris-Quatre-designers-de-retour-du-Japon"
   },
   {
@@ -1367,6 +1369,148 @@
    "admission": "check",
    "discipline": "History & collections",
    "url": "https://www.imarabe.org/fr/agenda/expositions-musee/tenter-art-pour-soigner-hopital-psychiatrique-blida-joinville-dans-les"
+  },
+  {
+   "id": "ca-cain",
+   "venue": "carnavalet",
+   "short": "Georges Cain, refounder of Carnavalet",
+   "title": "En mémoire de Georges Cain (1853-1919), refondateur du musée Carnavalet",
+   "artists": "",
+   "start": "2026-10-06",
+   "end": "2027-04-26",
+   "admission": "free",
+   "discipline": "History & collections",
+   "note": "A display within the museum, marking its 150th anniversary.",
+   "url": "https://www.carnavalet.paris.fr/expositions/en-memoire-de-georges-cain-1853-1919-refondateur-du-musee-carnavalet"
+  },
+  {
+   "id": "mam-simoni",
+   "venue": "mam",
+   "short": "Mariella Simoni",
+   "title": "Mariella Simoni",
+   "artists": "Mariella Simoni",
+   "start": "2026-07-21",
+   "end": "2027-01-04",
+   "admission": "check",
+   "discipline": null,
+   "url": "https://www.mam.paris.fr/fr/expositions/exposition-mariella-simoni",
+   "note": "Page only states free entry to the collections."
+  },
+  {
+   "id": "mam-dezeuze",
+   "venue": "mam",
+   "short": "Daniel Dezeuze",
+   "title": "Daniel Dezeuze",
+   "artists": "Daniel Dezeuze",
+   "start": "2026-07-21",
+   "end": "2027-01-04",
+   "admission": "check",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.mam.paris.fr/fr/expositions/exposition-daniel-dezeuze",
+   "note": "Page only states free entry to the collections."
+  },
+  {
+   "id": "mam-bordarier",
+   "venue": "mam",
+   "short": "Stéphane Bordarier",
+   "title": "Stéphane Bordarier",
+   "artists": "Stéphane Bordarier",
+   "start": "2026-07-21",
+   "end": "2027-01-04",
+   "admission": "check",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.mam.paris.fr/fr/expositions/exposition-stephane-bordarier",
+   "note": "Page only states free entry to the collections."
+  },
+  {
+   "id": "mam-bauret",
+   "venue": "mam",
+   "short": "Jean-François Bauret",
+   "title": "Jean-François Bauret",
+   "artists": "Jean-François Bauret",
+   "start": "2026-06-09",
+   "end": "2027-01-04",
+   "admission": "check",
+   "discipline": "Photography & moving image",
+   "url": "https://www.mam.paris.fr/fr/expositions/exposition-jean-francois-bauret",
+   "note": "Page only states free entry to the collections."
+  },
+  {
+   "id": "pdt-sarre",
+   "venue": "pdt",
+   "short": "Lassana Sarre",
+   "title": "Globale Inversion Inversion",
+   "artists": "Lassana Sarre",
+   "start": "2026-06-05",
+   "end": "2027-02-14",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://palaisdetokyo.com/exposition/globale-inversion-inversion/"
+  },
+  {
+   "id": "pdt-kodjo",
+   "venue": "pdt",
+   "short": "Paul Kodjo",
+   "title": "Photoromance",
+   "artists": "Paul Kodjo",
+   "start": "2026-10-21",
+   "end": "2027-02-14",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://palaisdetokyo.com/exposition/photoromance/"
+  },
+  {
+   "id": "pdt-lowder",
+   "venue": "pdt",
+   "short": "Rose Lowder",
+   "title": "La Source de la Loire et autres films",
+   "artists": "Rose Lowder",
+   "start": "2026-10-21",
+   "end": "2027-02-14",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://palaisdetokyo.com/exposition/la-source-de-la-loire-et-autres-films/"
+  },
+  {
+   "id": "pdt-chambre",
+   "venue": "pdt",
+   "short": "Chambre des Échos: Charles Villa and Yto Barrada",
+   "title": "Chambre des Échos : Le bleu de toute chose",
+   "artists": "Charles Villa, Yto Barrada",
+   "start": "2026-10-21",
+   "end": "2027-01-06",
+   "admission": "free",
+   "discipline": "Photography & moving image",
+   "url": "https://palaisdetokyo.com/exposition/chambre-des-echos-le-bleu-de-toute-chose/",
+   "note": "Free access from the Palais de Tokyo hall."
+  },
+  {
+   "id": "ima-libye",
+   "venue": "ima",
+   "short": "Libya: archaeological heritage revealed",
+   "title": "Libye, patrimoine révélé",
+   "artists": "",
+   "start": "2026-05-13",
+   "end": "2027-01-17",
+   "admission": "paid",
+   "price": "€10 museum ticket, free under 26",
+   "discipline": "History & collections",
+   "note": "Photographs and videos from the French archaeological mission in Libya (MAFL); level 7 of the museum. Venue page text also mentions 2026-10-20 in photo captions; end date to be confirmed.",
+   "url": "https://www.imarabe.org/fr/agenda/expositions-musee/libye-patrimoine-revele"
+  },
+  {
+   "id": "qb-echoes",
+   "venue": "branly",
+   "short": "Yo-E Ryou: Echoes of the tides",
+   "title": "Echoes of the tides (Échos des marées)",
+   "artists": "Yo-E Ryou",
+   "start": "2026-03-11",
+   "end": "2027-02-21",
+   "admission": "check",
+   "price": "Museum ticket €14 full, €11 reduced",
+   "discipline": "Sculpture & installation",
+   "note": "Sound work by the 2025 sound residency winner, shown in the Boîte à musique on the Plateau des collections; venue page does not say whether it needs a separate ticket.",
+   "url": "https://www.quaibranly.fr/fr/expositions-evenements/au-musee/expositions/details-de-levenement/e/echoes-of-the-tides-40978"
   }
  ]
 }
