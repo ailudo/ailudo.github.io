@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Seven Times: seven stories, seven numbers, every morning. An AI project by Studio AI Ludo.">
+<title>Seven Times</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Back-issue wrapper: the dashboard's theme tokens, defined for a standalone page. */
+:root {
+  --color-bg: #ffffff; --color-fg: #1d1d1f; --color-fg-muted: #6e6e73; --color-panel: #f5f5f7;
+  --color-border-line: rgba(0,0,0,.1); --color-bad: #d70015;
+  --cds-chart-muted: #aeaeb2; --cds-chart-grid: rgba(0,0,0,.08); --cds-chart-axis: rgba(0,0,0,.35); --cds-chart-reference: rgba(0,0,0,.45);
+  --cds-ease-out: cubic-bezier(.2,.8,.2,1); --cds-dur-slow: .4s;
+  --banner-bg: rgba(245,245,247,.82); --banner-fg: #1d1d1f; --banner-link: #0066cc;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --color-bg: #000000; --color-fg: #f5f5f7; --color-fg-muted: #a1a1a6; --color-panel: #1c1c1e;
+  --color-border-line: rgba(255,255,255,.14); --color-bad: #ff453a;
+  --cds-chart-muted: #636366; --cds-chart-grid: rgba(255,255,255,.1); --cds-chart-axis: rgba(255,255,255,.4); --cds-chart-reference: rgba(255,255,255,.5);
+  --banner-bg: rgba(28,28,30,.82); --banner-fg: #f5f5f7; --banner-link: #2997ff; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --color-bg: #000000; --color-fg: #f5f5f7; --color-fg-muted: #a1a1a6; --color-panel: #1c1c1e;
+  --color-border-line: rgba(255,255,255,.14); --color-bad: #ff453a;
+  --cds-chart-muted: #636366; --cds-chart-grid: rgba(255,255,255,.1); --cds-chart-axis: rgba(255,255,255,.4); --cds-chart-reference: rgba(255,255,255,.5);
+  --banner-bg: rgba(28,28,30,.82); --banner-fg: #f5f5f7; --banner-link: #2997ff; color-scheme: dark; }
+body { background: var(--color-bg); color: var(--color-fg); }
+#dash-root { padding-block: 8px 0; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.st-banner { display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: center; align-items: center; padding: 10px 16px; margin: 0 auto 6px; max-width: 84rem;
+  font: 600 13px -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif; color: var(--banner-fg);
+  background: var(--banner-bg); border-radius: 999px; }
+.st-banner a { color: var(--banner-link); text-decoration: none; }
+.st-banner a:hover { text-decoration: underline; }
+.st-banner a::after { content: " ›"; }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+/* Minimal stand-in for the dashboard runtime, fed with this edition's frozen data. */
+(function(){
+  const DATA = {"lottery": [{"rank": 1, "place": "Middlesbrough"}, {"rank": 2, "place": "Hounslow"}, {"rank": 3, "place": "Bradford"}], "stories": [{"order": 1, "id": "jackdaw", "section": "Britain", "headline": "Britain says yes to the Jackdaw gas field.", "dek": "Energy Secretary Miatta Fahnbulleh approved production at the North Sea field on Wednesday, ending years of legal wrangling. Gas could start flowing by the end of the month. The operator says Jackdaw will lift Britain’s gas output by about 6 percent at its peak; campaigners say it will meet barely 2 percent of demand over its life.", "so_what": "Same field, two very different numbers.", "src1": "ITV News", "url1": "https://www.itv.com/news/2026-10-21/government-approves-drilling-in-jackdaw-gas-field", "src2": "Reuters via Cyprus Mail", "url2": "https://cyprus-mail.com/2026/10/21/uk-approves-long-delayed-jackdaw-gas-field", "hook": "Six percent, or two?", "weight": 3, "tone": "urgent", "hero": "jackdaw-peak"}, {"order": 2, "id": "cpi", "section": "Economy", "headline": "Petrol pushes inflation to a one-year high.", "dek": "Consumer prices rose 3.5 percent in the year to September, faster than economists expected and the third monthly rise in a row. Fuel did most of the damage. Investors now expect the Bank of England to raise interest rates next month, its first increase in three years.", "so_what": "Prices overall rose modestly. Fuel did not.", "src1": "ONS", "url1": "https://www.ons.gov.uk/economy/inflationandpriceindices", "src2": "CNBC", "url2": "https://www.cnbc.com/2026/10/21/inflation-uk-cpi-interest-rates.html", "hook": "Blame the petrol pump.", "weight": 2, "tone": "urgent", "hero": "cpi-fuel"}, {"order": 3, "id": "france", "section": "World", "headline": "France’s school protests become a nation’s.", "dek": "What began in September as a protest by high school students over conditions in their schools has swelled into a national movement over fuel prices and the cost of living. Several cities have imposed curfews.", "so_what": "Every dot is a thousand marchers. The red ones were arrested.", "src1": "Euronews", "url1": "https://www.euronews.com/2026/10/19/protesters-block-access-to-louvre-museum-in-paris-in-support-of-demonstrations", "src2": "AzerNews", "url2": "https://www.azernews.az/region/265837.html", "hook": "Fuel lit the fuse.", "weight": 2, "tone": "urgent", "hero": "france-marchers"}, {"order": 4, "id": "mmx", "section": "Science", "headline": "Japan sets out to bring home a piece of a Martian moon.", "dek": "JAXA’s Martian Moons eXploration probe lifted off from Tanegashima Space Center on Monday. It is due to land on Phobos, the larger of Mars’s two moons, collect at least 10 grams of soil and return it to the South Australian desert in 2031. No mission has brought back a sample from Phobos before.", "so_what": "A four-and-a-half-ton spacecraft, a five-year round trip, for a couple of teaspoons of dirt.", "src1": "ESA", "url1": "https://www.esa.int/ESA_Multimedia/Images/2026/10/The_Martian_Moons_eXploration_MMX_mission", "src2": "TechSpot", "url2": "https://www.techspot.com/news/113757-japan-mmx-mission-attempt-land-phobos-bring-martian.html", "hook": "Five years, two teaspoons.", "weight": 1, "tone": "wonder", "hero": "mmx-sample"}, {"order": 5, "id": "lottery", "section": "Society", "headline": "In England, a child’s prospects depend on the postcode.", "dek": "England’s Children’s Commissioner ranked every local authority on what it is like to grow up there, scoring almost 100 measures of health care, schools, housing, safety and places to play. Middlesbrough, Hounslow and Bradford came out worst.", "so_what": "Where a child grows up still shapes how that childhood goes.", "src1": "Children's Commissioner", "url1": "https://childrenscommissioner.gov.uk/news-and-blogs/press-notice-devolution-must-deliver-for-young-people-says-childrens-commissioner-as-she-warns-of-emergency-for-children-in-some-communities", "src2": "ITV News", "url2": "https://itv.com/news/tyne-tees/2026-10-19/landmark-report-reveals-hardest-places-for-children-to-grow-up-in-england", "hook": "Your postcode, your chances.", "weight": 1, "tone": "solemn", "hero": "lottery-metrics"}, {"order": 6, "id": "jio", "section": "Business", "headline": "India’s biggest IPO fills up in 100 minutes.", "dek": "Jio Platforms, the digital arm of Mukesh Ambani’s Reliance Industries, opened its initial public offering on Wednesday and drew bids for every share on offer within 100 minutes, the fastest of any Indian IPO. At the top of its price range it would raise about $3.2 billion, a national record.", "so_what": "A record share sale, fully booked in less time than it takes to watch a movie.", "src1": "Reuters via New Straits Times", "url1": "https://www.nst.com.my/amp/business/corporate/2026/10/1556503/ambanis-jio-seeks-us32b-record-india-ipo", "src2": "DT Next", "url2": "https://www.dtnext.in/videos/dt-next-news-recap-what-are-the-top-headlines-of-today-october-21-2026", "hook": "Faster than a film.", "weight": 1, "tone": "light", "hero": "jio-minutes"}, {"order": 7, "id": "louvre", "section": "Culture", "headline": "About 50 students close the Louvre.", "dek": "Students from the École du Louvre blocked the museum’s entrances on Monday morning in support of France’s school protests, keeping its doors shut until at least noon. It came a year to the day after the Louvre jewel heist.", "so_what": "The world’s most visited museum, shut by a group that would fit in one lecture hall.", "src1": "Sortir à Paris", "url1": "https://www.sortiraparis.com/en/news/in-paris/articles/354969-louvre-blocked-in-paris-as-students-prevent-the-opening-in-a-show-of-solidarity-with-high-school-students", "src2": "Sud Radio / AFP", "url2": "https://www.sudradio.fr/societe/lacces-au-louvre-bloque-par-des-etudiants-en-soutien-au-mouvement-lyceen", "hook": "One class, one closure.", "weight": 1, "tone": "light", "hero": "louvre-students"}], "facts": [{"id": "jackdaw-peak", "story": "jackdaw", "value": 6, "unit": "%", "label": "of Britain’s gas output at peak, says the operator"}, {"id": "jackdaw-critics", "story": "jackdaw", "value": 2, "unit": "%", "label": "of demand over its lifetime, say campaigners"}, {"id": "jackdaw-homes", "story": "jackdaw", "value": 1.4, "unit": "million", "label": "homes heated at peak, an industry estimate"}, {"id": "jackdaw-years", "story": "jackdaw", "value": 11, "unit": "years", "label": "of production, at most"}, {"id": "jackdaw-invest", "story": "jackdaw", "value": 2.1, "unit": "£bn", "label": "of investment"}, {"id": "cpi-jul", "story": "cpi", "value": 2.9, "unit": "%", "label": "CPI, July"}, {"id": "cpi-aug", "story": "cpi", "value": 3.1, "unit": "%", "label": "CPI, August"}, {"id": "cpi-sep", "story": "cpi", "value": 3.5, "unit": "%", "label": "CPI, September"}, {"id": "cpi-forecast", "story": "cpi", "value": 3.4, "unit": "%", "label": "economists' forecast for September"}, {"id": "cpi-fuel", "story": "cpi", "value": 29.8, "unit": "%", "label": "rise in motor fuel prices over the year"}, {"id": "cpi-core", "story": "cpi", "value": 2.8, "unit": "%", "label": "core inflation"}, {"id": "cpi-target", "story": "cpi", "value": 2, "unit": "%", "label": "Bank of England target"}, {"id": "cpi-bankrate", "story": "cpi", "value": 4, "unit": "%", "label": "expected Bank Rate after next month’s meeting"}, {"id": "france-marchers", "story": "france", "value": 800000, "unit": "people", "label": "marched last weekend, by organizers’ count"}, {"id": "france-custody", "story": "france", "value": 2330, "unit": "people", "label": "people detained over the weekend"}, {"id": "france-adults", "story": "france", "value": 70, "unit": "%", "label": "of those detained were adults"}, {"id": "mmx-sample", "story": "mmx", "value": 10, "unit": "g", "label": "of Phobos soil, at minimum"}, {"id": "mmx-mass", "story": "mmx", "value": 4480, "unit": "kg", "label": "launch mass"}, {"id": "mmx-launch", "story": "mmx", "value": 2026, "unit": "year", "label": "launch"}, {"id": "mmx-mars", "story": "mmx", "value": 2027, "unit": "year", "label": "arrives at Mars"}, {"id": "mmx-sampling", "story": "mmx", "value": 2029, "unit": "year", "label": "samples collected"}, {"id": "mmx-return", "story": "mmx", "value": 2031, "unit": "year", "label": "capsule lands in Woomera, South Australia"}, {"id": "mmx-gravity", "story": "mmx", "value": 2000, "unit": "×", "label": "weaker gravity on Phobos than on Earth"}, {"id": "mmx-martian", "story": "mmx", "value": 0.1, "unit": "%", "label": "of the sample could be debris from Mars itself"}, {"id": "lottery-metrics", "story": "lottery", "value": 100, "unit": "metrics", "label": "scored measures"}, {"id": "lottery-measures", "story": "lottery", "value": 160, "unit": "measures", "label": "measures in the dataset (more than)"}, {"id": "jio-minutes", "story": "jio", "value": 100, "unit": "minutes", "label": "to sell every share on offer"}, {"id": "jio-times", "story": "jio", "value": 2.35, "unit": "×", "label": "oversubscribed by mid-afternoon"}, {"id": "jio-raise", "story": "jio", "value": 3.2, "unit": "$bn", "label": "raised at the top of the range"}, {"id": "jio-prior", "story": "jio", "value": 2.9, "unit": "$bn", "label": "previous record, Hyundai Motor India, 2024"}, {"id": "jio-subs", "story": "jio", "value": 524, "unit": "million", "label": "mobile subscribers"}, {"id": "louvre-students", "story": "louvre", "value": 50, "unit": "students", "label": "from the École du Louvre"}, {"id": "louvre-hours", "story": "louvre", "value": 3, "unit": "hours", "label": "closed, from opening until at least noon"}, {"id": "jackdaw-km", "story": "jackdaw", "value": 250, "unit": "km", "label": "east of Aberdeen"}, {"id": "jackdaw-depth", "story": "jackdaw", "value": 78, "unit": "m", "label": "of water beneath the platform"}, {"id": "louvre-open", "story": "louvre", "value": 9, "unit": "am", "label": "normal opening time"}, {"id": "louvre-noon", "story": "louvre", "value": 12, "unit": "noon", "label": "stayed shut until at least"}], "archive": [{"date": "2026-10-21", "weekday": "Wednesday", "short": "Oct 21", "url": "https://ailudo.github.io/7/2026-10-21/", "lead": "Britain says yes to the Jackdaw gas field."}], "edition": [{"date": "2026-10-21", "label": "Wednesday, October 21, 2026", "edition": "Trial edition"}]};
+  const calcs = {}, subs = [];
+  window.dash = {
+    data(id) {
+      if (id in DATA) return {status: 'ok', data: DATA[id], columns: [], meta: []};
+      if (calcs[id]) { try { return {status: 'ok', data: calcs[id].fn(...calcs[id].inputs.map(i => DATA[i] || [])), columns: [], meta: []}; } catch (e) { return {status: 'error', data: [], message: String(e)}; } }
+      return {status: 'missing', data: []};
+    },
+    onData(fn) { subs.push(fn); try { fn(); } catch (e) { console.error(e); } },
+    calc(id, o) { calcs[id] = o; },
+    loader() {}, setLink() {}, refresh() {},
+    params() { return {}; }, setParams() {}, resetParams() {},
+    colors: ['#0a84ff', '#ff9f0a', '#30d158', '#bf5af2', '#ff375f', '#64d2ff', '#ffd60a', '#8e8e93']
+  };
+  let t = null;
+  window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => subs.forEach(fn => { try { fn(); } catch (e) {} }), 200); });
+})();
+</script>
+<style>html,body{margin:0}body{font:14px -apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+<div id="dash-root"><style>
+#dash-root { --dash-gutter: clamp(8px, 1.6vw, 20px); }
+.m7 {
+  --sf: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --vh: 100vh;
+  container-type: inline-size; max-width: 84rem; margin-inline: auto;
+  font-family: var(--sf); color: var(--color-fg); -webkit-font-smoothing: antialiased;
+}
+.m7 a { text-decoration: none; }
+.m7 a:hover { text-decoration: underline; }
+
+.m7 { --sub: var(--color-fg-muted); }
+.m7 .mast { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; padding: 18px 6px 16px; }
+.m7 .wordmark { font-family: var(--sf); font-weight: 700; font-size: clamp(1.5rem, 3.4cqi, 2.1rem); letter-spacing: -.035em; line-height: 1; }
+.m7 .mdate { font-size: 15px; font-weight: 500; color: var(--color-fg-muted); letter-spacing: -.01em; }
+.m7 .foot { padding: 1.5rem 0 .5rem; text-align: center; }
+/* The deck */
+.m7 .deck { position: relative; padding-bottom: 8vh; }
+.m7 .rail { position: sticky; top: 10px; z-index: 30; height: 0; display: flex; justify-content: center; pointer-events: none; }
+.m7 .rail-in { pointer-events: auto; display: flex; align-items: center; gap: 12px; padding: 7px 14px; border-radius: 999px; background: rgba(120,120,128,.24); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); color: #fff; font-size: 12px; font-weight: 600; letter-spacing: .01em; opacity: 0; transform: translateY(-6px); transition: opacity .35s, transform .35s; mix-blend-mode: normal; }
+.m7 .rail-in.show { opacity: 1; transform: none; }
+.m7 .rail-lbl { min-width: 9.5rem; color: inherit; text-shadow: 0 1px 2px rgba(0,0,0,.35); }
+.m7 .segs { display: flex; gap: 5px; }
+.m7 .seg { width: 16px; height: 4px; border-radius: 2px; background: #fff; opacity: .35; border: 0; padding: 0; cursor: pointer; transition: opacity .3s, width .3s; }
+.m7 .seg.on { opacity: 1; width: 26px; }
+
+.m7 .card {
+  --p: 0;
+  position: sticky; top: 14px; margin: 0 0 22px;
+  min-height: calc(var(--vh) - 28px);
+  border-radius: 34px; overflow: hidden;
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(20px, 4cqi, 64px); align-items: center;
+  padding: 64px clamp(22px, 4.4cqi, 64px) clamp(28px, 4cqi, 52px);
+  transform-origin: 50% 0;
+  transform: scale(calc(1 - var(--p) * .06));
+  box-shadow: 0 -18px 50px rgba(0,0,0,calc(.14 + var(--p) * .1));
+}
+.m7 .card::after { content: ""; position: absolute; inset: 0; background: #000; opacity: calc(var(--p) * .55); pointer-events: none; border-radius: inherit; z-index: 5; }
+.m7 .card.light { background: var(--color-panel); color: var(--color-fg); --fg: var(--color-fg); --sub: var(--color-fg-muted); --line: var(--color-border-line); --link: #0066cc; }
+.m7 .card.dark { background: #000; color: #f5f5f7; --fg: #f5f5f7; --sub: #a1a1a6; --line: rgba(255,255,255,.18); --link: #2997ff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .m7 .card.light { --link: #2997ff; } :root:not([data-theme="light"]) .m7 .card.dark { box-shadow: inset 0 0 0 1px rgba(255,255,255,.1); } }
+:root[data-theme="dark"] .m7 .card.light { --link: #2997ff; }
+
+.m7 .txt { position: relative; z-index: 2; }
+.m7 .kick { display: flex; gap: 10px; align-items: baseline; font-size: 15px; font-weight: 600; }
+.m7 .kick .sec { color: var(--e); }
+.m7 .kick .cnt { color: var(--sub); font-variant-numeric: tabular-nums; }
+.m7 .card h2 { font-size: clamp(2rem, 4.6cqi, 3.3rem); font-weight: 700; letter-spacing: -.035em; line-height: 1.04; margin: .45rem 0 .55rem; }
+.m7 .hook { font-size: clamp(1.15rem, 2.2cqi, 1.5rem); color: var(--sub); letter-spacing: -.01em; margin: 0; }
+.m7 .big { font-weight: 700; letter-spacing: -.055em; line-height: .92; font-size: clamp(5rem, 13cqi, 9.5rem); margin: 1.4rem 0 .2rem; font-variant-numeric: tabular-nums; }
+.m7 .grad { background-image: var(--g); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.m7 .unit { font-size: .38em; letter-spacing: -.02em; }
+.m7 .blabel { font-size: 15px; color: var(--sub); }
+.m7 .dek { font-size: 17px; line-height: 1.5; letter-spacing: -.01em; margin: 1.3rem 0 0; max-width: 34rem; }
+.m7 .stats { display: flex; gap: clamp(1.4rem, 4cqi, 2.6rem); flex-wrap: wrap; margin-top: 1.3rem; }
+.m7 .stats .v { font-size: clamp(1.5rem, 3cqi, 2rem); font-weight: 700; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.m7 .stats .l { font-size: 13px; color: var(--sub); max-width: 12rem; }
+.m7 .ctas { display: flex; gap: 1.3rem; flex-wrap: wrap; margin-top: 1.4rem; font-size: 16px; }
+.m7 .ctas a { color: var(--link); }
+.m7 .ctas a::after { content: " ›"; }
+.m7 .art { position: relative; z-index: 2; width: 100%; }
+.m7 .art svg, .m7 .art canvas { display: block; width: 100%; height: auto; }
+.m7 .artcap { font-size: 13px; color: var(--sub); margin-top: .6rem; text-align: center; }
+.m7 .cu:empty { display: none; }
+.m7 .counting .real { display: none; }
+
+.m7 [data-id=jackdaw] { --g: linear-gradient(100deg, #2997ff, #bf5af2 60%, #ff375f); --e: #2997ff; }
+.m7 [data-id=cpi] { --g: linear-gradient(100deg, #ff9f0a, #ff375f); --e: #e35d00; }
+.m7 [data-id=france] { --g: linear-gradient(100deg, #ff375f, #bf5af2); --e: #ff375f; }
+.m7 [data-id=mmx] { --g: linear-gradient(100deg, #64d2ff, #5e5ce6); --e: #64d2ff; }
+.m7 [data-id=lottery] { --g: linear-gradient(100deg, #8e8e93, #48484a); --e: #8e8e93; }
+.m7 [data-id=jio] { --g: linear-gradient(100deg, #28b04d, #0a84ff); --e: #1a9e4b; }
+.m7 [data-id=louvre] { --g: linear-gradient(100deg, #ffd60a, #ff9f0a); --e: #ffd60a; }
+
+/* Cover */
+.m7 .backissues { margin: clamp(1.6rem, 4cqi, 2.6rem) auto 0; max-width: 64rem; }
+.m7 .bi-h { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--sub); margin-bottom: 10px; }
+.m7 .bi-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.m7 .bi { display: flex; flex-direction: column; align-items: center; min-width: 5.2rem; padding: 10px 14px; border-radius: 16px; background: rgba(127,127,127,.1); color: inherit; }
+.m7 .bi:hover { background: rgba(127,127,127,.2); text-decoration: none; }
+.m7 .bi .d { font-size: 13px; font-weight: 600; }
+.m7 .bi .w { font-size: 11px; color: var(--sub); }
+.m7 .bi.today { outline: 1.5px solid currentColor; }
+.m7 .backissues:not(.has) { display: none; }
+
+.m7 .irow[data-id-row=jackdaw] { --e: #2997ff; }
+.m7 .irow[data-id-row=cpi] { --e: #e35d00; }
+.m7 .irow[data-id-row=france] { --e: #ff375f; }
+.m7 .irow[data-id-row=mmx] { --e: #3aa7d9; }
+.m7 .irow[data-id-row=lottery] { --e: #8e8e93; }
+.m7 .irow[data-id-row=jio] { --e: #1a9e4b; }
+.m7 .irow[data-id-row=louvre] { --e: #d4a300; }
+
+.m7 .cover { display: block; text-align: center; padding-top: clamp(64px, 10cqi, 120px); }
+.m7 .cover .date { font-size: 17px; font-weight: 600; color: var(--sub); }
+.m7 .cover h1.masthead { font-family: 'Seven Times Blackletter', 'UnifrakturMaguntia', 'Old English Text MT', serif; font-size: clamp(3.6rem, 13cqi, 8.4rem); font-weight: 400; letter-spacing: 0; line-height: 1; margin: .3rem 0 .5rem; }
+.m7 .cover .rule { width: min(22rem, 60%); height: 1px; margin: 0 auto 1rem; background: currentColor; opacity: .25; }
+.m7 .cover .tag { font-size: clamp(1.15rem, 2.6cqi, 1.6rem); color: var(--sub); margin: 0 0 clamp(2rem, 5cqi, 3.4rem); }
+.m7 .index { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 10px; text-align: left; max-width: 64rem; margin: 0 auto; }
+.m7 .irow { border: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; padding: 18px 20px; border-radius: 20px; background: rgba(127,127,127,.1); display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; align-items: baseline; transition: background .25s, transform .25s; }
+.m7 .irow:hover { background: rgba(127,127,127,.18); }
+.m7 .irow .n { grid-row: span 2; font-size: 2.1rem; font-weight: 700; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.m7 .irow .s { font-size: 12px; font-weight: 600; color: var(--e); text-transform: none; }
+.m7 .irow .h { font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+.m7 .scrollhint { margin-top: clamp(1.6rem, 4cqi, 3rem); font-size: 13px; color: var(--sub); }
+.m7 .scrollhint::after { content: ""; display: block; width: 1px; height: 34px; margin: 10px auto 0; background: currentColor; opacity: .5; }
+
+.m7 .credit { text-align: center; font-size: 12px; color: var(--color-fg-muted); padding: 1rem 1rem 3rem; }
+.m7 [data-dash-source-state=empty] { color: transparent; }
+.m7 .fail { display: flex; align-items: center; justify-content: center; gap: .5rem; min-height: 12rem; color: var(--sub); font-size: 13px; }
+.m7 .fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+
+@container (max-width: 52rem) {
+  .m7 .card { grid-template-columns: minmax(0, 1fr); align-content: start; padding-top: 58px; }
+  .m7 .card .art { order: 2; }
+  .m7 .big { margin-top: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .m7 .card { transform: none; }
+  .m7 .card::after { opacity: 0; }
+}
+</style>
+
+<div class="m7" id="m7">
+  <header class="mast">
+    <div class="wordmark">Seven Times</div>
+    <div class="mdate" data-source="edition" data-field="label" data-row="0">—</div>
+  </header>
+  <div class="deck" id="deck">
+    <div class="rail"><div class="rail-in" id="rail"><span class="rail-lbl" id="rail-lbl"></span><span class="segs" id="segs"></span></div></div>
+
+    <section class="card dark" id="s-jackdaw" data-id="jackdaw" data-tone="urgent">
+      <div class="txt">
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=jackdaw">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=jackdaw">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=jackdaw">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=jackdaw">—</p>
+        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=jackdaw-peak">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=jackdaw-peak"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=jackdaw-peak">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=jackdaw">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=jackdaw-critics">—</span><span data-source="facts" data-field="unit" data-where="id=jackdaw-critics"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=jackdaw-critics">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=jackdaw-years">—</span><span data-source="facts" data-field="unit" data-where="id=jackdaw-years"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=jackdaw-years">—</div></div></div>
+        <div class="ctas"><a data-href="jackdaw:1">Read at <span data-source="stories" data-field="src1" data-where="id=jackdaw">—</span></a><a data-href="jackdaw:2">Read at <span data-source="stories" data-field="src2" data-where="id=jackdaw">—</span></a></div>
+      </div>
+      <div class="art" id="art-jackdaw" data-source="facts"></div>
+    </section>
+    <section class="card light" id="s-cpi" data-id="cpi" data-tone="urgent">
+      <div class="txt">
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=cpi">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=cpi">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=cpi">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=cpi">—</p>
+        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=cpi-fuel">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=cpi-fuel"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=cpi-fuel">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=cpi">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=cpi-sep">—</span>%</div><div class="l">overall inflation, against a forecast of <span data-source="facts" data-field="value" data-where="id=cpi-forecast">—</span>%</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=cpi-bankrate">—</span><span data-source="facts" data-field="unit" data-where="id=cpi-bankrate"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=cpi-bankrate">—</div></div></div>
+        <div class="ctas"><a data-href="cpi:1">Read at <span data-source="stories" data-field="src1" data-where="id=cpi">—</span></a><a data-href="cpi:2">Read at <span data-source="stories" data-field="src2" data-where="id=cpi">—</span></a></div>
+      </div>
+      <div class="art" id="art-cpi" data-source="facts"></div>
+    </section>
+    <section class="card dark" id="s-france" data-id="france" data-tone="urgent">
+      <div class="txt">
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=france">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=france">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=france">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=france">—</p>
+        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=france-marchers">—</span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=france-marchers">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=france">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=france-custody">—</span></div><div class="l" data-source="facts" data-field="label" data-where="id=france-custody">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=france-adults">—</span><span data-source="facts" data-field="unit" data-where="id=france-adults"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=france-adults">—</div></div></div>
+        <div class="ctas"><a data-href="france:1">Read at <span data-source="stories" data-field="src1" data-where="id=france">—</span></a><a data-href="france:2">Read at <span data-source="stories" data-field="src2" data-where="id=france">—</span></a></div>
+      </div>
+      <div class="art" id="art-france" data-source="facts"></div>
+    </section>
+    <section class="card dark" id="s-mmx" data-id="mmx" data-tone="wonder">
+      <div class="txt">
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=mmx">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=mmx">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=mmx">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=mmx">—</p>
+        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=mmx-sample">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=mmx-sample"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=mmx-sample">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=mmx">—</p>
+        <div class="stats"><div><div class="v"><span data-source="mmx-ratio" data-field="ratio" data-row="0">—</span> to one</div><div class="l">the spacecraft’s weight against the sample’s</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=mmx-martian">—</span><span data-source="facts" data-field="unit" data-where="id=mmx-martian"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=mmx-martian">—</div></div></div>
+        <div class="ctas"><a data-href="mmx:1">Read at <span data-source="stories" data-field="src1" data-where="id=mmx">—</span></a><a data-href="mmx:2">Read at <span data-source="stories" data-field="src2" data-where="id=mmx">—</span></a></div>
+      </div>
+      <div class="art" id="art-mmx" data-source="facts"></div>
+    </section>
+    <section class="card light" id="s-lottery" data-id="lottery" data-tone="solemn">
+      <div class="txt">
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=lottery">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=lottery">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=lottery">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=lottery">—</p>
+        <div class="big grad"><span class="unit">Nearly </span><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=lottery-metrics">—</span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=lottery-metrics">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=lottery">—</p>
+        
+        <div class="ctas"><a data-href="lottery:1">Read at <span data-source="stories" data-field="src1" data-where="id=lottery">—</span></a><a data-href="lottery:2">Read at <span data-source="stories" data-field="src2" data-where="id=lottery">—</span></a></div>
+      </div>
+      <div class="art" id="art-lottery" data-source="lottery"></div>
+    </section>
+    <section class="card light" id="s-jio" data-id="jio" data-tone="light">
+      <div class="txt">
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=jio">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=jio">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=jio">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=jio">—</p>
+        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=jio-minutes">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=jio-minutes"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=jio-minutes">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=jio">—</p>
+        <div class="stats"><div><div class="v">$<span data-source="facts" data-field="value" data-where="id=jio-raise">—</span> billion</div><div class="l">at the top of the range, beating a record of $<span data-source="facts" data-field="value" data-where="id=jio-prior">—</span> billion</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=jio-times">—</span><span data-source="facts" data-field="unit" data-where="id=jio-times"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=jio-times">—</div></div></div>
+        <div class="ctas"><a data-href="jio:1">Read at <span data-source="stories" data-field="src1" data-where="id=jio">—</span></a><a data-href="jio:2">Read at <span data-source="stories" data-field="src2" data-where="id=jio">—</span></a></div>
+      </div>
+      <div class="art" id="art-jio" data-source="facts"></div>
+    </section>
+    <section class="card dark" id="s-louvre" data-id="louvre" data-tone="light">
+      <div class="txt">
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=louvre">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=louvre">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=louvre">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=louvre">—</p>
+        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=louvre-students">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=louvre-students"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=louvre-students">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=louvre">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=louvre-hours">—</span><span data-source="facts" data-field="unit" data-where="id=louvre-hours"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=louvre-hours">—</div></div></div>
+        <div class="ctas"><a data-href="louvre:1">Read at <span data-source="stories" data-field="src1" data-where="id=louvre">—</span></a><a data-href="louvre:2">Read at <span data-source="stories" data-field="src2" data-where="id=louvre">—</span></a></div>
+      </div>
+      <div class="art" id="art-louvre" data-source="facts"></div>
+    </section>
+
+  </div>
+  <footer class="foot">
+      <div class="backissues" id="backissues" data-source="archive"><div class="bi-h">Past seven days</div><div class="bi-row" id="bi-row"></div></div>
+  </footer>
+  <div class="credit"><span data-source="edition" data-field="edition" data-row="0">—</span>. Figures and summaries from the outlets linked on each card. Illustrations are not to scale unless stated.</div>
+</div>
+
+<script>
+(function(){
+  const root = document.getElementById('m7');
+  const deck = document.getElementById('deck');
+  const cards = Array.from(root.querySelectorAll('.card'));
+  const stories = cards.filter(c => c.dataset.id);
+  const calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  dash.calc('mmx-ratio', {
+    inputs: ['facts'],
+    title: 'MMX spacecraft-to-sample ratio',
+    description: 'Launch mass in grams divided by the minimum Phobos sample in grams.',
+    fn: (facts) => {
+      const v = id => (facts.find(r => r.id === id) || {}).value;
+      return [{ratio: Math.round(v('mmx-mass') * 1000 / v('mmx-sample'))}];
+    }
+  });
+
+  /* ---------- marks ---------- */
+  const fmtVal = (v, unit) => {
+    if (v == null || v === '') return '—';
+    const n = Number(v);
+    if (unit === 'year') return String(n);
+    if (Math.abs(n) >= 1000) return d3.format(',')(n);
+    return String(n);
+  };
+  const unitText = u => (u === '%' || u === '×' || u === 'g') ? u : ' ' + u;
+  const parseWhere = w => Object.fromEntries((w || '').split('&').filter(Boolean).map(p => p.split('=').map(decodeURIComponent)));
+  function fillMarks(){
+    root.querySelectorAll('[data-source][data-field]').forEach(el => {
+      const d = dash.data(el.getAttribute('data-source'));
+      if (d.status !== 'ok') return;
+      const field = el.getAttribute('data-field');
+      const rows = Array.isArray(d.data) ? d.data : [];
+      let row;
+      if (el.hasAttribute('data-where')) {
+        const w = parseWhere(el.getAttribute('data-where'));
+        row = rows.find(r => Object.entries(w).every(([k, v]) => String(r[k]) === v));
+      } else if (el.hasAttribute('data-row')) row = rows[+el.getAttribute('data-row')];
+      else return;
+      if (!row) { el.textContent = '—'; return; }
+      let val = row[field];
+      if (field === 'value' || field === 'ratio') val = fmtVal(val, row.unit);
+      else if (field === 'unit') val = unitText(row.unit);
+      else if (field === 'order') val = String(row.order).padStart(2, '0');
+      el.textContent = val == null ? '' : String(val);
+    });
+    const st = dash.data('stories');
+    if (st.status === 'ok') {
+      root.querySelectorAll('[data-href]').forEach(a => {
+        const [id, k] = a.getAttribute('data-href').split(':');
+        const r = st.data.find(x => x.id === id), url = r && r['url' + k];
+        if (url && /^https:\/\//.test(url)) { a.href = url; a.target = '_blank'; a.rel = 'noopener'; }
+      });
+      root.querySelectorAll('.cnt-total').forEach(el => { el.textContent = String(st.data.length).padStart(2, '0'); });
+    }
+  }
+
+  /* ---------- scroller, stacking, progress ---------- */
+  function scrollerOf(el){
+    let p = el.parentElement;
+    while (p && p !== document.body && p !== document.documentElement) {
+      const o = getComputedStyle(p).overflowY;
+      if ((o === 'auto' || o === 'scroll') && p.scrollHeight > p.clientHeight) return p;
+      p = p.parentElement;
+    }
+    return null;
+  }
+  let scroller = null;
+  const viewH = () => scroller ? scroller.clientHeight : window.innerHeight;
+  const viewTop = () => scroller ? scroller.getBoundingClientRect().top : 0;
+  function layout(){
+    scroller = scrollerOf(deck);
+    const vh = viewH();
+    root.style.setProperty('--vh', vh + 'px');
+    cards.forEach(c => { const h = c.offsetHeight; c.style.top = Math.min(14, vh - h - 14) + 'px'; });
+    onScroll();
+  }
+  const segs = document.getElementById('segs');
+  stories.forEach((c, i) => {
+    const b = document.createElement('button'); b.className = 'seg'; b.type = 'button'; b.setAttribute('aria-label', 'Story ' + (i + 1));
+    b.addEventListener('click', () => go(c)); segs.appendChild(b);
+  });
+  function go(el){ el.scrollIntoView({behavior: calm ? 'auto' : 'smooth', block: 'start'}); if (el.id) dash.setLink(el.id); }
+  root.addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) { const el = document.getElementById(b.dataset.go); if (el) go(el); } });
+
+  let ticking = false, current = -1;
+  function onScroll(){
+    ticking = false;
+    const vh = viewH(), top = viewTop();
+    const rects = cards.map(c => c.getBoundingClientRect());
+    cards.forEach((c, i) => {
+      let p = 0;
+      if (!calm && rects[i + 1]) p = Math.max(0, Math.min(1, 1 - (rects[i + 1].top - rects[i].top) / (vh * .9)));
+      c.style.setProperty('--p', p.toFixed(3));
+    });
+    let cur = -1;
+    stories.forEach((c, i) => { if (c.getBoundingClientRect().top - top <= vh * .45) cur = i; });
+    if (cur !== current) {
+      current = cur;
+      const rail = document.getElementById('rail');
+      rail.classList.toggle('show', cur >= 0);
+      Array.from(segs.children).forEach((s, i) => s.classList.toggle('on', i === cur));
+      if (cur >= 0) {
+        const c = stories[cur];
+        document.getElementById('rail-lbl').textContent = `${String(cur + 1).padStart(2, '0')} / ${String(stories.length).padStart(2, '0')}  ·  ${c.querySelector('.sec').textContent}`;
+      }
+    }
+  }
+  const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } };
+  document.addEventListener('scroll', req, {passive: true, capture: true});
+  window.addEventListener('resize', () => requestAnimationFrame(layout));
+
+  /* ---------- helpers ---------- */
+  const SF = getComputedStyle(root).getPropertyValue('--sf') || 'sans-serif';
+  function cssColor(el, v){ const p = document.createElement('span'); p.style.color = `var(${v})`; el.appendChild(p); const c = getComputedStyle(p).color; p.remove(); return c; }
+  function mkSvg(box, w, h){
+    box.textContent = '';
+    return d3.select(box).append('svg').attr('viewBox', `0 0 ${w} ${h}`).attr('font-family', SF).attr('role', 'img');
+  }
+  const T = (sel, x, y, s, o = {}) => sel.append('text').attr('x', x).attr('y', y).attr('font-size', o.size || 14).attr('font-weight', o.w || 400)
+    .attr('text-anchor', o.a || 'start').attr('fill', o.fill || 'var(--fg)').attr('opacity', o.op == null ? 1 : o.op).text(s);
+  const ease = d3.easeCubicInOut;
+
+  /* ---------- 1. Jackdaw: from reservoir to living rooms ---------- */
+  function artJackdaw(box, f){
+    const W = 640, H = 470, svg = mkSvg(box, W, H);
+    const defs = svg.append('defs');
+    const sea = defs.append('linearGradient').attr('id', 'jd-sea').attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
+    sea.append('stop').attr('offset', 0).attr('stop-color', '#0a84ff').attr('stop-opacity', .55);
+    sea.append('stop').attr('offset', 1).attr('stop-color', '#0a2a5c').attr('stop-opacity', .9);
+    const res = defs.append('radialGradient').attr('id', 'jd-res');
+    res.append('stop').attr('offset', 0).attr('stop-color', '#ff9f0a').attr('stop-opacity', .95);
+    res.append('stop').attr('offset', .55).attr('stop-color', '#bf5af2').attr('stop-opacity', .55);
+    res.append('stop').attr('offset', 1).attr('stop-color', '#bf5af2').attr('stop-opacity', 0);
+    const surf = 150, bed = 300, coast = 430;
+    // sea
+    svg.append('rect').attr('x', 0).attr('y', surf).attr('width', coast + 20).attr('height', bed - surf).attr('fill', 'url(#jd-sea)');
+    for (let i = 0; i < 9; i++) svg.append('path').attr('d', `M${i * 52} ${surf} q13 -5 26 0 t26 0`).attr('fill', 'none').attr('stroke', '#64d2ff').attr('opacity', .6);
+    // rock
+    svg.append('rect').attr('x', 0).attr('y', bed).attr('width', W).attr('height', H - bed).attr('fill', 'var(--line)').attr('opacity', .45);
+    for (let i = 1; i < 5; i++) svg.append('path').attr('d', `M0 ${bed + i * 34} C160 ${bed + i * 34 - 12}, 320 ${bed + i * 34 + 12}, ${W} ${bed + i * 34 - 6}`).attr('fill', 'none').attr('stroke', 'var(--sub)').attr('opacity', .18);
+    const glow = svg.append('ellipse').attr('cx', 110).attr('cy', 425).attr('rx', 120).attr('ry', 34).attr('fill', 'url(#jd-res)');
+    T(svg, 110, 458, 'Gas, under very high pressure', {a: 'middle', size: 12, fill: 'var(--sub)'});
+    // land + town
+    svg.append('path').attr('d', `M${coast} ${bed} L${coast + 22} 250 L${W} 236 L${W} ${H} L${coast} ${H} Z`).attr('fill', 'var(--line)').attr('opacity', .8);
+    // platform
+    const px = 110;
+    [-34, -12, 12, 34].forEach(dx => svg.append('line').attr('x1', px + dx).attr('x2', px + dx * 1.25).attr('y1', 104).attr('y2', bed).attr('stroke', 'var(--fg)').attr('stroke-width', 2.2).attr('opacity', .85));
+    svg.append('rect').attr('x', px - 48).attr('y', 92).attr('width', 96).attr('height', 14).attr('rx', 3).attr('fill', 'var(--fg)');
+    svg.append('path').attr('d', `M${px - 10} 92 L${px} 48 L${px + 10} 92`).attr('fill', 'none').attr('stroke', 'var(--fg)').attr('stroke-width', 2);
+    const flare = svg.append('path').attr('d', `M${px + 40} 92 L${px + 54} 60`).attr('stroke', 'var(--fg)').attr('stroke-width', 2);
+    const flame = svg.append('path').attr('d', `M${px + 54} 60 q-7 -10 0 -24 q7 14 0 24`).attr('fill', '#ff9f0a');
+    // drill string
+    const drill = svg.append('line').attr('x1', px).attr('x2', px).attr('y1', 106).attr('y2', 106).attr('stroke', '#ff9f0a').attr('stroke-width', 2.5).attr('stroke-dasharray', '6 4');
+    // depth dimension
+    const dx = 26;
+    svg.append('line').attr('x1', dx).attr('x2', dx).attr('y1', surf).attr('y2', bed).attr('stroke', '#fff').attr('opacity', .8);
+    [surf, bed].forEach(y => svg.append('line').attr('x1', dx - 6).attr('x2', dx + 6).attr('y1', y).attr('y2', y).attr('stroke', '#fff').attr('opacity', .8));
+    T(svg, dx + 10, (surf + bed) / 2 + 4, `${f['jackdaw-depth'].value} m of sea`, {size: 12, fill: '#fff', w: 600});
+    // pipeline along the seabed
+    const pipeD = `M${px} ${bed - 2} L${coast - 90} ${bed - 2} M${coast - 70} ${bed - 2} L${coast + 8} ${bed - 2} L${coast + 30} 252`;
+    const pipe = svg.append('path').attr('d', pipeD).attr('fill', 'none').attr('stroke', '#ff9f0a').attr('stroke-width', 3).attr('stroke-linecap', 'round');
+    svg.append('text').attr('x', coast - 80).attr('y', bed + 5).attr('text-anchor', 'middle').attr('font-size', 16).attr('fill', '#ff9f0a').text('≈');
+    T(svg, (px + coast) / 2 + 20, bed - 12, `${f['jackdaw-km'].value} km to Aberdeen`, {a: 'middle', size: 12, fill: '#fff', w: 600});
+    // town: one house = 10,000 homes
+    const PER = 10000, nH = Math.round(f['jackdaw-homes'].value * 1e6 / PER), cols = 14;
+    const hx0 = coast + 34, hy0 = 112, hs = 12.4;
+    const houses = [];
+    for (let i = 0; i < nH; i++) {
+      const c = i % cols, r = Math.floor(i / cols), x = hx0 + c * hs, y = hy0 + r * hs;
+      houses.push(svg.append('path').attr('d', `M${x} ${y + 4} L${x + 4.5} ${y} L${x + 9} ${y + 4} L${x + 9} ${y + 10} L${x} ${y + 10} Z`).attr('fill', 'var(--sub)').attr('opacity', .3));
+    }
+    T(svg, hx0 + cols * hs / 2 - 2, hy0 - 26, `${f['jackdaw-homes'].value} million homes`, {a: 'middle', size: 15, w: 700});
+    T(svg, hx0 + cols * hs / 2 - 2, hy0 - 10, `heated at peak · one house = ${d3.format(',')(PER)}`, {a: 'middle', size: 11, fill: 'var(--sub)'});
+    const L = pipe.node().getTotalLength();
+    function final(){ drill.attr('y2', 400); pipe.attr('stroke-dasharray', null); houses.forEach(h => h.attr('fill', '#ffb340').attr('opacity', 1)); }
+    let flick = null;
+    return {
+      play(){
+        if (calm) return final();
+        drill.attr('y2', 106).transition().duration(900).ease(ease).attr('y2', 400);
+        pipe.attr('stroke-dasharray', `${L} ${L}`).attr('stroke-dashoffset', L).transition().delay(800).duration(1300).ease(ease).attr('stroke-dashoffset', 0);
+        houses.forEach((h, i) => h.attr('fill', 'var(--sub)').attr('opacity', .3).transition().delay(2000 + i * 11).duration(300).attr('fill', '#ffb340').attr('opacity', 1));
+        glow.attr('opacity', .3).transition().duration(1600).attr('opacity', 1);
+        if (!flick) flick = d3.interval(() => flame.attr('transform', `translate(${px + 54},60) scale(${.85 + Math.random() * .3}) translate(${-(px + 54)},-60)`), 140);
+      },
+      stop(){ if (flick) { flick.stop(); flick = null; } },
+      final
+    };
+  }
+
+  /* ---------- 2. Inflation: the pump and the receipt ---------- */
+  function artCpi(box, f){
+    const W = 640, H = 470, svg = mkSvg(box, W, H);
+    const fuel = f['cpi-fuel'].value, cpi = f['cpi-sep'].value;
+    const defs = svg.append('defs');
+    const g = defs.append('linearGradient').attr('id', 'cp-body').attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
+    g.append('stop').attr('offset', 0).attr('stop-color', '#ff6b3d'); g.append('stop').attr('offset', 1).attr('stop-color', '#e0243f');
+    // pump
+    const bx = 40, by = 50;
+    svg.append('rect').attr('x', bx).attr('y', by).attr('width', 200).attr('height', 340).attr('rx', 26).attr('fill', 'url(#cp-body)');
+    svg.append('rect').attr('x', bx - 10).attr('y', by + 340).attr('width', 220).attr('height', 22).attr('rx', 8).attr('fill', '#1d1d1f');
+    svg.append('rect').attr('x', bx + 22).attr('y', by + 34).attr('width', 156).attr('height', 104).attr('rx', 14).attr('fill', '#0b0b0d');
+    T(svg, bx + 34, by + 58, 'A YEAR AGO', {size: 10, fill: '#8e8e93', w: 600});
+    T(svg, bx + 166, by + 58, '£100.00', {a: 'end', size: 12, fill: '#8e8e93', w: 600});
+    T(svg, bx + 34, by + 84, 'TODAY', {size: 10, fill: '#ffd60a', w: 600});
+    const pumpTxt = T(svg, bx + 166, by + 122, '£100.00', {a: 'end', size: 34, fill: '#ffd60a', w: 700}).attr('font-variant-numeric', 'tabular-nums');
+    svg.append('rect').attr('x', bx + 22).attr('y', by + 160).attr('width', 156).attr('height', 54).attr('rx', 12).attr('fill', 'rgba(255,255,255,.16)');
+    T(svg, bx + 100, by + 185, 'Same tank of fuel', {a: 'middle', size: 13, fill: '#fff', w: 600});
+    T(svg, bx + 100, by + 203, `+${fuel}% in a year`, {a: 'middle', size: 12, fill: '#fff', op: .85});
+    svg.append('path').attr('d', `M${bx + 200} ${by + 120} C ${bx + 250} ${by + 130}, ${bx + 250} ${by + 260}, ${bx + 228} ${by + 300}`).attr('fill', 'none').attr('stroke', '#1d1d1f').attr('stroke-width', 9).attr('stroke-linecap', 'round');
+    svg.append('rect').attr('x', bx + 210).attr('y', by + 292).attr('width', 26).attr('height', 46).attr('rx', 6).attr('fill', '#1d1d1f');
+    // receipt
+    const rx = 330, ry = 64, rw = 260, rh = 250;
+    let zig = `M${rx} ${ry} L${rx + rw} ${ry} L${rx + rw} ${ry + rh}`;
+    for (let x = rx + rw; x > rx; x -= 13) zig += ` L${x - 6.5} ${ry + rh + 8} L${x - 13} ${ry + rh}`;
+    svg.append('path').attr('d', zig + ' Z').attr('fill', '#fff').attr('stroke', 'rgba(0,0,0,.08)');
+    const ink = '#1d1d1f', grey = '#6e6e73';
+    T(svg, rx + rw / 2, ry + 34, 'EVERYTHING ELSE', {a: 'middle', size: 13, fill: ink, w: 700}).attr('letter-spacing', '.12em');
+    T(svg, rx + rw / 2, ry + 52, 'the average shopping basket', {a: 'middle', size: 11, fill: grey});
+    svg.append('line').attr('x1', rx + 20).attr('x2', rx + rw - 20).attr('y1', ry + 70).attr('y2', ry + 70).attr('stroke', grey).attr('stroke-dasharray', '3 3');
+    T(svg, rx + 20, ry + 100, 'A year ago', {size: 14, fill: grey});
+    T(svg, rx + rw - 20, ry + 100, '£100.00', {a: 'end', size: 14, fill: grey}).attr('font-variant-numeric', 'tabular-nums');
+    T(svg, rx + 20, ry + 132, 'Today', {size: 16, fill: ink, w: 700});
+    const recTxt = T(svg, rx + rw - 20, ry + 132, '£100.00', {a: 'end', size: 16, fill: ink, w: 700}).attr('font-variant-numeric', 'tabular-nums');
+    svg.append('line').attr('x1', rx + 20).attr('x2', rx + rw - 20).attr('y1', ry + 150).attr('y2', ry + 150).attr('stroke', grey).attr('stroke-dasharray', '3 3');
+    // mini trend on the receipt
+    const tr = [['Jul', f['cpi-jul'].value], ['Aug', f['cpi-aug'].value], ['Sep', f['cpi-sep'].value]];
+    const tx = d3.scalePoint(tr.map(d => d[0]), [rx + 40, rx + rw - 40]), ty = d3.scaleLinear([f['cpi-target'].value - .5, cpi + .3], [ry + 228, ry + 166]);
+    svg.append('line').attr('x1', rx + 24).attr('x2', rx + rw - 24).attr('y1', ty(f['cpi-target'].value)).attr('y2', ty(f['cpi-target'].value)).attr('stroke', grey).attr('stroke-dasharray', '2 3');
+    T(svg, rx + 24, ty(f['cpi-target'].value) - 4, `${f['cpi-target'].value}% target`, {size: 9, fill: grey});
+    svg.append('path').attr('d', d3.line().x(d => tx(d[0])).y(d => ty(d[1]))(tr)).attr('fill', 'none').attr('stroke', '#ff375f').attr('stroke-width', 2.2).attr('stroke-linejoin', 'round');
+    tr.forEach(d => { svg.append('circle').attr('cx', tx(d[0])).attr('cy', ty(d[1])).attr('r', 3.2).attr('fill', '#ff375f'); T(svg, tx(d[0]), ty(d[1]) - 8, d[1] + '%', {a: 'middle', size: 10, fill: ink, w: 600}); T(svg, tx(d[0]), ry + 244, d[0], {a: 'middle', size: 9, fill: grey}); });
+    T(svg, rx + rw / 2, ry + rh + 46, 'Annual inflation, three months running', {a: 'middle', size: 12, fill: 'var(--sub)'});
+    const fmt = v => '£' + v.toFixed(2);
+    const to1 = 100 * (1 + fuel / 100), to2 = 100 * (1 + cpi / 100);
+    function final(){ pumpTxt.text(fmt(to1)); recTxt.text(fmt(to2)); }
+    let t = null;
+    return {
+      play(){
+        if (calm) return final();
+        if (t) t.stop();
+        t = d3.timer(el => {
+          const p = Math.min(1, el / 2200), e = d3.easeCubicOut(p);
+          pumpTxt.text(fmt(100 + (to1 - 100) * e)); recTxt.text(fmt(100 + (to2 - 100) * Math.min(1, e * 1.4)));
+          if (p >= 1) t.stop();
+        });
+      },
+      stop(){}, final
+    };
+  }
+
+  /* ---------- 3. France: a march in motion (canvas) ---------- */
+  function artFrance(box, f){
+    box.textContent = '';
+    const cv = document.createElement('canvas'); box.appendChild(cv);
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const W = 640, H = 470;
+    cv.width = W * dpr; cv.height = H * dpr;
+    const ctx = cv.getContext('2d'); ctx.scale(dpr, dpr);
+    const fg = cssColor(box, '--fg'), sub = cssColor(box, '--sub');
+    const PER = 1000, n = Math.round(f['france-marchers'].value / PER), held = f['france-custody'].value / PER;
+    const P0 = [-20, 380], P1 = [200, 360], P2 = [360, 110], P3 = [660, 90];
+    const bez = (t, k) => { const u = 1 - t; return u*u*u*P0[k] + 3*u*u*t*P1[k] + 3*u*t*t*P2[k] + t*t*t*P3[k]; };
+    const pt = t => [bez(t, 0), bez(t, 1)];
+    const norm = t => { const a = pt(Math.max(0, t - .002)), b = pt(Math.min(1, t + .002)); const dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1; return [-dy / l, dx / l]; };
+    const rnd = d3.randomLcg(42);
+    const walkers = d3.range(n).map(i => ({t: rnd(), off: (rnd() - .5) * 64, sp: .00055 + rnd() * .0004, ph: rnd() * 6.28}));
+    const penX = 470, penY = 300, penW = 130, penH = 74;
+    const reds = d3.range(Math.ceil(held)).map(i => ({t: .08 + i * .05, off: (i - 1) * 14, a: i < Math.floor(held) ? 1 : Math.max(.35, held - Math.floor(held)), state: 'march', x: 0, y: 0, tx: penX + 34 + i * 30, ty: penY + 44}));
+    function drawFrame(time){
+      ctx.clearRect(0, 0, W, H);
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = sub; ctx.globalAlpha = .12; ctx.lineWidth = 84;
+      ctx.beginPath(); ctx.moveTo(...P0); ctx.bezierCurveTo(...P1, ...P2, ...P3); ctx.stroke();
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = fg;
+      for (const w of walkers) {
+        const [x, y] = pt(w.t), [nx, ny] = norm(w.t), wob = Math.sin(time / 380 + w.ph) * 1.4;
+        ctx.globalAlpha = .62; ctx.beginPath(); ctx.arc(x + nx * (w.off + wob), y + ny * (w.off + wob), 2.1, 0, 6.283); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      // pen
+      ctx.setLineDash([4, 4]); ctx.strokeStyle = '#ff375f'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.roundRect ? ctx.roundRect(penX, penY, penW, penH, 14) : ctx.rect(penX, penY, penW, penH); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = '#ff375f'; ctx.font = `600 12px ${SF}`; ctx.textAlign = 'center';
+      ctx.fillText(`Detained: ${d3.format(',')(f['france-custody'].value)}`, penX + penW / 2, penY + 20);
+      for (const r of reds) {
+        ctx.globalAlpha = r.a; ctx.fillStyle = '#ff375f';
+        ctx.beginPath(); ctx.arc(r.x, r.y, 5.5, 0, 6.283); ctx.fill();
+        if (r.state === 'held') { ctx.globalAlpha = .25 * r.a * (1 + Math.sin(time / 500)); ctx.beginPath(); ctx.arc(r.x, r.y, 11, 0, 6.283); ctx.fill(); }
+      }
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = sub; ctx.font = `12px ${SF}`; ctx.textAlign = 'left';
+      ctx.fillText(`Each dot is ${d3.format(',')(PER)} marchers, by organizers’ count`, 16, H - 14);
+    }
+    function step(){
+      for (const w of walkers) { w.t += w.sp; if (w.t > 1) w.t -= 1; }
+      for (const r of reds) {
+        if (r.state === 'march') { r.t += .0011; const [x, y] = pt(r.t), [nx, ny] = norm(r.t); r.x = x + nx * r.off; r.y = y + ny * r.off; if (r.t > .5) r.state = 'leave'; }
+        else if (r.state === 'leave') { r.x += (r.tx - r.x) * .045; r.y += (r.ty - r.y) * .045; if (Math.hypot(r.tx - r.x, r.ty - r.y) < .6) { r.state = 'held'; r.x = r.tx; r.y = r.ty; } }
+      }
+    }
+    function reset(){ reds.forEach((r, i) => { r.t = .08 + i * .05; r.state = 'march'; const [x, y] = pt(r.t); r.x = x; r.y = y; }); }
+    function final(){ reds.forEach(r => { r.state = 'held'; r.x = r.tx; r.y = r.ty; }); drawFrame(0); }
+    reset(); drawFrame(0);
+    let timer = null;
+    return {
+      play(){ if (calm) return final(); reset(); if (timer) timer.stop(); timer = d3.timer(el => { step(); drawFrame(el); }); },
+      stop(){ if (timer) { timer.stop(); timer = null; } },
+      final
+    };
+  }
+
+  /* ---------- 4. MMX: the round trip ---------- */
+  function artMmx(box, f){
+    const W = 640, H = 470, svg = mkSvg(box, W, H);
+    const cx = 270, cy = 230, rE = 112, rM = 178;
+    const defs = svg.append('defs');
+    const sun = defs.append('radialGradient').attr('id', 'mx-sun');
+    sun.append('stop').attr('offset', 0).attr('stop-color', '#ffd60a'); sun.append('stop').attr('offset', 1).attr('stop-color', '#ff9f0a').attr('stop-opacity', 0);
+    // starfield
+    const rnd = d3.randomLcg(7);
+    for (let i = 0; i < 70; i++) svg.append('circle').attr('cx', rnd() * W).attr('cy', rnd() * H).attr('r', rnd() * 1.1 + .2).attr('fill', 'var(--fg)').attr('opacity', .15 + rnd() * .35);
+    svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', 34).attr('fill', 'url(#mx-sun)');
+    svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', 9).attr('fill', '#ffd60a');
+    [rE, rM].forEach(r => svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', r).attr('fill', 'none').attr('stroke', 'var(--line)').attr('stroke-dasharray', '2 5'));
+    const E = [cx - rE, cy], M = [cx + rM, cy];
+    const a = (rE + rM) / 2, b = Math.sqrt(rE * rM), ex = cx + (rM - rE) / 2;
+    const outD = `M${E[0]} ${E[1]} A ${a} ${b} 0 0 1 ${M[0]} ${M[1]}`;
+    const backD = `M${M[0]} ${M[1]} A ${a} ${b} 0 0 1 ${E[0]} ${E[1]}`;
+    const out = svg.append('path').attr('d', outD).attr('fill', 'none').attr('stroke', '#64d2ff').attr('stroke-width', 1.6).attr('stroke-dasharray', '5 5').attr('opacity', .8);
+    const back = svg.append('path').attr('d', backD).attr('fill', 'none').attr('stroke', '#5e5ce6').attr('stroke-width', 1.6).attr('stroke-dasharray', '5 5').attr('opacity', .8);
+    svg.append('circle').attr('cx', E[0]).attr('cy', E[1]).attr('r', 9).attr('fill', '#0a84ff');
+    T(svg, E[0], E[1] + 28, 'Earth', {a: 'middle', size: 12, fill: 'var(--sub)'});
+    svg.append('circle').attr('cx', M[0]).attr('cy', M[1]).attr('r', 7.5).attr('fill', '#ff6b3d');
+    T(svg, M[0] + 14, M[1] + 30, 'Mars', {a: 'middle', size: 12, fill: 'var(--sub)'});
+    svg.append('circle').attr('cx', M[0]).attr('cy', M[1]).attr('r', 18).attr('fill', 'none').attr('stroke', 'var(--line)');
+    const phobos = svg.append('circle').attr('r', 2.6).attr('fill', 'var(--fg)');
+    // labels
+    const y = id => f[id].value;
+    T(svg, cx, cy - b - 16, `${y('mmx-launch')} → ${y('mmx-mars')}  ·  out`, {a: 'middle', size: 13, w: 600, fill: '#64d2ff'});
+    T(svg, cx, cy + b + 26, `${y('mmx-return')}  ·  home, with the sample`, {a: 'middle', size: 13, w: 600, fill: '#9d9bff'});
+    T(svg, M[0] - 6, M[1] - 30, `${y('mmx-sampling')}: lands on Phobos`, {a: 'end', size: 12, fill: 'var(--fg)', w: 600});
+    // ratio card
+    const kx = 470, ky = 360;
+    T(svg, W - 22, ky, `${d3.format(',')(f['mmx-mass'].value)} kg out`, {a: 'end', size: 15, w: 700});
+    T(svg, W - 22, ky + 22, `${f['mmx-sample'].value} g back`, {a: 'end', size: 15, w: 700, fill: '#64d2ff'});
+    T(svg, W - 22, ky + 42, 'about two teaspoons of soil', {a: 'end', size: 11, fill: 'var(--sub)'});
+    T(svg, 22, H - 16, 'Orbits illustrative, not to scale', {size: 10, fill: 'var(--sub)'});
+    const probe = svg.append('g');
+    probe.append('circle').attr('r', 9).attr('fill', '#64d2ff').attr('opacity', .25);
+    probe.append('circle').attr('r', 3.6).attr('fill', '#fff');
+    const oL = out.node().getTotalLength(), bL = back.node().getTotalLength();
+    const place = (path, L, p) => { const q = path.node().getPointAtLength(L * p); probe.attr('transform', `translate(${q.x},${q.y})`); };
+    function frame(el){
+      const ph = el / 1000 * 2.4; phobos.attr('cx', M[0] + Math.cos(ph) * 18).attr('cy', M[1] + Math.sin(ph) * 18);
+      const cyc = 10000, t = el % cyc;
+      if (t < 3200) place(out, oL, ease(t / 3200));
+      else if (t < 6000) { const ang = (t - 3200) / 2800 * Math.PI * 4; probe.attr('transform', `translate(${M[0] + Math.cos(ang) * 30},${M[1] + Math.sin(ang) * 30})`); }
+      else if (t < 9200) place(back, bL, ease((t - 6000) / 3200));
+      else probe.attr('transform', `translate(${E[0]},${E[1]})`);
+    }
+    function final(){ phobos.attr('cx', M[0] + 18).attr('cy', M[1]); probe.attr('transform', `translate(${M[0] - 26},${M[1] - 10})`); }
+    final();
+    let timer = null;
+    return { play(){ if (calm) return final(); if (timer) timer.stop(); timer = d3.timer(frame); }, stop(){ if (timer) { timer.stop(); timer = null; } }, final };
+  }
+
+  /* ---------- 5. Childhood lottery: the draw ---------- */
+  function artLottery(box, rows, f){
+    const W = 640, H = 470, svg = mkSvg(box, W, H);
+    const cx = 240, cy = 200, R = 150;
+    const defs = svg.append('defs');
+    defs.append('clipPath').attr('id', 'lt-clip').append('circle').attr('cx', cx).attr('cy', cy).attr('r', R - 6);
+    svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', R).attr('fill', 'var(--fg)').attr('opacity', .05);
+    svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', R).attr('fill', 'none').attr('stroke', 'var(--sub)').attr('stroke-width', 3).attr('opacity', .5);
+    const inner = svg.append('g').attr('clip-path', 'url(#lt-clip)');
+    const rnd = d3.randomLcg(3);
+    const tones = ['#8e8e93', '#aeaeb2', '#636366', '#c7c7cc'];
+    const balls = d3.range(42).map(i => ({r: 20 + rnd() * (R - 44), a: rnd() * 6.28, s: .4 + rnd() * .7, z: 9 + rnd() * 5, c: tones[i % 4]}));
+    const bs = balls.map(bb => inner.append('circle').attr('r', bb.z).attr('fill', bb.c).attr('opacity', .85));
+    T(svg, cx, cy + R + 30, `Nearly ${f['lottery-metrics'].value} measures in the mix`, {a: 'middle', size: 13, fill: 'var(--sub)'});
+    // chute + tray
+    svg.append('path').attr('d', `M${cx + R * .72} ${cy + R * .69} C ${cx + R + 20} ${cy + R + 20}, ${cx + R + 60} ${cy + R - 10}, ${cx + R + 90} ${cy + R - 30}`).attr('fill', 'none').attr('stroke', 'var(--sub)').attr('stroke-width', 22).attr('stroke-linecap', 'round').attr('opacity', .18);
+    const trayY = 120;
+    svg.append('rect').attr('x', 430).attr('y', trayY - 12).attr('width', 190).attr('height', 3 * 96 + 18).attr('rx', 26).attr('fill', 'var(--fg)').attr('opacity', .05);
+    T(svg, 525, trayY - 24, 'Drawn: hardest places', {a: 'middle', size: 12, fill: 'var(--sub)', w: 600});
+    const T3 = rows.map((r, i) => {
+      const g = svg.append('g').attr('transform', `translate(525,${trayY + 40 + i * 96})`);
+      g.append('circle').attr('r', 40).attr('fill', ['#636366', '#8e8e93', '#aeaeb2'][i % 3]);
+      g.append('circle').attr('r', 27).attr('fill', 'var(--color-panel)');
+      const t = g.append('text').attr('text-anchor', 'middle').attr('y', 4).attr('font-size', 11).attr('font-weight', 700).attr('fill', 'var(--fg)').text(r.place);
+      let fs = 11; while (t.node().getComputedTextLength() > 50 && fs > 7) { fs--; t.attr('font-size', fs); }
+      return g;
+    });
+    function frame(el){
+      balls.forEach((bb, i) => {
+        const a = bb.a + el / 1000 * bb.s, wob = Math.sin(el / 700 + i) * 8;
+        bs[i].attr('cx', cx + Math.cos(a) * (bb.r + wob)).attr('cy', cy + Math.sin(a) * (bb.r + wob) * .92 + 10);
+      });
+    }
+    function final(){ frame(0); T3.forEach((g, i) => g.attr('opacity', 1).attr('transform', `translate(525,${trayY + 40 + i * 96})`)); }
+    final();
+    let timer = null;
+    return {
+      play(){
+        if (calm) return final();
+        if (timer) timer.stop(); timer = d3.timer(frame);
+        T3.forEach((g, i) => g.attr('opacity', 0).attr('transform', `translate(${cx + R * .8},${cy + R * .7})`)
+          .transition().delay(500 + i * 900).duration(900).ease(d3.easeBackOut.overshoot(1.4)).attr('opacity', 1).attr('transform', `translate(525,${trayY + 40 + i * 96})`));
+      },
+      stop(){ if (timer) { timer.stop(); timer = null; } },
+      final
+    };
+  }
+
+  /* ---------- 6. Jio: glasses filling up ---------- */
+  function artJio(box, f){
+    const W = 640, H = 470, svg = mkSvg(box, W, H);
+    const times = f['jio-times'].value, nG = Math.ceil(times);
+    const defs = svg.append('defs');
+    const lg = defs.append('linearGradient').attr('id', 'ji-liq').attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
+    lg.append('stop').attr('offset', 0).attr('stop-color', '#30d158'); lg.append('stop').attr('offset', 1).attr('stop-color', '#0a84ff');
+    const gw = 130, gh = 230, gap = 46, x0 = (W - (nG * gw + (nG - 1) * gap)) / 2, top = 110, bot = top + gh;
+    const fills = [];
+    for (let i = 0; i < nG; i++) {
+      const x = x0 + i * (gw + gap);
+      const shape = `M${x} ${top} L${x + 12} ${bot} Q${x + 14} ${bot + 10} ${x + 26} ${bot + 10} L${x + gw - 26} ${bot + 10} Q${x + gw - 14} ${bot + 10} ${x + gw - 12} ${bot} L${x + gw} ${top}`;
+      defs.append('clipPath').attr('id', 'ji-c' + i).append('path').attr('d', shape + ' Z');
+      const lvl = Math.min(1, times - i);
+      const rect = svg.append('rect').attr('clip-path', `url(#ji-c${i})`).attr('x', x - 2).attr('width', gw + 4).attr('y', bot + 12).attr('height', 0).attr('fill', 'url(#ji-liq)');
+      fills.push({rect, lvl, x});
+      svg.append('path').attr('d', shape).attr('fill', 'none').attr('stroke', 'var(--fg)').attr('stroke-width', 2.5).attr('stroke-linejoin', 'round').attr('opacity', .85);
+    }
+    T(svg, W / 2, 52, 'Each glass is every share on offer', {a: 'middle', size: 13, fill: 'var(--sub)'});
+    const labY = bot + 46;
+    T(svg, fills[0].x + gw / 2, labY, `Full in ${f['jio-minutes'].value} minutes`, {a: 'middle', size: 13, w: 700});
+    T(svg, fills[0].x + gw / 2, labY + 18, 'an Indian record', {a: 'middle', size: 11, fill: 'var(--sub)'});
+    T(svg, fills[nG - 1].x + gw / 2, labY, `${times}× by mid-afternoon`, {a: 'middle', size: 13, w: 700, fill: '#1a9e4b'});
+    T(svg, fills[nG - 1].x + gw / 2, labY + 18, 'and still pouring', {a: 'middle', size: 11, fill: 'var(--sub)'});
+    const yOf = l => bot + 10 - (gh + 10) * l;
+    function final(){ fills.forEach(F => F.rect.attr('y', yOf(F.lvl)).attr('height', (gh + 10) * F.lvl + 4)); }
+    return {
+      play(){
+        if (calm) return final();
+        let d = 0;
+        fills.forEach(F => {
+          F.rect.interrupt().attr('y', bot + 12).attr('height', 0)
+            .transition().delay(d).duration(1100 * F.lvl + 200).ease(d3.easeQuadInOut).attr('y', yOf(F.lvl)).attr('height', (gh + 10) * F.lvl + 4);
+          d += 1100 * F.lvl + 250;
+        });
+      },
+      stop(){}, final
+    };
+  }
+
+  /* ---------- 7. Louvre: fifty at the pyramid ---------- */
+  function artLouvre(box, f){
+    const W = 640, H = 470, svg = mkSvg(box, W, H);
+    const ground = 340, bx0 = 170, bx1 = 470, apx = 320, apy = 120;
+    const defs = svg.append('defs');
+    const gl = defs.append('linearGradient').attr('id', 'lv-glass').attr('x1', 0).attr('x2', 1).attr('y1', 0).attr('y2', 1);
+    gl.append('stop').attr('offset', 0).attr('stop-color', '#64d2ff').attr('stop-opacity', .35); gl.append('stop').attr('offset', 1).attr('stop-color', '#5e5ce6').attr('stop-opacity', .12);
+    defs.append('clipPath').attr('id', 'lv-tri').append('path').attr('d', `M${bx0} ${ground} L${apx} ${apy} L${bx1} ${ground} Z`);
+    svg.append('path').attr('d', `M${bx0} ${ground} L${apx} ${apy} L${bx1} ${ground} Z`).attr('fill', 'url(#lv-glass)');
+    const lat = svg.append('g').attr('clip-path', 'url(#lv-tri)').attr('stroke', 'var(--fg)').attr('opacity', .28);
+    for (let i = -12; i <= 12; i++) {
+      lat.append('line').attr('x1', apx + i * 26).attr('y1', apy).attr('x2', apx + i * 26 - 300).attr('y2', apy + 300 * 1.47);
+      lat.append('line').attr('x1', apx + i * 26).attr('y1', apy).attr('x2', apx + i * 26 + 300).attr('y2', apy + 300 * 1.47);
+    }
+    svg.append('path').attr('d', `M${bx0} ${ground} L${apx} ${apy} L${bx1} ${ground}`).attr('fill', 'none').attr('stroke', 'var(--fg)').attr('stroke-width', 2).attr('opacity', .8);
+    svg.append('line').attr('x1', 20).attr('x2', W - 20).attr('y1', ground).attr('y2', ground).attr('stroke', 'var(--line)');
+    // clock
+    const ck = [W - 70, 82], cr = 38;
+    const open = f['louvre-open'].value, noon = f['louvre-noon'].value;
+    svg.append('circle').attr('cx', ck[0]).attr('cy', ck[1]).attr('r', cr).attr('fill', 'none').attr('stroke', 'var(--sub)').attr('stroke-width', 2);
+    const arc = d3.arc()({innerRadius: 0, outerRadius: cr - 4, startAngle: (open % 12) / 12 * 2 * Math.PI, endAngle: (noon % 12 || 12) / 12 * 2 * Math.PI});
+    const shut = svg.append('path').attr('transform', `translate(${ck[0]},${ck[1]})`).attr('d', arc).attr('fill', '#ff9f0a').attr('opacity', .8);
+    for (let h = 0; h < 12; h++) { const a = h / 12 * 2 * Math.PI; svg.append('line').attr('x1', ck[0] + Math.sin(a) * (cr - 6)).attr('y1', ck[1] - Math.cos(a) * (cr - 6)).attr('x2', ck[0] + Math.sin(a) * cr).attr('y2', ck[1] - Math.cos(a) * cr).attr('stroke', 'var(--sub)'); }
+    T(svg, ck[0], ck[1] + cr + 20, `Shut ${open}am to noon`, {a: 'middle', size: 12, w: 600});
+    T(svg, ck[0], ck[1] + cr + 36, 'at least', {a: 'middle', size: 11, fill: 'var(--sub)'});
+    // students
+    const n = f['louvre-students'].value, perRow = Math.ceil(n / 2), sp = Math.min(22, (W - 60) / perRow);
+    const people = d3.range(n).map(i => {
+      const row = Math.floor(i / perRow), col = i % perRow;
+      const x = W / 2 - (perRow - 1) * sp / 2 + col * sp + (row ? sp / 2 : 0), y = ground + 40 + row * 34;
+      const g = svg.append('g').attr('transform', `translate(${x},${y})`);
+      g.append('circle').attr('cy', -18).attr('r', 4.4).attr('fill', '#ffd60a');
+      g.append('rect').attr('x', -4.2).attr('y', -12.5).attr('width', 8.4).attr('height', 15).attr('rx', 3.6).attr('fill', '#ffd60a');
+      return {g, x, y};
+    });
+    T(svg, W / 2, H - 6, 'One figure per student', {a: 'middle', size: 11, fill: 'var(--sub)'});
+    function final(){ people.forEach(p => p.g.attr('opacity', 1).attr('transform', `translate(${p.x},${p.y})`)); shut.attr('opacity', .8); }
+    return {
+      play(){
+        if (calm) return final();
+        people.forEach((p, i) => {
+          const fromX = p.x < W / 2 ? -30 : W + 30;
+          p.g.interrupt().attr('opacity', 0).attr('transform', `translate(${fromX},${p.y})`)
+            .transition().delay(i * 34).duration(1100).ease(d3.easeCubicOut).attr('opacity', 1).attr('transform', `translate(${p.x},${p.y})`);
+        });
+        shut.attr('opacity', 0).transition().delay(1500).duration(700).attr('opacity', .8);
+      },
+      stop(){}, final
+    };
+  }
+
+  /* ---------- count-up for the hero numbers ---------- */
+  let factsMap = null;
+  function countUp(card){
+    if (calm || !factsMap || card.dataset.tone === 'solemn' || card.classList.contains('counting')) return;
+    const real = card.querySelector('.big .real'), cu = card.querySelector('.big .cu');
+    if (!real || !cu) return;
+    const row = factsMap[(real.getAttribute('data-where') || '').split('=')[1]];
+    if (!row) return;
+    const v = row.value, dec = (String(v).split('.')[1] || '').length;
+    const fmt = x => Math.abs(v) >= 1000 ? d3.format(',.0f')(x) : x.toFixed(dec);
+    card.classList.add('counting');
+    const t = d3.timer(el => { const p = Math.min(1, el / 900); cu.textContent = fmt(v * d3.easeCubicOut(p)); if (p >= 1) { t.stop(); cu.textContent = ''; card.classList.remove('counting'); } });
+  }
+
+
+  /* ---------- back issues (seven rolling weekday copies) ---------- */
+  function drawArchive(){
+    const a = dash.data('archive'), box = document.getElementById('backissues'), row = document.getElementById('bi-row');
+    if (!box || a.status !== 'ok' || !Array.isArray(a.data)) return;
+    const ed = dash.data('edition'), today = ed.status === 'ok' && ed.data[0] ? ed.data[0].date : '';
+    const rows = a.data.filter(r => r.url && /^https:\/\//.test(r.url)).sort((x, y) => String(y.date).localeCompare(String(x.date))).slice(0, 7);
+    row.textContent = '';
+    rows.forEach(r => {
+      const el = document.createElement('a'); el.className = 'bi' + (r.date === today ? ' today' : '');
+      el.href = r.url; el.target = '_blank'; el.rel = 'noopener'; el.title = r.lead || '';
+      const d = document.createElement('span'); d.className = 'd'; d.textContent = r.short || r.date;
+      const w = document.createElement('span'); w.className = 'w'; w.textContent = r.date === today ? 'Today' : (r.weekday || '');
+      el.append(d, w); row.appendChild(el);
+    });
+    box.classList.toggle('has', rows.length > 0);
+  }
+
+  /* ---------- activation ---------- */
+  const arts = {};
+  const BUILD = {jackdaw: artJackdaw, cpi: artCpi, france: artFrance, mmx: artMmx, jio: artJio, louvre: artLouvre};
+  const active = new Set();
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    const id = e.target.dataset.id, a = arts[id];
+    if (e.isIntersecting && !active.has(id)) { active.add(id); if (a) a.play(); countUp(e.target); }
+    else if (!e.isIntersecting && active.has(id)) { active.delete(id); if (a && a.stop) a.stop(); }
+  }), {root: document, threshold: .55});
+
+  const fail = id => { const b = document.getElementById('art-' + id); if (!b) return; b.textContent = ''; const d = document.createElement('div'); d.className = 'fail'; d.textContent = 'Failed to load'; b.appendChild(d); };
+  let builtFor = null, builtLot = null, observed = false;
+  dash.onData(() => {
+    fillMarks();
+    drawArchive();
+    const fd = dash.data('facts'), ld = dash.data('lottery');
+    if (fd.status === 'ok') {
+      const f = Object.fromEntries(fd.data.map(r => [r.id, Object.assign({}, r, {value: Number(r.value)})]));
+      factsMap = f;
+      if (builtFor !== fd.data) {
+        builtFor = fd.data;
+        Object.entries(BUILD).forEach(([id, fn]) => {
+          try { if (arts[id] && arts[id].stop) arts[id].stop(); arts[id] = fn(document.getElementById('art-' + id), f); arts[id].final(); if (active.has(id)) arts[id].play(); }
+          catch (e) { fail(id); }
+        });
+      }
+      if (ld.status === 'ok' && builtLot !== ld.data) {
+        builtLot = ld.data;
+        try { if (arts.lottery && arts.lottery.stop) arts.lottery.stop(); arts.lottery = artLottery(document.getElementById('art-lottery'), ld.data, f); if (active.has('lottery')) arts.lottery.play(); } catch (e) { fail('lottery'); }
+      }
+      if (!observed) { observed = true; stories.forEach(c => io.observe(c)); }
+    } else if (fd.status === 'error') Object.keys(BUILD).concat('lottery').forEach(fail);
+    if (ld.status === 'error') fail('lottery');
+    requestAnimationFrame(layout);
+  });
+
+  layout();
+  const named = document.getElementById(location.hash.slice(1));
+  if (named) setTimeout(() => named.scrollIntoView(), 400);
+})();
+</script>
+</div>
+</body>
+</html>
