@@ -38,7 +38,7 @@ body { background: var(--color-bg); color: var(--color-fg); }
 <script>
 /* Minimal stand-in for the dashboard runtime, fed with this edition's frozen data. */
 (function(){
-  const DATA = {"lottery": [{"rank": 1, "place": "Middlesbrough"}, {"rank": 2, "place": "Hounslow"}, {"rank": 3, "place": "Bradford"}], "stories": [{"order": 1, "id": "jackdaw", "section": "Britain", "headline": "Britain says yes to the Jackdaw gas field.", "dek": "Energy Secretary Miatta Fahnbulleh approved production at the North Sea field on Wednesday, ending years of legal wrangling. Gas could start flowing by the end of the month. The operator says Jackdaw will lift Britain’s gas output by about 6 percent at its peak; campaigners say it will meet barely 2 percent of demand over its life.", "so_what": "Same field, two very different numbers.", "src1": "ITV News", "url1": "https://www.itv.com/news/2026-10-21/government-approves-drilling-in-jackdaw-gas-field", "src2": "Reuters via Cyprus Mail", "url2": "https://cyprus-mail.com/2026/10/21/uk-approves-long-delayed-jackdaw-gas-field", "hook": "Six percent, or two?", "weight": 3, "tone": "urgent", "hero": "jackdaw-peak"}, {"order": 2, "id": "cpi", "section": "Economy", "headline": "Petrol pushes inflation to a one-year high.", "dek": "Consumer prices rose 3.5 percent in the year to September, faster than economists expected and the third monthly rise in a row. Fuel did most of the damage. Investors now expect the Bank of England to raise interest rates next month, its first increase in three years.", "so_what": "Prices overall rose modestly. Fuel did not.", "src1": "ONS", "url1": "https://www.ons.gov.uk/economy/inflationandpriceindices", "src2": "CNBC", "url2": "https://www.cnbc.com/2026/10/21/inflation-uk-cpi-interest-rates.html", "hook": "Blame the petrol pump.", "weight": 2, "tone": "urgent", "hero": "cpi-fuel"}, {"order": 3, "id": "france", "section": "World", "headline": "France’s school protests become a nation’s.", "dek": "What began in September as a protest by high school students over conditions in their schools has swelled into a national movement over fuel prices and the cost of living. Several cities have imposed curfews.", "so_what": "Every dot is a thousand marchers. The red ones were arrested.", "src1": "Euronews", "url1": "https://www.euronews.com/2026/10/19/protesters-block-access-to-louvre-museum-in-paris-in-support-of-demonstrations", "src2": "AzerNews", "url2": "https://www.azernews.az/region/265837.html", "hook": "Fuel lit the fuse.", "weight": 2, "tone": "urgent", "hero": "france-marchers"}, {"order": 4, "id": "mmx", "section": "Science", "headline": "Japan sets out to bring home a piece of a Martian moon.", "dek": "JAXA’s Martian Moons eXploration probe lifted off from Tanegashima Space Center on Monday. It is due to land on Phobos, the larger of Mars’s two moons, collect at least 10 grams of soil and return it to the South Australian desert in 2031. No mission has brought back a sample from Phobos before.", "so_what": "A four-and-a-half-ton spacecraft, a five-year round trip, for a couple of teaspoons of dirt.", "src1": "ESA", "url1": "https://www.esa.int/ESA_Multimedia/Images/2026/10/The_Martian_Moons_eXploration_MMX_mission", "src2": "TechSpot", "url2": "https://www.techspot.com/news/113757-japan-mmx-mission-attempt-land-phobos-bring-martian.html", "hook": "Five years, two teaspoons.", "weight": 1, "tone": "wonder", "hero": "mmx-sample"}, {"order": 5, "id": "lottery", "section": "Society", "headline": "In England, a child’s prospects depend on the postcode.", "dek": "England’s Children’s Commissioner ranked every local authority on what it is like to grow up there, scoring almost 100 measures of health care, schools, housing, safety and places to play. Middlesbrough, Hounslow and Bradford came out worst.", "so_what": "Where a child grows up still shapes how that childhood goes.", "src1": "Children's Commissioner", "url1": "https://childrenscommissioner.gov.uk/news-and-blogs/press-notice-devolution-must-deliver-for-young-people-says-childrens-commissioner-as-she-warns-of-emergency-for-children-in-some-communities", "src2": "ITV News", "url2": "https://itv.com/news/tyne-tees/2026-10-19/landmark-report-reveals-hardest-places-for-children-to-grow-up-in-england", "hook": "Your postcode, your chances.", "weight": 1, "tone": "solemn", "hero": "lottery-metrics"}, {"order": 6, "id": "jio", "section": "Business", "headline": "India’s biggest IPO fills up in 100 minutes.", "dek": "Jio Platforms, the digital arm of Mukesh Ambani’s Reliance Industries, opened its initial public offering on Wednesday and drew bids for every share on offer within 100 minutes, the fastest of any Indian IPO. At the top of its price range it would raise about $3.2 billion, a national record.", "so_what": "A record share sale, fully booked in less time than it takes to watch a movie.", "src1": "Reuters via New Straits Times", "url1": "https://www.nst.com.my/amp/business/corporate/2026/10/1556503/ambanis-jio-seeks-us32b-record-india-ipo", "src2": "DT Next", "url2": "https://www.dtnext.in/videos/dt-next-news-recap-what-are-the-top-headlines-of-today-october-21-2026", "hook": "Faster than a film.", "weight": 1, "tone": "light", "hero": "jio-minutes"}, {"order": 7, "id": "louvre", "section": "Culture", "headline": "About 50 students close the Louvre.", "dek": "Students from the École du Louvre blocked the museum’s entrances on Monday morning in support of France’s school protests, keeping its doors shut until at least noon. It came a year to the day after the Louvre jewel heist.", "so_what": "The world’s most visited museum, shut by a group that would fit in one lecture hall.", "src1": "Sortir à Paris", "url1": "https://www.sortiraparis.com/en/news/in-paris/articles/354969-louvre-blocked-in-paris-as-students-prevent-the-opening-in-a-show-of-solidarity-with-high-school-students", "src2": "Sud Radio / AFP", "url2": "https://www.sudradio.fr/societe/lacces-au-louvre-bloque-par-des-etudiants-en-soutien-au-mouvement-lyceen", "hook": "One class, one closure.", "weight": 1, "tone": "light", "hero": "louvre-students"}], "facts": [{"id": "jackdaw-peak", "story": "jackdaw", "value": 6, "unit": "%", "label": "of Britain’s gas output at peak, says the operator"}, {"id": "jackdaw-critics", "story": "jackdaw", "value": 2, "unit": "%", "label": "of demand over its lifetime, say campaigners"}, {"id": "jackdaw-homes", "story": "jackdaw", "value": 1.4, "unit": "million", "label": "homes heated at peak, an industry estimate"}, {"id": "jackdaw-years", "story": "jackdaw", "value": 11, "unit": "years", "label": "of production, at most"}, {"id": "jackdaw-invest", "story": "jackdaw", "value": 2.1, "unit": "£bn", "label": "of investment"}, {"id": "cpi-jul", "story": "cpi", "value": 2.9, "unit": "%", "label": "CPI, July"}, {"id": "cpi-aug", "story": "cpi", "value": 3.1, "unit": "%", "label": "CPI, August"}, {"id": "cpi-sep", "story": "cpi", "value": 3.5, "unit": "%", "label": "CPI, September"}, {"id": "cpi-forecast", "story": "cpi", "value": 3.4, "unit": "%", "label": "economists' forecast for September"}, {"id": "cpi-fuel", "story": "cpi", "value": 29.8, "unit": "%", "label": "rise in motor fuel prices over the year"}, {"id": "cpi-core", "story": "cpi", "value": 2.8, "unit": "%", "label": "core inflation"}, {"id": "cpi-target", "story": "cpi", "value": 2, "unit": "%", "label": "Bank of England target"}, {"id": "cpi-bankrate", "story": "cpi", "value": 4, "unit": "%", "label": "expected Bank Rate after next month’s meeting"}, {"id": "france-marchers", "story": "france", "value": 800000, "unit": "people", "label": "marched last weekend, by organizers’ count"}, {"id": "france-custody", "story": "france", "value": 2330, "unit": "people", "label": "people detained over the weekend"}, {"id": "france-adults", "story": "france", "value": 70, "unit": "%", "label": "of those detained were adults"}, {"id": "mmx-sample", "story": "mmx", "value": 10, "unit": "g", "label": "of Phobos soil, at minimum"}, {"id": "mmx-mass", "story": "mmx", "value": 4480, "unit": "kg", "label": "launch mass"}, {"id": "mmx-launch", "story": "mmx", "value": 2026, "unit": "year", "label": "launch"}, {"id": "mmx-mars", "story": "mmx", "value": 2027, "unit": "year", "label": "arrives at Mars"}, {"id": "mmx-sampling", "story": "mmx", "value": 2029, "unit": "year", "label": "samples collected"}, {"id": "mmx-return", "story": "mmx", "value": 2031, "unit": "year", "label": "capsule lands in Woomera, South Australia"}, {"id": "mmx-gravity", "story": "mmx", "value": 2000, "unit": "×", "label": "weaker gravity on Phobos than on Earth"}, {"id": "mmx-martian", "story": "mmx", "value": 0.1, "unit": "%", "label": "of the sample could be debris from Mars itself"}, {"id": "lottery-metrics", "story": "lottery", "value": 100, "unit": "metrics", "label": "scored measures"}, {"id": "lottery-measures", "story": "lottery", "value": 160, "unit": "measures", "label": "measures in the dataset (more than)"}, {"id": "jio-minutes", "story": "jio", "value": 100, "unit": "minutes", "label": "to sell every share on offer"}, {"id": "jio-times", "story": "jio", "value": 2.35, "unit": "×", "label": "oversubscribed by mid-afternoon"}, {"id": "jio-raise", "story": "jio", "value": 3.2, "unit": "$bn", "label": "raised at the top of the range"}, {"id": "jio-prior", "story": "jio", "value": 2.9, "unit": "$bn", "label": "previous record, Hyundai Motor India, 2024"}, {"id": "jio-subs", "story": "jio", "value": 524, "unit": "million", "label": "mobile subscribers"}, {"id": "louvre-students", "story": "louvre", "value": 50, "unit": "students", "label": "from the École du Louvre"}, {"id": "louvre-hours", "story": "louvre", "value": 3, "unit": "hours", "label": "closed, from opening until at least noon"}, {"id": "jackdaw-km", "story": "jackdaw", "value": 250, "unit": "km", "label": "east of Aberdeen"}, {"id": "jackdaw-depth", "story": "jackdaw", "value": 78, "unit": "m", "label": "of water beneath the platform"}, {"id": "louvre-open", "story": "louvre", "value": 9, "unit": "am", "label": "normal opening time"}, {"id": "louvre-noon", "story": "louvre", "value": 12, "unit": "noon", "label": "stayed shut until at least"}], "archive": [{"date": "2026-10-21", "weekday": "Wednesday", "short": "Oct 21", "url": "https://ailudo.github.io/7/2026-10-21/", "lead": "Britain says yes to the Jackdaw gas field."}], "edition": [{"date": "2026-10-21", "label": "Wednesday, October 21, 2026", "edition": "Trial edition"}]};
+  const DATA = {"lottery": [{"rank": 1, "place": "Middlesbrough"}, {"rank": 2, "place": "Hounslow"}, {"rank": 3, "place": "Bradford"}], "stories": [{"order": 1, "id": "jackdaw", "section": "Britain", "headline": "Britain says yes to the Jackdaw gas field.", "dek": "Energy Secretary Miatta Fahnbulleh approved production at the North Sea field on Wednesday, ending years of legal wrangling. Gas could start flowing by the end of the month. The operator says Jackdaw will lift Britain’s gas output by about 6 percent at its peak; campaigners say it will meet barely 2 percent of demand over its life.", "so_what": "Same field, two very different numbers.", "src1": "ITV News", "url1": "https://www.itv.com/news/2026-10-21/government-approves-drilling-in-jackdaw-gas-field", "src2": "Reuters via Cyprus Mail", "url2": "https://cyprus-mail.com/2026/10/21/uk-approves-long-delayed-jackdaw-gas-field", "hook": "Six percent, or two?", "weight": 3, "tone": "urgent", "hero": "jackdaw-peak"}, {"order": 2, "id": "cpi", "section": "Economy", "headline": "Petrol pushes inflation to a one-year high.", "dek": "Consumer prices rose 3.5 percent in the year to September, faster than economists expected and the third monthly rise in a row. Fuel did most of the damage. Investors now expect the Bank of England to raise interest rates next month, its first increase in three years.", "so_what": "Prices overall rose modestly. Fuel did not.", "src1": "ONS", "url1": "https://www.ons.gov.uk/economy/inflationandpriceindices", "src2": "CNBC", "url2": "https://www.cnbc.com/2026/10/21/inflation-uk-cpi-interest-rates.html", "hook": "Blame the petrol pump.", "weight": 2, "tone": "urgent", "hero": "cpi-fuel"}, {"order": 3, "id": "france", "section": "World", "headline": "France’s school protests become a nation’s.", "dek": "What began in September as a protest by high school students over conditions in their schools has swelled into a national movement over fuel prices and the cost of living. Several cities have imposed curfews.", "so_what": "Every dot is a thousand marchers. The red ones were arrested.", "src1": "Euronews", "url1": "https://www.euronews.com/2026/10/19/protesters-block-access-to-louvre-museum-in-paris-in-support-of-demonstrations", "src2": "AzerNews", "url2": "https://www.azernews.az/region/265837.html", "hook": "Fuel lit the fuse.", "weight": 2, "tone": "urgent", "hero": "france-marchers"}, {"order": 4, "id": "mmx", "section": "Science", "headline": "Japan sets out to bring home a piece of a Martian moon.", "dek": "JAXA’s Martian Moons eXploration probe lifted off from Tanegashima Space Center on Monday. It is due to land on Phobos, the larger of Mars’s two moons, collect at least 10 grams of soil and return it to the South Australian desert in 2031. No mission has brought back a sample from Phobos before.", "so_what": "A four-and-a-half-ton spacecraft, a five-year round trip, for a couple of teaspoons of dirt.", "src1": "ESA", "url1": "https://www.esa.int/ESA_Multimedia/Images/2026/10/The_Martian_Moons_eXploration_MMX_mission", "src2": "TechSpot", "url2": "https://www.techspot.com/news/113757-japan-mmx-mission-attempt-land-phobos-bring-martian.html", "hook": "Five years, two teaspoons.", "weight": 1, "tone": "wonder", "hero": "mmx-sample"}, {"order": 5, "id": "lottery", "section": "Society", "headline": "In England, a child’s prospects depend on the postcode.", "dek": "England’s Children’s Commissioner ranked every local authority on what it is like to grow up there, scoring almost 100 measures of health care, schools, housing, safety and places to play. Middlesbrough, Hounslow and Bradford came out worst.", "so_what": "Where a child grows up still shapes how that childhood goes.", "src1": "Children's Commissioner", "url1": "https://childrenscommissioner.gov.uk/news-and-blogs/press-notice-devolution-must-deliver-for-young-people-says-childrens-commissioner-as-she-warns-of-emergency-for-children-in-some-communities", "src2": "ITV News", "url2": "https://itv.com/news/tyne-tees/2026-10-19/landmark-report-reveals-hardest-places-for-children-to-grow-up-in-england", "hook": "Your postcode, your chances.", "weight": 1, "tone": "solemn", "hero": "lottery-metrics"}, {"order": 6, "id": "jio", "section": "Business", "headline": "India’s biggest IPO fills up in 100 minutes.", "dek": "Jio Platforms, the digital arm of Mukesh Ambani’s Reliance Industries, opened its initial public offering on Wednesday and drew bids for every share on offer within 100 minutes, the fastest of any Indian IPO. At the top of its price range it would raise about $3.2 billion, a national record.", "so_what": "A record share sale, fully booked in less time than it takes to watch a movie.", "src1": "Reuters via New Straits Times", "url1": "https://www.nst.com.my/amp/business/corporate/2026/10/1556503/ambanis-jio-seeks-us32b-record-india-ipo", "src2": "DT Next", "url2": "https://www.dtnext.in/videos/dt-next-news-recap-what-are-the-top-headlines-of-today-october-21-2026", "hook": "Faster than a film.", "weight": 1, "tone": "light", "hero": "jio-minutes"}, {"order": 7, "id": "louvre", "section": "Culture", "headline": "About 50 students close the Louvre.", "dek": "Students from the École du Louvre blocked the museum’s entrances on Monday morning in support of France’s school protests, keeping its doors shut until at least noon. It came a year to the day after the Louvre jewel heist.", "so_what": "The world’s most visited museum, shut by a group that would fit in one lecture hall.", "src1": "Sortir à Paris", "url1": "https://www.sortiraparis.com/en/news/in-paris/articles/354969-louvre-blocked-in-paris-as-students-prevent-the-opening-in-a-show-of-solidarity-with-high-school-students", "src2": "Sud Radio / AFP", "url2": "https://www.sudradio.fr/societe/lacces-au-louvre-bloque-par-des-etudiants-en-soutien-au-mouvement-lyceen", "hook": "One class, one closure.", "weight": 1, "tone": "light", "hero": "louvre-students"}], "facts": [{"id": "jackdaw-peak", "story": "jackdaw", "value": 6, "unit": "%", "label": "of Britain’s gas output at peak, says the operator"}, {"id": "jackdaw-critics", "story": "jackdaw", "value": 2, "unit": "%", "label": "of demand over its lifetime, say campaigners"}, {"id": "jackdaw-homes", "story": "jackdaw", "value": 1.4, "unit": "million", "label": "homes heated at peak, an industry estimate"}, {"id": "jackdaw-years", "story": "jackdaw", "value": 11, "unit": "years", "label": "of production, at most"}, {"id": "jackdaw-invest", "story": "jackdaw", "value": 2.1, "unit": "£bn", "label": "of investment"}, {"id": "cpi-jul", "story": "cpi", "value": 2.9, "unit": "%", "label": "CPI, July"}, {"id": "cpi-aug", "story": "cpi", "value": 3.1, "unit": "%", "label": "CPI, August"}, {"id": "cpi-sep", "story": "cpi", "value": 3.5, "unit": "%", "label": "CPI, September"}, {"id": "cpi-forecast", "story": "cpi", "value": 3.4, "unit": "%", "label": "economists' forecast for September"}, {"id": "cpi-fuel", "story": "cpi", "value": 29.8, "unit": "%", "label": "rise in motor fuel prices over the year"}, {"id": "cpi-core", "story": "cpi", "value": 2.8, "unit": "%", "label": "core inflation"}, {"id": "cpi-target", "story": "cpi", "value": 2, "unit": "%", "label": "Bank of England target"}, {"id": "cpi-bankrate", "story": "cpi", "value": 4, "unit": "%", "label": "expected Bank Rate after next month’s meeting"}, {"id": "france-marchers", "story": "france", "value": 800000, "unit": "people", "label": "marched last weekend, by organizers’ count"}, {"id": "france-custody", "story": "france", "value": 2330, "unit": "people", "label": "people detained over the weekend"}, {"id": "france-adults", "story": "france", "value": 70, "unit": "%", "label": "of those detained were adults"}, {"id": "mmx-sample", "story": "mmx", "value": 10, "unit": "g", "label": "of Phobos soil, at minimum"}, {"id": "mmx-mass", "story": "mmx", "value": 4480, "unit": "kg", "label": "launch mass"}, {"id": "mmx-launch", "story": "mmx", "value": 2026, "unit": "year", "label": "launch"}, {"id": "mmx-mars", "story": "mmx", "value": 2027, "unit": "year", "label": "arrives at Mars"}, {"id": "mmx-sampling", "story": "mmx", "value": 2029, "unit": "year", "label": "samples collected"}, {"id": "mmx-return", "story": "mmx", "value": 2031, "unit": "year", "label": "capsule lands in Woomera, South Australia"}, {"id": "mmx-gravity", "story": "mmx", "value": 2000, "unit": "×", "label": "weaker gravity on Phobos than on Earth"}, {"id": "mmx-martian", "story": "mmx", "value": 0.1, "unit": "%", "label": "of the sample could be debris from Mars itself"}, {"id": "lottery-metrics", "story": "lottery", "value": 100, "unit": "metrics", "label": "scored measures"}, {"id": "lottery-measures", "story": "lottery", "value": 160, "unit": "measures", "label": "measures in the dataset (more than)"}, {"id": "jio-minutes", "story": "jio", "value": 100, "unit": "minutes", "label": "to sell every share on offer"}, {"id": "jio-times", "story": "jio", "value": 2.35, "unit": "×", "label": "oversubscribed by mid-afternoon"}, {"id": "jio-raise", "story": "jio", "value": 3.2, "unit": "$bn", "label": "raised at the top of the range"}, {"id": "jio-prior", "story": "jio", "value": 2.9, "unit": "$bn", "label": "previous record, Hyundai Motor India, 2024"}, {"id": "jio-subs", "story": "jio", "value": 524, "unit": "million", "label": "mobile subscribers"}, {"id": "louvre-students", "story": "louvre", "value": 50, "unit": "students", "label": "from the École du Louvre"}, {"id": "louvre-hours", "story": "louvre", "value": 3, "unit": "hours", "label": "closed, from opening until at least noon"}, {"id": "jackdaw-km", "story": "jackdaw", "value": 250, "unit": "km", "label": "east of Aberdeen"}, {"id": "jackdaw-depth", "story": "jackdaw", "value": 78, "unit": "m", "label": "of water beneath the platform"}, {"id": "louvre-open", "story": "louvre", "value": 9, "unit": "am", "label": "normal opening time"}, {"id": "louvre-noon", "story": "louvre", "value": 12, "unit": "noon", "label": "stayed shut until at least"}], "edition": [{"date": "2026-10-21", "label": "Wednesday, October 21, 2026", "edition": "Trial edition"}]};
   const calcs = {}, subs = [];
   window.dash = {
     data(id) {
@@ -71,24 +71,36 @@ body { background: var(--color-bg); color: var(--color-fg); }
 .m7 a:hover { text-decoration: underline; }
 
 .m7 { --sub: var(--color-fg-muted); }
-.m7 .mast { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; padding: 18px 6px 16px; }
-.m7 .wordmark { font-family: var(--sf); font-weight: 700; font-size: clamp(1.5rem, 3.4cqi, 2.1rem); letter-spacing: -.035em; line-height: 1; }
+.m7 .wordmark { font-family: var(--sf); font-weight: 700; font-size: clamp(1.25rem, 2.6cqi, 1.7rem); letter-spacing: -.035em; line-height: 1; }
 .m7 .mdate { font-size: 15px; font-weight: 500; color: var(--color-fg-muted); letter-spacing: -.01em; }
 .m7 .foot { padding: 1.5rem 0 .5rem; text-align: center; }
+.m7 .mast { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; padding: 12px 18px; margin: 0 0 10px; border-radius: 0 0 18px 18px;
+  background: color-mix(in srgb, var(--color-bg) 78%, transparent); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: 0 1px 0 var(--color-border-line); }
+.m7 .wordmark { justify-self: start; }
+.m7 .mdate { justify-self: end; text-align: right; }
+.m7 .prog { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; color: var(--color-fg-muted); opacity: 0; transition: opacity .35s; font-variant-numeric: tabular-nums; }
+.m7 .prog.show { opacity: 1; }
+.m7 .prog .seg { background: var(--color-fg); }
+@container (max-width: 40rem) {
+  .m7 .mast { grid-template-columns: 1fr auto; padding: 10px 14px; }
+  .m7 .mdate { display: none; }
+  .m7 .rail-lbl { display: none; }
+}
 /* The deck */
 .m7 .deck { position: relative; padding-bottom: 8vh; }
 .m7 .rail { position: sticky; top: 10px; z-index: 30; height: 0; display: flex; justify-content: center; pointer-events: none; }
 .m7 .rail-in { pointer-events: auto; display: flex; align-items: center; gap: 12px; padding: 7px 14px; border-radius: 999px; background: rgba(120,120,128,.24); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); color: #fff; font-size: 12px; font-weight: 600; letter-spacing: .01em; opacity: 0; transform: translateY(-6px); transition: opacity .35s, transform .35s; mix-blend-mode: normal; }
 .m7 .rail-in.show { opacity: 1; transform: none; }
-.m7 .rail-lbl { min-width: 9.5rem; color: inherit; text-shadow: 0 1px 2px rgba(0,0,0,.35); }
+.m7 .rail-lbl { min-width: 8.5rem; text-align: right; }
 .m7 .segs { display: flex; gap: 5px; }
-.m7 .seg { width: 16px; height: 4px; border-radius: 2px; background: #fff; opacity: .35; border: 0; padding: 0; cursor: pointer; transition: opacity .3s, width .3s; }
+.m7 .seg { width: 14px; height: 4px; border-radius: 2px; opacity: .25; border: 0; padding: 0; cursor: pointer; transition: opacity .3s, width .3s; }
 .m7 .seg.on { opacity: 1; width: 26px; }
 
 .m7 .card {
   --p: 0;
   position: sticky; top: 14px; margin: 0 0 22px;
-  min-height: calc(var(--vh) - 28px);
+  min-height: calc(var(--vh) - var(--hdr, 0px) - 26px);
   border-radius: 34px; overflow: hidden;
   display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(20px, 4cqi, 64px); align-items: center;
   padding: 64px clamp(22px, 4.4cqi, 64px) clamp(28px, 4cqi, 52px);
@@ -108,7 +120,6 @@ body { background: var(--color-bg); color: var(--color-fg); }
 .m7 .kick .cnt { color: var(--sub); font-variant-numeric: tabular-nums; }
 .m7 .card h2 { font-size: clamp(2rem, 4.6cqi, 3.3rem); font-weight: 700; letter-spacing: -.035em; line-height: 1.04; margin: .45rem 0 .55rem; }
 .m7 .hook { font-size: clamp(1.15rem, 2.2cqi, 1.5rem); color: var(--sub); letter-spacing: -.01em; margin: 0; }
-.m7 .big { font-weight: 700; letter-spacing: -.055em; line-height: .92; font-size: clamp(5rem, 13cqi, 9.5rem); margin: 1.4rem 0 .2rem; font-variant-numeric: tabular-nums; }
 .m7 .grad { background-image: var(--g); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .m7 .unit { font-size: .38em; letter-spacing: -.02em; }
 .m7 .blabel { font-size: 15px; color: var(--sub); }
@@ -134,15 +145,6 @@ body { background: var(--color-bg); color: var(--color-fg); }
 .m7 [data-id=louvre] { --g: linear-gradient(100deg, #ffd60a, #ff9f0a); --e: #ffd60a; }
 
 /* Cover */
-.m7 .backissues { margin: clamp(1.6rem, 4cqi, 2.6rem) auto 0; max-width: 64rem; }
-.m7 .bi-h { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--sub); margin-bottom: 10px; }
-.m7 .bi-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-.m7 .bi { display: flex; flex-direction: column; align-items: center; min-width: 5.2rem; padding: 10px 14px; border-radius: 16px; background: rgba(127,127,127,.1); color: inherit; }
-.m7 .bi:hover { background: rgba(127,127,127,.2); text-decoration: none; }
-.m7 .bi .d { font-size: 13px; font-weight: 600; }
-.m7 .bi .w { font-size: 11px; color: var(--sub); }
-.m7 .bi.today { outline: 1.5px solid currentColor; }
-.m7 .backissues:not(.has) { display: none; }
 
 .m7 .irow[data-id-row=jackdaw] { --e: #2997ff; }
 .m7 .irow[data-id-row=cpi] { --e: #e35d00; }
@@ -174,8 +176,7 @@ body { background: var(--color-bg); color: var(--color-fg); }
 @container (max-width: 52rem) {
   .m7 .card { grid-template-columns: minmax(0, 1fr); align-content: start; padding-top: 58px; }
   .m7 .card .art { order: 2; }
-  .m7 .big { margin-top: 1rem; }
-}
+  }
 @media (prefers-reduced-motion: reduce) {
   .m7 .card { transform: none; }
   .m7 .card::after { opacity: 0; }
@@ -183,12 +184,12 @@ body { background: var(--color-bg); color: var(--color-fg); }
 </style>
 
 <div class="m7" id="m7">
-  <header class="mast">
+  <header class="mast" id="mast">
     <div class="wordmark">Seven Times</div>
+    <div class="prog" id="rail"><span class="rail-lbl" id="rail-lbl"></span><span class="segs" id="segs"></span></div>
     <div class="mdate" data-source="edition" data-field="label" data-row="0">—</div>
   </header>
   <div class="deck" id="deck">
-    <div class="rail"><div class="rail-in" id="rail"><span class="rail-lbl" id="rail-lbl"></span><span class="segs" id="segs"></span></div></div>
 
     <section class="card dark" id="s-jackdaw" data-id="jackdaw" data-tone="urgent">
       <div class="txt">
@@ -283,9 +284,6 @@ body { background: var(--color-bg); color: var(--color-fg); }
     </section>
 
   </div>
-  <footer class="foot">
-      <div class="backissues" id="backissues" data-source="archive"><div class="bi-h">Past seven days</div><div class="bi-row" id="bi-row"></div></div>
-  </footer>
   <div class="credit"><span data-source="edition" data-field="edition" data-row="0">—</span>. Figures and summaries from the outlets linked on each card. Illustrations are not to scale unless stated.</div>
 </div>
 
@@ -364,7 +362,9 @@ body { background: var(--color-bg); color: var(--color-fg); }
     scroller = scrollerOf(deck);
     const vh = viewH();
     root.style.setProperty('--vh', vh + 'px');
-    cards.forEach(c => { const h = c.offsetHeight; c.style.top = Math.min(14, vh - h - 14) + 'px'; });
+    const hdr = (document.getElementById('mast') || {offsetHeight: 0}).offsetHeight;
+    root.style.setProperty('--hdr', hdr + 'px');
+    cards.forEach(c => { const h = c.offsetHeight; c.style.top = Math.min(hdr + 10, vh - h - 14) + 'px'; });
     onScroll();
   }
   const segs = document.getElementById('segs');
@@ -813,22 +813,6 @@ body { background: var(--color-bg); color: var(--color-fg); }
   }
 
 
-  /* ---------- back issues (seven rolling weekday copies) ---------- */
-  function drawArchive(){
-    const a = dash.data('archive'), box = document.getElementById('backissues'), row = document.getElementById('bi-row');
-    if (!box || a.status !== 'ok' || !Array.isArray(a.data)) return;
-    const ed = dash.data('edition'), today = ed.status === 'ok' && ed.data[0] ? ed.data[0].date : '';
-    const rows = a.data.filter(r => r.url && /^https:\/\//.test(r.url)).sort((x, y) => String(y.date).localeCompare(String(x.date))).slice(0, 7);
-    row.textContent = '';
-    rows.forEach(r => {
-      const el = document.createElement('a'); el.className = 'bi' + (r.date === today ? ' today' : '');
-      el.href = r.url; el.target = '_blank'; el.rel = 'noopener'; el.title = r.lead || '';
-      const d = document.createElement('span'); d.className = 'd'; d.textContent = r.short || r.date;
-      const w = document.createElement('span'); w.className = 'w'; w.textContent = r.date === today ? 'Today' : (r.weekday || '');
-      el.append(d, w); row.appendChild(el);
-    });
-    box.classList.toggle('has', rows.length > 0);
-  }
 
   /* ---------- activation ---------- */
   const arts = {};
@@ -844,7 +828,6 @@ body { background: var(--color-bg); color: var(--color-fg); }
   let builtFor = null, builtLot = null, observed = false;
   dash.onData(() => {
     fillMarks();
-    drawArchive();
     const fd = dash.data('facts'), ld = dash.data('lottery');
     if (fd.status === 'ok') {
       const f = Object.fromEntries(fd.data.map(r => [r.id, Object.assign({}, r, {value: Number(r.value)})]));

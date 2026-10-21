@@ -168,6 +168,46 @@
     outline-offset: 4px;
   }
 
+  /* Seven Times link: a black Apple-style pill with a gradient 7, drifting at its own period */
+  .drift.seven {
+    animation:
+      drift-x 57s ease-in-out -14s infinite alternate,
+      drift-y 49s ease-in-out -27s infinite alternate;
+  }
+  .drift.seven:hover { animation-play-state: paused; }
+  .seven-link {
+    display: flex;
+    align-items: center;
+    gap: 0.32em;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(16px, 2vw, 26px);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    padding: 0.42em 0.8em 0.42em 0.55em;
+    background: #000;
+    color: #f5f5f7;
+    border-radius: 999px;
+    text-decoration: none;
+    white-space: nowrap;
+    -webkit-font-smoothing: antialiased;
+    opacity: 0;
+    transform: scale(0);
+    animation: pop 0.55s cubic-bezier(.2, .9, .3, 1.25) 0.6s forwards;
+  }
+  .seven-link .n {
+    font-size: 1.5em;
+    letter-spacing: -0.05em;
+    background-image: linear-gradient(100deg, #2997ff, #bf5af2 55%, #ff375f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .seven-link:focus-visible {
+    outline: 2px solid #0030c8;
+    outline-offset: 4px;
+  }
+
   /* Reduced motion: keep the one-off blur and pop-up, but do not let the labels wander.
      Add ?motion=on to the address to see the drifting anyway. */
   @media (prefers-reduced-motion: reduce) {
@@ -175,6 +215,7 @@
     html:not(.motion-on) .drift.paris { right: auto; left: 24px; }
     html:not(.motion-on) .drift.gym { right: 24px; top: 24px; bottom: auto; left: auto; }
     html:not(.motion-on) .drift.zug { left: 24px; top: 24px; right: auto; bottom: auto; }
+    html:not(.motion-on) .drift.seven { left: 50%; bottom: 24px; top: auto; right: auto; transform: translateX(-50%); }
   }
 </style>
 <script>if(/[?&]motion=on\b/.test(location.search))document.documentElement.classList.add("motion-on");</script>
@@ -197,6 +238,9 @@
   <div class="drift zug">
     <a class="zug-link" href="zug/" aria-label="Zug: chess with friends by text message" title="Zug — chess by text message">Zug</a>
   </div>
+  <div class="drift seven">
+    <a class="seven-link" href="7/" aria-label="Seven Times: seven stories, seven numbers, every morning" title="Seven Times — the morning news in seven numbers"><span class="n" aria-hidden="true">7</span>Seven Times</a>
+  </div>
   <label id="hap" aria-hidden="true" style="position:fixed;left:-100px;top:0;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden"><input type="checkbox" switch tabindex="-1"></label>
   <script>
   (function () {
@@ -212,8 +256,8 @@
 
     // Each label drifts on two periods (seconds). A random point in each cycle gives a
     // random starting position; retry a few times so the labels do not start stacked.
-    var periods = { london: [53, 37], paris: [61, 43], gym: [47, 59], zug: [67, 41] };
-    function kind(el) { return el.classList.contains('paris') ? 'paris' : el.classList.contains('gym') ? 'gym' : el.classList.contains('zug') ? 'zug' : 'london'; }
+    var periods = { london: [53, 37], paris: [61, 43], gym: [47, 59], zug: [67, 41], seven: [57, 49] };
+    function kind(el) { return el.classList.contains('paris') ? 'paris' : el.classList.contains('gym') ? 'gym' : el.classList.contains('zug') ? 'zug' : el.classList.contains('seven') ? 'seven' : 'london'; }
     function where(offset, period) { // position 0..1 for an alternating ease-in-out cycle
       var t = offset % (2 * period), u = t < period ? t / period : 2 - t / period;
       return u * u * (3 - 2 * u);
