@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-20T12:05:41+01:00",
+ "updated": "2026-10-21T01:39:21+01:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -483,7 +483,7 @@
    "short": "Tim Walker",
    "title": "Tim Walker's Fairyland: Love and Legends",
    "artists": "Tim Walker",
-   "start": "2026-10-08",
+   "start": "2026-10-09",
    "end": "2027-02-07",
    "admission": "paid",
    "discipline": "Photography & moving image",
@@ -732,7 +732,7 @@
    "title": "Nan Goldin: You Never Did Anything Wrong",
    "artists": "Nan Goldin",
    "start": "2026-11-24",
-   "end": "2027-03-14",
+   "end": "2027-03-07",
    "admission": "paid",
    "discipline": "Photography & moving image",
    "url": "https://www.southbankcentre.co.uk/whats-on/nan-goldin-you-never-did-anything-wrong/"
@@ -1204,6 +1204,18 @@
    "admission": "check",
    "discipline": "History & collections",
    "url": "https://courtauld.ac.uk/whats-on/exh-modern-painting-from-the-courtauld-and-reuben-collections/"
+  },
+  {
+   "id": "va-freddie-mercury",
+   "venue": "va",
+   "short": "Freddie Mercury: Splendid Things",
+   "title": "Freddie Mercury | Splendid Things",
+   "artists": "",
+   "start": null,
+   "end": "2026-10-24",
+   "admission": "free",
+   "discipline": "History & collections",
+   "url": "https://www.vam.ac.uk/exhibitions/freddie-mercury-splendid-things"
   }
  ]
 }
