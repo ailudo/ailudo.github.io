@@ -38,7 +38,7 @@ body { background: var(--color-bg); color: var(--color-fg); }
 <script>
 /* Minimal stand-in for the dashboard runtime, fed with this edition's frozen data. */
 (function(){
-  const DATA = {"lottery": [{"rank": 1, "place": "Middlesbrough"}, {"rank": 2, "place": "Hounslow"}, {"rank": 3, "place": "Bradford"}], "stories": [{"order": 1, "id": "jackdaw", "section": "Britain", "headline": "Britain says yes to the Jackdaw gas field.", "dek": "Energy Secretary Miatta Fahnbulleh approved production at the North Sea field on Wednesday, ending years of legal wrangling. Gas could start flowing by the end of the month. The operator says Jackdaw will lift Britain’s gas output by about 6 percent at its peak; campaigners say it will meet barely 2 percent of demand over its life.", "so_what": "Same field, two very different numbers.", "src1": "ITV News", "url1": "https://www.itv.com/news/2026-10-21/government-approves-drilling-in-jackdaw-gas-field", "src2": "Reuters via Cyprus Mail", "url2": "https://cyprus-mail.com/2026/10/21/uk-approves-long-delayed-jackdaw-gas-field", "hook": "Six percent, or two?", "weight": 3, "tone": "urgent", "hero": "jackdaw-peak"}, {"order": 2, "id": "cpi", "section": "Economy", "headline": "Petrol pushes inflation to a one-year high.", "dek": "Consumer prices rose 3.5 percent in the year to September, faster than economists expected and the third monthly rise in a row. Fuel did most of the damage. Investors now expect the Bank of England to raise interest rates next month, its first increase in three years.", "so_what": "Prices overall rose modestly. Fuel did not.", "src1": "ONS", "url1": "https://www.ons.gov.uk/economy/inflationandpriceindices", "src2": "CNBC", "url2": "https://www.cnbc.com/2026/10/21/inflation-uk-cpi-interest-rates.html", "hook": "Blame the petrol pump.", "weight": 2, "tone": "urgent", "hero": "cpi-fuel"}, {"order": 3, "id": "france", "section": "World", "headline": "France’s school protests become a nation’s.", "dek": "What began in September as a protest by high school students over conditions in their schools has swelled into a national movement over fuel prices and the cost of living. Several cities have imposed curfews.", "so_what": "Every dot is a thousand marchers. The red ones were arrested.", "src1": "Euronews", "url1": "https://www.euronews.com/2026/10/19/protesters-block-access-to-louvre-museum-in-paris-in-support-of-demonstrations", "src2": "AzerNews", "url2": "https://www.azernews.az/region/265837.html", "hook": "Fuel lit the fuse.", "weight": 2, "tone": "urgent", "hero": "france-marchers"}, {"order": 4, "id": "mmx", "section": "Science", "headline": "Japan sets out to bring home a piece of a Martian moon.", "dek": "JAXA’s Martian Moons eXploration probe lifted off from Tanegashima Space Center on Monday. It is due to land on Phobos, the larger of Mars’s two moons, collect at least 10 grams of soil and return it to the South Australian desert in 2031. No mission has brought back a sample from Phobos before.", "so_what": "A four-and-a-half-ton spacecraft, a five-year round trip, for a couple of teaspoons of dirt.", "src1": "ESA", "url1": "https://www.esa.int/ESA_Multimedia/Images/2026/10/The_Martian_Moons_eXploration_MMX_mission", "src2": "TechSpot", "url2": "https://www.techspot.com/news/113757-japan-mmx-mission-attempt-land-phobos-bring-martian.html", "hook": "Five years, two teaspoons.", "weight": 1, "tone": "wonder", "hero": "mmx-sample"}, {"order": 5, "id": "lottery", "section": "Society", "headline": "In England, a child’s prospects depend on the postcode.", "dek": "England’s Children’s Commissioner ranked every local authority on what it is like to grow up there, scoring almost 100 measures of health care, schools, housing, safety and places to play. Middlesbrough, Hounslow and Bradford came out worst.", "so_what": "Where a child grows up still shapes how that childhood goes.", "src1": "Children's Commissioner", "url1": "https://childrenscommissioner.gov.uk/news-and-blogs/press-notice-devolution-must-deliver-for-young-people-says-childrens-commissioner-as-she-warns-of-emergency-for-children-in-some-communities", "src2": "ITV News", "url2": "https://itv.com/news/tyne-tees/2026-10-19/landmark-report-reveals-hardest-places-for-children-to-grow-up-in-england", "hook": "Your postcode, your chances.", "weight": 1, "tone": "solemn", "hero": "lottery-metrics"}, {"order": 6, "id": "jio", "section": "Business", "headline": "India’s biggest IPO fills up in 100 minutes.", "dek": "Jio Platforms, the digital arm of Mukesh Ambani’s Reliance Industries, opened its initial public offering on Wednesday and drew bids for every share on offer within 100 minutes, the fastest of any Indian IPO. At the top of its price range it would raise about $3.2 billion, a national record.", "so_what": "A record share sale, fully booked in less time than it takes to watch a movie.", "src1": "Reuters via New Straits Times", "url1": "https://www.nst.com.my/amp/business/corporate/2026/10/1556503/ambanis-jio-seeks-us32b-record-india-ipo", "src2": "DT Next", "url2": "https://www.dtnext.in/videos/dt-next-news-recap-what-are-the-top-headlines-of-today-october-21-2026", "hook": "Faster than a film.", "weight": 1, "tone": "light", "hero": "jio-minutes"}, {"order": 7, "id": "louvre", "section": "Culture", "headline": "About 50 students close the Louvre.", "dek": "Students from the École du Louvre blocked the museum’s entrances on Monday morning in support of France’s school protests, keeping its doors shut until at least noon. It came a year to the day after the Louvre jewel heist.", "so_what": "The world’s most visited museum, shut by a group that would fit in one lecture hall.", "src1": "Sortir à Paris", "url1": "https://www.sortiraparis.com/en/news/in-paris/articles/354969-louvre-blocked-in-paris-as-students-prevent-the-opening-in-a-show-of-solidarity-with-high-school-students", "src2": "Sud Radio / AFP", "url2": "https://www.sudradio.fr/societe/lacces-au-louvre-bloque-par-des-etudiants-en-soutien-au-mouvement-lyceen", "hook": "One class, one closure.", "weight": 1, "tone": "light", "hero": "louvre-students"}], "facts": [{"id": "jackdaw-peak", "story": "jackdaw", "value": 6, "unit": "%", "label": "of Britain’s gas output at peak, says the operator"}, {"id": "jackdaw-critics", "story": "jackdaw", "value": 2, "unit": "%", "label": "of demand over its lifetime, say campaigners"}, {"id": "jackdaw-homes", "story": "jackdaw", "value": 1.4, "unit": "million", "label": "homes heated at peak, an industry estimate"}, {"id": "jackdaw-years", "story": "jackdaw", "value": 11, "unit": "years", "label": "of production, at most"}, {"id": "jackdaw-invest", "story": "jackdaw", "value": 2.1, "unit": "£bn", "label": "of investment"}, {"id": "cpi-jul", "story": "cpi", "value": 2.9, "unit": "%", "label": "CPI, July"}, {"id": "cpi-aug", "story": "cpi", "value": 3.1, "unit": "%", "label": "CPI, August"}, {"id": "cpi-sep", "story": "cpi", "value": 3.5, "unit": "%", "label": "CPI, September"}, {"id": "cpi-forecast", "story": "cpi", "value": 3.4, "unit": "%", "label": "economists' forecast for September"}, {"id": "cpi-fuel", "story": "cpi", "value": 29.8, "unit": "%", "label": "rise in motor fuel prices over the year"}, {"id": "cpi-core", "story": "cpi", "value": 2.8, "unit": "%", "label": "core inflation"}, {"id": "cpi-target", "story": "cpi", "value": 2, "unit": "%", "label": "Bank of England target"}, {"id": "cpi-bankrate", "story": "cpi", "value": 4, "unit": "%", "label": "expected Bank Rate after next month’s meeting"}, {"id": "france-marchers", "story": "france", "value": 800000, "unit": "people", "label": "marched last weekend, by organizers’ count"}, {"id": "france-custody", "story": "france", "value": 2330, "unit": "people", "label": "people detained over the weekend"}, {"id": "france-adults", "story": "france", "value": 70, "unit": "%", "label": "of those detained were adults"}, {"id": "mmx-sample", "story": "mmx", "value": 10, "unit": "g", "label": "of Phobos soil, at minimum"}, {"id": "mmx-mass", "story": "mmx", "value": 4480, "unit": "kg", "label": "launch mass"}, {"id": "mmx-launch", "story": "mmx", "value": 2026, "unit": "year", "label": "launch"}, {"id": "mmx-mars", "story": "mmx", "value": 2027, "unit": "year", "label": "arrives at Mars"}, {"id": "mmx-sampling", "story": "mmx", "value": 2029, "unit": "year", "label": "samples collected"}, {"id": "mmx-return", "story": "mmx", "value": 2031, "unit": "year", "label": "capsule lands in Woomera, South Australia"}, {"id": "mmx-gravity", "story": "mmx", "value": 2000, "unit": "×", "label": "weaker gravity on Phobos than on Earth"}, {"id": "mmx-martian", "story": "mmx", "value": 0.1, "unit": "%", "label": "of the sample could be debris from Mars itself"}, {"id": "lottery-metrics", "story": "lottery", "value": 100, "unit": "metrics", "label": "scored measures"}, {"id": "lottery-measures", "story": "lottery", "value": 160, "unit": "measures", "label": "measures in the dataset (more than)"}, {"id": "jio-minutes", "story": "jio", "value": 100, "unit": "minutes", "label": "to sell every share on offer"}, {"id": "jio-times", "story": "jio", "value": 2.35, "unit": "×", "label": "oversubscribed by mid-afternoon"}, {"id": "jio-raise", "story": "jio", "value": 3.2, "unit": "$bn", "label": "raised at the top of the range"}, {"id": "jio-prior", "story": "jio", "value": 2.9, "unit": "$bn", "label": "previous record, Hyundai Motor India, 2024"}, {"id": "jio-subs", "story": "jio", "value": 524, "unit": "million", "label": "mobile subscribers"}, {"id": "louvre-students", "story": "louvre", "value": 50, "unit": "students", "label": "from the École du Louvre"}, {"id": "louvre-hours", "story": "louvre", "value": 3, "unit": "hours", "label": "closed, from opening until at least noon"}, {"id": "jackdaw-km", "story": "jackdaw", "value": 250, "unit": "km", "label": "east of Aberdeen"}, {"id": "jackdaw-depth", "story": "jackdaw", "value": 78, "unit": "m", "label": "of water beneath the platform"}, {"id": "louvre-open", "story": "louvre", "value": 9, "unit": "am", "label": "normal opening time"}, {"id": "louvre-noon", "story": "louvre", "value": 12, "unit": "noon", "label": "stayed shut until at least"}], "edition": [{"date": "2026-10-21", "label": "Wednesday, October 21, 2026", "edition": "Trial edition"}]};
+  const DATA = {"stories": [{"order": 1, "id": "debt", "section": "Britain", "headline": "Britain’s public debt passes £3 trillion for the first time.", "hook": "Borrowing falls, debt climbs.", "dek": "Net public debt reached about £3,005 billion in September, the Office for National Statistics said on Wednesday, the first time it has topped £3 trillion. The government borrowed £24.5 billion in the month, more than economists polled by Reuters expected, and almost £11 billion went on debt interest. Borrowing so far this financial year is lower than a year ago but £6 billion above the official forecast, a week before John Healey’s first budget on 28 October.", "so_what": "Less room for tax cuts or spending in next week’s budget.", "weight": 3, "tone": "urgent", "hero": "debt-total", "src1": "ONS", "url1": "https://www.ons.gov.uk/economy/governmentpublicsectorandtaxes/publicsectorfinance/bulletins/publicsectorfinances/september2026", "src2": "Reuters", "url2": "https://www.aol.com/articles/uk-borrows-more-expected-again-061844000.html"}, {"order": 2, "id": "oil", "section": "Economy", "headline": "Oil nears $111 as Iran rules out quick diplomatic progress.", "hook": "Diplomacy stalls, prices climb.", "dek": "Brent crude rose to $110.85 a barrel on Wednesday morning, close to a five-month high, after Iran said there was little reason to expect progress in talks with the United States, Reuters reported. Ship tracker Kpler has counted at least 18 attacks on vessels in two weeks, some beyond the Strait of Hormuz. Brent settled at $108.82 and was climbing again early on Thursday.", "so_what": "Dearer oil feeds straight into fuel prices and inflation.", "weight": 2, "tone": "urgent", "hero": "oil-brent", "src1": "Reuters", "url1": "https://live.euronext.com/en/financial-news/oil-prices-jump-2-iran-knocks-hopes-diplomatic-progress", "src2": "The Nation", "url2": "https://www.nationthailand.com/news/world/40072588"}, {"order": 3, "id": "ukraine", "section": "World", "headline": "Putin agrees in principle to three-way peace talks after a three-hour meeting with Trump’s envoy.", "hook": "Three hours, no ceasefire.", "dek": "Vladimir Putin met the US envoy Steve Witkoff in St Petersburg on Wednesday, their ninth meeting in person, and agreed in principle to three-way talks with Ukraine, which the Kremlin said could resume after 10 November. Russia freed Stephen Hubbard, a retired American teacher, as the meeting began. No ceasefire, terms or venue were announced in a war now more than four and a half years old.", "so_what": "The first sign since February that formal negotiations could restart.", "weight": 2, "tone": "urgent", "hero": "ua-hours", "src1": "AP", "url1": "https://www.wowt.com/2026/10/21/trump-envoy-witkoff-meets-putin-st-petersburg-ukraine-war-talks/?outputType=amp", "src2": "Al Jazeera", "url2": "https://www.aljazeera.com/news/2026/10/21/witkoff-in-russia-for-putin-meeting-after-positive-talks-with-zelenskyy"}, {"order": 4, "id": "climate", "section": "Science", "headline": "The world is heading for 2.8C of warming under current policies, UN report finds.", "hook": "Flat emissions, rising heat.", "dek": "Global greenhouse gas emissions were roughly level in 2025 with the previous year’s record, the UN Environment Programme said in its Emissions Gap Report on Wednesday. Today’s policies point to 2.8C of warming by 2100, and 2.6C if every national pledge is kept. To bring warming back to 1.5C by the end of the century, emissions would have to fall 18% from 2025 levels by 2030 and 69% by 2040.", "so_what": "The report says the window to avoid overshooting 1.5C has closed.", "weight": 2, "tone": "wonder", "hero": "cl-policy", "src1": "UNEP", "url1": "https://www.unep.org/en/news-and-stories/story/temperatures-spike-new-report-outlines-humanitys-options-containing-climate", "src2": "Euronews", "url2": "https://www.euronews.com/2026/10/21/this-is-possible-emissions-must-fall-by-18-in-next-4-years-to-limit-worst-impacts-of-globa"}, {"order": 5, "id": "aberfan", "section": "Society", "headline": "The King leads tributes to the 144 people killed at Aberfan, 60 years on.", "hook": "Sixty years, no prosecutions.", "dek": "King Charles, Queen Camilla and the Prince of Wales met survivors in Aberfan on Wednesday, 60 years after a colliery waste tip slid onto Pantglas Junior School just after 9.15am. The disaster killed 144 people, 116 of them children, most aged seven to ten. A tribunal blamed the National Coal Board, which had been warned of the danger, but no one was prosecuted.", "so_what": "A reminder of how long the fight for accountability lasted.", "weight": 2, "tone": "solemn", "hero": "ab-children", "src1": "Reuters", "url1": "https://www.gulftoday.ae/news/2026/10/21/king-charles-and-family-mark-60th-anniversary-of-aberfan-disaster", "src2": "Euronews", "url2": "https://www.euronews.com/2026/10/21/aberfan-king-charles-marks-welsh-mining-disaster-that-killed-a-generation-of-children"}, {"order": 6, "id": "php", "section": "Technology", "headline": "Governments pull websites offline as two critical flaws hit the web’s most common language.", "hook": "Two bugs, governments offline.", "dek": "Agencies in the Netherlands, Finland, France, Denmark and Australia took government websites offline this week over two critical vulnerabilities in PHP, the language behind about three quarters of websites whose code can be identified. CERT-EU rates both 9.2 out of 10 for severity because they can let attackers run code without logging in. Fixes were released on Wednesday; attempts to exploit the flaws have already been seen.", "so_what": "Any site running unpatched PHP, including many WordPress sites, is exposed.", "weight": 2, "tone": "urgent", "hero": "php-share", "src1": "ABC News", "url1": "https://www.abc.net.au/news/2026-10-22/php-vulnerabilities-cyber-asd/107294812", "src2": "The Register", "url2": "https://www.theregister.com/security/2026/10/21/php-devs-publish-critical-bug-fix-as-site-owners-warned-pull-em-offline-if-youre-unpatched/5304519"}, {"order": 7, "id": "beatles", "section": "Culture", "headline": "Apple Corps plans a Beatles attraction four times the size of the current one in Liverpool.", "hook": "Four lads, four times.", "dek": "The Beatles’ company, Apple Corps, said this week that the Beatles Story will leave Albert Dock for a 100,000 sq ft site in the former St Johns Market, opposite Lime Street station, in 2028. The multi-hour experience will recreate the Cavern, Abbey Road studios and Shea Stadium, partly with sets from Sam Mendes’s four Beatles films, due in April 2028.", "so_what": "Liverpool is betting on a Graceland-sized draw for music tourism.", "weight": 1, "tone": "light", "hero": "bt-times", "src1": "The Beatles", "url1": "https://www.thebeatles.com/beatles-liverpool-2028-new-immersive-experience-heart-liverpool", "src2": "Euronews", "url2": "https://www.euronews.com/2026/10/21/new-beatles-attraction-to-rival-graceland-coming-to-liverpool-in-2028"}], "facts": [{"id": "debt-total", "story": "debt", "value": 3005, "unit": "bn", "label": "public sector net debt in September, provisional (ONS)"}, {"id": "debt-gdp", "story": "debt", "value": 94, "unit": "%", "label": "of GDP, lower than a year earlier"}, {"id": "debt-sep", "story": "debt", "value": 24.52, "unit": "bn", "label": "borrowed in September"}, {"id": "debt-poll", "story": "debt", "value": 23.85, "unit": "bn", "label": "forecast by economists polled by Reuters"}, {"id": "debt-interest", "story": "debt", "value": 11, "unit": "bn", "label": "almost this much spent on debt interest in September"}, {"id": "debt-days", "story": "debt", "value": 30, "unit": "days", "label": "days in September"}, {"id": "debt-ytd", "story": "debt", "value": 97.8, "unit": "bn", "label": "borrowed April to September"}, {"id": "debt-obr", "story": "debt", "value": 6, "unit": "bn", "label": "above the official forecast so far this year"}, {"id": "oil-brent", "story": "oil", "value": 110.85, "unit": "a barrel", "label": "Brent crude on Wednesday morning, near a five-month high"}, {"id": "oil-close", "story": "oil", "value": 108.82, "unit": "a barrel", "label": "where Brent settled on Wednesday"}, {"id": "oil-attacks", "story": "oil", "value": 18, "unit": "attacks", "label": "attacks on vessels in two weeks, counted by Kpler"}, {"id": "oil-days", "story": "oil", "value": 14, "unit": "days", "label": "the two weeks Kpler counted"}, {"id": "ua-hours", "story": "ukraine", "value": 3, "unit": "hours", "label": "Putin and Witkoff talked in St Petersburg, the Kremlin said"}, {"id": "ua-meeting", "story": "ukraine", "value": 9, "unit": "meetings", "label": "in-person meetings between the two so far"}, {"id": "ua-nov", "story": "ukraine", "value": 10, "unit": "November", "label": "earliest date for three-way talks, per the Kremlin"}, {"id": "ua-years", "story": "ukraine", "value": 4.5, "unit": "years", "label": "since the full-scale invasion, and counting"}, {"id": "cl-policy", "story": "climate", "value": 2.8, "unit": "°C", "label": "warming by 2100 under current policies, says UNEP"}, {"id": "cl-pledge", "story": "climate", "value": 2.6, "unit": "°C", "label": "if every national pledge is met"}, {"id": "cl-now", "story": "climate", "value": 1.4, "unit": "°C", "label": "warming so far, roughly"}, {"id": "cl-paris", "story": "climate", "value": 1.5, "unit": "°C", "label": "the Paris Agreement goal"}, {"id": "cl-cut30", "story": "climate", "value": 18, "unit": "%", "label": "cut from 2025 levels needed by 2030"}, {"id": "cl-cut35", "story": "climate", "value": 45, "unit": "%", "label": "cut needed by 2035"}, {"id": "cl-cut40", "story": "climate", "value": 69, "unit": "%", "label": "cut needed by 2040"}, {"id": "ab-children", "story": "aberfan", "value": 116, "unit": "children", "label": "children killed, most aged seven to ten"}, {"id": "ab-adults", "story": "aberfan", "value": 28, "unit": "adults", "label": "adults killed"}, {"id": "ab-total", "story": "aberfan", "value": 144, "unit": "people", "label": "people killed on 21 October 1966"}, {"id": "ab-years", "story": "aberfan", "value": 60, "unit": "years", "label": "since the disaster"}, {"id": "ab-hour", "story": "aberfan", "value": 9, "unit": "h", "label": "hour the tip slid"}, {"id": "ab-min", "story": "aberfan", "value": 15, "unit": "min", "label": "minutes past the hour"}, {"id": "php-share", "story": "php", "value": 75, "unit": "%", "label": "of websites with an identifiable language run PHP (W3Techs)"}, {"id": "php-cvss", "story": "php", "value": 9.2, "unit": "out of 10", "label": "severity score CERT-EU gives each flaw"}, {"id": "php-bugs", "story": "php", "value": 2, "unit": "flaws", "label": "critical vulnerabilities"}, {"id": "php-govs", "story": "php", "value": 5, "unit": "countries", "label": "countries named taking government sites offline"}, {"id": "php-wp", "story": "php", "value": 43, "unit": "%", "label": "of all websites use WordPress, which runs on PHP"}, {"id": "bt-times", "story": "beatles", "value": 4, "unit": "×", "label": "more than the current attraction’s footprint"}, {"id": "bt-sqft", "story": "beatles", "value": 100000, "unit": "sq ft", "label": "new site in the former St Johns Market"}, {"id": "bt-year", "story": "beatles", "value": 2028, "unit": "year", "label": "opening"}, {"id": "bt-films", "story": "beatles", "value": 4, "unit": "films", "label": "Sam Mendes films lending sets and props"}], "edition": [{"date": "2026-10-22", "label": "Thursday, October 22, 2026", "edition": "Morning edition"}]};
   const calcs = {}, subs = [];
   window.dash = {
     data(id) {
@@ -136,23 +136,14 @@ body { background: var(--color-bg); color: var(--color-fg); }
 .m7 .cu:empty { display: none; }
 .m7 .counting .real { display: none; }
 
-.m7 [data-id=jackdaw] { --g: linear-gradient(100deg, #2997ff, #bf5af2 60%, #ff375f); --e: #2997ff; }
-.m7 [data-id=cpi] { --g: linear-gradient(100deg, #ff9f0a, #ff375f); --e: #e35d00; }
-.m7 [data-id=france] { --g: linear-gradient(100deg, #ff375f, #bf5af2); --e: #ff375f; }
-.m7 [data-id=mmx] { --g: linear-gradient(100deg, #64d2ff, #5e5ce6); --e: #64d2ff; }
-.m7 [data-id=lottery] { --g: linear-gradient(100deg, #8e8e93, #48484a); --e: #8e8e93; }
-.m7 [data-id=jio] { --g: linear-gradient(100deg, #28b04d, #0a84ff); --e: #1a9e4b; }
-.m7 [data-id=louvre] { --g: linear-gradient(100deg, #ffd60a, #ff9f0a); --e: #ffd60a; }
-
-/* Cover */
-
-.m7 .irow[data-id-row=jackdaw] { --e: #2997ff; }
-.m7 .irow[data-id-row=cpi] { --e: #e35d00; }
-.m7 .irow[data-id-row=france] { --e: #ff375f; }
-.m7 .irow[data-id-row=mmx] { --e: #3aa7d9; }
-.m7 .irow[data-id-row=lottery] { --e: #8e8e93; }
-.m7 .irow[data-id-row=jio] { --e: #1a9e4b; }
-.m7 .irow[data-id-row=louvre] { --e: #d4a300; }
+.m7 .big { font-size: clamp(4rem, 10cqi, 7.4rem); font-weight: 700; letter-spacing: -.05em; line-height: 1; margin-top: 1.1rem; font-variant-numeric: tabular-nums; }
+.m7 [data-id=debt] { --g: linear-gradient(100deg, #2997ff, #bf5af2 70%, #ff375f); --e: #2997ff; }
+.m7 [data-id=oil] { --g: linear-gradient(100deg, #ff9f0a, #ff375f); --e: #e35d00; }
+.m7 [data-id=ukraine] { --g: linear-gradient(100deg, #64d2ff, #5e5ce6); --e: #64d2ff; }
+.m7 [data-id=climate] { --g: linear-gradient(100deg, #ff9f0a, #ff375f); --e: #d64a1c; }
+.m7 [data-id=aberfan] { --g: linear-gradient(100deg, #d1d1d6, #8e8e93); --e: #a1a1a6; }
+.m7 [data-id=php] { --g: linear-gradient(100deg, #8892bf, #5e5ce6); --e: #6f78b0; }
+.m7 [data-id=beatles] { --g: linear-gradient(100deg, #ffd60a, #ff9f0a 60%, #ff375f); --e: #ffd60a; }
 
 .m7 .cover { display: block; text-align: center; padding-top: clamp(64px, 10cqi, 120px); }
 .m7 .cover .date { font-size: 17px; font-weight: 600; color: var(--sub); }
@@ -191,96 +182,96 @@ body { background: var(--color-bg); color: var(--color-fg); }
   </header>
   <div class="deck" id="deck">
 
-    <section class="card dark" id="s-jackdaw" data-id="jackdaw" data-tone="urgent">
+    <section class="card dark" id="s-debt" data-id="debt" data-tone="urgent">
       <div class="txt">
-        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=jackdaw">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=jackdaw">—</span> / <span class="cnt-total"></span></span></div>
-        <h2 data-source="stories" data-field="headline" data-where="id=jackdaw">—</h2>
-        <p class="hook" data-source="stories" data-field="hook" data-where="id=jackdaw">—</p>
-        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=jackdaw-peak">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=jackdaw-peak"></span></div>
-        <div class="blabel" data-source="facts" data-field="label" data-where="id=jackdaw-peak">—</div>
-        <p class="dek" data-source="stories" data-field="dek" data-where="id=jackdaw">—</p>
-        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=jackdaw-critics">—</span><span data-source="facts" data-field="unit" data-where="id=jackdaw-critics"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=jackdaw-critics">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=jackdaw-years">—</span><span data-source="facts" data-field="unit" data-where="id=jackdaw-years"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=jackdaw-years">—</div></div></div>
-        <div class="ctas"><a data-href="jackdaw:1">Read at <span data-source="stories" data-field="src1" data-where="id=jackdaw">—</span></a><a data-href="jackdaw:2">Read at <span data-source="stories" data-field="src2" data-where="id=jackdaw">—</span></a></div>
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=debt">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=debt">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=debt">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=debt">—</p>
+        <div class="big grad"><span class="unit">£</span><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=debt-total">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=debt-total"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=debt-total">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=debt">—</p>
+        <div class="stats"><div><div class="v">£<span data-source="facts" data-field="value" data-where="id=debt-sep">—</span><span data-source="facts" data-field="unit" data-where="id=debt-sep"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=debt-sep">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=debt-gdp">—</span><span data-source="facts" data-field="unit" data-where="id=debt-gdp"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=debt-gdp">—</div></div><div><div class="v">£<span data-source="debt-rate" data-field="value" data-row="0">—</span></div><div class="l">a second on debt interest, at September’s pace</div></div></div>
+        <div class="ctas"><a data-href="debt:1">Read at <span data-source="stories" data-field="src1" data-where="id=debt">—</span></a><a data-href="debt:2">Read at <span data-source="stories" data-field="src2" data-where="id=debt">—</span></a></div>
       </div>
-      <div class="art" id="art-jackdaw" data-source="facts"></div>
+      <div class="art" id="art-debt" data-source="facts debt-rate"></div>
     </section>
-    <section class="card light" id="s-cpi" data-id="cpi" data-tone="urgent">
+    <section class="card light" id="s-oil" data-id="oil" data-tone="urgent">
       <div class="txt">
-        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=cpi">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=cpi">—</span> / <span class="cnt-total"></span></span></div>
-        <h2 data-source="stories" data-field="headline" data-where="id=cpi">—</h2>
-        <p class="hook" data-source="stories" data-field="hook" data-where="id=cpi">—</p>
-        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=cpi-fuel">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=cpi-fuel"></span></div>
-        <div class="blabel" data-source="facts" data-field="label" data-where="id=cpi-fuel">—</div>
-        <p class="dek" data-source="stories" data-field="dek" data-where="id=cpi">—</p>
-        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=cpi-sep">—</span>%</div><div class="l">overall inflation, against a forecast of <span data-source="facts" data-field="value" data-where="id=cpi-forecast">—</span>%</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=cpi-bankrate">—</span><span data-source="facts" data-field="unit" data-where="id=cpi-bankrate"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=cpi-bankrate">—</div></div></div>
-        <div class="ctas"><a data-href="cpi:1">Read at <span data-source="stories" data-field="src1" data-where="id=cpi">—</span></a><a data-href="cpi:2">Read at <span data-source="stories" data-field="src2" data-where="id=cpi">—</span></a></div>
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=oil">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=oil">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=oil">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=oil">—</p>
+        <div class="big grad"><span class="unit">$</span><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=oil-brent">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=oil-brent"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=oil-brent">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=oil">—</p>
+        <div class="stats"><div><div class="v">$<span data-source="facts" data-field="value" data-where="id=oil-close">—</span><span data-source="facts" data-field="unit" data-where="id=oil-close"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=oil-close">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=oil-attacks">—</span><span data-source="facts" data-field="unit" data-where="id=oil-attacks"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=oil-attacks">—</div></div></div>
+        <div class="ctas"><a data-href="oil:1">Read at <span data-source="stories" data-field="src1" data-where="id=oil">—</span></a><a data-href="oil:2">Read at <span data-source="stories" data-field="src2" data-where="id=oil">—</span></a></div>
       </div>
-      <div class="art" id="art-cpi" data-source="facts"></div>
+      <div class="art" id="art-oil" data-source="facts"></div>
     </section>
-    <section class="card dark" id="s-france" data-id="france" data-tone="urgent">
+    <section class="card dark" id="s-ukraine" data-id="ukraine" data-tone="urgent">
       <div class="txt">
-        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=france">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=france">—</span> / <span class="cnt-total"></span></span></div>
-        <h2 data-source="stories" data-field="headline" data-where="id=france">—</h2>
-        <p class="hook" data-source="stories" data-field="hook" data-where="id=france">—</p>
-        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=france-marchers">—</span></div>
-        <div class="blabel" data-source="facts" data-field="label" data-where="id=france-marchers">—</div>
-        <p class="dek" data-source="stories" data-field="dek" data-where="id=france">—</p>
-        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=france-custody">—</span></div><div class="l" data-source="facts" data-field="label" data-where="id=france-custody">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=france-adults">—</span><span data-source="facts" data-field="unit" data-where="id=france-adults"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=france-adults">—</div></div></div>
-        <div class="ctas"><a data-href="france:1">Read at <span data-source="stories" data-field="src1" data-where="id=france">—</span></a><a data-href="france:2">Read at <span data-source="stories" data-field="src2" data-where="id=france">—</span></a></div>
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=ukraine">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=ukraine">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=ukraine">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=ukraine">—</p>
+        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=ua-hours">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=ua-hours"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=ua-hours">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=ukraine">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ua-meeting">—</span><span data-source="facts" data-field="unit" data-where="id=ua-meeting"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ua-meeting">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ua-nov">—</span><span data-source="facts" data-field="unit" data-where="id=ua-nov"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ua-nov">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ua-years">—</span><span data-source="facts" data-field="unit" data-where="id=ua-years"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ua-years">—</div></div></div>
+        <div class="ctas"><a data-href="ukraine:1">Read at <span data-source="stories" data-field="src1" data-where="id=ukraine">—</span></a><a data-href="ukraine:2">Read at <span data-source="stories" data-field="src2" data-where="id=ukraine">—</span></a></div>
       </div>
-      <div class="art" id="art-france" data-source="facts"></div>
+      <div class="art" id="art-ukraine" data-source="facts edition"></div>
     </section>
-    <section class="card dark" id="s-mmx" data-id="mmx" data-tone="wonder">
+    <section class="card light" id="s-climate" data-id="climate" data-tone="wonder">
       <div class="txt">
-        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=mmx">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=mmx">—</span> / <span class="cnt-total"></span></span></div>
-        <h2 data-source="stories" data-field="headline" data-where="id=mmx">—</h2>
-        <p class="hook" data-source="stories" data-field="hook" data-where="id=mmx">—</p>
-        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=mmx-sample">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=mmx-sample"></span></div>
-        <div class="blabel" data-source="facts" data-field="label" data-where="id=mmx-sample">—</div>
-        <p class="dek" data-source="stories" data-field="dek" data-where="id=mmx">—</p>
-        <div class="stats"><div><div class="v"><span data-source="mmx-ratio" data-field="ratio" data-row="0">—</span> to one</div><div class="l">the spacecraft’s weight against the sample’s</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=mmx-martian">—</span><span data-source="facts" data-field="unit" data-where="id=mmx-martian"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=mmx-martian">—</div></div></div>
-        <div class="ctas"><a data-href="mmx:1">Read at <span data-source="stories" data-field="src1" data-where="id=mmx">—</span></a><a data-href="mmx:2">Read at <span data-source="stories" data-field="src2" data-where="id=mmx">—</span></a></div>
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=climate">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=climate">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=climate">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=climate">—</p>
+        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=cl-policy">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=cl-policy"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=cl-policy">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=climate">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=cl-pledge">—</span><span data-source="facts" data-field="unit" data-where="id=cl-pledge"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=cl-pledge">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=cl-cut30">—</span><span data-source="facts" data-field="unit" data-where="id=cl-cut30"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=cl-cut30">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=cl-now">—</span><span data-source="facts" data-field="unit" data-where="id=cl-now"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=cl-now">—</div></div></div>
+        <div class="ctas"><a data-href="climate:1">Read at <span data-source="stories" data-field="src1" data-where="id=climate">—</span></a><a data-href="climate:2">Read at <span data-source="stories" data-field="src2" data-where="id=climate">—</span></a></div>
       </div>
-      <div class="art" id="art-mmx" data-source="facts"></div>
+      <div class="art" id="art-climate" data-source="facts"></div>
     </section>
-    <section class="card light" id="s-lottery" data-id="lottery" data-tone="solemn">
+    <section class="card dark" id="s-aberfan" data-id="aberfan" data-tone="solemn">
       <div class="txt">
-        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=lottery">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=lottery">—</span> / <span class="cnt-total"></span></span></div>
-        <h2 data-source="stories" data-field="headline" data-where="id=lottery">—</h2>
-        <p class="hook" data-source="stories" data-field="hook" data-where="id=lottery">—</p>
-        <div class="big grad"><span class="unit">Nearly </span><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=lottery-metrics">—</span></div>
-        <div class="blabel" data-source="facts" data-field="label" data-where="id=lottery-metrics">—</div>
-        <p class="dek" data-source="stories" data-field="dek" data-where="id=lottery">—</p>
-        
-        <div class="ctas"><a data-href="lottery:1">Read at <span data-source="stories" data-field="src1" data-where="id=lottery">—</span></a><a data-href="lottery:2">Read at <span data-source="stories" data-field="src2" data-where="id=lottery">—</span></a></div>
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=aberfan">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=aberfan">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=aberfan">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=aberfan">—</p>
+        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=ab-children">—</span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=ab-children">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=aberfan">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ab-total">—</span><span data-source="facts" data-field="unit" data-where="id=ab-total"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ab-total">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ab-adults">—</span><span data-source="facts" data-field="unit" data-where="id=ab-adults"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ab-adults">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ab-years">—</span><span data-source="facts" data-field="unit" data-where="id=ab-years"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ab-years">—</div></div></div>
+        <div class="ctas"><a data-href="aberfan:1">Read at <span data-source="stories" data-field="src1" data-where="id=aberfan">—</span></a><a data-href="aberfan:2">Read at <span data-source="stories" data-field="src2" data-where="id=aberfan">—</span></a></div>
       </div>
-      <div class="art" id="art-lottery" data-source="lottery"></div>
+      <div class="art" id="art-aberfan" data-source="facts"></div>
     </section>
-    <section class="card light" id="s-jio" data-id="jio" data-tone="light">
+    <section class="card light" id="s-php" data-id="php" data-tone="urgent">
       <div class="txt">
-        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=jio">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=jio">—</span> / <span class="cnt-total"></span></span></div>
-        <h2 data-source="stories" data-field="headline" data-where="id=jio">—</h2>
-        <p class="hook" data-source="stories" data-field="hook" data-where="id=jio">—</p>
-        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=jio-minutes">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=jio-minutes"></span></div>
-        <div class="blabel" data-source="facts" data-field="label" data-where="id=jio-minutes">—</div>
-        <p class="dek" data-source="stories" data-field="dek" data-where="id=jio">—</p>
-        <div class="stats"><div><div class="v">$<span data-source="facts" data-field="value" data-where="id=jio-raise">—</span> billion</div><div class="l">at the top of the range, beating a record of $<span data-source="facts" data-field="value" data-where="id=jio-prior">—</span> billion</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=jio-times">—</span><span data-source="facts" data-field="unit" data-where="id=jio-times"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=jio-times">—</div></div></div>
-        <div class="ctas"><a data-href="jio:1">Read at <span data-source="stories" data-field="src1" data-where="id=jio">—</span></a><a data-href="jio:2">Read at <span data-source="stories" data-field="src2" data-where="id=jio">—</span></a></div>
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=php">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=php">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=php">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=php">—</p>
+        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=php-share">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=php-share"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=php-share">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=php">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=php-cvss">—</span><span data-source="facts" data-field="unit" data-where="id=php-cvss"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=php-cvss">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=php-wp">—</span><span data-source="facts" data-field="unit" data-where="id=php-wp"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=php-wp">—</div></div></div>
+        <div class="ctas"><a data-href="php:1">Read at <span data-source="stories" data-field="src1" data-where="id=php">—</span></a><a data-href="php:2">Read at <span data-source="stories" data-field="src2" data-where="id=php">—</span></a></div>
       </div>
-      <div class="art" id="art-jio" data-source="facts"></div>
+      <div class="art" id="art-php" data-source="facts"></div>
     </section>
-    <section class="card dark" id="s-louvre" data-id="louvre" data-tone="light">
+    <section class="card dark" id="s-beatles" data-id="beatles" data-tone="light">
       <div class="txt">
-        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=louvre">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=louvre">—</span> / <span class="cnt-total"></span></span></div>
-        <h2 data-source="stories" data-field="headline" data-where="id=louvre">—</h2>
-        <p class="hook" data-source="stories" data-field="hook" data-where="id=louvre">—</p>
-        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=louvre-students">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=louvre-students"></span></div>
-        <div class="blabel" data-source="facts" data-field="label" data-where="id=louvre-students">—</div>
-        <p class="dek" data-source="stories" data-field="dek" data-where="id=louvre">—</p>
-        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=louvre-hours">—</span><span data-source="facts" data-field="unit" data-where="id=louvre-hours"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=louvre-hours">—</div></div></div>
-        <div class="ctas"><a data-href="louvre:1">Read at <span data-source="stories" data-field="src1" data-where="id=louvre">—</span></a><a data-href="louvre:2">Read at <span data-source="stories" data-field="src2" data-where="id=louvre">—</span></a></div>
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=beatles">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=beatles">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=beatles">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=beatles">—</p>
+        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=bt-times">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=bt-times"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=bt-times">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=beatles">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=bt-sqft">—</span><span data-source="facts" data-field="unit" data-where="id=bt-sqft"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=bt-sqft">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=bt-year">—</span><span data-source="facts" data-field="unit" data-where="id=bt-year"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=bt-year">—</div></div></div>
+        <div class="ctas"><a data-href="beatles:1">Read at <span data-source="stories" data-field="src1" data-where="id=beatles">—</span></a><a data-href="beatles:2">Read at <span data-source="stories" data-field="src2" data-where="id=beatles">—</span></a></div>
       </div>
-      <div class="art" id="art-louvre" data-source="facts"></div>
+      <div class="art" id="art-beatles" data-source="facts"></div>
     </section>
 
   </div>
@@ -295,13 +286,14 @@ body { background: var(--color-bg); color: var(--color-fg); }
   const stories = cards.filter(c => c.dataset.id);
   const calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  dash.calc('mmx-ratio', {
+
+  dash.calc('debt-rate', {
     inputs: ['facts'],
-    title: 'MMX spacecraft-to-sample ratio',
-    description: 'Launch mass in grams divided by the minimum Phobos sample in grams.',
+    title: 'Debt interest per second',
+    description: 'September debt interest spread evenly over the month’s seconds, rounded to the nearest £100.',
     fn: (facts) => {
-      const v = id => (facts.find(r => r.id === id) || {}).value;
-      return [{ratio: Math.round(v('mmx-mass') * 1000 / v('mmx-sample'))}];
+      const v = id => Number((facts.find(r => r.id === id) || {}).value);
+      return [{value: Math.round(v('debt-interest') * 1e9 / (v('debt-days') * 86400) / 100) * 100}];
     }
   });
 
@@ -313,7 +305,7 @@ body { background: var(--color-bg); color: var(--color-fg); }
     if (Math.abs(n) >= 1000) return d3.format(',')(n);
     return String(n);
   };
-  const unitText = u => (u === '%' || u === '×' || u === 'g') ? u : ' ' + u;
+  const unitText = u => (u === '%' || u === '×' || u === 'g' || u === '°C' || u === 'bn') ? u : u === 'year' ? '' : ' ' + u;
   const parseWhere = w => Object.fromEntries((w || '').split('&').filter(Boolean).map(p => p.split('=').map(decodeURIComponent)));
   function fillMarks(){
     root.querySelectorAll('[data-source][data-field]').forEach(el => {
@@ -413,390 +405,363 @@ body { background: var(--color-bg); color: var(--color-fg); }
     .attr('text-anchor', o.a || 'start').attr('fill', o.fill || 'var(--fg)').attr('opacity', o.op == null ? 1 : o.op).text(s);
   const ease = d3.easeCubicInOut;
 
-  /* ---------- 1. Jackdaw: from reservoir to living rooms ---------- */
-  function artJackdaw(box, f){
+  /* ---------- 1. Debt: a tower of £100bn blocks, and interest ticking ---------- */
+  function artDebt(box, f){
     const W = 640, H = 470, svg = mkSvg(box, W, H);
+    const total = f['debt-total'].value, PER = 100;
+    const rd = dash.data('debt-rate'), rate = rd.status === 'ok' && rd.data[0] ? Number(rd.data[0].value) : 0;
+    const n = Math.floor(total / PER), rem = total - n * PER;
+    const base = 430, bh = 11, gap = 1.2, bx = 70, bw = 170;
     const defs = svg.append('defs');
-    const sea = defs.append('linearGradient').attr('id', 'jd-sea').attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
-    sea.append('stop').attr('offset', 0).attr('stop-color', '#0a84ff').attr('stop-opacity', .55);
-    sea.append('stop').attr('offset', 1).attr('stop-color', '#0a2a5c').attr('stop-opacity', .9);
-    const res = defs.append('radialGradient').attr('id', 'jd-res');
-    res.append('stop').attr('offset', 0).attr('stop-color', '#ff9f0a').attr('stop-opacity', .95);
-    res.append('stop').attr('offset', .55).attr('stop-color', '#bf5af2').attr('stop-opacity', .55);
-    res.append('stop').attr('offset', 1).attr('stop-color', '#bf5af2').attr('stop-opacity', 0);
-    const surf = 150, bed = 300, coast = 430;
-    // sea
-    svg.append('rect').attr('x', 0).attr('y', surf).attr('width', coast + 20).attr('height', bed - surf).attr('fill', 'url(#jd-sea)');
-    for (let i = 0; i < 9; i++) svg.append('path').attr('d', `M${i * 52} ${surf} q13 -5 26 0 t26 0`).attr('fill', 'none').attr('stroke', '#64d2ff').attr('opacity', .6);
-    // rock
-    svg.append('rect').attr('x', 0).attr('y', bed).attr('width', W).attr('height', H - bed).attr('fill', 'var(--line)').attr('opacity', .45);
-    for (let i = 1; i < 5; i++) svg.append('path').attr('d', `M0 ${bed + i * 34} C160 ${bed + i * 34 - 12}, 320 ${bed + i * 34 + 12}, ${W} ${bed + i * 34 - 6}`).attr('fill', 'none').attr('stroke', 'var(--sub)').attr('opacity', .18);
-    const glow = svg.append('ellipse').attr('cx', 110).attr('cy', 425).attr('rx', 120).attr('ry', 34).attr('fill', 'url(#jd-res)');
-    T(svg, 110, 458, 'Gas, under very high pressure', {a: 'middle', size: 12, fill: 'var(--sub)'});
-    // land + town
-    svg.append('path').attr('d', `M${coast} ${bed} L${coast + 22} 250 L${W} 236 L${W} ${H} L${coast} ${H} Z`).attr('fill', 'var(--line)').attr('opacity', .8);
-    // platform
-    const px = 110;
-    [-34, -12, 12, 34].forEach(dx => svg.append('line').attr('x1', px + dx).attr('x2', px + dx * 1.25).attr('y1', 104).attr('y2', bed).attr('stroke', 'var(--fg)').attr('stroke-width', 2.2).attr('opacity', .85));
-    svg.append('rect').attr('x', px - 48).attr('y', 92).attr('width', 96).attr('height', 14).attr('rx', 3).attr('fill', 'var(--fg)');
-    svg.append('path').attr('d', `M${px - 10} 92 L${px} 48 L${px + 10} 92`).attr('fill', 'none').attr('stroke', 'var(--fg)').attr('stroke-width', 2);
-    const flare = svg.append('path').attr('d', `M${px + 40} 92 L${px + 54} 60`).attr('stroke', 'var(--fg)').attr('stroke-width', 2);
-    const flame = svg.append('path').attr('d', `M${px + 54} 60 q-7 -10 0 -24 q7 14 0 24`).attr('fill', '#ff9f0a');
-    // drill string
-    const drill = svg.append('line').attr('x1', px).attr('x2', px).attr('y1', 106).attr('y2', 106).attr('stroke', '#ff9f0a').attr('stroke-width', 2.5).attr('stroke-dasharray', '6 4');
-    // depth dimension
-    const dx = 26;
-    svg.append('line').attr('x1', dx).attr('x2', dx).attr('y1', surf).attr('y2', bed).attr('stroke', '#fff').attr('opacity', .8);
-    [surf, bed].forEach(y => svg.append('line').attr('x1', dx - 6).attr('x2', dx + 6).attr('y1', y).attr('y2', y).attr('stroke', '#fff').attr('opacity', .8));
-    T(svg, dx + 10, (surf + bed) / 2 + 4, `${f['jackdaw-depth'].value} m of sea`, {size: 12, fill: '#fff', w: 600});
-    // pipeline along the seabed
-    const pipeD = `M${px} ${bed - 2} L${coast - 90} ${bed - 2} M${coast - 70} ${bed - 2} L${coast + 8} ${bed - 2} L${coast + 30} 252`;
-    const pipe = svg.append('path').attr('d', pipeD).attr('fill', 'none').attr('stroke', '#ff9f0a').attr('stroke-width', 3).attr('stroke-linecap', 'round');
-    svg.append('text').attr('x', coast - 80).attr('y', bed + 5).attr('text-anchor', 'middle').attr('font-size', 16).attr('fill', '#ff9f0a').text('≈');
-    T(svg, (px + coast) / 2 + 20, bed - 12, `${f['jackdaw-km'].value} km to Aberdeen`, {a: 'middle', size: 12, fill: '#fff', w: 600});
-    // town: one house = 10,000 homes
-    const PER = 10000, nH = Math.round(f['jackdaw-homes'].value * 1e6 / PER), cols = 14;
-    const hx0 = coast + 34, hy0 = 112, hs = 12.4;
-    const houses = [];
-    for (let i = 0; i < nH; i++) {
-      const c = i % cols, r = Math.floor(i / cols), x = hx0 + c * hs, y = hy0 + r * hs;
-      houses.push(svg.append('path').attr('d', `M${x} ${y + 4} L${x + 4.5} ${y} L${x + 9} ${y + 4} L${x + 9} ${y + 10} L${x} ${y + 10} Z`).attr('fill', 'var(--sub)').attr('opacity', .3));
+    const g = defs.append('linearGradient').attr('id', 'db-blk').attr('x1', 0).attr('x2', 1);
+    g.append('stop').attr('offset', 0).attr('stop-color', '#2997ff'); g.append('stop').attr('offset', 1).attr('stop-color', '#bf5af2');
+    const blocks = d3.range(n).map(i => svg.append('rect').attr('x', bx).attr('y', base - (i + 1) * (bh + gap)).attr('width', bw).attr('height', bh).attr('rx', 2.5).attr('fill', 'url(#db-blk)').attr('opacity', .92));
+    const lineY = base - n * (bh + gap);
+    const sliverH = Math.max(2, rem / PER * bh);
+    const sliver = svg.append('rect').attr('x', bx).attr('y', lineY - sliverH - 1).attr('width', bw).attr('height', sliverH).attr('fill', '#ff375f');
+    svg.append('line').attr('x1', bx - 24).attr('x2', bx + bw + 24).attr('y1', lineY).attr('y2', lineY).attr('stroke', 'var(--fg)').attr('stroke-dasharray', '4 4').attr('opacity', .7);
+    T(svg, bx - 26, lineY + 4, '£3tn', {a: 'end', size: 12, w: 700});
+    T(svg, bx + bw + 30, lineY - 2, `£${d3.format(',')(total)}bn`, {size: 13, w: 700, fill: '#ff6b81'});
+    T(svg, bx + bw + 30, lineY + 14, 'first time over the line', {size: 11, fill: 'var(--sub)'});
+    T(svg, bx + bw / 2, base + 22, `Each block is £${PER}bn of public debt`, {a: 'middle', size: 11, fill: 'var(--sub)'});
+    T(svg, bx + bw / 2, base + 36, 'top sliver thickened to be visible', {a: 'middle', size: 10, fill: 'var(--sub)', op: .8});
+    // interest meter and coin jar
+    const mx = 420;
+    T(svg, mx + 85, 150, 'Debt interest, at September’s pace', {a: 'middle', size: 12, fill: 'var(--sub)', w: 600});
+    const meter = T(svg, mx + 85, 190, '£0', {a: 'middle', size: 30, w: 700}).attr('font-variant-numeric', 'tabular-nums');
+    const sub = T(svg, mx + 85, 210, 'since this card opened', {a: 'middle', size: 11, fill: 'var(--sub)'});
+    const jx = mx + 25, jy = 240, jw = 120, jh = 170;
+    svg.append('path').attr('d', `M${jx} ${jy} L${jx} ${jy + jh - 14} Q${jx} ${jy + jh} ${jx + 14} ${jy + jh} L${jx + jw - 14} ${jy + jh} Q${jx + jw} ${jy + jh} ${jx + jw} ${jy + jh - 14} L${jx + jw} ${jy}`).attr('fill', 'none').attr('stroke', 'var(--fg)').attr('stroke-width', 2).attr('opacity', .6);
+    T(svg, jx + jw / 2, jy + jh + 22, `One coin a second ≈ £${d3.format(',')(rate)}`, {a: 'middle', size: 11, fill: 'var(--sub)'});
+    const coinG = svg.append('g');
+    const cols = 6, cr = 8.5, perJar = 48;
+    let count = 0, iv = null, tm = null;
+    function dropCoin(){
+      if (count >= perJar) { coinG.selectAll('circle').transition().duration(400).attr('opacity', 0).remove(); count = 0; return; }
+      const c = count % cols, r = Math.floor(count / cols);
+      const x = jx + 12 + c * (cr * 2 + 1.2) + cr, y = jy + jh - 4 - cr - r * (cr * 2 - 1);
+      coinG.append('circle').attr('cx', x).attr('cy', jy - 30).attr('r', cr).attr('fill', '#ffd60a').attr('stroke', '#c99a00')
+        .transition().duration(520).ease(d3.easeBounceOut).attr('cy', y);
+      count++;
     }
-    T(svg, hx0 + cols * hs / 2 - 2, hy0 - 26, `${f['jackdaw-homes'].value} million homes`, {a: 'middle', size: 15, w: 700});
-    T(svg, hx0 + cols * hs / 2 - 2, hy0 - 10, `heated at peak · one house = ${d3.format(',')(PER)}`, {a: 'middle', size: 11, fill: 'var(--sub)'});
-    const L = pipe.node().getTotalLength();
-    function final(){ drill.attr('y2', 400); pipe.attr('stroke-dasharray', null); houses.forEach(h => h.attr('fill', '#ffb340').attr('opacity', 1)); }
-    let flick = null;
+    function final(){
+      blocks.forEach(b => b.attr('opacity', .92)); sliver.attr('opacity', 1);
+      meter.text(`£${d3.format(',')(rate)}`); sub.text('every second');
+    }
     return {
       play(){
         if (calm) return final();
-        drill.attr('y2', 106).transition().duration(900).ease(ease).attr('y2', 400);
-        pipe.attr('stroke-dasharray', `${L} ${L}`).attr('stroke-dashoffset', L).transition().delay(800).duration(1300).ease(ease).attr('stroke-dashoffset', 0);
-        houses.forEach((h, i) => h.attr('fill', 'var(--sub)').attr('opacity', .3).transition().delay(2000 + i * 11).duration(300).attr('fill', '#ffb340').attr('opacity', 1));
-        glow.attr('opacity', .3).transition().duration(1600).attr('opacity', 1);
-        if (!flick) flick = d3.interval(() => flame.attr('transform', `translate(${px + 54},60) scale(${.85 + Math.random() * .3}) translate(${-(px + 54)},-60)`), 140);
+        blocks.forEach((b, i) => b.interrupt().attr('opacity', 0).transition().delay(i * 45).duration(250).attr('opacity', .92));
+        sliver.interrupt().attr('opacity', 0).transition().delay(n * 45 + 200).duration(300).attr('opacity', 1);
+        sub.text('since this card opened');
+        coinG.selectAll('*').remove(); count = 0;
+        if (tm) tm.stop(); if (iv) iv.stop();
+        tm = d3.timer(el => meter.text('£' + d3.format(',.0f')(rate * el / 1000)));
+        iv = d3.interval(dropCoin, 1000);
       },
-      stop(){ if (flick) { flick.stop(); flick = null; } },
+      stop(){ if (tm) { tm.stop(); tm = null; } if (iv) { iv.stop(); iv = null; } },
       final
     };
   }
 
-  /* ---------- 2. Inflation: the pump and the receipt ---------- */
-  function artCpi(box, f){
+  /* ---------- 2. Oil: a shipping lane under fire ---------- */
+  function artOil(box, f){
     const W = 640, H = 470, svg = mkSvg(box, W, H);
-    const fuel = f['cpi-fuel'].value, cpi = f['cpi-sep'].value;
-    const defs = svg.append('defs');
-    const g = defs.append('linearGradient').attr('id', 'cp-body').attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
-    g.append('stop').attr('offset', 0).attr('stop-color', '#ff6b3d'); g.append('stop').attr('offset', 1).attr('stop-color', '#e0243f');
-    // pump
-    const bx = 40, by = 50;
-    svg.append('rect').attr('x', bx).attr('y', by).attr('width', 200).attr('height', 340).attr('rx', 26).attr('fill', 'url(#cp-body)');
-    svg.append('rect').attr('x', bx - 10).attr('y', by + 340).attr('width', 220).attr('height', 22).attr('rx', 8).attr('fill', '#1d1d1f');
-    svg.append('rect').attr('x', bx + 22).attr('y', by + 34).attr('width', 156).attr('height', 104).attr('rx', 14).attr('fill', '#0b0b0d');
-    T(svg, bx + 34, by + 58, 'A YEAR AGO', {size: 10, fill: '#8e8e93', w: 600});
-    T(svg, bx + 166, by + 58, '£100.00', {a: 'end', size: 12, fill: '#8e8e93', w: 600});
-    T(svg, bx + 34, by + 84, 'TODAY', {size: 10, fill: '#ffd60a', w: 600});
-    const pumpTxt = T(svg, bx + 166, by + 122, '£100.00', {a: 'end', size: 34, fill: '#ffd60a', w: 700}).attr('font-variant-numeric', 'tabular-nums');
-    svg.append('rect').attr('x', bx + 22).attr('y', by + 160).attr('width', 156).attr('height', 54).attr('rx', 12).attr('fill', 'rgba(255,255,255,.16)');
-    T(svg, bx + 100, by + 185, 'Same tank of fuel', {a: 'middle', size: 13, fill: '#fff', w: 600});
-    T(svg, bx + 100, by + 203, `+${fuel}% in a year`, {a: 'middle', size: 12, fill: '#fff', op: .85});
-    svg.append('path').attr('d', `M${bx + 200} ${by + 120} C ${bx + 250} ${by + 130}, ${bx + 250} ${by + 260}, ${bx + 228} ${by + 300}`).attr('fill', 'none').attr('stroke', '#1d1d1f').attr('stroke-width', 9).attr('stroke-linecap', 'round');
-    svg.append('rect').attr('x', bx + 210).attr('y', by + 292).attr('width', 26).attr('height', 46).attr('rx', 6).attr('fill', '#1d1d1f');
-    // receipt
-    const rx = 330, ry = 64, rw = 260, rh = 250;
-    let zig = `M${rx} ${ry} L${rx + rw} ${ry} L${rx + rw} ${ry + rh}`;
-    for (let x = rx + rw; x > rx; x -= 13) zig += ` L${x - 6.5} ${ry + rh + 8} L${x - 13} ${ry + rh}`;
-    svg.append('path').attr('d', zig + ' Z').attr('fill', '#fff').attr('stroke', 'rgba(0,0,0,.08)');
-    const ink = '#1d1d1f', grey = '#6e6e73';
-    T(svg, rx + rw / 2, ry + 34, 'EVERYTHING ELSE', {a: 'middle', size: 13, fill: ink, w: 700}).attr('letter-spacing', '.12em');
-    T(svg, rx + rw / 2, ry + 52, 'the average shopping basket', {a: 'middle', size: 11, fill: grey});
-    svg.append('line').attr('x1', rx + 20).attr('x2', rx + rw - 20).attr('y1', ry + 70).attr('y2', ry + 70).attr('stroke', grey).attr('stroke-dasharray', '3 3');
-    T(svg, rx + 20, ry + 100, 'A year ago', {size: 14, fill: grey});
-    T(svg, rx + rw - 20, ry + 100, '£100.00', {a: 'end', size: 14, fill: grey}).attr('font-variant-numeric', 'tabular-nums');
-    T(svg, rx + 20, ry + 132, 'Today', {size: 16, fill: ink, w: 700});
-    const recTxt = T(svg, rx + rw - 20, ry + 132, '£100.00', {a: 'end', size: 16, fill: ink, w: 700}).attr('font-variant-numeric', 'tabular-nums');
-    svg.append('line').attr('x1', rx + 20).attr('x2', rx + rw - 20).attr('y1', ry + 150).attr('y2', ry + 150).attr('stroke', grey).attr('stroke-dasharray', '3 3');
-    // mini trend on the receipt
-    const tr = [['Jul', f['cpi-jul'].value], ['Aug', f['cpi-aug'].value], ['Sep', f['cpi-sep'].value]];
-    const tx = d3.scalePoint(tr.map(d => d[0]), [rx + 40, rx + rw - 40]), ty = d3.scaleLinear([f['cpi-target'].value - .5, cpi + .3], [ry + 228, ry + 166]);
-    svg.append('line').attr('x1', rx + 24).attr('x2', rx + rw - 24).attr('y1', ty(f['cpi-target'].value)).attr('y2', ty(f['cpi-target'].value)).attr('stroke', grey).attr('stroke-dasharray', '2 3');
-    T(svg, rx + 24, ty(f['cpi-target'].value) - 4, `${f['cpi-target'].value}% target`, {size: 9, fill: grey});
-    svg.append('path').attr('d', d3.line().x(d => tx(d[0])).y(d => ty(d[1]))(tr)).attr('fill', 'none').attr('stroke', '#ff375f').attr('stroke-width', 2.2).attr('stroke-linejoin', 'round');
-    tr.forEach(d => { svg.append('circle').attr('cx', tx(d[0])).attr('cy', ty(d[1])).attr('r', 3.2).attr('fill', '#ff375f'); T(svg, tx(d[0]), ty(d[1]) - 8, d[1] + '%', {a: 'middle', size: 10, fill: ink, w: 600}); T(svg, tx(d[0]), ry + 244, d[0], {a: 'middle', size: 9, fill: grey}); });
-    T(svg, rx + rw / 2, ry + rh + 46, 'Annual inflation, three months running', {a: 'middle', size: 12, fill: 'var(--sub)'});
-    const fmt = v => '£' + v.toFixed(2);
-    const to1 = 100 * (1 + fuel / 100), to2 = 100 * (1 + cpi / 100);
-    function final(){ pumpTxt.text(fmt(to1)); recTxt.text(fmt(to2)); }
-    let t = null;
+    const nA = f['oil-attacks'].value, days = f['oil-days'].value;
+    // land masses (schematic)
+    svg.append('path').attr('d', 'M0 0 L640 0 L640 120 C 560 130, 470 120, 410 150 C 380 165, 360 200, 330 205 C 260 215, 160 150, 0 170 Z').attr('fill', 'var(--sub)').attr('opacity', .16);
+    svg.append('path').attr('d', 'M0 330 C 120 300, 230 310, 300 250 C 330 228, 350 232, 372 240 C 420 262, 520 250, 640 270 L640 380 L0 380 Z').attr('fill', 'var(--sub)').attr('opacity', .16);
+    const lane = svg.append('path').attr('d', 'M-20 250 C 120 240, 230 236, 320 226 C 380 220, 420 200, 470 192 C 540 182, 600 190, 660 196').attr('fill', 'none').attr('stroke', 'var(--sub)').attr('stroke-dasharray', '3 6').attr('opacity', .6);
+    T(svg, 110, 222, 'Gulf', {size: 12, fill: 'var(--sub)', w: 600});
+    T(svg, 340, 262, 'Strait of Hormuz', {a: 'middle', size: 12, fill: 'var(--sub)', w: 600});
+    T(svg, 560, 236, 'Gulf of Oman', {a: 'middle', size: 12, fill: 'var(--sub)', w: 600});
+    const L = lane.node().getTotalLength();
+    const ships = d3.range(7).map(i => {
+      const s = svg.append('g');
+      s.append('path').attr('d', 'M-11 -3 L9 -3 L12 0 L9 3 L-11 3 Z').attr('fill', 'var(--fg)').attr('opacity', .8);
+      return {s, t: i / 7};
+    });
+    // attacks, spread across the lane; positions illustrative
+    const rnd = d3.randomLcg(18);
+    const pts = d3.range(nA).map(i => {
+      const p = lane.node().getPointAtLength(L * (.12 + rnd() * .82));
+      return {x: p.x + (rnd() - .5) * 60, y: p.y + (rnd() - .5) * 46, day: Math.floor(rnd() * days)};
+    }).sort((a, b) => a.day - b.day);
+    const bursts = pts.map(p => {
+      const b = svg.append('g').attr('transform', `translate(${p.x},${p.y})`);
+      b.append('circle').attr('r', 9).attr('fill', '#ff375f').attr('opacity', .22);
+      b.append('circle').attr('r', 3.6).attr('fill', '#ff375f');
+      return b;
+    });
+    // day strip
+    const sx0 = 40, sx1 = 600, sy = 418, dw = (sx1 - sx0) / days;
+    const dayRects = d3.range(days).map(d => svg.append('rect').attr('x', sx0 + d * dw + 1).attr('y', sy).attr('width', dw - 2).attr('height', 10).attr('rx', 3).attr('fill', 'var(--sub)').attr('opacity', .2));
+    T(svg, sx0, sy - 8, `${days} days`, {size: 11, fill: 'var(--sub)'});
+    const cnt = T(svg, sx1, sy - 8, `${nA} attacks on ships`, {a: 'end', size: 12, w: 700, fill: '#ff375f'});
+    T(svg, 320, H - 12, 'Schematic, not to scale; attack positions illustrative. Count by Kpler.', {a: 'middle', size: 10, fill: 'var(--sub)'});
+    // price tag
+    T(svg, 620, 34, 'Brent, $ a barrel', {a: 'end', size: 11, fill: 'var(--sub)'});
+    const price = T(svg, 620, 66, '', {a: 'end', size: 28, w: 700}).attr('font-variant-numeric', 'tabular-nums');
+    const p0 = f['oil-close'].value, p1 = f['oil-brent'].value;
+    function placeShips(el){ ships.forEach(o => { const t = (o.t + el / 26000) % 1, q = lane.node().getPointAtLength(L * t), q2 = lane.node().getPointAtLength(Math.min(L, L * t + 2)); const a = Math.atan2(q2.y - q.y, q2.x - q.x) * 180 / Math.PI; o.s.attr('transform', `translate(${q.x},${q.y}) rotate(${a})`); }); }
+    function final(){ placeShips(0); bursts.forEach(b => b.attr('opacity', 1)); dayRects.forEach(r => r.attr('opacity', .45)); cnt.text(`${nA} attacks on ships`); price.text(p1.toFixed(2)); }
+    final();
+    let tm = null;
     return {
       play(){
         if (calm) return final();
-        if (t) t.stop();
-        t = d3.timer(el => {
-          const p = Math.min(1, el / 2200), e = d3.easeCubicOut(p);
-          pumpTxt.text(fmt(100 + (to1 - 100) * e)); recTxt.text(fmt(100 + (to2 - 100) * Math.min(1, e * 1.4)));
-          if (p >= 1) t.stop();
+        bursts.forEach(b => b.attr('opacity', 0)); dayRects.forEach(r => r.attr('opacity', .2));
+        if (tm) tm.stop();
+        tm = d3.timer(el => {
+          placeShips(el);
+          const d = Math.min(days, el / 260);
+          dayRects.forEach((r, i) => r.attr('opacity', i < d ? .45 : .2));
+          let shown = 0; pts.forEach((p, i) => { const on = p.day < d; bursts[i].attr('opacity', on ? 1 : 0); if (on) shown++; });
+          cnt.text(`${shown} attacks on ships`);
+          const pp = Math.min(1, el / 2400); price.text((p0 + (p1 - p0) * d3.easeCubicOut(pp)).toFixed(2));
         });
       },
-      stop(){}, final
-    };
-  }
-
-  /* ---------- 3. France: a march in motion (canvas) ---------- */
-  function artFrance(box, f){
-    box.textContent = '';
-    const cv = document.createElement('canvas'); box.appendChild(cv);
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
-    const W = 640, H = 470;
-    cv.width = W * dpr; cv.height = H * dpr;
-    const ctx = cv.getContext('2d'); ctx.scale(dpr, dpr);
-    const fg = cssColor(box, '--fg'), sub = cssColor(box, '--sub');
-    const PER = 1000, n = Math.round(f['france-marchers'].value / PER), held = f['france-custody'].value / PER;
-    const P0 = [-20, 380], P1 = [200, 360], P2 = [360, 110], P3 = [660, 90];
-    const bez = (t, k) => { const u = 1 - t; return u*u*u*P0[k] + 3*u*u*t*P1[k] + 3*u*t*t*P2[k] + t*t*t*P3[k]; };
-    const pt = t => [bez(t, 0), bez(t, 1)];
-    const norm = t => { const a = pt(Math.max(0, t - .002)), b = pt(Math.min(1, t + .002)); const dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1; return [-dy / l, dx / l]; };
-    const rnd = d3.randomLcg(42);
-    const walkers = d3.range(n).map(i => ({t: rnd(), off: (rnd() - .5) * 64, sp: .00055 + rnd() * .0004, ph: rnd() * 6.28}));
-    const penX = 470, penY = 300, penW = 130, penH = 74;
-    const reds = d3.range(Math.ceil(held)).map(i => ({t: .08 + i * .05, off: (i - 1) * 14, a: i < Math.floor(held) ? 1 : Math.max(.35, held - Math.floor(held)), state: 'march', x: 0, y: 0, tx: penX + 34 + i * 30, ty: penY + 44}));
-    function drawFrame(time){
-      ctx.clearRect(0, 0, W, H);
-      ctx.lineCap = 'round';
-      ctx.strokeStyle = sub; ctx.globalAlpha = .12; ctx.lineWidth = 84;
-      ctx.beginPath(); ctx.moveTo(...P0); ctx.bezierCurveTo(...P1, ...P2, ...P3); ctx.stroke();
-      ctx.globalAlpha = 1;
-      ctx.fillStyle = fg;
-      for (const w of walkers) {
-        const [x, y] = pt(w.t), [nx, ny] = norm(w.t), wob = Math.sin(time / 380 + w.ph) * 1.4;
-        ctx.globalAlpha = .62; ctx.beginPath(); ctx.arc(x + nx * (w.off + wob), y + ny * (w.off + wob), 2.1, 0, 6.283); ctx.fill();
-      }
-      ctx.globalAlpha = 1;
-      // pen
-      ctx.setLineDash([4, 4]); ctx.strokeStyle = '#ff375f'; ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.roundRect ? ctx.roundRect(penX, penY, penW, penH, 14) : ctx.rect(penX, penY, penW, penH); ctx.stroke(); ctx.setLineDash([]);
-      ctx.fillStyle = '#ff375f'; ctx.font = `600 12px ${SF}`; ctx.textAlign = 'center';
-      ctx.fillText(`Detained: ${d3.format(',')(f['france-custody'].value)}`, penX + penW / 2, penY + 20);
-      for (const r of reds) {
-        ctx.globalAlpha = r.a; ctx.fillStyle = '#ff375f';
-        ctx.beginPath(); ctx.arc(r.x, r.y, 5.5, 0, 6.283); ctx.fill();
-        if (r.state === 'held') { ctx.globalAlpha = .25 * r.a * (1 + Math.sin(time / 500)); ctx.beginPath(); ctx.arc(r.x, r.y, 11, 0, 6.283); ctx.fill(); }
-      }
-      ctx.globalAlpha = 1;
-      ctx.fillStyle = sub; ctx.font = `12px ${SF}`; ctx.textAlign = 'left';
-      ctx.fillText(`Each dot is ${d3.format(',')(PER)} marchers, by organizers’ count`, 16, H - 14);
-    }
-    function step(){
-      for (const w of walkers) { w.t += w.sp; if (w.t > 1) w.t -= 1; }
-      for (const r of reds) {
-        if (r.state === 'march') { r.t += .0011; const [x, y] = pt(r.t), [nx, ny] = norm(r.t); r.x = x + nx * r.off; r.y = y + ny * r.off; if (r.t > .5) r.state = 'leave'; }
-        else if (r.state === 'leave') { r.x += (r.tx - r.x) * .045; r.y += (r.ty - r.y) * .045; if (Math.hypot(r.tx - r.x, r.ty - r.y) < .6) { r.state = 'held'; r.x = r.tx; r.y = r.ty; } }
-      }
-    }
-    function reset(){ reds.forEach((r, i) => { r.t = .08 + i * .05; r.state = 'march'; const [x, y] = pt(r.t); r.x = x; r.y = y; }); }
-    function final(){ reds.forEach(r => { r.state = 'held'; r.x = r.tx; r.y = r.ty; }); drawFrame(0); }
-    reset(); drawFrame(0);
-    let timer = null;
-    return {
-      play(){ if (calm) return final(); reset(); if (timer) timer.stop(); timer = d3.timer(el => { step(); drawFrame(el); }); },
-      stop(){ if (timer) { timer.stop(); timer = null; } },
+      stop(){ if (tm) { tm.stop(); tm = null; } },
       final
     };
   }
 
-  /* ---------- 4. MMX: the round trip ---------- */
-  function artMmx(box, f){
+  /* ---------- 3. Ukraine: nine meetings, three hours, one date ---------- */
+  function artUkraine(box, f){
     const W = 640, H = 470, svg = mkSvg(box, W, H);
-    const cx = 270, cy = 230, rE = 112, rM = 178;
-    const defs = svg.append('defs');
-    const sun = defs.append('radialGradient').attr('id', 'mx-sun');
-    sun.append('stop').attr('offset', 0).attr('stop-color', '#ffd60a'); sun.append('stop').attr('offset', 1).attr('stop-color', '#ff9f0a').attr('stop-opacity', 0);
-    // starfield
-    const rnd = d3.randomLcg(7);
-    for (let i = 0; i < 70; i++) svg.append('circle').attr('cx', rnd() * W).attr('cy', rnd() * H).attr('r', rnd() * 1.1 + .2).attr('fill', 'var(--fg)').attr('opacity', .15 + rnd() * .35);
-    svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', 34).attr('fill', 'url(#mx-sun)');
-    svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', 9).attr('fill', '#ffd60a');
-    [rE, rM].forEach(r => svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', r).attr('fill', 'none').attr('stroke', 'var(--line)').attr('stroke-dasharray', '2 5'));
-    const E = [cx - rE, cy], M = [cx + rM, cy];
-    const a = (rE + rM) / 2, b = Math.sqrt(rE * rM), ex = cx + (rM - rE) / 2;
-    const outD = `M${E[0]} ${E[1]} A ${a} ${b} 0 0 1 ${M[0]} ${M[1]}`;
-    const backD = `M${M[0]} ${M[1]} A ${a} ${b} 0 0 1 ${E[0]} ${E[1]}`;
-    const out = svg.append('path').attr('d', outD).attr('fill', 'none').attr('stroke', '#64d2ff').attr('stroke-width', 1.6).attr('stroke-dasharray', '5 5').attr('opacity', .8);
-    const back = svg.append('path').attr('d', backD).attr('fill', 'none').attr('stroke', '#5e5ce6').attr('stroke-width', 1.6).attr('stroke-dasharray', '5 5').attr('opacity', .8);
-    svg.append('circle').attr('cx', E[0]).attr('cy', E[1]).attr('r', 9).attr('fill', '#0a84ff');
-    T(svg, E[0], E[1] + 28, 'Earth', {a: 'middle', size: 12, fill: 'var(--sub)'});
-    svg.append('circle').attr('cx', M[0]).attr('cy', M[1]).attr('r', 7.5).attr('fill', '#ff6b3d');
-    T(svg, M[0] + 14, M[1] + 30, 'Mars', {a: 'middle', size: 12, fill: 'var(--sub)'});
-    svg.append('circle').attr('cx', M[0]).attr('cy', M[1]).attr('r', 18).attr('fill', 'none').attr('stroke', 'var(--line)');
-    const phobos = svg.append('circle').attr('r', 2.6).attr('fill', 'var(--fg)');
-    // labels
-    const y = id => f[id].value;
-    T(svg, cx, cy - b - 16, `${y('mmx-launch')} → ${y('mmx-mars')}  ·  out`, {a: 'middle', size: 13, w: 600, fill: '#64d2ff'});
-    T(svg, cx, cy + b + 26, `${y('mmx-return')}  ·  home, with the sample`, {a: 'middle', size: 13, w: 600, fill: '#9d9bff'});
-    T(svg, M[0] - 6, M[1] - 30, `${y('mmx-sampling')}: lands on Phobos`, {a: 'end', size: 12, fill: 'var(--fg)', w: 600});
-    // ratio card
-    const kx = 470, ky = 360;
-    T(svg, W - 22, ky, `${d3.format(',')(f['mmx-mass'].value)} kg out`, {a: 'end', size: 15, w: 700});
-    T(svg, W - 22, ky + 22, `${f['mmx-sample'].value} g back`, {a: 'end', size: 15, w: 700, fill: '#64d2ff'});
-    T(svg, W - 22, ky + 42, 'about two teaspoons of soil', {a: 'end', size: 11, fill: 'var(--sub)'});
-    T(svg, 22, H - 16, 'Orbits illustrative, not to scale', {size: 10, fill: 'var(--sub)'});
-    const probe = svg.append('g');
-    probe.append('circle').attr('r', 9).attr('fill', '#64d2ff').attr('opacity', .25);
-    probe.append('circle').attr('r', 3.6).attr('fill', '#fff');
-    const oL = out.node().getTotalLength(), bL = back.node().getTotalLength();
-    const place = (path, L, p) => { const q = path.node().getPointAtLength(L * p); probe.attr('transform', `translate(${q.x},${q.y})`); };
-    function frame(el){
-      const ph = el / 1000 * 2.4; phobos.attr('cx', M[0] + Math.cos(ph) * 18).attr('cy', M[1] + Math.sin(ph) * 18);
-      const cyc = 10000, t = el % cyc;
-      if (t < 3200) place(out, oL, ease(t / 3200));
-      else if (t < 6000) { const ang = (t - 3200) / 2800 * Math.PI * 4; probe.attr('transform', `translate(${M[0] + Math.cos(ang) * 30},${M[1] + Math.sin(ang) * 30})`); }
-      else if (t < 9200) place(back, bL, ease((t - 6000) / 3200));
-      else probe.attr('transform', `translate(${E[0]},${E[1]})`);
-    }
-    function final(){ phobos.attr('cx', M[0] + 18).attr('cy', M[1]); probe.attr('transform', `translate(${M[0] - 26},${M[1] - 10})`); }
-    final();
-    let timer = null;
-    return { play(){ if (calm) return final(); if (timer) timer.stop(); timer = d3.timer(frame); }, stop(){ if (timer) { timer.stop(); timer = null; } }, final };
-  }
-
-  /* ---------- 5. Childhood lottery: the draw ---------- */
-  function artLottery(box, rows, f){
-    const W = 640, H = 470, svg = mkSvg(box, W, H);
-    const cx = 240, cy = 200, R = 150;
-    const defs = svg.append('defs');
-    defs.append('clipPath').attr('id', 'lt-clip').append('circle').attr('cx', cx).attr('cy', cy).attr('r', R - 6);
-    svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', R).attr('fill', 'var(--fg)').attr('opacity', .05);
-    svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', R).attr('fill', 'none').attr('stroke', 'var(--sub)').attr('stroke-width', 3).attr('opacity', .5);
-    const inner = svg.append('g').attr('clip-path', 'url(#lt-clip)');
-    const rnd = d3.randomLcg(3);
-    const tones = ['#8e8e93', '#aeaeb2', '#636366', '#c7c7cc'];
-    const balls = d3.range(42).map(i => ({r: 20 + rnd() * (R - 44), a: rnd() * 6.28, s: .4 + rnd() * .7, z: 9 + rnd() * 5, c: tones[i % 4]}));
-    const bs = balls.map(bb => inner.append('circle').attr('r', bb.z).attr('fill', bb.c).attr('opacity', .85));
-    T(svg, cx, cy + R + 30, `Nearly ${f['lottery-metrics'].value} measures in the mix`, {a: 'middle', size: 13, fill: 'var(--sub)'});
-    // chute + tray
-    svg.append('path').attr('d', `M${cx + R * .72} ${cy + R * .69} C ${cx + R + 20} ${cy + R + 20}, ${cx + R + 60} ${cy + R - 10}, ${cx + R + 90} ${cy + R - 30}`).attr('fill', 'none').attr('stroke', 'var(--sub)').attr('stroke-width', 22).attr('stroke-linecap', 'round').attr('opacity', .18);
-    const trayY = 120;
-    svg.append('rect').attr('x', 430).attr('y', trayY - 12).attr('width', 190).attr('height', 3 * 96 + 18).attr('rx', 26).attr('fill', 'var(--fg)').attr('opacity', .05);
-    T(svg, 525, trayY - 24, 'Drawn: hardest places', {a: 'middle', size: 12, fill: 'var(--sub)', w: 600});
-    const T3 = rows.map((r, i) => {
-      const g = svg.append('g').attr('transform', `translate(525,${trayY + 40 + i * 96})`);
-      g.append('circle').attr('r', 40).attr('fill', ['#636366', '#8e8e93', '#aeaeb2'][i % 3]);
-      g.append('circle').attr('r', 27).attr('fill', 'var(--color-panel)');
-      const t = g.append('text').attr('text-anchor', 'middle').attr('y', 4).attr('font-size', 11).attr('font-weight', 700).attr('fill', 'var(--fg)').text(r.place);
-      let fs = 11; while (t.node().getComputedTextLength() > 50 && fs > 7) { fs--; t.attr('font-size', fs); }
+    const nM = f['ua-meeting'].value, hrs = f['ua-hours'].value, day = f['ua-nov'].value;
+    T(svg, 30, 40, 'Putin–Witkoff meetings in person', {size: 12, fill: 'var(--sub)', w: 600});
+    const mx0 = 40, step = 50, my = 92;
+    const meets = d3.range(nM).map(i => {
+      const g = svg.append('g').attr('transform', `translate(${mx0 + i * step},${my})`);
+      const last = i === nM - 1;
+      g.append('rect').attr('x', -14).attr('y', -6).attr('width', 28).attr('height', 12).attr('rx', 3).attr('fill', 'var(--sub)').attr('opacity', last ? .55 : .3);
+      g.append('circle').attr('cx', -20).attr('r', 6).attr('fill', last ? '#64d2ff' : 'var(--sub)');
+      g.append('circle').attr('cx', 20).attr('r', 6).attr('fill', last ? '#64d2ff' : 'var(--sub)');
+      T(g, 0, 28, String(i + 1), {a: 'middle', size: 10, fill: last ? '#64d2ff' : 'var(--sub)', w: last ? 700 : 400});
       return g;
     });
-    function frame(el){
-      balls.forEach((bb, i) => {
-        const a = bb.a + el / 1000 * bb.s, wob = Math.sin(el / 700 + i) * 8;
-        bs[i].attr('cx', cx + Math.cos(a) * (bb.r + wob)).attr('cy', cy + Math.sin(a) * (bb.r + wob) * .92 + 10);
-      });
+    // clock for the ninth
+    const cx = 170, cy = 290, r = 92;
+    svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', r).attr('fill', 'none').attr('stroke', 'var(--sub)').attr('stroke-width', 2).attr('opacity', .6);
+    for (let h = 0; h < 12; h++) { const a = h / 12 * 2 * Math.PI; svg.append('line').attr('x1', cx + Math.sin(a) * (r - 8)).attr('y1', cy - Math.cos(a) * (r - 8)).attr('x2', cx + Math.sin(a) * r).attr('y2', cy - Math.cos(a) * r).attr('stroke', 'var(--sub)'); }
+    const arcGen = d3.arc().innerRadius(0).outerRadius(r - 12).startAngle(0);
+    const wedge = svg.append('path').attr('transform', `translate(${cx},${cy})`).attr('fill', '#64d2ff').attr('opacity', .45);
+    const hand = svg.append('line').attr('x1', cx).attr('y1', cy).attr('stroke', 'var(--fg)').attr('stroke-width', 3).attr('stroke-linecap', 'round');
+    svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', 4).attr('fill', 'var(--fg)');
+    T(svg, cx, cy + r + 26, `${hrs} hours in St Petersburg, meeting ${nM}`, {a: 'middle', size: 13, w: 700});
+    function setClock(p){ const ang = p * hrs / 12 * 2 * Math.PI; wedge.attr('d', arcGen({endAngle: ang})); hand.attr('x2', cx + Math.sin(ang) * (r - 18)).attr('y2', cy - Math.cos(ang) * (r - 18)); }
+    // November calendar: the three-way table
+    const kx = 360, ky = 196, cw = 34, ch = 28;
+    const ed = dash.data('edition'), yr = ed.status === 'ok' && ed.data[0] ? Number(String(ed.data[0].date).slice(0, 4)) : new Date().getFullYear(), first = new Date(yr, 10, 1).getDay(), dim = new Date(yr, 11, 0).getDate();
+    T(svg, kx, ky - 30, 'November', {size: 13, w: 700});
+    ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach((d, i) => T(svg, kx + i * cw + cw / 2, ky - 10, d, {a: 'middle', size: 10, fill: 'var(--sub)'}));
+    let ring = null;
+    for (let d = 1; d <= dim; d++) {
+      const k = first + d - 1, x = kx + (k % 7) * cw + cw / 2, y = ky + Math.floor(k / 7) * ch + 12;
+      const after = d > day;
+      T(svg, x, y + 4, String(d), {a: 'middle', size: 11, fill: after ? 'var(--fg)' : 'var(--sub)', op: after ? .9 : .45});
+      if (d === day) ring = svg.append('circle').attr('cx', x).attr('cy', y).attr('r', 13).attr('fill', 'none').attr('stroke', '#64d2ff').attr('stroke-width', 2);
     }
-    function final(){ frame(0); T3.forEach((g, i) => g.attr('opacity', 1).attr('transform', `translate(525,${trayY + 40 + i * 96})`)); }
+    const tri = svg.append('g').attr('transform', `translate(${kx + 3.5 * cw},${ky + 6 * ch + 22})`);
+    [[-22, 0], [22, 0], [0, -20]].forEach(([x, y]) => tri.append('circle').attr('cx', x).attr('cy', y).attr('r', 6).attr('fill', '#64d2ff'));
+    tri.append('circle').attr('r', 9).attr('fill', 'none').attr('stroke', 'var(--sub)');
+    T(svg, kx + 3.5 * cw, ky + 6 * ch + 46, 'Three-way talks: after this date, says the Kremlin', {a: 'middle', size: 11, fill: 'var(--sub)'});
+    function final(){ setClock(1); meets.forEach(m => m.attr('opacity', 1)); tri.attr('opacity', 1); if (ring) ring.attr('opacity', 1); }
     final();
-    let timer = null;
+    let tm = null;
     return {
       play(){
         if (calm) return final();
-        if (timer) timer.stop(); timer = d3.timer(frame);
-        T3.forEach((g, i) => g.attr('opacity', 0).attr('transform', `translate(${cx + R * .8},${cy + R * .7})`)
-          .transition().delay(500 + i * 900).duration(900).ease(d3.easeBackOut.overshoot(1.4)).attr('opacity', 1).attr('transform', `translate(525,${trayY + 40 + i * 96})`));
+        meets.forEach((m, i) => m.interrupt().attr('opacity', 0).transition().delay(i * 120).duration(300).attr('opacity', 1));
+        tri.interrupt().attr('opacity', 0).transition().delay(3000).duration(500).attr('opacity', 1);
+        if (ring) ring.interrupt().attr('opacity', 0).transition().delay(2600).duration(500).attr('opacity', 1);
+        if (tm) tm.stop();
+        tm = d3.timer(el => { const p = Math.min(1, Math.max(0, (el - 1100) / 1600)); setClock(ease(p)); if (p >= 1) { tm.stop(); tm = null; } });
       },
-      stop(){ if (timer) { timer.stop(); timer = null; } },
+      stop(){ if (tm) { tm.stop(); tm = null; } },
       final
     };
   }
 
-  /* ---------- 6. Jio: glasses filling up ---------- */
-  function artJio(box, f){
+  /* ---------- 4. Climate: the thermometer and the chimneys ---------- */
+  function artClimate(box, f){
     const W = 640, H = 470, svg = mkSvg(box, W, H);
-    const times = f['jio-times'].value, nG = Math.ceil(times);
-    const defs = svg.append('defs');
-    const lg = defs.append('linearGradient').attr('id', 'ji-liq').attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
-    lg.append('stop').attr('offset', 0).attr('stop-color', '#30d158'); lg.append('stop').attr('offset', 1).attr('stop-color', '#0a84ff');
-    const gw = 130, gh = 230, gap = 46, x0 = (W - (nG * gw + (nG - 1) * gap)) / 2, top = 110, bot = top + gh;
-    const fills = [];
-    for (let i = 0; i < nG; i++) {
-      const x = x0 + i * (gw + gap);
-      const shape = `M${x} ${top} L${x + 12} ${bot} Q${x + 14} ${bot + 10} ${x + 26} ${bot + 10} L${x + gw - 26} ${bot + 10} Q${x + gw - 14} ${bot + 10} ${x + gw - 12} ${bot} L${x + gw} ${top}`;
-      defs.append('clipPath').attr('id', 'ji-c' + i).append('path').attr('d', shape + ' Z');
-      const lvl = Math.min(1, times - i);
-      const rect = svg.append('rect').attr('clip-path', `url(#ji-c${i})`).attr('x', x - 2).attr('width', gw + 4).attr('y', bot + 12).attr('height', 0).attr('fill', 'url(#ji-liq)');
-      fills.push({rect, lvl, x});
-      svg.append('path').attr('d', shape).attr('fill', 'none').attr('stroke', 'var(--fg)').attr('stroke-width', 2.5).attr('stroke-linejoin', 'round').attr('opacity', .85);
-    }
-    T(svg, W / 2, 52, 'Each glass is every share on offer', {a: 'middle', size: 13, fill: 'var(--sub)'});
-    const labY = bot + 46;
-    T(svg, fills[0].x + gw / 2, labY, `Full in ${f['jio-minutes'].value} minutes`, {a: 'middle', size: 13, w: 700});
-    T(svg, fills[0].x + gw / 2, labY + 18, 'an Indian record', {a: 'middle', size: 11, fill: 'var(--sub)'});
-    T(svg, fills[nG - 1].x + gw / 2, labY, `${times}× by mid-afternoon`, {a: 'middle', size: 13, w: 700, fill: '#1a9e4b'});
-    T(svg, fills[nG - 1].x + gw / 2, labY + 18, 'and still pouring', {a: 'middle', size: 11, fill: 'var(--sub)'});
-    const yOf = l => bot + 10 - (gh + 10) * l;
-    function final(){ fills.forEach(F => F.rect.attr('y', yOf(F.lvl)).attr('height', (gh + 10) * F.lvl + 4)); }
+    const v = id => f[id].value;
+    const tx = 70, top = 60, bot = 380, y = d3.scaleLinear([0, 3], [bot, top]);
+    svg.append('rect').attr('x', tx - 13).attr('y', top - 10).attr('width', 26).attr('height', bot - top + 20).attr('rx', 13).attr('fill', 'none').attr('stroke', 'var(--fg)').attr('stroke-width', 2).attr('opacity', .7);
+    svg.append('circle').attr('cx', tx).attr('cy', bot + 26).attr('r', 22).attr('fill', '#ff9f0a');
+    const merc = svg.append('rect').attr('x', tx - 7).attr('width', 14).attr('rx', 7).attr('fill', '#ff9f0a');
+    const ghost = svg.append('rect').attr('x', tx - 7).attr('width', 14).attr('rx', 7).attr('fill', 'none').attr('stroke', '#ff375f').attr('stroke-width', 1.6).attr('stroke-dasharray', '3 3');
+    [0, 1, 2, 3].forEach(t => { svg.append('line').attr('x1', tx - 22).attr('x2', tx - 15).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', 'var(--sub)'); T(svg, tx - 26, y(t) + 4, t + '°', {a: 'end', size: 10, fill: 'var(--sub)'}); });
+    const mark = (val, txt, col, w, dy = 0) => { svg.append('line').attr('x1', tx + 15).attr('x2', tx + 30).attr('y1', y(val)).attr('y2', y(val)).attr('stroke', col); T(svg, tx + 34, y(val) + 4 + dy, txt, {size: 11, fill: col, w: w || 400}); };
+    mark(v('cl-policy'), `${v('cl-policy')}°C current policies`, '#ff375f', 700);
+    mark(v('cl-pledge'), `${v('cl-pledge')}°C if pledges kept`, 'var(--fg)');
+    mark(v('cl-paris'), `${v('cl-paris')}°C Paris goal`, 'var(--sub)', 400, -5);
+    mark(v('cl-now'), `${v('cl-now')}°C so far`, '#ff9f0a', 700, 6);
+    // chimneys: 100 = 2025 emissions
+    const gx = 300, gy = 70, cs = 31;
+    const cut = [v('cl-cut30'), v('cl-cut35'), v('cl-cut40')];
+    const cols = ['#30d158', '#34c3b0', '#64d2ff'];
+    const stacks = d3.range(100).map(i => {
+      const c = i % 10, r = Math.floor(i / 10), x = gx + c * cs, yy = gy + r * cs;
+      const g = svg.append('g').attr('transform', `translate(${x},${yy})`);
+      const body = g.append('path').attr('d', 'M2 22 L2 10 L8 10 L8 4 L13 4 L13 10 L22 10 L22 22 Z').attr('fill', 'var(--sub)').attr('opacity', .55);
+      const smoke = g.append('circle').attr('cx', 10.5).attr('cy', -1).attr('r', 3.2).attr('fill', 'var(--sub)').attr('opacity', .35);
+      const grp = i < cut[0] ? 0 : i < cut[1] ? 1 : i < cut[2] ? 2 : 3;
+      return {body, smoke, grp, ph: (i * 37 % 100) / 100};
+    });
+    T(svg, gx, gy - 22, 'Each chimney is 1% of 2025 emissions', {size: 11, fill: 'var(--sub)'});
+    const legY = gy + 10 * cs + 18;
+    const leg = [[cut[0], f['cl-cut30'].label], [cut[1], f['cl-cut35'].label], [cut[2], f['cl-cut40'].label]];
+    leg.forEach(([val, lab], i) => { svg.append('rect').attr('x', gx).attr('y', legY + i * 18 - 9).attr('width', 10).attr('height', 10).attr('rx', 2).attr('fill', cols[i]); T(svg, gx + 16, legY + i * 18, `${val}% ${lab}`, {size: 11, fill: 'var(--fg)'}); });
+    function paint(stage){ stacks.forEach(s => { const off = s.grp < stage; s.body.attr('fill', off ? cols[s.grp] : 'var(--sub)').attr('opacity', off ? .95 : .55); s.smoke.attr('opacity', off ? 0 : .35); }); }
+    function setMerc(t){ merc.attr('y', y(t)).attr('height', bot - y(t) + 12); }
+    function final(){ setMerc(v('cl-now')); ghost.attr('y', y(v('cl-policy'))).attr('height', y(v('cl-now')) - y(v('cl-policy'))); paint(3); }
+    final();
+    let tm = null;
     return {
       play(){
         if (calm) return final();
-        let d = 0;
-        fills.forEach(F => {
-          F.rect.interrupt().attr('y', bot + 12).attr('height', 0)
-            .transition().delay(d).duration(1100 * F.lvl + 200).ease(d3.easeQuadInOut).attr('y', yOf(F.lvl)).attr('height', (gh + 10) * F.lvl + 4);
-          d += 1100 * F.lvl + 250;
+        paint(0); ghost.attr('height', 0);
+        if (tm) tm.stop();
+        tm = d3.timer(el => {
+          const p = Math.min(1, el / 1400); setMerc(v('cl-now') * d3.easeCubicOut(p));
+          const q = Math.min(1, Math.max(0, (el - 1400) / 1400)), gt = v('cl-now') + (v('cl-policy') - v('cl-now')) * ease(q);
+          ghost.attr('y', y(gt)).attr('height', Math.max(0, y(v('cl-now')) - y(gt)));
+          const stage = el < 3000 ? 0 : el < 4000 ? 1 : el < 5000 ? 2 : 3;
+          paint(stage);
+          stacks.forEach(s => { if (s.grp >= stage) s.smoke.attr('cy', -1 - ((el / 1600 + s.ph) % 1) * 8).attr('opacity', .35 * (1 - ((el / 1600 + s.ph) % 1))); });
         });
+      },
+      stop(){ if (tm) { tm.stop(); tm = null; } },
+      final
+    };
+  }
+
+  /* ---------- 5. Aberfan: shown still ---------- */
+  function artAberfan(box, f){
+    const W = 640, H = 470, svg = mkSvg(box, W, H);
+    const kids = f['ab-children'].value, adults = f['ab-adults'].value;
+    svg.append('path').attr('d', 'M330 140 C 400 60, 470 30, 640 20 L640 140 Z').attr('fill', 'var(--sub)').attr('opacity', .28);
+    svg.append('path').attr('d', 'M300 140 L300 104 L350 78 L400 104 L400 140 Z').attr('fill', 'none').attr('stroke', 'var(--fg)').attr('stroke-width', 1.6).attr('opacity', .7);
+    const ck = [350, 112], cr = 11;
+    svg.append('circle').attr('cx', ck[0]).attr('cy', ck[1]).attr('r', cr).attr('fill', 'none').attr('stroke', 'var(--fg)').attr('opacity', .8);
+    const hA = ((f['ab-hour'].value % 12) + f['ab-min'].value / 60) / 12 * 2 * Math.PI, mA = f['ab-min'].value / 60 * 2 * Math.PI;
+    svg.append('line').attr('x1', ck[0]).attr('y1', ck[1]).attr('x2', ck[0] + Math.sin(hA) * 6).attr('y2', ck[1] - Math.cos(hA) * 6).attr('stroke', 'var(--fg)').attr('stroke-width', 1.8);
+    svg.append('line').attr('x1', ck[0]).attr('y1', ck[1]).attr('x2', ck[0] + Math.sin(mA) * 9).attr('y2', ck[1] - Math.cos(mA) * 9).attr('stroke', 'var(--fg)');
+    T(svg, 300, 160, `Pantglas Junior School, ${f['ab-hour'].value}.${f['ab-min'].value}am`, {size: 11, fill: 'var(--sub)'});
+    svg.append('line').attr('x1', 20).attr('x2', W - 20).attr('y1', 140).attr('y2', 140).attr('stroke', 'var(--line)');
+    const person = (g, x, y, s) => { g.append('circle').attr('cx', x).attr('cy', y - 9 * s).attr('r', 2.6 * s).attr('fill', 'var(--fg)').attr('opacity', .78); g.append('rect').attr('x', x - 2.4 * s).attr('y', y - 6 * s).attr('width', 4.8 * s).attr('height', 8 * s).attr('rx', 2 * s).attr('fill', 'var(--fg)').attr('opacity', .78); };
+    const g = svg.append('g');
+    const perRow = 29, sx = 20.5, x0 = 30, y0 = 210;
+    for (let i = 0; i < kids; i++) person(g, x0 + (i % perRow) * sx, y0 + Math.floor(i / perRow) * 28, 1);
+    const ay = y0 + Math.ceil(kids / perRow) * 28 + 24;
+    for (let i = 0; i < adults; i++) person(g, x0 + (i % perRow) * sx, ay, 1.35);
+    T(svg, x0, y0 - 26, `${kids} children`, {size: 13, w: 700});
+    T(svg, x0, ay - 26, `${adults} adults`, {size: 13, w: 700});
+    T(svg, W / 2, H - 10, 'Each figure is one person who died', {a: 'middle', size: 11, fill: 'var(--sub)'});
+    function final(){}
+    return { play(){ final(); }, stop(){}, final };
+  }
+
+  /* ---------- 6. PHP: three quarters of the web, five governments dark ---------- */
+  function artPhp(box, f){
+    const W = 640, H = 470, svg = mkSvg(box, W, H);
+    const share = f['php-share'].value, nGov = f['php-govs'].value;
+    const gx = 26, gy = 54, cw = 36, ch = 26;
+    T(svg, gx, 34, 'Each window is 1% of websites with an identifiable language', {size: 11, fill: 'var(--sub)'});
+    const wins = d3.range(100).map(i => {
+      const c = i % 10, r = Math.floor(i / 10), x = gx + c * (cw + 4), y = gy + r * (ch + 6);
+      const g = svg.append('g').attr('transform', `translate(${x},${y})`);
+      const fr = g.append('rect').attr('width', cw).attr('height', ch).attr('rx', 4).attr('fill', 'var(--sub)').attr('opacity', .14);
+      g.append('rect').attr('width', cw).attr('height', 5).attr('rx', 2).attr('fill', 'var(--sub)').attr('opacity', .3);
+      return {fr, php: i < share};
+    });
+    T(svg, gx, gy + 10 * (ch + 6) + 14, `${share}% run PHP`, {size: 13, w: 700, fill: '#8892bf'});
+    // government row
+    const gvx = 460, gvy = 70, names = ['Netherlands', 'Finland', 'France', 'Denmark', 'Australia'].slice(0, nGov);
+    T(svg, gvx, gvy - 16, 'Government sites pulled', {size: 12, w: 600, fill: 'var(--sub)'});
+    const gov = names.map((nm, i) => {
+      const y = gvy + i * 56, g = svg.append('g').attr('transform', `translate(${gvx},${y})`);
+      const scr = g.append('rect').attr('width', 64).attr('height', 40).attr('rx', 5).attr('fill', '#8892bf').attr('opacity', .85);
+      g.append('rect').attr('width', 64).attr('height', 7).attr('rx', 3).attr('fill', 'var(--fg)').attr('opacity', .35);
+      const x = g.append('path').attr('d', 'M24 16 L40 32 M40 16 L24 32').attr('stroke', '#ff375f').attr('stroke-width', 3).attr('stroke-linecap', 'round').attr('opacity', 0);
+      T(g, 74, 25, nm, {size: 12, w: 600});
+      return {scr, x};
+    });
+    // severity gauge
+    const sv = f['php-cvss'].value, gcx = 520, gcy = 420, gr = 40;
+    const bg = d3.arc().innerRadius(gr - 8).outerRadius(gr).startAngle(-Math.PI / 2).endAngle(Math.PI / 2);
+    svg.append('path').attr('transform', `translate(${gcx},${gcy})`).attr('d', bg()).attr('fill', 'var(--sub)').attr('opacity', .25);
+    const fg = svg.append('path').attr('transform', `translate(${gcx},${gcy})`).attr('fill', '#ff375f');
+    const setG = p => fg.attr('d', d3.arc().innerRadius(gr - 8).outerRadius(gr).startAngle(-Math.PI / 2).endAngle(-Math.PI / 2 + Math.PI * p * sv / 10)());
+    T(svg, gcx, gcy - 6, `${sv}`, {a: 'middle', size: 18, w: 700});
+    T(svg, gcx, gcy + 14, 'severity out of 10', {a: 'middle', size: 10, fill: 'var(--sub)'});
+    function paint(nLit, nDark){
+      wins.forEach((w, i) => w.fr.attr('fill', w.php && i < nLit ? '#8892bf' : 'var(--sub)').attr('opacity', w.php && i < nLit ? .9 : .14));
+      gov.forEach((g, i) => { const off = i < nDark; g.scr.attr('fill', off ? '#1c1c1e' : '#8892bf'); g.x.attr('opacity', off ? 1 : 0); });
+    }
+    function final(){ paint(100, gov.length); setG(1); }
+    final();
+    let tm = null;
+    return {
+      play(){
+        if (calm) return final();
+        if (tm) tm.stop();
+        tm = d3.timer(el => {
+          paint(Math.floor(el / 18), Math.max(0, Math.floor((el - 1700) / 450)));
+          setG(Math.min(1, el / 1500));
+          if (el > 1700 + 450 * (gov.length + 1)) { tm.stop(); tm = null; final(); }
+        });
+      },
+      stop(){ if (tm) { tm.stop(); tm = null; } },
+      final
+    };
+  }
+
+  /* ---------- 7. Beatles: one floor becomes four ---------- */
+  function artBeatles(box, f){
+    const W = 640, H = 470, svg = mkSvg(box, W, H);
+    const times = f['bt-times'].value;
+    const s = 120, nx = 290, ny = 70;
+    // today
+    const ox = 50, oy = 190;
+    svg.append('rect').attr('x', ox).attr('y', oy).attr('width', s).attr('height', s).attr('rx', 10).attr('fill', 'none').attr('stroke', 'var(--fg)').attr('stroke-width', 2).attr('opacity', .6);
+    T(svg, ox + s / 2, oy + s / 2 + 4, 'Albert Dock', {a: 'middle', size: 12, w: 600, fill: 'var(--sub)'});
+    T(svg, ox + s / 2, oy + s + 24, 'Today', {a: 'middle', size: 13, w: 700});
+    // new: times tiles in a grid, plus a dashed sliver for "more than"
+    const rooms = ['The Cavern', 'Abbey Road', 'Shea Stadium', 'Savile Row'];
+    const pos = d3.range(times).map(i => [nx + (i % 2) * (s + 6), ny + Math.floor(i / 2) * (s + 6)]);
+    const tiles = pos.map(([x, y], i) => {
+      const g = svg.append('g');
+      g.append('rect').attr('x', x).attr('y', y).attr('width', s).attr('height', s).attr('rx', 10).attr('fill', 'url(#bt-g)').attr('opacity', .9);
+      T(g, x + s / 2, y + s / 2 + 4, rooms[i] || '', {a: 'middle', size: 13, w: 700, fill: '#1d1d1f'});
+      return {g, x, y};
+    });
+    const defs = svg.append('defs');
+    const lg = defs.append('linearGradient').attr('id', 'bt-g').attr('x1', 0).attr('x2', 1).attr('y1', 0).attr('y2', 1);
+    lg.append('stop').attr('offset', 0).attr('stop-color', '#ffd60a'); lg.append('stop').attr('offset', 1).attr('stop-color', '#ff9f0a');
+    const rows = Math.ceil(times / 2), sl = svg.append('rect').attr('x', nx + 2 * s + 12).attr('y', ny).attr('width', 16).attr('height', rows * s + (rows - 1) * 6).attr('rx', 6).attr('fill', 'none').attr('stroke', '#ffd60a').attr('stroke-dasharray', '4 4');
+    T(svg, nx + 2 * s + 34, ny + 14, 'and a', {size: 10, fill: 'var(--sub)'});
+    T(svg, nx + 2 * s + 34, ny + 27, 'bit more', {size: 10, fill: 'var(--sub)'});
+    const by = ny + rows * (s + 6) + 18;
+    T(svg, nx + s + 3, by, `St Johns, ${f['bt-year'].value}: ${d3.format(',')(f['bt-sqft'].value)} sq ft`, {a: 'middle', size: 13, w: 700});
+    T(svg, nx + s + 3, by + 18, `Some sets from Sam Mendes’s ${f['bt-films'].value} films`, {a: 'middle', size: 11, fill: 'var(--sub)'});
+    T(svg, W / 2, H - 10, 'Footprints to scale with each other; room layout illustrative', {a: 'middle', size: 10, fill: 'var(--sub)'});
+    function final(){ tiles.forEach(t => t.g.attr('opacity', 1).attr('transform', null)); sl.attr('opacity', 1); }
+    final();
+    return {
+      play(){
+        if (calm) return final();
+        tiles.forEach((t, i) => t.g.interrupt().attr('opacity', 0).attr('transform', `translate(${ox - t.x},${oy - t.y})`)
+          .transition().delay(300 + i * 500).duration(800).ease(d3.easeCubicOut).attr('opacity', 1).attr('transform', 'translate(0,0)'));
+        sl.interrupt().attr('opacity', 0).transition().delay(300 + times * 500 + 400).duration(500).attr('opacity', 1);
       },
       stop(){}, final
     };
   }
 
-  /* ---------- 7. Louvre: fifty at the pyramid ---------- */
-  function artLouvre(box, f){
-    const W = 640, H = 470, svg = mkSvg(box, W, H);
-    const ground = 340, bx0 = 170, bx1 = 470, apx = 320, apy = 120;
-    const defs = svg.append('defs');
-    const gl = defs.append('linearGradient').attr('id', 'lv-glass').attr('x1', 0).attr('x2', 1).attr('y1', 0).attr('y2', 1);
-    gl.append('stop').attr('offset', 0).attr('stop-color', '#64d2ff').attr('stop-opacity', .35); gl.append('stop').attr('offset', 1).attr('stop-color', '#5e5ce6').attr('stop-opacity', .12);
-    defs.append('clipPath').attr('id', 'lv-tri').append('path').attr('d', `M${bx0} ${ground} L${apx} ${apy} L${bx1} ${ground} Z`);
-    svg.append('path').attr('d', `M${bx0} ${ground} L${apx} ${apy} L${bx1} ${ground} Z`).attr('fill', 'url(#lv-glass)');
-    const lat = svg.append('g').attr('clip-path', 'url(#lv-tri)').attr('stroke', 'var(--fg)').attr('opacity', .28);
-    for (let i = -12; i <= 12; i++) {
-      lat.append('line').attr('x1', apx + i * 26).attr('y1', apy).attr('x2', apx + i * 26 - 300).attr('y2', apy + 300 * 1.47);
-      lat.append('line').attr('x1', apx + i * 26).attr('y1', apy).attr('x2', apx + i * 26 + 300).attr('y2', apy + 300 * 1.47);
-    }
-    svg.append('path').attr('d', `M${bx0} ${ground} L${apx} ${apy} L${bx1} ${ground}`).attr('fill', 'none').attr('stroke', 'var(--fg)').attr('stroke-width', 2).attr('opacity', .8);
-    svg.append('line').attr('x1', 20).attr('x2', W - 20).attr('y1', ground).attr('y2', ground).attr('stroke', 'var(--line)');
-    // clock
-    const ck = [W - 70, 82], cr = 38;
-    const open = f['louvre-open'].value, noon = f['louvre-noon'].value;
-    svg.append('circle').attr('cx', ck[0]).attr('cy', ck[1]).attr('r', cr).attr('fill', 'none').attr('stroke', 'var(--sub)').attr('stroke-width', 2);
-    const arc = d3.arc()({innerRadius: 0, outerRadius: cr - 4, startAngle: (open % 12) / 12 * 2 * Math.PI, endAngle: (noon % 12 || 12) / 12 * 2 * Math.PI});
-    const shut = svg.append('path').attr('transform', `translate(${ck[0]},${ck[1]})`).attr('d', arc).attr('fill', '#ff9f0a').attr('opacity', .8);
-    for (let h = 0; h < 12; h++) { const a = h / 12 * 2 * Math.PI; svg.append('line').attr('x1', ck[0] + Math.sin(a) * (cr - 6)).attr('y1', ck[1] - Math.cos(a) * (cr - 6)).attr('x2', ck[0] + Math.sin(a) * cr).attr('y2', ck[1] - Math.cos(a) * cr).attr('stroke', 'var(--sub)'); }
-    T(svg, ck[0], ck[1] + cr + 20, `Shut ${open}am to noon`, {a: 'middle', size: 12, w: 600});
-    T(svg, ck[0], ck[1] + cr + 36, 'at least', {a: 'middle', size: 11, fill: 'var(--sub)'});
-    // students
-    const n = f['louvre-students'].value, perRow = Math.ceil(n / 2), sp = Math.min(22, (W - 60) / perRow);
-    const people = d3.range(n).map(i => {
-      const row = Math.floor(i / perRow), col = i % perRow;
-      const x = W / 2 - (perRow - 1) * sp / 2 + col * sp + (row ? sp / 2 : 0), y = ground + 40 + row * 34;
-      const g = svg.append('g').attr('transform', `translate(${x},${y})`);
-      g.append('circle').attr('cy', -18).attr('r', 4.4).attr('fill', '#ffd60a');
-      g.append('rect').attr('x', -4.2).attr('y', -12.5).attr('width', 8.4).attr('height', 15).attr('rx', 3.6).attr('fill', '#ffd60a');
-      return {g, x, y};
-    });
-    T(svg, W / 2, H - 6, 'One figure per student', {a: 'middle', size: 11, fill: 'var(--sub)'});
-    function final(){ people.forEach(p => p.g.attr('opacity', 1).attr('transform', `translate(${p.x},${p.y})`)); shut.attr('opacity', .8); }
-    return {
-      play(){
-        if (calm) return final();
-        people.forEach((p, i) => {
-          const fromX = p.x < W / 2 ? -30 : W + 30;
-          p.g.interrupt().attr('opacity', 0).attr('transform', `translate(${fromX},${p.y})`)
-            .transition().delay(i * 34).duration(1100).ease(d3.easeCubicOut).attr('opacity', 1).attr('transform', `translate(${p.x},${p.y})`);
-        });
-        shut.attr('opacity', 0).transition().delay(1500).duration(700).attr('opacity', .8);
-      },
-      stop(){}, final
-    };
-  }
 
   /* ---------- count-up for the hero numbers ---------- */
   let factsMap = null;
@@ -813,10 +778,9 @@ body { background: var(--color-bg); color: var(--color-fg); }
   }
 
 
-
   /* ---------- activation ---------- */
   const arts = {};
-  const BUILD = {jackdaw: artJackdaw, cpi: artCpi, france: artFrance, mmx: artMmx, jio: artJio, louvre: artLouvre};
+  const BUILD = {debt: artDebt, oil: artOil, ukraine: artUkraine, climate: artClimate, aberfan: artAberfan, php: artPhp, beatles: artBeatles};
   const active = new Set();
   const io = new IntersectionObserver(es => es.forEach(e => {
     const id = e.target.dataset.id, a = arts[id];
@@ -825,10 +789,10 @@ body { background: var(--color-bg); color: var(--color-fg); }
   }), {root: document, threshold: .55});
 
   const fail = id => { const b = document.getElementById('art-' + id); if (!b) return; b.textContent = ''; const d = document.createElement('div'); d.className = 'fail'; d.textContent = 'Failed to load'; b.appendChild(d); };
-  let builtFor = null, builtLot = null, observed = false;
+  let builtFor = null, observed = false;
   dash.onData(() => {
     fillMarks();
-    const fd = dash.data('facts'), ld = dash.data('lottery');
+    const fd = dash.data('facts');
     if (fd.status === 'ok') {
       const f = Object.fromEntries(fd.data.map(r => [r.id, Object.assign({}, r, {value: Number(r.value)})]));
       factsMap = f;
@@ -836,16 +800,11 @@ body { background: var(--color-bg); color: var(--color-fg); }
         builtFor = fd.data;
         Object.entries(BUILD).forEach(([id, fn]) => {
           try { if (arts[id] && arts[id].stop) arts[id].stop(); arts[id] = fn(document.getElementById('art-' + id), f); arts[id].final(); if (active.has(id)) arts[id].play(); }
-          catch (e) { fail(id); }
+          catch (e) { if (window.__ST_DEBUG) console.error(id, e); fail(id); }
         });
       }
-      if (ld.status === 'ok' && builtLot !== ld.data) {
-        builtLot = ld.data;
-        try { if (arts.lottery && arts.lottery.stop) arts.lottery.stop(); arts.lottery = artLottery(document.getElementById('art-lottery'), ld.data, f); if (active.has('lottery')) arts.lottery.play(); } catch (e) { fail('lottery'); }
-      }
       if (!observed) { observed = true; stories.forEach(c => io.observe(c)); }
-    } else if (fd.status === 'error') Object.keys(BUILD).concat('lottery').forEach(fail);
-    if (ld.status === 'error') fail('lottery');
+    } else if (fd.status === 'error') Object.keys(BUILD).forEach(fail);
     requestAnimationFrame(layout);
   });
 
@@ -854,6 +813,7 @@ body { background: var(--color-bg); color: var(--color-fg); }
   if (named) setTimeout(() => named.scrollIntoView(), 400);
 })();
 </script>
+
 </div>
 </body>
 </html>
