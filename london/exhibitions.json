@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-21T01:39:21+01:00",
+ "updated": "2026-10-22T01:43:17+01:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -1216,6 +1216,42 @@
    "admission": "free",
    "discipline": "History & collections",
    "url": "https://www.vam.ac.uk/exhibitions/freddie-mercury-splendid-things"
+  },
+  {
+   "id": "saatchi-cold-sweat",
+   "venue": "saatchi",
+   "short": "Luke Hannam",
+   "title": "Cold Sweat",
+   "artists": "Luke Hannam",
+   "start": "2026-10-22",
+   "end": "2026-11-22",
+   "admission": "free",
+   "discipline": "Photography & moving image",
+   "url": "https://www.saatchigallery.com/exhibition/cold-sweat"
+  },
+  {
+   "id": "saatchi-jalloh",
+   "venue": "saatchi",
+   "short": "Adama Jalloh",
+   "title": "Adama Jalloh: Process (2014–ongoing)",
+   "artists": "Adama Jalloh",
+   "start": "2026-10-22",
+   "end": "2026-11-22",
+   "admission": "free",
+   "discipline": "Photography & moving image",
+   "url": "https://www.saatchigallery.com/exhibition/adama-jalloh-process-2014-ongoing"
+  },
+  {
+   "id": "slg-kang",
+   "venue": "slg",
+   "short": "Kang Seung Lee",
+   "title": "Kang Seung Lee: Weeds of Cultivation",
+   "artists": "Kang Seung Lee",
+   "start": "2026-12-11",
+   "end": "2027-03-28",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.southlondongallery.org/exhibitions/kang-seung-lee-weeds-of-cultivation/"
   }
  ]
 }
