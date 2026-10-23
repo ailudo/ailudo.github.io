@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-22T01:15:54+01:00",
+ "updated": "2026-10-23T01:18:01+01:00",
  "venues": [
   {
    "id": "louvre",
@@ -659,19 +659,21 @@
    "end": "2027-02-14",
    "admission": "paid",
    "discipline": "Sculpture & installation",
-   "url": "https://palaisdetokyo.com/"
+   "url": "https://palaisdetokyo.com/exposition/today-is-ok/",
+   "price": "€13 / €9 (one exhibitions ticket covers all Palais de Tokyo shows)"
   },
   {
    "id": "pdt-gomes",
    "venue": "pdt",
    "short": "Sonia Gomes",
-   "title": "Wild Heart",
+   "title": "Cœur sauvage",
    "artists": "Sonia Gomes",
    "start": "2026-10-21",
    "end": "2027-02-14",
    "admission": "paid",
    "discipline": "Sculpture & installation",
-   "url": "https://palaisdetokyo.com/"
+   "url": "https://palaisdetokyo.com/exposition/coeur-sauvage/",
+   "price": "€13 / €9 (one exhibitions ticket covers all Palais de Tokyo shows)"
   },
   {
    "id": "pdt-gang",
@@ -683,20 +685,22 @@
    "end": "2027-02-14",
    "admission": "paid",
    "discipline": "Group shows",
-   "url": "https://palaisdetokyo.com/",
-   "note": "Free entry on 21 and 22 October."
+   "url": "https://palaisdetokyo.com/exposition/toi-et-ta-bande/",
+   "note": "Free entry on 21 and 22 October.",
+   "price": "€13 / €9 (one exhibitions ticket covers all Palais de Tokyo shows)"
   },
   {
    "id": "pdt-john",
    "venue": "pdt",
    "short": "Valérie John",
-   "title": "I telman nwè ki i blé (So Black It Turns Blue)",
+   "title": "I telman nwè ki i blé (si noir que cela en devient bleu)",
    "artists": "Valérie John",
    "start": "2026-10-21",
    "end": "2027-02-14",
    "admission": "paid",
    "discipline": "Sculpture & installation",
-   "url": "https://palaisdetokyo.com/"
+   "url": "https://palaisdetokyo.com/exposition/i-telman-nwe-ki-i-ble-si-noir-que-cela-en-devient-bleu/",
+   "price": "€13 / €9 (one exhibitions ticket covers all Palais de Tokyo shows)"
   },
   {
    "id": "flv-fayet",
@@ -720,7 +724,8 @@
    "end": "2027-01-18",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.pinaultcollection.com/en/boursedecommerce/remember-me"
+   "url": "https://www.pinaultcollection.com/en/boursedecommerce/remember-me",
+   "price": "€15 / €10"
   },
   {
    "id": "bc-kruger",
@@ -733,7 +738,8 @@
    "admission": "paid",
    "discipline": "Sculpture & installation",
    "url": "https://www.pinaultcollection.com/en/boursedecommerce/history-tears",
-   "note": "In the Rotunda, with Remember Me on the same ticket."
+   "note": "In the Rotunda, with Remember Me on the same ticket.",
+   "price": "€15 / €10 (same ticket as Remember Me)"
   },
   {
    "id": "bc-penn",
@@ -746,7 +752,8 @@
    "admission": "paid",
    "discipline": "Photography & moving image",
    "url": "https://www.pinaultcollection.com/en/boursedecommerce/world-according-penn",
-   "note": "Gallery 2, shown with Remember Me."
+   "note": "Gallery 2, shown with Remember Me.",
+   "price": "€15 / €10 (same ticket as Remember Me)"
   },
   {
    "id": "bc-depardon",
@@ -759,7 +766,8 @@
    "admission": "paid",
    "discipline": "Photography & moving image",
    "url": "https://www.pinaultcollection.com/en/boursedecommerce/raymond-depardon",
-   "note": "Gallery 3, shown with Remember Me."
+   "note": "Gallery 3, shown with Remember Me.",
+   "price": "€15 / €10 (same ticket as Remember Me)"
   },
   {
    "id": "bc-goldin",
@@ -772,7 +780,8 @@
    "admission": "paid",
    "discipline": "Photography & moving image",
    "url": "https://www.pinaultcollection.com/en/boursedecommerce/nan-goldin-stendhal-syndrome",
-   "note": "Slideshow in the auditorium, shown with Remember Me."
+   "note": "Slideshow in the auditorium, shown with Remember Me.",
+   "price": "€15 / €10 (same ticket as Remember Me)"
   },
   {
    "id": "la-nishimura",
@@ -784,7 +793,7 @@
    "end": "2027-01-03",
    "admission": "free",
    "discipline": "Painting & works on paper",
-   "url": "https://www.lafayetteanticipations.com/"
+   "url": "https://www.lafayetteanticipations.com/fr/exposition/yu-nishimura"
   },
   {
    "id": "la-fauquet",
@@ -796,7 +805,7 @@
    "end": "2027-01-03",
    "admission": "free",
    "discipline": "Sculpture & installation",
-   "url": "https://www.lafayetteanticipations.com/"
+   "url": "https://www.lafayetteanticipations.com/fr/exposition/helene-fauquet"
   },
   {
    "id": "la-thomson",
@@ -808,7 +817,7 @@
    "end": "2026-11-29",
    "admission": "free",
    "discipline": "Sculpture & installation",
-   "url": "https://www.lafayetteanticipations.com/"
+   "url": "https://www.lafayetteanticipations.com/fr/exposition/mungo-thomson"
   },
   {
    "id": "pi-schwitters",
@@ -826,14 +835,15 @@
    "id": "pi-malraux",
    "venue": "picasso",
    "short": "André Malraux and Pablo Picasso",
-   "title": "Le musée imaginaire",
+   "title": "PARCOURS : « André Malraux et Pablo Picasso : le musée imaginaire »",
    "artists": "André Malraux, Pablo Picasso",
-   "start": null,
+   "start": "2026-10-06",
    "end": "2027-02-07",
    "admission": "paid",
    "discipline": "History & collections",
    "url": "https://www.museepicassoparis.fr/fr/agenda/salle-dossier-andre-malraux-et-pablo-picasso-le-musee-imaginaire/",
-   "note": "A display within the museum."
+   "note": "A display within the museum.",
+   "price": "16 EUR full / 12 EUR reduced"
   },
   {
    "id": "gp-cezanne",
@@ -877,7 +887,7 @@
    "venue": "bal",
    "short": "The Wilson Centre for Photography collection",
    "title": "L’Espace entre nous : dans la collection du Wilson Centre for Photography",
-   "artists": "",
+   "artists": "Walker Evans, Dorothea Lange, Graciela Iturbide, Daidō Moriyama, Robert Mapplethorpe, Francesca Woodman and others",
    "start": "2026-06-19",
    "end": "2027-01-03",
    "admission": "paid",
@@ -1042,7 +1052,8 @@
    "end": "2027-01-10",
    "admission": "paid",
    "discipline": "Sculpture & installation",
-   "url": "https://palaisdetokyo.com/"
+   "url": "https://palaisdetokyo.com/exposition/toutes-les-colonnes-nont-pas-un-coeur-de-pierre/",
+   "price": "€13 / €9 (one exhibitions ticket covers all Palais de Tokyo shows)"
   },
   {
    "id": "mam-fattal",
@@ -1084,9 +1095,9 @@
    "id": "pi-cahiers",
    "venue": "picasso",
    "short": "Picasso and Cahiers d’art",
-   "title": "Pablo Picasso au prisme de « Cahiers d’art »",
+   "title": "Parcours : PABLO PICASSO au prisme de « Cahiers d'art »",
    "artists": "Pablo Picasso",
-   "start": null,
+   "start": "2026-10-06",
    "end": "2027-01-03",
    "admission": "paid",
    "discipline": "Painting & works on paper",
@@ -1225,9 +1236,10 @@
    "artists": "Nina Fradet, Tony Jouanneau, Felipe Ribon, Marion Vidal",
    "start": "2026-09-10",
    "end": "2027-01-03",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://madparis.fr/Paris-Kyoto-Paris-Quatre-designers-de-retour-du-Japon"
+   "url": "https://madparis.fr/Paris-Kyoto-Paris-Quatre-designers-de-retour-du-Japon",
+   "note": "Shown within the museum's permanent galleries; museum ticket required."
   },
   {
    "id": "mam-himid",
@@ -1354,9 +1366,11 @@
    "artists": "Joss Dray",
    "start": "2026-09-19",
    "end": "2026-11-01",
-   "admission": "check",
+   "admission": "free",
    "discipline": "Photography & moving image",
-   "url": "https://www.imarabe.org/fr/agenda/expositions-musee/palestine-photographiee-par-joss-dray"
+   "url": "https://www.imarabe.org/fr/agenda/expositions-musee/derniers-jours-palestine-photographiee-par-joss-dray",
+   "price": "Free and open access, no ticket needed",
+   "note": "Shown in the Bibliothèque Leïla Shahid (level 1)."
   },
   {
    "id": "ima-blida",
@@ -1445,7 +1459,8 @@
    "end": "2027-02-14",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://palaisdetokyo.com/exposition/globale-inversion-inversion/"
+   "url": "https://palaisdetokyo.com/exposition/globale-inversion-inversion/",
+   "price": "€13 / €9 (one exhibitions ticket covers all Palais de Tokyo shows)"
   },
   {
    "id": "pdt-kodjo",
@@ -1457,7 +1472,8 @@
    "end": "2027-02-14",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://palaisdetokyo.com/exposition/photoromance/"
+   "url": "https://palaisdetokyo.com/exposition/photoromance/",
+   "price": "€13 / €9 (one exhibitions ticket covers all Palais de Tokyo shows)"
   },
   {
    "id": "pdt-lowder",
@@ -1469,14 +1485,15 @@
    "end": "2027-02-14",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://palaisdetokyo.com/exposition/la-source-de-la-loire-et-autres-films/"
+   "url": "https://palaisdetokyo.com/exposition/la-source-de-la-loire-et-autres-films/",
+   "price": "€13 / €9 (one exhibitions ticket covers all Palais de Tokyo shows)"
   },
   {
    "id": "pdt-chambre",
    "venue": "pdt",
    "short": "Chambre des Échos: Charles Villa and Yto Barrada",
    "title": "Chambre des Échos : Le bleu de toute chose",
-   "artists": "Charles Villa, Yto Barrada",
+   "artists": "Yto Barrada, Charles Villa",
    "start": "2026-10-21",
    "end": "2027-01-06",
    "admission": "free",
@@ -1495,7 +1512,7 @@
    "admission": "paid",
    "price": "€10 museum ticket, free under 26",
    "discipline": "History & collections",
-   "note": "Photographs and videos from the French archaeological mission in Libya (MAFL); level 7 of the museum. Venue page text also mentions 2026-10-20 in photo captions; end date to be confirmed.",
+   "note": "Venue listing gives an end date of 2027-01-17; some photo captions on the page say 20 October 2026. End date to be confirmed.",
    "url": "https://www.imarabe.org/fr/agenda/expositions-musee/libye-patrimoine-revele"
   },
   {
@@ -1524,6 +1541,46 @@
    "price": "€16",
    "discipline": "Sculpture & installation",
    "url": "https://www.musee-orsay.fr/fr/programme/agenda/expositions/vertige-richard-peduzzi-orsay"
+  },
+  {
+   "id": "ca-nouveauparis",
+   "venue": "carnavalet",
+   "short": "Nouveau Paris, from 1977 to today",
+   "title": "Nouveau Paris, de 1977 à nos jours",
+   "artists": "Christo and Jeanne-Claude, JR, Yves Bélorgey, Jacques Audiard, Bertrand Tavernier, Albert and David Maysles and others",
+   "start": "2026-09-25",
+   "end": "2027-12-05",
+   "admission": "free",
+   "discipline": "History & collections",
+   "url": "https://www.carnavalet.paris.fr/expositions/nouveau-paris-de-1977-nos-jours",
+   "note": "A display in the last room of the permanent collections route; free admission."
+  },
+  {
+   "id": "gp-transparence",
+   "venue": "grandpalais",
+   "short": "Transparence: Palais des enfants exhibition",
+   "title": "Transparence",
+   "artists": "Dan Graham, Soo Sunny Park, Patrick Neu, Agathe May",
+   "start": "2025-06-20",
+   "end": "2027-08-29",
+   "admission": "paid",
+   "price": "13 EUR full, 8 EUR subscribers",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.grandpalais.fr/fr/programme/transparence",
+   "note": "First exhibition of the Palais des enfants (aimed at children; accompanying adults need their own ticket)."
+  },
+  {
+   "id": "gal-envolume",
+   "venue": "galliera",
+   "short": "In volume! From flat fabric to finished garment",
+   "title": "En volume !",
+   "artists": "",
+   "start": "2026-12-12",
+   "end": "2027-10-17",
+   "admission": "check",
+   "discipline": "Design & architecture",
+   "url": "https://www.palaisgalliera.paris.fr/expositions",
+   "note": "Opens 12 December 2026."
   }
  ]
 }
