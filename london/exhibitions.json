@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-23T01:43:26+01:00",
+ "updated": "2026-10-24T01:43:30+01:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -630,7 +630,7 @@
    "short": "Winston Churchill: The Painter",
    "title": "Winston Churchill: The Painter",
    "artists": "Winston Churchill",
-   "start": null,
+   "start": "2026-05-23",
    "end": "2026-11-29",
    "admission": "paid",
    "price": "£18",
@@ -643,7 +643,7 @@
    "short": "The Wallace Collection at War",
    "title": "The Wallace Collection at War",
    "artists": "",
-   "start": null,
+   "start": "2026-03-15",
    "end": "2026-10-25",
    "admission": "free",
    "discipline": "History & collections",
@@ -655,7 +655,7 @@
    "short": "Rachel Kneebone",
    "title": "Metamorphoses: Porcelain Sculpture by Rachel Kneebone",
    "artists": "Rachel Kneebone",
-   "start": null,
+   "start": "2026-09-23",
    "end": "2027-04-25",
    "admission": "free",
    "discipline": "Sculpture & installation",
@@ -1212,7 +1212,7 @@
    "title": "Freddie Mercury | Splendid Things",
    "artists": "",
    "start": null,
-   "end": "2026-10-24",
+   "end": "2027-01-17",
    "admission": "free",
    "discipline": "History & collections",
    "url": "https://www.vam.ac.uk/exhibitions/freddie-mercury-splendid-things"
