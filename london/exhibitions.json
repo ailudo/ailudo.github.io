@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-25T01:43:30+01:00",
+ "updated": "2026-10-26T12:00:00+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -638,18 +638,6 @@
    "url": "https://www.wallacecollection.org/explore/exhibitions/"
   },
   {
-   "id": "wc-at-war",
-   "venue": "wallace",
-   "short": "The Wallace Collection at War",
-   "title": "The Wallace Collection at War",
-   "artists": "",
-   "start": "2026-03-15",
-   "end": "2026-10-25",
-   "admission": "free",
-   "discipline": "History & collections",
-   "url": "https://www.wallacecollection.org/explore/exhibitions/"
-  },
-  {
    "id": "wc-kneebone",
    "venue": "wallace",
    "short": "Rachel Kneebone",
@@ -698,32 +686,6 @@
    "admission": "free",
    "discipline": "Photography & moving image",
    "url": "https://www.serpentinegalleries.org/whats-on/amar-kanwar-exhibition/"
-  },
-  {
-   "id": "sp-pavilion",
-   "venue": "serpentine",
-   "site": "Serpentine South",
-   "short": "Serpentine Pavilion 2026",
-   "title": "Serpentine Pavilion 2026 by LANZA atelier",
-   "artists": "LANZA atelier (Isabel Abascal, Alessandro Arienzo)",
-   "start": "2026-06-06",
-   "end": "2026-10-25",
-   "admission": "free",
-   "discipline": "Design & architecture",
-   "url": "https://www.serpentinegalleries.org/whats-on/serpentine-pavilion-2026-by-isabel-abascal-and-alessandro-arienzo-lanza-atelier/"
-  },
-  {
-   "id": "sp-soto",
-   "venue": "serpentine",
-   "site": "Serpentine South",
-   "short": "Jesús Rafael Soto",
-   "title": "Jesús Rafael Soto: Pénétrable BBL Jaune",
-   "artists": "Jesús Rafael Soto",
-   "start": "2026-06-16",
-   "end": "2026-10-25",
-   "admission": "free",
-   "discipline": "Sculpture & installation",
-   "url": "https://www.serpentinegalleries.org/whats-on/jesus-rafael-soto-penetrable-bbl-jaune/"
   },
   {
    "id": "hw-goldin",
@@ -912,19 +874,6 @@
    "sinophone": "includes",
    "discipline": "Group shows",
    "url": "https://www.ydp.co/exhibitions/true-names"
-  },
-  {
-   "id": "ra-dadd",
-   "venue": "ra",
-   "short": "Richard Dadd",
-   "title": "Richard Dadd",
-   "artists": "Richard Dadd",
-   "start": "2026-07-25",
-   "end": "2026-10-25",
-   "admission": "paid",
-   "discipline": "Painting & works on paper",
-   "url": "https://www.royalacademy.org.uk/exhibition/richard-dadd",
-   "price": "£15"
   },
   {
    "id": "ra-riviera",
