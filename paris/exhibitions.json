@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-26T01:15:53+00:00",
+ "updated": "2026-10-27T01:16:12+00:00",
  "venues": [
   {
    "id": "louvre",
@@ -1242,19 +1242,6 @@
    "note": "Free entry to the museum collections."
   },
   {
-   "id": "ca-hains",
-   "venue": "cartier",
-   "short": "Raymond Hains: Du Grand Louvre aux 3 Cartier",
-   "title": "Raymond Hains : l’œuvre en chantier. Du Grand Louvre aux 3 Cartier",
-   "artists": "Raymond Hains",
-   "start": "2026-06-09",
-   "end": "2026-10-26",
-   "admission": "check",
-   "discipline": "Photography & moving image",
-   "url": "https://www.fondationcartier.com/programme/exposition/raymond-hains-l-oeuvre-en-chantier-du-grand-louvre-aux-3-cartier-place-palais-royal",
-   "note": "Outdoor installation at Place du Palais-Royal; the Galerie Valois part ended 4 October."
-  },
-  {
    "id": "ca-barnor",
    "venue": "cartier",
    "short": "James Barnor: Style in the viewfinder",
@@ -1592,6 +1579,18 @@
    "admission": "check",
    "discipline": "Group shows",
    "url": "https://www.grandpalais.fr/fr/programme/le-musee-imaginaire-doli"
+  },
+  {
+   "id": "pdt-toi",
+   "venue": "pdt",
+   "short": "Group show: Artetxe, Théo Audoire, Johann Berger etc.",
+   "title": "Toi et ta bande",
+   "artists": "Artetxe, Théo Audoire, Johann Berger, Olga Boudin, Elsa Brès, Marie Voignier and others",
+   "start": "2026-10-21",
+   "end": "2027-02-14",
+   "admission": "paid",
+   "discipline": "Group shows",
+   "url": "https://palaisdetokyo.com/exposition/toi-et-ta-bande/"
   }
  ]
 }
