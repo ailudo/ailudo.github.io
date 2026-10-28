@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-27T01:43:56+00:00",
+ "updated": "2026-10-28T01:43:21+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -495,7 +495,7 @@
    "short": "Taylor Wessing Photo Portrait Prize",
    "title": "Taylor Wessing Photo Portrait Prize 2026",
    "artists": "",
-   "start": "2026-10-29",
+   "start": "2026-11-05",
    "end": "2027-01-17",
    "admission": "paid",
    "discipline": "Photography & moving image",
@@ -697,7 +697,8 @@
    "end": "2027-03-07",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.southbankcentre.co.uk/whats-on/nan-goldin-you-never-did-anything-wrong/"
+   "url": "https://www.southbankcentre.co.uk/whats-on/nan-goldin-you-never-did-anything-wrong/",
+   "price": "£19"
   },
   {
    "id": "hw-arutiunian",
