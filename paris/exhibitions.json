@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-27T01:16:12+00:00",
+ "updated": "2026-10-28T01:17:47+00:00",
  "venues": [
   {
    "id": "louvre",
@@ -1169,13 +1169,13 @@
    "id": "ca-harvest",
    "venue": "cartier",
    "short": "Ibrahim Mahama",
-   "title": "The Harvest Season",
+   "title": "Le Temps des récoltes",
    "artists": "Ibrahim Mahama, Dorothy Akpene Amenuke, Gideon Appah, James Barnor, CATPC, Courage Dzidula Kpodo, Zohra Opoku, Tjaša Rener, Feda Wardak",
    "start": "2026-10-22",
    "end": "2027-02-28",
    "admission": "paid",
    "discipline": "Group shows",
-   "url": "https://www.fondationcartier.com/en/programme/exhibition/the-harvest-season",
+   "url": "https://www.fondationcartier.com/programme/exposition/le-temps-des-recoltes-ibrahim-mahama",
    "price": "€15 / €10"
   },
   {
@@ -1591,6 +1591,20 @@
    "admission": "paid",
    "discipline": "Group shows",
    "url": "https://palaisdetokyo.com/exposition/toi-et-ta-bande/"
+  },
+  {
+   "id": "pdt-baloji",
+   "venue": "pdt",
+   "short": "Baloji: Symbiosis 26-27",
+   "title": "Symbiosis 26-27",
+   "artists": "Baloji",
+   "start": "2026-10-22",
+   "end": "2027-06-30",
+   "admission": "paid",
+   "discipline": null,
+   "url": "https://palaisdetokyo.com/exposition/symbiosis-26-27/",
+   "price": "€13 / €9 (one exhibitions ticket covers all Palais de Tokyo shows)",
+   "note": "A year-long artist invitation with screenings, concerts, performances and installations."
   }
  ]
 }
