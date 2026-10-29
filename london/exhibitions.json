@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T01:43:21+00:00",
+ "updated": "2026-10-29T01:44:17+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -403,7 +403,8 @@
    "end": "2027-02-14",
    "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://www.tate.org.uk/whats-on/tate-britain/the-90s"
+   "url": "https://www.tate.org.uk/whats-on/tate-britain/the-90s",
+   "price": "£22 (£20 concessions)"
   },
   {
    "id": "tb-bloomsbury",
@@ -421,7 +422,7 @@
    "id": "tb-sedira",
    "venue": "tate-britain",
    "short": "Zineb Sedira",
-   "title": "Tate Britain Commission 2026: Zineb Sedira",
+   "title": "Tate Britain Commission 2026: Zineb Sedira: When Words Fall Silent, Cinema Speaks",
    "artists": "Zineb Sedira",
    "start": null,
    "end": "2027-01-17",
@@ -487,7 +488,8 @@
    "end": "2027-02-07",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.npg.org.uk/whatson/exhibitions"
+   "url": "https://www.npg.org.uk/whatson/exhibitions/2026/tim-walkers-fairyland-love-and-legends",
+   "price": "£23–£27.50"
   },
   {
    "id": "npg-taylor-wessing",
@@ -590,7 +592,7 @@
    "start": "2026-11-07",
    "end": null,
    "admission": "paid",
-   "price": "From £25",
+   "price": "£25 weekday / £27 weekend",
    "discipline": "History & collections",
    "url": "https://www.vam.ac.uk/exhibitions/constantinople-to-istanbul-one-city-two-empires"
   },
@@ -635,7 +637,7 @@
    "admission": "paid",
    "price": "£18",
    "discipline": "Painting & works on paper",
-   "url": "https://www.wallacecollection.org/explore/exhibitions/"
+   "url": "https://www.wallacecollection.org/whats-on/exhibitions-displays/winston-churchill-the-painter"
   },
   {
    "id": "wc-kneebone",
@@ -647,7 +649,7 @@
    "end": "2027-04-25",
    "admission": "free",
    "discipline": "Sculpture & installation",
-   "url": "https://www.wallacecollection.org/explore/exhibitions/"
+   "url": "https://www.wallacecollection.org/whats-on/exhibitions-displays/metamorphoses-porcelain-sculpture-by-rachel-kneebone/"
   },
   {
    "id": "wc-cosimo",
@@ -659,7 +661,7 @@
    "end": "2027-03-21",
    "admission": "free",
    "discipline": "History & collections",
-   "url": "https://www.wallacecollection.org/whats-on/events/cosimo-i-de-medici-art-and-dynasty/"
+   "url": "https://www.wallacecollection.org/whats-on/exhibitions-displays/cosimo-i-de-medici-art-and-dynasty/"
   },
   {
    "id": "sp-caguiat",
@@ -722,9 +724,10 @@
    "artists": "Robert Ryman",
    "start": "2026-10-09",
    "end": "2027-02-28",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.barbican.org.uk/whats-on/2026/event/robert-ryman-the-real-thing"
+   "url": "https://www.barbican.org.uk/whats-on/2026/event/robert-ryman-the-real-thing",
+   "price": "£19"
   },
   {
    "id": "bb-mohri",
@@ -773,7 +776,7 @@
    "artists": "Andrew Cranston, Lenz Geerk, Gareth Cadwallader, Sky Glabush and others",
    "start": "2026-10-08",
    "end": "2026-11-08",
-   "admission": "check",
+   "admission": "free",
    "discipline": "Group shows",
    "url": "https://www.whitechapelgallery.org/exhibitions/this-must-be-the-place-artists-for-whitechapel-gallery/",
    "note": "Exhibition and sale"
@@ -785,8 +788,8 @@
    "title": "Screen Portraits: Whitechapel Gallery Artists – Part 2",
    "artists": "Ayo Akingbade, Holly Graham, Maz Murray, Gaby Sahhar and others",
    "start": "2026-10-07",
-   "end": "2027-01-17",
-   "admission": "check",
+   "end": "2027-01-13",
+   "admission": "free",
    "discipline": "Photography & moving image",
    "url": "https://www.whitechapelgallery.org/exhibitions/screen-portraits-whitechapel-gallery-artists-part-2/"
   },
@@ -798,7 +801,7 @@
    "artists": "Sadia Pineda Hameed, Ilona Sagar, Rhea Storr, Alia Syed",
    "start": "2026-11-17",
    "end": "2026-12-13",
-   "admission": "check",
+   "admission": "free",
    "discipline": "Photography & moving image",
    "url": "https://www.whitechapelgallery.org/exhibitions/the-film-london-jarman-award-2026/"
   },
@@ -810,9 +813,10 @@
    "artists": "Autumn Knight",
    "start": "2026-09-29",
    "end": "2026-11-29",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Sculpture & installation",
-   "url": "https://www.ica.art/exhibitions/autumn-knight"
+   "url": "https://www.ica.art/exhibitions/autumn-knight",
+   "price": "£7.50"
   },
   {
    "id": "cac-hard-line",
@@ -849,7 +853,7 @@
    "end": "2026-12-06",
    "admission": "free",
    "discipline": "Photography & moving image",
-   "url": "https://chisenhale.org.uk/"
+   "url": "https://chisenhale.org.uk/project/wakaliga-uganda/"
   },
   {
    "id": "rr-sturtevant",
@@ -986,10 +990,11 @@
    "artists": "Salman Toor",
    "start": "2026-10-02",
    "end": "2027-01-10",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Painting & works on paper",
    "url": "https://courtauld.ac.uk/whats-on/exh-salman-toor-someone-like-you/",
-   "note": "With a drawings display"
+   "note": "With a drawings display",
+   "price": "£16 (£18 with donation)"
   },
   {
    "id": "ct-gill",
@@ -1202,6 +1207,19 @@
    "admission": "free",
    "discipline": "Sculpture & installation",
    "url": "https://www.southlondongallery.org/exhibitions/kang-seung-lee-weeds-of-cultivation/"
+  },
+  {
+   "id": "saatchi-local-royalty",
+   "venue": "saatchi",
+   "short": "Group show: Nicky Philipps, Jamie Coreth, Gareth Reid etc.",
+   "title": "Local Royalty",
+   "artists": "Nicky Philipps, Jamie Coreth, Gareth Reid, Nick Bashall",
+   "start": "2026-10-28",
+   "end": "2026-11-01",
+   "admission": "free",
+   "discipline": "Group shows",
+   "url": "https://www.saatchigallery.com/exhibition/local-royalty",
+   "note": "Coca-Cola Great Britain exhibition of four portraits of independent business owners; Gallery 3"
   }
  ]
 }
