@@ -132,9 +132,14 @@ async function api(path, body){
 }
 function adopt(g, sg){
   // take the server's copy as the truth; returns how many new moves arrived
+  // a move waiting for Done is kept if the server hasn't moved on since it was made
+  const held = g.pending && g.moves.length === sg.moves.length + 1 && sg.moves.every((m,i)=>m===g.moves[i]) && !sg.resign
+    ? g.moves[g.moves.length-1] : null;
+  if (held) g.moves = g.moves.slice(0,-1);
   const before = g.moves.length;
   const extends_ = sg.moves.length > before && g.moves.every((m,i)=>m===sg.moves[i]);
   g.name = sg.name || g.name; g.w = sg.w; g.b = sg.b; g.resign = sg.resign || ''; g.moves = sg.moves.slice(); g.online = true; g.pending = false;
+  if (held){ g.moves.push(held); g.pending = true; }
   if (extends_) g.sent = g.moves.length;
   if (g.sent > g.moves.length) g.sent = g.moves.length;
   return extends_ ? sg.moves.length - before : 0;
@@ -322,9 +327,9 @@ function viewHome(refresh = true){
     const n = Math.floor(g.moves.length/2) + 1;
     let status, sub;
     if (g.me==='spec'){ status = res ? res.score : 'Watching'; sub = `${opp} · move ${n}`; }
+    else if (g.pending){ status = '<span class="dot"></span>Tap Done'; sub = `${opp} · move ${n}`; }
     else if (res){ status = res.score; sub = `${opp} · ${n} moves · ${res.text.toLowerCase()}`; }
     else if (!g.w || !g.b){ status = chess.turn()===g.me ? '<span class="dot"></span>Your move' : 'Waiting'; sub = `${opp} · invite sent`; }
-    else if (g.pending){ status = '<span class="dot"></span>Tap Done'; sub = `${opp} · move ${n}`; }
     else if (g.moves.length > (g.sent||0) && chess.turn()!==g.me && !g.online){ status = '<span class="dot"></span>Send your move'; sub = `${opp} · move ${n}`; }
     else if (chess.turn()===g.me){ status = '<span class="dot"></span>Your move'; sub = `${opp} · move ${n}`; }
     else { status = 'Their move'; sub = `${opp} · move ${n}`; }
@@ -564,15 +569,15 @@ function viewGame(g, opts = {}){
     } else if (spec){
       panel = `<div class="panel"><p>${res ? `<strong>${res.score}</strong> · ${esc(res.text)}.` : `${g.online ? "You're watching live — new moves appear by themselves." : "You're watching. This is the position when the link was sent — ask for a new link to see more."}`}</p>
         <button class="secondary" id="log">Move log</button></div>`;
+    } else if (g.pending && live){
+      panel = `<div class="panel"><p><strong>You played ${esc(moveLabel(full.hist, full.hist.length-1))}${res ? ` — ${esc(res.text.toLowerCase())}, ${res.score}` : ''}.</strong> Tap Done to put it on ${esc(oppName)}'s board — until then you can take it back.</p>
+        <button class="primary" id="done"><span>Done</span>${I.arrow}</button>
+        <button class="secondary" id="undo">Take back</button></div>`;
     } else if (res){
       panel = `<div class="panel"><p><strong>${res.score} · ${esc(res.text)}.</strong> ${unsent ? `Send the final position to ${esc(oppName)}.` : ''}</p>
         ${unsent ? `<button class="primary red" id="send"><span>Send to ${esc(oppName)} by SMS</span>${I.arrow}</button>` : ''}
         <div class="row2"><button class="secondary" id="log">Move log</button><button class="secondary" id="spec">Invite spectators</button></div>
         ${unsent ? `<button class="textbtn" id="sendother" style="align-self:flex-start">Send another way</button>` : ''}</div>`;
-    } else if (g.pending && live){
-      panel = `<div class="panel"><p><strong>You played ${esc(moveLabel(full.hist, full.hist.length-1))}.</strong> Tap Done to put it on ${esc(oppName)}'s board — until then you can take it back.</p>
-        <button class="primary" id="done"><span>Done</span>${I.arrow}</button>
-        <button class="secondary" id="undo">Take back</button></div>`;
     } else if (unsent && g.online && !g.offline){
       panel = `<div class="panel"><p><strong>Done — ${esc(moveLabel(full.hist, full.hist.length-1))} is on ${esc(oppName)}'s board.</strong> Want to give them a nudge?</p>
         <button class="primary red" id="send"><span>Text ${esc(oppName)}</span>${I.arrow}</button>
@@ -657,6 +662,12 @@ function viewGame(g, opts = {}){
     saveGame(g); view = Math.min(view, g.moves.length); if (mode==='live') view = g.moves.length; render();
   }
 
+  async function commitPending(){
+    if (!g.pending) return;
+    g.pending = false;
+    await online('move', { move: g.moves[g.moves.length-1], expect: g.moves.length-1 });
+  }
+
   function startPolling(){
     if (!g.online || poll) return;
     poll = setInterval(async () => {
@@ -726,9 +737,9 @@ function viewGame(g, opts = {}){
     const specLink = () => { const msg = `Watch ${g.w||'?'} vs ${g.b||'?'} — ${g.name} on Zug: ${gameLink(g, { v:'1' })}`; shareOther(msg); };
     on('spec', specLink); on('spectop', specLink);
     on('mylink', ()=>{ const msg = `${g.name} — my own Zug link, playing ${colourName(g.me)}. Keep it private: whoever has it can move for me. ${gameLink(g, { k:g.key })}`; shareOther(msg); });
-    on('send', ()=>{ const m = sendMessage(); markSent(); location.href = smsHref(m, g.phone||''); setTimeout(render, 400); });
-    on('sendother', async ()=>{ const m = sendMessage(); await shareOther(m); markSent(); render(); });
-    on('done', ()=>{ g.pending = false; feedback('tap'); online('move', { move: g.moves[g.moves.length-1], expect: g.moves.length-1 }); });
+    on('send', async ()=>{ await commitPending(); const m = sendMessage(); markSent(); location.href = smsHref(m, g.phone||''); setTimeout(render, 400); });
+    on('sendother', async ()=>{ await commitPending(); const m = sendMessage(); await shareOther(m); markSent(); render(); });
+    on('done', ()=>{ feedback('tap'); commitPending(); });
     on('nonudge', ()=>{ markSent(); render(); });
     on('undo', ()=>{ if (g.pending){ g.moves = g.moves.slice(0,-1); g.pending = false; saveGame(g); view = g.moves.length; feedback('tap'); render(); return; }
       const expect = g.moves.length; g.moves = g.moves.slice(0,-1); if (g.sent > g.moves.length) g.sent = g.moves.length; saveGame(g); view=g.moves.length; feedback('tap'); render(); if (g.online && g.key) online('undo', { expect }); });
