@@ -219,14 +219,23 @@ function replay(list, upto = list.length){
 /* ---------- links ---------- */
 function gameLink(g, extra = {}){
   const p = new URLSearchParams();
-  p.set('id', g.id); p.set('n', g.name);
+  p.set('id', g.id);
+  if (g.online && !g.offline){ for (const [k,v] of Object.entries(extra)) p.set(k, v); return BASE + '#' + p.toString(); }
+  p.set('n', g.name);
   p.set('w', g.w || ''); p.set('b', g.b || '');
   if (g.moves.length) p.set('m', encodeMoves(g.moves));
   if (g.resign) p.set('r', g.resign);
   for (const [k,v] of Object.entries(extra)) p.set(k, v);
   return BASE + '#' + p.toString();
 }
+function plainText(t){
+  return String(t)
+    .replace(/[\u2014\u2013]/g, '-').replace(/\u2026/g, '...').replace(/\u00bd/g, '1/2')
+    .replace(/[\u2018\u2019]/g, "'").replace(/[\u201c\u201d]/g, '"').replace(/[\u2190-\u21ff]/g, '>')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '').normalize('NFC');
+}
 function smsHref(body, phone=''){
+  body = plainText(body);
   const ios = /iP(hone|ad|od)/.test(navigator.userAgent);
   return `sms:${phone}${ios ? '&' : '?'}body=${encodeURIComponent(body)}`;
 }
@@ -283,7 +292,7 @@ const newId = () => Array.from(crypto.getRandomValues(new Uint8Array(5)), b => A
 let toastT;
 function toast(msg){ const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove('on'), 2600); }
 async function copy(text, msg='Link copied'){ try { await navigator.clipboard.writeText(text); toast(msg); } catch { prompt('Copy this:', text); } }
-async function shareOther(text){ if (navigator.share){ try { await navigator.share({ text }); } catch {} } else copy(text, 'Message copied'); }
+async function shareOther(text){ text = plainText(text); if (navigator.share){ try { await navigator.share({ text }); } catch {} } else copy(text, 'Message copied'); }
 const colourName = c => c==='w' ? 'White' : 'Black';
 const other = c => c==='w' ? 'b' : 'w';
 function moveLabel(hist, i){ const m = hist[i]; const no = Math.floor(i/2)+1; return i%2===0 ? `${no}. ${m.san}` : `${no}… ${m.san}`; }
@@ -397,7 +406,7 @@ function viewNew(){
 }
 function inviteText(g){
   const me = g.me==='w' ? g.w : g.b;
-  return `${g.name} — ${me} has challenged you to chess on Zug. You play ${colourName(other(g.me))}. Join here: ${gameLink(g, g.inviteKey ? { k:g.inviteKey } : {})}`;
+  return `${me} has challenged you to chess on Zug: ${gameLink(g, g.inviteKey ? { k:g.inviteKey } : {})} - you play ${colourName(other(g.me))} in the ${g.name}.`;
 }
 
 /* ---------- opening a link ---------- */
@@ -670,7 +679,7 @@ function viewGame(g, opts = {}){
 
   function startPolling(){
     if (!g.online || poll) return;
-    poll = setInterval(async () => {
+    const check = async () => {
       if (document.visibilityState !== 'visible' || g.saving || promo || g.pending) return;
       const r = await api(`/games/${g.id}`);
       if (!r || !r.ok) return;
@@ -683,7 +692,9 @@ function viewGame(g, opts = {}){
       if (wasLive){ view = g.moves.length; sel = null; targets = []; }
       render();
       if (fresh){ const { chess, hist } = replay(g.moves); feedbackFor(hist[hist.length-1], chess); }
-    }, 5000);
+    };
+    poll = setInterval(check, 5000);
+    check();   // catch up straight away when the game opens
   }
 
   function sendMessage(){
@@ -693,9 +704,9 @@ function viewGame(g, opts = {}){
     const lm = full.hist.length ? moveLabel(full.hist, full.hist.length-1) : '';
     const link = gameLink(g, g.inviteKey ? { k:g.inviteKey } : {});
     let msg;
-    if (g.resign === g.me) msg = `${g.name} — ${me} resigned. Good game! ${link}`;
-    else if (res) msg = `${g.name} — ${me} played ${lm}. ${res.text}! ${res.score}. ${link}`;
-    else msg = `${g.name} — ${me} played ${lm}. Your move: ${link}`;
+    if (g.resign === g.me) msg = `${me} resigned the ${g.name}: ${link} - good game!`;
+    else if (res) msg = `${me} played ${lm}: ${link} - ${res.text}, ${res.score}.`;
+    else msg = `${me} played ${lm}: ${link} - your move.`;
     return msg;
   }
   function markSent(){ g.sent = g.moves.length; saveGame(g); }
@@ -734,9 +745,9 @@ function viewGame(g, opts = {}){
     on('tolive', ()=>{ mode='live'; view=g.moves.length; render(); });
     $app.querySelectorAll('[data-ply]').forEach(b => b.onclick = () => step(+b.dataset.ply));
     on('fx', ()=>{ prefs.fx = !prefs.fx; savePrefs(); if (prefs.fx){ audio(); feedback('move'); } render(); });
-    const specLink = () => { const msg = `Watch ${g.w||'?'} vs ${g.b||'?'} — ${g.name} on Zug: ${gameLink(g, { v:'1' })}`; shareOther(msg); };
+    const specLink = () => { const msg = `Watch ${g.w||'?'} vs ${g.b||'?'} on Zug: ${gameLink(g, { v:'1' })} - the ${g.name}, live.`; shareOther(msg); };
     on('spec', specLink); on('spectop', specLink);
-    on('mylink', ()=>{ const msg = `${g.name} — my own Zug link, playing ${colourName(g.me)}. Keep it private: whoever has it can move for me. ${gameLink(g, { k:g.key })}`; shareOther(msg); });
+    on('mylink', ()=>{ const msg = `My Zug link for the ${g.name}: ${gameLink(g, { k:g.key })} - I play ${colourName(g.me)}. Keep it private, it can move for me.`; shareOther(msg); });
     on('send', async ()=>{ await commitPending(); const m = sendMessage(); markSent(); location.href = smsHref(m, g.phone||''); setTimeout(render, 400); });
     on('sendother', async ()=>{ await commitPending(); const m = sendMessage(); await shareOther(m); markSent(); render(); });
     on('done', ()=>{ feedback('tap'); commitPending(); });
