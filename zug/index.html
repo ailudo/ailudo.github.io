@@ -706,7 +706,7 @@ function viewGame(g, opts = {}){
     let msg;
     if (g.resign === g.me) msg = `${me} resigned the ${g.name}: ${link} - good game!`;
     else if (res) msg = `${me} played ${lm}: ${link} - ${res.text}, ${res.score}.`;
-    else msg = `${me} played ${lm}: ${link} - your move.`;
+    else msg = `It's now your move: ${link} (Zug)`;
     return msg;
   }
   function markSent(){ g.sent = g.moves.length; saveGame(g); }
