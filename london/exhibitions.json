@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-01T01:43:07+00:00",
+ "updated": "2026-11-02T01:43:09+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -1207,19 +1207,6 @@
    "admission": "free",
    "discipline": "Sculpture & installation",
    "url": "https://www.southlondongallery.org/exhibitions/kang-seung-lee-weeds-of-cultivation/"
-  },
-  {
-   "id": "saatchi-local-royalty",
-   "venue": "saatchi",
-   "short": "Group show: Nicky Philipps, Jamie Coreth, Gareth Reid etc.",
-   "title": "Local Royalty",
-   "artists": "Nicky Philipps, Jamie Coreth, Gareth Reid, Nick Bashall",
-   "start": "2026-10-28",
-   "end": "2026-11-01",
-   "admission": "free",
-   "discipline": "Group shows",
-   "url": "https://www.saatchigallery.com/exhibition/local-royalty",
-   "note": "Coca-Cola Great Britain exhibition of four portraits of independent business owners; Gallery 3"
   }
  ]
 }
