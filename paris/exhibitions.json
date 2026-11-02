@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-01T12:00:00+00:00",
+ "updated": "2026-11-02T12:00:00+00:00",
  "venues": [
   {
    "id": "louvre",
@@ -919,18 +919,6 @@
    "url": "https://madparis.fr/rafael-pavarotti-photographe-10279"
   },
   {
-   "id": "ad-maj",
-   "venue": "artsdeco",
-   "short": "Haute couture at the Thai court",
-   "title": "La Mode en majesté. Haute couture et tradition à la cour de Thaïlande",
-   "artists": "",
-   "start": "2026-05-13",
-   "end": "2026-11-01",
-   "admission": "paid",
-   "discipline": "Design & architecture",
-   "url": "https://madparis.fr/La-Mode-en-majeste-Haute-couture-et-tradition-a-la-cour-de-Thailande-10206"
-  },
-  {
    "id": "ima-mariee",
    "venue": "ima",
    "short": "Weddings in Algeria, Morocco and Tunisia",
@@ -1331,20 +1319,6 @@
    "discipline": "Sculpture & installation",
    "url": "https://www.cernuschi.paris.fr/fr/expositions/perspective-dargile",
    "note": "Clay works installed in the Buddha room among Han and Tang funerary terracottas."
-  },
-  {
-   "id": "ima-dray",
-   "venue": "ima",
-   "short": "Joss Dray: Palestine photographed",
-   "title": "La Palestine photographiée par Joss Dray",
-   "artists": "Joss Dray",
-   "start": "2026-09-19",
-   "end": "2026-11-01",
-   "admission": "free",
-   "discipline": "Photography & moving image",
-   "url": "https://www.imarabe.org/fr/agenda/expositions-musee/derniers-jours-palestine-photographiee-par-joss-dray",
-   "price": "Free and open access, no ticket needed",
-   "note": "Shown in the Bibliothèque Leïla Shahid (level 1)."
   },
   {
    "id": "ima-blida",
