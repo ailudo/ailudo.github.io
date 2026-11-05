@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T01:43:25+00:00",
+ "updated": "2026-11-05T01:43:07+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -1207,6 +1207,18 @@
    "admission": "free",
    "discipline": "Sculpture & installation",
    "url": "https://www.southlondongallery.org/exhibitions/kang-seung-lee-weeds-of-cultivation/"
+  },
+  {
+   "id": "gw-nguyen",
+   "venue": "gasworks",
+   "short": "Thuy Tien Nguyen",
+   "title": "Thuy Tien Nguyen: Press, Release",
+   "artists": "Thuy Tien Nguyen",
+   "start": "2027-01-14",
+   "end": "2027-03-21",
+   "admission": "free",
+   "discipline": null,
+   "url": "https://gasworks.org.uk/exhibitions/thuy-tien-nguyen/"
   }
  ]
 }
