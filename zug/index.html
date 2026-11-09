@@ -27,6 +27,7 @@ a{color:var(--ink)}
 .primary.red{background:var(--red)}
 .primary:disabled{opacity:.35;cursor:default}
 .secondary{height:48px;padding:0 14px;border:1.5px solid var(--ink);background:var(--paper);font-size:15px}
+.secondary:disabled{opacity:.35;cursor:default}
 .textbtn{height:44px;padding:0;border:0;background:none;font-size:15px;text-decoration:underline;text-underline-offset:3px}
 .iconbtn{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:0;background:none;padding:0}
 .field{display:flex;flex-direction:column;gap:8px}
@@ -307,12 +308,55 @@ function resultOf(g, chess){
   return null;
 }
 
+/* ---------- the bot: Stockfish 19 lite, in a Web Worker ---------- */
+const LEVELS = {
+  beginner: { name:'Beginner', skill:0,  depth:1, random:0.35 },
+  casual:   { name:'Casual',   skill:3,  depth:3, random:0.12 },
+  club:     { name:'Club',     skill:8,  movetime:350 },
+  strong:   { name:'Strong',   skill:14, movetime:800 },
+  max:      { name:'Max',      skill:20, movetime:1500 },
+};
+const LEVEL_ORDER = ['beginner','casual','club','strong','max'];
+const botName = level => `Stockfish · ${(LEVELS[level]||LEVELS.casual).name}`;
+let engine = null, engineReady = null, engineJob = 0, searching = null;
+function getEngine(){
+  if (engineReady) return engineReady;
+  engineReady = new Promise((resolve, reject) => {
+    let w;
+    try { w = new Worker('engine/stockfish-19-lite-single.js'); } catch (e) { engineReady = null; return reject(e); }
+    const t = setTimeout(() => { engineReady = null; try { w.terminate(); } catch {} reject(new Error('engine timeout')); }, 25000);
+    w.onmessage = e => { if (String(e.data).startsWith('readyok')) { clearTimeout(t); w.onmessage = null; engine = w; resolve(w); } };
+    w.onerror = e => { clearTimeout(t); engineReady = null; reject(e); };
+    w.postMessage('uci'); w.postMessage('isready');
+  });
+  return engineReady;
+}
+async function bestMove(moves, level){
+  const job = ++engineJob;
+  const w = await getEngine();
+  if (searching){ w.postMessage('stop'); await searching; }
+  if (job !== engineJob) return null;
+  const L = LEVELS[level] || LEVELS.casual;
+  let done; searching = new Promise(r => done = r);
+  const move = await new Promise(resolve => {
+    w.onmessage = e => { const t = String(e.data); if (t.startsWith('bestmove')) { w.onmessage = null; resolve(t.split(' ')[1]); } };
+    w.postMessage(`setoption name Skill Level value ${L.skill}`);
+    w.postMessage(`position startpos${moves.length ? ' moves ' + moves.join(' ') : ''}`);
+    w.postMessage(L.depth ? `go depth ${L.depth}` : `go movetime ${L.movetime}`);
+  });
+  searching = null; done();
+  return job === engineJob && move && move !== '(none)' ? move : null;
+}
+function cancelBot(){ engineJob++; if (engine && searching) engine.postMessage('stop'); }
+
 /* ---------- routing ---------- */
 window.addEventListener('hashchange', route);
 function route(){
   if (poll){ clearInterval(poll); poll = null; }
+  cancelBot();
   const h = location.hash.slice(1);
   if (h === 'new') return viewNew();
+  if (h === 'bot') return viewBot();
   if (h.includes('id=')) return openFromLink(new URLSearchParams(h));
   if (h.startsWith('g/')) { const g = games()[h.slice(2)]; if (g) return viewGame(g); }
   viewHome();
@@ -338,6 +382,7 @@ function viewHome(refresh = true){
     if (g.me==='spec'){ status = res ? res.score : 'Watching'; sub = `${opp} · move ${n}`; }
     else if (g.pending){ status = '<span class="dot"></span>Tap Done'; sub = `${opp} · move ${n}`; }
     else if (res){ status = res.score; sub = `${opp} · ${n} moves · ${res.text.toLowerCase()}`; }
+    else if (g.bot){ status = chess.turn()===g.me ? '<span class="dot"></span>Your move' : 'Bot to move'; sub = `${opp} · move ${n}`; }
     else if (!g.w || !g.b){ status = chess.turn()===g.me ? '<span class="dot"></span>Your move' : 'Waiting'; sub = `${opp} · invite sent`; }
     else if (g.moves.length > (g.sent||0) && chess.turn()!==g.me && !g.online){ status = '<span class="dot"></span>Send your move'; sub = `${opp} · move ${n}`; }
     else if (chess.turn()===g.me){ status = '<span class="dot"></span>Your move'; sub = `${opp} · move ${n}`; }
@@ -353,7 +398,10 @@ function viewHome(refresh = true){
   </header>
   <div class="strip" aria-hidden="true">${'<span></span>'.repeat(8)}</div>
   <main class="page" style="gap:28px">
-    <a class="primary" href="#new"><span>New game</span>${I.arrow}</a>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <a class="primary" href="#new"><span>New game</span>${I.arrow}</a>
+      <a class="primary" href="#bot" style="background:var(--sqd)"><span>Play a bot</span>${I.arrow}</a>
+    </div>
     <section>
       <div class="list-head"><h2 class="label" style="margin:0">Games</h2><span class="muted" style="font-size:13px">${list.length ? `${list.length} saved on this phone` : ''}</span></div>
       ${rows || `<p class="empty">No games yet. Start one, and it will be kept here — every move your friend texts you updates it.</p>`}
@@ -407,6 +455,46 @@ function viewNew(){
 function inviteText(g){
   const me = g.me==='w' ? g.w : g.b;
   return `${me} has challenged you to chess on Zug: ${gameLink(g, g.inviteKey ? { k:g.inviteKey } : {})} - you play ${colourName(other(g.me))} in the ${g.name}.`;
+}
+
+/* ---------- play a bot: setup ---------- */
+function viewBot(){
+  let level = LEVELS[prefs.botLevel] ? prefs.botLevel : 'casual', side = prefs.botSide || 'w';
+  $app.innerHTML = `
+  <main class="page">
+    <a href="#" style="display:flex;align-items:center;gap:6px;height:44px;font-size:15px;text-decoration:none">${I.back}Games</a>
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <span class="label">Play a bot</span>
+      <h1 style="margin:0;font-size:40px;line-height:1.05;letter-spacing:-.03em">Stockfish</h1>
+      <p class="muted" style="margin:4px 0 0;font-size:15px;line-height:1.4">The open-source engine behind most chess sites, running on this phone. Pick how hard it plays.</p>
+    </div>
+    <div class="field"><label class="label" for="me">01 — Your name</label><input id="me" autocomplete="given-name" maxlength="24" value="${esc(prefs.name)}" placeholder="Your name"></div>
+    <div class="field"><span class="label" id="lvl">02 — Level</span>
+      <div class="seg" role="group" aria-labelledby="lvl" style="grid-template-columns:repeat(5,minmax(0,1fr))">${LEVEL_ORDER.map(k=>`<button data-l="${k}" aria-pressed="${k===level}" style="font-size:13px;padding:0 2px">${LEVELS[k].name}</button>`).join('')}</div>
+      <p class="muted" id="lvlnote" style="margin:0;font-size:13px"></p></div>
+    <div class="field"><span class="label" id="sidel">03 — Play as</span>
+      <div class="seg" role="group" aria-labelledby="sidel">${['w','b','r'].map(k=>`<button data-s="${k}" aria-pressed="${k===side}">${{w:'White',b:'Black',r:'Random'}[k]}</button>`).join('')}</div></div>
+    <button class="primary" id="start" style="background:var(--sqd)"><span>Start</span>${I.arrow}</button>
+  </main>`;
+  const notes = { beginner:'Makes real mistakes — a fair first game.', casual:'Plays sensibly, slips now and then.', club:'A solid club player.', strong:'Strong. Expect to work hard.', max:'Full strength. Good luck.' };
+  const $note = document.getElementById('lvlnote');
+  const paint = () => { $app.querySelectorAll('[data-l]').forEach(b => b.setAttribute('aria-pressed', b.dataset.l===level)); $app.querySelectorAll('[data-s]').forEach(b => b.setAttribute('aria-pressed', b.dataset.s===side)); $note.textContent = notes[level]; };
+  $app.querySelectorAll('[data-l]').forEach(b => b.onclick = () => { level = b.dataset.l; feedback('tap'); paint(); });
+  $app.querySelectorAll('[data-s]').forEach(b => b.onclick = () => { side = b.dataset.s; feedback('tap'); paint(); });
+  paint();
+  getEngine().catch(()=>{});   // start loading the engine while they choose
+  document.getElementById('start').onclick = () => {
+    const me = document.getElementById('me').value.trim() || 'You';
+    if (me !== 'You'){ prefs.name = me; }
+    prefs.botLevel = level; prefs.botSide = side; savePrefs(); audio();
+    go('g/' + newBotGame(level, side === 'r' ? (Math.random() < .5 ? 'w' : 'b') : side, me).id);
+  };
+}
+function newBotGame(level, colour, me){
+  const g = { id: newId(), name: randomName(), me: colour, moves: [], sent: 0, bot: { level }, created: Date.now(),
+              w: colour==='w' ? me : botName(level), b: colour==='b' ? me : botName(level) };
+  saveGame(g);
+  return g;
 }
 
 /* ---------- opening a link ---------- */
@@ -512,6 +600,8 @@ function viewGame(g, opts = {}){
   let view = g.moves.length;           // ply being shown
   let sel = null, targets = [], promo = null;
   const spec = g.me === 'spec';
+  const bot = !!g.bot;
+  let thinking = false, botError = false;
   const flip = g.me === 'b';
   let mode = 'live';                    // 'live' | 'log'
 
@@ -543,7 +633,7 @@ function viewGame(g, opts = {}){
       const t = targets.find(x=>x.to===name);
       if (t) cls.push('tgt', t.captured ? 'cap' : '');
       if (kingInCheck===name) cls.push('chk');
-      const canTap = myTurn && !opts.lock && ((p && p.color===g.me) || t);
+      const canTap = myTurn && !thinking && !opts.lock && ((p && p.color===g.me) || t);
       if (canTap) cls.push('can');
       const label = name + (p ? ` ${p.color==='w'?'white':'black'} ${PIECE_NAME[p.type]}` : '');
       sqs += `<button class="${cls.join(' ')}" data-sq="${name}" aria-label="${label}" ${canTap?'':'tabindex="-1"'}>`+
@@ -578,6 +668,25 @@ function viewGame(g, opts = {}){
     } else if (spec){
       panel = `<div class="panel"><p>${res ? `<strong>${res.score}</strong> · ${esc(res.text)}.` : `${g.online ? "You're watching live — new moves appear by themselves." : "You're watching. This is the position when the link was sent — ask for a new link to see more."}`}</p>
         <button class="secondary" id="log">Move log</button></div>`;
+    } else if (bot){
+      const lm = full.hist.length ? moveLabel(full.hist, full.hist.length-1) : '';
+      if (res){
+        const draw = res.score.includes('½');
+        const won = !draw && res.score === (g.me==='w' ? '1–0' : '0–1');
+        panel = `<div class="panel"><p><strong>${g.resign===g.me ? 'You resigned.' : draw ? `${esc(res.text.startsWith('Draw') ? res.text : 'Draw — ' + res.text.toLowerCase())}.` : won ? 'Checkmate — you win!' : 'Checkmate — Stockfish wins.'}</strong> ${res.score}</p>
+          <button class="primary" id="again" style="background:var(--sqd)"><span>Play again</span>${I.arrow}</button>
+          <div class="row2"><button class="secondary" id="botundo"${g.resign ? ' disabled' : ''}>Take back</button><button class="secondary" id="log">Move log</button></div></div>`;
+      } else if (botError){
+        panel = `<div class="panel"><p><strong>The bot couldn't start.</strong> It needs a one-time download of about 2 MB — check your connection.</p>
+          <button class="primary" id="retry" style="background:var(--sqd)"><span>Try again</span>${I.arrow}</button></div>`;
+      } else if (thinking || full.chess.turn() !== g.me){
+        panel = `<div class="panel"><p><strong>Stockfish is thinking…</strong></p>
+          <div class="row2"><button class="secondary" id="botundo"${g.moves.length ? '' : ' disabled'}>Take back</button><button class="secondary" id="log">Move log</button></div></div>`;
+      } else {
+        panel = `<div class="panel"><p>${lm ? `Stockfish played <strong>${esc(lm)}</strong>. ` : ''}<strong>Your move.</strong>${full.chess.inCheck()?' You are in check.':''}</p>
+          <div class="row2"><button class="secondary" id="botundo"${g.moves.length >= (g.me==='w'?2:3) ? '' : ' disabled'}>Take back</button><button class="secondary" id="log">Move log</button></div>
+          <button class="textbtn" id="botresign" style="align-self:flex-start">Resign</button></div>`;
+      }
     } else if (g.pending && live){
       panel = `<div class="panel"><p><strong>You played ${esc(moveLabel(full.hist, full.hist.length-1))}${res ? ` — ${esc(res.text.toLowerCase())}, ${res.score}` : ''}.</strong> Tap Done to put it on ${esc(oppName)}'s board — until then you can take it back.</p>
         <button class="primary" id="done"><span>Done</span>${I.arrow}</button>
@@ -617,7 +726,7 @@ function viewGame(g, opts = {}){
         <a class="iconbtn" href="#" aria-label="Back to games">${I.back}</a>
         <div class="who"><span class="chip ${top}"></span><b>${esc(nameOf(top))}</b><span class="muted" style="font-size:14px;white-space:nowrap">${colourName(top)}${tag(top)}</span></div>
         <button class="iconbtn" id="fx" aria-label="Sound and vibration" aria-pressed="${prefs.fx}">${prefs.fx?I.soundOn:I.soundOff}</button>
-        ${spec ? '' : `<button class="iconbtn" id="spectop" aria-label="Invite spectators">${I.eye}</button>`}
+        ${spec || bot ? '' : `<button class="iconbtn" id="spectop" aria-label="Invite spectators">${I.eye}</button>`}
       </div>`;
 
     $app.innerHTML = `${head}
@@ -658,6 +767,32 @@ function viewGame(g, opts = {}){
     feedbackFor(mv, chess);
     if (g.online && g.key && !g.offline){ g.pending = true; saveGame(g); }
     render();
+    if (bot) botTurn();
+  }
+
+  const here = () => location.hash === '#g/' + g.id;
+  async function botTurn(){
+    if (!bot || g.resign || thinking) return;
+    const { chess } = replay(g.moves);
+    if (chess.isGameOver() || chess.turn() === g.me) return;
+    const L = LEVELS[g.bot.level] || LEVELS.casual;
+    const at = g.moves.length, started = Date.now();
+    thinking = true; botError = false; if (here()) render();
+    let mv = null;
+    try {
+      if (L.random && Math.random() < L.random){ const all = chess.moves({ verbose:true }); mv = lan(all[Math.floor(Math.random()*all.length)]); }
+      else mv = await bestMove(g.moves, g.bot.level);
+    } catch { thinking = false; botError = true; if (here()) render(); return; }
+    const pause = 500 + Math.random()*500 - (Date.now() - started);
+    if (mv && pause > 0) await new Promise(r => setTimeout(r, pause));
+    thinking = false;
+    if (!mv || g.moves.length !== at || !here()){ if (here()) render(); return; }
+    const c = replay(g.moves).chess;
+    let m; try { m = c.move({ from: mv.slice(0,2), to: mv.slice(2,4), promotion: mv[4] }); } catch { render(); return; }
+    const wasLive = view === g.moves.length;
+    g.moves = [...g.moves, lan(m)]; saveGame(g);
+    if (wasLive) view = g.moves.length;
+    feedbackFor(m, c); render();
   }
 
   async function online(action, body){
@@ -755,6 +890,17 @@ function viewGame(g, opts = {}){
     on('undo', ()=>{ if (g.pending){ g.moves = g.moves.slice(0,-1); g.pending = false; saveGame(g); view = g.moves.length; feedback('tap'); render(); return; }
       const expect = g.moves.length; g.moves = g.moves.slice(0,-1); if (g.sent > g.moves.length) g.sent = g.moves.length; saveGame(g); view=g.moves.length; feedback('tap'); render(); if (g.online && g.key) online('undo', { expect }); });
     on('reinvite', ()=>{ location.href = smsHref(inviteText(g), g.phone||''); });
+    on('botundo', ()=>{
+      cancelBot(); thinking = false;
+      const c = replay(g.moves).chess;
+      // your turn: undo its reply and your move; its turn: undo your move
+      let n = g.moves.length - (c.turn() === g.me ? 2 : 1);
+      if (g.resign) n = g.moves.length;
+      g.moves = g.moves.slice(0, Math.max(0, n)); g.resign = ''; saveGame(g);
+      view = g.moves.length; mode = 'live'; feedback('tap'); render(); botTurn(); });
+    on('botresign', ()=>{ if (!confirm('Resign this game?')) return; cancelBot(); thinking = false; g.resign = g.me; saveGame(g); feedback('end'); render(); });
+    on('again', ()=>{ go('g/' + newBotGame(g.bot.level, g.me, (g.me==='w'?g.w:g.b)).id); });
+    on('retry', ()=>{ botError = false; botTurn(); });
     on('resign', ()=>{ if (!confirm('Resign this game?')) return; g.resign = g.me; saveGame(g); feedback('end'); if (g.online && g.key) online('resign', {});
       const m = sendMessage(); g.sent = g.moves.length; saveGame(g);
       if (confirm(`Tell ${oppName} by SMS?`)) location.href = smsHref(m, g.phone||''); render(); });
@@ -770,6 +916,7 @@ function viewGame(g, opts = {}){
 
   render();
   startPolling();
+  if (bot) botTurn();
   // replay the move that just arrived by text
   if (opts.arrived && g.moves.length){
     const once = () => { const { chess, hist } = replay(g.moves); feedbackFor(hist[hist.length-1], chess); };
