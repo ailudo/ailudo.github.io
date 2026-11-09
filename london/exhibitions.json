@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T01:43:53+00:00",
+ "updated": "2026-11-09T01:43:50+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -431,18 +431,6 @@
    "url": "https://www.tate.org.uk/whats-on/tate-britain/zineb-sedira"
   },
   {
-   "id": "tb-rahman",
-   "venue": "tate-britain",
-   "short": "Mohammed Z Rahman",
-   "title": "Art Now: Mohammed Z Rahman",
-   "artists": "Mohammed Z Rahman",
-   "start": null,
-   "end": "2026-11-08",
-   "admission": "free",
-   "discipline": "Painting & works on paper",
-   "url": "https://www.tate.org.uk/whats-on/tate-britain/art-now-mohammed-z-rahman"
-  },
-  {
    "id": "ng-renoir",
    "venue": "national-gallery",
    "short": "Renoir and Love",
@@ -769,19 +757,6 @@
    "note": "With Foraging Quipu"
   },
   {
-   "id": "wg-this-must-be",
-   "venue": "whitechapel",
-   "short": "Artists for Whitechapel Gallery",
-   "title": "This Must Be the Place: Artists for Whitechapel Gallery",
-   "artists": "Andrew Cranston, Lenz Geerk, Gareth Cadwallader, Sky Glabush and others",
-   "start": "2026-10-08",
-   "end": "2026-11-08",
-   "admission": "free",
-   "discipline": "Group shows",
-   "url": "https://www.whitechapelgallery.org/exhibitions/this-must-be-the-place-artists-for-whitechapel-gallery/",
-   "note": "Exhibition and sale"
-  },
-  {
    "id": "wg-screen-portraits",
    "venue": "whitechapel",
    "short": "Screen Portraits",
@@ -907,18 +882,6 @@
    "price": "£17"
   },
   {
-   "id": "ra-day",
-   "venue": "ra",
-   "short": "RA Schools 2026",
-   "title": "Day: RA Schools 2026",
-   "artists": "Anna Metzger, Sam Tromp, Joel Wycherley",
-   "start": "2026-09-18",
-   "end": "2026-11-08",
-   "admission": "free",
-   "discipline": "Group shows",
-   "url": "https://www.royalacademy.org.uk/exhibition/raschools-day-2026"
-  },
-  {
    "id": "ra-eisenman",
    "venue": "ra",
    "site": "Annenberg Courtyard",
@@ -1031,19 +994,6 @@
    "admission": "free",
    "discipline": "History & collections",
    "url": "https://warburg.sas.ac.uk/news-events/events/night-maps"
-  },
-  {
-   "id": "hw-blake",
-   "venue": "hayward",
-   "short": "Quentin Blake",
-   "title": "Quentin Blake: The Southbank Parade",
-   "artists": "Quentin Blake",
-   "start": "2026-10-18",
-   "end": "2026-11-08",
-   "admission": "free",
-   "discipline": "Painting & works on paper",
-   "url": "https://www.southbankcentre.co.uk/whats-on/quentin-blake-the-southbank-parade/",
-   "note": "Site-wide across Southbank Centre"
   },
   {
    "id": "hw-koestler",
