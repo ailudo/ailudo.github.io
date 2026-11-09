@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T01:16:24+00:00",
+ "updated": "2026-11-09T01:40:00+00:00",
  "venues": [
   {
    "id": "louvre",
@@ -380,18 +380,6 @@
    "admission": "paid",
    "discipline": "Group shows",
    "url": "https://www.louvre.fr/expositions-et-evenements/expositions/les-hotes-du-louvre"
-  },
-  {
-   "id": "l-ingres",
-   "venue": "louvre",
-   "short": "Ingres and fashion",
-   "title": "Ingres et la mode",
-   "artists": "Jean-Auguste-Dominique Ingres",
-   "start": "2026-07-03",
-   "end": "2026-11-08",
-   "admission": "paid",
-   "discipline": "Painting & works on paper",
-   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/ingres-et-la-mode"
   },
   {
    "id": "l-myth",
@@ -979,18 +967,6 @@
    "admission": "check",
    "discipline": "History & collections",
    "url": "https://parismusees.paris.fr/en/exposition/korea"
-  },
-  {
-   "id": "qb-plumes",
-   "venue": "branly",
-   "short": "Birds of paradise",
-   "title": "Plumes du Paradis",
-   "artists": "",
-   "start": "2026-05-12",
-   "end": "2026-11-08",
-   "admission": "paid",
-   "discipline": "History & collections",
-   "url": "https://www.quaibranly.fr/fr/expositions-evenements/au-musee/expositions/details-de-levenement/e/plumes-du-paradis"
   },
   {
    "id": "l-affin",
