@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#111111; --paper:#FFFFFF; --blue:#A8D8F0; --red:#E2231A; --grey:#595959; --rule:#111111;
+  --ink:#111111; --paper:#FFFFFF; --blue:#A8D8F0; --sql:#B9E1F5; --sqd:#7A58CC; --red:#E2231A; --grey:#595959; --rule:#111111;
   --pad:24px;
 }
 *{box-sizing:border-box}
@@ -42,7 +42,7 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .home-head{padding:28px var(--pad) 20px}
 .wordmark{margin:0;font-size:112px;line-height:.9;font-weight:700;letter-spacing:-.05em}
 .strip{display:grid;grid-template-columns:repeat(8,1fr);height:48px}
-.strip span:nth-child(odd){background:var(--blue)}.strip span:nth-child(even){background:var(--ink)}
+.strip span:nth-child(odd){background:var(--sql)}.strip span:nth-child(even){background:var(--sqd)}
 .list-head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:10px;border-bottom:2px solid var(--rule)}
 .row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:var(--ink)}
 .row b{display:block;font-size:20px}
@@ -60,11 +60,11 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .boardwrap{width:100%;display:flex;justify-content:center}
 .board{position:relative;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));width:min(100%, calc(100svh - 300px));min-width:280px;aspect-ratio:1/1;touch-action:manipulation;user-select:none;-webkit-user-select:none}
 .sq{position:relative;border:0;padding:0;margin:0;display:block;aspect-ratio:1/1;cursor:default}
-.sq.l{background:var(--blue)} .sq.d{background:var(--ink)}
+.sq.l{background:var(--sql)} .sq.d{background:var(--sqd)}
 .sq.can{cursor:pointer}
 .sq svg.pc{position:absolute;inset:4%;width:92%;height:92%;pointer-events:none}
 .sq .co{position:absolute;font-size:clamp(8px,2.4vw,11px);font-weight:500;line-height:1;pointer-events:none}
-.sq.l .co{color:var(--ink)} .sq.d .co{color:var(--blue)}
+.sq.l .co{color:var(--sqd);font-weight:700} .sq.d .co{color:var(--sql);font-weight:700}
 .sq .rk{top:3px;left:4px} .sq .fl{bottom:3px;right:4px}
 .sq.last::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 3px var(--red);pointer-events:none}
 .sq.sel::before{content:"";position:absolute;inset:0;background:rgba(226,35,26,.35);pointer-events:none}
@@ -88,7 +88,7 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke
 .sheethead{display:grid;grid-template-columns:40px minmax(0,1fr) minmax(0,1fr);padding-bottom:6px;border-bottom:2px solid var(--rule)}
 .promo{position:absolute;inset:0;background:rgba(17,17,17,.6);display:flex;align-items:center;justify-content:center;z-index:5}
 .promo div{display:grid;grid-template-columns:repeat(4,1fr);background:var(--paper);border:2px solid var(--ink)}
-.promo button{width:72px;height:72px;border:0;background:var(--blue);padding:6px}
+.promo button{width:72px;height:72px;border:0;background:var(--sql);padding:6px}
 .promo button+button{border-left:2px solid var(--ink)}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 16px;font-size:15px;max-width:90vw;z-index:20;opacity:0;transition:opacity .2s;pointer-events:none}
 .toast.on{opacity:1}
@@ -468,7 +468,7 @@ function viewJoin(g, colour){
     <a href="#" style="font-size:28px;font-weight:700;letter-spacing:-.04em;text-decoration:none">Zug</a>
     <span class="label" style="font-size:12px;font-weight:500;letter-spacing:.08em">${esc(g.name)}</span>
   </div>
-  <div class="hero" aria-hidden="true"><div style="background:var(--blue)">${pieceSVG(k,'w').replace('class="pc"','')}</div><div style="background:var(--ink)">${pieceSVG(k,'b').replace('class="pc"','')}</div></div>
+  <div class="hero" aria-hidden="true"><div style="background:var(--sql)">${pieceSVG(k,'w').replace('class="pc"','')}</div><div style="background:var(--sqd)">${pieceSVG(k,'b').replace('class="pc"','')}</div></div>
   <main class="page" style="padding-top:28px">
     <h1 style="margin:0;font-size:40px;line-height:1.05;letter-spacing:-.03em">${esc(host || 'A friend')} has challenged you.</h1>
     <p style="margin:0;font-size:17px;line-height:1.4">You play <strong>${colourName(colour)}</strong>. ${colour==='w' ? 'You move first.' : `${esc(host||'They')} moves first — you'll get a text when it's your turn.`}</p>
