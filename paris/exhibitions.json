@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-09T01:40:00+00:00",
+ "updated": "2026-11-10T09:00:00+00:00",
  "venues": [
   {
    "id": "louvre",
@@ -382,18 +382,6 @@
    "url": "https://www.louvre.fr/expositions-et-evenements/expositions/les-hotes-du-louvre"
   },
   {
-   "id": "l-myth",
-   "venue": "louvre",
-   "short": "Mythologies",
-   "title": "Mythologies",
-   "artists": "",
-   "start": "2026-07-08",
-   "end": "2026-11-09",
-   "admission": "paid",
-   "discipline": "History & collections",
-   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/mythologies"
-  },
-  {
    "id": "l-cross",
    "venue": "louvre",
    "short": "Mughal, Safavid and Ottoman masterworks",
@@ -568,8 +556,8 @@
    "short": "Marie and Félix Bracquemond",
    "title": "Decorative arts drawings",
    "artists": "Marie Bracquemond, Félix Bracquemond",
-   "start": null,
-   "end": "2027-01-10",
+   "start": "2026-09-22",
+   "end": "2026-12-06",
    "admission": "paid",
    "discipline": "Design & architecture",
    "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions",
