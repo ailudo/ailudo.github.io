@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T09:00:00+00:00",
+ "updated": "2026-11-11T01:23:18+00:00",
  "venues": [
   {
    "id": "louvre",
@@ -337,25 +337,29 @@
    "id": "l-zurb",
    "venue": "louvre",
    "short": "Francisco de Zurbarán",
-   "title": "Zurbarán",
+   "title": "Zurbarán: 1598-1664",
    "artists": "Francisco de Zurbarán",
    "start": "2026-10-07",
    "end": "2027-01-25",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/zurbaran"
+   "url": "https://www.louvre.fr/agenda/expositions/zurbaran",
+   "price": "€22 (EEA residents/citizens), €32 (others)",
+   "note": "Hall Napoléon; shares a ticket and jointly designed layout with “Sculpter la couleur”."
   },
   {
    "id": "l-sculpt",
    "venue": "louvre",
    "short": "Sculpture from the Museo Nacional de Escultura, Valladolid",
    "title": "Sculpter la couleur: Chefs-d’œuvre du Musée national de sculpture, Valladolid",
-   "artists": "",
+   "artists": "Gregorio Fernández, Alonso Cano, Juan de Mesa, Pedro de Mena, Luisa Roldán and others",
    "start": "2026-10-07",
    "end": "2027-01-25",
    "admission": "paid",
    "discipline": "Sculpture & installation",
-   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/sculpter-la-couleur"
+   "url": "https://www.louvre.fr/agenda/expositions/sculpter-la-couleur",
+   "price": "€22 (EEA residents/citizens), €32 (others)",
+   "note": "Hall Napoléon; shares a ticket with “Zurbarán”."
   },
   {
    "id": "l-photo",
@@ -367,7 +371,7 @@
    "end": "2027-05-03",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/louvre-photo"
+   "url": "https://www.louvre.fr/agenda/expositions/louvre-photo"
   },
   {
    "id": "l-hotes",
@@ -379,7 +383,7 @@
    "end": "2026-12-14",
    "admission": "paid",
    "discipline": "Group shows",
-   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/les-hotes-du-louvre"
+   "url": "https://www.louvre.fr/agenda/expositions/les-hotes-du-louvre"
   },
   {
    "id": "l-cross",
@@ -391,7 +395,7 @@
    "end": "2027-01-24",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/crosscurrents"
+   "url": "https://www.louvre.fr/agenda/expositions/crosscurrents"
   },
   {
    "id": "l-eau",
@@ -403,7 +407,7 @@
    "end": "2027-03-15",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/l-eau-primordiale-0"
+   "url": "https://www.louvre.fr/agenda/expositions/l-eau-primordiale-0"
   },
   {
    "id": "l-romain",
@@ -415,7 +419,7 @@
    "end": "2027-01-10",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/l-art-romain-du-louvre"
+   "url": "https://www.louvre.fr/agenda/expositions/l-art-romain-du-louvre"
   },
   {
    "id": "c-flamel",
@@ -437,45 +441,49 @@
    "artists": "Tintoretto",
    "start": "2026-09-11",
    "end": "2027-01-24",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.musee-jacquemart-andre.com/fr/eternel-tintoret"
+   "url": "https://www.musee-jacquemart-andre.com/fr/eternel-tintoret",
+   "price": "€19"
   },
   {
    "id": "pp-gonzales",
    "venue": "petitpalais",
    "short": "Eva Gonzalès",
-   "title": "Eva Gonzalès",
+   "title": "Eva Gonzalès: Parcours d'une artiste libre",
    "artists": "Eva Gonzalès",
    "start": "2026-09-15",
    "end": "2027-01-24",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.petitpalais.paris.fr/decouvrir-la-programmation/expositions/eva-gonzales"
+   "url": "https://www.petitpalais.paris.fr/decouvrir-la-programmation/expositions/eva-gonzales",
+   "price": "€14"
   },
   {
    "id": "pp-bruxelles",
    "venue": "petitpalais",
    "short": "Brussels around 1900",
    "title": "Bruxelles 1900",
-   "artists": "",
+   "artists": "Fernand Khnopff, James Ensor, Théo van Rysselberghe, Paul Gauguin, Paul Cézanne, Auguste Rodin and others",
    "start": "2026-11-10",
    "end": "2027-04-25",
    "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://www.petitpalais.paris.fr/decouvrir-la-programmation/expositions/bruxelles-1900"
+   "url": "https://www.petitpalais.paris.fr/decouvrir-la-programmation/expositions/bruxelles-1900",
+   "price": "€17"
   },
   {
    "id": "cu-amis",
    "venue": "custodia",
    "short": "Drawings in the collections of 19th-century French artists",
-   "title": "Mes Chers Amis",
-   "artists": "",
+   "title": "Mes chers amis. Le dessin dans les collections d'artistes français au XIXe siècle",
+   "artists": "Jean Auguste Dominique Ingres, Eugène Delacroix, Théodore Géricault, Honoré Daumier, James Whistler and others",
    "start": "2026-10-17",
    "end": "2027-01-17",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.fondationcustodia.fr/Exhibitions"
+   "url": "https://www.fondationcustodia.fr/Expositions/Mes-chers-amis-Le-dessin-dans-les-collections-d-artistes-francais-au-XIXe",
+   "price": "€15"
   },
   {
    "id": "lux-warhol",
@@ -485,9 +493,10 @@
    "artists": "Andy Warhol",
    "start": "2026-09-16",
    "end": "2027-01-10",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://museeduluxembourg.fr/fr/agenda/evenement/andy-warhol"
+   "url": "https://museeduluxembourg.fr/fr/agenda/evenement/andy-warhol",
+   "price": "€14"
   },
   {
    "id": "ca-villegle",
@@ -523,7 +532,7 @@
    "end": "2027-02-21",
    "admission": "paid",
    "discipline": "Sculpture & installation",
-   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
+   "url": "https://www.musee-orsay.fr/fr/programme/agenda/expositions/jenny-holzer-jai-vu"
   },
   {
    "id": "o-bartholdi",
@@ -560,7 +569,7 @@
    "end": "2026-12-06",
    "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions",
+   "url": "https://www.musee-orsay.fr/fr/programme/agenda/expositions/marie-bracquemond",
    "note": "A display within the museum."
   },
   {
@@ -569,11 +578,11 @@
    "short": "Maurice Denis",
    "title": "Illustrating Christian mysticism",
    "artists": "Maurice Denis",
-   "start": null,
-   "end": "2027-01-24",
+   "start": "2026-10-08",
+   "end": "2027-01-10",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions",
+   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions/maurice-denis-mystical-illustrator",
    "note": "A display within the museum."
   },
   {
@@ -799,13 +808,14 @@
    "id": "pi-schwitters",
    "venue": "picasso",
    "short": "Kurt Schwitters",
-   "title": "Le chaos-monde 1918–1948",
+   "title": "Kurt Schwitters. Le chaos-monde 1918–1948",
    "artists": "Kurt Schwitters",
    "start": "2026-10-06",
    "end": "2027-02-07",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.museepicassoparis.fr/fr/agenda/kurt-schwitters-le-chaos-monde-1918-1948/"
+   "url": "https://www.museepicassoparis.fr/fr/agenda/kurt-schwitters-le-chaos-monde-1918-1948/",
+   "price": "16 EUR full / 12 EUR reduced"
   },
   {
    "id": "pi-malraux",
@@ -826,13 +836,14 @@
    "venue": "grandpalais",
    "short": "Cézanne and the artists after him",
    "title": "Cézanne et nous",
-   "artists": "Paul Cézanne and others",
+   "artists": "Paul Cézanne, Paul Gauguin, Henri Matisse, Pablo Picasso, Piet Mondrian, Joan Mitchell and others",
    "start": "2026-09-23",
    "end": "2027-01-17",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Painting & works on paper",
    "url": "https://www.grandpalais.fr/fr/programme/cezanne-et-nous",
-   "note": "Presented with the Musée d’Orsay."
+   "note": "Co-produced with the Centre Pompidou and the Musée d’Orsay.",
+   "price": "€19 full / €16 reduced (Billet Liberté €24; free under 18)"
   },
   {
    "id": "jp-douglas",
@@ -880,7 +891,8 @@
    "end": "2027-02-14",
    "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://www.palaisgalliera.paris.fr/expositions/un-vestiaire-soi-feminites-dissidentes-au-19e-siecle"
+   "url": "https://www.palaisgalliera.paris.fr/expositions/un-vestiaire-soi-feminites-dissidentes-au-19e-siecle",
+   "price": "€14 full, €12 reduced; €17 / €15 combined with En volume !; free under 18"
   },
   {
    "id": "ad-pav",
@@ -924,7 +936,7 @@
    "id": "gu-dal",
    "venue": "guimet",
    "short": "Seulgi Lee",
-   "title": "DAL DARI. The Moon and its Legs",
+   "title": "DAL DARI. La Lune et les Jambes",
    "artists": "Seulgi Lee",
    "start": "2026-06-06",
    "end": "2027-02-08",
@@ -936,7 +948,7 @@
    "id": "gu-trompe",
    "venue": "guimet",
    "short": "Korean trompe-l’œil",
-   "title": "Le savoir en trompe-l’œil: Corée, XVIIIe–XXe siècle",
+   "title": "Le savoir en trompe-l’œil. Corée, 18e-20e s.",
    "artists": "",
    "start": "2026-09-16",
    "end": "2027-01-04",
@@ -966,7 +978,7 @@
    "end": "2026-12-06",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/affinites-0",
+   "url": "https://www.louvre.fr/agenda/expositions/affinites-0",
    "note": "Richelieu wing, Objets d’art rooms."
   },
   {
@@ -979,7 +991,7 @@
    "end": "2027-01-11",
    "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://www.louvre.fr/expositions-et-evenements/expositions/la-donation-michel-lacoste-au-musee-du-louvre"
+   "url": "https://www.louvre.fr/agenda/expositions/la-donation-michel-lacoste-au-musee-du-louvre"
   },
   {
    "id": "o-echos",
@@ -1051,7 +1063,7 @@
    "artists": "Pablo Picasso",
    "start": "2026-10-06",
    "end": "2027-01-03",
-   "admission": "paid",
+   "admission": "check",
    "discipline": "Painting & works on paper",
    "url": "https://www.museepicassoparis.fr/fr/agenda/salle-dossier-pablo-picasso-au-prisme-de-cahiers-dart/",
    "note": "A display within the museum."
@@ -1062,17 +1074,19 @@
    "short": "Guillermo Kuitca",
    "title": "Guillermo Kuitca, Chapelle",
    "artists": "Guillermo Kuitca",
-   "start": null,
+   "start": "2024-10-15",
    "end": "2027-12-31",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.museepicassoparis.fr/fr/agenda/guillermo-kuitca-chapelle/"
+   "url": "https://www.museepicassoparis.fr/fr/agenda/guillermo-kuitca-chapelle/",
+   "price": "16 EUR full / 12 EUR reduced (museum ticket)",
+   "note": "In-situ painting in the chapel of the Hôtel Salé; seen with the museum ticket."
   },
   {
    "id": "pp-visionnaires",
    "venue": "petitpalais",
    "short": "Prune Nourry: Visionaries",
-   "title": "Visionnaires: carte blanche à Prune Nourry",
+   "title": "Visionnaires: Carte blanche à Prune Nourry",
    "artists": "Prune Nourry",
    "start": "2026-10-20",
    "end": "2027-01-24",
@@ -1097,13 +1111,15 @@
    "id": "gp-girls",
    "venue": "grandpalais",
    "short": "Girls: adolescence, fashion and rebellion",
-   "title": "Girls: Adolescence, mode et rébellion",
-   "artists": "",
+   "title": "Girls. Adolescence, mode, rébellion",
+   "artists": "Louise Bourgeois, Sofia Coppola, Martin Margiela, Simone Rocha, Jenny Fax and others",
    "start": "2026-12-09",
    "end": "2027-03-21",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://www.grandpalais.fr/fr/programme/girls-adolescence-mode-rebellion"
+   "url": "https://www.grandpalais.fr/fr/programme/girls-adolescence-mode-rebellion",
+   "price": "€15 full / €12 reduced (free under 18)",
+   "note": "Organised by MoMu – Museum of Fashion, Antwerp; Galeries 8."
   },
   {
    "id": "gp-ninagawa",
@@ -1113,9 +1129,10 @@
    "artists": "Mika Ninagawa, EiM",
    "start": "2026-12-16",
    "end": "2027-03-21",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.grandpalais.fr/fr/programme/mika-ninagawa-eim-alive-shadows"
+   "url": "https://www.grandpalais.fr/fr/programme/mika-ninagawa-eim-alive-shadows",
+   "price": "€15 full / €12 reduced (free under 18)"
   },
   {
    "id": "ca-harvest",
@@ -1420,7 +1437,7 @@
    "title": "Libye, patrimoine révélé",
    "artists": "",
    "start": "2026-05-13",
-   "end": "2027-01-17",
+   "end": "2027-03-21",
    "admission": "paid",
    "price": "€10 museum ticket, free under 26",
    "discipline": "History & collections",
@@ -1485,26 +1502,15 @@
    "id": "gal-envolume",
    "venue": "galliera",
    "short": "In volume! From flat fabric to finished garment",
-   "title": "En volume !",
+   "title": "En volume ! Donner corps à la mode",
    "artists": "",
    "start": "2026-12-12",
    "end": "2027-10-17",
-   "admission": "check",
-   "discipline": "Design & architecture",
-   "url": "https://www.palaisgalliera.paris.fr/expositions",
-   "note": "Opens 12 December 2026."
-  },
-  {
-   "id": "pdt-spectrum",
-   "venue": "pdt",
-   "short": "Group show: Lêna Bui, Ruofan Chen, Musquiqui Chihying etc.",
-   "title": "Art Spectrum 2026",
-   "artists": "Lêna Bui, Ruofan Chen, Musquiqui Chihying, Ria Choi, Lieko Shiga, Martin Wong and others",
-   "start": "2026-09-01",
-   "end": "2026-12-27",
    "admission": "paid",
-   "discipline": "Group shows",
-   "url": "https://palaisdetokyo.com/exposition/art-spectrum-2026/"
+   "discipline": "Design & architecture",
+   "url": "https://www.palaisgalliera.paris.fr/expositions/en-volume-donner-corps-la-mode",
+   "note": "Opens 12 December 2026.",
+   "price": "€14 full, €12 reduced; €17 / €15 combined with Un vestiaire à soi; free under 18"
   },
   {
    "id": "gp-oli",
@@ -1514,21 +1520,10 @@
    "artists": "Oli",
    "start": "2026-12-02",
    "end": "2027-02-21",
-   "admission": "check",
-   "discipline": "Group shows",
-   "url": "https://www.grandpalais.fr/fr/programme/le-musee-imaginaire-doli"
-  },
-  {
-   "id": "pdt-toi",
-   "venue": "pdt",
-   "short": "Group show: Artetxe, Théo Audoire, Johann Berger etc.",
-   "title": "Toi et ta bande",
-   "artists": "Artetxe, Théo Audoire, Johann Berger, Olga Boudin, Elsa Brès, Marie Voignier and others",
-   "start": "2026-10-21",
-   "end": "2027-02-14",
    "admission": "paid",
    "discipline": "Group shows",
-   "url": "https://palaisdetokyo.com/exposition/toi-et-ta-bande/"
+   "url": "https://www.grandpalais.fr/fr/programme/le-musee-imaginaire-doli",
+   "price": "€22 full / €17 reduced / €13 ages 12-17 / €10 ages 5-11"
   },
   {
    "id": "pdt-baloji",
@@ -1543,6 +1538,58 @@
    "url": "https://palaisdetokyo.com/exposition/symbiosis-26-27/",
    "price": "€13 / €9 (one exhibitions ticket covers all Palais de Tokyo shows)",
    "note": "A year-long artist invitation with screenings, concerts, performances and installations."
+  },
+  {
+   "id": "o-vuillard",
+   "venue": "orsay",
+   "short": "Édouard Vuillard",
+   "title": "Édouard Vuillard",
+   "artists": "Édouard Vuillard",
+   "start": "2026-12-15",
+   "end": "2027-03-07",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.musee-orsay.fr/fr/programme/agenda/expositions/edouard-vuillard",
+   "note": "A display within the museum (room 33, level 5) of recent acquisitions, mainly gifts, in painting, pastel and decorative arts, shown ahead of the exhibition 'Vuillard, théâtres intimes' (from 23 March 2027)."
+  },
+  {
+   "id": "mep-gilbert",
+   "venue": "mep",
+   "short": "David Gilbert",
+   "title": "Apparitions",
+   "artists": "David Gilbert",
+   "start": "2026-12-04",
+   "end": "2027-01-17",
+   "admission": "check",
+   "discipline": "Photography & moving image",
+   "url": "https://www.mep-fr.org/event/david-gilbert/",
+   "note": "Shown in the Studio."
+  },
+  {
+   "id": "ad-delarue",
+   "venue": "artsdeco",
+   "short": "Marion Delarue",
+   "title": "Marion Delarue. Pierre, plume, ciseaux !",
+   "artists": "Marion Delarue",
+   "start": "2026-10-06",
+   "end": "2027-01-10",
+   "admission": "check",
+   "discipline": "Design & architecture",
+   "url": "https://madparis.fr/exposition-focus-marion-delarue",
+   "note": "A focus display in the museum's Cabinet des Dessins, Papiers peints et Photographies."
+  },
+  {
+   "id": "ad-serfaty",
+   "venue": "artsdeco",
+   "short": "Yohan Serfaty",
+   "title": "Hommage à Yohan Serfaty",
+   "artists": "Yohan Serfaty, Martin Margiela, Marine Serre, EgonLab, Natalia Brilli, Sarah Levy and others",
+   "start": "2026-11-11",
+   "end": "2027-03-21",
+   "admission": "check",
+   "discipline": "Design & architecture",
+   "url": "https://madparis.fr/EXPOSITION-FOCUS-Hommage-a-Yohan-Serfaty",
+   "note": "A focus display in three rooms of the museum's Middle Ages and Renaissance galleries."
   }
  ]
 }
