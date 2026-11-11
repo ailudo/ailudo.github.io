@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T01:43:45+00:00",
+ "updated": "2026-11-11T01:47:26+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -385,7 +385,7 @@
    "id": "tm-atoui",
    "venue": "tate-modern",
    "short": "Tarek Atoui",
-   "title": "Hyundai Commission: Tarek Atoui",
+   "title": "Hyundai Commission: Tarek Atoui: Hold",
    "artists": "Tarek Atoui",
    "start": null,
    "end": "2027-04-11",
@@ -482,14 +482,15 @@
   {
    "id": "npg-taylor-wessing",
    "venue": "npg",
-   "short": "Taylor Wessing Photo Portrait Prize",
-   "title": "Taylor Wessing Photo Portrait Prize 2026",
+   "short": "Winston Taylor Photo Portrait Prize",
+   "title": "Winston Taylor Photo Portrait Prize 2026",
    "artists": "",
    "start": "2026-11-05",
    "end": "2027-01-17",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.npg.org.uk/whatson/exhibitions"
+   "url": "https://www.npg.org.uk/whatson/exhibitions",
+   "price": "£10–£12 (£11–£13.20 with donation)"
   },
   {
    "id": "bm-bayeux",
@@ -578,7 +579,7 @@
    "title": "Constantinople to Istanbul: One City, Two Empires",
    "artists": "",
    "start": "2026-11-07",
-   "end": null,
+   "end": "2027-05-09",
    "admission": "paid",
    "price": "£25 weekday / £27 weekend",
    "discipline": "History & collections",
@@ -822,7 +823,7 @@
    "id": "ch-wakaliga",
    "venue": "chisenhale",
    "short": "Wakaliga Uganda",
-   "title": "Wakaliga Uganda",
+   "title": "Kibuuka Omumbaale",
    "artists": "Wakaliga Uganda",
    "start": "2026-10-02",
    "end": "2026-12-06",
@@ -943,7 +944,7 @@
    "admission": "paid",
    "price": "£20–£25",
    "discipline": "History & collections",
-   "url": "https://www.ianvisits.co.uk/calendar/agatha-christie-a-world-of-mystery-british-library-431007/"
+   "url": "https://events.bl.uk/exhibitions/agathachristie"
   },
   {
    "id": "ct-toor",
@@ -967,7 +968,7 @@
    "artists": "Winifred Gill",
    "start": "2026-10-14",
    "end": "2027-01-20",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Painting & works on paper",
    "url": "https://courtauld.ac.uk/whats-on/exh-winifred-gill/"
   },
@@ -1156,7 +1157,8 @@
    "end": "2027-03-28",
    "admission": "free",
    "discipline": "Sculpture & installation",
-   "url": "https://www.southlondongallery.org/exhibitions/kang-seung-lee-weeds-of-cultivation/"
+   "url": "https://www.southlondongallery.org/exhibitions/kang-seung-lee-weeds-of-cultivation/",
+   "price": "Suggested £5 donation"
   },
   {
    "id": "gw-nguyen",
@@ -1169,6 +1171,31 @@
    "admission": "free",
    "discipline": null,
    "url": "https://gasworks.org.uk/exhibitions/thuy-tien-nguyen/"
+  },
+  {
+   "id": "ch-celestino",
+   "venue": "chisenhale",
+   "short": "Wisrah C. V. da R. Celestino",
+   "title": "Wisrah C. V. da R. Celestino",
+   "artists": "Wisrah C. V. da R. Celestino",
+   "start": "2027-01-16",
+   "end": "2027-03-14",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://chisenhale.org.uk/whats-on/wisrahc.v.dar.celestino/"
+  },
+  {
+   "id": "saatchi-beyond-the-streets",
+   "venue": "saatchi",
+   "short": "Six Decades of Street Culture",
+   "title": "Beyond the Streets",
+   "artists": "Jenny Holzer, Damien Hirst, Futura 2000, KAWS, Invader, Shepard Fairey and others",
+   "start": "2026-11-11",
+   "end": "2027-05-05",
+   "admission": "paid",
+   "price": "£25",
+   "discipline": "Group shows",
+   "url": "https://www.saatchigallery.com/exhibition/beyond-the-streets"
   }
  ]
 }
