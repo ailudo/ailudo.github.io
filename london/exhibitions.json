@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T01:47:26+00:00",
+ "updated": "2026-11-12T01:46:07+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -711,7 +711,7 @@
    "short": "Robert Ryman",
    "title": "Robert Ryman: The Real Thing",
    "artists": "Robert Ryman",
-   "start": "2026-10-09",
+   "start": "2026-10-08",
    "end": "2027-02-28",
    "admission": "paid",
    "discipline": "Painting & works on paper",
@@ -1196,6 +1196,126 @@
    "price": "£25",
    "discipline": "Group shows",
    "url": "https://www.saatchigallery.com/exhibition/beyond-the-streets"
+  },
+  {
+   "id": "va-chinese-studio-crafts",
+   "venue": "va",
+   "site": "South Kensington",
+   "short": "Contemporary Chinese Studio Crafts",
+   "title": "Dimensions: Contemporary Chinese Studio Crafts",
+   "artists": "Gao Zhenyu, Yao Yongkang, Huang Jing, Huang Wanbing, Gu Yue and others",
+   "start": null,
+   "end": "2027-09-26",
+   "admission": "free",
+   "discipline": "Design & architecture",
+   "url": "https://www.vam.ac.uk/exhibitions/dimensions-contemporary-chinese-studio-crafts",
+   "sinophone": "lead"
+  },
+  {
+   "id": "va-urushi-now",
+   "venue": "va",
+   "site": "South Kensington",
+   "short": "Contemporary Japanese Lacquer",
+   "title": "Urushi Now: Contemporary Japanese Lacquer",
+   "artists": "Ishizuka Genta, Uesugi Gakusui, Ikeda Iwao, Murose Kazumi, Nakata Mayu and others",
+   "start": null,
+   "end": "2027-04-30",
+   "admission": "free",
+   "discipline": "Design & architecture",
+   "url": "https://www.vam.ac.uk/exhibitions/urushi-now-contemporary-japanese-lacquer"
+  },
+  {
+   "id": "va-kher",
+   "venue": "va",
+   "site": "South Kensington",
+   "short": "Bharti Kher",
+   "title": "Bharti Kher at the V&A",
+   "artists": "Bharti Kher",
+   "start": null,
+   "end": "2027-01-24",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.vam.ac.uk/exhibitions/bharti-kher-at-the-va"
+  },
+  {
+   "id": "va-molnar",
+   "venue": "va",
+   "site": "South Kensington",
+   "short": "Vera Molnar and Generative Art",
+   "title": "Degrees of Disruption: Vera Molnar and Generative Art",
+   "artists": "Vera Molnar, Casey Reas, Licia He, Harm van den Dorpel, William Mapan and others",
+   "start": "2026-10-16",
+   "end": "2027-05-30",
+   "admission": "free",
+   "discipline": "Group shows",
+   "url": "https://www.vam.ac.uk/exhibitions/degrees-of-disruption-vera-molnar-and-generative-art"
+  },
+  {
+   "id": "va-palmer",
+   "venue": "va",
+   "site": "South Kensington",
+   "short": "Samuel Palmer and Modern Art",
+   "title": "Samuel Palmer and Modern Art",
+   "artists": "Samuel Palmer, Paul Nash, Eric Ravilious",
+   "start": null,
+   "end": "2027-09-26",
+   "admission": "free",
+   "discipline": "Painting & works on paper",
+   "url": "https://www.vam.ac.uk/exhibitions/samuel-palmer-and-modern-art"
+  },
+  {
+   "id": "va-american-photographs",
+   "venue": "va",
+   "site": "South Kensington",
+   "short": "American Photographs",
+   "title": "American Photographs",
+   "artists": "Walker Evans, Mark Ruwedel, An-My Lê, Tod Papageorge, Cindy Sherman and others",
+   "start": null,
+   "end": "2027-04-11",
+   "admission": "free",
+   "discipline": "Photography & moving image",
+   "url": "https://www.vam.ac.uk/exhibitions/american-photographs"
+  },
+  {
+   "id": "va-ismailova",
+   "venue": "va",
+   "site": "South Kensington",
+   "short": "Saodat Ismailova",
+   "title": "Saodat Ismailova: Melted Into the Sun",
+   "artists": "Saodat Ismailova",
+   "start": "2026-11-12",
+   "end": "2027-02-28",
+   "admission": "free",
+   "discipline": "Photography & moving image",
+   "url": "https://www.vam.ac.uk/event/qNX8p578x5/saodat-ismailova-melted-into-the-sun-2026-27"
+  },
+  {
+   "id": "va-xa-amulets",
+   "venue": "va",
+   "site": "V&A East Museum",
+   "area": "City & East",
+   "short": "Zadie Xa",
+   "title": "Amulets",
+   "artists": "Zadie Xa",
+   "start": "2026-11-14",
+   "end": "2027-06-20",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.vam.ac.uk/event/a5LgLrn1OW/amulets-2026-2027"
+  },
+  {
+   "id": "va-dispersal",
+   "venue": "va",
+   "site": "V&A East Museum",
+   "area": "City & East",
+   "short": "Urban Change in East London",
+   "title": "Dispersal: Picturing urban change in east London",
+   "artists": "Marion Davies, Debra Rapp",
+   "start": "2026-11-12",
+   "end": "2027-04-04",
+   "admission": "free",
+   "discipline": "Photography & moving image",
+   "url": "https://www.vam.ac.uk/event/0v0GJw8DOR/dispersal-picturing-change-in-east-london"
   }
  ]
 }
