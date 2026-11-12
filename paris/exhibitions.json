@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-11T01:23:18+00:00",
+ "updated": "2026-11-12T01:25:09+00:00",
  "venues": [
   {
    "id": "louvre",
@@ -386,18 +386,6 @@
    "url": "https://www.louvre.fr/agenda/expositions/les-hotes-du-louvre"
   },
   {
-   "id": "l-cross",
-   "venue": "louvre",
-   "short": "Mughal, Safavid and Ottoman masterworks",
-   "title": "Crosscurrents: Chefs-d’œuvre de l’art moghol, safavide et ottoman du musée du Louvre",
-   "artists": "",
-   "start": "2026-06-19",
-   "end": "2027-01-24",
-   "admission": "paid",
-   "discipline": "History & collections",
-   "url": "https://www.louvre.fr/agenda/expositions/crosscurrents"
-  },
-  {
    "id": "l-eau",
    "venue": "louvre",
    "short": "Mesopotamia",
@@ -408,18 +396,6 @@
    "admission": "paid",
    "discipline": "History & collections",
    "url": "https://www.louvre.fr/agenda/expositions/l-eau-primordiale-0"
-  },
-  {
-   "id": "l-romain",
-   "venue": "louvre",
-   "short": "Roman art",
-   "title": "L’art romain du Louvre: Un monde d’images",
-   "artists": "",
-   "start": "2026-06-11",
-   "end": "2027-01-10",
-   "admission": "paid",
-   "discipline": "History & collections",
-   "url": "https://www.louvre.fr/agenda/expositions/l-art-romain-du-louvre"
   },
   {
    "id": "c-flamel",
@@ -697,7 +673,8 @@
    "end": "2027-03-08",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.fondationlouisvuitton.fr/"
+   "url": "https://www.fondationlouisvuitton.fr/",
+   "price": "€0–18"
   },
   {
    "id": "bc-remember",
@@ -853,9 +830,10 @@
    "artists": "Stan Douglas",
    "start": "2026-10-20",
    "end": "2027-01-10",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://jeudepaume.org/evenement/stan-douglas/"
+   "url": "https://jeudepaume.org/evenement/stan-douglas/",
+   "price": "€12 full / €9 reduced online; €13 / €9.50 on site"
   },
   {
    "id": "mep-penn",
@@ -1205,7 +1183,7 @@
    "artists": "Lubaina Himid",
    "start": "2026-10-23",
    "end": "2027-01-10",
-   "admission": "check",
+   "admission": "free",
    "discipline": "Sculpture & installation",
    "url": "https://www.mam.paris.fr/fr/expositions/exposition-lubaina-himid",
    "note": "Free entry to the museum collections."
@@ -1257,23 +1235,25 @@
    "artists": "Nanténé Traoré",
    "start": "2026-09-30",
    "end": "2026-11-29",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Photography & moving image",
    "url": "https://www.mep-fr.org/event/nantene-traore-pays-des-merveilles/",
-   "note": "Shown in the Studio."
+   "note": "Shown in the Studio.",
+   "price": "€14 full / €9 reduced online; €13 / €8 at the desk (general MEP entry)"
   },
   {
    "id": "mep-vetement",
    "venue": "mep",
    "short": "Everyday clothing",
    "title": "Vêtement du quotidien",
-   "artists": "",
+   "artists": "Despatin & Gobeli, Ralph Gibson, August Sander, Albrecht Tübke, Xavier Zimmermann",
    "start": "2026-09-30",
    "end": "2027-01-17",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Photography & moving image",
    "url": "https://www.mep-fr.org/event/vetement-du-quotidien/",
-   "note": "Shown in the Petite Galerie."
+   "note": "Shown in the Petite Galerie.",
+   "price": "€14 full / €9 reduced online; €13 / €8 at the desk (general MEP entry)"
   },
   {
    "id": "ce-hashi",
@@ -1560,10 +1540,11 @@
    "artists": "David Gilbert",
    "start": "2026-12-04",
    "end": "2027-01-17",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Photography & moving image",
    "url": "https://www.mep-fr.org/event/david-gilbert/",
-   "note": "Shown in the Studio."
+   "note": "Shown in the Studio.",
+   "price": "€14 full / €9 reduced online; €13 / €8 at the desk (general MEP entry)"
   },
   {
    "id": "ad-delarue",
@@ -1590,6 +1571,19 @@
    "discipline": "Design & architecture",
    "url": "https://madparis.fr/EXPOSITION-FOCUS-Hommage-a-Yohan-Serfaty",
    "note": "A focus display in three rooms of the museum's Middle Ages and Renaissance galleries."
+  },
+  {
+   "id": "flv-alfaraj",
+   "venue": "flv",
+   "short": "Mohammad Alfaraj",
+   "title": "Open Space #19 Mohammad Alfaraj",
+   "artists": "Mohammad Alfaraj",
+   "start": "2026-10-09",
+   "end": "2027-01-18",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://www.fondationlouisvuitton.fr/",
+   "note": "Shown in Gallery 8; shares a ticket with the Gustave Fayet exhibition."
   }
  ]
 }
