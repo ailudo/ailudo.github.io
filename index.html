@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Inter:wght@700&family=VT323&family=Bodoni+Moda:ital,opsz,wght@1,6..96,500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&text=%E4%BA%BA%E6%A0%91%E5%9C%B0%E5%9B%BE&display=swap">
 <style>
   html, body {
     margin: 0;
@@ -208,6 +209,35 @@
     outline-offset: 4px;
   }
 
+  /* Tree of Man map link: green serif characters, drifting at its own period */
+  .drift.tree {
+    animation:
+      drift-x 71s ease-in-out -22s infinite alternate,
+      drift-y 45s ease-in-out -30s infinite alternate;
+  }
+  .drift.tree:hover { animation-play-state: paused; }
+  .tree-link {
+    display: block;
+    font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+    font-weight: 700;
+    font-size: clamp(18px, 2.3vw, 30px);
+    letter-spacing: 0.12em;
+    line-height: 1;
+    padding: 0.35em 0.4em 0.35em 0.52em;
+    background: #fff;
+    color: #1f7a4d;
+    border-bottom: 3px solid #1f7a4d;
+    text-decoration: none;
+    white-space: nowrap;
+    opacity: 0;
+    transform: scale(0);
+    animation: pop 0.55s cubic-bezier(.2, .9, .3, 1.25) 0.8s forwards;
+  }
+  .tree-link:focus-visible {
+    outline: 2px solid #0030c8;
+    outline-offset: 4px;
+  }
+
   /* Reduced motion: keep the one-off blur and pop-up, but do not let the labels wander.
      Add ?motion=on to the address to see the drifting anyway. */
   @media (prefers-reduced-motion: reduce) {
@@ -216,6 +246,7 @@
     html:not(.motion-on) .drift.gym { right: 24px; top: 24px; bottom: auto; left: auto; }
     html:not(.motion-on) .drift.zug { left: 24px; top: 24px; right: auto; bottom: auto; }
     html:not(.motion-on) .drift.seven { left: 50%; bottom: 24px; top: auto; right: auto; transform: translateX(-50%); }
+    html:not(.motion-on) .drift.tree { left: 50%; top: 24px; bottom: auto; right: auto; transform: translateX(-50%); }
   }
 </style>
 <script>if(/[?&]motion=on\b/.test(location.search))document.documentElement.classList.add("motion-on");</script>
@@ -241,6 +272,9 @@
   <div class="drift seven">
     <a class="seven-link" href="7/" aria-label="Seven Times: seven stories, seven numbers, every morning" title="Seven Times — the morning news in seven numbers"><span class="n" aria-hidden="true">7</span>Times</a>
   </div>
+  <div class="drift tree">
+    <a class="tree-link" href="tree-of-man/" lang="zh-Hans" aria-label="人树地图: A Map of Tree of Man" title="A Map of Tree of Man">人树地图</a>
+  </div>
   <label id="hap" aria-hidden="true" style="position:fixed;left:-100px;top:0;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden"><input type="checkbox" switch tabindex="-1"></label>
   <script>
   (function () {
@@ -256,8 +290,8 @@
 
     // Each label drifts on two periods (seconds). A random point in each cycle gives a
     // random starting position; retry a few times so the labels do not start stacked.
-    var periods = { london: [53, 37], paris: [61, 43], gym: [47, 59], zug: [67, 41], seven: [57, 49] };
-    function kind(el) { return el.classList.contains('paris') ? 'paris' : el.classList.contains('gym') ? 'gym' : el.classList.contains('zug') ? 'zug' : el.classList.contains('seven') ? 'seven' : 'london'; }
+    var periods = { london: [53, 37], paris: [61, 43], gym: [47, 59], zug: [67, 41], seven: [57, 49], tree: [71, 45] };
+    function kind(el) { return el.classList.contains('paris') ? 'paris' : el.classList.contains('gym') ? 'gym' : el.classList.contains('zug') ? 'zug' : el.classList.contains('seven') ? 'seven' : el.classList.contains('tree') ? 'tree' : 'london'; }
     function where(offset, period) { // position 0..1 for an alternating ease-in-out cycle
       var t = offset % (2 * period), u = t < period ? t / period : 2 - t / period;
       return u * u * (3 - 2 * u);

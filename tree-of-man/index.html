@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Map of Tree of Man · 人树地图</title>
+<meta name="description" content="An interactive reading map of Patrick White's The Tree of Man: twelve stretches of the novel, its people and houses, and eleven concepts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a strip of the novel's twelve stretches, drawn to their true length, sits above a
+   two-column workbench: a radial map on the left, a reading panel on the right. */
+:root{
+  --bg:#e8ece6; --panel:#f5f7f2; --ink:#1c2620; --muted:#5d6b62; --line:#c3ccc2;
+  --leaf:#2c5f4f; --leaf-soft:#d3e2d8; --glass:#8a2f52; --glass-soft:#f0d9e1; --bark:#6f5a3c; --facebg:#f4f1e6;
+  --display:"Noto Serif SC","Songti SC","STSong",serif;
+  --body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#131a16; --panel:#1b2520; --ink:#e4ebe4; --muted:#9aa89f; --line:#34423a;
+    --leaf:#8cc7ad; --leaf-soft:#24382f; --glass:#e58aa8; --glass-soft:#3a1f2a; --bark:#c2a67a; --facebg:#d5dbd0;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131a16; --panel:#1b2520; --ink:#e4ebe4; --muted:#9aa89f; --line:#34423a;
+  --leaf:#8cc7ad; --leaf-soft:#24382f; --glass:#e58aa8; --glass-soft:#3a1f2a; --bark:#c2a67a; --facebg:#d5dbd0;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--glass);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 16px 48px;display:flex;flex-direction:column;gap:18px}
+
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px}
+h1{font-family:var(--display);font-size:30px;line-height:1.2;margin:0;font-weight:700;letter-spacing:.04em}
+h1 small{display:block;font-family:var(--body);font-size:13px;font-weight:400;color:var(--muted);letter-spacing:0;margin-top:4px}
+.modes{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--panel)}
+.modes button{border:0;background:none;padding:7px 16px;border-radius:999px;font-weight:500}
+.modes button[aria-pressed="true"]{background:var(--leaf);color:var(--bg)}
+
+/* strip */
+.stripbox{overflow-x:auto;padding-bottom:4px}
+.strip{display:flex;gap:3px;min-width:900px}
+.seg{flex:1 1 0;min-width:68px;border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:8px 8px 7px;text-align:left;display:flex;flex-direction:column;gap:2px;position:relative}
+.seg .ch{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.seg .t{font-family:var(--display);font-weight:700;font-size:15px;line-height:1.3}
+.seg .mk{font-size:11px;color:var(--glass);font-weight:700;min-height:17px}
+.seg.hit{border-color:var(--glass)}
+.seg.hit::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--glass);border-radius:5px 5px 0 0}
+.seg[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:var(--bg)}
+.seg[aria-pressed="true"] .ch,.seg[aria-pressed="true"] .mk{color:var(--bg)}
+.parts{display:flex;gap:3px;min-width:900px;margin-top:5px;font-size:11px;color:var(--muted)}
+.parts span{border-top:2px solid var(--bark);padding-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hint{font-size:12px;color:var(--muted);margin:0}
+
+/* concept chips row */
+.conrow{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:4px 12px;font-size:13px}
+.chip[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:var(--bg)}
+.chip.c{border-color:var(--leaf);color:var(--leaf)}
+.chip.p{border-color:var(--bark)}
+
+.bench{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:860px){.bench{grid-template-columns:1fr}}
+.map{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px;position:sticky;top:10px}
+@media (max-width:860px){.map{position:static}}
+svg{display:block;width:100%;height:auto}
+.edge{stroke:var(--line);stroke-width:1.2}
+.edge.on{stroke:var(--glass);stroke-width:2}
+.node{cursor:pointer}
+.node .ring{fill:var(--facebg);stroke:var(--bark);stroke-width:1.5}
+.node.fam .ring{stroke:var(--leaf);stroke-width:2.5}
+.node.con .ring{fill:var(--leaf-soft);stroke:var(--leaf)}
+.node.stg .ring{fill:var(--glass-soft);stroke:var(--glass)}
+.node.on .ring{stroke:var(--glass);stroke-width:4}
+.node.con.on .ring,.node.stg.on .ring{fill:var(--glass)}
+.node.dim{opacity:.28}
+.region{fill:var(--bg);stroke:var(--line);stroke-width:1;stroke-dasharray:4 4}
+.rtitle{fill:var(--muted);font-family:var(--display);font-size:13px;font-weight:700}
+.kin{stroke:var(--bark);stroke-width:1.6;fill:none}
+.kin.loose{stroke-dasharray:5 4}
+.kinlab{fill:var(--bark);font-size:10.5px;text-anchor:middle;font-family:var(--body)}
+.actl{stroke:var(--glass);stroke-width:1.8;fill:none}
+.actt{fill:var(--glass);font-family:var(--body);font-size:12px;font-weight:700;text-anchor:middle;stroke:var(--panel);stroke-width:4;paint-order:stroke;stroke-linejoin:round}
+#ar path{fill:var(--glass)}
+.mapscroll{overflow-x:auto}
+.mapscroll svg{min-width:560px}
+.node text{fill:var(--ink);font-family:var(--body);font-size:13px;text-anchor:middle}
+.node text.sub{fill:var(--muted);font-size:10.5px}
+.node:hover .ring{stroke-width:3.5}
+.hub text{fill:var(--bg);font-family:var(--display);font-weight:700;text-anchor:middle}
+.hub text.sub{font-family:var(--body);font-weight:400;font-size:11px}
+.hub .hubc{fill:var(--leaf);stroke:none}
+.node.hub text,.node.hub text.sub{fill:var(--bg)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted);padding:2px 8px 6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;border:1.5px solid var(--bark);margin-right:5px;vertical-align:-1px}
+.legend i.f{background:var(--leaf-soft);border-color:var(--leaf)}
+.legend i.s{border-radius:2px;background:var(--glass-soft);border-color:var(--glass)}
+
+.panel{display:flex;flex-direction:column;gap:16px;min-width:0}
+.panel h2{font-family:var(--display);font-size:24px;line-height:1.3;margin:0;text-wrap:balance}
+.panel h2 span{font-family:var(--body);font-size:13px;font-weight:400;color:var(--muted);margin-left:8px}
+.eyebrow{font-size:12px;color:var(--muted);margin:0 0 2px;font-variant-numeric:tabular-nums}
+.lead{margin:0;max-width:36em}
+.panel h3{font-size:12px;font-weight:700;color:var(--leaf);margin:0 0 6px;letter-spacing:.12em}
+.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.list li{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:baseline;max-width:38em}
+.tag{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.link{border:0;background:none;padding:0;font-weight:700;color:var(--leaf);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;white-space:nowrap;text-align:left}
+.list li.now{background:var(--leaf-soft);border-radius:6px;padding:6px 8px;margin:0 -8px}
+blockquote{margin:0;padding:8px 14px;border-left:3px solid var(--glass);background:var(--glass-soft);border-radius:0 6px 6px 0;font-family:var(--display);font-size:16px;max-width:34em}
+blockquote .ctx{font-family:var(--body);font-size:13px;color:var(--ink);margin:4px 0 0}
+blockquote cite{display:block;font-family:var(--body);font-style:normal;font-size:12px;color:var(--muted);margin-top:2px}
+.quotes{display:flex;flex-direction:column;gap:8px}
+.back{align-self:flex-start;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:3px 12px;font-size:13px}
+.flash{animation:fl 1.2s ease-out}
+@keyframes fl{from{background:var(--glass-soft)}to{background:transparent}}
+@media (prefers-reduced-motion:reduce){.flash{animation:none}}
+footer{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;max-width:60em}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>人树地图<small>A Map of Tree of Man · 帕特里克·怀特《人树》1955</small></h1>
+    <div class="modes" role="group" aria-label="视图">
+      <button id="m-timeline" aria-pressed="true" data-act="mode" data-id="timeline">时间线 · 人物</button>
+      <button id="m-concepts" aria-pressed="false" data-act="mode" data-id="concepts">概念</button>
+    </div>
+  </header>
+
+  <section id="v-timeline">
+    <div class="stripbox"><div class="strip" id="strip"></div><div class="parts" id="parts"></div></div>
+    <p class="hint">每一格的宽度按该段在译本中的篇幅绘制。选一段，地图上亮起这一段出场的人，红线是这一段里发生在他们之间的事。点一个人，看他一生的全部连线。</p>
+  </section>
+
+  <section id="v-concepts" hidden>
+    <div class="conrow" id="conrow"></div>
+  </section>
+
+  <div class="bench">
+    <div class="map"><div id="graph" class="mapscroll"></div><div class="legend" id="legend"></div></div>
+    <div class="panel" id="panel" aria-live="polite"></div>
+  </div>
+
+  <footer>引文为所附中译本里的短句，只取片段并标明章次，译本中的个别错字照原样保留。四部的划分依英文原版，译本本身只分二十六章。概述和概念归纳是这张图的解读，不是原文。头像是按书中零星描写自行画的示意。英文人名、地名取自英文原著。 <a href="../" style="color:inherit">An AI project by Studio AI Ludo</a></footer>
+</div>
+
+<script>
+const STAGES=[
+{id:'s1',t:'拓荒',en:'Clearing',ch:'1–4',part:1,w:88,sum:'年轻的斯坦·帕克独自赶车进丛林，在两株硬皮桉之间停下，砍树、搭棚、生火。他回海边小镇尤罗加，娶了菲宾斯家的姑娘艾米，把她带回林中空地。日子由砍树、挤奶和一株白玫瑰组成。',
+ ev:[['1','斯坦砍下第一斧；回想铁匠父亲和当过教师的母亲'],['2','尤罗加的教堂舞会上遇见艾米·菲宾斯'],['3','婚礼；艾米带着肉豆蔻银擦板上路，决定在窗外种白玫瑰'],['4','艾米祈求显灵而不得；一个兜售《圣经》和药水的过路人借宿一夜']],
+ q:[['总算到了一个地方。','1','叙述'],['他只是一个普通人。','1','叙述']],con:['root','suburb','cycle','god']},
+{id:'s2',t:'邻人与雷暴',en:'Neighbours',ch:'5–6',part:1,w:59,kind:1,mk:'雷暴',sum:'别的人家陆续迁来。欧达乌德太太赶着大车来认邻居，成了艾米的第一个朋友；奎克莱依一家帮帕克夫妇盖起新房。一场雷暴摧毁了棚屋，也第一次让斯坦感到自己渺小。艾米流产，母牛死去。',
+ ev:[['5','欧达乌德太太登门，邀艾米去喝茶'],['5','雷暴：斯坦跪在地上，记起少年时读的《旧约》'],['6','奎克莱依家的多尔和巴布出场，新房落成'],['6','母牛病死的那一夜，艾米失去了孩子']],
+ q:[['人在一个地方怎样扎下根来是挺有意思的。','6','多尔'],['现在我们已经像邻居那样，相互认识了。','5','欧达乌德太太']],con:['disaster','root','god']},
+{id:'s3',t:'洪水',en:'The Flood',ch:'7',part:1,w:90,kind:1,mk:'洪水',sum:'德国老头弗利兹来帮工后不久，雨下个不停，大河在乌龙雅泛滥。男人们坐着皮博迪的马车去救灾，像是出游。斯坦划船救人，在水里看见死者。帕克夫妇带回一个无主的男孩，他第二天清晨不告而别，床板上只剩压碎的红玻璃。',
+ ev:[['7','弗利兹来到帕克家'],['7','乌龙雅大水；斯坦划船救出被困的人'],['7','女人们在岸上等待，看见富人家的马车经过'],['7','捡来的孩子透过红玻璃片看洪水，次晨离去']],
+ q:[['这里先前是一块平原，现在是水的世界。','7','叙述']],con:['disaster','possess','ordinary']},
+{id:'s4',t:'村庄与孩子',en:'Durilgai',ch:'8–11',part:2,w:148,sum:'岔路口盖起杂货铺和邮政局，杜瑞尔盖才算名副其实。艾米终于生下雷和塞尔玛。阿姆斯特朗家的别墅格兰斯顿伯里来了一位骑马的姑娘马德琳，成了艾米的幻象。邻居欧达乌德酒后持刀发疯。斯坦在又一场暴风雨里由狂喜转为谦卑。',
+ ev:[['8','杂货铺、邮局、盖奇夫妇；邮政局长的丈夫趴在地上看蚂蚁'],['9','雷出生，随后是塞尔玛；马德琳的名字第一次传来'],['10','欧达乌德喝醉后放枪、提刀，两个女人绕着房子奔逃'],['11','斯坦觉得妻子是“几个艾米”；门廊上的暴风雨；与奥塞·皮博迪做牛犊买卖']],
+ q:[['没有理由非出什么差错。','9','斯坦'],['我是个中不溜秋的人。','10','欧达乌德']],con:['class','alone','ordinary','god','cycle']},
+{id:'s5',t:'大火',en:'The Fire',ch:'12',part:2,w:72,kind:1,mk:'大火',sum:'盛夏，大地干枯，荒火从山谷烧向格兰斯顿伯里。男人们沿河谷去打火。斯坦冲进着火的别墅，在浓烟滚滚的楼梯上把马德琳带出来，她的头发烧掉了。艾米在外面看着。一场暴雨把火浇灭。',
+ ev:[['12','艾米去别墅送鸭子，窥见宴会和马德琳'],['12','荒火逼近，男人们去河谷打火'],['12','斯坦在楼梯上救出马德琳，两人之间有过无法言说的一刻'],['12','暴雨']],
+ q:[['他们一起在浓烟滚滚的楼梯口燃烧。','12','叙述']],con:['disaster','class','alone']},
+{id:'s6',t:'战争',en:'The War',ch:'13–14',part:3,w:45,kind:1,mk:'战争',sum:'火后的田野重新变绿。马德琳一去不回，她与小阿姆斯特朗的婚事告吹。战争爆发，村里人逼走了德国老头弗利兹。斯坦参军。第十四章很短，是泥泞、炮火和几封笨拙的家书。',
+ ev:[['13','阿姆斯特朗先生来信酬谢；欧达乌德太太转述马德琳出走的传闻'],['13','杂货铺里传来开战的消息；弗利兹被赶走'],['13','斯坦吻别妻子，坐大车离开'],['14','战壕里他想起上帝却不能祈祷；在露天的残破教堂里坐了一会儿']],
+ q:[['我们从来都不是能说会道的人。','14','斯坦的家书']],con:['disaster','silence','god']},
+{id:'s7',t:'归来',en:'The Return',ch:'15',part:3,w:89,sum:'斯坦回家，很少谈起战场。小汤姆·阿姆斯特朗战死，老阿姆斯特朗中风，重建到一半的格兰斯顿伯里停了工；斯坦在废墟里翻到一捆发霉的信。帕克家雇了语言不通的希腊青年柯，全家人都被他搅动。',
+ ev:[['15','一个伤兵路过，艾米独自接待'],['15','斯坦归来，孩子们已让他陌生；雷不喜欢父亲身上当兵的气味'],['15','格兰斯顿伯里的半截新房与那捆信'],['15','希腊人柯来了又走']],
+ q:[],con:['class','silence','alone']},
+{id:'s8',t:'离巢',en:'Leaving',ch:'16–17',part:3,w:156,kind:1,mk:'自缢',sum:'雷被送到班加雷跟鞍具匠学徒，很快跑了，进城给赛马赌注登记人干活，出了事。塞尔玛进城读女子商业学校，寄宿在远房姑妈莉莉·鲍凯家，学着做另一种人。邮政局长的丈夫盖奇先生在院子的树上自缢，留下一屋子画。',
+ ev:[['16','雷去班加雷学徒，又逃走'],['16','塞尔玛在商业学校和鲍凯家；雷来访'],['17','盖奇太太宣布丈夫自杀，把遗画摆出来给太太们看'],['17','艾米在“修理工耶稣”前站住，看懂了']],
+ q:[['我要是会画，就知道该画什么','17','欧达乌德'],['他自杀了，亲爱的','17','盖奇太太']],con:['art','root','class','ordinary']},
+{id:'s9',t:'干旱',en:'The Drought',ch:'18',part:3,w:103,kind:1,mk:'干旱',sum:'斯坦到了受人尊敬的岁数，名字已和这片地分不开。干旱把一切晒成枯黄。流动推销员利奥开着蓝色汽车来到门廊前，艾米与他私通。斯坦看见了那辆车，一言不发，开车进城，醉倒街头，朝天空吐唾沫。',
+ ev:[['18','干旱；斯坦捉住一只蜻蜓'],['18','推销员利奥上门，艾米既不接纳也不拒绝他的名字'],['18','斯坦连夜驱车进城，酗酒，呕吐，“朝那不存在的上帝”吐唾沫'],['18','他回家，两人对此只字不提']],
+ q:[['人们都叫我利奥。','18','利奥'],['我的丈夫信仰上帝。至少我认为他信仰。','18','艾米'],['他们甚至发现干旱也有一种超然的美。','18','叙述']],con:['alone','god','disaster','silence']},
+{id:'s10',t:'儿女成家',en:'Marriages',ch:'19–20',part:4,w:152,sum:'塞尔玛嫁给律师达德利·福斯迪克，开车回乡探亲。雷在逃，约母亲到格兰斯顿伯里的废墟见面，吃了她带来的东西，甩开她的手。后来他向妹妹借了二十镑，娶了悉尼姑娘埃尔西·塔巴特，有了一个儿子，又离开她。',
+ ev:[['19','福斯迪克夫妇来访，达德利被乡间的气息灌醉'],['19','艾米爬上山坡，在废墟里见到雷'],['20','多年后与盖奇太太重逢'],['20','雷向塞尔玛借钱结婚；埃尔西带着孩子来，艾米开始爱她']],
+ q:[['当然，他们是好人','19','塞尔玛'],['我简直认不出你了','20','盖奇太太']],con:['class','possess','cycle','root']},
+{id:'s11',t:'郊区与剧场',en:'Suburb & Stage',ch:'21–22',part:4,w:112,sum:'大路两旁盖起新房，帕克家的地分批卖掉。斯坦说自己成了一只空桶，领圣餐，看蚂蚁，带艾米进城看《哈姆雷特》。雷带着罗拉的男孩回来过一次。塞尔玛带朋友菲希尔太太来访，艾米认出她就是马德琳。',
+ ev:[['21','卖地；塞尔玛劝父亲放手'],['21','圣餐；斯坦坐在地上看蚂蚁，喊出“啊，上帝”'],['21','剧场里的《哈姆雷特》，艾米想起利奥'],['22','雷带来罗拉的孩子；马德琳重现']],
+ q:[['这是我们的哈姆雷特吗？','21','斯坦'],['这么说是你，马德琳！','22','艾米'],['我简直认不出这地方了','22','雷']],con:['suburb','art','god','class','root']},
+{id:'s12',t:'死亡与树',en:'Deaths',ch:'23–26',part:4,w:122,kind:1,mk:'死亡',sum:'斯坦在晨报上读到雷在夜总会被人开枪打死。欧达乌德太太死于癌症。多尔·奎克莱依“结果了”痴呆的弟弟，被关进班加雷的疯人院。斯坦病倒后坐在后花园，对上门的年轻传教士指着地上的唾沫说，这就是上帝，当天死去。孙子走进屋后的树林，想写一首诗。',
+ ev:[['23','雷之死；艾米去见罗拉；欧达乌德太太临终'],['24','多尔与巴布'],['25','塞尔玛在音乐会上；斯坦在花园里的最后一天'],['26','孙子带着玻璃片走进丛林']],
+ q:[['这就是上帝','25','斯坦'],['我不想说我杀了他。因为我爱巴布。','24','多尔'],['归根结底，这里还是一片树木','26','叙述'],['那么，他将写一首生命的诗。','26','叙述']],con:['god','possess','cycle','ordinary','art','suburb']}
+];
+const PARTS=['第一部 · 青年','第二部 · 壮年','第三部 · 中年','第四部 · 暮年'];
+
+const CH={
+stan:{n:'斯坦·帕克',en:'Stan Parker',role:'拓荒者。沉默、可靠，一生都在一个地方，慢慢被逼向上帝。',w:3,fam:1,rel:['amy','ray','thelma','madeleine','parents','grandson'],con:['god','silence','root','ordinary'],
+ in:{s1:'独自进丛林砍下第一斧，回尤罗加娶了艾米。这时他还没有感觉到对上帝的需要。',s2:'雷暴里跪在地上，第一次觉得自己渺小。',s3:'划船救人，在洪水里看见死者；把无主的男孩带回家。',s4:'做了父亲。门廊上看暴风雨，由狂喜转为谦卑。',s5:'冲进着火的别墅，把马德琳带下楼梯。此后绝口不提。',s6:'参军。战壕里想祈祷却找不到词，家书只谈牛犊和蓝布衣裳。',s7:'回家后更沉默，在废墟里读到别人的信。',s8:'把儿子送去学徒，对结果并无把握。',s9:'看见推销员的汽车后独自进城，醉倒街头，朝天吐唾沫。',s10:'站在一旁看女儿女婿来去。',s11:'卖地。自称空桶，领圣餐，看《哈姆雷特》，坐在地上看蚂蚁。',s12:'读到儿子的死讯。病倒后在花园里指着一口唾沫说“这就是上帝”，当天去世。'},
+ q:[['这就是上帝','25'],['我们从来都不是能说会道的人。','14'],['啊，上帝！啊，上帝！','21']]},
+amy:{n:'艾米·帕克',en:'Amy Parker (née Fibbens)',role:'斯坦的妻子。能说，贪爱，想占有却总是扑空。全书多半是透过她的眼睛。',w:3,fam:1,rel:['stan','ray','thelma','odowd_mrs','madeleine','leo','elsie','doll'],con:['possess','alone','class','art'],
+ in:{s1:'菲宾斯家的穷姑娘，带着一本《圣经》和肉豆蔻银擦板出嫁，在窗外种白玫瑰。',s2:'有了第一个朋友；流产。',s3:'在岸上等。想留下洪水里的孩子，他天亮前走了。',s4:'生下雷和塞尔玛，对爱变得贪婪；把骑马的马德琳当作梦。',s5:'火夜守在外面，看丈夫和马德琳从火里出来。',s6:'与丈夫吻别，独自撑起牛奶场。',s7:'被希腊青年柯搅得心神不安。',s8:'儿子离家；在盖奇的遗画前忽然看懂了。',s9:'与推销员利奥私通，事后与自己的厌恶搏斗。',s10:'给逃亡的儿子送吃的，被他甩开；爱上儿媳埃尔西。',s11:'花园疯长。剧场里想着利奥；认出马德琳，幻象熄灭。',s12:'送走儿子、欧达乌德太太和丈夫，去疯人院看多尔。她的生活在孙子眼里才变得清晰。'},
+ q:[['这么说是你，马德琳！','22'],['我的丈夫信仰上帝。至少我认为他信仰。','18']]},
+ray:{n:'雷·帕克',en:'Ray Parker',role:'儿子。被母亲的爱烫到，一路下坠：学徒、赌注登记、倒卖汽车、夜总会。',w:2,fam:1,rel:['amy','stan','thelma','elsie','lola','con','grandson'],con:['root','possess','cycle'],
+ in:{s4:'迟来的头生子。爬树掏鸟巢，残忍和渴望并存。',s6:'父亲出征，他兴奋得吃不下饭。',s7:'不喜欢归来的父亲；钻进希腊人柯的棚屋，把他当朋友。',s8:'去班加雷学鞍具，逃走，进城后出事。',s10:'在废墟里见母亲；向妹妹借二十镑，娶埃尔西，生子，离去。',s11:'带着罗拉的男孩回家一次，说认不出这地方了。',s12:'在夜总会被阿尔费开枪打死。'},
+ q:[['我简直认不出这地方了','22']]},
+thelma:{n:'塞尔玛',en:'Thelma Forsdyke',role:'女儿。苍白、要强，靠打字机和婚姻一级级离开杜瑞尔盖。',w:2,fam:1,rel:['amy','stan','ray','dudley','bourkes','madeleine'],con:['class','root','art'],
+ in:{s4:'名字是母亲从报纸上看来的，属于一位牧场主的女继承人。',s6:'给前线的父亲织袜子、寄照片。',s8:'进城读女子商业学校，寄宿鲍凯家。',s10:'成了律师太太，回乡时把脑袋缩在皮领子里。',s11:'劝父母卖地；带菲希尔太太来访。',s12:'音乐会上听小提琴协奏曲。父亲死后独自开车回去，记起他的手。'},
+ q:[['当然，他们是好人','19']]},
+odowd_mrs:{n:'欧达乌德太太',en:"Mrs O'Dowd",role:'爱尔兰邻居，艾米的第一个也是最久的朋友。粗声大气，消息灵通。',w:2,rel:['amy','odowd'],con:['alone','god'],
+ in:{s2:'赶着大车来认邻居。',s3:'在岸上看救人，在想象里给小船升起风帆。',s4:'带来马德琳的消息；丈夫发酒疯时与艾米一起逃命。',s5:'转述别墅厨娘的闲话。',s6:'为马德琳的事与艾米拌嘴，又舍不得不欢而散。',s8:'把艾米当多年的朋友，托付秘密。',s12:'一口咬定自己得的是癌。艾米守着她死去。'},
+ q:[['我只是他的妻子，其实也不完全是。','10'],['是癌','23']]},
+odowd:{n:'欧达乌德',en:"O'Dowd",role:'酒鬼邻居。闹得凶，哭得也快。',w:1,rel:['odowd_mrs','stan'],con:['alone','disaster','art'],
+ in:{s2:'随妻子迁来。',s3:'带着一瓶酒去看洪水，一路唱歌。',s4:'喝醉后放枪、提切肉刀追人，醒来痛哭。',s8:'看了盖奇的画，说自己要画绵羊的下水和光屁股女人。',s12:'丧妻。'},
+ q:[['我是个中不溜秋的人。','10'],['我要是会画，就知道该画什么','17']]},
+doll:{n:'多尔·奎克莱依',en:'Doll Quigley',role:'瘦长、平静的老姑娘，一辈子照料痴呆的弟弟。斯坦眼里唯一没被岁月弄脏的人。',w:2,rel:['bub','amy','stan'],con:['possess','root','god'],
+ in:{s2:'全家迁来，帮帕克家盖房；说起人怎样扎根。',s3:'洪水时也在。',s4:'常来帕克家，被幼年的雷嫌弃。',s7:'斯坦归来后想到她那副纯洁无瑕的样子。',s10:'偶尔露面。',s12:'“结果了”弟弟，自己走来告诉艾米；被关进班加雷的疯人院。'},
+ q:[['人在一个地方怎样扎下根来是挺有意思的。','6'],['我不想说我杀了他。因为我爱巴布。','24']]},
+bub:{n:'巴布·奎克莱依',en:'Bub Quigley',role:'多尔的弟弟，长着娃娃脸的痴儿，爱躺在树下嚼树枝。',w:1,rel:['doll'],con:['possess'],
+ in:{s2:'随家人迁来。',s3:'在洪水边捡到一块被水磨圆的怪石头。',s4:'让怀孕的艾米看了心里发紧。',s12:'死在姐姐手里。'},q:[]},
+fritz:{n:'弗利兹',en:'Fritz',role:'帮工的德国老头，斯坦的朋友。',w:1,rel:['stan','ossie'],con:['disaster'],
+ in:{s3:'来到帕克家，随后雨季开始。',s4:'和斯坦一起收燕麦。',s6:'开战后被村里人逼走，脸色像纸一样白。'},q:[]},
+boy:{n:'洪水里的孩子',en:'The flood child',role:'乌龙雅大水后被帕克夫妇带回的无主男孩。',w:1,rel:['amy','grandson'],con:['ordinary','possess'],
+ in:{s3:'透过一块红玻璃看洪水。艾米想收养他，他天亮前走了，玻璃碎在床板上。'},q:[]},
+gage:{n:'盖奇先生',en:'Mr Gage',role:'邮政局长的丈夫，没人记得他。全书唯一的艺术家。',w:2,rel:['mrsgage','amy'],con:['art','ordinary','god','silence'],
+ in:{s4:'被艾米撞见趴在地上，出神地看一只蚂蚁。',s8:'在院子的树上自缢。遗画里有一幅画在茶叶箱板上的、修理工模样的耶稣。'},q:[]},
+mrsgage:{n:'盖奇太太',en:'Mrs Gage',role:'邮政局长。讲什么都活灵活现。',w:1,rel:['gage','amy'],con:['art','alone'],
+ in:{s4:'在柜台后面向艾米抱怨天气和西红柿。',s8:'把丈夫的画摆出来示众，气得去踢。',s10:'多年后重逢，已另有生活。'},q:[['他自杀了，亲爱的','17']]},
+madeleine:{n:'马德琳',en:'Madeleine (Mrs Fisher)',role:'格兰斯顿伯里的客人，骑马的美人。艾米的幻象，斯坦的一刻。',w:2,rel:['amy','stan','armstrongs','thelma'],con:['class','disaster','root'],
+ in:{s4:'骑马从大路上经过，村里人只知道她的名字。',s5:'被斯坦从着火的楼梯上带出来，头发烧掉了。',s6:'出门旅行，没有回来，婚事告吹。',s11:'以菲希尔太太的身份坐在艾米屋里，说想养蜂。',s12:'已经去世，留下塞尔玛更懂得寂寞。'},q:[]},
+armstrongs:{n:'阿姆斯特朗一家',en:'The Armstrongs',role:'格兰斯顿伯里别墅的主人，村里人仰头看的富户。',w:1,rel:['madeleine','stan'],con:['class'],
+ in:{s3:'洪水时他们的马车从等待的女人身边驶过。',s4:'别墅里宴客，向帕克家订鸭子。',s5:'别墅烧毁。',s6:'来信酬谢斯坦。',s7:'小汤姆战死，老头中风，重建停工。'},q:[]},
+ossie:{n:'奥塞·皮博迪',en:'Ossie Peabody',role:'精明的邻居。',w:1,rel:['stan','fritz'],con:['suburb'],
+ in:{s3:'赶马车送大家去看洪水，又把帕克夫妇和孩子送回家。',s4:'为一头小牛犊与斯坦讨价还价，嫌六镑太贵。',s6:'提醒艾米，这时候还养着一个德国佬不合适。'},q:[]},
+con:{n:'柯',en:'Con the Greek',role:'战后来帮工的希腊青年，语言不通。',w:1,rel:['amy','ray'],con:['silence'],
+ in:{s7:'忍饥挨饿来找活干。雷把他当朋友，艾米给他补袜子，他离开时她心神不安。'},q:[]},
+leo:{n:'利奥',en:'Leo',role:'流动推销员，卖衣料、长统袜和扣子。',w:1,rel:['amy'],con:['alone'],
+ in:{s9:'开着蓝色汽车来到干旱中的门廊。',s11:'在剧场的黑暗里回到艾米和斯坦各自的脑子里。'},q:[['人们都叫我利奥。','18']]},
+dudley:{n:'达德利·福斯迪克',en:'Dudley Forsdyke',role:'律师，塞尔玛的丈夫。认真是他最大的虚荣。',w:1,rel:['thelma'],con:['class','alone'],
+ in:{s10:'开车谨慎，到了岳父的农场却被泥土的气息灌醉。',s12:'接到妻子从服装店打来的电话。'},q:[]},
+elsie:{n:'埃尔西',en:'Elsie Tarbutt',role:'雷的妻子，悉尼来的朴素姑娘。',w:1,rel:['ray','amy','grandson'],con:['possess','cycle'],
+ in:{s10:'嫁给雷，生下儿子，带孩子来老屋；艾米在闪电里明白自己开始爱她。',s12:'带着儿子留在帕克家身边。'},q:[]},
+lola:{n:'罗拉',en:'Lola',role:'雷后来同居的女人，给他生了另一个男孩。',w:1,rel:['ray'],con:['cycle'],
+ in:{s11:'她的男孩被雷带回老屋，趴在窗玻璃上往里看。',s12:'雷中枪时在场，后来讲给艾米听。'},q:[]},
+grandson:{n:'孙子',en:'The grandson',role:'埃尔西和雷的儿子，瘦长、苍白，书的最后一个人物。',w:2,fam:1,rel:['elsie','ray','stan','amy'],con:['cycle','art','ordinary','silence'],
+ in:{s10:'出生。',s12:'祖父死的那天躲进屋后的丛林，口袋里装着奶奶给的玻璃片，想写一首包含所有生命的诗。'},q:[]},
+bourkes:{n:'鲍凯夫妇',en:'Lily & Horrie Bourke',role:'城里的亲戚。莉莉是尤罗加绸布商的女儿，年轻时斯坦认识她。',w:1,rel:['thelma','ray','stan'],con:['class'],
+ in:{s1:'莉莉是伯特家三个嘻嘻哈哈的姑娘之一。',s8:'塞尔玛在他们家寄宿；雷上门时，莉莉开黑啤酒欢迎斯坦的儿子。'},q:[]},
+evangelist:{n:'年轻的传教士',en:'The evangelist',role:'上门传福音的年轻人，自述当过养路工。',w:1,rel:['stan'],con:['god'],
+ in:{s12:'在后花园缠着病中的斯坦讲得救的故事，留下一堆小册子。'},q:[]},
+stranger:{n:'过路人',en:'The stranger',role:'兜售《圣经》和催眠药水的旅人，林中空地的第一个访客。',w:1,rel:['stan','amy'],con:['god'],
+ in:{s1:'在帕克家吃了一顿饱饭，讲非洲见闻，注意到壁炉台上的银擦子，天亮前悄悄走了。'},q:[]},
+parents:{n:'斯坦的父母',en:"Stan's parents",role:'铁匠父亲，当过教师的母亲。',w:1,rel:['stan'],con:['cycle','god'],
+ in:{s1:'父亲盯着炉火，并不否认上帝；母亲想把儿子造就成教师或传道士。'},q:[['你都长成大人了。','1']]}
+};
+
+const CON=[
+{id:'god',t:'上帝在哪里',en:'God',gist:'斯坦一生不谈信仰，却被一步步逼向它。起初不需要，后来被雷电压低，战场上祈祷失灵，妻子背叛后朝天吐唾沫，晚年自称空桶，最后在一口唾沫里认出上帝。小说把神从教堂挪到了最低的地方。',
+ takes:[['stan','从“不需要”走到“这就是上帝”。他的信仰是亲眼看见的，没有谁说服他。'],['amy','翻着《圣经》祈求显灵，恩赐始终没有落进手心。她对丈夫那位看不见的上帝有妒意。'],['gage','把耶稣画成骨瘦如柴的修理工，画在茶叶箱板上。'],['evangelist','信仰像蒸汽压路机，带着小册子和忏悔故事上门。'],['parents','父亲在炉火前并不否认上帝；母亲希望儿子去传道。'],['odowd_mrs','把上帝当感叹词挂在嘴边，日子照旧热热闹闹。']],
+ ex:[['s1','4','艾米祈求面色苍白的耶稣显灵'],['s2','5','雷暴中斯坦跪地，记起《旧约》'],['s4','11','门廊上的暴风雨，闪电像能劈开灵魂'],['s6','14','战壕里想起上帝却不能祈祷'],['s9','18','街头朝“不存在的上帝”吐唾沫'],['s11','21','圣餐、空桶、蚂蚁'],['s12','25','唾沫']],
+ q:[['这就是上帝','25','斯坦'],['啊，上帝！啊，上帝！','21','斯坦'],['我的丈夫信仰上帝。至少我认为他信仰。','18','艾米']]},
+{id:'silence',t:'说不出口',en:'Inarticulacy',gist:'帕克夫妇都不善言辞，最要紧的事从未被说出来：火里的楼梯，蓝色的汽车，对上帝的怀疑。小说一再让人物站到语言的边上，再用别的东西替他们说话，一幅画，一块玻璃，一首还没写的诗。',
+ takes:[['stan','自认不善于解释事物。家书里只有牛犊、袜子和蓝布衣裳。'],['amy','话多，用闲话把两个人系在一起，真正想要的却说不出。'],['gage','一言不发地画，死后才被人看见。'],['con','不会这里的语言，靠干活和手势存在。'],['grandson','要写一首包含所有生命的诗，可是还不到时候。']],
+ ex:[['s6','14','前线家书'],['s8','17','盖奇的遗画'],['s9','18','夫妻对背叛只字不提'],['s12','26','尚未诞生的诗']],
+ q:[['我们从来都不是能说会道的人。','14','斯坦'],['我要是会画，就知道该画什么','17','欧达乌德']]},
+{id:'possess',t:'占有与爱',en:'Possession',gist:'艾米的爱是想把人整个吞下去。丈夫的内心她进不去，儿子把她甩开，洪水里的孩子天亮前就走了。与她对照的是多尔：多尔的爱什么都不要，最后用最可怕的方式负责到底。',
+ takes:[['amy','对爱贪婪，想“吞噬”丈夫，又把儿子的脸贴在自己脸上。'],['stan','爱，但保持距离。第一章里他连自己的狗和马都不抚摸。'],['ray','一辈子都在躲母亲的手。'],['doll','照料弟弟一生，怕自己先死，亲手了结他。'],['boy','不肯被收养，留下一地碎玻璃。'],['thelma','从爱的要求前退缩，只肯在“爱慕”的温水里躺一躺。'],['elsie','平静地接受雷，也接受被他离开。']],
+ ex:[['s3','7','艾米想留下捡来的孩子'],['s4','9','“对于爱变得十分贪婪”'],['s10','19','废墟里送饭，被儿子甩开'],['s12','24','多尔与巴布']],
+ q:[['我不想说我杀了他。因为我爱巴布。','24','多尔']]},
+{id:'disaster',t:'灾难即启示',en:'Disaster',gist:'雷暴、洪水、大火、战争、干旱，隔几章来一次。它们并不改变谁的命运，只是把人从日常里剥出来，让他们看见平时看不见的东西，然后生活照旧合拢。',
+ takes:[['stan','每一场都把他推近一步：雷电教他谦卑，洪水让他看见死者，大火让他碰到欲望。'],['amy','灾难是她等在外面的时刻，看着别人被改变。'],['odowd','把洪水当出游，带着酒唱着歌去。'],['madeleine','一场火烧掉头发和婚约，幻象变回凡人。'],['fritz','战火没烧到杜瑞尔盖，先把一个德国老头赶出了村。']],
+ ex:[['s2','5','雷暴'],['s3','7','乌龙雅洪水'],['s5','12','格兰斯顿伯里大火'],['s6','13–14','战争'],['s9','18','干旱']],
+ q:[['这里先前是一块平原，现在是水的世界。','7','叙述'],['他们甚至发现干旱也有一种超然的美。','18','叙述']]},
+{id:'root',t:'扎根与漂泊',en:'Permanence',gist:'年轻的斯坦只想永远待在某个地方。他做到了，孩子们却都走了，雷往下坠，塞尔玛往上爬。小说问的是，留在原地算不算一种成就。',
+ takes:[['stan','在一个地方过完一生，名字和这片地分不开。'],['ray','学徒、赌注登记、卖汽车、夜总会，没有一处停得住。'],['thelma','从商业学校到律师太太，每一步都离杜瑞尔盖更远。'],['doll','给了全书最朴素的说法：人慢慢就在一个地方扎下根。'],['madeleine','游历、嫁人，回来时要问格兰斯顿伯里在哪个方向。'],['grandson','祖父死的那天，走进同一片树林。']],
+ ex:[['s1','1','“总算到了一个地方”'],['s2','6','多尔谈扎根'],['s8','16','两个孩子先后进城'],['s11','21','卖地']],
+ q:[['总算到了一个地方。','1','叙述'],['人在一个地方怎样扎下根来是挺有意思的。','6','多尔'],['我简直认不出这地方了','22','雷']]},
+{id:'ordinary',t:'平凡里的光',en:'The ordinary',gist:'怀特说过他想写出平凡背后的不平凡。书里的启示总落在小东西上：蚂蚁，一块红玻璃，挤进桶里的牛奶，一口唾沫。',
+ takes:[['stan','看蚂蚁从地里钻出来，看唾沫在地上发光。'],['gage','趴在地上看蚂蚁，被邻人当成怪人。'],['boy','透过红玻璃看世界。'],['amy','多数时候看不见，却在盖奇的画前忽然看懂了。'],['grandson','继承了那块玻璃。']],
+ ex:[['s3','7','红玻璃片'],['s4','8','盖奇与蚂蚁；风中的牛棚'],['s8','17','修理工耶稣'],['s12','25','珍珠般的唾沫'],['s12','26','玻璃片后的丛林']],
+ q:[['他只是一个普通人。','1','叙述']]},
+{id:'alone',t:'同床异梦',en:'Marriage',gist:'帕克夫妇相守一生，彼此始终是谜。婚礼那天他们各具不同，却又浑然一体，此后整本书都在量这两者之间的距离。',
+ takes:[['stan','用沉默守住内心，妻子进不来。'],['amy','进不去，于是转向儿子、幻象和一个推销员。'],['gage','丈夫的画，妻子在他死后才摆出来。'],['odowd_mrs','吵闹、动刀、和好。她说自己其实也不完全是他的妻子。'],['dudley','与塞尔玛相敬如宾，婚姻像一份办妥的文件。']],
+ ex:[['s1','3','婚礼与第一夜'],['s4','11','斯坦觉得有“几个艾米”'],['s5','12','楼梯上的一刻，无人提起'],['s9','18','利奥'],['s11','21','剧场里各想各的']],
+ q:[['我只是他的妻子，其实也不完全是。','10','欧达乌德太太']]},
+{id:'art',t:'艺术与看见',en:'Art',gist:'这家人与艺术只碰过三次：盖奇的遗画，悉尼的一场《哈姆雷特》，塞尔玛的音乐会。每次都有人被击中，也有人只是坐在那里。结尾把写作的事交给了孙子。',
+ takes:[['gage','真正的画家，无名，自缢。'],['amy','在画前看懂了，在剧场里想的却是利奥。'],['stan','少年时读过剧本，台上那个膝盖瘦削的人不是他心里的哈姆雷特。'],['thelma','把音乐当教养来修习。'],['odowd','说自己要是会画，就画绵羊的下水。'],['grandson','要写一首生命的诗。']],
+ ex:[['s8','17','遗画示众'],['s11','21','《哈姆雷特》'],['s12','25','音乐会'],['s12','26','诗']],
+ q:[['这是我们的哈姆雷特吗？','21','斯坦'],['那么，他将写一首生命的诗。','26','叙述']]},
+{id:'suburb',t:'丛林变郊区',en:'Bush to suburb',gist:'第一章是一个人和一片树。后来有了邻居、杂货铺、邮局、新房和汽车，帕克家的地一块块卖掉，杜瑞尔盖成了悉尼的郊区。最后一章只剩屋后没人要的溪谷里那片树。',
+ takes:[['stan','砍下第一棵树的人，晚年坐在被新房子围住的花园里。'],['amy','随手栽下的花木疯长，几乎占领了房子。'],['thelma','劝父母卖地。'],['ossie','什么都能折成价钱的邻居。'],['grandson','在最后的树林里。']],
+ ex:[['s1','1','两株硬皮桉之间'],['s2','5','别的人也来这一带居住'],['s4','8','杂货铺和邮政局'],['s11','21','卖地，新房'],['s12','26','只剩树木']],
+ q:[['归根结底，这里还是一片树木','26','叙述']]},
+{id:'class',t:'体面与幻象',en:'Class & dream',gist:'格兰斯顿伯里别墅和马德琳，是村里人看得见的另一种生活。艾米把骑马的马德琳当梦来养，塞尔玛干脆走进了那个阶层。几十年后马德琳成了菲希尔太太，坐在艾米屋里，梦和体面一起露了底。',
+ takes:[['amy','需要一个幻象，马德琳正好。'],['madeleine','被人拿来做梦的人，自己并不快活。'],['stan','在着火的楼梯上与她有过一刻。'],['thelma','修指甲，练谈吐，嫁律师，把出身一点点擦掉。'],['armstrongs','别墅烧了重建，儿子战死后停工。'],['bourkes','热那亚天鹅绒沙发，是塞尔玛的第一级台阶。'],['dudley','她到达的地方。']],
+ ex:[['s4','9','马德琳的名字传来'],['s5','12','宴会与大火'],['s7','15','盖了一半的新别墅'],['s8','16','塞尔玛在鲍凯家'],['s11','22','菲希尔太太来访']],
+ q:[['这么说是你，马德琳！','22','艾米'],['当然，他们是好人','19','塞尔玛']]},
+{id:'cycle',t:'代际与循环',en:'Generations',gist:'书以一个年轻人走进树林开头，以一个少年走进树林结尾。中间是三代人：铁匠和女教师，拓荒的夫妇，一个罪犯和一位太太，最后是口袋里装着玻璃片的孙子。',
+ takes:[['parents','给了他手艺、《旧约》和一笔字。'],['stan','既是儿子，也是祖父。'],['ray','留下两个男孩，分属两个女人。'],['thelma','没有孩子，传下去的是财产和礼节。'],['elsie','把孙子带回老屋的人。'],['lola','另一个男孩的母亲。'],['grandson','树的新枝。']],
+ ex:[['s1','1','母亲说他长成大人了'],['s4','9','雷和塞尔玛出生'],['s10','20','孙子出生'],['s11','22','罗拉的男孩趴在窗上'],['s12','26','少年走进丛林']],
+ q:[['你都长成大人了。','1','斯坦的母亲']]}
+];
+
+CH.lolaboy={n:'罗拉的男孩',en:"Lola's boy",role:'雷和罗拉的儿子。',w:1,rel:['ray','lola','amy'],con:['cycle'],in:{s11:'被父亲带回老屋，趴在窗玻璃上往里看，祖母盯着他热烘烘的后脑勺。'},q:[]};
+const SHORT={stan:'斯坦',amy:'艾米',ray:'雷',thelma:'塞尔玛',odowd_mrs:'欧达乌德太太',odowd:'欧达乌德',doll:'多尔',bub:'巴布',fritz:'弗利兹',boy:'洪水里的孩子',gage:'盖奇先生',mrsgage:'盖奇太太',madeleine:'马德琳',armstrongs:'阿姆斯特朗家',ossie:'奥塞·皮博迪',con:'柯',leo:'利奥',dudley:'达德利',elsie:'埃尔西',lola:'罗拉',grandson:'孙子',bourkes:'鲍凯夫妇',evangelist:'传教士',stranger:'过路人',parents:'父母',lolaboy:'罗拉的男孩'};
+const POS={stranger:[62,76],leo:[136,76],evangelist:[210,76],parents:[390,76],armstrongs:[610,76],madeleine:[706,76],
+ odowd_mrs:[76,201],odowd:[168,201],doll:[76,326],bub:[168,326],stan:[345,205],amy:[435,205],fritz:[280,318],con:[340,318],boy:[468,318],
+ mrsgage:[612,201],gage:[704,201],ossie:[658,326],elsie:[235,465],ray:[330,465],lola:[425,465],thelma:[545,465],dudley:[636,465],grandson:[282,592],lolaboy:[378,592],bourkes:[612,596]};
+const REG=[['过路的人 Passers-by',14,8,244,124],['柳溪 Willow Creek',300,8,180,124],['格兰斯顿伯里 Glastonbury',552,8,214,124],["欧达乌德家 The O'Dowds",14,137,214,122],['奎克莱依家 The Quigleys',14,264,214,122],['帕克家 The Parkers · 杜瑞尔盖 Durilgai',240,137,292,249],['邮政局 Post office',552,137,214,122],['皮博迪家 The Peabodys',580,264,158,122],['悉尼 Sydney',176,402,520,304]];
+const WED=[['stan','amy'],['elsie','ray'],['ray','lola',1],['thelma','dudley'],['odowd_mrs','odowd',1],['mrsgage','gage'],['doll','bub',0,'姐弟'],['armstrongs','madeleine',1,'客人']];
+const DESC=[['parents',null,['stan'],136],['stan','amy',['ray','thelma'],394],['elsie','ray',['grandson'],535],['ray','lola',['lolaboy'],535]];
+const ACTS=[['stranger','stan','借宿一夜','s1',1],['odowd_mrs','amy','第一个朋友','s2',0],['doll','stan','帮着盖房','s2',1],
+['fritz','stan','帮工','s3',0],['amy','boy','想收养','s3',1],['ossie','stan','赶车同去洪水','s3',0],
+['amy','madeleine','当作梦','s4',1],['odowd','odowd_mrs','酒后提刀','s4',1],['ossie','stan','压价买牛犊','s4',1],['amy','gage','撞见他看蚂蚁','s4',1],['madeleine','armstrongs','与小汤姆的婚约','s4',0],
+['stan','madeleine','火中救出','s5',1],
+['ossie','fritz','逼走','s6',1],['armstrongs','stan','酬谢信','s6',1],['madeleine','armstrongs','婚事告吹','s6',0],
+['ray','con','朋友','s7',0],['amy','con','心神不安','s7',1],
+['thelma','bourkes','寄宿','s8',1],['mrsgage','amy','拉去看遗画','s8',1],['amy','gage','看懂了画','s8',1],
+['leo','amy','私通','s9',1],
+['amy','ray','废墟里送饭','s10',1],['ray','thelma','借二十镑','s10',1],['amy','elsie','开始爱她','s10',1],['mrsgage','amy','重逢','s10',0],
+['thelma','madeleine','朋友','s11',0],['amy','madeleine','认出','s11',1],['ray','lolaboy','带回老屋','s11',1],
+['doll','bub','了结','s12',1],['amy','doll','疯人院探望','s12',1],['evangelist','stan','传福音','s12',1],['amy','grandson','给了玻璃片','s12',1],['amy','odowd_mrs','守到临终','s12',1],['lola','amy','讲述雷之死','s12',1]];
+const F={stan:{h:'#5a4632',hat:'bush',sk:'#d9a77c'},amy:{h:'#6b4a2e',s:'bun'},ray:{h:'#2b2420',s:'short',sk:'#e0b08a',m:1},thelma:{h:'#cdb58a',s:'bob',sk:'#f3ddcc',x:'pearl'},
+odowd_mrs:{h:'#b5532a',s:'curly',sk:'#ecb99a'},odowd:{h:'#b5532a',s:'short',b:'#b5532a',sk:'#e3a07e'},doll:{h:'#8d8b84',s:'bun',sk:'#ead2bd',thin:1},bub:{h:'#b99a6a',s:'tuft',k:1},
+fritz:{h:'#e6e3da',s:'short',b:'#e6e3da'},boy:{h:'#4a3a2a',s:'short',k:1,x:'glass'},gage:{h:'#3a342e',s:'bald',thin:1,sk:'#e6cdb6'},mrsgage:{h:'#3a2e28',s:'bun',sk:'#eac3a6'},
+madeleine:{h:'#c9853a',s:'long',hat:'riding',sk:'#f4dfcf'},armstrongs:{h:'#8a8580',hat:'top',m:1},ossie:{h:'#6a5a44',hat:'cap'},con:{h:'#1e1b1a',s:'curly',sk:'#c9925f'},
+leo:{h:'#2a2320',s:'short',m:1,x:'freck',sk:'#d79c72'},dudley:{h:'#5a5148',s:'bald',g:1},elsie:{h:'#7a5a3a',s:'bob'},lola:{h:'#17171a',s:'long',x:'lips'},
+grandson:{h:'#8a6a44',s:'tuft',k:1,sk:'#f1dccb'},bourkes:{h:'#d7b45a',s:'curly',x:'lips'},evangelist:{h:'#6a4a2a',s:'part'},stranger:{h:'#7a756c',hat:'bush',b:'#7a756c',sk:'#cf9a70'},
+parents:{h:'#b8b4aa',s:'bun',g:1},lolaboy:{h:'#22201e',s:'short',k:1}};
+function face(k,x,y,r){
+  const f=F[k]||{},sk=f.sk||'#e8c3a2',h=f.h||'#555',ink='#26302a',sc=(r/20)*(f.k?.86:1);
+  let o='';
+  if(f.s==='long')o+=`<path d="M-14,-2 Q-15,-17 0,-17 Q15,-17 14,-2 L15,15 Q8,11 8,4 L-8,4 Q-8,11 -15,15Z" fill="${h}"/>`;
+  if(f.s==='bob')o+=`<path d="M-14,-2 Q-15,-17 0,-17 Q15,-17 14,-2 L14,8 Q10,9 9,3 L-9,3 Q-10,9 -14,8Z" fill="${h}"/>`;
+  if(f.s==='bun')o+=`<circle cx="0" cy="-16" r="5" fill="${h}"/>`;
+  if(f.s==='curly')o+=[[-11,-8],[-6,-14],[0,-16],[6,-14],[11,-8],[-13,-1],[13,-1]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="5" fill="${h}"/>`).join('');
+  o+=`<ellipse cx="0" cy="1" rx="${f.thin?10.5:12}" ry="14" fill="${sk}"/>`;
+  if(f.s==='bald')o+=`<circle cx="-11.5" cy="0" r="3" fill="${h}"/><circle cx="11.5" cy="0" r="3" fill="${h}"/>`;
+  else if(f.s==='tuft')o+=`<path d="M-7,-11 Q-2,-18 1,-12 Q5,-17 8,-10 Q0,-9 -7,-11Z" fill="${h}"/>`;
+  else if(f.s==='part')o+=`<path d="M-12,-2 Q-13,-15 0,-15 Q13,-15 12,-2 Q10,-9 -4,-10 Q-9,-8 -12,-2Z" fill="${h}"/>`;
+  else if(!f.hat||f.hat==='riding')o+=`<path d="M-12,-1 Q-13,-15 0,-15 Q13,-15 12,-1 Q6,-8 0,-8 Q-6,-8 -12,-1Z" fill="${h}"/>`;
+  if(f.hat==='bush')o+=`<path d="M-10,-9 Q-10,-21 0,-21 Q10,-21 10,-9Z" fill="#7b6240"/><ellipse cx="0" cy="-9" rx="19" ry="4" fill="#8f744c"/>`;
+  if(f.hat==='top')o+=`<rect x="-9" y="-25" width="18" height="15" fill="#2e2e33"/><rect x="-14" y="-11" width="28" height="3" rx="1.5" fill="#2e2e33"/>`;
+  if(f.hat==='cap')o+=`<path d="M-12,-8 Q-12,-18 0,-18 Q12,-18 12,-8Z" fill="#5c6a5a"/><path d="M-12,-8 L17,-8 Q17,-5 12,-5 L-12,-5Z" fill="#48543f"/>`;
+  if(f.hat==='riding')o+=`<path d="M-9,-11 Q-9,-20 0,-20 Q9,-20 9,-11Z" fill="#23232a"/><ellipse cx="0" cy="-11" rx="14" ry="2.6" fill="#23232a"/>`;
+  if(f.b)o+=`<path d="M-11.5,4 Q-10,17 0,17 Q10,17 11.5,4 Q6,9 0,9 Q-6,9 -11.5,4Z" fill="${f.b}"/>`;
+  const er=f.k?1.7:1.3;
+  o+=`<circle cx="-4.5" cy="1" r="${er}" fill="${ink}"/><circle cx="4.5" cy="1" r="${er}" fill="${ink}"/>`;
+  if(f.g)o+=`<circle cx="-4.5" cy="1" r="3.6" fill="none" stroke="${ink}" stroke-width=".9"/><circle cx="4.5" cy="1" r="3.6" fill="none" stroke="${ink}" stroke-width=".9"/><path d="M-.9,1 L.9,1" stroke="${ink}" stroke-width=".9"/>`;
+  if(f.m)o+=`<path d="M-5,7 Q0,4.5 5,7" fill="none" stroke="${h}" stroke-width="2.2" stroke-linecap="round"/>`;
+  if(f.x==='lips')o+=`<path d="M-3.2,8.5 Q0,11 3.2,8.5" fill="none" stroke="#b3273f" stroke-width="2" stroke-linecap="round"/>`;
+  else if(!f.b)o+=`<path d="M-3,${f.m?10:8.5} Q0,${f.m?11.5:10.5} 3,${f.m?10:8.5}" fill="none" stroke="#7a4a3a" stroke-width="1" stroke-linecap="round"/>`;
+  if(f.x==='freck')o+=[[-7,4],[-5.5,5.5],[7,4],[5.5,5.5]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r=".7" fill="#9a5a3a"/>`).join('');
+  if(f.x==='pearl')o+=[-5,-2.5,0,2.5,5].map(p=>`<circle cx="${p}" cy="${15.5-Math.abs(p)*.25}" r="1.3" fill="#fbfbf5" stroke="#b9b6aa" stroke-width=".4"/>`).join('');
+  if(f.x==='glass')o+=`<rect x="0.5" y="-3.5" width="9" height="8" rx="1" fill="#b0244f" opacity=".72" transform="rotate(-10 5 0)"/>`;
+  return `<g transform="translate(${x.toFixed(1)},${y.toFixed(1)}) scale(${sc.toFixed(2)})" aria-hidden="true">${o}</g>`;
+}
+function placeMap(sid,sel){
+  const W=780,H=712,R=20;
+  const acts=sel?ACTS.filter(a=>a[0]===sel||a[1]===sel):ACTS.filter(a=>a[3]===sid);
+  const lit=new Set(Object.keys(POS).filter(k=>CH[k].in[sid]));
+  acts.forEach(a=>{lit.add(a[0]);lit.add(a[1])});
+  let o=`<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10Z"/></marker></defs>`;
+  o+=REG.map(r=>`<rect class="region" x="${r[1]}" y="${r[2]}" width="${r[3]}" height="${r[4]}" rx="12"/><text class="rtitle" x="${r[1]+12}" y="${r[2]+20}">${r[0]}</text>`).join('');
+  WED.forEach(w=>{const a=POS[w[0]],b=POS[w[1]],x1=a[0]+R+4,x2=b[0]-R-4,y=a[1];
+    if(w[2]||w[3])o+=`<path class="kin${w[2]?' loose':''}" d="M${x1},${y} L${x2},${y}"/>`;
+    else o+=`<path class="kin" d="M${x1},${y-2.5} L${x2},${y-2.5} M${x1},${y+2.5} L${x2},${y+2.5}"/>`;
+    if(w[3])o+=`<text class="kinlab" x="${(x1+x2)/2}" y="${y+14}">${w[3]}</text>`});
+  DESC.forEach(d=>{const a=POS[d[0]],px=d[1]?(a[0]+POS[d[1]][0])/2:a[0],py=d[1]?a[1]+3:a[1]+R+34;
+    d[2].forEach(c=>{const q=POS[c];o+=`<path class="kin" d="M${px},${py} L${px},${d[3]} L${q[0]},${d[3]} L${q[0]},${q[1]-R-8}"/>`})});
+  let labs='';
+  acts.forEach((a,i)=>{const p=POS[a[0]],q=POS[a[1]];let dx=q[0]-p[0],dy=q[1]-p[1];const L=Math.hypot(dx,dy);dx/=L;dy/=L;
+    let nx=dy,ny=-dx;if(ny>0||(ny===0&&nx>0)){nx=-nx;ny=-ny}
+    const dup=acts.filter((b,j)=>j<i&&((b[0]===a[0]&&b[1]===a[1])||(b[0]===a[1]&&b[1]===a[0]))).length;
+    const off=Math.max(30,L*.16)*(dup?-1.3:1);
+    const cx=(p[0]+q[0])/2+nx*off,cy=(p[1]+q[1])/2+ny*off,g=R+7;
+    const d1=Math.hypot(cx-p[0],cy-p[1]),d2=Math.hypot(cx-q[0],cy-q[1]);
+    const sx=p[0]+(cx-p[0])/d1*g,sy=p[1]+(cy-p[1])/d1*g,ex=q[0]+(cx-q[0])/d2*g,ey=q[1]+(cy-q[1])/d2*g;
+    o+=`<path class="actl" d="M${sx.toFixed(1)},${sy.toFixed(1)} Q${cx.toFixed(1)},${cy.toFixed(1)} ${ex.toFixed(1)},${ey.toFixed(1)}"${a[4]?' marker-end="url(#ar)"':''}/>`;
+    labs+=`<text class="actt" x="${(.25*sx+.5*cx+.25*ex).toFixed(1)}" y="${(.25*sy+.5*cy+.25*ey+4).toFixed(1)}">${esc(a[2])}${sel&&a[3]!==sid?' · '+S(a[3]).t:''}</text>`});
+  Object.keys(POS).forEach(k=>{const p=POS[k],c=CH[k];
+    o+=`<g class="node${c.fam?' fam':''}${sel===k?' on':''}${lit.has(k)?'':' dim'}" tabindex="0" role="button" aria-label="${esc(c.n)}" data-act="map-char" data-id="${k}"><circle class="ring" cx="${p[0]}" cy="${p[1]}" r="${R+3}"/>${face(k,p[0],p[1],R)}<text x="${p[0]}" y="${p[1]+R+17}">${esc(SHORT[k])}</text><text class="sub" x="${p[0]}" y="${p[1]+R+30}">${esc(EN[k])}</text></g>`});
+  return `<svg viewBox="0 0 ${W} ${H}" role="group" aria-label="人物地图">${o}${labs}</svg>`;
+}
+const EN={stan:'Stan Parker',amy:'Amy Parker',ray:'Ray Parker',thelma:'Thelma',odowd_mrs:"Mrs O'Dowd",odowd:"O'Dowd",doll:'Doll Quigley',bub:'Bub Quigley',fritz:'Fritz',boy:'the flood child',gage:'Mr Gage',mrsgage:'Mrs Gage',madeleine:'Madeleine',armstrongs:'the Armstrongs',ossie:'Ossie Peabody',con:'Con',leo:'Leo',dudley:'Dudley Forsdyke',elsie:'Elsie',lola:'Lola',grandson:'the grandson',bourkes:'the Bourkes',evangelist:'the evangelist',stranger:'the stranger',parents:"Stan's parents",lolaboy:"Lola's boy"};
+const MORE={
+s1:'开头几乎没有对话。斯坦的来历是倒着交代的：柳溪（Willow Creek）的老房子，铁匠父亲艾德·帕克，教过书、想让他当教师或传道士的母亲。他自己只想找个地方永远待下去。艾米是凯利角菲宾斯家的孩子，跟着姨父姨母长大，十六岁起给人帮工，唯一敬重的人是牧师的妻子埃尔贝太太，那本《圣经》和银擦板都是她给的。两人在尤罗加（Yuruga）的教堂舞会上认识，几乎没有恋爱就结了婚。第四章里艾米一个人在空地上等丈夫从班加雷（Bangalay）赶集回来，开始觉得自己被这片寂静缩小了。',
+s2:'这一段写的是“两个人”怎样变成“一个地方”。欧达乌德太太胖墩墩地坐在大车上闯进来，说她家离这儿只有一两英里，那匹栗色母马就死在拐弯的地方。艾米擦桌子时一直想着她，因为她以前从来没有过朋友。雷暴那一夜，夫妻俩在雨里搂抱着找对方的脸，棚屋塌了，三只小母鸡被压扁。第六章搬进斯坦和奎克莱依家小伙子们盖的新房，艾米怀了孕，盼着是个小姑娘。母牛病倒的夜里，欧达乌德教他们往啤酒瓶里灌煤油给牛治病，牛还是死了，艾米往回跑得太快，孩子没保住。',
+s3:'全书最长的单章之一。洪水是邻居们的一次出征，也是斯坦第一次看见大量的死亡：水漫进窗户，在教堂尖顶下打旋，柳树下漂着人脸和牲口。女人们留在岸上的临时救济处，欧达乌德太太一路评点，阿姆斯特朗家的轻便马车从她们身边溅着泥水驶过。回程的大车上最后只剩帕克夫妇和一个没人认领的男孩，他手里攥着一块红玻璃。艾米在想象里已经和他一起坐在教堂长椅上了。这是她第一次想要占有一个人而落空，后面还有许多次。',
+s4:'四章合在一起是帕克家的壮年。第八章用杂货铺和邮局给村子定了名，也引出邮政局长盖奇太太和她那位没人注意的丈夫。第九章孩子出生，艾米却并不因此满足，她看着丈夫，觉得还没能把他整个得到；雷从小就大吵大闹，爬到很高的树上，对一只空鸟巢都带着轻蔑。同一章里欧达乌德太太带来了马德琳的消息，从此大路尽头总有一位骑马的女人。第十章是一出闹剧，酒醒后的欧达乌德哭着说都是性格害了他。第十一章回到斯坦：雷电让他觉得皮肉都从骨头上脱落了，他在门廊上学会了卑微，第二天照样去跟奥塞·皮博迪为一头牛犊讲价。',
+s5:'这一章的前半是艾米的。她提着鸭子走进格兰斯顿伯里（Glastonbury）的厨房，厨娘弗里斯巴依太太把硬币扔给她，说起这场宴会是为了马德琳和小阿姆斯特朗的婚事。艾米隔着门看见那些像金属丝一样脆的客人。后半是斯坦的。火起初只是烟味，男人们还开着玩笑回家睡觉；第二天几个孩子飞跑来报信，火已经进了河谷。斯坦穿着笨重的靴子踢开一扇扇门找到马德琳。楼梯上的那几行是全书最接近情欲的地方，她承认他的汗水让她沉醉。两人出来以后，这件事再没有被任何人说起。',
+s6:'第十三章里村子自己先打了一场小仗。欧达乌德太太拿到厨娘的信，说马德琳“有的那点感情在起火的那天晚上也都烧光了”；艾米夜里还梦见自己在火里旋转。然后莫瑞阿蒂在杂货铺宣布开战，雷兴奋得吃不下饭，奥塞·皮博迪来敲打艾米，说这时候还养着一个德国佬不合适。弗利兹脸色像纸一样白，蹒跚着回了棚屋，随后离开。斯坦吻别时艾米穿着白罩衫，僵硬得像个陌生人。第十四章只有十几段，写炮弹炸开的皮肉、战友汤姆·阿切尔和杰克·萨利文的死、斯坦在一座只剩窗框的教堂里坐着。他的信问的是母牛彻丽下犊了没有。',
+s7:'战争没有给杜瑞尔盖带来什么损失，这是这章的第一句话，也是它的讽刺。斯坦不在的时候，一个腿上带伤的年轻兵路过，艾米在大丽花的荫凉里和他说了一会儿话，那是她第一次意识到自己可以被陌生人注意。斯坦回来以后，差点开口问孩子们几岁。多尔光着脚来送她烤的点心，艾米笑她是爱上了斯坦。斯坦独自走上山坡，格兰斯顿伯里的新房盖到一半就废了，有过路人在里面生过火。然后是希腊人柯：艾米给他一个大红苹果，看他咬下去；雷翻他的盒子，把那把上了油的刀子拿在手里掂量。柯唱完歌宣布要去邦代娶一个开铺子的寡妇。',
+s8:'两个孩子用两种方式离开。雷在班加雷寄住在诺斯科特大妈家，跟鞍具匠贾漫学徒，父亲羞于把这个儿子拿到众人面前；他留下一封信说“反正我得动动地方”，进城给卖赛马彩票的伯尼·亚伯拉罕姆斯干活，一桩蹊跷的事连累霍瑞·鲍凯丢了差事。斯坦进城去找他，坐电车、问路，最后站在大街上明白自己见不着儿子了。塞尔玛的信则越写越得体：气喘病不大犯了，想去配副眼镜，想在证券经纪人或律师那里找个工作。第十七章，盖奇先生死了，太太们来“表示同情”，艾米一个人在那些画前面站住。回家路上欧达乌德夫妇拉她喝酒，欧达乌德说他也知道该画什么。',
+s9:'这一章把两件看似无关的事叠在一起，干旱和通奸。天空像一张白纸，人们先是互相打量，后来只盯着天。利奥是个块头很大的男人，带着衣料、长统袜和时新的扣子。艾米站在高出地面的门廊上跟他谈起丈夫的信仰，然后让他进了屋。事后她把那看成是往丈夫脸上、也往丈夫那位上帝的神秘上吐了一口。斯坦认出那辆车，没有进屋，一路开到城里，喝到在巷子里呕吐、撒尿。他回来时她正说着新下的牛犊，两个人忽然变得彼此客气起来。',
+s10:'第四部从一辆汽车开始，孩子们如今是开车回来的。达德利·福斯迪克是律师事务所的合伙人，塞尔玛原是那里的打字员，她听见打字机换行的铃声还会心惊。父亲居然能和这位不带感情色彩的女婿在牛棚边谈得很自在，让母女俩都有点气恼。同一章的夜里，多尔来报信，艾米提着灯推开格兰斯顿伯里生锈的大门。雷说自己在西部跑船，从墨尔本搭货车回来；他吃完东西就要走，她想学会怎样留住他，却什么也没学会。第二十章里花园开始吞没房子，年轻的乔·皮博迪来帮斯坦围篱笆，盖奇太太路过叙旧。埃尔西带着婴儿住下时，一场暴风雨把两个女人刮得笑起来。艾米翻出一只铁盒，里面有几片红玻璃。',
+s11:'杜瑞尔盖成了郊区。塞尔玛带来一个“小小的计划”，劝父母把地分批卖掉，斯坦其实早就想到了。老两口有时进城逛街，发现自己还很健壮。《哈姆雷特》是斯坦提议去看的：他母亲当年指着书讲给他听，如今台上的毒药让他想起那辆蓝色汽车，艾米坐在顶层楼座上想要回她的小男孩。圣餐一场里，年轻牧师像用榔头往人灵魂里钉信仰，斯坦嗓子发干，尝到酒里有那天夜里的胆汁味。第二十二章是两次来访。雷衣着华贵，教那个陌生的男孩往水坑里扔石头；塞尔玛领来一位皮肤像白垩的菲希尔太太，她站在台阶上问格兰斯顿伯里在哪个方向。',
+s12:'四章四场死亡，写法各不相同。雷的死先出现在晨报上，斯坦光着头站在寒霜里读；过后才由罗拉在她的住处讲给艾米听，阿尔费怎样走进来，雷怎样转过身。欧达乌德太太把病说成一个从网袋里甩出来的小包，两个黑不溜秋的老女人在冷阳光下走了一小段路。多尔的一章最短也最静，她穿着体面的小方格裙子来通知艾米。最后是斯坦：花园以他为中心一圈圈展开，他坐在草地上，被一个出汗的年轻人追问信不信上帝。同一天艾米找到了埃尔贝太太送的银擦板，他已经不记得那是什么了。第二十六章不到一页，从“归根结底”开始，也以它结束。'};
+const EV2={
+s1:[['1','母亲翻抽屉时说他长成大人了；斯坦想起贴在玻璃窗上的那张女人的脸'],['3','菲宾斯家房顶上那块一直没钉回去的铁皮，是艾米回头看见的最后一样东西'],['4','斯坦去班加雷赶集，红色的法院和黄色的监狱都没能让他信服']],
+s2:[['5','夫妻间“第一次出现了某种松动”'],['6','欧达乌德传授用啤酒瓶灌煤油治牛的办法']],
+s3:[['7','巴布在水边捡到一块被洪水磨圆的石头'],['7','奥塞·皮博迪赶车把帕克夫妇和孩子送到家门口']],
+s4:[['8','艾米在柳树下避开马车上的两位姑娘，因为不满意自己的脸'],['9','老牧师珀布莱克为孩子施洗'],['9','雷嫌多尔，艾米替他道歉']],
+s5:[['12','厨娘弗里斯巴依太太把鸭子钱扔给艾米'],['12','孩子们飞跑来报信，火进了河谷']],
+s6:[['13','欧达乌德太太与艾米为马德琳几乎翻脸'],['14','信里问母牛彻丽下犊了没有，告诉塞尔玛袜子收到了']],
+s7:[['15','多尔光着脚来送点心'],['15','雷把柯盒子里的刀子拿在手里'],['15','柯宣布要去邦代娶一个开铺子的寡妇']],
+s8:[['16','雷留信出走：“反正我得动动地方”'],['16','霍瑞·鲍凯受牵连丢了差事；斯坦进城找儿子未果'],['17','回家路上欧达乌德夫妇拉艾米喝酒']],
+s9:[['18','艾米给雷的小笔记本，他不喜欢'],['18','利奥第二次来']],
+s10:[['19','多尔来报信，说起巴布犯病时她怎样守着他'],['20','年轻的乔·皮博迪帮斯坦围篱笆'],['20','暴风雨里艾米与埃尔西一起笑；铁盒里的红玻璃片']],
+s11:[['21','老头带着狗和雪貂在干涸的小溪边过了一个傍晚'],['21','艾米告诉塞尔玛，雷离开埃尔西了'],['22','雷教罗拉的男孩往水坑里扔石头']],
+s12:[['23','两个老女人在冷阳光下走了一小段路，然后分手'],['24','艾米冬天坐公共汽车去班加雷看多尔，带了一袋枣子'],['25','艾米找到银擦板，斯坦已经忘了它']]};
+const BIO={
+stan:'铁匠艾德·帕克的儿子，在柳溪长大，母亲教过书，给了他一笔工整的字和一点读过的书。小说对他的定义出现在第一章：他只是一个普通人，不善于解释。他砍树、挤奶、送奶油，从不缺一次；他救过人，打过仗，被妻子背叛过，都没有说什么。怀特把一场漫长的、不借助任何教义的寻找放在这样一个人身上，全书的结构就是他被一次次灾难推着往里走。',
+amy:'凯利角菲宾斯家的孩子，家里穷，孩子多，她跟着姨父姨母长大，出嫁前没有爱过谁。她比斯坦会说话，也比他更需要别人：一个朋友，一个孩子，一个可以拿来做梦的贵妇，一个路过的男人。她几乎每次伸手都抓空。她不是坏人，书里的大部分温情也来自她：她给战场上的丈夫写信，给逃亡的儿子送饭，守着邻居死。结尾时银擦板找到了，丈夫却走了。',
+ray:'头生子，来得很晚，被母亲爱得透不过气。小时候他躲进屋后的溪谷，母亲追不上；他说自己不结婚，要去赛马，或者徒步横跨澳大利亚。此后的每一份营生都比上一份更靠近底层：鞍具学徒，赛马彩票，西部的货船，卖汽车，最后是夜总会。他知道自己一无所有，偶尔回家一次，穿得很讲究，像在给父母看一件戏装。',
+thelma:'从小苍白，有气喘病，头发颜色很浅。她很早就明白乡下出身是一件要处理掉的东西，于是学打字、速记，进律师事务所，嫁给合伙人，住进能望见海港的房子，再去读伦理学和人类学、听音乐会。她对父母有礼而疏远，承认父亲“人品是相当难得的”。父亲死后她才真正想起他的手。她没有孩子。',
+odowd_mrs:'帕克家往外一两英里的邻居，从一辆大车上闯进艾米的生活，此后五十年都是她的消息来源、对头和伴儿。她的话是全书最鲜活的口语，不敬神父，不怕丈夫，连自己是不是他合法的妻子也满不在乎地说破。她和艾米吵过，为马德琳，为各自的丈夫，每次都舍不得真的翻脸。',
+odowd:'欧达乌德太太的男人。清醒时是个传授土法的热心邻居，喝了酒就放枪、提刀，把两个女人追得绕屋跑，酒醒又哭。书里拿他和斯坦对照：一个把什么都喊出来，一个什么都不说。',
+doll:'奎克莱依家的女儿，瘦长，光着脚，从小孩儿直接长成老姑娘，村里人后来都叫她奎克莱依小姐。她帮帕克家盖房，给归来的斯坦烤点心，守着犯病的弟弟，往他嘴里塞软木。斯坦觉得岁月没有在她身上留下泥。她是书里最接近“圣徒”的人，她的结局也因此最难承受。',
+bub:'多尔的弟弟，娃娃脸，智力停在童年，会犯很凶的病。他喜欢石头、树枝和山羊。多尔常想自己应当更爱他。',
+fritz:'在洪水那年来到帕克家的德国老头，住在棚屋里，和斯坦一起种地，是斯坦少有的朋友。战争一来，村里人忽然想起了他的国籍。',
+boy:'没有名字。洪水退后没人认领，被帕克夫妇用大车带回家。他有一块红玻璃，说透过它看，洪水是紫红色的。艾米留着那些碎片，几十年后放在一只画着小花的铁盒里。',
+gage:'邮政局长的丈夫，干些零活，村里人几乎想不起他的存在。艾米只真正见过他一次，他趴在地上，整个人被一只蚂蚁吸住。他死后人们才知道他一直在画。',
+mrsgage:'杜瑞尔盖的邮政局长，有一架钢琴，嘴快，日子经她一讲总是活灵活现。丈夫自缢后她把画摆出来，既是诉苦也是示众。多年后她胖了，路过时与艾米在大路上互相认出。',
+madeleine:'格兰斯顿伯里的常客，传言中小汤姆·阿姆斯特朗的未婚妻。艾米从没和她说过话，却在心里跟着她过了许多年。火灾以后她离开了，再出现时是塞尔玛的朋友菲希尔太太，皮肤像白垩，对自己的优雅也不满意，说想养蜂。',
+armstrongs:'杜瑞尔盖一带最有钱的人家，住在砖砌的别墅格兰斯顿伯里，有厨娘、宴会和从城里来的客人。阿姆斯特朗太太为自己的富有感到负疚。别墅烧掉后他们动手重建，儿子小汤姆战死，老头中风，工程就停在半截。',
+ossie:'帕克家的邻居，有一大家子要养。他有马车，肯帮忙，也肯占便宜，人们都说他奸滑。后来他家的年轻人乔·皮博迪还来帮斯坦围篱笆。',
+con:'战后流落到这一带找活干的希腊青年，不会说这里的话，会唱歌，有一只装着私人物件的盒子。他在帕克家没待多久，全家人却都被他改变了一点。',
+leo:'块头很大的流动推销员，开一辆蓝色汽车，爱讲乡村小镇的轶事。他来过两次。',
+dudley:'律师事务所的合伙人，娶了自己所里的打字员。开车时不喜欢分心。他读了太多关于别人如何生活的文件，偶尔会对真正的生活生出过分迫切的好奇。',
+elsie:'悉尼来的姑娘，戴一顶拉得很低的大黑帽子，朴素，壮实。她很快明白自己得不到足够的恩爱，却没有因此变坏。艾米先是挑剔她，后来爱她。',
+lola:'雷离开埃尔西后跟的女人，年纪不轻，在艾米口中是“那个婆娘”。雷死的那晚她在场。',
+grandson:'埃尔西和雷的儿子。祖父曾对他说起小时候用蓝铅笔画地图上的海湾。他个子长得太快，衣袖都短了。',
+bourkes:'莉莉原是尤罗加绸布商伯特家的三女儿，斯坦母亲那边的亲戚，嫁给了与赛马打交道的霍瑞·鲍凯，住在兰德维克。她说大家都喜欢斯坦，可他慢吞吞的，是艾米“招赘”了他。',
+evangelist:'一个挨家传福音的年轻人，自述过去酗酒、玩女人，后来跪在地上得了救。他相信同样的事也会发生在这个老头身上。',
+stranger:'帕克夫妇婚后见到的第一个外人，秃顶上搭着几缕头发，自称曾在非洲调查贩卖红木的生意。他把《圣经》和药水一起卖。',
+parents:'父亲艾德·帕克是铁匠，力气大，喝酒；母亲教过书，读书，手指后来生了关节炎。《哈姆雷特》和《旧约》都是她带进这个家的。',
+lolaboy:'雷和罗拉的儿子，长得漂亮，被带来见祖母一次。'};
+const CMORE={
+god:'值得留意的是每一步都发生在身体上而不在头脑里：跪下，淋雨，嗓子发干，呕吐，吐唾沫。斯坦从没有读过神学，也没有和谁讨论过。教堂在书里一再出现，却总是不顶用：艾米在彩色玻璃窗下没有得到恩赐，前线的教堂只剩窗框，圣餐酒里是胆汁味。最后那位传教士带来的是别人的得救故事，斯坦用拐杖一指，给了他一个自己的。',
+silence:'这也是怀特给自己出的题：怎样用语言去写不靠语言生活的人。他的办法是让叙述贴着人物的感觉走，句子常常断在半截。书里真正流利的人都不大可靠，推销员、律师、传教士、塞尔玛。艾米晚年抱怨受过教育的人把话里的意思都“漂白”光了。',
+possess:'艾米的每一次占有都对应一件小东西：银擦板，白玫瑰，给雷的笔记本，给柯的红苹果，铁盒里的碎玻璃。她收着这些东西，就像收着没能留住的人。书对她并不苛刻，它只是一次次让她看见，被爱的人有一个她到不了的地方。',
+disaster:'五场灾难的排列有一种近乎《旧约》的节奏，雷、水、火、刀兵、旱。每一场之后小说都特意写日常怎样回来：压扁的母鸡喂了狗，烧焦的山谷重新变绿，战后的头一句是村子没什么损失。启示来过，没有留下可以指给别人看的痕迹。',
+root:'“扎根”在书里不全是褒义。斯坦的留守有时近于迟钝，莉莉·鲍凯说他慢慢吞吞；而雷那句“反正我得动动地方”引的正是父亲的话。到第四部，连土地本身也不再是可以扎根的东西，它被分成一块块卖给盖房子的人。',
+ordinary:'这些小东西几乎都与“看”有关：趴下去看，透过玻璃看，在牛棚的昏暗里看。书里的人大多看不见，看见的那几个，盖奇、斯坦、那个孩子，都付出了被当作怪人或者干脆消失的代价。',
+alone:'小说并不把这写成失败。帕克夫妇之间有习惯、照料和偶尔涌上来的柔情，艾米老了还会拂着丈夫的袖子问他要一个吻。只是每个人最要紧的那部分经验，斯坦的上帝，艾米的欲望，都是独自经历的，对方只看见它留在脸上的影子。',
+art:'三次里只有盖奇是创作者，其余都是观众。怀特让最不可能的人做了最好的观众：艾米没有知识，却在那幅耶稣前面“理解了它”；斯坦看《哈姆雷特》时整晚没有表情，回家以后那出戏才在他身上发作。塞尔玛懂得最多，得到的反而最少。',
+suburb:'这条线写得很平静，没有挽歌的腔调。新房子里的人有他们自己的日子，帕克老两口只是不再相信眼前发生的事。花园是艾米对郊区的回答：她不按计划，看见什么想要就栽什么，最后花木把房子围了起来，斯坦死在它的正中。',
+class:'体面在书里总带着一点人工的气味：塞尔玛嘴里紫罗兰味的口香糖，鲍凯家的热那亚天鹅绒，律师太太们的珍珠项链。与之相对的是多尔那张毫无装饰的桌子，塞尔玛在它面前觉得自己“变得可疑了”。',
+cycle:'循环并不等于重复。斯坦带着斧子进树林，孙子带着一块玻璃；一个要开出一块地，一个要写一首诗。中间那一代是断裂的，雷和塞尔玛都没有接住父母的东西，它绕过他们传了下去。'};
+const QCTX={
+'总算到了一个地方。':'第一夜，斯坦在两株硬皮桉之间点起火堆以后。',
+'他只是一个普通人。':'斯坦坐在火边，想到母亲原本对他的打算。',
+'人在一个地方怎样扎下根来是挺有意思的。':'多尔对艾米说起自家迁到这里的感受。',
+'现在我们已经像邻居那样，相互认识了。':'欧达乌德太太坐在大车上，第一次邀艾米去喝茶。',
+'这里先前是一块平原，现在是水的世界。':'男人们的马车到达乌龙雅时看见的景象。',
+'没有理由非出什么差错。':'艾米再次怀孕、害怕失去时，斯坦在她脖子后面说的话。',
+'我是个中不溜秋的人。':'欧达乌德提刀追人之后，哭着为自己辩解。',
+'他们一起在浓烟滚滚的楼梯口燃烧。':'斯坦带着马德琳下楼的那一刻。',
+'我们从来都不是能说会道的人。':'斯坦从前线写给艾米的信。',
+'我要是会画，就知道该画什么':'艾米看过盖奇的遗画后，在欧达乌德家喝酒时他的咆哮。',
+'他自杀了，亲爱的':'盖奇太太抓着艾米的手宣布消息。',
+'人们都叫我利奥。':'推销员俯下身，隔着烟气看着艾米。',
+'我的丈夫信仰上帝。至少我认为他信仰。':'艾米站在门廊上，居高临下地对利奥说。',
+'他们甚至发现干旱也有一种超然的美。':'旱情持续，人们不再互相打量，只望着枯黄的田野。',
+'当然，他们是好人':'开车回乡的路上，塞尔玛缩在皮领子里对丈夫谈起父母。',
+'我简直认不出你了':'盖奇太太多年后在大路上认出艾米。',
+'这是我们的哈姆雷特吗？':'斯坦在剧场里看着台上那个身穿黑衣的瘦弱演员。',
+'这么说是你，马德琳！':'塞尔玛提到格兰斯顿伯里，艾米才认出菲希尔太太。',
+'我简直认不出这地方了':'雷穿着讲究的衣服回到被花木吞没的老屋。',
+'这就是上帝':'斯坦用拐杖指着地上的唾沫，回答传教士。',
+'我不想说我杀了他。因为我爱巴布。':'多尔走到帕克家，平静地告诉艾米发生了什么。',
+'归根结底，这里还是一片树木':'最后一章的第一句。',
+'那么，他将写一首生命的诗。':'孙子躺在沙地上，透过玻璃片看着树林。',
+'啊，上帝！啊，上帝！':'斯坦坐在地上起不来，蚂蚁从土里钻出来。',
+'是癌':'欧达乌德太太看着从网袋里掉出来的小包，对艾米说。',
+'我只是他的妻子，其实也不完全是。':'欧达乌德太太向艾米解释为什么劝不住丈夫。',
+'你都长成大人了。':'斯坦回忆里，母亲在柳溪的老房子翻抽屉时抬头说的话。'};
+const S=id=>STAGES.find(s=>s.id===id), C=id=>CON.find(c=>c.id===id);
+const st={mode:'timeline',stage:'s1',char:null,con:null};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const quote=q=>`<blockquote>“${esc(q[0])}”<cite>第${q[1]}章${q[2]?' · '+esc(q[2]):''}</cite>${QCTX[q[0]]?`<p class="ctx">${esc(QCTX[q[0]])}</p>`:''}</blockquote>`;
+const btn=(act,id,label,cls='link',extra='')=>`<button class="${cls}" data-act="${act}" data-id="${id}" ${extra}>${esc(label)}</button>`;
+
+function graph(hub,nodes){
+  const W=680,H=520,cx=W/2,cy=H/2-6,n=nodes.length;
+  let edges='',out='';
+  nodes.forEach((d,i)=>{
+    const a=-Math.PI/2+i*2*Math.PI/n, k=(n>8&&i%2)?.66:1;
+    const x=cx+Math.cos(a)*262*k, y=cy+Math.sin(a)*190*k;
+    const r=d.w===3?24:d.w===2?18:13;
+    edges+=`<line class="edge${d.on?' on':''}" x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}"/>`;
+    const isP=!d.type&&F[d.id], rr=isP?r+5:r;
+    const shape=d.type==='stg'?`<rect class="ring" x="${(x-15).toFixed(1)}" y="${(y-15).toFixed(1)}" width="30" height="30" rx="5"/>`:`<circle class="ring" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rr}"/>`+(isP?face(d.id,x,y,rr-3):'');
+    const ly=y+(d.type==='stg'?15:rr)+16;
+    out+=`<g class="node ${d.type||''}${d.fam?' fam':''}${d.on?' on':''}" tabindex="0" role="button" aria-label="${esc(d.label)}" data-act="${d.act}" data-id="${d.id}">${shape}<text x="${x.toFixed(1)}" y="${ly.toFixed(1)}">${esc(d.label)}</text>${d.sub?`<text class="sub" x="${x.toFixed(1)}" y="${(ly+14).toFixed(1)}">${esc(d.sub)}</text>`:''}</g>`;
+  });
+  const hubG=`<g class="hub${hub.act?' node':''}" ${hub.act?`tabindex="0" role="button" data-act="${hub.act}" data-id="${hub.id||''}"`:''}><circle class="hubc" cx="${cx}" cy="${cy}" r="50"/><text x="${cx}" y="${cy+(hub.sub?0:7)}" font-size="${hub.label.length>4?16:20}">${esc(hub.label)}</text>${hub.sub?`<text class="sub" x="${cx}" y="${cy+19}">${esc(hub.sub)}</text>`:''}</g>`;
+  return `<svg viewBox="0 0 ${W} ${H}" role="group" aria-label="关系图">${edges}${hubG}${out}</svg>`;
+}
+
+function charsIn(sid){return Object.keys(CH).filter(k=>CH[k].in[sid]).sort((a,b)=>CH[b].w-CH[a].w)}
+
+function renderStrip(){
+  const tot=STAGES.reduce((a,s)=>a+s.w,0);
+  $('strip').innerHTML=STAGES.map(s=>`<button class="seg${s.kind?' hit':''}" style="flex-grow:${s.w}" aria-pressed="${st.stage===s.id}" data-act="stage" data-id="${s.id}"><span class="ch">第${s.ch}章</span><span class="t">${s.t}</span><span class="mk">${s.mk||''}</span></button>`).join('');
+  $('parts').innerHTML=[1,2,3,4].map(p=>{const w=STAGES.filter(s=>s.part===p).reduce((a,s)=>a+s.w,0);return `<span style="flex:${w} 1 0;min-width:0">${PARTS[p-1]}</span>`}).join('');
+}
+
+function renderTimeline(){
+  const s=S(st.stage), ids=charsIn(s.id);
+  if(st.char&&!CH[st.char].in[s.id])st.char=null;
+  $('graph').innerHTML=placeMap(s.id,st.char);
+  $('legend').innerHTML='<span>虚线框：住处</span><span>双线：夫妻　虚线：同居或客居　折线：亲子</span><span>红线：'+(st.char?'此人一生的举动':'这一段里的举动')+'</span><span>变淡的人这一段不出场</span>';
+  let h='';
+  if(st.char){
+    const c=CH[st.char];
+    h+=btn('char','', '← 回到「'+s.t+'」','back');
+    h+=`<div><p class="eyebrow">人物</p><h2>${esc(c.n)}<span>${esc(c.en)}</span></h2></div><p class="lead">${esc(c.role)}</p><p class="lead">${esc(BIO[st.char]||'')}</p>`;
+    h+=`<div><h3>一生轨迹</h3><ul class="list">${STAGES.filter(x=>c.in[x.id]).map(x=>`<li class="${x.id===s.id?'now':''}">${btn('stage',x.id,x.t)}<span>${esc(c.in[x.id])} <span class="tag">第${x.ch}章</span></span></li>`).join('')}</ul></div>`;
+    if(c.q.length)h+=`<div><h3>原句</h3><div class="quotes">${c.q.map(quote).join('')}</div></div>`;
+    const mine=ACTS.filter(a=>a[0]===st.char||a[1]===st.char);
+    if(mine.length)h+=`<div><h3>关系与举动</h3><ul class="list">${mine.map(a=>`<li>${btn('stage',a[3],S(a[3]).t)}<span>${esc(SHORT[a[0]])} ${a[4]?'→':'—'} ${esc(SHORT[a[1]])}：${esc(a[2])}</span></li>`).join('')}</ul></div>`;
+    h+=`<div><h3>相关人物</h3><div class="conrow">${c.rel.map(r=>btn('goto-char',r,CH[r].n,'chip p')).join('')}</div></div>`;
+    h+=`<div><h3>相关概念</h3><div class="conrow">${c.con.map(r=>btn('goto-con',r,C(r).t,'chip c')).join('')}</div></div>`;
+  }else{
+    h+=`<div><p class="eyebrow">${PARTS[s.part-1]} · 第${s.ch}章</p><h2>${esc(s.t)}<span>${esc(s.en)}</span></h2></div><p class="lead">${esc(s.sum)}</p><p class="lead">${esc(MORE[s.id])}</p>`;
+    h+=`<div><h3>发生了什么</h3><ul class="list">${s.ev.concat(EV2[s.id]||[]).sort((a,b)=>parseInt(a[0])-parseInt(b[0])).map(e=>`<li><span class="tag">第${e[0]}章</span><span>${esc(e[1])}</span></li>`).join('')}</ul></div>`;
+    if(s.q.length)h+=`<div><h3>原句</h3><div class="quotes">${s.q.map(quote).join('')}</div></div>`;
+    h+=`<div><h3>这一段里的人</h3><ul class="list">${ids.map(k=>`<li>${btn('char',k,CH[k].n)}<span>${esc(CH[k].in[s.id])}</span></li>`).join('')}</ul></div>`;
+    h+=`<div><h3>相关概念</h3><div class="conrow">${s.con.map(r=>btn('goto-con',r,C(r).t,'chip c')).join('')}</div></div>`;
+  }
+  $('panel').innerHTML=h;
+}
+
+function renderConcepts(){
+  $('conrow').innerHTML=btn('con','', '全部','chip',`aria-pressed="${!st.con}"`)+CON.map(c=>btn('con',c.id,c.t,'chip',`aria-pressed="${st.con===c.id}"`)).join('');
+  let h='';
+  if(!st.con){
+    $('graph').innerHTML=graph({label:'人树'},CON.map(c=>({id:c.id,label:c.t,sub:c.en,w:2,type:'con',act:'con'})));
+    $('legend').innerHTML='<span>点一个概念，看它在谁身上、在哪一章出现</span>';
+    h+=`<div><p class="eyebrow">十一个概念</p><h2>这本书在问什么</h2></div><p class="lead">时间线按“发生了什么”排，这里按“为什么写”排。每个概念下面有三样东西：不同人物给出的不同回答，书里的例证，和几句原话。</p>`;
+    h+=`<ul class="list">${CON.map(c=>`<li>${btn('con',c.id,c.t)}<span>${esc(c.gist.split('。')[0])}。</span></li>`).join('')}</ul>`;
+  }else{
+    const c=C(st.con);
+    const nodes=c.takes.map(t=>({id:t[0],label:SHORT[t[0]],sub:EN[t[0]],w:CH[t[0]].w,fam:CH[t[0]].fam,act:'focus'}))
+      .concat(c.ex.map((e,i)=>({id:'ex'+i,label:S(e[0]).t,sub:'第'+e[1]+'章',type:'stg',act:'focus'})));
+    $('graph').innerHTML=graph({label:c.t,sub:c.en,act:'con',id:''},nodes);
+    $('legend').innerHTML='<span><i class="f"></i><i></i>人物的回答</span><span><i class="s"></i>书中的例证</span><span>点中心回到全部概念</span>';
+    h+=`<div><p class="eyebrow">概念</p><h2>${esc(c.t)}<span>${esc(c.en)}</span></h2></div><p class="lead">${esc(c.gist)}</p><p class="lead">${esc(CMORE[c.id])}</p>`;
+    h+=`<div><h3>不同的回答</h3><ul class="list">${c.takes.map(t=>`<li id="f-${t[0]}">${btn('goto-char',t[0],CH[t[0]].n)}<span>${esc(t[1])}</span></li>`).join('')}</ul></div>`;
+    h+=`<div><h3>例证</h3><ul class="list">${c.ex.map((e,i)=>`<li id="f-ex${i}">${btn('goto-stage',e[0],S(e[0]).t)}<span>${esc(e[2])} <span class="tag">第${e[1]}章</span></span></li>`).join('')}</ul></div>`;
+    h+=`<div><h3>原句</h3><div class="quotes">${c.q.map(quote).join('')}</div></div>`;
+    h+=`<p class="hint">人名和段落名都可以点，会跳到时间线上对应的位置。</p>`;
+  }
+  $('panel').innerHTML=h;
+}
+
+function render(){
+  const tl=st.mode==='timeline';
+  $('v-timeline').hidden=!tl; $('v-concepts').hidden=tl;
+  $('m-timeline').setAttribute('aria-pressed',tl); $('m-concepts').setAttribute('aria-pressed',!tl);
+  if(tl){renderStrip();renderTimeline()}else renderConcepts();
+}
+function firstStage(cid){return STAGES.find(s=>CH[cid].in[s.id]).id}
+function act(a,id){
+  if(a==='mode'){st.mode=id;try{history.replaceState(null,'','#'+id)}catch(e){}}
+  else if(a==='stage'){st.stage=id}
+  else if(a==='char'){st.char=(id&&st.char!==id)?id:null}
+  else if(a==='map-char'){if(!CH[id].in[st.stage])st.stage=firstStage(id);st.char=(st.char!==id)?id:null}
+  else if(a==='con'){st.con=id||null}
+  else if(a==='goto-con'){st.mode='concepts';st.con=id}
+  else if(a==='goto-stage'){st.mode='timeline';st.stage=id;st.char=null}
+  else if(a==='goto-char'){if(st.mode!=='timeline'||!CH[id].in[st.stage])st.stage=firstStage(id);st.mode='timeline';st.char=id}
+  else if(a==='focus'){const el=$('f-'+id);if(el){el.scrollIntoView({block:'center',behavior:'smooth'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash')}return}
+  render();
+}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(t)act(t.dataset.act,t.dataset.id)});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('g[data-act]')){e.preventDefault();act(e.target.dataset.act,e.target.dataset.id)}});
+function fromHash(){const h=location.hash.slice(1);if(h==='concepts'||h==='timeline'){st.mode=h;render()}}
+window.addEventListener('hashchange',fromHash);
+if(location.hash.slice(1)==='concepts')st.mode='concepts';
+render();
+</script>
+</body>
+</html>
