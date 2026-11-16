@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-14T01:18:57+00:00",
+ "updated": "2026-11-16T01:18:45+00:00",
  "venues": [
   {
    "id": "louvre",
@@ -497,7 +497,7 @@
    "end": "2027-01-31",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
+   "url": "https://www.musee-orsay.fr/fr/programme/agenda/expositions/presentation/mary-cassatt-lindependante"
   },
   {
    "id": "o-holzer",
@@ -585,7 +585,8 @@
    "end": "2027-01-25",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.musee-orangerie.fr/fr/programme/agenda/expositions/monet-peindre-le-temps"
+   "url": "https://www.musee-orangerie.fr/fr/programme/agenda/expositions/monet-peindre-le-temps",
+   "price": "€12.50 full / €10 reduced"
   },
   {
    "id": "ma-paysages",
@@ -597,7 +598,8 @@
    "end": "2027-01-31",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.marmottan.fr/expositions/histoires-de-paysages/"
+   "url": "https://www.marmottan.fr/expositions/histoires-de-paysages/",
+   "price": "€14 full, €9 reduced (museum ticket covers permanent collections and temporary exhibitions)"
   },
   {
    "id": "mam-hist",
@@ -609,7 +611,8 @@
    "end": "2027-01-24",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.mam.paris.fr/"
+   "url": "https://www.mam.paris.fr/",
+   "price": "€17"
   },
   {
    "id": "pdt-cherri",
@@ -858,7 +861,8 @@
    "end": "2027-01-03",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.le-bal.fr/2026/05/lespace-entre-nous"
+   "url": "https://www.le-bal.fr/2026/05/lespace-entre-nous",
+   "price": "€10"
   },
   {
    "id": "gal-vest",
@@ -896,7 +900,7 @@
    "admission": "paid",
    "discipline": "History & collections",
    "url": "https://www.imarabe.org/fr/agenda/expositions-musee/vive-mariee",
-   "price": "€10 museum ticket, free under 26 (IMA museum admission)"
+   "price": "€12 full, €10 reduced, €6 ages 12-26, free under 12; combined museum + exhibition ticket €15"
   },
   {
    "id": "ima-alhambra",
@@ -1008,7 +1012,7 @@
    "end": "2027-01-24",
    "admission": "paid",
    "discipline": "Sculpture & installation",
-   "url": "https://www.mam.paris.fr/"
+   "url": "https://www.mam.paris.fr/fr/expositions/exposition-simone-fattal"
   },
   {
    "id": "mam-krewer",
@@ -1042,10 +1046,10 @@
    "artists": "Pablo Picasso",
    "start": "2026-10-06",
    "end": "2027-01-03",
-   "admission": "check",
+   "admission": "free",
    "discipline": "Painting & works on paper",
    "url": "https://www.museepicassoparis.fr/fr/agenda/salle-dossier-pablo-picasso-au-prisme-de-cahiers-dart/",
-   "note": "A display within the museum."
+   "note": "A display within the museum; the page states 'Entrée gratuite et libre dans la limite des places disponibles'."
   },
   {
    "id": "pi-kuitca",
@@ -1223,10 +1227,11 @@
    "artists": "Peter Soriano",
    "start": "2026-09-24",
    "end": "2027-01-31",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Painting & works on paper",
    "url": "https://www.marmottan.fr/expositions/monet-soriano/",
-   "note": "A display within the museum."
+   "note": "A display within the museum.",
+   "price": "€14 full, €9 reduced (museum ticket covers permanent collections and temporary exhibitions)"
   },
   {
    "id": "mep-traore",
@@ -1290,9 +1295,10 @@
    "artists": "",
    "start": "2025-10-22",
    "end": "2027-01-03",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.imarabe.org/fr/agenda/expositions-musee/tenter-art-pour-soigner-hopital-psychiatrique-blida-joinville-dans-les"
+   "url": "https://www.imarabe.org/fr/agenda/expositions-musee/tenter-art-pour-soigner-hopital-psychiatrique-blida-joinville-dans-les",
+   "price": "€10 museum ticket, free under 26"
   },
   {
    "id": "ca-cain",
