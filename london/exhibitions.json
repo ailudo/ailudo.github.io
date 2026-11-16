@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15T01:46:02+00:00",
+ "updated": "2026-11-16T01:44:42+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -549,20 +549,6 @@
    "url": "https://www.britishmuseum.org/exhibitions/multiplied-wonders-italian-renaissance-woodcuts"
   },
   {
-   "id": "va-schiaparelli",
-   "venue": "va",
-   "site": "South Kensington",
-   "short": "Elsa Schiaparelli",
-   "title": "Schiaparelli: Fashion Becomes Art",
-   "artists": "Elsa Schiaparelli",
-   "start": "2026-03-28",
-   "end": "2026-11-15",
-   "admission": "paid",
-   "note": "Sold out online",
-   "discipline": "Design & architecture",
-   "url": "https://www.vam.ac.uk/exhibitions/schiaparelli"
-  },
-  {
    "id": "va-rising-voices",
    "venue": "va",
    "site": "South Kensington",
@@ -605,21 +591,6 @@
    "price": "£22.50–£24.50",
    "discipline": "History & collections",
    "url": "https://www.vam.ac.uk/exhibitions/the-music-is-black-a-british-story"
-  },
-  {
-   "id": "va-aardman",
-   "venue": "va",
-   "site": "Young V&A",
-   "area": "City & East",
-   "short": "Inside Aardman",
-   "title": "Inside Aardman: Wallace & Gromit and Friends",
-   "artists": "Aardman",
-   "start": "2026-02-12",
-   "end": "2026-11-15",
-   "admission": "paid",
-   "price": "£12.50",
-   "discipline": "Photography & moving image",
-   "url": "https://www.vam.ac.uk/exhibitions/inside-aardman-wallace-gromit-and-friends"
   },
   {
    "id": "wc-churchill",
@@ -1526,6 +1497,18 @@
    "discipline": "Painting & works on paper",
    "url": "https://www.saatchigallery.com/exhibition/sketches-that-shaped-history",
    "note": "Presented by Harvey, Gallery 3"
+  },
+  {
+   "id": "bb-uprising",
+   "venue": "barbican",
+   "short": "Black British Resistance in London",
+   "title": "Uprising in the Wake",
+   "artists": "Phil Lewis, David Hoffman, Vron Ware, Ada Cotton, Etienne Joseph and Jeffrey Lennon",
+   "start": "2027-01-25",
+   "end": "2027-05-03",
+   "admission": "free",
+   "discipline": "Photography & moving image",
+   "url": "https://www.barbican.org.uk/whats-on/2027/event/uprising-in-the-wake"
   }
  ]
 }
