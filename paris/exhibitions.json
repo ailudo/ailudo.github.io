@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-16T01:18:45+00:00",
+ "updated": "2026-11-17T01:21:34+00:00",
  "venues": [
   {
    "id": "louvre",
@@ -515,13 +515,13 @@
    "id": "o-bartholdi",
    "venue": "orsay",
    "short": "Auguste Bartholdi",
-   "title": "Liberty Enlightening the World",
+   "title": "Auguste Bartholdi. La Liberté éclairant le monde",
    "artists": "Auguste Bartholdi",
    "start": "2026-09-15",
    "end": "2027-01-31",
    "admission": "paid",
    "discipline": "Sculpture & installation",
-   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions"
+   "url": "https://www.musee-orsay.fr/fr/programme/agenda/expositions/auguste-bartholdi-la-liberte-eclairant-le-monde"
   },
   {
    "id": "o-monet",
@@ -699,8 +699,8 @@
    "short": "Barbara Kruger",
    "title": "The History of Tears",
    "artists": "Barbara Kruger",
-   "start": null,
-   "end": "2027-01-25",
+   "start": "2026-10-07",
+   "end": "2027-01-18",
    "admission": "paid",
    "discipline": "Sculpture & installation",
    "url": "https://www.pinaultcollection.com/en/boursedecommerce/history-tears",
@@ -742,7 +742,7 @@
    "title": "Stendhal Syndrome",
    "artists": "Nan Goldin",
    "start": null,
-   "end": "2027-01-25",
+   "end": "2027-01-24",
    "admission": "paid",
    "discipline": "Photography & moving image",
    "url": "https://www.pinaultcollection.com/en/boursedecommerce/nan-goldin-stendhal-syndrome",
@@ -816,7 +816,7 @@
    "id": "gp-cezanne",
    "venue": "grandpalais",
    "short": "Cézanne and the artists after him",
-   "title": "Cézanne et nous",
+   "title": "Cezanne et nous",
    "artists": "Paul Cézanne, Paul Gauguin, Henri Matisse, Pablo Picasso, Piet Mondrian, Joan Mitchell and others",
    "start": "2026-09-23",
    "end": "2027-01-17",
@@ -837,7 +837,7 @@
    "admission": "paid",
    "discipline": "Photography & moving image",
    "url": "https://jeudepaume.org/evenement/stan-douglas/",
-   "price": "€12 full / €9 reduced online; €13 / €9.50 on site"
+   "price": "€14 full / €9.50 reduced on site (€7.50 students and ages 19–25, Tue–Fri)"
   },
   {
    "id": "mep-penn",
@@ -849,7 +849,8 @@
    "end": "2027-01-17",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.mep-fr.org/event/penn-fashion/"
+   "url": "https://www.mep-fr.org/event/penn-fashion/",
+   "price": "€14 full / €9 reduced online; €13 / €8 at the desk"
   },
   {
    "id": "bal-wilson",
@@ -894,7 +895,7 @@
    "venue": "ima",
    "short": "Weddings in Algeria, Morocco and Tunisia",
    "title": "Vive la mariée !",
-   "artists": "",
+   "artists": "Héla Ammar, Daoud Aoulad-Syad, Valérie Belin, Carolle Bénitah, Lazhar Mansouri, Sara Ouhaddou and others",
    "start": "2026-09-29",
    "end": "2027-02-28",
    "admission": "paid",
@@ -925,7 +926,8 @@
    "end": "2027-02-08",
    "admission": "paid",
    "discipline": "Sculpture & installation",
-   "url": "https://www.guimet.fr/fr/expositions/dal-dari-la-lune-et-les-jambes"
+   "url": "https://www.guimet.fr/fr/expositions/dal-dari-la-lune-et-les-jambes",
+   "price": "€15 full, €12 reduced (museum ticket incl. collections)"
   },
   {
    "id": "gu-trompe",
@@ -937,7 +939,8 @@
    "end": "2027-01-04",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.guimet.fr/fr/expositions/le-savoir-en-trompe-loeil-coree-18e-20e-s"
+   "url": "https://www.guimet.fr/fr/expositions/le-savoir-en-trompe-loeil-coree-18e-20e-s",
+   "price": "€15 full, €12 reduced (museum ticket incl. collections); free under 26"
   },
   {
    "id": "ce-coree",
@@ -1012,7 +1015,8 @@
    "end": "2027-01-24",
    "admission": "paid",
    "discipline": "Sculpture & installation",
-   "url": "https://www.mam.paris.fr/fr/expositions/exposition-simone-fattal"
+   "url": "https://www.mam.paris.fr/fr/expositions/exposition-simone-fattal",
+   "price": "up to €17"
   },
   {
    "id": "mam-krewer",
@@ -1022,7 +1026,7 @@
    "artists": "Florian Krewer",
    "start": "2026-06-19",
    "end": "2027-01-04",
-   "admission": "paid",
+   "admission": "free",
    "discipline": "Painting & works on paper",
    "url": "https://www.mam.paris.fr/"
   },
@@ -1122,7 +1126,7 @@
    "venue": "cartier",
    "short": "Ibrahim Mahama",
    "title": "Le Temps des récoltes",
-   "artists": "Ibrahim Mahama, Dorothy Akpene Amenuke, Gideon Appah, James Barnor, CATPC, Courage Dzidula Kpodo, Zohra Opoku, Tjaša Rener, Feda Wardak",
+   "artists": "Ibrahim Mahama, Dorothy Akpene Amenuke, Gideon Appah, James Barnor, Cercle d'Art des Travailleurs de Plantation Congolaise (CATPC), Courage Dzidula Kpodo and Postbox Ghana, Zohra Opoku, Tjaša Rener, Feda Wardak",
    "start": "2026-10-22",
    "end": "2027-02-28",
    "admission": "paid",
@@ -1134,7 +1138,7 @@
    "id": "qb-premieres",
    "venue": "branly",
    "short": "First Nations",
-   "title": "Premières Nations",
+   "title": "Premières Nations. Arts et cultures du Nord-Ouest de l'Amérique",
    "artists": "",
    "start": "2026-09-29",
    "end": "2027-01-17",
@@ -1148,12 +1152,13 @@
    "venue": "branly",
    "short": "Early photographs of Tahiti",
    "title": "Voir Tahiti: Premières photographies 1859–1870",
-   "artists": "",
+   "artists": "Gustave Viaud, Paul Émile Miot",
    "start": "2026-09-29",
    "end": "2027-01-31",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.quaibranly.fr/fr/expositions-evenements/au-musee/expositions/details-de-levenement/e/voir-tahiti"
+   "url": "https://www.quaibranly.fr/fr/expositions-evenements/au-musee/expositions/details-de-levenement/e/voir-tahiti",
+   "price": "€14 full, €11 reduced (museum ticket)"
   },
   {
    "id": "qb-mivekannin",
@@ -1165,7 +1170,8 @@
    "end": "2027-04-04",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.quaibranly.fr/fr/expositions-evenements/au-musee/expositions/details-de-levenement/e/violence-silencieuse"
+   "url": "https://www.quaibranly.fr/fr/expositions-evenements/au-musee/expositions/details-de-levenement/e/violence-silencieuse",
+   "price": "€14 full, €11 reduced (museum ticket)"
   },
   {
    "id": "ad-kyoto",
@@ -1217,7 +1223,7 @@
    "admission": "paid",
    "discipline": "Painting & works on paper",
    "url": "https://www.musee-orangerie.fr/fr/agenda/expositions/vija-celmins",
-   "price": "€12.50"
+   "price": "€12.50 full / €10 reduced"
   },
   {
    "id": "ma-soriano",
@@ -1334,7 +1340,7 @@
    "artists": "Daniel Dezeuze",
    "start": "2026-07-21",
    "end": "2027-01-04",
-   "admission": "check",
+   "admission": "free",
    "discipline": "Painting & works on paper",
    "url": "https://www.mam.paris.fr/fr/expositions/exposition-daniel-dezeuze",
    "note": "Page only states free entry to the collections."
@@ -1360,7 +1366,7 @@
    "artists": "Jean-François Bauret",
    "start": "2026-06-09",
    "end": "2027-01-04",
-   "admission": "check",
+   "admission": "free",
    "discipline": "Photography & moving image",
    "url": "https://www.mam.paris.fr/fr/expositions/exposition-jean-francois-bauret",
    "note": "Page only states free entry to the collections."
@@ -1439,8 +1445,8 @@
    "artists": "Yo-E Ryou",
    "start": "2026-03-11",
    "end": "2027-02-21",
-   "admission": "check",
-   "price": "Museum ticket €14 full, €11 reduced",
+   "admission": "paid",
+   "price": "€14 full, €11 reduced (museum ticket)",
    "discipline": "Sculpture & installation",
    "note": "Sound work by the 2025 sound residency winner, shown in the Boîte à musique on the Plateau des collections; venue page does not say whether it needs a separate ticket.",
    "url": "https://www.quaibranly.fr/fr/expositions-evenements/au-musee/expositions/details-de-levenement/e/echoes-of-the-tides-40978"
@@ -1591,6 +1597,46 @@
    "discipline": "Photography & moving image",
    "url": "https://www.fondationlouisvuitton.fr/",
    "note": "Shown in Gallery 8; shares a ticket with the Gustave Fayet exhibition."
+  },
+  {
+   "id": "ima-filor",
+   "venue": "ima",
+   "short": "Gold and silk thread: traditional Tunisian women's dress",
+   "title": "Expo-dossier à la bibliothèque | De fil d'or et de soie",
+   "artists": "",
+   "start": "2026-11-03",
+   "end": "2027-02-28",
+   "admission": "free",
+   "discipline": "History & collections",
+   "url": "https://www.imarabe.org/fr/agenda/expositions-musee/expo-dossier-bibliotheque-fil-or-et-soie",
+   "price": "Accès libre",
+   "note": "A library display (Bibliothèque Leïla Shahid, level 1) presented alongside “Vive la mariée !”; free, no exhibition ticket needed."
+  },
+  {
+   "id": "jp-klein",
+   "venue": "jeudepaume",
+   "short": "William Klein",
+   "title": "New York Revisited",
+   "artists": "William Klein",
+   "start": "2027-01-26",
+   "end": "2027-05-30",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://jeudepaume.org/evenement/william-klein/",
+   "price": "€14 full / €9.50 reduced on site (general admission)"
+  },
+  {
+   "id": "jp-andrade",
+   "venue": "jeudepaume",
+   "short": "Jonathas de Andrade",
+   "title": "Gueule de bois tropicale et autres histoires",
+   "artists": "Jonathas de Andrade",
+   "start": "2027-01-26",
+   "end": "2027-05-30",
+   "admission": "paid",
+   "discipline": null,
+   "url": "https://jeudepaume.org/evenement/jonathas-de-andrade-paris/",
+   "price": "€14 full / €9.50 reduced on site (general admission)"
   }
  ]
 }
