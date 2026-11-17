@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Seven Times</title><meta name="description" content="Seven Times: a daily visual news briefing. Monday, November 16, 2026.">
+<title>Seven Times</title><meta name="description" content="Seven Times: a daily visual news briefing. Tuesday, November 17, 2026.">
 <style>
 :root{--color-fg:#1d1d1f;--color-fg-muted:#6e6e73;--color-bg:#fff;--color-panel:#f5f5f7;--color-border-line:rgba(0,0,0,.12);--color-bad:#ff453a}
 @media (prefers-color-scheme:dark){:root{--color-fg:#f5f5f7;--color-fg-muted:#a1a1a6;--color-bg:#000;--color-panel:#1c1c1e;--color-border-line:rgba(255,255,255,.16)}}
@@ -76,13 +76,13 @@ html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg)}
 .m7 .counting .real { display: none; }
 .m7 .big { font-size: clamp(4rem, 10cqi, 7.4rem); font-weight: 700; letter-spacing: -.05em; line-height: 1; margin-top: 1.1rem; font-variant-numeric: tabular-nums; }
 .m7 .big.long { font-size: clamp(3rem, 6.2cqi, 5.4rem); }
-.m7 [data-id=rb] { --g: linear-gradient(100deg, #ff9f0a,#ff453a); --e: #ff453a; }
-.m7 [data-id=jp] { --g: linear-gradient(100deg, #30d158,#0a84ff); --e: #0a84ff; }
-.m7 [data-id=pr] { --g: linear-gradient(100deg, #bf5af2,#ff375f); --e: #ff375f; }
-.m7 [data-id=ss] { --g: linear-gradient(100deg, #64d2ff,#5e5ce6); --e: #5e5ce6; }
-.m7 [data-id=kr] { --g: linear-gradient(100deg, #ffd60a,#ff9f0a); --e: #ff9f0a; }
-.m7 [data-id=mt] { --g: linear-gradient(100deg, #0a84ff,#bf5af2); --e: #0a84ff; }
-.m7 [data-id=ev] { --g: linear-gradient(100deg, #ff375f,#ffd60a); --e: #ff375f; }
+.m7 [data-id=bx] { --g: linear-gradient(100deg, #ff9f0a,#ff453a); --e: #ff453a; }
+.m7 [data-id=hp] { --g: linear-gradient(100deg, #ff9f0a,#0a84ff); --e: #0a84ff; }
+.m7 [data-id=hz] { --g: linear-gradient(100deg, #ff375f,#bf5af2); --e: #ff375f; }
+.m7 [data-id=nd] { --g: linear-gradient(100deg, #64d2ff,#5e5ce6); --e: #5e5ce6; }
+.m7 [data-id=ci] { --g: linear-gradient(100deg, #ffd60a,#ff9f0a); --e: #ff9f0a; }
+.m7 [data-id=ch] { --g: linear-gradient(100deg, #0a84ff,#ff375f); --e: #ff375f; }
+.m7 [data-id=ve] { --g: linear-gradient(100deg, #ffd60a,#ff9f0a); --e: #ff9f0a; }
 .m7 .credit { text-align: center; font-size: 12px; color: var(--color-fg-muted); padding: 1rem 1rem 3rem; }
 .m7 [data-dash-source-state=empty] { color: transparent; }
 .m7 .fail { display: flex; align-items: center; justify-content: center; gap: .5rem; min-height: 12rem; color: var(--sub); font-size: 13px; }
@@ -99,6 +99,7 @@ html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg)}
 
 </style></head>
 <body><div id="dash-root">
+
 <div class="m7" id="m7">
   <header class="mast" id="mast">
     <div class="wordmark">Seven Times</div>
@@ -106,117 +107,116 @@ html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg)}
     <div class="mdate" data-source="edition" data-field="label" data-row="0">—</div>
   </header>
   <div class="deck" id="deck">
-    <section class="card dark" id="s-rb" data-id="rb" data-tone="urgent">
+    <section class="card dark" id="s-bx" data-id="bx" data-tone="urgent">
       <div class="txt">
-        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=rb">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=rb">—</span> / <span class="cnt-total"></span></span></div>
-        <h2 data-source="stories" data-field="headline" data-where="id=rb">—</h2>
-        <p class="hook" data-source="stories" data-field="hook" data-where="id=rb">—</p>
-        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=rb-mps">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=rb-mps"></span></div>
-        <div class="blabel" data-source="facts" data-field="label" data-where="id=rb-mps">—</div>
-        <p class="dek" data-source="stories" data-field="dek" data-where="id=rb">—</p>
-        <p class="sowhat" data-source="stories" data-field="so_what" data-where="id=rb">—</p>
-        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=rb-total">—</span><span data-source="facts" data-field="unit" data-where="id=rb-total"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=rb-total">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=rb-invest">—</span><span data-source="facts" data-field="unit" data-where="id=rb-invest"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=rb-invest">—</div></div></div>
-        <div class="ctas"><a data-href="rb:1">Read at <span data-source="stories" data-field="src1" data-where="id=rb">—</span></a><a data-href="rb:2">Read at <span data-source="stories" data-field="src2" data-where="id=rb">—</span></a></div>
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=bx">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=bx">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=bx">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=bx">—</p>
+        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=bx-low">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=bx-low"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=bx-low">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=bx">—</p>
+        <p class="sowhat" data-source="stories" data-field="so_what" data-where="id=bx">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=bx-gain">—</span><span data-source="facts" data-field="unit" data-where="id=bx-gain"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=bx-gain">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=bx-high">—</span><span data-source="facts" data-field="unit" data-where="id=bx-high"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=bx-high">—</div></div></div>
+        <div class="ctas"><a data-href="bx:1">Read at <span data-source="stories" data-field="src1" data-where="id=bx">—</span></a><a data-href="bx:2">Read at <span data-source="stories" data-field="src2" data-where="id=bx">—</span></a></div>
       </div>
-      <div class="art" id="art-rb" data-source="facts"></div>
+      <div class="art" id="art-bx" data-source="facts"></div>
     </section>
 
-    <section class="card light" id="s-jp" data-id="jp" data-tone="light">
+    <section class="card light" id="s-hp" data-id="hp" data-tone="light">
       <div class="txt">
-        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=jp">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=jp">—</span> / <span class="cnt-total"></span></span></div>
-        <h2 data-source="stories" data-field="headline" data-where="id=jp">—</h2>
-        <p class="hook" data-source="stories" data-field="hook" data-where="id=jp">—</p>
-        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=jp-ann">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=jp-ann"></span></div>
-        <div class="blabel" data-source="facts" data-field="label" data-where="id=jp-ann">—</div>
-        <p class="dek" data-source="stories" data-field="dek" data-where="id=jp">—</p>
-        <p class="sowhat" data-source="stories" data-field="so_what" data-where="id=jp">—</p>
-        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=jp-capex">—</span><span data-source="facts" data-field="unit" data-where="id=jp-capex"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=jp-capex">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=jp-cons">—</span><span data-source="facts" data-field="unit" data-where="id=jp-cons"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=jp-cons">—</div></div></div>
-        <div class="ctas"><a data-href="jp:1">Read at <span data-source="stories" data-field="src1" data-where="id=jp">—</span></a><a data-href="jp:2">Read at <span data-source="stories" data-field="src2" data-where="id=jp">—</span></a></div>
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=hp">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=hp">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=hp">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=hp">—</p>
+        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=hp-fall">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=hp-fall"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=hp-fall">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=hp">—</p>
+        <p class="sowhat" data-source="stories" data-field="so_what" data-where="id=hp">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=hp-price">—</span><span data-source="facts" data-field="unit" data-where="id=hp-price"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=hp-price">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=hp-rate">—</span><span data-source="facts" data-field="unit" data-where="id=hp-rate"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=hp-rate">—</div></div></div>
+        <div class="ctas"><a data-href="hp:1">Read at <span data-source="stories" data-field="src1" data-where="id=hp">—</span></a><a data-href="hp:2">Read at <span data-source="stories" data-field="src2" data-where="id=hp">—</span></a></div>
       </div>
-      <div class="art" id="art-jp" data-source="facts"></div>
+      <div class="art" id="art-hp" data-source="facts"></div>
     </section>
 
-    <section class="card dark" id="s-pr" data-id="pr" data-tone="urgent">
+    <section class="card dark" id="s-hz" data-id="hz" data-tone="urgent">
       <div class="txt">
-        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=pr">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=pr">—</span> / <span class="cnt-total"></span></span></div>
-        <h2 data-source="stories" data-field="headline" data-where="id=pr">—</h2>
-        <p class="hook" data-source="stories" data-field="hook" data-where="id=pr">—</p>
-        <div class="big grad long"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=pr-crowd">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=pr-crowd"></span></div>
-        <div class="blabel" data-source="facts" data-field="label" data-where="id=pr-crowd">—</div>
-        <p class="dek" data-source="stories" data-field="dek" data-where="id=pr">—</p>
-        <p class="sowhat" data-source="stories" data-field="so_what" data-where="id=pr">—</p>
-        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=pr-fee">—</span><span data-source="facts" data-field="unit" data-where="id=pr-fee"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=pr-fee">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=pr-cut">—</span><span data-source="facts" data-field="unit" data-where="id=pr-cut"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=pr-cut">—</div></div></div>
-        <div class="ctas"><a data-href="pr:1">Read at <span data-source="stories" data-field="src1" data-where="id=pr">—</span></a><a data-href="pr:2">Read at <span data-source="stories" data-field="src2" data-where="id=pr">—</span></a></div>
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=hz">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=hz">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=hz">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=hz">—</p>
+        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=hz-barrels">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=hz-barrels"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=hz-barrels">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=hz">—</p>
+        <p class="sowhat" data-source="stories" data-field="so_what" data-where="id=hz">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=hz-48h">—</span><span data-source="facts" data-field="unit" data-where="id=hz-48h"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=hz-48h">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=hz-share">—</span><span data-source="facts" data-field="unit" data-where="id=hz-share"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=hz-share">—</div></div></div>
+        <div class="ctas"><a data-href="hz:1">Read at <span data-source="stories" data-field="src1" data-where="id=hz">—</span></a><a data-href="hz:2">Read at <span data-source="stories" data-field="src2" data-where="id=hz">—</span></a></div>
       </div>
-      <div class="art" id="art-pr" data-source="facts"></div>
+      <div class="art" id="art-hz" data-source="facts"></div>
     </section>
 
-    <section class="card light" id="s-ss" data-id="ss" data-tone="wonder">
+    <section class="card light" id="s-nd" data-id="nd" data-tone="wonder">
       <div class="txt">
-        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=ss">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=ss">—</span> / <span class="cnt-total"></span></span></div>
-        <h2 data-source="stories" data-field="headline" data-where="id=ss">—</h2>
-        <p class="hook" data-source="stories" data-field="hook" data-where="id=ss">—</p>
-        <div class="big grad long"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=ss-hours">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=ss-hours"></span></div>
-        <div class="blabel" data-source="facts" data-field="label" data-where="id=ss-hours">—</div>
-        <p class="dek" data-source="stories" data-field="dek" data-where="id=ss">—</p>
-        <p class="sowhat" data-source="stories" data-field="so_what" data-where="id=ss">—</p>
-        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ss-orbits">—</span><span data-source="facts" data-field="unit" data-where="id=ss-orbits"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ss-orbits">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ss-sats">—</span><span data-source="facts" data-field="unit" data-where="id=ss-sats"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ss-sats">—</div></div></div>
-        <div class="ctas"><a data-href="ss:1">Read at <span data-source="stories" data-field="src1" data-where="id=ss">—</span></a><a data-href="ss:2">Read at <span data-source="stories" data-field="src2" data-where="id=ss">—</span></a></div>
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=nd">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=nd">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=nd">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=nd">—</p>
+        <div class="big grad long"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=nd-max">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=nd-max"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=nd-max">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=nd">—</p>
+        <p class="sowhat" data-source="stories" data-field="so_what" data-where="id=nd">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=nd-avg">—</span><span data-source="facts" data-field="unit" data-where="id=nd-avg"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=nd-avg">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=nd-n">—</span><span data-source="facts" data-field="unit" data-where="id=nd-n"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=nd-n">—</div></div></div>
+        <div class="ctas"><a data-href="nd:1">Read at <span data-source="stories" data-field="src1" data-where="id=nd">—</span></a><a data-href="nd:2">Read at <span data-source="stories" data-field="src2" data-where="id=nd">—</span></a></div>
       </div>
-      <div class="art" id="art-ss" data-source="facts"></div>
+      <div class="art" id="art-nd" data-source="facts"></div>
     </section>
 
-    <section class="card dark" id="s-kr" data-id="kr" data-tone="light">
+    <section class="card dark" id="s-ci" data-id="ci" data-tone="urgent">
       <div class="txt">
-        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=kr">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=kr">—</span> / <span class="cnt-total"></span></span></div>
-        <h2 data-source="stories" data-field="headline" data-where="id=kr">—</h2>
-        <p class="hook" data-source="stories" data-field="hook" data-where="id=kr">—</p>
-        <div class="big grad long"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=kr-score">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=kr-score"></span></div>
-        <div class="blabel" data-source="facts" data-field="label" data-where="id=kr-score">—</div>
-        <p class="dek" data-source="stories" data-field="dek" data-where="id=kr">—</p>
-        <p class="sowhat" data-source="stories" data-field="so_what" data-where="id=kr">—</p>
-        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=kr-right">—</span><span data-source="facts" data-field="unit" data-where="id=kr-right"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=kr-right">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=kr-proctors">—</span><span data-source="facts" data-field="unit" data-where="id=kr-proctors"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=kr-proctors">—</div></div></div>
-        <div class="ctas"><a data-href="kr:1">Read at <span data-source="stories" data-field="src1" data-where="id=kr">—</span></a><a data-href="kr:2">Read at <span data-source="stories" data-field="src2" data-where="id=kr">—</span></a></div>
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=ci">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=ci">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=ci">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=ci">—</p>
+        <div class="big grad long"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=ci-n">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=ci-n"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=ci-n">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=ci">—</p>
+        <p class="sowhat" data-source="stories" data-field="so_what" data-where="id=ci">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ci-pop">—</span><span data-source="facts" data-field="unit" data-where="id=ci-pop"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ci-pop">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ci-nov">—</span><span data-source="facts" data-field="unit" data-where="id=ci-nov"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ci-nov">—</div></div></div>
+        <div class="ctas"><a data-href="ci:1">Read at <span data-source="stories" data-field="src1" data-where="id=ci">—</span></a><a data-href="ci:2">Read at <span data-source="stories" data-field="src2" data-where="id=ci">—</span></a></div>
       </div>
-      <div class="art" id="art-kr" data-source="facts"></div>
+      <div class="art" id="art-ci" data-source="facts"></div>
     </section>
 
-    <section class="card light" id="s-mt" data-id="mt" data-tone="light">
+    <section class="card light" id="s-ch" data-id="ch" data-tone="light">
       <div class="txt">
-        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=mt">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=mt">—</span> / <span class="cnt-total"></span></span></div>
-        <h2 data-source="stories" data-field="headline" data-where="id=mt">—</h2>
-        <p class="hook" data-source="stories" data-field="hook" data-where="id=mt">—</p>
-        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=mt-fine">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=mt-fine"></span></div>
-        <div class="blabel" data-source="facts" data-field="label" data-where="id=mt-fine">—</div>
-        <p class="dek" data-source="stories" data-field="dek" data-where="id=mt">—</p>
-        <p class="sowhat" data-source="stories" data-field="so_what" data-where="id=mt">—</p>
-        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=mt-users">—</span><span data-source="facts" data-field="unit" data-where="id=mt-users"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=mt-users">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=mt-share">—</span><span data-source="facts" data-field="unit" data-where="id=mt-share"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=mt-share">—</div></div></div>
-        <div class="ctas"><a data-href="mt:1">Read at <span data-source="stories" data-field="src1" data-where="id=mt">—</span></a><a data-href="mt:2">Read at <span data-source="stories" data-field="src2" data-where="id=mt">—</span></a></div>
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=ch">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=ch">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=ch">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=ch">—</p>
+        <div class="big grad"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=ch-taiex">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=ch-taiex"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=ch-taiex">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=ch">—</p>
+        <p class="sowhat" data-source="stories" data-field="so_what" data-where="id=ch">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ch-countries">—</span><span data-source="facts" data-field="unit" data-where="id=ch-countries"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ch-countries">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ch-tsmc">—</span><span data-source="facts" data-field="unit" data-where="id=ch-tsmc"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ch-tsmc">—</div></div></div>
+        <div class="ctas"><a data-href="ch:1">Read at <span data-source="stories" data-field="src1" data-where="id=ch">—</span></a><a data-href="ch:2">Read at <span data-source="stories" data-field="src2" data-where="id=ch">—</span></a></div>
       </div>
-      <div class="art" id="art-mt" data-source="facts"></div>
+      <div class="art" id="art-ch" data-source="facts"></div>
     </section>
 
-    <section class="card dark" id="s-ev" data-id="ev" data-tone="light">
+    <section class="card dark" id="s-ve" data-id="ve" data-tone="light">
       <div class="txt">
-        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=ev">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=ev">—</span> / <span class="cnt-total"></span></span></div>
-        <h2 data-source="stories" data-field="headline" data-where="id=ev">—</h2>
-        <p class="hook" data-source="stories" data-field="hook" data-where="id=ev">—</p>
-        <div class="big grad long"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=ev-pts">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=ev-pts"></span></div>
-        <div class="blabel" data-source="facts" data-field="label" data-where="id=ev-pts">—</div>
-        <p class="dek" data-source="stories" data-field="dek" data-where="id=ev">—</p>
-        <p class="sowhat" data-source="stories" data-field="so_what" data-where="id=ev">—</p>
-        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ev-jury">—</span><span data-source="facts" data-field="unit" data-where="id=ev-jury"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ev-jury">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ev-tele">—</span><span data-source="facts" data-field="unit" data-where="id=ev-tele"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ev-tele">—</div></div></div>
-        <div class="ctas"><a data-href="ev:1">Read at <span data-source="stories" data-field="src1" data-where="id=ev">—</span></a><a data-href="ev:2">Read at <span data-source="stories" data-field="src2" data-where="id=ev">—</span></a></div>
+        <div class="kick"><span class="sec" data-source="stories" data-field="section" data-where="id=ve">—</span><span class="cnt"><span data-source="stories" data-field="order" data-where="id=ve">—</span> / <span class="cnt-total"></span></span></div>
+        <h2 data-source="stories" data-field="headline" data-where="id=ve">—</h2>
+        <p class="hook" data-source="stories" data-field="hook" data-where="id=ve">—</p>
+        <div class="big grad long"><span class="cu" aria-hidden="true"></span><span class="real" data-source="facts" data-field="value" data-where="id=ve-n">—</span><span class="unit" data-source="facts" data-field="unit" data-where="id=ve-n"></span></div>
+        <div class="blabel" data-source="facts" data-field="label" data-where="id=ve-n">—</div>
+        <p class="dek" data-source="stories" data-field="dek" data-where="id=ve">—</p>
+        <p class="sowhat" data-source="stories" data-field="so_what" data-where="id=ve">—</p>
+        <div class="stats"><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ve-all">—</span><span data-source="facts" data-field="unit" data-where="id=ve-all"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ve-all">—</div></div><div><div class="v"><span data-source="facts" data-field="value" data-where="id=ve-marg">—</span><span data-source="facts" data-field="unit" data-where="id=ve-marg"></span></div><div class="l" data-source="facts" data-field="label" data-where="id=ve-marg">—</div></div></div>
+        <div class="ctas"><a data-href="ve:1">Read at <span data-source="stories" data-field="src1" data-where="id=ve">—</span></a><a data-href="ve:2">Read at <span data-source="stories" data-field="src2" data-where="id=ve">—</span></a></div>
       </div>
-      <div class="art" id="art-ev" data-source="facts"></div>
+      <div class="art" id="art-ve" data-source="facts"></div>
     </section>
-
   </div>
   <div class="credit"><span data-source="edition" data-field="edition" data-row="0">—</span>. Figures and summaries from the outlets linked on each card; BBC News could not be read. Illustrations are not to scale unless stated.</div>
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
-<script>window.__SEVEN={"stories": [{"order": 1, "id": "rb", "section": "Britain", "weight": 3, "tone": "urgent", "hero": "rb-mps", "headline": "Seventy-five Labour MPs sign a letter urging Burnham to block the Rosebank oilfield.", "hook": "Cabinet yes, backbenches no.", "dek": "The Sunday Times and the Guardian reported on Sunday that 75 Labour MPs have signed a private letter against drilling at Rosebank, the North Sea field west of Shetland, the first big revolt of Andy Burnham's premiership. Organisers hope to reach 100 names, about a quarter of the party's 404 MPs, and to hand the letter over within two weeks. They argue approval would damage Britain's standing on climate and would not cut energy bills; most of the cabinet, including the chancellor, John Healey, backs the project.", "so_what": "The decision is open: the energy minister is reported to lean towards rejection, the unions GMB and Unite want the jobs, and the operator, Adura, says the field would bring £6.6 billion of investment to British businesses.", "src1": "Finwire (Sunday Times)", "url1": "https://finwire.io/news/economy-news/labour-lawmakers-challenge-burnham-on-rosebank-oil-drilling-report", "src2": "UA.News (Guardian)", "url2": "https://ua.news/en/dovkolo-svitu/75-leiboristiv-u-britaniyi-vistupili-proti-rosebank-the-guardian"}, {"order": 2, "id": "jp", "section": "Economy", "weight": 2, "tone": "light", "hero": "jp-ann", "headline": "Japan's economy stalled over the summer as imports jumped and shoppers cut back.", "hook": "Factories invest, shoppers retreat.", "dek": "Japan's Cabinet Office said on Monday that real output shrank at an annualised 0.1 per cent between July and September, against forecasts of 0.3 per cent growth. Business investment rose 1.6 per cent, but household consumption fell for a second quarter and imports, swollen by energy, rose 2.5 per cent. Domestic demand added 0.6 points to growth and trade took exactly as much away.", "so_what": "The flat quarter complicates the Bank of Japan's debate over a December rate rise: a weak yen is pushing up import costs while consumers are already pulling back.", "src1": "MLQ.ai", "url1": "https://mlq.ai/news/japans-economy-shrinks-at-a-01-annualized-pace-in-the-third-quarter-as-imports-jump-and-consumers-cut-back/", "src2": "Newsquawk", "url2": "https://www.newsquawk.com/headlines/japanese-gdp-growth-annualized-prel-q3--01-vs-exp-03-prev-14"}, {"order": 3, "id": "pr", "section": "World", "weight": 2, "tone": "urgent", "hero": "pr-crowd", "headline": "Hundreds of thousands rally in Prague against a plan to put public broadcasting on the state budget.", "hook": "Lower bills, louder Letná.", "dek": "About 350,000 people filled Letná Plain in Prague on Sunday, by the organisers' count, to oppose Andrej Babiš's plan to scrap the household fees that fund Czech Television and Czech Radio. Households now pay 205 koruna a month for both; the government would pay the broadcasters from the budget instead, cutting their money by roughly 15 per cent. Protesters say state funding would give ministers leverage over the news; Mr Babiš says he will not interfere in editorial work.", "so_what": "It was the largest protest yet against the three-party government, which pushed the bill through its first reading in October after cutting off debate.", "src1": "Euronews", "url1": "https://www.euronews.com/2026/11/15/hundreds-of-thousands-in-prague-protest-czech-governments-public-media-funding-plans", "src2": "UNN", "url2": "https://unn.ua/en/news/hundreds-of-thousands-of-czechs-hold-protest-in-prague-for-media-freedom"}, {"order": 4, "id": "ss", "section": "Science", "weight": 2, "tone": "wonder", "hero": "ss-hours", "headline": "SpaceX catches a Starship upper stage returning from orbit for the first time.", "hook": "Ship caught, booster lost.", "dek": "On its 15th test flight, Starship's upper stage spent about 22 and a half hours in orbit, circling Earth some 14 times and releasing 26 Starlink satellites, before the arms of its launch tower in Texas caught it on Saturday afternoon. No upper stage of an orbital rocket had been flown back to its launch site and caught before. The Super Heavy booster aborted its own catch and was destroyed over the Gulf of Mexico.", "so_what": "Catching both stages is the core of SpaceX's plan for a fully reusable rocket; Elon Musk said the booster loss does not change that timeline.", "src1": "Teslarati", "url1": "https://www.teslarati.com/spacex-catches-starship-first/", "src2": "Wikipedia", "url2": "https://en.wikipedia.org/wiki/Starship_flight_15"}, {"order": 5, "id": "kr", "section": "Society", "weight": 2, "tone": "light", "hero": "kr-score", "headline": "South Korea's top-scoring tax accountant candidate admits he cheated with a hidden camera and AI.", "hook": "Top marks, hidden camera.", "dek": "Han Won-seok, who came first in this year's national tax accountant exam, said in a video on Sunday that he photographed questions with a miniature camera, sent them to a generative AI system and read the answers on a smartphone. He had scored 397.5 out of 400 in the first stage in April, getting 159 of 160 questions right, while two proctors watched the room. He has given police a written confession, reversing months of denials.", "so_what": "The exam agency apologised and has filed a criminal complaint; the government has set up an emergency team to stop AI cheating at Thursday's college entrance exam.", "src1": "Korea Times", "url1": "https://www.koreatimes.co.kr/southkorea/law-crime/20261115/top-tax-accountant-exam-scorer-admits-to-cheating-using-ai", "src2": "JoongAng Daily", "url2": "https://www.koreajoongangdaily.com/korea/tax-exam-top-scorer-details-camera-use-ai-cheating-in-written-confession-to-police/12974452"}, {"order": 6, "id": "mt", "section": "Business", "weight": 1, "tone": "light", "hero": "mt-fine", "headline": "Italy fines Meta €805 million for reading Android users' photo galleries without proper consent.", "hook": "One permission, many purposes.", "dek": "Italy's data protection authority said on Saturday that Facebook's Android app had, since 2023, read photos, videos and their metadata to suggest posts, under a single permission that covered several purposes and was switched on by default. About 20 million Android users in Italy were affected. Meta has 60 days to ask for separate consent and turn the feature off by default.", "so_what": "Meta calls the fine disproportionate and will appeal, and denies using the pictures to train AI; the fine is about 0.47 per cent of its global revenue.", "src1": "The Hacker News", "url1": "https://thehackernews.com/2026/11/italy-fines-meta-805-million-over.html", "src2": "Security Affairs", "url2": "https://securityaffairs.com/203174/laws-and-regulations/meta-fined-e805-million-in-italy-over-facebooks-default-photo-gallery-access.html"}, {"order": 7, "id": "ev", "section": "Culture", "weight": 1, "tone": "light", "hero": "ev-pts", "headline": "A 19-year-old Filipina wins the first Eurovision Song Contest Asia.", "hook": "Youngest singer, biggest score.", "dek": "Carmelle, the youngest act in the contest, won the inaugural Eurovision Asia in Bangkok on Saturday night with the dance-pop song \"Sobra-Sobra\", beating performers from 10 other countries. She scored 211 points, topping both the national juries, with 93, and the viewers' vote, with 118. Thailand's Mang x Daou came second.", "so_what": "She called the song a tribute to Filipino women; the Philippines entered by public vote, choosing her from a national final of ten.", "src1": "Anadolu Agency", "url1": "https://www.aa.com.tr/en/world/morning-briefing-nov-15-2026/4125489", "src2": "NBC News", "url2": "https://www.nbcnews.com/world/asia/eurovision-asia-carmelle-rcna609327"}], "facts": [{"id": "rb-mps", "story": "rb", "value": 75, "unit": "", "label": "Labour MPs who have signed the letter against Rosebank"}, {"id": "rb-total", "story": "rb", "value": 404, "unit": "", "label": "Labour MPs in the Commons"}, {"id": "rb-goal", "story": "rb", "value": 100, "unit": "", "label": "signatures the organisers are aiming for"}, {"id": "rb-barrels", "story": "rb", "value": 300, "unit": "m", "label": "barrels of oil the field is said to hold"}, {"id": "rb-invest", "story": "rb", "value": 6.6, "unit": "bn", "label": "pounds of investment for UK firms, the operator estimates"}, {"id": "jp-ann", "story": "jp", "value": -0.1, "unit": "%", "label": "annualised change in Japan's output, July to September"}, {"id": "jp-fc", "story": "jp", "value": 0.3, "unit": "%", "label": "growth economists had forecast"}, {"id": "jp-prev", "story": "jp", "value": 1.4, "unit": "%", "label": "annualised growth in April to June"}, {"id": "jp-dom", "story": "jp", "value": 0.6, "unit": "points", "label": "added to growth by domestic demand"}, {"id": "jp-net", "story": "jp", "value": -0.6, "unit": "points", "label": "taken off growth by net exports"}, {"id": "jp-imp", "story": "jp", "value": 2.5, "unit": "%", "label": "rise in imports over the quarter"}, {"id": "jp-capex", "story": "jp", "value": 1.6, "unit": "%", "label": "rise in business investment"}, {"id": "jp-cons", "story": "jp", "value": -0.3, "unit": "%", "label": "change in private consumption, a second fall"}, {"id": "pr-crowd", "story": "pr", "value": 350000, "unit": "", "label": "people on Letná Plain, by the organisers' count"}, {"id": "pr-fee", "story": "pr", "value": 205, "unit": "koruna", "label": "a month, what a household pays now for TV and radio"}, {"id": "pr-tv", "story": "pr", "value": 150, "unit": "koruna", "label": "a month for television"}, {"id": "pr-radio", "story": "pr", "value": 55, "unit": "koruna", "label": "a month for radio"}, {"id": "pr-cut", "story": "pr", "value": 15, "unit": "%", "label": "cut in the broadcasters' money under the plan, roughly"}, {"id": "ss-hours", "story": "ss", "value": 22.5, "unit": "hours", "label": "from launch to catch, about"}, {"id": "ss-orbits", "story": "ss", "value": 14, "unit": "", "label": "orbits of Earth, about"}, {"id": "ss-sats", "story": "ss", "value": 26, "unit": "", "label": "Starlink satellites released"}, {"id": "ss-alt", "story": "ss", "value": 276, "unit": "km", "label": "lowest point of the orbit"}, {"id": "ss-flight", "story": "ss", "value": 15, "unit": "th", "label": "Starship test flight"}, {"id": "kr-score", "story": "kr", "value": 397.5, "unit": "of 400", "label": "Han's first-stage score in April"}, {"id": "kr-right", "story": "kr", "value": 159, "unit": "", "label": "questions answered correctly"}, {"id": "kr-qs", "story": "kr", "value": 160, "unit": "", "label": "questions on the first-stage paper"}, {"id": "kr-proctors", "story": "kr", "value": 2, "unit": "", "label": "proctors in the room"}, {"id": "mt-fine", "story": "mt", "value": 805, "unit": "m", "label": "euros, the fine from Italy's data protection authority"}, {"id": "mt-users", "story": "mt", "value": 20, "unit": "m", "label": "Android users in Italy affected, about"}, {"id": "mt-days", "story": "mt", "value": 60, "unit": "days", "label": "for Meta to ask separate consent and switch the feature off by default"}, {"id": "mt-share", "story": "mt", "value": 0.47, "unit": "%", "label": "of Meta's global revenue, the size of the fine"}, {"id": "ev-pts", "story": "ev", "value": 211, "unit": "points", "label": "for Carmelle's \"Sobra-Sobra\""}, {"id": "ev-jury", "story": "ev", "value": 93, "unit": "", "label": "points from national juries"}, {"id": "ev-tele", "story": "ev", "value": 118, "unit": "", "label": "points from viewers"}, {"id": "ev-acts", "story": "ev", "value": 11, "unit": "", "label": "countries competing"}, {"id": "ev-age", "story": "ev", "value": 19, "unit": "", "label": "Carmelle's age, the youngest in the contest"}], "edition": [{"date": "2026-11-16", "label": "Monday, November 16, 2026", "edition": "Morning edition"}]};
+<script>window.__SEVEN={"stories": [{"order": 1, "id": "bx", "section": "Britain", "weight": 3, "tone": "urgent", "hero": "bx-low", "headline": "Burnham says Britain has lost more than it gained from Brexit and sets three tests for a new EU deal.", "hook": "Lost 4%, seeking 0.4%.", "dek": "Andy Burnham told the Lord Mayor's Banquet in London on Monday night that the Brexit deal Britain was given has not worked, comparing it to the emperor's new clothes. He said estimates of the damage range from 4 to 8 per cent of GDP, and that a new agreement at Friday's UK–EU summit in Brussels could add up to 0.4 per cent. Any deal, he said, must stay within Labour's red lines, improve on the current terms and pass his \"Makerfield test\" of real change in everyday lives.", "so_what": "The summit is expected to bring deals on food trade, energy and emissions, and youth mobility. Mr Burnham, the seventh prime minister since the 2016 vote, remains bound by the pledge not to rejoin the single market or customs union before the next election; talks on the longer-term relationship would follow.", "src1": "LBC", "url1": "https://www.lbc.co.uk/article/andy-burnham-says-hard-brexit-is-not-good-enough-for-britain-as-he-sets-out-eu-5HjdmRB_2/", "src2": "Al Jazeera", "url2": "https://www.aljazeera.com/news/2026/11/17/uk-seeks-closer-ties-with-eu-after-brexit-fail"}, {"order": 2, "id": "hp", "section": "Economy", "weight": 2, "tone": "light", "hero": "hp-fall", "headline": "Asking prices for British homes fell more than usual in November as mortgage costs bit.", "hook": "More homes, fewer buyers.", "dek": "Rightmove's monthly survey, published on Monday, found the average asking price of a newly listed home fell 1.8 per cent, or £6,745, to £364,270, steeper than the 1.1 per cent dip usual for November. Homes for sale are at a 12-year high, while new buyer demand is 8 per cent below a year ago. The average two-year fixed mortgage costs 5.51 per cent, against 4.25 per cent before the war with Iran began.", "so_what": "Asking prices are now 0.2 per cent lower than a year earlier. Rightmove says higher rates have added just over £200 a month to a typical new mortgage since February, and sellers are pricing to tempt buyers who can borrow less.", "src1": "Mortgage Strategy", "url1": "https://www.mortgagestrategy.co.uk/news/asking-prices-fall-1-8-as-buyers-face-rate-squeeze-rightmove/", "src2": "Mortgage Solutions", "url2": "https://www.mortgagesolutions.co.uk/mortgage-news/2026/11/16/asking-prices-see-larger-than-usual-november-drop-rightmove/"}, {"order": 3, "id": "hz", "section": "World", "weight": 2, "tone": "urgent", "hero": "hz-barrels", "headline": "Iran says a supertanker sank after hitting a mine in the Strait of Hormuz.", "hook": "Claimed sinking, unnamed ship.", "dek": "Iran's Revolutionary Guards said on Sunday that two oil tankers struck naval mines while using what they called an unauthorised route through the southern strait, and that one of them, a supertanker carrying more than 2 million barrels of crude, went down. The Guards named neither ship nor its flag and gave no word on the crews; the claim has not been independently confirmed. IRNA, Iran's state news agency, said five tankers had been hit by mines in the previous 48 hours.", "so_what": "About a fifth of the world's oil normally passes through the strait, which Iran has tightly controlled since the war began in February. The United States, which is blockading Iranian ports, says the main shipping routes are clear of mines.", "src1": "Anadolu Agency", "url1": "https://www.aa.com.tr/en/middle-east/iran-says-2-oil-tankers-hit-mines-near-strait-of-hormuz-1-sinks/4125887", "src2": "Marine Insight", "url2": "https://www.marineinsight.com/supertanker-with-2-million-barrels-of-oil-sinks-after-hitting-mine-in-strait-of-hormuz-iran-says/"}, {"order": 4, "id": "nd", "section": "Science", "weight": 2, "tone": "wonder", "hero": "nd-max", "headline": "Scientists find as many as 245 tiny animals living inside a single deep-sea rock.", "hook": "Fist-sized rock, 245 tenants.", "dek": "Researchers at MARUM in Bremen and NIOZ in the Netherlands opened 244 fist-sized metal nodules raised from 4,000 to 6,000 metres down in the Pacific's Clarion-Clipperton Zone and found 4,139 animals in their cracks, mostly nematode worms and copepods smaller than a millimetre. The average nodule held 17; the busiest held 245. The communities, reported in Scientific Reports, differ from those in the surrounding mud and look alike at sites up to 1,000 km apart.", "so_what": "The nodules grow a few millimetres in a million years and are rich in nickel, cobalt and copper, which makes them the target of deep-sea mining. The authors warn that taking them would remove this habitat for good.", "src1": "ScienceDaily", "url1": "https://www.sciencedaily.com/releases/2026/11/261114202133.htm", "src2": "Phys.org", "url2": "https://phys.org/news/2026-11-deep-sea-destroy-unique-habitats.html"}, {"order": 5, "id": "ci", "section": "Society", "weight": 2, "tone": "urgent", "hero": "ci-n", "headline": "A record 1,488 migrants reach the Canary Islands in one day, most of them landing on El Hierro.", "hook": "Small island, record landings.", "dek": "Spain's maritime rescue service brought 1,488 people ashore in the Canaries on Saturday from 14 boats, according to the EFE news agency, passing the previous one-day record of 1,461 set in November 2020. Twelve of the boats reached El Hierro, an island of just over 12,000 people that has received more than 9,000 arrivals since the start of the month, by the broadcaster RTVE's count. Most came from Senegal, Gambia and Guinea.", "so_what": "Spain has declared a migration emergency on El Hierro, and the Canary Islands' president, Fernando Clavijo, called Saturday a \"sad record\" and asked Madrid for the help it promised. Arrivals for the year to October were still 5.5 per cent below last year's.", "src1": "The Star (Reuters)", "url1": "https://www.thestar.com.my/news/world/2026/11/15/nearly-1500-migrants-arrive-in-canary-islands-in-one-day", "src2": "Yahoo News (DPA)", "url2": "https://www.yahoo.com/news/world/articles/more-1-500-migrants-reach-174835575.html"}, {"order": 6, "id": "ch", "section": "Business", "weight": 1, "tone": "light", "hero": "ch-taiex", "headline": "Asian chip stocks slump as Washington demands licences for AI chips sent to five countries.", "hook": "Five licences, 6% slump.", "dek": "The US Commerce Department said on Monday that exporters now need a licence to ship advanced AI chips to Indonesia, Malaysia, Singapore, Thailand and Brazil, which it sees as at risk of passing them on to China; US companies running data centres there are exempt. Taiwan's Taiex had its worst day since July on Monday, falling about 6 per cent, as TSMC lost 5.7 per cent and MediaTek 7.9 per cent.", "so_what": "Singapore said on Tuesday it was talking to Washington about how the rule will work and would act against firms that break the law. The Taiex slipped another 1.72 per cent on Tuesday, ahead of Nvidia's results.", "src1": "AsiaOne", "url1": "https://www.asiaone.com/singapore/us-export-control-ai-chips-singapore-impact", "src2": "IBTimes Australia", "url2": "https://www.ibtimes.com.au/taiwan-stocks-fall-ahead-nvidia-earnings-1878746"}, {"order": 7, "id": "ve", "section": "Culture", "weight": 1, "tone": "light", "hero": "ve-n", "headline": "All nine of Jan van Eyck's painted portraits go on show together for the first time.", "hook": "Nine faces, first reunion.", "dek": "The National Gallery in London opens Van Eyck: The Portraits on Saturday, gathering every surviving painted portrait by the Netherlandish master, about half of the 20 or so pictures known to be by his hand, along with his only surviving drawing. The Arnolfini Portrait of 1434 hangs beside a Berlin portrait that seems to show the same man, and the gallery's possible self-portrait of 1433 beside his wife, Margaret, painted in 1439.", "so_what": "The gallery calls Margaret the first known portrait of a woman who was not an aristocrat. Vienna's Kunsthistorisches Museum is lending both its van Eyck paintings at once for the first time; the show runs until 11 April.", "src1": "National Gallery", "url1": "https://www.nationalgallery.org.uk/about-us/press-and-media/press-releases-archive/van-eyck-the-portraits", "src2": "FAD Magazine", "url2": "https://fadmagazine.com/2026/11/13/jan-van-eyck-portraits-national-gallery/"}], "facts": [{"id": "bx-low", "story": "bx", "value": 4, "unit": "%", "label": "the lowest estimate of Brexit's hit to GDP that Burnham cited"}, {"id": "bx-high", "story": "bx", "value": 8, "unit": "%", "label": "the highest estimate he cited"}, {"id": "bx-gain", "story": "bx", "value": 0.4, "unit": "%", "label": "most a new EU deal could add to GDP, Burnham says"}, {"id": "bx-tests", "story": "bx", "value": 3, "unit": "", "label": "tests any new deal must pass"}, {"id": "bx-years", "story": "bx", "value": 10, "unit": "years", "label": "since the referendum"}, {"id": "bx-pm", "story": "bx", "value": 7, "unit": "th", "label": "prime minister since the 2016 vote"}, {"id": "hp-fall", "story": "hp", "value": -1.8, "unit": "%", "label": "change in the average asking price this month"}, {"id": "hp-price", "story": "hp", "value": 364270, "unit": "", "label": "pounds, the average asking price of a newly listed home"}, {"id": "hp-drop", "story": "hp", "value": 6745, "unit": "", "label": "pounds off the average asking price in a month"}, {"id": "hp-typ", "story": "hp", "value": -1.1, "unit": "%", "label": "the usual November change, ten-year average"}, {"id": "hp-yoy", "story": "hp", "value": -0.2, "unit": "%", "label": "change on a year ago"}, {"id": "hp-rate", "story": "hp", "value": 5.51, "unit": "%", "label": "average two-year fixed mortgage rate"}, {"id": "hp-prewar", "story": "hp", "value": 4.25, "unit": "%", "label": "the same rate before the war with Iran began"}, {"id": "hp-extra", "story": "hp", "value": 200, "unit": "", "label": "pounds a month, just over, added to a typical new mortgage since February"}, {"id": "hp-stock", "story": "hp", "value": 12, "unit": "years", "label": "homes for sale at their highest in"}, {"id": "hp-demand", "story": "hp", "value": -8, "unit": "%", "label": "new buyer demand on a year ago"}, {"id": "hz-barrels", "story": "hz", "value": 2, "unit": "m", "label": "barrels of crude aboard, Iran says, more than"}, {"id": "hz-tankers", "story": "hz", "value": 2, "unit": "", "label": "tankers the Revolutionary Guards say hit mines on Sunday"}, {"id": "hz-48h", "story": "hz", "value": 5, "unit": "", "label": "tankers hit by mines in 48 hours, IRNA says"}, {"id": "hz-share", "story": "hz", "value": 20, "unit": "%", "label": "of the world's oil normally passes through the strait, about"}, {"id": "nd-max", "story": "nd", "value": 245, "unit": "animals", "label": "in a single nodule, the most found"}, {"id": "nd-avg", "story": "nd", "value": 17, "unit": "", "label": "animals in the average nodule"}, {"id": "nd-n", "story": "nd", "value": 244, "unit": "", "label": "nodules examined"}, {"id": "nd-total", "story": "nd", "value": 4139, "unit": "", "label": "animals found in all"}, {"id": "nd-dlo", "story": "nd", "value": 4000, "unit": "", "label": "metres, the shallowest sampling depth"}, {"id": "nd-dhi", "story": "nd", "value": 6000, "unit": "", "label": "metres, the deepest"}, {"id": "nd-size", "story": "nd", "value": 1, "unit": "mm", "label": "the animals are smaller than"}, {"id": "nd-dist", "story": "nd", "value": 1000, "unit": "km", "label": "distance over which communities looked alike, up to"}, {"id": "ci-n", "story": "ci", "value": 1488, "unit": "", "label": "people reached the Canary Islands on Saturday, by EFE's count"}, {"id": "ci-boats", "story": "ci", "value": 14, "unit": "", "label": "boats"}, {"id": "ci-hierro-boats", "story": "ci", "value": 12, "unit": "", "label": "boats that landed on El Hierro"}, {"id": "ci-rec", "story": "ci", "value": 1461, "unit": "", "label": "the previous one-day record, November 2020"}, {"id": "ci-pop", "story": "ci", "value": 12000, "unit": "", "label": "people live on El Hierro, just over"}, {"id": "ci-nov", "story": "ci", "value": 9000, "unit": "", "label": "arrivals on El Hierro since November 1, more than, by RTVE's count"}, {"id": "ci-ytd", "story": "ci", "value": -5.5, "unit": "%", "label": "arrivals January to October, on a year earlier"}, {"id": "ch-taiex", "story": "ch", "value": -6, "unit": "%", "label": "Taiwan's Taiex on Monday, about, its worst day since July"}, {"id": "ch-countries", "story": "ch", "value": 5, "unit": "", "label": "countries where AI chips now need a licence"}, {"id": "ch-tsmc", "story": "ch", "value": -5.7, "unit": "%", "label": "TSMC on Monday"}, {"id": "ch-mtk", "story": "ch", "value": -7.9, "unit": "%", "label": "MediaTek on Monday"}, {"id": "ch-nasdaq", "story": "ch", "value": -2.5, "unit": "%", "label": "Nasdaq Composite on Monday"}, {"id": "ch-taiex2", "story": "ch", "value": -1.72, "unit": "%", "label": "Taiex on Tuesday"}, {"id": "ve-n", "story": "ve", "value": 9, "unit": "portraits", "label": "by Jan van Eyck, every one that survives"}, {"id": "ve-all", "story": "ve", "value": 20, "unit": "", "label": "pictures by his own hand survive, roughly"}, {"id": "ve-arn", "story": "ve", "value": 1434, "unit": "year", "label": "the Arnolfini Portrait"}, {"id": "ve-self", "story": "ve", "value": 1433, "unit": "year", "label": "Portrait of a Man (Self Portrait?)"}, {"id": "ve-marg", "story": "ve", "value": 1439, "unit": "year", "label": "Margaret, the Artist's Wife"}, {"id": "ve-draw", "story": "ve", "value": 1, "unit": "", "label": "surviving drawing, also shown"}], "edition": [{"date": "2026-11-17", "label": "Tuesday, November 17, 2026", "edition": "Morning edition"}]};
 window.dash={data:function(id){var d=window.__SEVEN[id];return d?{status:'ok',data:d,columns:Object.keys(d[0])}:{status:'missing',data:[]}},onData:function(f){f()},setLink:function(id){try{history.replaceState(null,'','#'+id)}catch(e){}},colors:[]};</script>
 <script>
 (function(){
@@ -352,269 +352,294 @@ window.dash={data:function(id){var d=window.__SEVEN[id];return d?{status:'ok',da
   };
 
 
-  /* ---------- 1. Britain: 404 Labour seats, 75 lit against Rosebank ---------- */
-  function art_rb(box, f){
-    const W = 640, H = 470, svg = mkSvg(box, W, H), col = '#ff453a';
-    const total = f['rb-total'].value, signed = f['rb-mps'].value, goal = f['rb-goal'].value;
-    svg.attr('aria-label', `A half-circle of ${total} dots, one for each Labour MP; ${signed} on the left are lit, the MPs who signed the letter against Rosebank, and ${goal - signed} more are outlined, the organisers' target of ${goal}`);
-    T(svg, 30, 32, `${signed} of ${total} Labour MPs have signed`, {size: 21, w: 700});
-    T(svg, 30, 54, `Each dot is one Labour MP. Outlined: the ${goal - signed} more the organisers want, for ${goal}.`, {size: 13, fill: 'var(--sub)'});
-    const cx = W / 2, cy = 360, rows = 9, R0 = 120, R1 = 280;
-    const radii = d3.range(rows).map(i => R0 + (R1 - R0) * i / (rows - 1));
-    const sumR = d3.sum(radii);
-    let counts = radii.map(r => Math.round(total * r / sumR));
-    counts[rows - 1] += total - d3.sum(counts);
-    const seats = [];
-    radii.forEach((r, i) => d3.range(counts[i]).forEach(j => { const a = Math.PI - Math.PI * (j + .5) / counts[i]; seats.push({x: cx + r * Math.cos(a), y: cy - r * Math.sin(a), a}); }));
-    seats.sort((p, q) => q.a - p.a);
-    const dots = svg.append('g').selectAll('circle').data(seats).join('circle')
-      .attr('cx', d => d.x).attr('cy', d => d.y).attr('r', 6.2).attr('fill', 'var(--sub)').attr('opacity', 0);
-    // the field itself, under the chamber
-    const rig = svg.append('g').attr('transform', `translate(${cx},${cy + 18})`);
-    rig.append('path').attr('d', 'M-18,40 L0,-34 L18,40 M-12,16 L12,16 M-7,-6 L7,-6').attr('stroke', 'var(--sub)').attr('stroke-width', 2.5).attr('fill', 'none');
-    rig.append('rect').attr('x', -34).attr('y', 40).attr('width', 68).attr('height', 5).attr('rx', 2).attr('fill', 'var(--sub)');
-    T(svg, cx, cy + 82, `Rosebank: said to hold ${N(f['rb-barrels'].value)} million barrels`, {size: 13, w: 700, a: 'middle'});
-    T(svg, cx, cy + 100, `Adura, the operator, puts investment for UK firms at £${f['rb-invest'].value}bn`, {size: 12, a: 'middle', fill: 'var(--sub)'});
-    const lbl = T(svg, 30, cy + 8, `${signed} signed`, {size: 16, w: 700, fill: col}).attr('opacity', 0);
+
+  /* ---------- 1. Britain: a hundred squares of economy, some missing ---------- */
+  function art_bx(box, f){
+    const W = 640, H = 470, svg = mkSvg(box, W, H), col = '#ff453a', ok = '#30d158';
+    const lo = f['bx-low'].value, hi = f['bx-high'].value, gain = f['bx-gain'].value;
+    svg.attr('aria-label', `A grid of 100 squares, each 1 per cent of the economy. ${lo} squares are missing, the lowest estimate of Brexit's cost that Burnham cited; ${hi - lo} more are outlined, up to his highest, ${hi}. A sliver of ${gain} of a square is filled back in green: what he says a new deal could add.`);
+    T(svg, 30, 32, `Brexit's hit: ${lo}% to ${hi}% of GDP, as Burnham put it`, {size: 21, w: 700});
+    T(svg, 30, 54, 'Each square is 1% of the economy. Green: what a new deal could add.', {size: 13, fill: 'var(--sub)'});
+    const n = 100, cols = 10, s = 28, gap = 6, x0 = 150, y0 = 72;
+    const cells = d3.range(n).map(i => ({i, x: x0 + (i % cols) * (s + gap), y: y0 + Math.floor(i / cols) * (s + gap)}));
+    const lost = i => i >= n - lo, maybe = i => i >= n - hi && i < n - lo;
+    const sq = svg.append('g').selectAll('rect').data(cells).join('rect')
+      .attr('x', d => d.x).attr('y', d => d.y).attr('width', s).attr('height', s).attr('rx', 5);
+    const first = cells[n - lo];
+    const sliver = svg.append('rect').attr('x', first.x).attr('y', first.y).attr('height', s).attr('rx', 3).attr('fill', ok).attr('width', 0);
+    const lab1 = T(svg, first.x + (lo * (s + gap) - gap) / 2, first.y + s + 22, `${lo} gone`, {size: 15, w: 700, fill: col, a: 'middle'}).attr('opacity', 0);
+    const lab2 = T(svg, cells[n - hi].x + ((hi - lo) * (s + gap) - gap) / 2, first.y + s + 22, `up to ${hi}`, {size: 13, fill: 'var(--sub)', a: 'middle'}).attr('opacity', 0);
+    const lab3 = T(svg, x0 + cols * (s + gap) + 4, first.y + 20, `+${gain} back, at best`, {size: 14, w: 700, fill: ok}).attr('opacity', 0);
     const set = p => {
-      const q = stage(p, 0, .35), m = stage(p, .4, .8), g = stage(p, .82, 1);
-      dots.attr('opacity', (d, i) => clamp01(q * 1.4 - i / total * .4))
-        .attr('fill', (d, i) => i < signed && i < m * signed ? col : 'var(--sub)')
-        .attr('stroke', (d, i) => i >= signed && i < goal && g > 0 ? col : 'none').attr('stroke-width', 1.6)
-        .attr('fill-opacity', (d, i) => i >= signed && i < goal && g > 0 ? .15 : 1);
-      lbl.attr('opacity', m);
+      const a = stage(p, 0, .3), b = stage(p, .35, .6), c = stage(p, .65, .8), e = stage(p, .85, 1);
+      sq.attr('fill', d => lost(d.i) ? 'none' : maybe(d.i) ? (c > 0 ? 'var(--sub)' : 'var(--fg)') : 'var(--fg)')
+        .attr('fill-opacity', d => maybe(d.i) && c > 0 ? .35 : 1)
+        .attr('stroke', d => lost(d.i) ? col : maybe(d.i) && c > 0 ? col : 'none')
+        .attr('stroke-dasharray', d => maybe(d.i) ? '4 3' : null).attr('stroke-width', 1.5)
+        .attr('opacity', d => lost(d.i) ? clamp01(a * 2) * (.3 + .7 * b) : clamp01(a * 1.3 - d.i / n * .3));
+      lab1.attr('opacity', b); lab2.attr('opacity', c); lab3.attr('opacity', e);
+      sliver.attr('width', s * gain * e);
     };
     return mkTw(4200, set);
   }
 
-  /* ---------- 2. Economy: a beam that ends level ---------- */
-  function art_jp(box, f){
-    const W = 640, H = 470, svg = mkSvg(box, W, H), up = '#30d158', dn = '#0a84ff';
-    const dom = f['jp-dom'].value, net = f['jp-net'].value, ann = f['jp-ann'].value, fc = f['jp-fc'].value;
-    const nL = Math.round(Math.abs(dom) / .1), nR = Math.round(Math.abs(net) / .1);
-    svg.attr('aria-label', `A balance: ${nL} blocks of domestic demand, worth ${dom} points of growth, on one side, and ${nR} blocks of net exports, worth ${net} points, on the other. The beam ends level: output changed ${ann}% annualised, against a forecast of ${fc}%.`);
-    T(svg, 30, 32, 'What came in at home went out through trade', {size: 21, w: 700});
-    T(svg, 30, 54, 'Each block is a tenth of a point of quarterly growth', {size: 13, fill: 'var(--sub)'});
-    const cx = 320, py = 300, half = 200;
-    svg.append('path').attr('d', `M${cx},${py} L${cx - 40},${py + 110} L${cx + 40},${py + 110} Z`).attr('fill', 'var(--line)');
-    const beam = svg.append('g').attr('transform', `translate(${cx},${py})`);
-    beam.append('rect').attr('x', -half - 10).attr('y', -4).attr('width', 2 * half + 20).attr('height', 8).attr('rx', 4).attr('fill', 'var(--fg)');
-    beam.append('circle').attr('r', 9).attr('fill', 'var(--fg)');
-    const pan = (side, n, colr, title, val) => {
-      const g = beam.append('g').attr('transform', `translate(${side * half},0)`);
-      g.append('rect').attr('x', -70).attr('y', -10).attr('width', 140).attr('height', 6).attr('rx', 3).attr('fill', 'var(--sub)');
-      const blocks = d3.range(n).map(i => g.append('rect').attr('x', -66 + (i % 3) * 44).attr('y', -10 - 30 * (Math.floor(i / 3) + 1)).attr('width', 40).attr('height', 26).attr('rx', 5).attr('fill', colr).attr('opacity', 0));
-      const t1 = T(g, 0, 34, title, {size: 14, w: 700, a: 'middle'});
-      const t2 = T(g, 0, 54, `${val > 0 ? '+' : ''}${val} points`, {size: 14, a: 'middle', fill: colr});
-      return {blocks, labels: [t1, t2]};
-    };
-    const L = pan(-1, nL, up, 'Domestic demand', dom), R = pan(1, nR, dn, 'Net exports', net);
-    T(svg, cx + half, py + 92, `imports +${f['jp-imp'].value}%`, {size: 12, a: 'middle', fill: 'var(--sub)'});
-    const read = T(svg, cx, 110, '', {size: 44, w: 700, a: 'middle'});
-    T(svg, cx, 136, `annualised, against +${fc}% forecast`, {size: 13, a: 'middle', fill: 'var(--sub)'});
+  /* ---------- 2. Economy: a price tag sliding down a steeper slope ---------- */
+  function art_hp(box, f){
+    const W = 640, H = 470, svg = mkSvg(box, W, H), col = '#ff9f0a', blue = '#0a84ff';
+    const fall = f['hp-fall'].value, typ = f['hp-typ'].value, price = f['hp-price'].value, drop = f['hp-drop'].value;
+    const rate = f['hp-rate'].value, pre = f['hp-prewar'].value;
+    const before = price + drop;
+    svg.attr('aria-label', `A house's for-sale sign falls from £${N(before)} to £${N(price)}, down ${Math.abs(fall)}%, along a slope steeper than the usual November dip of ${Math.abs(typ)}%. Below, a mortgage rate gauge moves from ${pre}% before the war with Iran to ${rate}%.`);
+    T(svg, 30, 32, `This November's dip is steeper than usual`, {size: 21, w: 700});
+    T(svg, 30, 54, 'Average asking price of a newly listed home. Slopes exaggerated, not to scale.', {size: 13, fill: 'var(--sub)'});
+    const x0 = 70, x1 = 560, y0 = 190, k = 46; // px per percentage point
+    const yT = y0 + k * Math.abs(typ), yF = y0 + k * Math.abs(fall);
+    svg.append('line').attr('x1', x0).attr('x2', x1).attr('y1', y0).attr('y2', y0).attr('stroke', 'var(--line)').attr('stroke-dasharray', '3 5');
+    svg.append('path').attr('d', `M${x0},${y0} L${x1},${yT}`).attr('stroke', 'var(--sub)').attr('stroke-width', 3).attr('stroke-dasharray', '7 6').attr('fill', 'none');
+    T(svg, x1 + 6, yT + 4, `usual ${typ}%`, {size: 12, fill: 'var(--sub)'});
+    const path = svg.append('path').attr('d', `M${x0},${y0} L${x1},${yF}`).attr('stroke', col).attr('stroke-width', 5).attr('fill', 'none').attr('stroke-linecap', 'round');
+    T(svg, x1 + 6, yF + 4, `${fall}%`, {size: 15, w: 700, fill: col});
+    // the house with its sign, riding the slope
+    const house = svg.append('g');
+    house.append('path').attr('d', 'M-34,0 L-34,-38 L0,-64 L34,-38 L34,0 Z').attr('fill', 'var(--fg)');
+    house.append('rect').attr('x', -8).attr('y', -22).attr('width', 16).attr('height', 22).attr('fill', 'var(--color-panel)');
+    house.append('line').attr('x1', -52).attr('x2', -52).attr('y1', 0).attr('y2', -58).attr('stroke', 'var(--fg)').attr('stroke-width', 3);
+    house.append('rect').attr('x', -150).attr('y', -96).attr('width', 112).attr('height', 40).attr('rx', 6).attr('fill', col);
+    T(house, -94, -82, 'FOR SALE', {size: 10, w: 700, a: 'middle', fill: '#000'});
+    const tag = T(house, -94, -64, '', {size: 15, w: 700, a: 'middle', fill: '#000'});
+    // mortgage gauge
+    const gx = 320, gy = 420, R = 70, sc = d3.scaleLinear().domain([0, 8]).range([-Math.PI / 2, Math.PI / 2]);
+    const arc = d3.arc().innerRadius(R - 10).outerRadius(R);
+    svg.append('path').attr('transform', `translate(${gx},${gy})`).attr('d', arc({startAngle: sc(0), endAngle: sc(8)})).attr('fill', 'var(--line)');
+    const fillA = svg.append('path').attr('transform', `translate(${gx},${gy})`).attr('fill', blue);
+    const needle = svg.append('line').attr('x1', gx).attr('y1', gy).attr('stroke', 'var(--fg)').attr('stroke-width', 3).attr('stroke-linecap', 'round');
+    const rlab = T(svg, gx, gy + 34, '', {size: 22, w: 700, a: 'middle'});
+    T(svg, gx - R - 14, gy + 2, `${pre}% before the war`, {size: 12, a: 'end', fill: 'var(--sub)'});
+    T(svg, gx + R + 14, gy + 2, 'two-year fixed now', {size: 12, fill: 'var(--sub)'});
     const set = p => {
-      const a = stage(p, 0, .4), b = stage(p, .45, .85);
-      L.blocks.forEach((r, i) => r.attr('opacity', clamp01(a * nL - i)));
-      R.blocks.forEach((r, i) => r.attr('opacity', clamp01(b * nR - i)));
-      const tilt = -9 * (clamp01(a * nL) / nL) * (1 - clamp01(b * nR) / nR);
-      beam.attr('transform', `translate(${cx},${py}) rotate(${tilt})`);
-      read.text(p >= .9 ? `${ann}%` : '…');
+      const a = ease(stage(p, .05, .6)), b = ease(stage(p, .6, 1));
+      const x = x0 + 170 + (x1 - x0 - 230) * a, y = y0 + (yF - y0) * (x - x0) / (x1 - x0);
+      const ang = Math.atan2(yF - y0, x1 - x0) * 180 / Math.PI;
+      house.attr('transform', `translate(${x},${y - 2}) rotate(${ang})`);
+      tag.text('£' + N(Math.round(before - drop * a)));
+      const r = pre + (rate - pre) * b, t = sc(r);
+      fillA.attr('d', arc({startAngle: sc(0), endAngle: t}));
+      needle.attr('x2', gx + (R - 18) * Math.sin(t)).attr('y2', gy - (R - 18) * Math.cos(t));
+      rlab.text(r.toFixed(2) + '%');
     };
     return mkTw(4200, set);
   }
 
-  /* ---------- 3. World: Letná fills, a thousand at a time ---------- */
-  function art_pr(box, f){
+  /* ---------- 3. World: a tanker's cargo, counted in barrels (Iran's claim) ---------- */
+  function art_hz(box, f){
     const W = 640, H = 470, svg = mkSvg(box, W, H), col = '#ff375f';
-    const crowd = f['pr-crowd'].value, unit = 1000, n = Math.round(crowd / unit);
-    svg.attr('aria-label', `${n} dots, each 1,000 people, fill a field marked Letná Plain: ${N(crowd)} by the organisers' count. Below, a household's monthly fee of ${f['pr-tv'].value} koruna for television and ${f['pr-radio'].value} for radio, ${f['pr-fee'].value} in all, which the plan would abolish.`);
-    T(svg, 30, 32, `${N(crowd)} on Letná Plain, by the organisers' count`, {size: 21, w: 700});
-    T(svg, 30, 54, 'Each dot is 1,000 people. Not to scale.', {size: 13, fill: 'var(--sub)'});
-    const fx = 40, fy = 80, fw = 560, fh = 250, cols = 25, rws = Math.ceil(n / cols);
-    svg.append('rect').attr('x', fx).attr('y', fy).attr('width', fw).attr('height', fh).attr('rx', 18).attr('fill', 'none').attr('stroke', 'var(--line)').attr('stroke-width', 2).attr('stroke-dasharray', '5 6');
-    // stage with a screen at the far end
-    svg.append('rect').attr('x', fx + fw / 2 - 50).attr('y', fy + 10).attr('width', 100).attr('height', 22).attr('rx', 4).attr('fill', 'var(--fg)');
-    T(svg, fx + fw / 2, fy + 25, 'STAGE', {size: 10, w: 700, a: 'middle', fill: '#000'});
-    const rnd = d3.randomLcg(7);
-    const pts = d3.range(n).map(i => {
-      const c = i % cols, r = Math.floor(i / cols);
-      return {x: fx + 22 + c * (fw - 44) / (cols - 1) + (rnd() - .5) * 8, y: fy + 48 + r * (fh - 66) / Math.max(1, rws - 1) + (rnd() - .5) * 6,
-        sx: fx + 22 + rnd() * (fw - 44), sy: H + 20, d: rnd() * .3 + r / rws * .35};
+    const mb = f['hz-barrels'].value, unit = .1, n = Math.round(mb / unit), hit = f['hz-48h'].value;
+    svg.attr('aria-label', `A supertanker drawn in profile holding ${n} barrel symbols, each 100,000 barrels, ${mb} million in all, the cargo Iran's Revolutionary Guards say was aboard the ship that sank. Below, ${hit} flame marks for the tankers IRNA says were hit by mines in 48 hours. The claims are not independently confirmed.`);
+    T(svg, 30, 32, `More than ${mb} million barrels, by Iran's account`, {size: 21, w: 700});
+    T(svg, 30, 54, 'Each barrel is 100,000 barrels of crude. Not independently confirmed. Not to scale.', {size: 13, fill: 'var(--sub)'});
+    const sea = 250;
+    const ship = svg.append('g');
+    ship.append('path').attr('d', 'M60,180 L560,180 L540,262 L90,262 Z').attr('fill', 'var(--fg)');
+    ship.append('rect').attr('x', 470).attr('y', 132).attr('width', 54).attr('height', 48).attr('rx', 4).attr('fill', 'var(--fg)');
+    ship.append('rect').attr('x', 494).attr('y', 110).attr('width', 12).attr('height', 22).attr('fill', 'var(--fg)');
+    const cols = 10, bw = 34;
+    const barrels = d3.range(n).map(i => {
+      const g = ship.append('g');
+      const row = Math.floor(i / cols);
+      g.attr('transform', `translate(${92 + (i % cols) * (bw + 4)},${144 - row * 40})`);
+      g.append('rect').attr('width', bw - 6).attr('height', 34).attr('rx', 5).attr('fill', col);
+      g.append('line').attr('x1', 0).attr('x2', bw - 6).attr('y1', 12).attr('y2', 12).attr('stroke', '#000').attr('stroke-opacity', .35);
+      g.append('line').attr('x1', 0).attr('x2', bw - 6).attr('y1', 23).attr('y2', 23).attr('stroke', '#000').attr('stroke-opacity', .35);
+      return g.attr('opacity', 0);
     });
-    const dots = svg.append('g').selectAll('circle').data(pts).join('circle').attr('r', 4.3).attr('fill', col);
-    // the fee they are fighting over
-    const by = 372, g = svg.append('g');
-    T(g, 40, by, 'What a household pays now, a month', {size: 13, fill: 'var(--sub)'});
-    const tv = f['pr-tv'].value, rd = f['pr-radio'].value, fee = f['pr-fee'].value, bw = 420;
-    g.append('rect').attr('x', 40).attr('y', by + 12).attr('width', bw * tv / fee).attr('height', 30).attr('rx', 6).attr('fill', 'var(--fg)');
-    g.append('rect').attr('x', 44 + bw * tv / fee).attr('y', by + 12).attr('width', bw * rd / fee - 4).attr('height', 30).attr('rx', 6).attr('fill', 'var(--sub)');
-    T(g, 52, by + 32, `TV ${tv}`, {size: 13, w: 700, fill: '#000'});
-    T(g, 52 + bw * tv / fee, by + 32, `Radio ${rd}`, {size: 13, w: 700, fill: '#000'});
-    T(g, 52 + bw, by + 33, `= ${fee} koruna`, {size: 15, w: 700});
-    T(g, 40, by + 66, `The plan: scrap the fee, fund both from the state budget, about ${f['pr-cut'].value}% less money`, {size: 12, fill: 'var(--sub)'});
+    const water = svg.append('rect').attr('x', 0).attr('width', W).attr('fill', '#0a84ff').attr('fill-opacity', .28);
+    svg.append('line').attr('x1', 0).attr('x2', W).attr('y1', sea).attr('y2', sea).attr('stroke', '#0a84ff').attr('stroke-width', 2);
+    const claim = T(svg, 320, 334, 'Iran says the ship went down; it named neither the ship nor its flag', {size: 13, a: 'middle', fill: 'var(--sub)'}).attr('opacity', 0);
+    T(svg, 40, 362, `Tankers hit by mines in 48 hours, IRNA says: ${hit}`, {size: 13, fill: 'var(--sub)'});
+    const flames = d3.range(hit).map(i => {
+      const g = svg.append('g').attr('transform', `translate(${60 + i * 64},${410})`).attr('opacity', 0);
+      g.append('path').attr('d', 'M-26,14 L26,14 L20,26 L-20,26 Z').attr('fill', 'var(--sub)');
+      g.append('path').attr('d', 'M0,10 C-12,0 -6,-10 0,-22 C6,-10 12,0 0,10 Z').attr('fill', '#ff9f0a');
+      return g;
+    });
     const set = p => {
-      dots.attr('cx', d => { const m = ease(clamp01((p - d.d) / .3)); return d.sx + (d.x - d.sx) * m; })
-        .attr('cy', d => { const m = ease(clamp01((p - d.d) / .3)); return d.sy + (d.y - d.sy) * m; })
-        .attr('opacity', d => clamp01((p - d.d) / .1));
+      const a = stage(p, 0, .5), b = ease(stage(p, .55, .85)), c = stage(p, .75, 1);
+      barrels.forEach((g, i) => g.attr('opacity', clamp01(a * n - i)));
+      ship.attr('transform', `translate(0,${b * 34}) rotate(${b * 3},320,220)`);
+      water.attr('y', sea).attr('height', H - sea);
+      claim.attr('opacity', b);
+      flames.forEach((g, i) => g.attr('opacity', clamp01(c * hit - i)));
     };
-    return mkTw(5000, set);
+    return mkTw(4600, set);
   }
 
-  /* ---------- 4. Science: fourteen laps, then the tower ---------- */
-  function art_ss(box, f){
-    const W = 640, H = 470, svg = mkSvg(box, W, H), col = '#5e5ce6';
-    const hours = f['ss-hours'].value, laps = f['ss-orbits'].value, nsat = f['ss-sats'].value;
-    svg.attr('aria-label', `Starship circles Earth ${laps} times over about ${hours} hours, releasing ${nsat} satellites, then drops back to its launch tower and is caught. Not to scale.`);
-    T(svg, 30, 32, `${laps} laps of Earth, then back into the tower's arms`, {size: 21, w: 700});
-    T(svg, 30, 54, `Flight ${f['ss-flight'].value}. Not to scale: the orbit's low point is ${f['ss-alt'].value} km up.`, {size: 13, fill: 'var(--sub)'});
-    const cx = 230, cy = 270, re = 118, ro = 168, ta = -Math.PI / 3;
-    svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', re).attr('fill', '#0a84ff').attr('opacity', .85);
-    svg.append('circle').attr('cx', cx).attr('cy', cy).attr('r', ro).attr('fill', 'none').attr('stroke', 'var(--line)').attr('stroke-dasharray', '3 5');
-    // tower at the launch site
-    const tx = cx + re * Math.cos(ta), ty = cy + re * Math.sin(ta);
-    const tower = svg.append('g').attr('transform', `translate(${tx},${ty}) rotate(${ta * 180 / Math.PI + 90})`);
-    tower.append('rect').attr('x', -4).attr('y', -40).attr('width', 8).attr('height', 40).attr('fill', 'var(--fg)');
-    const armL = tower.append('rect').attr('x', 4).attr('y', -36).attr('width', 18).attr('height', 4).attr('fill', 'var(--fg)');
-    T(svg, tx + 44, ty - 46, 'Starbase tower', {size: 12, w: 700});
-    const sats = svg.append('g').selectAll('circle').data(d3.range(nsat)).join('circle').attr('r', 2.6).attr('fill', 'var(--sub)').attr('opacity', 0);
-    const trail = svg.append('path').attr('fill', 'none').attr('stroke', col).attr('stroke-width', 1.4).attr('opacity', .5);
-    const ship = svg.append('circle').attr('r', 7).attr('fill', col);
-    const caught = T(svg, tx + 44, ty - 28, 'caught', {size: 14, w: 700, fill: col}).attr('opacity', 0);
-    // right-hand readout
-    const rx = 450;
-    const clk = T(svg, rx, 160, '', {size: 40, w: 700});
-    T(svg, rx, 184, 'hours since launch', {size: 13, fill: 'var(--sub)'});
-    const lapT = T(svg, rx, 250, '', {size: 40, w: 700});
-    T(svg, rx, 274, 'orbits', {size: 13, fill: 'var(--sub)'});
-    const satT = T(svg, rx, 340, '', {size: 40, w: 700});
-    T(svg, rx, 364, 'satellites released', {size: 13, fill: 'var(--sub)'});
-    T(svg, 30, H - 14, 'The Super Heavy booster aborted its catch and was destroyed over the Gulf of Mexico.', {size: 12, fill: 'var(--sub)'});
-    const relEnd = 1.3 / hours; // satellites go out in the first ~80 minutes
-    const set = p => {
-      const orbitP = Math.min(1, p / .88), land = stage(p, .88, 1);
-      const ang = ta + orbitP * laps * 2 * Math.PI, r = ro - (ro - re - 10) * ease(land);
-      ship.attr('cx', cx + r * Math.cos(ang)).attr('cy', cy + r * Math.sin(ang));
-      const k = Math.floor(clamp01(orbitP / relEnd) * nsat);
-      sats.attr('opacity', (d, i) => i < k ? 1 : 0)
-        .attr('cx', (d, i) => cx + (ro + 10) * Math.cos(ta + (i + .5) / nsat * relEnd * laps * 2 * Math.PI + orbitP * 3))
-        .attr('cy', (d, i) => cy + (ro + 10) * Math.sin(ta + (i + .5) / nsat * relEnd * laps * 2 * Math.PI + orbitP * 3));
-      const lastLap = (orbitP * laps) % 1, a0 = ang - Math.min(lastLap, .25) * 2 * Math.PI;
-      trail.attr('d', d3.arc()({innerRadius: r, outerRadius: r, startAngle: a0 + Math.PI / 2, endAngle: ang + Math.PI / 2})).attr('transform', `translate(${cx},${cy})`);
-      clk.text(p >= 1 ? String(hours) : (orbitP * hours).toFixed(1));
-      lapT.text(String(Math.min(laps, Math.floor(orbitP * laps + 1e-9))));
-      satT.text(String(k));
-      caught.attr('opacity', land >= 1 ? 1 : 0);
-      armL.attr('width', 18 - 8 * (land >= 1 ? 1 : 0));
+  /* ---------- 4. Science: one rock, many lodgers ---------- */
+  function art_nd(box, f){
+    const W = 640, H = 470, svg = mkSvg(box, W, H), col = '#5e5ce6', glow = '#64d2ff';
+    const mx = f['nd-max'].value, avg = f['nd-avg'].value, nn = f['nd-n'].value;
+    svg.attr('aria-label', `Two nodules in cross-section. The large one holds ${mx} dots, one for each animal found in the busiest nodule; the small one holds ${avg}, the average across ${nn} nodules. Not to scale: the animals are under a millimetre long.`);
+    T(svg, 30, 32, `${mx} animals in the busiest rock, ${avg} in a typical one`, {size: 21, w: 700});
+    T(svg, 30, 54, 'Each dot is one animal. Not to scale: they are smaller than a millimetre.', {size: 13, fill: 'var(--sub)'});
+    const rnd = d3.randomLcg(11);
+    const blob = (cx, cy, r, k) => {
+      const pts = d3.range(k).map(i => { const a = i / k * Math.PI * 2, rr = r * (.86 + rnd() * .22); return [cx + rr * Math.cos(a), cy + rr * Math.sin(a) * .82]; });
+      return d3.line().curve(d3.curveCardinalClosed.tension(.4))(pts);
     };
-    return mkTw(9000, set);
+    const nod = (cx, cy, r, count, label) => {
+      const g = svg.append('g');
+      const d = blob(cx, cy, r, 14);
+      g.append('path').attr('d', d).attr('fill', '#2c2c2e').attr('stroke', '#48484a').attr('stroke-width', 3);
+      // cracks
+      d3.range(Math.round(r / 18)).forEach(() => {
+        const a = rnd() * Math.PI * 2, l = r * (.3 + rnd() * .5), x = cx + (rnd() - .5) * r * .5, y = cy + (rnd() - .5) * r * .4;
+        g.append('path').attr('d', `M${x},${y} q${l * .3 * Math.cos(a + 1)},${l * .3 * Math.sin(a + 1)} ${l * Math.cos(a)},${l * Math.sin(a) * .8}`).attr('stroke', '#1c1c1e').attr('stroke-width', 4).attr('fill', 'none');
+      });
+      const dots = d3.range(count).map(() => {
+        let x, y; do { x = cx + (rnd() * 2 - 1) * r * .82; y = cy + (rnd() * 2 - 1) * r * .66; } while (((x - cx) / (r * .84)) ** 2 + ((y - cy) / (r * .68)) ** 2 > 1);
+        return {x, y, t: rnd()};
+      });
+      const sel = g.append('g').selectAll('circle').data(dots).join('circle').attr('cx', d => d.x).attr('cy', d => d.y).attr('r', 2.6).attr('fill', glow);
+      T(svg, cx, cy + r * .82 + 30, label, {size: 14, w: 700, a: 'middle'});
+      return sel;
+    };
+    const big = nod(230, 240, 150, mx, `The busiest: ${mx}`);
+    const small = nod(530, 250, 62, avg, `Average: ${avg}`);
+    T(svg, 530, 360, `across ${nn} nodules`, {size: 12, a: 'middle', fill: 'var(--sub)'});
+    T(svg, 30, 450, `${N(f['nd-dlo'].value)} to ${N(f['nd-dhi'].value)} metres down, Clarion-Clipperton Zone, Pacific`, {size: 12, fill: 'var(--sub)'});
+    const set = p => {
+      const a = stage(p, .05, .75), b = stage(p, .55, .95);
+      big.attr('opacity', d => clamp01((a - d.t * .9) * 10));
+      small.attr('opacity', d => clamp01((b - d.t * .9) * 10));
+    };
+    return mkTw(4500, set);
   }
 
-  /* ---------- 5. Society: 160 bubbles, one left empty ---------- */
-  function art_kr(box, f){
+  /* ---------- 5. Society: an island of 12,000, and the people landing ---------- */
+  function art_ci(box, f){
     const W = 640, H = 470, svg = mkSvg(box, W, H), col = '#ff9f0a';
-    const qs = f['kr-qs'].value, right = f['kr-right'].value, proc = f['kr-proctors'].value;
-    svg.attr('aria-label', `An answer sheet of ${qs} circles, one per question; ${right} fill in, one is marked wrong. Beside it, ${proc} proctors and a hidden camera sending questions to AI.`);
-    T(svg, 30, 32, `${right} of ${qs} right, with help nobody saw`, {size: 21, w: 700});
-    T(svg, 30, 54, 'Each circle is one question on the April paper; the miss is placed for illustration', {size: 13, fill: 'var(--sub)'});
-    const sx = 40, sy = 84, cols = 16, step = 22;
-    svg.append('rect').attr('x', sx - 14).attr('y', sy - 16).attr('width', cols * step + 16).attr('height', Math.ceil(qs / cols) * step + 20).attr('rx', 10).attr('fill', 'none').attr('stroke', 'var(--line)').attr('stroke-width', 2);
-    const wrong = Math.floor(qs * .73);
-    const bub = svg.append('g').selectAll('circle').data(d3.range(qs)).join('circle')
-      .attr('cx', i => sx + (i % cols) * step + 2).attr('cy', i => sy + Math.floor(i / cols) * step + 2).attr('r', 7.5)
-      .attr('stroke', 'var(--sub)').attr('stroke-width', 1.4);
-    const miss = svg.append('path').attr('d', (() => { const x = sx + (wrong % cols) * step + 2, y = sy + Math.floor(wrong / cols) * step + 2; return `M${x - 5},${y - 5}L${x + 5},${y + 5}M${x + 5},${y - 5}L${x - 5},${y + 5}`; })())
-      .attr('stroke', '#ff453a').attr('stroke-width', 2.4).attr('opacity', 0);
-    // the room: two proctors and the camera
-    const px = 440;
-    d3.range(proc).forEach(i => person(svg, px + i * 46, 150, 1.6, 'var(--sub)'));
-    T(svg, px + 23, 190, `${proc} proctors saw nothing`, {size: 13, w: 700, a: 'middle'});
-    const cam = svg.append('g').attr('transform', `translate(${px - 6},260)`);
-    cam.append('rect').attr('width', 28).attr('height', 18).attr('rx', 4).attr('fill', col);
-    cam.append('circle').attr('cx', 14).attr('cy', 9).attr('r', 5).attr('fill', 'var(--color-bg, #000)');
-    T(svg, px + 30, 274, 'mini camera', {size: 12, fill: 'var(--sub)'});
-    const link = svg.append('path').attr('d', `M${px + 8},282 C${px + 8},330 ${px + 60},320 ${px + 60},350`).attr('fill', 'none').attr('stroke', col).attr('stroke-width', 2).attr('stroke-dasharray', '4 5').attr('opacity', 0);
-    const phone = svg.append('g').attr('transform', `translate(${px + 46},352)`).attr('opacity', 0);
-    phone.append('rect').attr('width', 30).attr('height', 52).attr('rx', 6).attr('fill', 'none').attr('stroke', 'var(--fg)').attr('stroke-width', 2);
-    T(phone, 15, 31, 'AI', {size: 12, w: 700, a: 'middle', fill: col});
-    T(svg, px + 84, 384, 'answers on a phone', {size: 12, fill: 'var(--sub)'});
-    T(svg, 40, H - 14, `First-stage score: ${f['kr-score'].value} out of 400.`, {size: 13, w: 700});
-    const set = p => {
-      const k = stage(p, .1, .85) * qs;
-      bub.attr('fill', i => i !== wrong && i < k ? 'var(--fg)' : 'none').attr('stroke', i => i === wrong && k > wrong ? '#ff453a' : 'var(--sub)');
-      miss.attr('opacity', k > wrong ? 1 : 0);
-      link.attr('opacity', stage(p, 0, .1)); phone.attr('opacity', stage(p, .05, .15));
-    };
-    return mkTw(5000, set);
-  }
-
-  /* ---------- 6. Business: a gallery read, then a switch turned off ---------- */
-  function art_mt(box, f){
-    const W = 640, H = 470, svg = mkSvg(box, W, H), col = '#0a84ff';
-    const users = f['mt-users'].value, n = Math.round(users);
-    svg.attr('aria-label', `A phone's photo gallery of ${n} tiles, each a million Italian Android users, read by a scanning line; then a switch for gallery suggestions turns off, as ordered within ${f['mt-days'].value} days. Fine: €${f['mt-fine'].value} million.`);
-    T(svg, 30, 32, `€${f['mt-fine'].value}m for a switch left on`, {size: 21, w: 700});
-    T(svg, 30, 54, 'Each tile is a million Android users in Italy', {size: 13, fill: 'var(--sub)'});
-    const px = 200, py = 74, pw = 240, ph = 380;
-    svg.append('rect').attr('x', px).attr('y', py).attr('width', pw).attr('height', ph).attr('rx', 34).attr('fill', 'none').attr('stroke', 'var(--fg)').attr('stroke-width', 3);
-    const cols = 4, tw = 46, gap = 8, gx = px + (pw - cols * tw - (cols - 1) * gap) / 2, gy = py + 40;
-    const hues = ['#ff9f0a', '#30d158', '#64d2ff', '#bf5af2', '#ff375f', '#ffd60a'];
-    const tiles = svg.append('g').selectAll('rect').data(d3.range(n)).join('rect')
-      .attr('x', i => gx + (i % cols) * (tw + gap)).attr('y', i => gy + Math.floor(i / cols) * (tw + gap)).attr('width', tw).attr('height', tw).attr('rx', 6)
-      .attr('fill', i => hues[(i * 5) % hues.length]).attr('opacity', .35);
-    const gridH = Math.ceil(n / cols) * (tw + gap);
-    const scan = svg.append('rect').attr('x', gx - 6).attr('width', cols * (tw + gap) + 4).attr('height', 3).attr('fill', col).attr('opacity', 0);
-    // the switch
-    const sy = gy + gridH + 26, sw = svg.append('g').attr('transform', `translate(${px + 24},${sy})`);
-    T(sw, 0, 16, 'Gallery suggestions', {size: 14, w: 700});
-    const track = sw.append('rect').attr('x', pw - 98).attr('y', 0).attr('width', 50).attr('height', 26).attr('rx', 13);
-    const knob = sw.append('circle').attr('cy', 13).attr('r', 10).attr('fill', '#fff');
-    T(svg, px + pw + 24, sy + 6, `Off by default`, {size: 13, w: 700});
-    T(svg, px + pw + 24, sy + 24, `within ${f['mt-days'].value} days`, {size: 12, fill: 'var(--sub)'});
-    T(svg, 30, H - 14, 'Meta says it will appeal.', {size: 12, fill: 'var(--sub)'});
-    const set = p => {
-      const s = stage(p, 0, .6), y = gy + s * gridH;
-      scan.attr('y', y).attr('opacity', s > 0 && s < 1 ? 1 : 0);
-      tiles.attr('opacity', (i) => (gy + Math.floor(i / cols) * (tw + gap)) < y ? 1 : .35)
-        .attr('stroke', i => (gy + Math.floor(i / cols) * (tw + gap)) < y && s < 1 ? col : 'none').attr('stroke-width', 2);
-      const off = ease(stage(p, .7, .9));
-      track.attr('fill', d3.interpolateRgb('#30d158', '#8e8e93')(off));
-      knob.attr('cx', pw - 98 + 37 - 24 * off);
-    };
-    return mkTw(4500, set);
-  }
-
-  /* ---------- 7. Culture: eleven microphones, one stack of points ---------- */
-  function art_ev(box, f){
-    const W = 640, H = 470, svg = mkSvg(box, W, H), jc = '#ff375f', vc = '#ffd60a';
-    const jury = f['ev-jury'].value, tele = f['ev-tele'].value, acts = f['ev-acts'].value, tot = f['ev-pts'].value;
-    svg.attr('aria-label', `${acts} microphones on a stage; above the Philippines' one, ${tot} dots, one per point: ${jury} from juries and ${tele} from viewers.`);
-    T(svg, 30, 32, `${tot} points for the youngest act on stage`, {size: 21, w: 700});
-    T(svg, 30, 54, 'Each dot is one point. Other countries’ scores are not shown.', {size: 13, fill: 'var(--sub)'});
-    const base = 410, mx0 = 40, mstep = (W - 80) / (acts - 1), win = 0;
-    svg.append('rect').attr('x', 20).attr('y', base + 12).attr('width', W - 40).attr('height', 6).attr('rx', 3).attr('fill', 'var(--line)');
-    d3.range(acts).forEach(i => {
-      const x = mx0 + i * mstep, g = svg.append('g').attr('transform', `translate(${x},${base})`);
-      g.append('rect').attr('x', -1.5).attr('y', -22).attr('width', 3).attr('height', 34).attr('fill', i === win ? 'var(--fg)' : 'var(--sub)');
-      g.append('rect').attr('x', -5).attr('y', -36).attr('width', 10).attr('height', 16).attr('rx', 5).attr('fill', i === win ? vc : 'var(--sub)').attr('opacity', i === win ? 1 : .5);
+    const pop = f['ci-pop'].value, arr = f['ci-nov'].value, u = 100, nP = Math.round(pop / u), nA = Math.round(arr / u);
+    const day = f['ci-n'].value, boats = f['ci-boats'].value, hb = f['ci-hierro-boats'].value;
+    svg.attr('aria-label', `El Hierro drawn as a field of ${nP} grey dots, each 100 residents, ${N(pop)} people. Beside them ${nA} orange dots, each 100 people, the more than ${N(arr)} who have landed there since November 1. Below, ${boats} boats that arrived across the Canaries on Saturday, ${hb} of them at El Hierro, carrying ${N(day)} people.`);
+    T(svg, 30, 32, `El Hierro: ${N(pop)} residents, ${N(arr)}+ arrivals this month`, {size: 21, w: 700});
+    T(svg, 30, 54, 'Each dot is 100 people. Grey: islanders. Orange: arrivals since November 1, by RTVE’s count.', {size: 13, fill: 'var(--sub)'});
+    const cols = 15, s = 15, x0 = 310, y0 = 86;
+    const res = svg.append('g').selectAll('circle').data(d3.range(nP)).join('circle')
+      .attr('cx', i => x0 + (i % cols) * s).attr('cy', i => y0 + Math.floor(i / cols) * s).attr('r', 5.4).attr('fill', 'var(--sub)');
+    const rowsP = Math.ceil(nP / cols);
+    const ay0 = y0 + rowsP * s + 14;
+    const rnd = d3.randomLcg(5);
+    const arrv = d3.range(nA).map(i => ({x: x0 + (i % cols) * s, y: ay0 + Math.floor(i / cols) * s, sx: 30 + rnd() * 60, sy: 120 + rnd() * 200, d: i / nA * .6}));
+    const ad = svg.append('g').selectAll('circle').data(arrv).join('circle').attr('r', 5.4).attr('fill', col);
+    T(svg, x0 - 12, y0 + 6, 'Islanders', {size: 13, w: 700, a: 'end'});
+    T(svg, x0 - 12, ay0 + 6, 'Arrivals', {size: 13, w: 700, a: 'end', fill: col});
+    // Saturday's boats
+    const by = 418;
+    T(svg, 30, by - 26, `Saturday: ${boats} boats, ${N(day)} people across the islands; ${hb} boats to El Hierro`, {size: 13, fill: 'var(--sub)'});
+    const bts = d3.range(boats).map(i => {
+      const g = svg.append('g').attr('transform', `translate(${44 + i * 40},${by})`);
+      g.append('path').attr('d', 'M-16,0 L16,0 L11,9 L-11,9 Z').attr('fill', i < hb ? col : 'var(--sub)');
+      return g;
     });
-    T(svg, mx0, base + 40, 'Philippines', {size: 13, w: 700});
-    T(svg, mx0 + mstep * (acts - 1), base + 40, `${acts - 1} other countries`, {size: 12, a: 'end', fill: 'var(--sub)'});
-    const per = 12, ds = 9.4, ox = mx0 - (per - 1) * ds / 2 + 52, top = base - 50;
-    const pts = d3.range(tot).map(i => ({x: ox + (i % per) * ds, y: top - Math.floor(i / per) * ds, c: i < jury ? jc : vc}));
-    const dots = svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', d => d.x).attr('cy', d => d.y).attr('r', 3.6).attr('fill', d => d.c).attr('opacity', 0);
-    const lx = ox + per * ds + 16, jy = top - Math.floor((jury - 1) / per) * ds / 2, ty = top - (Math.floor((jury) / per) + Math.floor((tot - 1) / per)) * ds / 2;
-    const l1 = T(svg, lx, jy, `${jury} from juries`, {size: 14, w: 700, fill: jc}).attr('opacity', 0);
-    const l2 = T(svg, lx, ty, `${tele} from viewers`, {size: 14, w: 700, fill: vc}).attr('opacity', 0);
-    T(svg, lx, ty - 40, `Age ${f['ev-age'].value}, "Sobra-Sobra"`, {size: 13, fill: 'var(--sub)'});
     const set = p => {
-      const k = ease(stage(p, 0, .9)) * tot;
-      dots.attr('opacity', (d, i) => i < k ? 1 : 0);
-      l1.attr('opacity', k >= jury ? 1 : 0); l2.attr('opacity', k >= tot - .5 ? 1 : 0);
+      ad.attr('cx', d => { const m = ease(clamp01((p - d.d) / .35)); return d.sx + (d.x - d.sx) * m; })
+        .attr('cy', d => { const m = ease(clamp01((p - d.d) / .35)); return d.sy + (d.y - d.sy) * m; })
+        .attr('opacity', d => clamp01((p - d.d) / .08));
+      bts.forEach((g, i) => g.attr('opacity', clamp01(p * boats * 1.5 - i)));
     };
-    return mkTw(4500, set);
+    return mkTw(5200, set);
   }
 
-  const BUILD = {rb: art_rb, jp: art_jp, pr: art_pr, ss: art_ss, kr: art_kr, mt: art_mt, ev: art_ev};
+  /* ---------- 6. Business: five gates, and the floor gives way ---------- */
+  function art_ch(box, f){
+    const W = 640, H = 470, svg = mkSvg(box, W, H), col = '#ff375f', blue = '#0a84ff';
+    const nC = f['ch-countries'].value;
+    const names = ['Indonesia', 'Malaysia', 'Singapore', 'Thailand', 'Brazil'].slice(0, nC);
+    const drops = [['Taiex', f['ch-taiex'].value], ['TSMC', f['ch-tsmc'].value], ['MediaTek', f['ch-mtk'].value], ['Nasdaq', f['ch-nasdaq'].value]];
+    svg.attr('aria-label', `A chip with ${nC} routes leading out, each closed by a licence gate: ${names.join(', ')}. Below, four markers drop from a common line by Monday's falls: ${drops.map(d => `${d[0]} ${d[1]}%`).join(', ')}.`);
+    T(svg, 30, 32, `${nC} new licence gates, and Monday's fall`, {size: 21, w: 700});
+    T(svg, 30, 54, 'Advanced AI chips now need a US licence to reach these countries.', {size: 13, fill: 'var(--sub)'});
+    const cx = 110, cy = 150;
+    const chip = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+    d3.range(5).forEach(i => { [-1, 1].forEach(sd => { chip.append('rect').attr('x', -30 + i * 13).attr('y', sd < 0 ? -42 : 30).attr('width', 6).attr('height', 12).attr('fill', 'var(--sub)'); chip.append('rect').attr('y', -30 + i * 13).attr('x', sd < 0 ? -42 : 30).attr('height', 6).attr('width', 12).attr('fill', 'var(--sub)'); }); });
+    chip.append('rect').attr('x', -32).attr('y', -32).attr('width', 64).attr('height', 64).attr('rx', 8).attr('fill', 'var(--fg)');
+    T(chip, 0, 5, 'AI', {size: 16, w: 700, a: 'middle', fill: 'var(--color-panel)'});
+    const gates = names.map((nm, i) => {
+      const y = 84 + i * 33, x2 = 470;
+      const ln = svg.append('path').attr('d', `M${cx + 44},${cy} C${cx + 150},${cy} ${cx + 150},${y} ${x2 - 90},${y} L${x2},${y}`).attr('stroke', blue).attr('stroke-width', 2.5).attr('fill', 'none');
+      const len = 420; ln.attr('stroke-dasharray', `${len} ${len}`);
+      const gate = svg.append('g').attr('transform', `translate(${x2 - 60},${y})`);
+      gate.append('rect').attr('x', -3).attr('y', -11).attr('width', 6).attr('height', 22).attr('rx', 2).attr('fill', col);
+      T(svg, x2 + 8, y + 5, nm, {size: 14, w: 700});
+      return {ln, gate, len};
+    });
+    T(svg, 410, 72, 'licence', {size: 11, w: 700, a: 'middle', fill: col});
+    const base = 300, k = 16;
+    svg.append('line').attr('x1', 60).attr('x2', 600).attr('y1', base).attr('y2', base).attr('stroke', 'var(--line)').attr('stroke-width', 2);
+    T(svg, 600, base - 8, 'previous close', {size: 11, a: 'end', fill: 'var(--sub)'});
+    const bars = drops.map(([nm, v], i) => {
+      const x = 90 + i * 120;
+      const g = svg.append('g');
+      const r = g.append('rect').attr('x', x - 32).attr('y', base).attr('width', 64).attr('rx', 6).attr('fill', nm === 'Nasdaq' ? 'var(--sub)' : col);
+      const t = T(g, x, base, `${v}%`, {size: 15, w: 700, a: 'middle'});
+      T(g, x, base - 10, nm, {size: 12, a: 'middle', fill: 'var(--sub)'});
+      return {r, t, v};
+    });
+    const set = p => {
+      const a = stage(p, 0, .45), b = ease(stage(p, .5, 1));
+      gates.forEach((g, i) => { const q = clamp01(a * 1.4 - i * .08); g.ln.attr('stroke-dashoffset', g.len * (1 - q) + 0).attr('opacity', .3 + .7 * q); g.gate.attr('opacity', q >= 1 ? 1 : q * .5); });
+      bars.forEach(o => { const h = Math.abs(o.v) * k * b; o.r.attr('height', h); o.t.attr('y', base + h + 20).attr('opacity', b); });
+    };
+    return mkTw(4200, set);
+  }
+
+  /* ---------- 7. Culture: a wall of twenty, nine faces lit ---------- */
+  function art_ve(box, f){
+    const W = 640, H = 470, svg = mkSvg(box, W, H), gold = '#ffd60a';
+    const nP = f['ve-n'].value, all = f['ve-all'].value;
+    const yr = {arn: f['ve-arn'].value, self: f['ve-self'].value, marg: f['ve-marg'].value};
+    svg.attr('aria-label', `A wall of ${all} frames, roughly every picture known to be by Jan van Eyck. ${nP} are portraits and light up one by one; one, Margaret, painted in ${yr.marg}, is picked out as the first known portrait of a woman who was not an aristocrat.`);
+    T(svg, 30, 32, `${nP} portraits of about ${all} surviving pictures`, {size: 21, w: 700});
+    T(svg, 30, 54, 'Each frame is one surviving painting by van Eyck. Lit: the portraits, all now in London.', {size: 13, fill: 'var(--sub)'});
+    const cols = 5, fw = 88, fh = 70, gx = 18, gy = 18, x0 = (W - (cols * fw + (cols - 1) * gx)) / 2, y0 = 78;
+    // portraits placed across the wall, not bunched
+    const pIdx = [1, 3, 5, 7, 9, 12, 14, 16, 18].slice(0, nP);
+    const margI = pIdx[pIdx.length - 2];
+    const frames = d3.range(all).map(i => {
+      const x = x0 + (i % cols) * (fw + gx), y = y0 + Math.floor(i / cols) * (fh + gy), isP = pIdx.includes(i);
+      const g = svg.append('g').attr('transform', `translate(${x},${y})`);
+      const fr = g.append('rect').attr('width', fw).attr('height', fh).attr('rx', 3).attr('fill', 'none').attr('stroke', 'var(--sub)').attr('stroke-width', 3);
+      const inner = g.append('rect').attr('x', 6).attr('y', 6).attr('width', fw - 12).attr('height', fh - 12).attr('fill', 'var(--line)');
+      let bust = null;
+      if (isP) {
+        bust = g.append('g').attr('opacity', 0);
+        bust.append('circle').attr('cx', fw / 2).attr('cy', 28).attr('r', 11).attr('fill', '#3a2a16');
+        bust.append('path').attr('d', `M${fw / 2 - 22},${fh - 6} Q${fw / 2},${30} ${fw / 2 + 22},${fh - 6} Z`).attr('fill', '#3a2a16');
+      }
+      return {i, isP, fr, inner, bust, x, y};
+    });
+    const m = frames[margI];
+    const tag = T(svg, m.x + fw / 2, m.y + fh + 15, `Margaret, ${yr.marg}`, {size: 11, w: 700, a: 'middle', fill: gold}).attr('opacity', 0);
+    T(svg, 30, 446, `Arnolfini Portrait, ${yr.arn} · Self portrait?, ${yr.self} · National Gallery, London, from Saturday`, {size: 12, fill: 'var(--sub)'});
+    const set = p => {
+      const a = stage(p, 0, .25), b = stage(p, .3, .85), c = stage(p, .88, 1);
+      let k = 0;
+      frames.forEach(o => {
+        o.fr.attr('opacity', clamp01(a * 2 - o.i / all));
+        if (o.isP) {
+          const q = clamp01(b * nP - k); k++;
+          o.inner.attr('fill', q > 0 ? gold : 'var(--line)').attr('fill-opacity', q > 0 ? .25 + .6 * q : 1);
+          o.fr.attr('stroke', q > 0 ? gold : 'var(--sub)');
+          o.bust.attr('opacity', q);
+        }
+      });
+      m.fr.attr('stroke-width', c > 0 ? 3 + 2 * c : 3);
+      tag.attr('opacity', c);
+    };
+    return mkTw(4400, set);
+  }
+
+  const BUILD = {bx: art_bx, hp: art_hp, hz: art_hz, nd: art_nd, ci: art_ci, ch: art_ch, ve: art_ve};
+
 
   let factsMap = null;
   function countUp(card){
@@ -663,6 +688,7 @@ window.dash={data:function(id){var d=window.__SEVEN[id];return d?{status:'ok',da
   if (named) setTimeout(() => named.scrollIntoView(), 400);
 })();
 </script>
+
 
 
 </body></html>
