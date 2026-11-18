@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T01:45:11+00:00",
+ "updated": "2026-11-18T01:45:21+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -729,10 +729,11 @@
    "artists": "Cecilia Vicuña",
    "start": "2026-10-07",
    "end": "2027-02-14",
-   "admission": "check",
+   "admission": "paid",
    "discipline": "Sculpture & installation",
    "url": "https://www.whitechapelgallery.org/exhibitions/cecilia-vicuna/",
-   "note": "With Foraging Quipu"
+   "note": "With Foraging Quipu",
+   "price": "£16.50 (concessions £9.50)"
   },
   {
    "id": "wg-screen-portraits",
@@ -1484,19 +1485,6 @@
    "admission": "free",
    "discipline": "Design & architecture",
    "url": "https://www.vam.ac.uk/event/w2VbAjO8Gaq/motions-and-notions-of-fastening-2026-2027"
-  },
-  {
-   "id": "saatchi-sketches",
-   "venue": "saatchi",
-   "short": "Courtroom Drawings from Landmark Trials",
-   "title": "Sketches That Shaped History",
-   "artists": "",
-   "start": "2026-11-14",
-   "end": "2026-11-17",
-   "admission": "free",
-   "discipline": "Painting & works on paper",
-   "url": "https://www.saatchigallery.com/exhibition/sketches-that-shaped-history",
-   "note": "Presented by Harvey, Gallery 3"
   },
   {
    "id": "bb-uprising",
