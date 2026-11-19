@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18T01:17:30+00:00",
+ "updated": "2026-11-19T01:18:48+00:00",
  "venues": [
   {
    "id": "louvre",
@@ -371,7 +371,8 @@
    "end": "2027-05-03",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.louvre.fr/agenda/expositions/louvre-photo"
+   "url": "https://www.louvre.fr/agenda/expositions/louvre-photo",
+   "price": "Included in museum admission"
   },
   {
    "id": "l-hotes",
@@ -383,7 +384,8 @@
    "end": "2026-12-14",
    "admission": "paid",
    "discipline": "Group shows",
-   "url": "https://www.louvre.fr/agenda/expositions/les-hotes-du-louvre"
+   "url": "https://www.louvre.fr/agenda/expositions/les-hotes-du-louvre",
+   "price": "Included in museum admission"
   },
   {
    "id": "l-eau",
@@ -395,7 +397,8 @@
    "end": "2027-03-15",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.louvre.fr/agenda/expositions/l-eau-primordiale-0"
+   "url": "https://www.louvre.fr/agenda/expositions/l-eau-primordiale-0",
+   "price": "Included in museum admission"
   },
   {
    "id": "c-flamel",
@@ -459,7 +462,7 @@
    "admission": "paid",
    "discipline": "Painting & works on paper",
    "url": "https://www.fondationcustodia.fr/Expositions/Mes-chers-amis-Le-dessin-dans-les-collections-d-artistes-francais-au-XIXe",
-   "price": "€15"
+   "price": "€15 full / €10 reduced"
   },
   {
    "id": "lux-warhol",
@@ -472,7 +475,7 @@
    "admission": "paid",
    "discipline": "Painting & works on paper",
    "url": "https://museeduluxembourg.fr/fr/agenda/evenement/andy-warhol",
-   "price": "€14"
+   "price": "€14 full / €10 reduced; free under 16"
   },
   {
    "id": "ca-villegle",
@@ -965,7 +968,8 @@
    "admission": "paid",
    "discipline": "History & collections",
    "url": "https://www.louvre.fr/agenda/expositions/affinites-0",
-   "note": "Richelieu wing, Objets d’art rooms."
+   "note": "Richelieu wing, Objets d’art rooms.",
+   "price": "Included in museum admission"
   },
   {
    "id": "l-lacoste",
@@ -977,7 +981,8 @@
    "end": "2027-01-11",
    "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://www.louvre.fr/agenda/expositions/la-donation-michel-lacoste-au-musee-du-louvre"
+   "url": "https://www.louvre.fr/agenda/expositions/la-donation-michel-lacoste-au-musee-du-louvre",
+   "price": "Included in museum admission"
   },
   {
    "id": "o-echos",
@@ -1125,7 +1130,7 @@
    "id": "ca-harvest",
    "venue": "cartier",
    "short": "Ibrahim Mahama",
-   "title": "Le Temps des récoltes",
+   "title": "Ibrahim Mahama, Le Temps des récoltes",
    "artists": "Ibrahim Mahama, Dorothy Akpene Amenuke, Gideon Appah, James Barnor, Cercle d'Art des Travailleurs de Plantation Congolaise (CATPC), Courage Dzidula Kpodo and Postbox Ghana, Zohra Opoku, Tjaša Rener, Feda Wardak",
    "start": "2026-10-22",
    "end": "2027-02-28",
@@ -1327,7 +1332,7 @@
    "artists": "Mariella Simoni",
    "start": "2026-07-21",
    "end": "2027-01-04",
-   "admission": "check",
+   "admission": "free",
    "discipline": null,
    "url": "https://www.mam.paris.fr/fr/expositions/exposition-mariella-simoni",
    "note": "Page only states free entry to the collections."
@@ -1353,7 +1358,7 @@
    "artists": "Stéphane Bordarier",
    "start": "2026-07-21",
    "end": "2027-01-04",
-   "admission": "check",
+   "admission": "free",
    "discipline": "Painting & works on paper",
    "url": "https://www.mam.paris.fr/fr/expositions/exposition-stephane-bordarier",
    "note": "Page only states free entry to the collections."
@@ -1443,7 +1448,7 @@
    "short": "Yo-E Ryou: Echoes of the tides",
    "title": "Echoes of the tides (Échos des marées)",
    "artists": "Yo-E Ryou",
-   "start": "2026-03-11",
+   "start": "2026-03-12",
    "end": "2027-02-21",
    "admission": "paid",
    "price": "€14 full, €11 reduced (museum ticket)",
@@ -1637,6 +1642,31 @@
    "discipline": null,
    "url": "https://jeudepaume.org/evenement/jonathas-de-andrade-paris/",
    "price": "€14 full / €9.50 reduced on site (general admission)"
+  },
+  {
+   "id": "qb-ainous",
+   "venue": "branly",
+   "short": "The Ainu of Japan",
+   "title": "Aïnous. Une voix du Japon",
+   "artists": "Paul Jacoulet and others",
+   "start": "2027-01-26",
+   "end": "2027-06-27",
+   "admission": "paid",
+   "price": "€14 full, €11 reduced (museum ticket)",
+   "discipline": "History & collections",
+   "url": "https://www.quaibranly.fr/fr/expositions/ainous"
+  },
+  {
+   "id": "ad-viktorrolf",
+   "venue": "artsdeco",
+   "short": "Viktor&Rolf",
+   "title": "Le monde de Viktor&Rolf. 30 ans de haute couture",
+   "artists": "Viktor&Rolf (Viktor Horsting, Rolf Snoeren)",
+   "start": "2027-01-28",
+   "end": "2027-07-04",
+   "admission": "paid",
+   "discipline": "Design & architecture",
+   "url": "https://madparis.fr/Le-monde-de-Viktor-Rolf-30-ans-de-haute-couture"
   }
  ]
 }
