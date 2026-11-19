@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18T01:45:21+00:00",
+ "updated": "2026-11-19T01:44:34+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -1497,6 +1497,18 @@
    "admission": "free",
    "discipline": "Photography & moving image",
    "url": "https://www.barbican.org.uk/whats-on/2027/event/uprising-in-the-wake"
+  },
+  {
+   "id": "trg-juodvalkyte",
+   "venue": "trg",
+   "short": "Agnė Juodvalkytė",
+   "title": "Agnė Juodvalkytė: Shared Ritual",
+   "artists": "Agnė Juodvalkytė",
+   "start": "2026-11-25",
+   "end": "2027-01-23",
+   "admission": "check",
+   "discipline": "Painting & works on paper",
+   "url": "https://gallerytabularasa.co.uk/2026-11-Agne-Juodvalkyte"
   }
  ]
 }
