@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19T01:44:34+00:00",
+ "updated": "2026-11-20T01:47:06+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -1509,6 +1509,61 @@
    "admission": "check",
    "discipline": "Painting & works on paper",
    "url": "https://gallerytabularasa.co.uk/2026-11-Agne-Juodvalkyte"
+  },
+  {
+   "id": "bl-american-revolution",
+   "venue": "british-library",
+   "short": "American Revolution at 250",
+   "title": "American Revolution: 250 Years from the Declaration of Independence",
+   "artists": "",
+   "start": "2026-06-29",
+   "end": "2027-01-17",
+   "admission": "free",
+   "price": null,
+   "discipline": "History & collections",
+   "url": "https://events.bl.uk/exhibitions/american-revolution-250-years-from-the-declaration-of-independence",
+   "note": "Display in the Treasures Gallery"
+  },
+  {
+   "id": "va-adobe-residents",
+   "venue": "va",
+   "short": "Adobe Creative Residents",
+   "title": "The Adobe Creative Residents On Display, 2026",
+   "artists": "Shanti Bell, Emily Stapleton-Jefferis, Maria Than",
+   "start": "2026-12-03",
+   "end": "2027-11-01",
+   "admission": "free",
+   "price": null,
+   "discipline": "Group shows",
+   "url": "https://www.vam.ac.uk/exhibitions/the-adobe-creative-residents-on-display-2026"
+  },
+  {
+   "id": "ica-momostar",
+   "venue": "ica",
+   "short": "Maite de Orbe",
+   "title": "MOMOSTAR: Unbaptising Exhibition",
+   "artists": "Maite de Orbe",
+   "start": "2026-12-01",
+   "end": "2026-12-07",
+   "admission": "paid",
+   "price": "£3 (opening night free, booking essential)",
+   "discipline": null,
+   "url": "https://www.ica.art/talks/momostar",
+   "note": "In the Upper Gallery"
+  },
+  {
+   "id": "saatchi-one-story",
+   "venue": "saatchi",
+   "short": "Jillian Edelstein",
+   "title": "One Story At A Time",
+   "artists": "Jillian Edelstein",
+   "start": "2026-11-20",
+   "end": "2026-11-23",
+   "admission": "free",
+   "price": null,
+   "discipline": "Photography & moving image",
+   "url": "https://www.saatchigallery.com/exhibition/one-story-at-a-time",
+   "note": "Portraits made with Everyone's Invited; four days only"
   }
  ]
 }
