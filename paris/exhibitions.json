@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20T01:17:21+00:00",
+ "updated": "2026-11-21T01:19:50+00:00",
  "venues": [
   {
    "id": "louvre",
@@ -410,7 +410,8 @@
    "end": "2027-01-24",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.musee-moyenage.fr/"
+   "url": "https://www.musee-moyenage.fr/en-ce-moment/exposition-nicolas-flamel",
+   "price": "€14 full / €12 reduced; free under 26"
   },
   {
    "id": "ja-tintoret",
@@ -436,7 +437,7 @@
    "admission": "paid",
    "discipline": "Painting & works on paper",
    "url": "https://www.petitpalais.paris.fr/decouvrir-la-programmation/expositions/eva-gonzales",
-   "price": "€14"
+   "price": "€14 full / €12 reduced"
   },
   {
    "id": "pp-bruxelles",
@@ -449,7 +450,7 @@
    "admission": "paid",
    "discipline": "Design & architecture",
    "url": "https://www.petitpalais.paris.fr/decouvrir-la-programmation/expositions/bruxelles-1900",
-   "price": "€17"
+   "price": "€17 full / €15 reduced"
   },
   {
    "id": "cu-amis",
@@ -680,7 +681,7 @@
    "end": "2027-03-08",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.fondationlouisvuitton.fr/",
+   "url": "https://www.fondationlouisvuitton.fr/fr/evenements/gustave-fayet-collectionneur-createur",
    "price": "€0–18"
   },
   {
@@ -1061,20 +1062,6 @@
    "note": "A display within the museum; the page states 'Entrée gratuite et libre dans la limite des places disponibles'."
   },
   {
-   "id": "pi-kuitca",
-   "venue": "picasso",
-   "short": "Guillermo Kuitca",
-   "title": "Guillermo Kuitca, Chapelle",
-   "artists": "Guillermo Kuitca",
-   "start": "2024-10-15",
-   "end": "2027-12-31",
-   "admission": "paid",
-   "discipline": "Painting & works on paper",
-   "url": "https://www.museepicassoparis.fr/fr/agenda/guillermo-kuitca-chapelle/",
-   "price": "16 EUR full / 12 EUR reduced (museum ticket)",
-   "note": "In-situ painting in the chapel of the Hôtel Salé; seen with the museum ticket."
-  },
-  {
    "id": "pp-visionnaires",
    "venue": "petitpalais",
    "short": "Prune Nourry: Visionaries",
@@ -1448,13 +1435,13 @@
    "short": "Yo-E Ryou: Echoes of the tides",
    "title": "Echoes of the tides (Échos des marées)",
    "artists": "Yo-E Ryou",
-   "start": "2026-03-12",
+   "start": "2026-03-11",
    "end": "2027-02-21",
    "admission": "paid",
    "price": "€14 full, €11 reduced (museum ticket)",
    "discipline": "Sculpture & installation",
-   "note": "Sound work by the 2025 sound residency winner, shown in the Boîte à musique on the Plateau des collections; venue page does not say whether it needs a separate ticket.",
-   "url": "https://www.quaibranly.fr/fr/expositions-evenements/au-musee/expositions/details-de-levenement/e/echoes-of-the-tides-40978"
+   "note": "Sound work by the 2025 sound residency winner, shown in the Boîte à musique on the Plateau des collections; included in the museum ticket.",
+   "url": "https://www.quaibranly.fr/fr/expositions/echoes-tides-echos-des-marees"
   },
   {
    "id": "o-peduzzi",
@@ -1600,8 +1587,9 @@
    "end": "2027-01-18",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.fondationlouisvuitton.fr/",
-   "note": "Shown in Gallery 8; shares a ticket with the Gustave Fayet exhibition."
+   "url": "https://www.fondationlouisvuitton.fr/fr/evenements/open-space-19-mohammad-alfaraj",
+   "note": "Shown in Gallery 8; shares a ticket with the Gustave Fayet exhibition.",
+   "price": "€0–16 (included in the Gustave Fayet ticket)"
   },
   {
    "id": "ima-filor",
@@ -1667,6 +1655,46 @@
    "admission": "paid",
    "discipline": "Design & architecture",
    "url": "https://madparis.fr/Le-monde-de-Viktor-Rolf-30-ans-de-haute-couture"
+  },
+  {
+   "id": "pi-bacon",
+   "venue": "picasso",
+   "title": "Bacon face à Picasso",
+   "short": "Francis Bacon and Pablo Picasso",
+   "artists": "Francis Bacon, Pablo Picasso",
+   "start": "2027-01-12",
+   "end": "2027-05-16",
+   "admission": "paid",
+   "price": "16 EUR full / 12 EUR reduced",
+   "discipline": "Painting & works on paper",
+   "note": "A display within the permanent collection route: 12 works by Bacon, centred on Three Studies of Figures at the Base of a Crucifixion (second version), with loans from Tate Modern and MB Art Collection.",
+   "url": "https://www.museepicassoparis.fr/fr/agenda/bacon-face-a-picasso/"
+  },
+  {
+   "id": "or-monettravail",
+   "venue": "orangerie",
+   "title": "Monet au travail",
+   "short": "Monet at work: family archives",
+   "artists": "Claude Monet",
+   "start": "2026-09-30",
+   "end": "2027-01-25",
+   "admission": "check",
+   "discipline": "History & collections",
+   "note": "A display in the Salle Focus (project 'Monet. Focus sur les archives familiales'), photographs and correspondence on Monet's creative process. Details from press coverage; not yet confirmed on the venue page.",
+   "url": "https://www.musee-orangerie.fr/"
+  },
+  {
+   "id": "or-monetprive",
+   "venue": "orangerie",
+   "title": "Monet en privé",
+   "short": "Monet in private: family archives",
+   "artists": "Claude Monet",
+   "start": "2027-01-29",
+   "end": "2027-05-31",
+   "admission": "check",
+   "discipline": "History & collections",
+   "note": "A display in the Salle Focus (second part of 'Monet. Focus sur les archives familiales') on the artist's daily life, accompanying '1927. Le temps retrouvé' (from 31 March 2027). Details from press coverage; not yet confirmed on the venue page.",
+   "url": "https://www.musee-orangerie.fr/"
   }
  ]
 }
