@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20T01:47:06+00:00",
+ "updated": "2026-11-21T01:46:09+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -1564,6 +1564,18 @@
    "discipline": "Photography & moving image",
    "url": "https://www.saatchigallery.com/exhibition/one-story-at-a-time",
    "note": "Portraits made with Everyone's Invited; four days only"
+  },
+  {
+   "id": "saatchi-deadly-prey",
+   "venue": "saatchi",
+   "short": "Art of Ghana's Mobile Cinema",
+   "title": "Deadly Prey: The Art of Ghana's Mobile Cinema",
+   "artists": "Bright Obeng, C.A. Wisely, Farkira, Heavy J, H.K. Matthias and others",
+   "start": "2026-11-26",
+   "end": "2027-01-24",
+   "admission": "free",
+   "url": "https://www.saatchigallery.com/exhibition/deadly-prey-the-art-of-ghanas-mobile-cinema",
+   "discipline": "Painting & works on paper"
   }
  ]
 }
