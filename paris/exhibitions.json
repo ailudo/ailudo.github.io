@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T01:17:17+00:00",
+ "updated": "2026-11-23T01:21:07+00:00",
  "venues": [
   {
    "id": "louvre",
@@ -337,7 +337,7 @@
    "id": "l-zurb",
    "venue": "louvre",
    "short": "Francisco de Zurbarán",
-   "title": "Zurbarán: 1598-1664",
+   "title": "Zurbarán 1598-1664",
    "artists": "Francisco de Zurbarán",
    "start": "2026-10-07",
    "end": "2027-01-25",
@@ -576,7 +576,7 @@
    "end": "2027-02-07",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions",
+   "url": "https://www.musee-orsay.fr/en/program/whats-on/exhibitions/gustave-le-gray-painter-and-photographer",
    "note": "A display within the museum."
   },
   {
@@ -682,7 +682,7 @@
    "admission": "paid",
    "discipline": "Painting & works on paper",
    "url": "https://www.fondationlouisvuitton.fr/fr/evenements/gustave-fayet-collectionneur-createur",
-   "price": "€0–18"
+   "price": "€0–36"
   },
   {
    "id": "bc-remember",
@@ -1136,7 +1136,7 @@
    "end": "2027-01-17",
    "admission": "paid",
    "discipline": "History & collections",
-   "url": "https://www.quaibranly.fr/fr/expositions-evenements/au-musee/expositions/details-de-levenement/e/premieres-nations",
+   "url": "https://www.quaibranly.fr/fr/expositions/premieres-nations",
    "price": "€14 full, €11 reduced (museum ticket)"
   },
   {
@@ -1149,7 +1149,7 @@
    "end": "2027-01-31",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://www.quaibranly.fr/fr/expositions-evenements/au-musee/expositions/details-de-levenement/e/voir-tahiti",
+   "url": "https://www.quaibranly.fr/fr/expositions/voir-tahiti",
    "price": "€14 full, €11 reduced (museum ticket)"
   },
   {
@@ -1162,7 +1162,7 @@
    "end": "2027-04-04",
    "admission": "paid",
    "discipline": "Painting & works on paper",
-   "url": "https://www.quaibranly.fr/fr/expositions-evenements/au-musee/expositions/details-de-levenement/e/violence-silencieuse",
+   "url": "https://www.quaibranly.fr/fr/expositions/violence-silencieuse",
    "price": "€14 full, €11 reduced (museum ticket)"
   },
   {
@@ -1589,7 +1589,7 @@
    "discipline": "Photography & moving image",
    "url": "https://www.fondationlouisvuitton.fr/fr/evenements/open-space-19-mohammad-alfaraj",
    "note": "Shown in Gallery 8; shares a ticket with the Gustave Fayet exhibition.",
-   "price": "€0–16 (included in the Gustave Fayet ticket)"
+   "price": "Included in the Gustave Fayet ticket"
   },
   {
    "id": "ima-filor",
