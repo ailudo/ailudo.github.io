@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T01:46:28+00:00",
+ "updated": "2026-11-23T01:45:30+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -785,19 +785,6 @@
    "url": "https://camdenartcentre.org/whats-on/a-hard-line-to-bend"
   },
   {
-   "id": "slg-sosnowska",
-   "venue": "slg",
-   "short": "Monika Sosnowska",
-   "title": "Monika Sosnowska: Weight of Matter",
-   "artists": "Monika Sosnowska",
-   "start": "2026-09-10",
-   "end": "2026-11-22",
-   "admission": "free",
-   "discipline": "Sculpture & installation",
-   "url": "https://www.southlondongallery.org/exhibitions/monika-sosnowska-weight-of-matter/",
-   "price": "Suggested £5 donation"
-  },
-  {
    "id": "ch-wakaliga",
    "venue": "chisenhale",
    "short": "Wakaliga Uganda",
@@ -1027,19 +1014,6 @@
    "url": "https://gasworks.org.uk/exhibitions/paloma-contreras-lomas-exhibition/"
   },
   {
-   "id": "ib-taring-padi",
-   "venue": "ibraaz",
-   "site": "Majlis",
-   "short": "Taring Padi",
-   "title": "Rakyat Pasti Menang",
-   "artists": "Taring Padi",
-   "start": "2026-07-08",
-   "end": "2026-11-22",
-   "admission": "check",
-   "discipline": "Painting & works on paper",
-   "url": "https://ibraaz.org/whats-on/taring-padi"
-  },
-  {
    "id": "ib-elegy",
    "venue": "ibraaz",
    "site": "Minassa",
@@ -1089,30 +1063,6 @@
    "discipline": "History & collections",
    "url": "https://www.vam.ac.uk/exhibitions/freddie-mercury-splendid-things",
    "site": "South Kensington"
-  },
-  {
-   "id": "saatchi-cold-sweat",
-   "venue": "saatchi",
-   "short": "Luke Hannam",
-   "title": "Cold Sweat",
-   "artists": "Luke Hannam",
-   "start": "2026-10-22",
-   "end": "2026-11-22",
-   "admission": "free",
-   "discipline": "Photography & moving image",
-   "url": "https://www.saatchigallery.com/exhibition/cold-sweat"
-  },
-  {
-   "id": "saatchi-jalloh",
-   "venue": "saatchi",
-   "short": "Adama Jalloh",
-   "title": "Adama Jalloh: Process (2014–ongoing)",
-   "artists": "Adama Jalloh",
-   "start": "2026-10-22",
-   "end": "2026-11-22",
-   "admission": "free",
-   "discipline": "Photography & moving image",
-   "url": "https://www.saatchigallery.com/exhibition/adama-jalloh-process-2014-ongoing"
   },
   {
    "id": "slg-kang",
@@ -1602,6 +1552,19 @@
    "price": null,
    "url": "https://www.e-flux.com/announcements/6784261/exhibition-programme-2026-27",
    "discipline": "Sculpture & installation"
+  },
+  {
+   "id": "hw-winter-light",
+   "venue": "hayward",
+   "short": "Winter Light Art Trail",
+   "title": "Winter Light",
+   "artists": "",
+   "start": "2026-11-24",
+   "end": "2027-01-10",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.southbankcentre.co.uk/whats-on/winter-light/",
+   "note": "Outdoors across the Southbank Centre site"
   }
  ]
 }
