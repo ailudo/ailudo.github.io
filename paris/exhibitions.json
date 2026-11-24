@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23T01:21:07+00:00",
+ "updated": "2026-11-24T01:17:50+00:00",
  "venues": [
   {
    "id": "louvre",
@@ -655,7 +655,6 @@
    "admission": "paid",
    "discipline": "Group shows",
    "url": "https://palaisdetokyo.com/exposition/toi-et-ta-bande/",
-   "note": "Free entry on 21 and 22 October.",
    "price": "€13 / €9 (one exhibitions ticket covers all Palais de Tokyo shows)"
   },
   {
@@ -1609,13 +1608,13 @@
    "id": "jp-klein",
    "venue": "jeudepaume",
    "short": "William Klein",
-   "title": "New York Revisited",
+   "title": "Revoir New York",
    "artists": "William Klein",
    "start": "2027-01-26",
    "end": "2027-05-30",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://jeudepaume.org/evenement/william-klein/",
+   "url": "https://jeudepaume.org/evenement/william-klein-revoir-new-york/",
    "price": "€14 full / €9.50 reduced on site (general admission)"
   },
   {
