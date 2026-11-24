@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23T01:45:30+00:00",
+ "updated": "2026-11-24T01:44:32+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -1502,20 +1502,6 @@
    "note": "In the Upper Gallery"
   },
   {
-   "id": "saatchi-one-story",
-   "venue": "saatchi",
-   "short": "Jillian Edelstein",
-   "title": "One Story At A Time",
-   "artists": "Jillian Edelstein",
-   "start": "2026-11-20",
-   "end": "2026-11-23",
-   "admission": "free",
-   "price": null,
-   "discipline": "Photography & moving image",
-   "url": "https://www.saatchigallery.com/exhibition/one-story-at-a-time",
-   "note": "Portraits made with Everyone's Invited; four days only"
-  },
-  {
    "id": "saatchi-deadly-prey",
    "venue": "saatchi",
    "short": "Art of Ghana's Mobile Cinema",
@@ -1565,6 +1551,18 @@
    "discipline": "Sculpture & installation",
    "url": "https://www.southbankcentre.co.uk/whats-on/winter-light/",
    "note": "Outdoors across the Southbank Centre site"
+  },
+  {
+   "id": "tb-hastrup",
+   "venue": "tate-britain",
+   "short": "Clara Hastrup",
+   "title": "Art Now: Clara Hastrup",
+   "artists": "Clara Hastrup",
+   "start": "2026-12-04",
+   "end": "2027-05-16",
+   "admission": "check",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.tate.org.uk/whats-on/tate-britain/art-now-clara-hastrup"
   }
  ]
 }
