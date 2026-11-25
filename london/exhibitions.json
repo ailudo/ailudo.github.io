@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T01:44:32+00:00",
+ "updated": "2026-11-25T01:46:14+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -1485,7 +1485,8 @@
    "admission": "free",
    "price": null,
    "discipline": "Group shows",
-   "url": "https://www.vam.ac.uk/exhibitions/the-adobe-creative-residents-on-display-2026"
+   "url": "https://www.vam.ac.uk/exhibitions/the-adobe-creative-residents-on-display-2026",
+   "site": "South Kensington"
   },
   {
    "id": "ica-momostar",
@@ -1494,7 +1495,7 @@
    "title": "MOMOSTAR: Unbaptising Exhibition",
    "artists": "Maite de Orbe",
    "start": "2026-12-01",
-   "end": "2026-12-07",
+   "end": "2026-12-06",
    "admission": "paid",
    "price": "£3 (opening night free, booking essential)",
    "discipline": null,
@@ -1512,6 +1513,18 @@
    "admission": "free",
    "url": "https://www.saatchigallery.com/exhibition/deadly-prey-the-art-of-ghanas-mobile-cinema",
    "discipline": "Painting & works on paper"
+  },
+  {
+   "id": "saatchi-colbert",
+   "venue": "saatchi",
+   "short": "Charlotte Colbert",
+   "title": "Conversations with Strangers",
+   "artists": "Charlotte Colbert",
+   "start": "2026-11-27",
+   "end": null,
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.saatchigallery.com/exhibition/conversations-with-strangers"
   },
   {
    "id": "cac-merlin-james",
