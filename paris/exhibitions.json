@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T01:17:50+00:00",
+ "updated": "2026-11-25T01:19:53+00:00",
  "venues": [
   {
    "id": "louvre",
@@ -891,7 +891,8 @@
    "end": "2027-05-02",
    "admission": "paid",
    "discipline": "Photography & moving image",
-   "url": "https://madparis.fr/rafael-pavarotti-photographe-10279"
+   "url": "https://madparis.fr/rafael-pavarotti-photographe-10279",
+   "price": "€18 exhibition(s) + collections; €14 reduced; €10 ages 18-25 (EEA); free under 18"
   },
   {
    "id": "ima-mariee",
@@ -917,7 +918,7 @@
    "admission": "paid",
    "discipline": "History & collections",
    "url": "https://www.imarabe.org/fr/agenda/expositions-musee/les-secrets-alhambra",
-   "price": "€17 full, €15 reduced, €9 ages 12-26, free under 12"
+   "price": "€17 full, €15 reduced, €9 ages 12-26, free under 12; combined exhibition + museum ticket €20 full, €9 ages 12-25"
   },
   {
    "id": "gu-dal",
@@ -1083,7 +1084,8 @@
    "end": "2027-04-04",
    "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://madparis.fr/Look-40-ans-de-mode-au-musee-10263"
+   "url": "https://madparis.fr/Look-40-ans-de-mode-au-musee-10263",
+   "price": "€18 exhibition(s) + collections; €14 reduced; €10 ages 18-25 (EEA); free under 18"
   },
   {
    "id": "gp-girls",
@@ -1653,7 +1655,8 @@
    "end": "2027-07-04",
    "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://madparis.fr/Le-monde-de-Viktor-Rolf-30-ans-de-haute-couture"
+   "url": "https://madparis.fr/Le-monde-de-Viktor-Rolf-30-ans-de-haute-couture",
+   "price": "€18 exhibition(s) + collections; €14 reduced; €10 ages 18-25 (EEA); free under 18"
   },
   {
    "id": "pi-bacon",
@@ -1672,15 +1675,15 @@
   {
    "id": "or-monettravail",
    "venue": "orangerie",
-   "title": "Monet au travail",
+   "title": "Monet à l'œuvre",
    "short": "Monet at work: family archives",
    "artists": "Claude Monet",
    "start": "2026-09-30",
    "end": "2027-01-25",
    "admission": "check",
    "discipline": "History & collections",
-   "note": "A display in the Salle Focus (project 'Monet. Focus sur les archives familiales'), photographs and correspondence on Monet's creative process. Details from press coverage; not yet confirmed on the venue page.",
-   "url": "https://www.musee-orangerie.fr/"
+   "note": "A display in the Salle Focus (project 'Monet. Focus sur les archives familiales'), photographs and correspondence on Monet's creative process. Level -2, Salle Focus.",
+   "url": "https://www.musee-orangerie.fr/fr/articles/focus-collection-monet-archives-familiales-381845"
   },
   {
    "id": "or-monetprive",
@@ -1688,12 +1691,38 @@
    "title": "Monet en privé",
    "short": "Monet in private: family archives",
    "artists": "Claude Monet",
-   "start": "2027-01-29",
+   "start": "2027-01-28",
    "end": "2027-05-31",
    "admission": "check",
    "discipline": "History & collections",
-   "note": "A display in the Salle Focus (second part of 'Monet. Focus sur les archives familiales') on the artist's daily life, accompanying '1927. Le temps retrouvé' (from 31 March 2027). Details from press coverage; not yet confirmed on the venue page.",
-   "url": "https://www.musee-orangerie.fr/"
+   "note": "A display in the Salle Focus (second part of 'Monet. Focus sur les archives familiales') on the artist's daily life, accompanying '1927. Le temps retrouvé' (from 31 March 2027). Level -2, Salle Focus.",
+   "url": "https://www.musee-orangerie.fr/fr/articles/focus-collection-monet-archives-familiales-381845"
+  },
+  {
+   "id": "mep-ishiuchi",
+   "venue": "mep",
+   "short": "Ishiuchi Miyako",
+   "title": "Textures du temps",
+   "artists": "Ishiuchi Miyako",
+   "start": "2027-02-03",
+   "end": "2027-04-25",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://www.mep-fr.org/event/ishiuchi-miyako-textures-du-temps/",
+   "price": "€14 full / €9 reduced online; €13 / €8 at the desk (general MEP entry)"
+  },
+  {
+   "id": "mep-shook",
+   "venue": "mep",
+   "short": "Melissa Shook",
+   "title": "Daily Self-Portraits, 1972-1973",
+   "artists": "Melissa Shook",
+   "start": "2027-02-03",
+   "end": "2027-04-25",
+   "admission": "paid",
+   "discipline": "Photography & moving image",
+   "url": "https://www.mep-fr.org/event/melissa-shook-daily-self-portraits-1972-1973/",
+   "price": "€14 full / €9 reduced online; €13 / €8 at the desk (general MEP entry)"
   }
  ]
 }
