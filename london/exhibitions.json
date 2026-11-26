@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25T01:46:14+00:00",
+ "updated": "2026-11-26T01:48:31+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -1576,6 +1576,19 @@
    "admission": "check",
    "discipline": "Sculpture & installation",
    "url": "https://www.tate.org.uk/whats-on/tate-britain/art-now-clara-hastrup"
+  },
+  {
+   "id": "ra-sequence",
+   "venue": "ra",
+   "short": "Group show: Woodsy Bransfield, Seren Metcalfe, Joshua Clague etc.",
+   "title": "SEQUENCE",
+   "artists": "Woodsy Bransfield, Seren Metcalfe, Joshua Clague, Elliot Jeffries",
+   "start": "2026-11-20",
+   "end": "2027-01-10",
+   "admission": "free",
+   "discipline": "Sculpture & installation",
+   "url": "https://www.royalacademy.org.uk/exhibition/raschools-show-sequence",
+   "note": "RA Schools students, Weston Studio"
   }
  ]
 }
