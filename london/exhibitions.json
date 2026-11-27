@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26T01:48:31+00:00",
+ "updated": "2026-11-27T01:45:14+00:00",
  "venues": [
   {
    "id": "tate-modern",
@@ -1589,6 +1589,31 @@
    "discipline": "Sculpture & installation",
    "url": "https://www.royalacademy.org.uk/exhibition/raschools-show-sequence",
    "note": "RA Schools students, Weston Studio"
+  },
+  {
+   "id": "ct-rego",
+   "venue": "courtauld",
+   "short": "Paula Rego",
+   "title": "Paula Rego: Dog Woman",
+   "artists": "Paula Rego",
+   "start": "2027-02-05",
+   "end": "2027-05-23",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://courtauld.ac.uk/whats-on/exh-paula-rego-dog-woman/",
+   "note": "With a prints display, Pendle Witches"
+  },
+  {
+   "id": "ct-bruegel-drawings",
+   "venue": "courtauld",
+   "short": "Drawing in the Age of Bruegel",
+   "title": "New Discoveries: Drawing in the Age of Bruegel",
+   "artists": "Pieter Bruegel the Elder and others",
+   "start": "2027-02-05",
+   "end": "2027-05-16",
+   "admission": "paid",
+   "discipline": "Painting & works on paper",
+   "url": "https://courtauld.ac.uk/whats-on/exh-new-discoveries-drawing-in-the-age-of-bruegel/"
   }
  ]
 }
