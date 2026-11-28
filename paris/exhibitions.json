@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27T01:18:38+00:00",
+ "updated": "2026-11-28T01:18:51+00:00",
  "venues": [
   {
    "id": "louvre",
@@ -745,7 +745,7 @@
    "title": "Stendhal Syndrome",
    "artists": "Nan Goldin",
    "start": null,
-   "end": "2027-01-24",
+   "end": "2027-01-25",
    "admission": "paid",
    "discipline": "Photography & moving image",
    "url": "https://www.pinaultcollection.com/en/boursedecommerce/nan-goldin-stendhal-syndrome",
@@ -1176,7 +1176,7 @@
    "end": "2027-01-03",
    "admission": "paid",
    "discipline": "Design & architecture",
-   "url": "https://madparis.fr/Paris-Kyoto-Paris-Quatre-designers-de-retour-du-Japon",
+   "url": "https://madparis.fr/SUR-INVITATION-DESIGN-Paris-Kyoto-Paris-Quatre-designers-de-retour-du-Japon",
    "note": "Shown within the museum's permanent galleries; museum ticket required."
   },
   {
@@ -1489,7 +1489,7 @@
    "venue": "galliera",
    "short": "In volume! From flat fabric to finished garment",
    "title": "En volume ! Donner corps à la mode",
-   "artists": "",
+   "artists": "Madame Grès, Issey Miyake, Martin Margiela, Sonia Rykiel, Yves Saint Laurent and others",
    "start": "2026-12-12",
    "end": "2027-10-17",
    "admission": "paid",
